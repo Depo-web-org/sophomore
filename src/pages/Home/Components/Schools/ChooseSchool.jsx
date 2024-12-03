@@ -43,7 +43,7 @@ export default function ChooseSchool() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {Schools.map((item) => {
           return (
-           <CardInfo key={item.id} item={item}/>
+            <CardInfo key={item.id} item={item} path={`/school/${item.Name}`} />
           );
         })}
       </div>
