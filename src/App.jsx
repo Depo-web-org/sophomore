@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import { About } from "./pages/About/About";
+import Home from "./pages/Home/index";
+import About from "./pages/About/index";
 import ScrollTop from "./Helpers/ScrollTop";
-import { PublicLayout } from "../layouts";
+import { PublicLayout } from "./utils/layouts";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/aboutus" element={<About />} />
+          <Route path="/about" element={<About />} />
         </Route>
       </Routes>
     </>

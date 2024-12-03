@@ -1,0 +1,6 @@
+.hero-Background{
+    background-image: url('https://s3-alpha-sig.figma.com/img/22f7/78e4/6f40635ac139e94c8c27bc1acc3297b8?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TaR8qgybk5Dde5VKB7g2XUlfIZP2Y5bRDzOuCTcaW7DBXDESlIxjZ0AvJInDyVRoWMk3g8Cj3KQbIp4-hrXB2JMXb4z7TlLcRId2jSSNsWJWFGEB~PPUKeomj5NDTWFmEa9L838DUcNiupZCqfhQ-Zv1BDK0OhCRHGRex3HoK~zI58KtAHwt5rGTQQblM2fTqLnGiIBOtjF-5mdByK2kDCGmPb3dLIGi1Xz~PVZR6-IPBTFmq~sVP3GteRRR5iVOUecEMFpSXXDBtMFT0MpCI~tXn0y6U3vXwzqGtuuYT4gObwDkanMuBaIOmtXU9p6hvbJ~9naZNCaZOiHlZIEslQ__');
+    background-position: center top;
+    background-size: cover;
+    object-fit: cover;
+  }
