@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../Components/Navbar/Navbar";
 
 // AuthLayout.js
 const AuthLayout = () => {
@@ -14,6 +15,7 @@ const DashboardLayout = () => {
 const PublicLayout = () => {
   return (
     <>
+    <Navbar/>
       <Outlet />
     </>
   );
