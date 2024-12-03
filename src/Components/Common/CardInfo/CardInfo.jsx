@@ -4,7 +4,7 @@ const CardInfo = ({item}) => {
   return (
     <>
      <div className="relative overflow-hidden mt-4 rounded-3xl group ">
-              <Link to=''>
+              <Link to={item.Name}>
               <img
                 src={item.img}
                 alt={item.Name}
