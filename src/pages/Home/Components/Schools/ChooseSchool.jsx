@@ -1,3 +1,5 @@
+import CardInfo from "../../../../Components/Common/CardInfo/CardInfo";
+
 export default function ChooseSchool() {
   const Schools = [
     {
@@ -34,26 +36,14 @@ export default function ChooseSchool() {
           Get Started Now!
         </span>
         <span className="text-2xl cursor-pointer leading-10">
-          What type of school do
-          <br />
-          you attend ?
+          What type of school do you attend ?
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 cursor-pointer">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {Schools.map((item) => {
           return (
-            <div key={item.id} className="relative overflow-hidden mt-4">
-              <img
-                src={item.img}
-                alt={item.Name}
-                className="w-full h-64 object-cover rounded-md hover:scale-110 hover:opacity-30 transition duration-500 ease-in-out"
-              />
-
-              <span className="absolute bottom-6 left-3 flex justify-center items-center text-2xl lg:text-4xl font-bold text-white">
-                {item.Name}
-              </span>
-            </div>
+           <CardInfo key={item.id} item={item}/>
           );
         })}
       </div>
