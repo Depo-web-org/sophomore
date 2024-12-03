@@ -1,72 +1,64 @@
 export default function ChooseCard() {
+  const Sophomore = [
+    {
+      id: "Personalized",
+      Name: "Personalized Learning Paths",
+      dec: "Customized curriculum based on your goals and current skill level",
+      img: "/public/Schools/Group-1.svg",
+    },
+    {
+      id: "Expert",
+      Name: "Expert Instructors",
+      dec: "Learn from industry professionals with real-world experience",
 
-  // const Sophomore = [
-  //   {
-  //     id: "Personalized",
-  //     Name: "Personalized Learning Paths",
-  //     dec: "Customized curriculum based on your goals and current skill level",
-  //        img: "/public/Schools/Group-1.svg",
-  //   },
-  //   // {
-  //   //   id: "Expert",
-  //   //   Name: "Expert Instructors",
-  //   //   img: "/public/Schools/Icon-2.svg",
+      img: "/public/Schools/Icon-2.svg",
+    },
+    {
+      id: "Interactive",
+      Name: "Interactive Content",
+      dec: "Engage with hands-on projects and real-time feedback",
 
-  //   // },
-  //   // {
-  //   //   id: "Interactive",
-  //   //   Name: "Interactive Content",
-  //   //   img: "/public/Schools/Icon-3.svg",
-
-  //   // },
-  // ];
+      img: "/public/Schools/Icon-3.svg",
+    },
+  ];
 
   return (
-<></>
-    // <section className="min-h-screen">
+    <section className="min-h-[498px] py-7">
+      <div className="text-white pb-4">
+        <p className=" text-2xl lg:text-4xl font-bold leading-10 ">
+          Why Choose{" "}
+          <span className="bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent inline-block">
+            Sophomore
+          </span>
+        </p>
+      </div>
+      <div className="flex justify-center md:justify-between items-center flex-wrap  md:flex-row gap-4 pt-6 ">
+        {Sophomore.map((item) => {
+          return (
+            <>
+              <div
+                key={item.id}
+                className="w-80 md:min-w-96 min-h-[292px] md:min-h-[350px]  xl: rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center gap-y-5 p-5"
+              >
+                <div>
+                  <img
+                    src={item.img}
+                    alt={item.Name}
+                    className="size-20 xl:size-32  object-cover rounded-md"
+                  />
+                </div>
 
-
-    //   <div className="text-white pb-4">
-    //     <span className="block text-2xl lg:text-4xl font-bold leading-10">
-    //       Why Choose Sophomore
-    //     </span>
-    //   </div>
-
-    //   <div className="h-64 w-96 bg-white  cursor-pointer">
-    //     {Sophomore.map((item) => {
-    //       return (
-    //     <div key={item.id} className="relative">
-
-    //           <div className="w-full h-36 flex justify-center items-center bg-red-300">
-          
-    //               <img
-    //                 src={item.img}
-    //                 alt={item.Name}
-    //                 className="w-20 h-20 object-cover rounded-md  "
-    //               />
-            
-    //           </div>
- 
-
-    //           <div className=" bg-blue-400 absolute -bottom-24  text-black  font-normal">
-    //                   <span className="font-bold text-md ">
-    //                     {item.Name}
-    //                     <br/>
-    //                   </span>
-    //                   <span className=" text-md">
-    //                     {item.dec}
-    //                   </span>
-    //             </div>   
-
-
-    //     </div>
-
-
-
-    //       );
-    //     })}
-    //   </div>
-    // </section>
-
+                <p className="text-base xl:text-xl  font-medium leading-[18.75px] text-center text-black ">
+                  {item.Name}
+                </p>
+                <p className="text-sm xl:text-lg font-normal leading-[16.41px] text-center text-[#0000007D] ">
+                  {item.dec}
+                </p>
+              </div>
+            </>
+          );
+        })}
+      </div>
+    </section>
   );
 }
