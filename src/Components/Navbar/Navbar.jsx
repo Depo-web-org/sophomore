@@ -1,6 +1,15 @@
 import logo from '../../../public/logos/logo.svg'
-import { Link } from "react-router-dom"
+import {  NavLink } from "react-router-dom"
+import './style.css'
+import { useMemo } from 'react';
+
 const Navbar = () => {
+const navItems = useMemo(() => ( [
+        { text: `Home`, link: "/" },
+        { text: `About Us`, link: "/about" },
+        { text: `Contact Us`, link: "/contact" }
+    ]
+), []);
 
   return (
     <nav className="  z-50  fixed top-4  w-full">
@@ -14,24 +23,17 @@ const Navbar = () => {
         <div className="flex-1  flex justify-end items-center mr-5  ">
             <div className="w-auto text-white flex  items-center gap-8       ">
                 <ul className="flex gap-x-7 font-semibold">
-                    <li>
-                        <Link to={'/'}>
-                        Home
-                        </Link>
-                    </li>
-                    <li>
-                    <Link to={'/about'}>
-                    About Us
-                        </Link>
-                    </li>
-                    <li>
-                    <Link to={'/contact'}>
-                    Contact Us
-                        </Link>
-
-                    </li>
+                    {
+                        navItems.map((item, index) => (
+                            <li key={index+item.text+item.link}>
+                                <NavLink to={item.link} activeClassName="text-primary">
+                                    {item.text}
+                                </NavLink>
+                            </li>
+                        ))
+                    }
                 </ul>
-                <button className="bg-primary py-2 px-6 rounded-md font-semibold">
+                <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200">
                 Login
                 </button>
             </div>
