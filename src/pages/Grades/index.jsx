@@ -7,7 +7,15 @@ export const Grade = () => {
   //   const school = staticSchools.find((s) => s.id === schoolId);
   //   console.log(school);
   return (
-    <></>
+    <>
+      <div className="bg-slate-900 min-h-screen pt-24 px-4 lg:px-[124px]">
+        <div className="w-full">
+          <p className="text-4xl text-white font-semibold leading-[54px] text-left">
+            What is your current school grade ?
+          </p>
+        </div>
+      </div>
+    </>
     // <div>
     //   <h2>{school.name} - Grades</h2>
     //   <ul>

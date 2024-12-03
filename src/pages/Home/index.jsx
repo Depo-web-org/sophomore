@@ -1,6 +1,6 @@
 import Hero from "./Components/Hero/Hero";
 import ChooseSchool from "./Components/Schools/ChooseSchool";
-import ChooseCard from "./Components/ why Choose Sophomore/ChooseCard";
+import ChooseCard from "./Components/choose/ChooseCard";
 
 const Home = () => {
   return (
