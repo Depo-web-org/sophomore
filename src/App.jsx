@@ -6,7 +6,8 @@ import { PublicLayout } from "./utils/layouts";
 import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
-import TeacherDetails from "./pages/TeacherDetails";
+import TeacherDetails, { AboutTab, ReviewsTab } from "./pages/TeacherDetails";
+import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
 
 function App() {
   return (
@@ -28,7 +29,11 @@ function App() {
           <Route
             path="/school/:schoolName/grade/:gradeName/subject/:subjectName/teacher/:teacherName"
             element={<TeacherDetails />}
-          />
+          >
+            <Route path="about" element={<AboutTab />} index />
+            <Route path="course-details" element={<CourseDetailsTab />} />
+            <Route path="reviews" element={<ReviewsTab />} />
+          </Route>
         </Route>
       </Routes>
     </>
