@@ -13,9 +13,11 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/school/:schoolId" element={<Grade />}>
-            <Route path="grade/:gradeId" element={<Grade />} />
-          </Route>
+          <Route path="/school/:schoolName" element={<Grade />} />
+          <Route
+            path="/school/:schoolName/grade/:gradeName"
+            element={<div>subjects</div>}
+          />
         </Route>
       </Routes>
     </>
