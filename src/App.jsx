@@ -6,8 +6,9 @@ import { PublicLayout } from "./utils/layouts";
 import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
-import TeacherDetails, { AboutTab, ReviewsTab } from "./pages/TeacherDetails";
+import TeacherDetails, { ReviewsTab } from "./pages/TeacherDetails";
 import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
+import { AboutTab } from "./pages/TeacherDetails/TeacherInfos";
 
 function App() {
   return (
