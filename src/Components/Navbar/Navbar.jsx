@@ -26,7 +26,7 @@ const navItems = useMemo(() => ( [
                     {
                         navItems.map((item, index) => (
                             <li key={index+item.text+item.link}>
-                                <NavLink to={item.link} activeClassName="text-primary">
+                                <NavLink to={item.link} className="text-primary">
                                     {item.text}
                                 </NavLink>
                             </li>

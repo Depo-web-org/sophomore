@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const CardInfo = ({ item, path }) => {
-  console.log(item)
   return (
     <>
       <div className="relative overflow-hidden mt-4 rounded-3xl group ">

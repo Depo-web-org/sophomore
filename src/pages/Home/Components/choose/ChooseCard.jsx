@@ -34,9 +34,7 @@ export default function ChooseCard() {
       </div>
       <div className="flex justify-center md:justify-between items-center flex-wrap  md:flex-row gap-4 pt-6 ">
         {Sophomore.map((item) => {
-          return (
-            <>
-              <div
+          return (  <div
                 key={item.id}
                 className="w-80 md:min-w-96 min-h-[292px] md:min-h-[350px]  xl: rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center gap-y-5 p-5"
               >
@@ -55,7 +53,6 @@ export default function ChooseCard() {
                   {item.dec}
                 </p>
               </div>
-            </>
           );
         })}
       </div>
