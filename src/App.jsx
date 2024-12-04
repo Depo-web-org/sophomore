@@ -7,8 +7,10 @@ import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Contact from "./pages/Contact";
+import TeacherDetails, { ReviewsTab } from "./pages/TeacherDetails";
+import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
 import Wishlistempty from "./pages/Wishlist/components/Wishlistempty/Wishlistempty";
- 
+import { AboutTab } from "./pages/TeacherDetails/TeacherInfos";
 
 function App() {
   return (
