@@ -40,11 +40,13 @@ export default function ChooseSchool() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+      <div className="grid grid-cols-6  lg:grid-cols-12 gap-4 ">
         {Schools.map((item) => {
           return (
-            <CardInfo key={item.id} item={item} path={`/school/${item.Name}`} />
-          );
+            <div key={item.id} className=" col-span-3 lg:col-span-4">
+                                            <CardInfo  item={item} path={`/school/${item.Name}`} />
+                                        </div>
+                )
         })}
       </div>
     </section>

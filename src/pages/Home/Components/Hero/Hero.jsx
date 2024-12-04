@@ -7,13 +7,13 @@ const Hero = () => {
   <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center  h-full relative z-10 ">
     <div className="mx-auto  text-center  ">
       <h1
-        className="text-white lg:text-4xl xl:text-6xl font-extrabold text-transparent "
+        className="text-white lg:text-4xl xl:text-6xl font-extrabold text-transparent slide-in-top "
       >
             “Your Path to Knowledge Starts Here”
 
       </h1>
 
-      <p className="mx-auto sm:text-xl/relaxed font-semibold">
+      <p className="mx-auto sm:text-xl/relaxed font-semibold slide-in-top-slow">
       Learn. Grow. Succeed. Discover courses tailored for your success.
       </p>
 

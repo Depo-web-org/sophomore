@@ -4,6 +4,7 @@ import About from "./pages/About/index";
 import ScrollTop from "./Helpers/ScrollTop";
 import { PublicLayout } from "./utils/layouts";
 import { Grade } from "./pages/Grades";
+import Subjects from "./pages/Subjects";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
             path="/school/:schoolName/grade/:gradeName"
-            element={<div>subjects</div>}
+            element={<Subjects/>}
           />
         </Route>
       </Routes>
