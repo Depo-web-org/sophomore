@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/UseFetch";
 
@@ -5,10 +6,7 @@ const Teachers = () => {
   const { data, error, loading } = useFetch(
     "https://os1907.github.io/Schools//grades/subject/Teacher/Teacher.json"
   );
-  console.log(data, error, loading);
   const { gradeName, schoolName, subjectName } = useParams();
-  console.log(gradeName, schoolName, subjectName);
-
   return (
     <>
       <section className="min-h-screen   py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
