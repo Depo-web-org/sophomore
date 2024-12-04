@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import CardInfo from "../../../../Components/Common/CardInfo/CardInfo";
 import useFetch from "../../../../Hooks/UseFetch";
 
 export default function ChooseSchool() {
-const {data,error,loading}=useFetch('https://os1907.github.io/Schools/Schools.json')
-console.log(data,error,loading)
+  const { data, error, loading } = useFetch(
+    "https://os1907.github.io/Schools/Schools.json"
+  );
   return (
     <section className="my-20">
       <div className="text-white font-bold">
@@ -19,7 +21,7 @@ console.log(data,error,loading)
         {data?.Schools?.map((item) => {
           return (
             <div key={item.id} className=" col-span-3 lg:col-span-4">
-              <CardInfo item={item} path={`/school/${item.Name}`} />
+              <CardInfo item={item} path={`/school/${item.name}`} />
             </div>
           );
         })}
