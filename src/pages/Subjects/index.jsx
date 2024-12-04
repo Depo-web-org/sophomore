@@ -11,9 +11,9 @@ const Subjects = () => {
 
   return (
     <>
-      <section className="min-h-screen w-full pt-24 px-4 lg:px-[124px]">
+      <section className="min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 pt-32 ">
         <div>
-          <h2 className="text-white  text-lg lg:text-4xl font-semibold">
+          <h2 className="text-white  text-lg lg:text-4xl font-semibold  pb-4 md:pb-10 xl:pb-20">
             What Subject do you want ?
           </h2>
         </div>

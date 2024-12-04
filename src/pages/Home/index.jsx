@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <div className="px-4 lg:px-[124px]">
+      <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
         <ChooseSchool />
         <ChooseCard />
       </div>

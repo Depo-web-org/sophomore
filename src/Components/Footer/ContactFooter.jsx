@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Contact() {
+export default function ContactFooter() {
   return (
     <div className="text-center">
       <p className="bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent text-2xl font-bold inline-block">
