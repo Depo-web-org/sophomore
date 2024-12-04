@@ -7,6 +7,7 @@ import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import TeacherDetails from "./pages/TeacherDetails";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
             path="/school/:schoolName/grade/:gradeName"

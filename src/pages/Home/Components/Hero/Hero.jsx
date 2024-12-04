@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom'
 import './style.css'
 const Hero = () => {
   return (
-    <section className="hero-Background text-white relative  lg:min-h-[520px] xl:h-screen  px-2 lg:px-[124px]">
-     
-  <div className="mx-auto max-w-screen-xl  py-32 lg:flex lg:items-center  h-full relative z-10 ">
+    <section className="hero-Background text-white relative  lg:min-h-[520px] xl:h-screen  px-2 lg:px-[124px]"> 
+    <div className="mx-auto max-w-screen-xl  py-32 lg:flex lg:items-center  h-full relative z-10 ">
     <div className="mx-auto  text-center   ">
       <h1
         className="text-white text-3xl lg:text-4xl xl:text-6xl font-extrabold text-transparent slide-in-top "
