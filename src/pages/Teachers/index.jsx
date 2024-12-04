@@ -7,7 +7,6 @@ const Teachers = () => {
   );
   console.log(data, error, loading);
   const { gradeName, schoolName, subjectName } = useParams();
-  console.log(gradeName, schoolName, subjectName);
 
   return (
     <>
