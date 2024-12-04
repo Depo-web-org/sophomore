@@ -44,9 +44,9 @@ export default function ChooseSchool() {
         {Schools.map((item) => {
           return (
             <div key={item.id} className=" col-span-3 lg:col-span-4">
-                                            <CardInfo  item={item} path={`/school/${item.Name}`} />
-                                        </div>
-                )
+              <CardInfo item={item} path={`/school/${item.Name}`} />
+            </div>
+          );
         })}
       </div>
     </section>
