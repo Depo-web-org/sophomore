@@ -1,33 +1,33 @@
-export default function ChooseCard() {
-  const Sophomore = [
-    {
-      id: "Personalized",
-      Name: "Personalized Learning Paths",
-      dec: "Customized curriculum based on your goals and current skill level",
-      img: "/public/Schools/Group-1.svg",
-    },
-    {
-      id: "Expert",
-      Name: "Expert Instructors",
-      dec: "Learn from industry professionals with real-world experience",
+const Sophomore = [
+  {
+    id: "Personalized",
+    Name: "Personalized Learning Paths",
+    dec: "Customized curriculum based on your goals and current skill level",
+    img: "/public/Schools/Group-1.svg",
+  },
+  {
+    id: "Expert",
+    Name: "Expert Instructors",
+    dec: "Learn from industry professionals with real-world experience",
 
-      img: "/public/Schools/Icon-2.svg",
-    },
-    {
-      id: "Interactive",
-      Name: "Interactive Content",
-      dec: "Engage with hands-on projects and real-time feedback",
+    img: "/public/Schools/Icon-2.svg",
+  },
+  {
+    id: "Interactive",
+    Name: "Interactive Content",
+    dec: "Engage with hands-on projects and real-time feedback",
 
-      img: "/public/Schools/Icon-3.svg",
-    },
-  ];
+    img: "/public/Schools/Icon-3.svg",
+  },
+];
 
+const ChooseCard = () => {
   return (
-    <section className="min-h-[498px] py-7">
-      <div className="text-white pb-4">
-        <p className=" text-2xl lg:text-4xl font-bold leading-10 ">
-          Why Choose{" "}
-          <span className="bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent inline-block">
+    <section className="min-h-[498px] pb-8 lg:pb-20  ">
+      <div className="text-white pb-4 lg:pb-8">
+        <p className=" text-2xl lg:text-4xl font-bold md:leading-10  inline ">
+          Why Choose
+          <span className=" mx-1 bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent inline-block">
             Sophomore
           </span>
         </p>
@@ -36,20 +36,20 @@ export default function ChooseCard() {
         {Sophomore.map((item) => {
           return (  <div
                 key={item.id}
-                className="w-80 md:min-w-96 min-h-[292px] md:min-h-[350px]  xl: rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center gap-y-5 p-5"
+                className=" w-full flex-initial sm:flex-auto md:flex-1     rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8"
               >
                 <div>
                   <img
                     src={item.img}
                     alt={item.Name}
-                    className="size-20 xl:size-32  object-cover rounded-md"
+                    className="size-16 md:size-20 xl:size-32  rounded-md"
                   />
                 </div>
 
-                <p className="text-base xl:text-xl  font-medium leading-[18.75px] text-center text-black ">
+                <p className="text-sm sm:text-base xl:text-xl  font-medium leading-[18.75px] text-center text-black ">
                   {item.Name}
                 </p>
-                <p className="text-sm xl:text-lg font-normal leading-[16.41px] text-center text-[#0000007D] ">
+                <p className="text-[12px] sm:text-sm xl:text-lg font-normal leading-[16.41px] text-center text-[#0000007D] ">
                   {item.dec}
                 </p>
               </div>
@@ -59,3 +59,5 @@ export default function ChooseCard() {
     </section>
   );
 }
+
+export default ChooseCard

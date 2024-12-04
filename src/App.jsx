@@ -5,7 +5,8 @@ import ScrollTop from "./Helpers/ScrollTop";
 import { PublicLayout } from "./utils/layouts";
 import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
-import Teachers from "./pages/Teachers/Teachers";
+import Teachers from "./pages/Teachers";
+import TeacherDetails from "./pages/TeacherDetails";
 
 function App() {
   return (
@@ -18,11 +19,15 @@ function App() {
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
             path="/school/:schoolName/grade/:gradeName"
-            element={<Subjects/>}
+            element={<Subjects />}
           />
           <Route
             path="/school/:schoolName/grade/:gradeName/subject/:subjectName"
-            element={<Teachers/>}
+            element={<Teachers />}
+          />
+          <Route
+            path="/school/:schoolName/grade/:gradeName/subject/:subjectName/teacher/:teacherName"
+            element={<TeacherDetails />}
           />
         </Route>
       </Routes>
