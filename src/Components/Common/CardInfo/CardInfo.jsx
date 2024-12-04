@@ -6,8 +6,8 @@ const CardInfo = ({ item, path }) => {
       <div className="relative overflow-hidden mt-4 rounded-3xl group ">
         <Link to={path}>
           <img
-            src={item.img}
-            alt={item.Name}
+            src={item.imageUrl}
+            alt={item.name}
             className="w-full h-full object-fill  group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
           />
           <p
@@ -15,7 +15,7 @@ const CardInfo = ({ item, path }) => {
                xl:text-4xl font-bold text-white   group-hover:bottom-1/2  group-hover:translate-y-1/2 
                group-hover:left-1/2 group-hover:-translate-x-1/2 duration-300 transition-all "
           >
-            {item.Name}
+            {item.name}
           </p>
         </Link>
       </div>
