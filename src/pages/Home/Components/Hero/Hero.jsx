@@ -4,16 +4,16 @@ const Hero = () => {
   return (
     <section className="hero-Background text-white relative  lg:min-h-[520px] xl:h-screen  px-2 lg:px-[124px]">
      
-  <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center  h-full relative z-10 ">
-    <div className="mx-auto  text-center  ">
+  <div className="mx-auto max-w-screen-xl  py-32 lg:flex lg:items-center  h-full relative z-10 ">
+    <div className="mx-auto  text-center   ">
       <h1
-        className="text-white lg:text-4xl xl:text-6xl font-extrabold text-transparent slide-in-top "
+        className="text-white text-3xl lg:text-4xl xl:text-6xl font-extrabold text-transparent slide-in-top "
       >
             “Your Path to Knowledge Starts Here”
 
       </h1>
 
-      <p className="mx-auto sm:text-xl/relaxed font-semibold slide-in-top-slow">
+      <p className="mx-auto sm:text-xl/relaxed font-semibold slide-in-top-slow pb-2 lg:pb-0">
       Learn. Grow. Succeed. Discover courses tailored for your success.
       </p>
 
