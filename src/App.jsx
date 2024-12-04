@@ -8,6 +8,8 @@ import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import TeacherDetails from "./pages/TeacherDetails";
 import Contact from "./pages/Contact";
+import Wishlistempty from "./pages/Wishlist/components/Wishlistempty/Wishlistempty";
+ 
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/Wishlistempty" element={<Wishlistempty />} />
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
             path="/school/:schoolName/grade/:gradeName"
