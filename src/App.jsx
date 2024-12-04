@@ -30,7 +30,7 @@ function App() {
             path="/school/:schoolName/grade/:gradeName/subject/:subjectName/teacher/:teacherName"
             element={<TeacherDetails />}
           >
-            <Route path="about" element={<AboutTab />} index />
+            <Route element={<AboutTab />} index />
             <Route path="course-details" element={<CourseDetailsTab />} />
             <Route path="reviews" element={<ReviewsTab />} />
           </Route>
