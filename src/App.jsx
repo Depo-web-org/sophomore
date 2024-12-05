@@ -7,6 +7,7 @@ import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Contact from "./pages/Contact";
+import Cart from "./pages/Cart";
 import TeacherDetails, { ReviewsTab } from "./pages/TeacherDetails";
 import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
 import Wishlistempty from "./pages/Wishlist/components/Wishlistempty/Wishlistempty";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
@@ -40,6 +42,7 @@ function App() {
             <Route path="reviews" element={<ReviewsTab />} />
           </Route>
         </Route>
+
       </Routes>
     </>
   );
