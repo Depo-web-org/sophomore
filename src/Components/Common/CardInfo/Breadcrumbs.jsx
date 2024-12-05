@@ -11,27 +11,30 @@ const Breadcrumbs = () => {
         const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
         const isLast = index === pathnames.length - 1;
 
-        // Capitalize the first letter and replace hyphens with spaces
+        if (
+          ["school", "grade", "subject", "teacher"].includes(name.toLowerCase())
+        ) {
+          return null;
+        }
+
         const displayName =
           decodeURIComponent(name).charAt(0).toUpperCase() +
           decodeURIComponent(name).slice(1).replace(/-/g, " ");
 
         return (
           <li key={routeTo} className="flex items-center">
-            {index > 0 && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 mx-1"
-                viewBox="0 0 20 20"
-                fill="#536CB3"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            )}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 mx-1"
+              viewBox="0 0 20 20"
+              fill="#536CB3"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
             {!isLast ? (
               <Link to={routeTo} className="text-white hover:text-primary">
                 {displayName}
@@ -65,20 +68,8 @@ const Breadcrumbs = () => {
               />
             </svg>
           </Link>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 mx-1"
-            viewBox="0 0 20 20"
-            fill="#536CB3"
-          >
-            <path
-              fillRule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
         </li>
-        {breadcrumbs}
+        {breadcrumbs.filter(Boolean)}
       </ol>
     </nav>
   );

@@ -13,10 +13,11 @@ const Teachers = () => {
   return (
     <>
       <section className="min-h-screen   py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+        <Breadcrumbs />
+
         <div>
-          <Breadcrumbs />
           <h2 className="text-white  text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
-            What Subject do you want ?
+            Which Teacher do you want ?
           </h2>
         </div>
         <div className="grid grid-cols-6w-full lg:grid-cols-12 gap-4 items-center justify-center">
