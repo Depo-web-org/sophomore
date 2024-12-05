@@ -4,24 +4,27 @@ import Tabs from "./Tabs";
 export default function TeacherInfos() {
   return (
     <>
-      <div className="flex items-start justify-start flex-col gap-6">
+      <div className="flex items-start justify-start flex-col gap-6 w-full">
         <div className="flex justify-start items-start gap-8">
           <img src="/TeacherDetails/Frame 38.png" alt="teacher" />
           <div className="flex items-start justify-start flex-col gap-3">
-            <p className="text-[36px] font-semibold leading-[54px] text-white">
+            <p className="text-[36px] font-semibold leading-[36px] text-white">
               Omar Gad
             </p>
             <p className="text-[16px] font-normal leading-[18.75px] text-[#FFFFFF66]">
               Math Teacher
             </p>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-between gap-4">
               <img src="/TeacherDetails/Facebook.svg" alt="facebook" />
               <img src="/TeacherDetails/ig.svg" alt="ig" />
             </div>
           </div>
         </div>
-        <Tabs />
-        <div className="pt-10">
+        <div className="">
+          <Tabs />
+        </div>
+
+        <div className="py-6">
           <Outlet />
         </div>
       </div>
@@ -31,7 +34,7 @@ export default function TeacherInfos() {
 
 export function AboutTab() {
   return (
-    <div className="text-white flex items-start justify-start w-3/4 gap-2">
+    <div className="text-white flex items-start justify-start w-full lg:w-3/4 gap-2">
       <img src="/TeacherDetails/About.svg" alt="svg" className="pt-1" />
       <p className="text-[18px] font-semibold leading-[27px]">
         Omar is a passionate and dedicated Math teacher with 4 years of
