@@ -1,10 +1,17 @@
 
 import { Link } from 'react-router-dom'
 import cart from '/public/empty.svg'
+import TitlePage from '../../../Components/Common/TitlePage/Titlepage'
 
 const EmptyCart = () => {
   return (
     <>
+     <section className="container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 min-h-[calc(100vh-128px)] h">
+        <div className="pt-32 relative ">
+            <TitlePage name={'Your Cart'} items={' 🙁'}/>
+
+        </div>
+
       <div className=' flex items-center justify-between flex-col lg:flex-row mt-10 gap-y-5  lg:mt-20' >
                 <div className='flex items-center justify-center   flex-1 flex-col  gap-y-2 lg:gap-y-5'>
                     <p className="text-white  text-2xl lg:text-4xl xl:text-6xl font-semibold   ">
@@ -27,7 +34,7 @@ const EmptyCart = () => {
             <img src={cart} alt="" className='w-full '/>
                 </div>
             </div>
-
+            </section>
     </>
   )
 }
