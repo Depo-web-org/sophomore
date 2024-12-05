@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import CardInfo from "../../Components/Common/CardInfo/CardInfo";
 import useFetch from "../../Hooks/UseFetch";
+import Breadcrumbs from "../../Components/Common/CardInfo/Breadcrumbs";
 /* eslint-disable no-unused-vars */
 
 export const Grade = () => {
@@ -12,6 +13,7 @@ export const Grade = () => {
     <>
       <div className="bg-slate-900 min-h-screen py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
         <div className="w-full">
+          <Breadcrumbs />
           <p className="text-4xl text-white font-semibold leading-[54px] text-left pb-4 md:pb-10 xl:pb-20">
             What is your current school grade?
           </p>

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/UseFetch";
+import Breadcrumbs from "../../Components/Common/CardInfo/Breadcrumbs";
 
 const Teachers = () => {
   // eslint-disable-next-line no-unused-vars
@@ -13,6 +14,7 @@ const Teachers = () => {
     <>
       <section className="min-h-screen   py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
         <div>
+          <Breadcrumbs />
           <h2 className="text-white  text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
             What Subject do you want ?
           </h2>
