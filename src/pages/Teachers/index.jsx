@@ -2,12 +2,11 @@ import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/UseFetch";
 
 const Teachers = () => {
+  // eslint-disable-next-line no-unused-vars
   const { data, error, loading } = useFetch(
     "https://os1907.github.io/Schools//grades/subject/Teacher/Teacher.json"
   );
-  console.log(data, error, loading);
   const { gradeName, schoolName, subjectName } = useParams();
-  console.log(gradeName, schoolName, subjectName);
 
   return (
     <>
@@ -16,13 +15,13 @@ const Teachers = () => {
           <h2 className="text-white  text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
             What Subject do you want ?
           </h2>
-        </div>
+        </div> 
         <div className="grid grid-cols-6w-full lg:grid-cols-12 gap-4 items-center justify-center">
           {data?.Teacher.map((teacher) => (
             <div
               className=" col-span-6 md:col-span-3 lg:col-span-4 items-center justify-center"
               key={teacher.id}
-            >
+             >
               <div className="max-w-[420px]">
                 <Link
                   to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.name}`}
