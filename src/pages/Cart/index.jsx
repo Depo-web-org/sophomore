@@ -3,7 +3,7 @@ import cart from '/public/empty.svg'
 const Cart = () => {
   return (
     <>
-    <section className="container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 min-h-[calc(100vh-128px)] h">
+    <section className="container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 min-h-[calc(100vh-128px)]">
         <div className="pt-32 relative ">
             <div className="flex justify-between border-b border-white items-center pb-4  "> 
             <h2 className="text-white  text-lg lg:text-4xl font-semibold  ">

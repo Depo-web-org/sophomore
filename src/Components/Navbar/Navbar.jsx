@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom"
 import './style.css'
 import { useMemo, useState } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { IoCartOutline, IoHeartOutline } from 'react-icons/io5';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +11,9 @@ const Navbar = () => {
   const navItems = useMemo(() => ([
     { text: `Home`, link: "/" },
     { text: `About Us`, link: "/about" },
-    { text: `Contact Us`, link: "/contact" }
+    { text: `Contact Us`, link: "/contact" },
+    { icon: <IoCartOutline />, link: "/cart" },
+    { icon: <IoHeartOutline />, link: "/" },
   ]), []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -33,9 +36,10 @@ const Navbar = () => {
             <ul className="flex gap-x-7 font-semibold">
               {navItems.map((item, index) => (
                 <li key={index+item.text+item.link}>
-                  <NavLink to={item.link} className="text-primary">
-                    {item.text}
-                  </NavLink>
+                   <NavLink to={item.link} className="text-white ">
+                   <span className='text-xl relative top-1 left-7'>{item.icon}</span>
+                   {item.text}
+                   </NavLink>
                 </li>
               ))}
             </ul>

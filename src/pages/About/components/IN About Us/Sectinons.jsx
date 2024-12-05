@@ -1,19 +1,25 @@
+import { useEffect } from "react";
+import Aos from "aos";
  
 export default function Sectinons() {
+
+  useEffect(() => {Aos.init({duration:2000})}, []);
+ 
   return (
-    <section>
+    <section >
       {/* item 1*/}
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover "
           src="/public/About Us/header1.svg"
           alt="img header1"
         />
-        <div className="absolute inset-0 pt-[25%] md:pt-[15%] px-[3%] lg:px-[24%] text-center text-white font-bold ">
+        <div data-aos="fade-down" className="absolute inset-0 pt-[25%] md:pt-[15%] px-[3%] lg:px-[24%] text-center text-white font-bold ">
           <span className="text-3xl lg:text-5xl font-bold slide-in-top-slow">
             About Us
           </span>
-          <p className="text-lg pt-3 lg:pt-10 slide-in-top-slow ">
+          {/* slide-in-top-slow  */}
+          <p className="text-lg pt-3 lg:pt-10 ">
             At
             <span className=" bg-gradient-to-r from-white to-red-500 bg-clip-text text-transparent pl-1">
               Sophomore
@@ -26,14 +32,15 @@ export default function Sectinons() {
         </div>
       </div>
       {/* item 2*/}
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover  "
           src="/public/About Us/header2.svg"
           alt="img header2"
         />
+ {/*  Vision-slide-in-left-slow */}
 
-        <div className="w-[85%] sm:w-[45%] absolute inset-0 pt-[10%] lg:pt-[10%] pl-[5%] text-left text-white font-medium Vision-slide-in-left-slow">
+        <div  data-aos="fade-right" className=" w-[85%] sm:w-[45%] absolute inset-0 pt-[10%] lg:pt-[10%] pl-[5%] text-left text-white font-medium">
           <span className="text-3xl lg:text-5xl text-[#536CB3] font-bold">
             Mission
           </span>
@@ -44,16 +51,17 @@ export default function Sectinons() {
             boundaries.
           </p>
         </div>
-      </div>
+
+        </div>  
       {/* item 3 */}
-      <div className="relative ">
+      <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover "
           src="/public/About Us/header3.svg"
           alt="img header3"
         />
 
-        <div className="w-[85%] sm:w-[45%] absolute inset-y-0 right-0 mt-[15%] md:mt-[10%] pr-[5%]  text-white font-medium Mission-slide-in-right-slow ">
+        <div data-aos="fade-left" className="w-[85%] sm:w-[45%] absolute inset-y-0 right-0 mt-[15%] md:mt-[10%] pr-[5%]  text-white font-medium ">
           <span className="text-3xl lg:text-5xl text-red-500 font-bold">
             Vision
           </span>
@@ -66,13 +74,14 @@ export default function Sectinons() {
         </div>
       </div>
       {/* item 4 */}
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover"
           src="/public/About Us/header4.svg"
           alt="img header4"
         />
-        <div className="w-full lg:w-[45%] absolute inset-0 pt-[20%] sm:pt-[10%] pl-[5%] text-left font-medium Vision-slide-in-left-slow">
+
+        <div data-aos="fade-right" className=" w-full lg:w-[45%] absolute inset-0 pt-[20%] sm:pt-[10%] pl-[5%] text-left font-medium  ">
           <span className="text-3xl lg:text-5xl ld text-[#536CB3] font-bold">
             Core Values
           </span>
@@ -83,7 +92,9 @@ export default function Sectinons() {
             <span className="pl-20 block">4. Accessibility</span>
             <span className="pl-28 block">5. Collaboration</span>
           </p>
-        </div>
+        </div> 
+
+      
       </div>
       {/* end */}
     </section>

@@ -1,7 +1,7 @@
 export default function Wishlistempty() {
   return (
     <>
-      <div className="text-center mt-[25%] sm:mt-[15%] lg:mt-[10%] p-5">
+      <section className="text-center mt-[25%] sm:mt-[12%] lg:mt-[10%] p-5">
         <div className="border-b-2 border-b-white flex justify-between md:px-14 pb-5 text-white">
           <span className="font-bold text-3xl md:text-4xl">Your Wishlist</span>
           <p className="text-4xl font-bold ">:(</p>
@@ -22,7 +22,7 @@ export default function Wishlistempty() {
         >
           Start Shopping
         </button>
-      </div>
+      </section>
     </>
   );
 }
