@@ -36,7 +36,7 @@ const ChooseCard = () => {
         {Sophomore.map((item) => {
           return (  <div
                 key={item.id}
-                className=" w-full flex-initial sm:flex-auto md:flex-1     rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8"
+                className=" w-full flex-initial sm:flex-auto md:flex-1 rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8"
               >
                 <div>
                   <img

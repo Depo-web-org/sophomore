@@ -7,7 +7,7 @@ export default function ChooseSchool() {
     "https://os1907.github.io/Schools/Schools.json"
   );
   return (
-    <section className=" py-8 lg:py-20">
+    <section className="py-8 lg:py-20">
       <div className="text-white font-bold pb-4 lg:pb-8">
         <p className=" text-2xl lg:text-3xl
           xl:text-4xl pb-1 sm:pb-2">
@@ -18,10 +18,10 @@ export default function ChooseSchool() {
         </p>
       </div>
 
-      <div className="grid grid-cols-6  lg:grid-cols-12 gap-2 sm:gap-4 ">
+      <div className="grid grid-cols-6 lg:grid-cols-12 gap-2 sm:gap-4 ">
         {data?.Schools?.map((item) => {
           return (
-            <div key={item.id} className=" col-span-6 sm:col-span-3 lg:col-span-4">
+            <div key={item.id} className="col-span-6 sm:col-span-3 lg:col-span-4">
               <CardInfo item={item} path={`/school/${item.name}`} />
             </div>
           );
