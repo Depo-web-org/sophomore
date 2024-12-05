@@ -1,7 +1,7 @@
  
 export default function Sectinons() {
   return (
-    <section>
+    <section >
       {/* item 1*/}
       <div className="relative">
         <img
