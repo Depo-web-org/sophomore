@@ -1,5 +1,5 @@
 export let cartInfo = {
-    numberOfItems: 0,
+    numberOfItems: 5,
     cartItems: [
       {
         subject: "Mathematics",

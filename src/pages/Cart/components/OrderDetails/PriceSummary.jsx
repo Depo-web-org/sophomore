@@ -1,4 +1,5 @@
 export const PriceSummary = ({ cartInfo }) => {
+  console.log(cartInfo)
  return <>
   
     <div className="w-4/5 my-5 flex flex-col gap-y-2">
@@ -21,7 +22,7 @@ export const PriceSummary = ({ cartInfo }) => {
         Checkout
       </button>
     </div>
-  );
+  
 </>
 }
   
