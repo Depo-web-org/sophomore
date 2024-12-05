@@ -27,22 +27,22 @@ const Navbar = () => {
         <Link to={"/"}>
           <div className="flex justify-start items-center pt-1 ml-5">
             <img src={logo} alt="logo" className="h-8 w-auto" />
-            <p className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl md:text-2xl font-bold ml-2">
+            <p className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
               Sophomore
             </p>
           </div>
         </Link>
 
         <div className="hidden md:flex items-center mr-5">
-          <div className="w-auto text-white flex items-center gap-8">
-            <ul className="flex gap-x-7 font-semibold">
+          <div className="w-auto text-white flex items-center gap-[-5px]">
+            <ul className="flex gap-x-[14px] lg:gap-x-7 font-semibold">
               {navItems.map((item, index) => (
                 <li key={index + item.text + item.link}>
                   <NavLink
                     to={item.link}
-                    className="text-white text-base flex items-center justify-center "
+                    className="text-white text-sm lg:text-base flex items-center justify-center "
                   >
-                    <span className="text-xl"> {item.icon}</span>
+                    <span className="text-base md:text-lg"> {item.icon}</span>
                     {item.text}
                   </NavLink>
                 </li>
