@@ -16,18 +16,15 @@ const Teachers = () => {
           <h2 className="text-white  text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
             What Subject do you want ?
           </h2>
-        </div> 
+        </div>
         <div className="grid grid-cols-6w-full lg:grid-cols-12 gap-4 items-center justify-center">
           {data?.Teacher.map((teacher) => (
             <div
               className=" col-span-6 md:col-span-3 lg:col-span-4 items-center justify-center"
               key={teacher.id}
-             >
+            >
               <div className="max-w-[420px]">
-                <Link
-                  to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.name}`}
-                  className="group relative block overflow-hidden rounded-md"
-                >
+                <div className="group relative block overflow-hidden rounded-md">
                   <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
                     <span className="sr-only">Wishlist</span>
 
@@ -67,13 +64,15 @@ const Teachers = () => {
                       {teacher.name}
                     </h3>
 
-                    <form className="mt-4">
-                      <button className="block w-full rounded bg-primary text-white p-4 text-sm font-medium transition hover:scale-105">
+                    <Link
+                      to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.name}`}
+                    >
+                      <button className="block w-full mt-4 rounded bg-primary text-white p-4 text-sm font-medium transition hover:scale-105">
                         View
                       </button>
-                    </form>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </div>
             </div>
           ))}
