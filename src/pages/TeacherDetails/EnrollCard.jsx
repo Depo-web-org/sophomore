@@ -1,11 +1,24 @@
 import { useState } from "react";
-import { IoClose } from "react-icons/io5";
+import ModalPackages, { MoadlUnits } from "./ModalPackages";
+import ModalOops from "./ModalOops";
 
 export default function EnrollCard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
+  const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
+  const [isModalUnitsOpen, setIsModalUnitsOpen] = useState(false);
 
   const handleButtonClick = () => {
-    setIsModalOpen(true);
+    setIsModalUnitsOpen(false);
+    setIsModalPackagesOpen(false);
+    setIsModalOopsOpen(true);
+  };
+
+  const handleUnitsPackages = () => {
+    setIsModalPackagesOpen(false);
+    setIsModalUnitsOpen(true);
+  };
+  const handleModalPackages = () => {
+    setIsModalPackagesOpen(true);
   };
 
   return (
@@ -35,7 +48,7 @@ export default function EnrollCard() {
           <div className="flex items-center justify-between gap-5 min-w-full">
             <button
               className="bg-primary cursor-pointer text-white rounded-md p-2 w-[160px]"
-              onClick={handleButtonClick}
+              onClick={handleModalPackages}
             >
               Enroll now
             </button>
@@ -49,47 +62,20 @@ export default function EnrollCard() {
         </div>
       </div>
 
-      {isModalOpen && <ModalOops setIsModalOpen={setIsModalOpen} />}
+      {isModalOopsOpen && <ModalOops setIsModalOopsOpen={setIsModalOopsOpen} />}
+      {isModalPackagesOpen && (
+        <ModalPackages
+          setIsModalPackagesOpen={setIsModalPackagesOpen}
+          handleUnitsPackages={handleUnitsPackages}
+          handleButtonClick={handleButtonClick}
+        />
+      )}
+      {isModalUnitsOpen && (
+        <MoadlUnits
+          setIsModalUnitsOpen={setIsModalUnitsOpen}
+          handleButtonClick={handleButtonClick}
+        />
+      )}
     </>
-  );
-}
-
-function ModalOops({ setIsModalOpen }) {
-  return (
-    <div
-      onClick={() => setIsModalOpen(false)}
-      className="fixed inset-0 bg-slate-600 bg-opacity-50 flex items-center justify-center"
-    >
-      <div
-        className="bg-slate-900 rounded-lg p-6 min-w-[327px] border-r-2 border-b-2 border-primary"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-end justify-end">
-          <button
-            onClick={() => setIsModalOpen(false)}
-            className="text-white hover:text-gray-400"
-          >
-            <IoClose size={24} />
-          </button>
-        </div>
-        <div className="flex items-center justify-center flex-col gap-2">
-          <p className="mb-4 text-white text-2xl font-bold">Oops!</p>
-          <span className="text-base font-normal leading-6 text-center text-[#72777A]">
-            Please login to Continue
-          </span>
-          <button className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-full">
-            Login
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ModalPackages() {
-  return (
-    <div>
-      <h1>Modal Packages</h1>
-    </div>
   );
 }
