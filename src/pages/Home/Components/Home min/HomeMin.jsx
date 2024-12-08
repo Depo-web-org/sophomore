@@ -22,7 +22,8 @@ export default function HomeMin() {
 
   return (
     <>
-      <section className=" text-white my-10 ">
+      <section className=" text-white my-5 px-6 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
+    
 
         <div className="py-5">
           <div className="flex justify-between">
