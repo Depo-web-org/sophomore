@@ -13,12 +13,3 @@ export default function TeacherDetails() {
     </div>
   );
 }
-
-export function ReviewsTab() {
-  return (
-    <div className="text-white">
-      <h2>Reviews</h2>
-      <p>Student reviews will be displayed here.</p>
-    </div>
-  );
-}

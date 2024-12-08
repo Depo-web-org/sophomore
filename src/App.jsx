@@ -8,10 +8,11 @@ import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
-import TeacherDetails, { ReviewsTab } from "./pages/TeacherDetails";
 import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
 import Wishlistempty from "./pages/Wishlist/components/Wishlistempty/Wishlistempty";
 import { AboutTab } from "./pages/TeacherDetails/TeacherInfos";
+import ReviewsTab from "./pages/TeacherDetails/ReviewsTab";
+import TeacherDetails from "./pages/TeacherDetails";
 
 function App() {
   return (
@@ -42,7 +43,6 @@ function App() {
             <Route path="reviews" element={<ReviewsTab />} />
           </Route>
         </Route>
-
       </Routes>
     </>
   );
