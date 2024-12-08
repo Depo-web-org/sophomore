@@ -23,9 +23,9 @@ const Navbar = () => {
 
   return (
     <nav className="z-50 fixed top-4 w-full px-4 md:px-0">
-      <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 w-full md:w-[calc(100%-124px)] xl:w-4/5 transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
+      <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl  transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
         <Link to={"/"}>
-          <div className="flex justify-start items-center pt-1 ml-5">
+          <div className="flex justify-start items-center pt-1 ml-5 w-full">
             <img src={logo} alt="logo" className="h-8 w-auto" />
             <p className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
               Sophomore
