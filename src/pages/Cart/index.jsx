@@ -1,21 +1,15 @@
 /* eslint-disable no-unused-vars */
-import TitlePage from '../../Components/Common/TitlePage/Titlepage'
-import { cartInfo } from './cartInfo'
-import CourseCard from './components/CourseCard/CourseCard'
+import useFetch from '../../Hooks/UseFetch'
 import EmptyCart from './components/EmptyCart'
 import FailedCart from './components/FailedCart'
-import OrderSummary from './components/OrderDetails/OrderSummary'
 
 const Cart = () => {
-  const {numberOfItems,cartItems}=cartInfo
+  const { data, error, loading } = useFetch(
+    "https://os1907.github.io/Schools/CartInfo/cartInfo.json"
+  ); 
   return (
     <>
-    
-        {
-          numberOfItems ===0 &&  <EmptyCart/>
-        }
-        <FailedCart info={cartInfo}/>
-         
+        { data?.numberOfItems ===0 ? <EmptyCart/> :   <FailedCart info={data}/> }
         </>
   )
 }
