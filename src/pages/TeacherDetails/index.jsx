@@ -1,6 +1,6 @@
 import Breadcrumbs from "../../Components/Common/CardInfo/Breadcrumbs";
-import EnrollCard from "./EnrollCard";
-import TeacherInfos from "./TeacherInfos";
+import EnrollCard from "./components/EnrollCard";
+import TeacherInfos from "./components/TeacherInfos";
 
 export default function TeacherDetails() {
   return (
