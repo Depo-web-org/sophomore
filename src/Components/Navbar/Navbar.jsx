@@ -14,7 +14,7 @@ const Navbar = () => {
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
       { icon: <IoCartOutline />, link: "/cart" },
-      { icon: <IoHeartOutline />, link: "/" },
+      { icon: <IoHeartOutline />, link: "/wishlist" },
     ],
     []
   );

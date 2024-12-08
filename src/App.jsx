@@ -9,10 +9,11 @@ import Teachers from "./pages/Teachers";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
-import Wishlistempty from "./pages/Wishlist/components/Wishlistempty/Wishlistempty";
+import Wishlistempty from "./pages/Wishlist/components/Wishlistempty";
 import { AboutTab } from "./pages/TeacherDetails/TeacherInfos";
 import ReviewsTab from "./pages/TeacherDetails/ReviewsTab";
 import TeacherDetails from "./pages/TeacherDetails";
+import WishList from "./pages/Wishlist";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<WishList />} />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
