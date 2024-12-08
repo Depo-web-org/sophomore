@@ -8,12 +8,12 @@ import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
-import CourseDetailsTab from "./pages/TeacherDetails/CourseDetailsTab";
 import Wishlistempty from "./pages/Wishlist/components/Wishlistempty";
-import { AboutTab } from "./pages/TeacherDetails/TeacherInfos";
-import ReviewsTab from "./pages/TeacherDetails/ReviewsTab";
 import TeacherDetails from "./pages/TeacherDetails";
 import WishList from "./pages/Wishlist";
+import CourseDetailsTab from "./pages/TeacherDetails/components/CourseDetailsTab";
+import { AboutTab } from "./pages/TeacherDetails/components/TeacherInfos";
+import ReviewsTab from "./pages/TeacherDetails/components/ReviewsTab";
 
 function App() {
   return (
