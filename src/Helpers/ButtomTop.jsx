@@ -1,6 +1,5 @@
-import { FaRegHandPointUp } from "react-icons/fa";
-
 import { useEffect, useState } from "react";
+import { HiChevronDoubleUp } from "react-icons/hi";
 
 const ButtomTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,12 +18,12 @@ const ButtomTop = () => {
       window.removeEventListener("scroll", checkScroll);
     };
   }, []);
- 
+
   return (
     <>
       {isVisible && (
-        <FaRegHandPointUp
-          className=" text-red-500 size-7 fixed bottom-10 right-10 z-40"
+        <HiChevronDoubleUp
+          className="text-blue-500 size-7 fixed bottom-10 right-10 z-40"
           onClick={() => {
             window.scrollTo({
               top: 0,
