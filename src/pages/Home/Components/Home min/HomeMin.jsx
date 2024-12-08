@@ -40,7 +40,7 @@ export default function HomeMin() {
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
           {HomeMin.map((item) => (
             <div
-              className="col-span-6 md:col-span-3 lg:col-span-4"
+              className="col-span-6 md:col-span-3 lg:col-span-4 hover:cursor-pointer"
               key={item.id}
             >
               {/* img */}
