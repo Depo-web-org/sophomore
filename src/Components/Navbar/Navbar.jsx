@@ -13,6 +13,7 @@ const Navbar = () => {
       { text: `Home`, link: "/" },
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
+     { text: 'My Learning', link: '/mylearning' },
       { icon: <IoCartOutline />, link: "/cart" },
       { icon: <IoHeartOutline />, link: "/wishlist" },
     ],
