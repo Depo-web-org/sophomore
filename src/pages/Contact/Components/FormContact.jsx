@@ -70,12 +70,12 @@ const FormContact = () => {
 
   return (
     <section className="pt-4 text-white ">
-      <form onSubmit={handleFormSubmit} action="submit" className=" p-10 xl:p-20 flex flex-col gap-y-5 ">
+      <form onSubmit={handleFormSubmit} action="submit" className=" p-2 lg:p-10 xl:p-20 flex flex-col gap-y-5 ">
         {/* First Name and Last Name Fields */}
-        <div className="flex justify-between gap-4 ">
+        <div className="flex  flex-col lg:flex-row justify-between  lg:gap-4 ">
   <label
     htmlFor="first-name"
-    className="w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col"
+    className="w-full lg:w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col"
   >
     First Name
     <input
@@ -98,7 +98,7 @@ const FormContact = () => {
 
   <label
     htmlFor="last-name"
-    className="w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col"
+    className="w-full  lg:w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col"
   >
     Last Name
     <input
@@ -120,12 +120,12 @@ const FormContact = () => {
   </label>
 </div>
 
-        <div  className="flex  items-center gap-4  ">
+        <div  className="flex   flex-col lg:flex-row items-center  lg:gap-4  ">
 
         {/* Email Field */}
         <label
           htmlFor="user-mail"
-           className="h-10  w-1/2 cursor-pointer  text-slate-100 font-medium flex flex-col"
+           className="h-10  w-full mb-12 lg:mb-0  lg:w-1/2 cursor-pointer  text-slate-100 font-medium flex flex-col"
         >
           Email
           <input
@@ -149,7 +149,7 @@ const FormContact = () => {
         {/* Phone Number Field */}
         <label
           htmlFor="user-phone"
-          className="h-10 w-1/2  cursor-pointer  text-slate-100 font-medium flex flex-col "
+          className="h-10 w-full  lg:w-1/2  cursor-pointer  text-slate-100 font-medium flex flex-col "
         >
           Phone
           <PhoneInput

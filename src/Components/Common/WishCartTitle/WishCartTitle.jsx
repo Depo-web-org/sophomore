@@ -1,5 +1,5 @@
 
-const TitlePage = ({name, items}) => {
+const WishCartTitle = ({name, items}) => {
   return (
     <>
     
@@ -18,4 +18,4 @@ const TitlePage = ({name, items}) => {
   )
 }
 
-export default TitlePage
+export default WishCartTitle

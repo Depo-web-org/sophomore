@@ -1,14 +1,14 @@
 
 import { Link } from 'react-router-dom'
 import cart from '/public/empty.svg'
-import TitlePage from '../../../Components/Common/TitlePage/Titlepage'
+import WishCartTitle from '../../../Components/Common/WishCartTitle/WishCartTitle'
 
 const EmptyCart = () => {
   return (
     <>
      <section className="container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 min-h-[calc(100vh-128px)] h">
         <div className="pt-32 relative ">
-            <TitlePage name={'Your Cart'} items={' 🙁'}/>
+            <WishCartTitle name={'Your Cart'} items={' 🙁'}/>
 
         </div>
 
