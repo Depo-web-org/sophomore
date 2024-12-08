@@ -23,7 +23,7 @@ export default function EnrollCard() {
 
   return (
     <>
-      <div className="w-[376px] h-[406px] bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
+      <div className="max-w-[320px] md:min-w-[376px] min-h-[406px] bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
         <p className="text-[18px] font-semibold leading-[27px] text-primary">
           Grade 1 Math - Fundamentals of Numbers & Operations
         </p>
@@ -47,13 +47,13 @@ export default function EnrollCard() {
           </div>
           <div className="flex items-center justify-between gap-5 min-w-full">
             <button
-              className="bg-primary cursor-pointer text-white rounded-md p-2 w-[160px]"
+              className="bg-primary cursor-pointer text-white rounded-md p-2 w-[120px] md:w-[160px] "
               onClick={handleModalPackages}
             >
               Enroll now
             </button>
             <button
-              className="bg-white cursor-pointer text-primary rounded-md p-2 w-[160px]"
+              className="bg-white cursor-pointer text-primary rounded-md p-2 w-[120px] md:w-[160px]"
               onClick={handleButtonClick}
             >
               Add to cart
