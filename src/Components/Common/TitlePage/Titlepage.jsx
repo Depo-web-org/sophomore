@@ -10,9 +10,7 @@ const TitlePage = ({name, items}) => {
           <p className="text-2xl text-white font-semibold">
          {items}  
          <span className="mx-1">
-         {
-            typeof(items) === "number"&& "items"
-         }
+         { typeof(items) === "number"&& "items"       }
          </span>
           </p>
             </div>

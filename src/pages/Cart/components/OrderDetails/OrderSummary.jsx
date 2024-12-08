@@ -3,7 +3,7 @@ import { OrderDetalis } from "./OrderDetalis";
 import { PaymentMethod } from "./PaymentMethod";
 import { PriceSummary } from "./PriceSummary";
 
- const OrderSummary = ({ cartItems,  onPay, onApply , style }) => {
+ const OrderSummary = ({ cartItems,  onPay, onApply , style , pricesInfo }) => {
   return (
     <div className={style}>
       {/* Order Details */}
@@ -18,7 +18,7 @@ import { PriceSummary } from "./PriceSummary";
         <DiscountCode onApply={onApply} />
 
         {/* Items Price */}
-        <PriceSummary cartInfo={cartItems} />
+        <PriceSummary cartInfo={pricesInfo} />
       </div>
     </div>
   );
