@@ -12,13 +12,13 @@ const Hero = () => {
 
       </h1>
 
-      <p className="mx-auto sm:text-xl/relaxed font-semibold slide-in-top-slow pb-2 lg:pb-0">
+      <p className="mx-auto sm:text-xl/relaxed font-semibold slide-in-top-slow pb-8 lg:pb-0">
       Learn. Grow. Succeed. Discover courses tailored for your success.
       </p>
 
       <div className="lg:mt-8 xl:mt-4 flex flex-wrap justify-center gap-4">
         <Link
-          className="block w-full rounded bg-white  px-12 py-3 text-sm font-medium text-primary hover:bg-opacity-95    sm:w-auto"
+          className="block w-full rounded bg-white  px-12 py-3 text-sm font-medium text-primary hover:bg-opacity-95 sm:w-auto"
           to="about"
         >
           Learn More
