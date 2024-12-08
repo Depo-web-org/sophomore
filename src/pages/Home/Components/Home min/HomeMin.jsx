@@ -48,7 +48,7 @@ export default function HomeMin() {
                 <img
                   src={item.img}
                   alt={item.Name}
-                  className="w-full h-44 sm:h-48 lg:h-60 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
+                  className="w-full h-44 sm:h-48 lg:h-48 xl:h-64 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                 />
               </div>
               {/* Text */}
