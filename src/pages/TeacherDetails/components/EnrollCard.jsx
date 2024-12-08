@@ -1,6 +1,7 @@
 import { useState } from "react";
-import ModalPackages, { MoadlUnits } from "./ModalPackages";
+import ModalPackages from "./ModalPackages";
 import ModalOops from "./ModalOops";
+import { ModalUnits } from "./ModalUnits";
 
 export default function EnrollCard() {
   const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
@@ -71,7 +72,7 @@ export default function EnrollCard() {
         />
       )}
       {isModalUnitsOpen && (
-        <MoadlUnits
+        <ModalUnits
           setIsModalUnitsOpen={setIsModalUnitsOpen}
           handleButtonClick={handleButtonClick}
         />
