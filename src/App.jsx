@@ -14,19 +14,21 @@ import WishList from "./pages/Wishlist";
 import CourseDetailsTab from "./pages/TeacherDetails/components/CourseDetailsTab";
 import { AboutTab } from "./pages/TeacherDetails/components/TeacherInfos";
 import ReviewsTab from "./pages/TeacherDetails/components/ReviewsTab";
+import MyLearning from "./pages/MyLearning";
 import ButtomTop from "./Helpers/ButtomTop";
 
 function App() {
   return (
     <>
       <ScrollTop />
-      <ButtomTop/>
+      <ButtomTop />
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/mylearning" element={<MyLearning />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
           <Route path="/school/:schoolName" element={<Grade />} />

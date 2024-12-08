@@ -8,10 +8,10 @@ export default function TeacherInfos() {
         <div className="flex justify-start items-start gap-8">
           <img src="/TeacherDetails/Frame 38.png" alt="teacher" />
           <div className="flex items-start justify-start flex-col gap-3">
-            <p className="text-[36px] font-semibold leading-[36px] text-white">
+            <p className="text-2xl md:text-4xl font-semibold leading-[24px] text-white">
               Omar Gad
             </p>
-            <p className="text-[16px] font-normal leading-[18.75px] text-[#FFFFFF66]">
+            <p className="text-[14px] md:text-[16px]  font-normal leading-[18.75px] text-[#FFFFFF66]">
               Math Teacher
             </p>
             <div className="flex items-center justify-between gap-4">
