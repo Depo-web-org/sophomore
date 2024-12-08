@@ -13,7 +13,7 @@ export default function WishList() {
           Your Wishlist
         </h2>
       </div>
-      <div className="grid grid-cols-6w-full lg:grid-cols-12 gap-4 items-center justify-center">
+      <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
         {data?.Teacher.map((teacher) => (
           <TeacherCard
             key={teacher.id}
