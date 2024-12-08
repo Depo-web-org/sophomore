@@ -54,7 +54,7 @@ const CourseDetailsTab = () => {
             >
               <span className="font-medium">{item.title}</span>
               <FiPlus
-                className={`w-6 h-6 transition-transform duration-300 ease-in-out ${
+                className={`w-6 h-6 border rounded-full transition-transform duration-300 ease-in-out ${
                   isOpen ? "rotate-45" : ""
                 }`}
               />
