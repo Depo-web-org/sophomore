@@ -22,19 +22,19 @@ export default function HomeMin() {
 
   return (
     <>
-      <section className=" text-white my-5 px-6 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
+      <section className="text-white my-5 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
     
-
         <div className="py-5">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
+
             <span className="font-bold text-lg md:text-4xl">
               Let&apos;s Continue learning
             </span>
-            <p className="text-sm font-medium border-b-2 border-b-slate-700 pt-3 hover:cursor-pointer">
+            <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer">
               My learning
             </p>
           </div>
-          <p className="text-sm font-medium ">Pick up from where you left</p>
+          <p className="text-sm font-medium py-2">Pick up from where you left</p>
         </div>
 
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
@@ -48,7 +48,7 @@ export default function HomeMin() {
                 <img
                   src={item.img}
                   alt={item.Name}
-                  className="w-full h-44 sm:h-48 lg:h-48 xl:h-64 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
+                  className="w-full h-44 sm:h-48 lg:h-48 xl:h-52 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                 />
               </div>
               {/* Text */}
