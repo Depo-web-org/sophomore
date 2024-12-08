@@ -65,12 +65,27 @@ const courses = [
 
 export default function Courses() {
   return (
-    <div className="flex flex-wrap justify-center md:justify-between items-center gap-y-4 gap-4">
-      {courses.map((course) => (
-        <div key={course.name}>
-          <LearningCard course={course} />
+    <div className="w-full flex flex-col gap-6">
+      <div className="w-full flex flex-col gap-4 ">
+        <p className="text-2xl font-semibold text-white">Not finished yet</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
+          {courses
+            .filter((cur) => cur.isFinished === true)
+            .map((course) => (
+              <LearningCard key={course.name} course={course} />
+            ))}
         </div>
-      ))}
+      </div>
+      <div className="w-full flex flex-col gap-4 pt-2 border-t-[1px] border-gray-500">
+        <p className="text-2xl font-semibold text-white"> finished </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
+          {courses
+            .filter((cur) => cur.isFinished === false)
+            .map((course) => (
+              <LearningCard key={course.name} course={course} />
+            ))}
+        </div>
+      </div>
     </div>
   );
 }
