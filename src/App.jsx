@@ -14,11 +14,13 @@ import WishList from "./pages/Wishlist";
 import CourseDetailsTab from "./pages/TeacherDetails/components/CourseDetailsTab";
 import { AboutTab } from "./pages/TeacherDetails/components/TeacherInfos";
 import ReviewsTab from "./pages/TeacherDetails/components/ReviewsTab";
+import ButtomTop from "./Helpers/ButtomTop";
 
 function App() {
   return (
     <>
       <ScrollTop />
+      <ButtomTop/>
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
