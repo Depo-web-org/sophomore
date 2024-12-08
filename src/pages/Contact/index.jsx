@@ -6,10 +6,9 @@ const Contact = () => {
     <section >
 
 {/* Part  One */}
-   <div className="contact-Background text-white relative  max-h-[520px]  " > 
-    <div className="  py-32  relative z-10 flex container w-full md:w-custom-md xl:w-custom-xl mx-auto  gap-5 ">
-
-    <div className='flex-1  '>
+   <div className="contact-Background text-white relative  lg:max-h-[650px] 2xl:max-h-[676px]" > 
+    <div className=" pt-32 pb-10  lg:py-32  relative z-10 flex flex-col lg:flex-row container w-full md:w-custom-md xl:w-custom-xl mx-auto  gap-5 ">
+    <div className='flex-1  w-full  '>
       <h5
         className="text-white text-3xl lg:text-4xl xl:text-5xl font-extrabold text-transparent text-start "
       >
@@ -20,7 +19,7 @@ const Contact = () => {
     </p>
   </div>
 
-<div className='bg-slate-900 flex-grow rounded-2xl  w-1/5  mt-16   '>
+<div className='bg-slate-900 flex-grow rounded-2xl  lg:w-1/5  lg:mt-16   '>
 
 <FormContact/>
 
@@ -36,10 +35,10 @@ const Contact = () => {
 
 {/* Part Two */}
 
-<div className='bg-primary min-h-[60vh] xl:min-h-[70vh] w-full'>
-<div className='py-32   flex container w-full md:w-custom-md xl:w-custom-xl mx-auto gap-5 flex-col'>
+<div className='bg-primary lg:min-h-[10vh] xl:min-h-[70vh]   w-full items-center xl:items-start   flex '>
+<div className=' py-10 lg:py-32   flex container w-full h-full md:w-custom-md xl:w-custom-xl mx-auto gap-5 flex-col'>
       <h5
-        className="text-white text-3xl lg:text-4xl xl:text-5xl font-extrabold text-transparent  text-start "
+        className="  text-white text-3xl lg:text-4xl xl:text-5xl font-extrabold text-transparent  text-start  2xl:w-[35%]"
       >
          Get in touch with us
       </h5>

@@ -1,4 +1,4 @@
-import TitlePage from "../../../Components/Common/TitlePage/Titlepage"
+import WishCartTitle from "../../../Components/Common/WishCartTitle/WishCartTitle"
 import CourseCard from "./CourseCard/CourseCard"
 import OrderSummary from "./OrderDetails/OrderSummary"
 
@@ -8,7 +8,7 @@ const FailedCart = ({info}) => {
      <section className="min-h-screen ">
 
 <div className=" pt-32 relative container w-full md:w-custom-md xl:w-custom-xl mx-auto   ">
-    <TitlePage name={'Your Cart'} items={info?.numberOfItems}/>
+    <WishCartTitle name={'Your Cart'} items={info?.numberOfItems}/>
 
 </div>
 <div className='w-full min-h-96 lg:pt-9   mr-auto  xl:w-[90%]   '>
