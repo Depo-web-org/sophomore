@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import CardInfo from "../../Components/Common/CardInfo/CardInfo";
 import useFetch from "../../Hooks/UseFetch";
-import Breadcrumbs from "../../Components/Common/CardInfo/Breadcrumbs";
+import Breadcrumbs from "../../Components/Common/BreadCrumbs/Breadcrumbs";
 /* eslint-disable no-unused-vars */
 
 const Subjects = () => {

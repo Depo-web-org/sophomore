@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/UseFetch";
-import Breadcrumbs from "../../Components/Common/CardInfo/Breadcrumbs";
+import Breadcrumbs from "../../Components/Common/BreadCrumbs/Breadcrumbs";
 import { useState } from "react";
 
 const Teachers = () => {

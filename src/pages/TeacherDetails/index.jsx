@@ -1,4 +1,4 @@
-import Breadcrumbs from "../../Components/Common/CardInfo/Breadcrumbs";
+import Breadcrumbs from "../../Components/Common/BreadCrumbs/Breadcrumbs";
 import EnrollCard from "./components/EnrollCard";
 import TeacherInfos from "./components/TeacherInfos";
 
