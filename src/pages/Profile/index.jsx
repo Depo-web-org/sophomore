@@ -3,7 +3,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { Outlet, NavLink } from "react-router-dom";
 export default function Profile() {
   return (
-    <div className="account-page pt-24 container">
+    <div className="account-page pt-24 container flex gap-8">
       <div className="tabs flex flex-col justify-start w-[200px] items-start border-r h-screen border-gray-200">
         <NavLink
           to="myprofile"
