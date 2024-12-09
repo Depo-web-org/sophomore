@@ -7,8 +7,6 @@ export default function Security() {
       {/* first section */}
       <div className="w-full h-72">
         <div className="relative bg-gradient-to-r from-[#F15C54] from-10%  to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px]">
-          {/* icon */}
-          <BsFillCameraFill className="  absolute top-4 right-7 h-6 w-6 text-white" />
           {/* img */}
           <img
             className="border-2 border-white  absolute top-36 left-24 w-32 h-32 rounded-full"
