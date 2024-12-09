@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/index";
 import About from "./pages/About/index";
 import ScrollTop from "./Helpers/ScrollTop";
@@ -20,6 +20,10 @@ import CourseVideo from "./pages/CourseVideo";
 import CourseDetails from "./pages/CourseVideo/components/CourseInfos/CourseDetails";
 import CourseComments from "./pages/CourseVideo/components/CourseInfos/CourseComments";
 import CourseMaterial from "./pages/CourseVideo/components/CourseInfos/CourseMaterial";
+import Profile from "./pages/Profile";
+import Subscriptions from "./pages/Profile/components/Subscriptions/Subscriptions";
+import Security from "./pages/Profile/components/Security/Security";
+import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
 
 function App() {
   return (
@@ -33,6 +37,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/mylearning" element={<MyLearning />} />
+          {/* course video nested route */}
           <Route
             path="/mylearning/course/:courseName"
             element={<CourseVideo />}
@@ -52,6 +57,7 @@ function App() {
             path="/school/:schoolName/grade/:gradeName/subject/:subjectName"
             element={<Teachers />}
           />
+          {/* teacher details nested route */}
           <Route
             path="/school/:schoolName/grade/:gradeName/subject/:subjectName/teacher/:teacherName"
             element={<TeacherDetails />}
@@ -59,6 +65,13 @@ function App() {
             <Route element={<AboutTab />} index />
             <Route path="course-details" element={<CourseDetailsTab />} />
             <Route path="reviews" element={<ReviewsTab />} />
+          </Route>
+          {/* Profile nested route */}
+          <Route path="/profile" element={<Profile />}>
+            <Route index element={<Navigate to="myprofile" />} />
+            <Route path="myprofile" element={<MyProfile />} />
+            <Route path="subscriptions" element={<Subscriptions />} />
+            <Route path="security" element={<Security />} />
           </Route>
         </Route>
       </Routes>
