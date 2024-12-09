@@ -17,6 +17,9 @@ import ReviewsTab from "./pages/TeacherDetails/components/ReviewsTab";
 import MyLearning from "./pages/MyLearning";
 import ButtomTop from "./Helpers/ButtomTop";
 import CourseVideo from "./pages/CourseVideo";
+import CourseDetails from "./pages/CourseVideo/components/CourseInfos/CourseDetails";
+import CourseComments from "./pages/CourseVideo/components/CourseInfos/CourseComments";
+import CourseMaterial from "./pages/CourseVideo/components/CourseInfos/CourseMaterial";
 
 function App() {
   return (
@@ -33,7 +36,11 @@ function App() {
           <Route
             path="/mylearning/course/:courseName"
             element={<CourseVideo />}
-          />
+          >
+            <Route element={<CourseDetails />} index />
+            <Route path="comments" element={<CourseComments />} />
+            <Route path="material" element={<CourseMaterial />} />
+          </Route>
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
           <Route path="/school/:schoolName" element={<Grade />} />
