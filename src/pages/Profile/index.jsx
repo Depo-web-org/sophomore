@@ -1,10 +1,22 @@
 import { HiUserCircle, HiClipboardList } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa6";
 import { Outlet, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { TiFlash } from "react-icons/ti";
+import "./profile.css";
 export default function Profile() {
+  const [Active, setActive] = useState("close");
+
   return (
-    <div className="pt-24 container flex gap-8">
-      <div className="tabs flex flex-col justify-start w-[200px] items-start border-r h-screen border-gray-200">
+    <div className=" pt-24 container flex gap-8">
+      <div
+        className={`${Active} flex flex-col justify-start overflow-hidden items-start border-r h-screen border-gray-200`}
+      >
+        <TiFlash
+          onClick={() => setActive(Active === "open" ? "close" : "open")}
+          className={`mb-3 ms-auto w-7 h-7 text-red-500 custom-rotate-x `}
+        />
+
         <NavLink
           to="myprofile"
           className={({ isActive }) =>
