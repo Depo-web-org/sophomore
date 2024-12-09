@@ -72,7 +72,11 @@ export default function Courses() {
           {courses
             .filter((cur) => cur.isFinished === true)
             .map((course) => (
-              <LearningCard key={course.name} course={course} />
+              <LearningCard
+                key={course.name}
+                course={course}
+                path={`/mylearning/course/${course.name}`}
+              />
             ))}
         </div>
       </div>
@@ -82,7 +86,11 @@ export default function Courses() {
           {courses
             .filter((cur) => cur.isFinished === false)
             .map((course) => (
-              <LearningCard key={course.name} course={course} />
+              <LearningCard
+                key={course.name}
+                course={course}
+                path={`/mylearning/course/${course.name}`}
+              />
             ))}
         </div>
       </div>
