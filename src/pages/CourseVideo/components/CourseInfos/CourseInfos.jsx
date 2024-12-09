@@ -1,11 +1,11 @@
 import React from "react";
-import Tabs from "./Tabs";
 import { Outlet } from "react-router-dom";
+import Tabs from "./Tabs";
 
 export default function CourseInfos() {
   return (
-    <div>
-      <div className="">
+    <div className="w-full md:w-2/3">
+      <div className="w-[257px]">
         <Tabs />
       </div>
 
