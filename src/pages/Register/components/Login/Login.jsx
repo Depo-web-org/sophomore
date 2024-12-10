@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Login({ toggleForm }) {
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-44 w-full md:w-1/2">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-44 w-full md:w-4/5 lg:w-1/2">
       <div className=" flex flex-col items-start gap-24 w-full">
         <div className="flex flex-col justify-start items-start gap-2">
           <img src="/logos/logo.svg" alt="" />
@@ -111,7 +111,7 @@ export default function Login({ toggleForm }) {
             </div>
             <button
               type="submit"
-              className="inline-block w-full rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+              className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
             >
               Login
             </button>
