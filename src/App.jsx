@@ -24,6 +24,7 @@ import Profile from "./pages/Profile";
 import Subscriptions from "./pages/Profile/components/Subscriptions/Subscriptions";
 import Security from "./pages/Profile/components/Security/Security";
 import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -73,6 +74,7 @@ function App() {
             <Route path="subscriptions" element={<Subscriptions />} />
             <Route path="security" element={<Security />} />
           </Route>
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </>
