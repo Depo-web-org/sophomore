@@ -20,11 +20,11 @@ export default function Subscriptions() {
     <>
       {/* top Text */}
       <div>
-        <div className="flex justify-between text-white font-bold">
+        <div className="flex justify-between text-white font-bold text-sm sm:text-lg">
           <p>Subscriptions</p>
           <p>Available until</p>
         </div>
-        <div className="flex justify-between text-sm my-2 text-gray-500 font-normal">
+        <div className="flex justify-between my-2 text-gray-500 font-normal text-sm ">
           <p>Subscriptions</p>
           <p>Available until</p>
         </div>
@@ -32,7 +32,7 @@ export default function Subscriptions() {
 
       {/* Card Subscriptions*/}
 
-      <div className="grid grid-cols-2 gap-5 pt-10">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5 pt-10">
         {Subscriptions.map((item) => {
           return (
             <>

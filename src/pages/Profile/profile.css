@@ -1,19 +1,14 @@
-
-
-
 .close {
-    width: 50px !important;
-    transition: all 1s !important;
-  }
+  width: 50px !important;
+  transition: all 1s !important;
+}
 
-  .open {
-    width: 200px !important;
-    transition: all 1s !important;
+.open {
+  width: 200px !important;
+  transition: all 1s !important;
+}
 
-  }
-  
-
-  .custom-rotate-x:hover {
-    transform: rotateY(180deg);
-    transition: transform .5s ease-in-out;
-  }
+.custom-rotate-x:hover {
+  transform: rotateY(180deg);
+  transition: transform 0.5s ease-in-out;
+}
