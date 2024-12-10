@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SignUp({ toggleForm }) {
+export default function SignUp({ toggleForm, handleSendOtp }) {
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-12 justify-between w-full md:w-1/2">
       <div className=" flex flex-col items-start gap-6 w-full">
@@ -16,6 +16,14 @@ export default function SignUp({ toggleForm }) {
             action="#"
             className=" mb-0 mt-8 w-full space-y-4 flex flex-col gap-8"
           >
+            <div className="w-full flex justify-center items-center gap-8 ">
+              <button className="text-white text-base font-bold p-[10px] bg-secondary  rounded-lg">
+                Student
+              </button>
+              <button className="text-white text-base font-bold p-[10px] active:bg-secondary border-[1px] border-gray-600 rounded-lg">
+                Teacher
+              </button>
+            </div>
             <div>
               <label htmlFor="name" className="sr-only">
                 Name
@@ -146,9 +154,10 @@ export default function SignUp({ toggleForm }) {
             </div>
             <button
               type="submit"
+              onClick={handleSendOtp}
               className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
             >
-              Sign up
+              Send OTP
             </button>
           </form>
         </div>

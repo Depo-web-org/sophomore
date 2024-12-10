@@ -6,6 +6,7 @@ export default {
       colors: {
         primary: "#536CB3",
         secondary: "#F15C54",
+        textopacity: "#FFFFFF70",
         dark: "#0a142f",
       },
       container: {
@@ -20,7 +21,6 @@ export default {
         "custom-md": "calc(100% - 124px)",
         "custom-xl": "80%",
       },
-      
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],
