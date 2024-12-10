@@ -16,6 +16,7 @@ import { AboutTab } from "./pages/TeacherDetails/components/TeacherInfos";
 import ReviewsTab from "./pages/TeacherDetails/components/ReviewsTab";
 import MyLearning from "./pages/MyLearning";
 import ButtomTop from "./Helpers/ButtomTop";
+import Quiz from "./pages/Quiz/Index";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/mylearning" element={<MyLearning />} />
+          <Route path="/quiz" element={<Quiz />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
           <Route path="/school/:schoolName" element={<Grade />} />
