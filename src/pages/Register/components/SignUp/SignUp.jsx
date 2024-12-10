@@ -14,7 +14,7 @@ export default function SignUp({ toggleForm, handleSendOtp }) {
         <div className="w-full">
           <form
             action="#"
-            className=" mb-0 mt-8 w-full space-y-4 flex flex-col gap-8"
+            className=" mb-0 mt-8 w-full space-y-4 flex flex-col gap-5"
           >
             <div className="w-full flex justify-center items-center gap-8 ">
               <button className="text-white text-base font-bold p-[10px] bg-secondary  rounded-lg">

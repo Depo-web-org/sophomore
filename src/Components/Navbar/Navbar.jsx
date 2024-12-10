@@ -1,5 +1,5 @@
 import logo from "../../../public/logos/logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useMemo, useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -7,6 +7,7 @@ import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = useMemo(
     () => [
@@ -50,11 +51,13 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <NavLink to={"/register"}>
-              <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white">
-                Login
-              </button>
-            </NavLink>
+
+            <button
+              onClick={() => navigate("/register")}
+              className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
+            >
+              Login
+            </button>
           </div>
         </div>
         <button onClick={toggleMenu} className="md:hidden mr-5 text-primary">
@@ -78,11 +81,12 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <NavLink to={"/register"}>
-            <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full">
-              Login
-            </button>
-          </NavLink>
+          <button
+            onClick={() => navigate("/register")}
+            className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
+          >
+            Login
+          </button>
         </div>
       )}
     </nav>
