@@ -53,6 +53,7 @@ const Navbar = () => {
                 <li key={index + item.text + item.link}>
                   <NavLink
                     to={item.link}
+                    style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
                     className="text-white text-sm lg:text-base flex items-center justify-center "
                   >
                     <span className="text-base md:text-lg"> {item.icon}</span>
