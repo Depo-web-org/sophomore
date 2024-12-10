@@ -26,59 +26,112 @@ import Subscriptions from "./pages/Profile/components/Subscriptions/Subscription
 import Security from "./pages/Profile/components/Security/Security";
 import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
 import Register from "./pages/Register";
+import { AuthProvider } from "./ProtectedRoutes/AuthContext";
+import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
 
 function App() {
   return (
     <>
-      <ScrollTop />
-      <ButtomTop />
-      <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/mylearning" element={<MyLearning />} />
-          <Route path="/quiz" element={<Quiz />} />
-          {/* course video nested route */}
-          <Route
-            path="/mylearning/course/:courseName"
-            element={<CourseVideo />}
-          >
-            <Route element={<CourseDetails />} index />
-            <Route path="comments" element={<CourseComments />} />
-            <Route path="material" element={<CourseMaterial />} />
+      <AuthProvider>
+        <ScrollTop />
+        <ButtomTop />
+        <Routes>
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mylearning"
+              element={
+                <ProtectedRoute>
+                  <MyLearning />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/quiz" element={<Quiz />} />
+            {/* course video nested route */}
+            <Route
+              path="/mylearning/course/:courseName"
+              element={<CourseVideo />}
+            >
+              <Route element={<CourseDetails />} index />
+              <Route path="comments" element={<CourseComments />} />
+              <Route path="material" element={<CourseMaterial />} />
+            </Route>
+            <Route
+              path="/wishlist"
+              element={
+                <ProtectedRoute>
+                  <WishList />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/Wishlistempty" element={<Wishlistempty />} />
+            <Route path="/school/:schoolName" element={<Grade />} />
+            <Route
+              path="/school/:schoolName/grade/:gradeName"
+              element={<Subjects />}
+            />
+            <Route
+              path="/school/:schoolName/grade/:gradeName/subject/:subjectName"
+              element={<Teachers />}
+            />
+            {/* teacher details nested route */}
+            <Route
+              path="/school/:schoolName/grade/:gradeName/subject/:subjectName/teacher/:teacherName"
+              element={<TeacherDetails />}
+            >
+              <Route element={<AboutTab />} index />
+              <Route path="course-details" element={<CourseDetailsTab />} />
+              <Route path="reviews" element={<ReviewsTab />} />
+            </Route>
+            {/* Profile nested route */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to="myprofile" />} />
+              <Route
+                path="myprofile"
+                element={
+                  <ProtectedRoute>
+                    <MyProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="subscriptions"
+                element={
+                  <ProtectedRoute>
+                    <Subscriptions />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="security"
+                element={
+                  <ProtectedRoute>
+                    <Security />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="/register" element={<Register />} />
           </Route>
-          <Route path="/wishlist" element={<WishList />} />
-          <Route path="/Wishlistempty" element={<Wishlistempty />} />
-          <Route path="/school/:schoolName" element={<Grade />} />
-          <Route
-            path="/school/:schoolName/grade/:gradeName"
-            element={<Subjects />}
-          />
-          <Route
-            path="/school/:schoolName/grade/:gradeName/subject/:subjectName"
-            element={<Teachers />}
-          />
-          {/* teacher details nested route */}
-          <Route
-            path="/school/:schoolName/grade/:gradeName/subject/:subjectName/teacher/:teacherName"
-            element={<TeacherDetails />}
-          >
-            <Route element={<AboutTab />} index />
-            <Route path="course-details" element={<CourseDetailsTab />} />
-            <Route path="reviews" element={<ReviewsTab />} />
-          </Route>
-          {/* Profile nested route */}
-          <Route path="/profile" element={<Profile />}>
-            <Route index element={<Navigate to="myprofile" />} />
-            <Route path="myprofile" element={<MyProfile />} />
-            <Route path="subscriptions" element={<Subscriptions />} />
-            <Route path="security" element={<Security />} />
-          </Route>
-          <Route path="/register" element={<Register />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

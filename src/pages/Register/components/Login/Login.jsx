@@ -1,6 +1,15 @@
 import React from "react";
+import { useAuth } from "../../../../ProtectedRoutes/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({ toggleForm }) {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    login();
+    navigate("/");
+  };
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-44 w-full md:w-4/5 lg:w-1/2">
       <div className=" flex flex-col items-start gap-24 w-full">
@@ -110,6 +119,7 @@ export default function Login({ toggleForm }) {
               </button>
             </div>
             <button
+              onClick={handleLogin}
               type="submit"
               className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
             >

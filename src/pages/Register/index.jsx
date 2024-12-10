@@ -34,7 +34,7 @@ export default function Register() {
         alt="register img"
         className={`hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] ${
           !isSignUp || isLogin ? "slide-in-left" : "slide-in-right"
-        } object-cover rounded-xl z-50`}
+        } object-cover rounded-xl z-10`}
       />
       {isSignUp && (
         <SignUp toggleForm={toggleForm} handleSendOtp={handleSendOtp} />

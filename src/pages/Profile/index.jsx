@@ -1,12 +1,21 @@
 import { HiUserCircle, HiClipboardList } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa6";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TiFlash } from "react-icons/ti";
 import "./profile.css";
 import { MdOutlineLogout } from "react-icons/md";
+import { useAuth } from "../../ProtectedRoutes/AuthContext";
 export default function Profile() {
   const [Active, setActive] = useState("close");
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,12 +87,8 @@ export default function Profile() {
           }
         >
           <MdOutlineLogout className="w-6 h-6" />
-          <span >Logout</span>
-
-
+          <button onClick={handleLogout}>Logout</button>
         </NavLink>
-
-
       </div>
 
       <div className="pb-8 w-[calc(100%-30px)] lg:w-[calc(100%-232px)] ">

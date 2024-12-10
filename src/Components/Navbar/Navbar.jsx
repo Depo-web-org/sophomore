@@ -4,23 +4,33 @@ import "./style.css";
 import { useMemo, useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
+import { useAuth } from "../../ProtectedRoutes/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth(); // Access authentication state from context
 
-  const navItems = useMemo(
-    () => [
+  // Define nav items, some will be conditionally shown based on authentication
+  const navItems = useMemo(() => {
+    const items = [
       { text: `Home`, link: "/" },
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
-      { text: "My Learning", link: "/mylearning" },
-      { text: "Profile", link: "/profile" },
-      { icon: <IoCartOutline />, link: "/cart" },
-      { icon: <IoHeartOutline />, link: "/wishlist" },
-    ],
-    []
-  );
+    ];
+
+    if (isAuthenticated) {
+      // Add protected items only if authenticated
+      items.push(
+        { text: "My Learning", link: "/mylearning" },
+        { text: "Profile", link: "/profile" },
+        { icon: <IoCartOutline />, link: "/cart" },
+        { icon: <IoHeartOutline />, link: "/wishlist" }
+      );
+    }
+
+    return items;
+  }, [isAuthenticated]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -52,12 +62,14 @@ const Navbar = () => {
               ))}
             </ul>
 
-            <button
-              onClick={() => navigate("/register")}
-              className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
-            >
-              Login
-            </button>
+            {!isAuthenticated && (
+              <button
+                onClick={() => navigate("/register")}
+                className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
         <button onClick={toggleMenu} className="md:hidden mr-5 text-primary">
@@ -81,12 +93,14 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <button
-            onClick={() => navigate("/register")}
-            className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
-          >
-            Login
-          </button>
+          {!isAuthenticated && (
+            <button
+              onClick={() => navigate("/register")}
+              className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
+            >
+              Login
+            </button>
+          )}
         </div>
       )}
     </nav>
