@@ -72,18 +72,18 @@ export default function Profile() {
         </NavLink>
 
         <NavLink
-          to="myprofile"
+          // to="myprofile"
           className={({ isActive }) =>
-            `relative top-72 lg:top-96 p-3 flex items-center gap-3 border-b border-transparent rounded-t-lg transition-all duration-300 ${
-              isActive
-                ? "text-primary border-blue-900 bg-secondaryBg"
-                : "text-gray-500"
-            } hover:text-primary hover:border-blue-900 hover:bg-secondaryBg`
+            `relative top-72 lg:top-96 p-3 flex items-center gap-3 border-b border-transparent rounded-t-lg text-red-500 font-bold hover:text-red-400 transition-all duration-300 `
           }
         >
           <MdOutlineLogout className="w-6 h-6" />
-          <span>Logout</span>
+          <span >Logout</span>
+
+
         </NavLink>
+
+
       </div>
 
       <div className="pb-8 w-[calc(100%-30px)] lg:w-[calc(100%-232px)] ">

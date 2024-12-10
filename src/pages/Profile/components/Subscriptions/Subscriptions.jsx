@@ -36,12 +36,12 @@ export default function Subscriptions() {
         {Subscriptions.map((item) => {
           return (
             <>
-              <div className="flex flex-col w-[auto] min-h-[328px]">
-                <div className="relative w-full min-h-[285px]">
+              <div className="flex flex-col w-[auto] min-h-[328px] hover:opacity-45 transition-all duration-300">
+                <div className="relative max-w-xs rounded-lg overflow-hidden w-full min-h-[285px]">
                   <img
                     src={item.img}
                     alt="learning card"
-                    className="w-full min-h-[285px] object-cover rounded-lg"
+                    className="max-w-xs transition duration-300 ease-in-out hover:scale-110 min-h-[285px] object-cover rounded-lg"
                   />
                 </div>
                 <div className="flex items-center justify-between w-full pt-2">

@@ -31,7 +31,7 @@ export default function MyProfile() {
               type="button"
               data-twe-ripple-init
               data-twe-ripple-color="light"
-              className="rounded bg-primary px-4 py-2 text-sm font-semibold text-white"
+              className="rounded bg-primary px-4 py-2 text-sm font-semibold text-white  hover:bg-blue-800 transition-all duration-300"
             >
               Save
             </button>
