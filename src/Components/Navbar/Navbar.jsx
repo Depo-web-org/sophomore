@@ -50,9 +50,11 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white">
-              Login
-            </button>
+            <NavLink to={"/register"}>
+              <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white">
+                Login
+              </button>
+            </NavLink>
           </div>
         </div>
         <button onClick={toggleMenu} className="md:hidden mr-5 text-primary">
@@ -76,9 +78,11 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full">
-            Login
-          </button>
+          <NavLink to={"/register"}>
+            <button className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full">
+              Login
+            </button>
+          </NavLink>
         </div>
       )}
     </nav>

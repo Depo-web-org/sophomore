@@ -16,6 +16,7 @@ import { AboutTab } from "./pages/TeacherDetails/components/TeacherInfos";
 import ReviewsTab from "./pages/TeacherDetails/components/ReviewsTab";
 import MyLearning from "./pages/MyLearning";
 import ButtomTop from "./Helpers/ButtomTop";
+import Quiz from "./pages/Quiz/Index";
 import CourseVideo from "./pages/CourseVideo";
 import CourseDetails from "./pages/CourseVideo/components/CourseInfos/CourseDetails";
 import CourseComments from "./pages/CourseVideo/components/CourseInfos/CourseComments";
@@ -24,6 +25,7 @@ import Profile from "./pages/Profile";
 import Subscriptions from "./pages/Profile/components/Subscriptions/Subscriptions";
 import Security from "./pages/Profile/components/Security/Security";
 import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/mylearning" element={<MyLearning />} />
+          <Route path="/quiz" element={<Quiz />} />
           {/* course video nested route */}
           <Route
             path="/mylearning/course/:courseName"
@@ -73,6 +76,7 @@ function App() {
             <Route path="subscriptions" element={<Subscriptions />} />
             <Route path="security" element={<Security />} />
           </Route>
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </>
