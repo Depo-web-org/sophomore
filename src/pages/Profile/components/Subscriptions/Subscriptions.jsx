@@ -4,7 +4,7 @@ export default function Subscriptions() {
   const Subscriptions = [
     {
       id: "0987",
-      name: "PMath ",
+      name: "Math ",
       grade: "Grade 1",
       img: "https://s3-alpha-sig.figma.com/img/2ea7/3fb8/a57668df10fd5bd8d75fd99351111818?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=k2SXFfG6AGXGqit3edm-4PzFommVRtau~mGfejL~LWCtV5XSHKMMK3AgM2aDiS67sWsANL-hooPqDmteCkGbmMYJXNkXjdvu5FtBmlVr6rd2No8sGeewDRf2YUdWwB0tyhxuWiO76kKwJdXDPLeHsJl8iNwy35piYMqohPkz5-RBu7sn6XDKH16r8YFaIDYHHZ6lBNR~I~ZkaHW2UAyNYPWFjTuQp3M538SnMyqRvJTixZ3c4gOePjARjT6wq~iuJ6jRcHu4S~0NGGwYsDazuimTGcWx1gXWGjSiAT4liWNkBxGHuEMuDfJsntzrx3TtTkx8ktiBSqX4v3YOmBxWXw__",
     },
@@ -36,12 +36,12 @@ export default function Subscriptions() {
         {Subscriptions.map((item) => {
           return (
             <>
-              <div className="flex flex-col w-[auto] min-h-[328px] hover:opacity-45 transition-all duration-300">
-                <div className="relative max-w-xs rounded-lg overflow-hidden w-full min-h-[285px]">
+              <div className="flex flex-col w-[auto] min-h-[328px]  hover:opacity-45 transition-all duration-300">
+                <div className="relative w-full min-h-[285px] overflow-hidden bg-cover bg-no-repeat rounded-lg">
                   <img
                     src={item.img}
                     alt="learning card"
-                    className="max-w-xs transition duration-300 ease-in-out hover:scale-110 min-h-[285px] object-cover rounded-lg"
+                    className="w-full min-h-[285px] object-cover rounded-lg transition duration-300 ease-in-out hover:scale-110"
                   />
                 </div>
                 <div className="flex items-center justify-between w-full pt-2">
