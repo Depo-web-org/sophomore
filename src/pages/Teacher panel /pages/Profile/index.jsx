@@ -1,5 +1,10 @@
-import React from "react";
+import React from 'react'
+import Teacher from '../../index';
 
-export default function index() {
-  return <div>index</div>;
+const TeacherProfile = () => {
+  return (
+    <div>TeacherProfile</div>
+  )
 }
+
+export default TeacherProfile

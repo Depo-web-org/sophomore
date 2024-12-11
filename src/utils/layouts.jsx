@@ -31,7 +31,7 @@ const DashboardLayout = () => {
           {/* <!-- ===== Main Content Start ===== --> */}
           <main>
             <div className="bg-[#F8F9FA] ">
-              <Outlet />{" "}
+              <Outlet />
             </div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
