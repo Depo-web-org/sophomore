@@ -4,7 +4,7 @@ const SkeletonLoader = () => {
   return (
     <div className='min-h-screen '>
 
-<div className="text-white my-10">
+<div className="text-white ">
       <div className="text-white  ">
         <p className="text-center font-semibold   ">
           <span className="bg-gray-300 w-72 h-9 rounded-md animate-pulse inline-block "></span> 
@@ -23,6 +23,11 @@ const SkeletonLoader = () => {
         </div>
       </div>
     </div>
+   <div className='flex justify-center mx-auto '>
+   <button onClick={()=>  window.location.reload()} className='text-white bg-primary  py-3 px-7   rounded-md'>
+            Refresh
+    </button>
+   </div>
     </div>
   
   );
