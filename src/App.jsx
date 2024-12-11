@@ -29,6 +29,7 @@ import Register from "./pages/Register";
 import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import Teacher from "./pages/Teacher panel ";
+import Dashboard from "./pages/Teacher panel /pages/Dashboard";
 
 function App() {
   return (
@@ -132,9 +133,11 @@ function App() {
             <Route path="/register" element={<Register />} />
 
             {/* page Teacherrrr */}
-            <Route path="/teacherPanel" element={<Teacher />} />
+            <Route path="/Teacher" element={<Teacher />} />
           </Route>
-          <Route element={<DashboardLayout />}></Route>
+          <Route element={<DashboardLayout />}>
+            <Route path="/teacherPanel" element={<Dashboard />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </>
