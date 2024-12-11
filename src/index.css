@@ -8,3 +8,6 @@ body{
     background-color: #111827 !important;
 }
  
+.text-gradient {
+    @apply bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent
+  }
