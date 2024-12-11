@@ -6,9 +6,13 @@ export default function Login({ toggleForm }) {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
-    navigate("/");
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const isTeacher = document.getElementById("rememberMe").checked;
+    login(isTeacher); // Pass role based on "Remember Me"
+    if (isTeacher) {
+      navigate("/teacherPanel");
+    } else navigate("/");
   };
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-44 w-full md:w-4/5 lg:w-1/2">
@@ -23,6 +27,8 @@ export default function Login({ toggleForm }) {
         <div className="w-full">
           <form
             action="#"
+            form
+            onSubmit={handleLogin}
             className=" mb-0 mt-8 w-full space-y-4 flex flex-col gap-8"
           >
             <div>
@@ -103,13 +109,13 @@ export default function Login({ toggleForm }) {
                   <input
                     type="checkbox"
                     className="size-5 rounded border-gray-300"
-                    id="Option1"
+                    id="rememberMe"
                   />
                 </div>
 
                 <div>
                   <strong className="font-normal text-sm text-white">
-                    remember me
+                    remember me (Teacher)
                   </strong>
                 </div>
               </label>
@@ -119,7 +125,6 @@ export default function Login({ toggleForm }) {
               </button>
             </div>
             <button
-              onClick={handleLogin}
               type="submit"
               className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
             >

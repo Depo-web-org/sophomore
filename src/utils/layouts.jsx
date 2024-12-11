@@ -9,7 +9,11 @@ const AuthLayout = () => {
 
 // DashboardLayout.js
 const DashboardLayout = () => {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };
 
 // PublicLayout.js
