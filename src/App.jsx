@@ -32,6 +32,7 @@ import Teacher from "./pages/Teacher panel ";
 import Dashboard from "./pages/Teacher panel /pages/Dashboard";
 import Courses from "./pages/Teacher panel /pages/Courses";
 import Students from "./pages/Teacher panel /pages/Students";
+import TeacherProfile from "./pages/Teacher panel /pages/Profile";
 
 function App() {
   return (
@@ -141,7 +142,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="courses" element={<Courses />}/>
             <Route path="students" element={<Students />}/>
-            <Route path="students" element={<Students />}/>
+            <Route path="profile" element={<TeacherProfile />}/>
           </Route>
         </Routes>
       </AuthProvider>

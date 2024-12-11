@@ -1,6 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import LogoIcon from "/logos/logo.svg";
 import DropdownUser from "./DropdownUser";
+import { BsMenuUp } from "react-icons/bs";
+import { RiMenu4Line, RiMenuLine } from "react-icons/ri";
+import { HiMenu } from "react-icons/hi";
 
 const Header = (props) => {
   const location = useLocation();
@@ -8,7 +11,7 @@ const Header = (props) => {
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 ">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
-        <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
+        <div className="flex items-center gap-2 sm:gap-4 lg:hidden  ">
           {/* <!-- Hamburger Toggle BTN --> */}
           <button
             aria-controls="sidebar"
@@ -16,58 +19,28 @@ const Header = (props) => {
               e.stopPropagation();
               props.setSidebarOpen(!props.sidebarOpen);
             }}
-            className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm lg:hidden"
+            className="z-[99999] block  bg-white p-1.5   lg:hidden"
           >
-            <span className="relative block h-5.5 w-5.5 cursor-pointer">
-              <span className="du-block absolute right-0 h-full w-full">
-                <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && "!w-full delay-300"
-                  }`}
-                ></span>
-                <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && "delay-400 !w-full"
-                  }`}
-                ></span>
-                <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && "!w-full delay-500"
-                  }`}
-                ></span>
-              </span>
-              <span className="absolute right-0 h-full w-full rotate-45">
-                <span
-                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && "!h-0 !delay-[0]"
-                  }`}
-                ></span>
-                <span
-                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && "!h-0 !delay-200"
-                  }`}
-                ></span>
-              </span>
-            </span>
+<HiMenu className=" text-primary text-2xl " />
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" to="/">
+          <Link className="block flex-shrink-0 lg:hidden " to="/teacherPanel">
             <img src={LogoIcon} alt="Logo" />
           </Link>
         </div>
 
         <div className="hidden sm:block ">
-        <p className="text-gradient  text-xl lg:text-2xl font-bold ml-2 capitalize">
-         {pathname.length === 1 ? 'Dashboard' : pathname[pathname.length - 1]}
-        </p>
+          <p className="text-gradient  text-xl lg:text-2xl font-bold ml-2 capitalize">
+            {pathname.length === 1 ? "Dashboard" : pathname[pathname.length - 1]}
+          </p>
         </div>
 
-          {/* <!-- User Area --> */}
+        {/* <!-- User Area --> */}
         <div className="flex items-center gap-3  ">
           <DropdownUser />
         </div>
-          {/* <!-- User Area --> */}
+        {/* <!-- User Area --> */}
       </div>
     </header>
   );

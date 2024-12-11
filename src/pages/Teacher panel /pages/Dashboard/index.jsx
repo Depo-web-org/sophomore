@@ -13,7 +13,7 @@ export default function Dashboard() {
       <div className="flex flex-col xl:flex-row items-start w-full justify-between gap-8">
         <div className="flex flex-wrap lg:flex-col items-start justify-start gap-8 w-full xl:w-[25%] ">
           <Activity />
-          <QuickAction />
+          <QuickAction Text={'Upload a new course'}/>
         </div>
         <ApexChart />
       </div>

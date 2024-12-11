@@ -1,6 +1,6 @@
 import React from "react";
 import { StatisticCard, statisticsData } from "../Dashboard/components/StatisticCard";
-import CourseManagement from "../Dashboard/components/CourseManagement";
+import QuickAction from "../Dashboard/components/QuickAction";
 export default function Courses() {
   return  <div className="min-h-screen bg-[#F8F9FA] flex flex-col p-4 px-8 justify-start items-start  gap-8">
     <div className="grid grid-cols-1   gap-8 w-full ">
@@ -14,6 +14,104 @@ export default function Courses() {
         />
       ))}
     </div>
-    <CourseManagement/>
+    
+    <AllCourses/>
   </div>;
 }
+
+
+
+function UploadCourse(props) {
+  return (
+    <button className="bg-primary rounded-md  px-8 py-2   font-semibold text-white text-center">
+      {props.Text}
+    </button>
+  );
+}
+
+
+const AllCourses=()=>{
+ 
+    // Array of objects representing course details
+    const courses = [
+      {
+        name: "Introduction to math",
+        dob: "Jan 12 , 2024",
+        enrollment: "500",
+        status: "Active",
+      },
+      {
+        name: "Introduction to math",
+        dob: "Jan 12 , 2024",
+        enrollment: "500",
+        status: "Active",
+      },
+      
+    ];
+  
+    return (
+      <div className="w-full  bg-white rounded-3xl py-4 ">
+        <div className="flex justify-between mx-5">
+        <p className="text-[28px] font-semibold text-start py-4 text-black ">
+          All Course 
+        </p>
+        <div className="flex items-center">
+
+  <UploadCourse  Text={'Add A New Course'} />
+        </div>
+        </div>
+        <div className="overflow-x-auto px-4">
+          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead className="ltr:text-left rtl:text-right">
+              <tr>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  Name
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  Date of Birth
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  enrollment
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  status
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+  
+            <tbody className="divide-y divide-gray-200">
+              {courses.map((course, index) => (
+                <tr key={index}>
+                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {course.name}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {course.dob}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {course.enrollment}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-green-700">
+                    {course.status}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <button>
+                      <img
+                        src="/dashboard/Group3.svg"
+                        alt="edit"
+                        className="w-5 h-5"
+                      />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+  
