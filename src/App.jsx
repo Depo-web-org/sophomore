@@ -30,6 +30,7 @@ import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import Teacher from "./pages/Teacher panel ";
 import Dashboard from "./pages/Teacher panel /pages/Dashboard";
+import Courses from "./pages/Teacher panel /pages/Courses";
 
 function App() {
   return (
@@ -135,8 +136,9 @@ function App() {
             {/* page Teacherrrr */}
             <Route path="/Teacher" element={<Teacher />} />
           </Route>
-          <Route element={<DashboardLayout />}>
-            <Route path="/teacherPanel" element={<Dashboard />} />
+          <Route path="/teacherPanel" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="courses" element={<Courses />}></Route>
           </Route>
         </Routes>
       </AuthProvider>
