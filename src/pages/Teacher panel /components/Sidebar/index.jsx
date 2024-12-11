@@ -102,21 +102,23 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <div>
             <ul className="mb-6 flex flex-col gap-5">
             {menuItems.map((item, index) => (
-        <li key={index}>
-        <Link
-          to={item.to}
-          className={`group  relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium  duration-300 ease-in-out  ${
-            pathname.includes(item.to.slice(1))
-              ? "bg-primary text-white"
-              : "text-[#4B5563] "
-          }
-          `}
-        >
-          {item.icon}
-          {item.label}
-        </Link>
-    </li>
+  <li key={index}>
+    <Link
+      to={item.to}
+      className={`group relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium duration-300 ease-in-out ${
+        pathname === item.to
+          ? "bg-primary text-white" 
+          : item.to === "/teacherPanel" && pathname.startsWith("/teacherPanel") && !pathname.includes("/", "/teacherPanel".length)
+          ? "bg-primary text-white" 
+          : "text-[#4B5563]" 
+      }`}
+    >
+      {item.icon}
+      {item.label}
+    </Link>
+  </li>
 ))}
+
             </ul>
           </div>
 
