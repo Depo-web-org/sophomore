@@ -64,7 +64,7 @@ const ApexChart = () => {
   });
 
   return (
-    <div style={{ width: "100%" }}>
+    <div className="bg-white p-2 rounded-lg" style={{ width: "100%" }}>
       <div id="chart">
         <ReactApexChart
           options={state.options}
