@@ -1,7 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import SkeletonLoader from './SkeletonLoader';
 
-const Questions = ({ data, studentAnswer  , setIsExamFinished}) => {
+const AnswerComponents = props => {
+  return (
+    <div
+      onClick={(e) => props.addAnswer(e)}
+      className={`h-14 w-4/5 xl:w-1/2 ${
+        props.isSelected ? 'bg-primary' : 'bg-white hover:bg-primary'
+      } group cursor-pointer transition-all duration-500 rounded-md flex items-center justify-start px-5 text-black font-semibold gap-x-5`}
+    >
+      <span
+        className={`${
+          props.isSelected
+            ? 'bg-white text-black'
+            : 'bg-zinc-300 group-hover:bg-white group-hover:text-black'
+        } px-3 py-1 rounded-full`}
+      >
+        {props.index + 1}
+      </span>
+      <span
+        className={`answer-text ${
+          props.isSelected ? 'text-white' : 'group-hover:text-white'
+        }`}
+      >
+        {props.ques}
+      </span>
+    </div>
+  );
+}
+
+const Questions = ({ data, studentAnswer, setIsExamFinished }) => {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [randomAnswers, setRandomAnswers] = useState([]);
@@ -10,7 +38,9 @@ const Questions = ({ data, studentAnswer  , setIsExamFinished}) => {
 
   useEffect(() => {
     if (Question) {
-      const answers = [...new Set([...Question.incorrect_answers, Question.correct_answer])];
+      const answers = [
+        ...new Set([...Question.incorrect_answers, Question.correct_answer]),
+      ];
       const shuffledAnswers = [...answers].sort(() => Math.random() - 0.5);
       setRandomAnswers(shuffledAnswers);
       setSelectedAnswer(null);
@@ -23,7 +53,9 @@ const Questions = ({ data, studentAnswer  , setIsExamFinished}) => {
     setSelectedAnswer(answerText);
     studentAnswer((prev) => {
       const newAnswers = [...prev];
-      newAnswers[activeQuestionIndex] = { [activeQuestionIndex + 1]: answerText };
+      newAnswers[activeQuestionIndex] = {
+        [activeQuestionIndex + 1]: answerText,
+      };
       return newAnswers;
     });
   };
@@ -43,37 +75,36 @@ const Questions = ({ data, studentAnswer  , setIsExamFinished}) => {
   } else {
     return (
       <>
-        { (
+        {
           <>
-            <div className='text-white my-10'>
-              <p className='text-center font-semibold text-xl xl:text-2xl'>
+            <div className="text-white my-10">
+              <p className="text-center font-semibold text-xl xl:text-2xl">
                 <span>{activeQuestionIndex + 1} - </span> {Question.question}
               </p>
-              <div className='flex flex-col items-center justify-center my-5 gap-y-2'>
+              <div className="flex flex-col items-center justify-center my-5 gap-y-2">
                 {randomAnswers.map((ques, index) => {
                   const isSelected = ques === selectedAnswer;
                   return (
-                    <div
+                    <AnswerComponents
                       key={ques + index}
-                      onClick={(e) => addAnswer(e)}
-                      className={`h-14 w-4/5 xl:w-1/2 ${isSelected ? 'bg-primary' : 'bg-white hover:bg-primary'} group cursor-pointer transition-all duration-500 rounded-md flex items-center justify-start px-5 text-black font-semibold gap-x-5`}
-                    >
-                      <span className={`${isSelected ? 'bg-white text-black' : 'bg-zinc-300 group-hover:bg-white group-hover:text-black'} px-3 py-1 rounded-full`}>
-                        {index + 1}
-                      </span>
-                      <span className={`answer-text ${isSelected ? 'text-white' : 'group-hover:text-white'}`}>
-                        {ques}
-                      </span>
-                    </div>
+                      isSelected={isSelected}
+                      addAnswer={addAnswer}
+                      ques={ques}
+                      index={index}
+                    ></AnswerComponents>
                   );
                 })}
               </div>
             </div>
-            <div className='absolute w-full bg-white z-10 h-20 left-0 bottom-0 flex items-center justify-center gap-x-5'>
+            <div className="absolute w-full bg-white z-10 h-20 left-0 bottom-0 flex items-center justify-center gap-x-5">
               <div className="h-auto w-1/5 bg-neutral-200 rounded-full relative">
                 <div
                   className="h-3 bg-emerald-700 rounded-full"
-                  style={{ width: `${((activeQuestionIndex + 1) / data?.results?.length) * 100}%` }}
+                  style={{
+                    width: `${
+                      ((activeQuestionIndex + 1) / data?.results?.length) * 100
+                    }%`,
+                  }}
                 />
               </div>
               <span>
@@ -82,17 +113,20 @@ const Questions = ({ data, studentAnswer  , setIsExamFinished}) => {
               <button
                 onClick={handleContinue}
                 disabled={!selectedAnswer}
-                className={`${selectedAnswer ? "bg-secondary" : "bg-zinc-500"} text-white rounded-lg py-3 px-8`}
+                className={`${
+                  selectedAnswer ? "bg-secondary" : "bg-zinc-500"
+                } text-white rounded-lg py-3 px-8`}
               >
-                {activeQuestionIndex + 1 === data?.results?.length ? "Finish" : "Continue"}
+                {activeQuestionIndex + 1 === data?.results?.length
+                  ? "Finish"
+                  : "Continue"}
               </button>
             </div>
           </>
-        )}
+        }
       </>
     );
   }
 };
 
 export default Questions;
-

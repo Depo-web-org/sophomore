@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/index";
 import About from "./pages/About/index";
 import ScrollTop from "./Helpers/ScrollTop";
-import { PublicLayout } from "./utils/layouts";
+import { DashboardLayout, PublicLayout } from "./utils/layouts";
 import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
@@ -29,6 +29,9 @@ import Register from "./pages/Register";
 import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import Teacher from "./pages/Teacher panel ";
+import Dashboard from "./pages/Teacher panel /pages/Dashboard";
+import Courses from "./pages/Teacher panel /pages/Courses";
+import Students from "./pages/Teacher panel /pages/Students";
 
 function App() {
   return (
@@ -130,10 +133,15 @@ function App() {
               />
             </Route>
             <Route path="/register" element={<Register />} />
-         
-                 {/* page Teacherrrr */}
-                 <Route path="/Teacher" element={<Teacher />} />
 
+            {/* page Teacherrrr */}
+            <Route path="/Teacher" element={<Teacher />} />
+          </Route>
+          <Route path="/teacherPanel" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="courses" element={<Courses />}/>
+            <Route path="students" element={<Students />}/>
+            <Route path="students" element={<Students />}/>
           </Route>
         </Routes>
       </AuthProvider>
