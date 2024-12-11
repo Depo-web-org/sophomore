@@ -14,17 +14,17 @@ const menuItems = [
   },
   {
     label: "Courses",
-    to: "/Courses",
+    to: "/teacherPanel/courses",
     icon: <FaBook className="mb-1 text-2xl" />,
   },
   {
     label: "Students",
-    to: "/Students",
+    to: "/teacherPanel/students",
     icon: <IoIosPeople className="mb-1 text-2xl" />,
   },
   {
     label: "Profile",
-    to: "/profile",
+    to: "/teacherPanel/profile",
     icon: <IoPersonSharp className="mb-1 text-2xl" />,
   },
 ];
