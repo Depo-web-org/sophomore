@@ -28,6 +28,7 @@ import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
 import Register from "./pages/Register";
 import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
+import Teacher from "./pages/Teacher panel ";
 
 function App() {
   return (
@@ -129,6 +130,10 @@ function App() {
               />
             </Route>
             <Route path="/register" element={<Register />} />
+         
+                 {/* page Teacherrrr */}
+                 <Route path="/Teacher" element={<Teacher />} />
+
           </Route>
         </Routes>
       </AuthProvider>
