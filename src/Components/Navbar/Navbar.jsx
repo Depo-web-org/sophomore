@@ -9,7 +9,7 @@ import { useAuth } from "../../ProtectedRoutes/AuthContext";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth(); // Access authentication state from context
+  const { isAuthenticated, role } = useAuth(); // Access authentication state from context
 
   // Define nav items, some will be conditionally shown based on authentication
   const navItems = useMemo(() => {
@@ -17,13 +17,14 @@ const Navbar = () => {
       { text: `Home`, link: "/" },
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
+      { text: "Profile", link: "/profile" },
     ];
 
-    if (isAuthenticated) {
+    if (isAuthenticated && role === "student") {
       // Add protected items only if authenticated
       items.push(
         { text: "My Learning", link: "/mylearning" },
-        { text: "Profile", link: "/profile" },
+
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );
