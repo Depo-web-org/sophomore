@@ -7,27 +7,28 @@ import Timer from './Components/Timer/Timer'
 
 
 const Quiz = () => {
+  // get data 
     const {data ,success}=useFetch('https://opentdb.com/api.php?amount=5&category=21&type=multiple')
+    //get all answers
     const [Answers, setAnswers] = useState([])
+    // Store all true answers
     const [trueAnswers, setTrueAnswers] = useState([])
+    //status of exam
   const [isExamFinished, setIsExamFinished] = useState(false);
 
+  //get all true answers 
 const getTrueAnswers=useCallback(()=>{
   const correctAnswers=data?.results.map((item, index) => ({ [index + 1]: item.correct_answer }))
   setTrueAnswers(correctAnswers)
 },[data])
+
 useEffect(()=>{
       getTrueAnswers()
-     
     },[data])
-
-   
-  
-      console.log(success)
   return (
     <>
 <section className='relative pb-20 xl:pb-0 '>
-  <div  className='min-h-screen pt-20 lg:pt-32 overflow-hidden   '>
+  <div  className='min-h-[calc(100vh-128px)] xl:min-h-screen pt-20 lg:pt-32  overflow-hidden   '>
 
     <div className='py-10'>
 
@@ -39,6 +40,8 @@ useEffect(()=>{
       <p className='font-semibold text-3xl border-b'>
           Math Test 
       </p>
+      
+      {/* timer start when get all question  */}
       {success &&<Timer  ExamFinished={setIsExamFinished} isExamFinished={isExamFinished}/> }
      
   </div>
