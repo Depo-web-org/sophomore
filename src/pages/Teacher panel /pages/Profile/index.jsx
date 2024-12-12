@@ -1,10 +1,21 @@
-import React from 'react'
-import Teacher from '../../index';
+import React from "react";
+import Form from "./components/Form";
+import MinProfile from "./components/MinProfile";
+import Profile from "./components/Profile";
 
 const TeacherProfile = () => {
   return (
-    <div>TeacherProfile</div>
-  )
-}
+    <>
+      {/* Profile */}
+      <Profile />
 
-export default TeacherProfile
+      {/* MinProfile */}
+      <MinProfile />
+
+      {/* form */}
+      <Form />
+    </>
+  );
+};
+
+export default TeacherProfile;
