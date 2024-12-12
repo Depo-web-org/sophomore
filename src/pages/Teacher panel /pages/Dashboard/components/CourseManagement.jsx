@@ -24,7 +24,7 @@ export default function CourseManagement() {
   ];
 
   return (
-    <div className="w-full lg:w-[80%] bg-white rounded-[20px] py-4 ">
+    <div className="w-full lg:w-[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg  ">
       <p className="text-[28px] font-semibold text-center py-4 text-black">
         Course Management
       </p>

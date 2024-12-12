@@ -64,7 +64,10 @@ const ApexChart = () => {
   });
 
   return (
-    <div className="bg-white p-2 rounded-lg" style={{ width: "100%" }}>
+    <div
+      className="bg-white p-2 rounded-lg group hover:shadow-lg "
+      style={{ width: "100%" }}
+    >
       <div id="chart">
         <ReactApexChart
           options={state.options}
