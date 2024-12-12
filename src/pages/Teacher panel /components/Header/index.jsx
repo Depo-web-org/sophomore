@@ -9,7 +9,7 @@ const Header = (props) => {
   const location = useLocation();
   const pathname = location.pathname.split("/").filter((x) => x);
   return (
-    <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 ">
+    <header className="sticky top-0 z-[999] flex w-full bg-white drop-shadow-1 ">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden  ">
           {/* <!-- Hamburger Toggle BTN --> */}
@@ -21,7 +21,7 @@ const Header = (props) => {
             }}
             className="z-[99999] block  bg-white p-1.5   lg:hidden"
           >
-<HiMenu className=" text-primary text-2xl " />
+            <HiMenu className=" text-primary text-2xl " />
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
@@ -32,7 +32,9 @@ const Header = (props) => {
 
         <div className="hidden sm:block ">
           <p className="text-gradient  text-xl lg:text-2xl font-bold ml-2 capitalize">
-            {pathname.length === 1 ? "Dashboard" : pathname[pathname.length - 1]}
+            {pathname.length === 1
+              ? "Dashboard"
+              : pathname[pathname.length - 1]}
           </p>
         </div>
 
