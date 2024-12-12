@@ -33,6 +33,7 @@ import Dashboard from "./pages/Teacher panel /pages/Dashboard";
 import Courses from "./pages/Teacher panel /pages/Courses";
 import Students from "./pages/Teacher panel /pages/Students";
 import TeacherProfile from "./pages/Teacher panel /pages/Profile";
+import AddNewCourse from "./pages/Teacher panel /pages/Courses/components/AddNewCourse.jsx";
 
 function App() {
   return (
@@ -137,6 +138,9 @@ function App() {
 
             {/* page Teacherrrr */}
             <Route path="/Teacher" element={<Teacher />} />
+            {/*  Add New Course*/}
+            <Route path="/AddNewCourse" element={<AddNewCourse />} />
+
           </Route>
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
