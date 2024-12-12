@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ClickOutside from "./ClickOutside";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
+   
       <Link
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className="flex items-center gap-4"
@@ -25,7 +24,6 @@ const DropdownUser = () => {
           </span>
         </span>
       </Link>
-    </ClickOutside>
   );
 };
 
