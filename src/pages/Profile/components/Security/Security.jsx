@@ -63,7 +63,7 @@ export default function Security() {
 
             <input
               type="Password"
-              id="UserEmail"
+              id="Password"
               placeholder="*********"
               className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
             />
@@ -82,7 +82,7 @@ export default function Security() {
 
             <input
               type="Password"
-              id="UserEmail"
+              id="Change Password"
               placeholder="*********"
               className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
             />
