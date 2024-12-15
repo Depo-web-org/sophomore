@@ -38,6 +38,7 @@ import StudentProfile from "./pages/Teacher panel /pages/Students/components/Stu
 import CourseStatistics from "./pages/Teacher panel /pages/Courses/Page/CourseStatistics.jsx";
 import Courses from "./pages/Teacher panel /pages/Courses/Index.jsx";
 import ChooseUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit.jsx";
+import Test from "./pages/Teacher panel /pages/Courses/Page/Test.jsx";
 
 function App() {
   return (
@@ -146,10 +147,11 @@ function App() {
           </Route>
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="courses" element={<Courses />} >
-            <Route  element={<CourseStatistics/>} index />
-            <Route path="addnewcourse" element={<AddNewCourse />} />
-            <Route path="chooseUnit" element={<ChooseUnit />} />
+            <Route path="courses" element={<Courses />}>
+              <Route element={<CourseStatistics />} index />
+              <Route path="addnewcourse" element={<AddNewCourse />} />
+              <Route path="chooseUnit" element={<ChooseUnit />} />
+              <Route path="test" element={<Test />} />
             </Route>
             <Route path="students" element={<Students />}>
               <Route element={<StudentStatistics />} index />
