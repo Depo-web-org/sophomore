@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ApplicationSection.css";
 
 const ApplicationSection = () => {
@@ -31,13 +31,23 @@ const ApplicationSection = () => {
     },
   ];
 
+  const [selectedValues, setSelectedValues] = useState(["", "", ""]);
+
+  const handleSelectChange = (index, value) => {
+    const updatedValues = [...selectedValues];
+    updatedValues[index] = value;
+    setSelectedValues(updatedValues);
+  };
+
+  const allFilled = selectedValues.every((val) => val !== "");
+
   return (
     <>
       <div
         id="options"
         className="h-auto w-full tracking-wide lg:pt-16 lg:ps-5"
       >
-        {options.map((item) => {
+        {options.map((item, index) => {
           return (
             <div key={item.id}>
               <label
@@ -47,16 +57,14 @@ const ApplicationSection = () => {
                 {item.title}
               </label>
               <select
-                name="HeadlineAct"
-                id="HeadlineAct"
+                id={`dropdown-${index}`}
+                value={selectedValues[index]}
+                onChange={(e) => handleSelectChange(index, e.target.value)}
                 className="mt-1.5 py-2 w-full rounded-lg text-lg font-semibold text-gray-600 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option value="" >{item.name}</option>
+                <option >{item.name}</option>
                 {item.opations?.map((option, index) => (
-                  <option
-                    key={index}
-                    value={option}
-                  >
+                  <option key={index} value={option}>
                     {option}
                   </option>
                 ))}
@@ -64,6 +72,9 @@ const ApplicationSection = () => {
             </div>
           );
         })}
+        {allFilled && (
+          <p className="text-3xl text-red-400">All dropdowns are filled!</p>
+        )}
       </div>
     </>
   );

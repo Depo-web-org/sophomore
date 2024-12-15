@@ -13,9 +13,11 @@ const AddMessage = () => {
         </label>
 
         <input
+        onChange={(eo) => { console.log(eo.target.value);
+         }}
           type="username"
           id="username"
-          placeholder=" "
+          placeholder=" Title"
           className="border-2 py-2.5 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
         />
       </div>
@@ -29,10 +31,12 @@ const AddMessage = () => {
         </label>
 
         <textarea
+        onChange={(eo) => { console.log(eo.target.value);
+        }}
           id="OrderNotes"
           className="border-2 mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"
           rows="4"
-          placeholder="Enter any additional order notes..."
+          placeholder=" Enter any additional order notes..."
         ></textarea>
 
         <Link to="/teacherPanel/courses/chooseunit">
