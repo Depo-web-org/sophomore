@@ -33,7 +33,7 @@ const menuItems = [
 function SideBarHeader({ setSidebarOpen, sidebarOpen }) {
   return (
     <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-      <Link to="/" className="py-3 flex items-center justify-center">
+      <Link  to="/" className="py-3 flex items-center justify-center">
         <img src={Logo} alt="Logo" />
         <p className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
           Sophomore
@@ -43,7 +43,7 @@ function SideBarHeader({ setSidebarOpen, sidebarOpen }) {
         onClick={() => setSidebarOpen(!sidebarOpen)}
         className="block lg:hidden text-gray-500 hover:text-gray-700"
       >
-<IoCloseSharp className=" text-primary text-2xl " />
+    <IoCloseSharp className=" text-primary text-2xl " />
       </button>
     </div>
   );
@@ -95,24 +95,29 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   }, [sidebarOpen, setSidebarOpen]);
 
   return (
+    
+  <>
     <aside
       ref={sidebar}
       className={`absolute left-0 top-0 z-[9999] flex h-screen w-72.5
-         flex-col overflow-y-hidden bg-white duration-300 ease-linear 
-          lg:static lg:translate-x-0 
-          ${
-            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        flex-col overflow-y-hidden bg-white duration-300 ease-linear 
+        lg:static lg:translate-x-0 
+        ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`
         }
     >
+
       {/* Sidebar Header with Logo */}
       <SideBarHeader trigger={trigger} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Sidebar Items */}
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear mt-1">
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
-          <ul className="mb-6 flex flex-col gap-5">
+          <ul onClick={() => setSidebarOpen(!sidebarOpen)}  className="mb-6 flex flex-col gap-5">
+   
             {menuItems.map((item, index) => (
+              
               <li key={index}>
                 <Link
                   to={item.to}
@@ -132,7 +137,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </ul>
         </nav>
       </div>
+
     </aside>
+             <div  onClick={() => setSidebarOpen(!sidebarOpen)} className={`absolute top-0 left-0 z-[9998]  ${sidebarOpen ? " w-full translate-x-0" : "-translate-x-full"     }   h-full `}> </div>
+  </>
   );
 };
 
