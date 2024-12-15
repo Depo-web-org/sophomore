@@ -28,7 +28,7 @@ function TestIndex() {
       </p>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center gap-8 w-full pt-8"
+        className="flex flex-col items-center justify-center gap-4 md:gap-8 w-full pt-8"
       >
         <div className="flex flex-col w-full md:w-1/2">
           <label
@@ -50,7 +50,7 @@ function TestIndex() {
           {/* Display error message */}
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center gap-8 w-full">
+        <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full">
           <div className="flex flex-col w-full md:w-1/2">
             <label
               htmlFor="correctAnswer"
@@ -95,7 +95,7 @@ function TestIndex() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center gap-8 w-full">
+        <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full">
           <div className="flex flex-col w-full md:w-1/2">
             <label
               htmlFor="answer3"
@@ -137,7 +137,7 @@ function TestIndex() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center gap-8 w-full">
+        <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 w-full">
           <button className="bg-primary rounded-md p-2 text-white text-lg font-semibold ">
             Add new Question
           </button>
@@ -145,7 +145,7 @@ function TestIndex() {
             type="submit"
             className="bg-primary rounded-md p-2 text-white text-lg font-semibold "
           >
-            Submit
+            Submit Test
           </button>
         </div>
       </form>
