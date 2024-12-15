@@ -13,7 +13,7 @@ export const statisticsData = [
   },
   {
     image: "/dashboard/Group (1).svg",
-    title: "Completed Tasks",
+    title: "Total Profit",
     stats: 56,
   },
 ];
