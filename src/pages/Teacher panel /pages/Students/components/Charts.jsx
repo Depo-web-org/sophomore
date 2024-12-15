@@ -29,7 +29,7 @@ const TotalChart = () => {
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 768,
         options: {
           chart: {
             width: 200,
