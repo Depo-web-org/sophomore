@@ -37,8 +37,10 @@ import StudentStatistics from "./pages/Teacher panel /pages/Students/components/
 import StudentProfile from "./pages/Teacher panel /pages/Students/components/StudentProfile.jsx";
 import CourseStatistics from "./pages/Teacher panel /pages/Courses/Page/CourseStatistics.jsx";
 import Courses from "./pages/Teacher panel /pages/Courses/Index.jsx";
-import ChooseUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit.jsx";
 import Test from "./pages/Teacher panel /pages/Courses/Page/Test.jsx";
+import ItemsUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page/ItemsUnit.jsx";
+import Unit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page/Unit/Unit.jsx";
+import ChooseUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/Index.jsx";
 
 function App() {
   return (
@@ -150,8 +152,14 @@ function App() {
             <Route path="courses" element={<Courses />}>
               <Route element={<CourseStatistics />} index />
               <Route path="addnewcourse" element={<AddNewCourse />} />
-              <Route path="chooseUnit" element={<ChooseUnit />} />
-              <Route path="test" element={<Test />} />
+
+              {/* Nested Routes Courses */}
+
+              <Route path="chooseunit" element={<ChooseUnit />}>
+                <Route index element={<ItemsUnit />} />
+                <Route path=":unit" element={<Unit />} />
+                <Route path=":unit/test" element={<Test />} />
+              </Route>
             </Route>
             <Route path="students" element={<Students />}>
               <Route element={<StudentStatistics />} index />

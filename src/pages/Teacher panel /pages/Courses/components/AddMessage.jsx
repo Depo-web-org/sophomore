@@ -35,7 +35,7 @@ const AddMessage = () => {
           placeholder="Enter any additional order notes..."
         ></textarea>
 
-        <Link to="/chooseunit">
+        <Link to="/teacherPanel/courses/chooseunit">
           <button
             type="button"
             data-twe-ripple-init
