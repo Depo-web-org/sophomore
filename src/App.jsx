@@ -34,6 +34,8 @@ import Courses from "./pages/Teacher panel /pages/Courses";
 import Students from "./pages/Teacher panel /pages/Students";
 import TeacherProfile from "./pages/Teacher panel /pages/Profile";
 import AddNewCourse from "./pages/Teacher panel /pages/Courses/components/AddNewCourse.jsx";
+import StudentStatistics from "./pages/Teacher panel /pages/Students/components/StudentStatistics.jsx";
+import StudentProfile from "./pages/Teacher panel /pages/Students/components/StudentProfile.jsx";
 
 function App() {
   return (
@@ -140,13 +142,15 @@ function App() {
             <Route path="/Teacher" element={<Teacher />} />
             {/*  Add New Course*/}
             <Route path="/AddNewCourse" element={<AddNewCourse />} />
-
           </Route>
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="courses" element={<Courses />}/>
-            <Route path="students" element={<Students />}/>
-            <Route path="profile" element={<TeacherProfile />}/>
+            <Route path="courses" element={<Courses />} />
+            <Route path="students" element={<Students />}>
+              <Route element={<StudentStatistics />} index />
+              <Route path="studentprofile" element={<StudentProfile />} />
+            </Route>
+            <Route path="profile" element={<TeacherProfile />} />
           </Route>
         </Routes>
       </AuthProvider>
