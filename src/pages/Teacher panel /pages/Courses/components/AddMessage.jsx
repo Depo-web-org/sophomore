@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddMasege = () => {
+const AddMessage = () => {
   return (
     <>
       <div className="my-4">
@@ -38,4 +38,4 @@ const AddMasege = () => {
   );
 };
 
-export default AddMasege;
+export default AddMessage;

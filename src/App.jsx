@@ -30,7 +30,7 @@ import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import Teacher from "./pages/Teacher panel ";
 import Dashboard from "./pages/Teacher panel /pages/Dashboard";
-import Courses from "./pages/Teacher panel /pages/Courses";
+import Courses from "./pages/Teacher panel /pages/Courses/CourSestatistics.jsx";
 import Students from "./pages/Teacher panel /pages/Students";
 import TeacherProfile from "./pages/Teacher panel /pages/Profile";
 import AddNewCourse from "./pages/Teacher panel /pages/Courses/components/AddNewCourse.jsx";

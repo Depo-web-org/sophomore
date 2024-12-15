@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../../../components/Sidebar";
-import AddMasege from "./Add Masege";
+import AddMasege from "./AddMessage";
 import Header from "../../../components/Header";
 import SideBarHeader from "../../../components/Sidebar/index";
 
