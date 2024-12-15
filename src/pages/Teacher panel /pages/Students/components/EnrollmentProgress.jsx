@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 const EnrollmentProgress = () => {
-  const progress = 50;
-  const increaseValue = 50;
+  const targetProgress = 50;
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let animationFrame;
+    const animateProgress = () => {
+      setProgress((prev) => {
+        if (prev < targetProgress) {
+          return Math.min(prev + 1, targetProgress);
+        } else {
+          cancelAnimationFrame(animationFrame);
+          return prev;
+        }
+      });
+      animationFrame = requestAnimationFrame(animateProgress);
+    };
+
+    animationFrame = requestAnimationFrame(animateProgress);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [targetProgress]);
 
   return (
     <div className="flex flex-col items-center p-8">
@@ -10,7 +30,7 @@ const EnrollmentProgress = () => {
       </h1>
 
       <ProgressCircle progress={progress} />
-      <ProgressInfo value={increaseValue} />
+      <ProgressInfo progress={progress} />
     </div>
   );
 };
@@ -57,11 +77,11 @@ const ProgressCircle = ({ progress }) => {
   );
 };
 
-const ProgressInfo = ({ value }) => {
+const ProgressInfo = ({ progress }) => {
   return (
     <div className="mt-4 flex items-end gap-1">
       <span className="text-green-500 text-2xl">▲</span>
-      <span className="text-base font-normal text-[#666666]">{value}</span>
+      <span className="text-base font-normal text-[#666666]">{progress}</span>
     </div>
   );
 };
