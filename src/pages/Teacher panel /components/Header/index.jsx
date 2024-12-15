@@ -31,9 +31,9 @@ const Header = (props) => {
 
         <div className="hidden sm:block ">
           <p className="text-gradient  text-xl lg:text-2xl font-bold ml-2 capitalize">
-            {pathname.length === 1
+            { pathname.length === 1
               ? "Dashboard"
-              : pathname[pathname.length - 1]}
+              : pathname[1]}
           </p>
         </div>
 
