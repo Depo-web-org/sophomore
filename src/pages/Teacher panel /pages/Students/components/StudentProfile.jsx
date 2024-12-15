@@ -59,7 +59,6 @@ export default function StudentProfile() {
 function CoursesCard() {
   const location = useLocation();
   const { student } = location.state || {};
-  console.log(student);
   return (
     <div>
       <div className="flex flex-col w-[auto]">
