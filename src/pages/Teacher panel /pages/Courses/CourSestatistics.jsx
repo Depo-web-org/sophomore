@@ -2,8 +2,11 @@ import React from "react";
 import { StatisticCard, statisticsData } from "../Dashboard/components/StatisticCard";
 import QuickAction from "../Dashboard/components/QuickAction";
 import { Link } from "react-router-dom";
+
+
+
 export default function Courses() {
-  return  <div className="min-h-screen bg-[#F8F9FA] flex flex-col p-4 px-8 justify-start items-start  gap-8">
+  return  <>
     <div className="grid grid-cols-1   gap-8 w-full ">
       {statisticsData.filter(i=> i.title != 'Completed Tasks').map((item, index) => (
         <StatisticCard
@@ -15,10 +18,9 @@ export default function Courses() {
         />
       ))}
     </div>
-    
     <AllCourses/>
 
-  </div>;
+  </>;
 }
 
 

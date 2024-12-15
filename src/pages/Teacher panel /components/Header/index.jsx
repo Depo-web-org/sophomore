@@ -1,9 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import LogoIcon from "/logos/logo.svg";
-import DropdownUser from "./DropdownUser";
-import { BsMenuUp } from "react-icons/bs";
-import { RiMenu4Line, RiMenuLine } from "react-icons/ri";
+
 import { HiMenu } from "react-icons/hi";
+import DropdownUser from '/src/pages/Teacher panel /components/Header/DropdownUser.jsx';
 
 const Header = (props) => {
   const location = useLocation();
