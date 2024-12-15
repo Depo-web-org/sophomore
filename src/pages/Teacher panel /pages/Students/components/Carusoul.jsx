@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './style/styles.css';
+import './style/style.css';
 import { Pagination } from 'swiper/modules';
 import { IoMdTrendingUp, IoMdTrendingDown } from 'react-icons/io';
-
 const Carusoul = () => {
   const [details, setDetails] = useState([]);
   
@@ -25,20 +24,17 @@ const Carusoul = () => {
       };
       setDetails(response.data);
     };
-
     fetchData();
   }, []);
-
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
       return '<span class="' + className + '">' + (index + 1) + '</span>';
     },
   };
-
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col m-4 px-8 justify-start items-start gap-8">
-      <div className="bg-white w-full h-52 rounded-3xl px-8">
+    <div className=" bg-[#F8F9FA] flex flex-col m-4 px-8 justify-start items-start gap-8 w-full">
+      <div className="bg-white w-full  h-52 rounded-3xl px-8">
         <Swiper
           breakpoints={{
             1280: {
@@ -86,5 +82,4 @@ const Carusoul = () => {
     </div>
   );
 };
-
 export default Carusoul;
