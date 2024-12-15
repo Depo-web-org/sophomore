@@ -11,3 +11,7 @@ body{
 .text-gradient {
     @apply bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent
   }
+
+  textarea {
+    resize: none;
+  }
