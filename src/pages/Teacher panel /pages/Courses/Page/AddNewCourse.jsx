@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import AddMessage from "../components/AddMessage";
 import ApplicationSection from "../components/options/ApplicationSection";
 
 const AddNewCourse = () => {
-  const [valuee, setvaluee] = useState(null);
 
   return (
     <div className="lg:flex justify-between">
