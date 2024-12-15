@@ -1,11 +1,11 @@
 import React from "react";
-import { StatisticCard, statisticsData } from "../Dashboard/components/StatisticCard";
-import QuickAction from "../Dashboard/components/QuickAction";
+import { StatisticCard, statisticsData } from "../../Dashboard/components/StatisticCard";
+import QuickAction from "../../Dashboard/components/QuickAction";
 import { Link } from "react-router-dom";
 
 
 
-export default function Courses() {
+export default function CourseStatistics() {
   return  <>
     <div className="grid grid-cols-1   gap-8 w-full ">
       {statisticsData.filter(i=> i.title != 'Completed Tasks').map((item, index) => (
@@ -27,7 +27,7 @@ export default function Courses() {
 
 function UploadCourse(props) {
   return (
-    <Link to="/AddNewCourse" className="bg-primary rounded-md  px-8 py-2   font-semibold text-white text-center">
+    <Link to="addnewcourse" className="bg-primary rounded-md  px-8 py-2   font-semibold text-white text-center">
       {props.Text}
     </Link>
   );

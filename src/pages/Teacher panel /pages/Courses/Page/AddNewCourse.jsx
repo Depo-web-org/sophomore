@@ -1,13 +1,9 @@
 import React from "react";
-import Sidebar from "../../../components/Sidebar";
-import AddMasege from "./AddMessage";
-import Header from "../../../components/Header";
-import SideBarHeader from "../../../components/Sidebar/index";
+import AddMessage from "../components/AddMessage";
 
 const AddNewCourse = () => {
   return (
     <>
-  <Header/>
   {/* <SideBarHeader/> */}
       <div className=" w-96">
         <div className=" w-96">
@@ -47,7 +43,7 @@ const AddNewCourse = () => {
             </div>
             <img src className="mt-4 mx-auto max-h-40 hidden" id="preview" />
           </div>
-          <AddMasege />
+          <AddMessage />
         </div>
       </div>
     </>

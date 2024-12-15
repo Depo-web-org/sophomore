@@ -30,12 +30,13 @@ import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import Teacher from "./pages/Teacher panel ";
 import Dashboard from "./pages/Teacher panel /pages/Dashboard";
-import Courses from "./pages/Teacher panel /pages/Courses/CourSestatistics.jsx";
 import Students from "./pages/Teacher panel /pages/Students";
 import TeacherProfile from "./pages/Teacher panel /pages/Profile";
-import AddNewCourse from "./pages/Teacher panel /pages/Courses/components/AddNewCourse.jsx";
+import AddNewCourse from "./pages/Teacher panel /pages/Courses/Page/AddNewCourse.jsx";
 import StudentStatistics from "./pages/Teacher panel /pages/Students/components/StudentStatistics.jsx";
 import StudentProfile from "./pages/Teacher panel /pages/Students/components/StudentProfile.jsx";
+import CourseStatistics from "./pages/Teacher panel /pages/Courses/Page/CourseStatistics.jsx";
+import Courses from "./pages/Teacher panel /pages/Courses/Index.jsx";
 
 function App() {
   return (
@@ -141,11 +142,13 @@ function App() {
             {/* page Teacherrrr */}
             <Route path="/Teacher" element={<Teacher />} />
             {/*  Add New Course*/}
-            <Route path="/AddNewCourse" element={<AddNewCourse />} />
           </Route>
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="courses" element={<Courses />} />
+            <Route path="courses" element={<Courses />} >
+            <Route  element={<CourseStatistics/>} index />
+            <Route path="addnewcourse" element={<AddNewCourse />} />
+            </Route>
             <Route path="students" element={<Students />}>
               <Route element={<StudentStatistics />} index />
               <Route path="studentprofile" element={<StudentProfile />} />
