@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Statistics from "./components/StatisticCard";
 import CourseManagement from "./components/CourseManagement";
 import Activity from "./components/Activity";
@@ -6,6 +6,7 @@ import QuickAction from "./components/QuickAction";
 import ApexChart from "./components/Chart";
 
 export default function Dashboard() {
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col p-4 lg:px-8 justify-start items-start  gap-8">
       <Statistics />

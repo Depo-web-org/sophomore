@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import GoBack from '../../../../components/GoBack';
 import { useState } from 'react';
 import { FaPlay } from 'react-icons/fa';
@@ -44,7 +44,6 @@ const [video, setVideo] = useState(true)
 
     setUploading(true);
     setMessage('Uploading...');
-
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
@@ -74,7 +73,6 @@ const [video, setVideo] = useState(true)
     const pdf = event.target.files[0];
     setUploadedPDF(pdf);
   };
-  console.log(uploadedPDF)
   return (
     <div>
       {/* Head */}
@@ -85,19 +83,29 @@ const [video, setVideo] = useState(true)
       <div className="flex">
         <GoBack title={unit} />
         <div className="flex-1 flex justify-end gap-x-2">
+         
+        <div className="flex items-center justify-end">
+      <button    className='bg-primary hover:bg-secondary py-2 px-2 text-white rounded-md transition-all duration-300'>
+        <Link to={`/teacherpanel/courses/chooseunit/${unit}/test`}>
+        Add Unit Test
+
+        </Link>
+
+
+
+      </button>
+    </div>
+
+
+
           <Button
-            events={() => console.log('Test')}
-            classButton="bg-primary py-2 px-2 text-white rounded-md"
-            title="Add Unit Test"
-          />
-          <Button
-            classButton="bg-primary py-2 px-2 text-white rounded-md"
+            classButton="bg-primary py-2 px-2 text-white rounded-md hover:bg-secondary transition-all duration-300" 
             title="Submit"
             type="submit"
           />
         </div>
       </div>
-          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
+          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4 ">
             <label htmlFor="title" className="text-base font-normal text-[#00000078]">
               Title
             </label>
@@ -120,7 +128,7 @@ const [video, setVideo] = useState(true)
             />
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between gap-x-8 ">
+          <div className="flex flex-col lg:flex-row justify-between gap-x-8 gap-y-4 ">
             {/* Upload Video */}
             <div className="w-full">
               <label htmlFor="Upload-Video" className="text-[#00000078] py-4">

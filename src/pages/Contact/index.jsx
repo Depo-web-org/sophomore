@@ -38,11 +38,11 @@ const Contact = () => {
 <div className='bg-primary lg:min-h-[10vh] xl:min-h-[70vh]   w-full items-center xl:items-start   flex '>
 <div className=' py-10 lg:py-32   flex container w-full h-full md:w-custom-md xl:w-custom-xl mx-auto gap-5 flex-col'>
       <h5
-        className="  text-white text-3xl lg:text-4xl xl:text-5xl font-extrabold text-transparent  text-start  2xl:w-[35%]"
+        className="  text-white text-3xl lg:text-4xl xl:text-5xl font-extrabold text-transparent  text-start  xl:w-[35%] 2xl:w-[40%]"
       >
          Get in touch with us
       </h5>
-    <p className='-mt-4 text-white font-medium'>
+    <p className='-mt-4 text-white font-medium '>
        
     Have an inquiry or feedback to us ? <br />
     fill out the form to contact our team 
