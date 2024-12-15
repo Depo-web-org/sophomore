@@ -5,7 +5,7 @@ const MinProfile = () => {
     <div className="mx-5 lg:pe-20">
       {/* form */}
       <div className="flex flex-col sm:flex-row items-center my-5 lg:w-[calc(100%-30%)] ms-auto">
-        <span className="font-medium text-white text-base sm:text-lg me-auto pb-2">
+        <span className="font-medium text-base sm:text-lg me-auto pb-2">
           User Name
         </span>
 
@@ -31,12 +31,12 @@ const MinProfile = () => {
 
       <div className="h-36 my-2 lg:w-[calc(100%-30%)] ms-auto">
         <div className=" text-right py-1 cursor-pointer">
-          <pre className=" text-gray-400 font-light "> Delete | Update </pre>
+          <pre className=" text-gray-400 font-light hover:text-black duration-700 "> Delete | Update </pre>
         </div>
 
         <div>
           <div className="flex justify-start items-center py-1">
-            <p className=" text-white font-bold  px-5">Photo</p>
+            <p className=" font-bold  px-5">Photo</p>
             <img
               className="w-14 h-14"
               src="/public/Profile/Camera.svg"

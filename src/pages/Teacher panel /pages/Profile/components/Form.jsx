@@ -5,7 +5,7 @@ const Form = () => {
     <div className="lg:w-[calc(100%-30%)] min-h-96 sm:ms-auto my-16 sm:mt-10 px-5 lg:px-0">
       {/*first email */}
       <div className="sm:pe-32 flex flex-col sm:flex-row items-center gap-4">
-        <span className="font-medium text-white text-base sm:text-lg me-auto">
+        <span className="font-medium text-base sm:text-lg me-auto">
           Email
         </span>
 
@@ -30,7 +30,7 @@ const Form = () => {
         <div className="pb-5">
           <label
             htmlFor="UserEmail"
-            className="block text-sm font-medium text-white pb-2"
+            className="block text-sm font-medium pb-2"
           >
             Enter New Password
           </label>
@@ -46,7 +46,7 @@ const Form = () => {
         <div className="py-5">
           <label
             htmlFor="UserEmail"
-            className="block text-sm font-medium text-white pb-2"
+            className="block text-sm font-medium pb-2"
           >
             {" "}
             Retype new Password{" "}

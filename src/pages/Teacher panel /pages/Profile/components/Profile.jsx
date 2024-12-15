@@ -19,8 +19,8 @@ const Profile = () => {
       <div className="relative min-h-36 sm:px-4 py-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <p className="font-bold text-white text-md">Mohamed Ayman</p>
-            <p className="text-gray-300 text-sm">
+            <p className="font-bold  text-md">Mohamed Ayman</p>
+            <p className="text-gray-400 text-sm">
               Update your photos and personal Details
             </p>
           </div>

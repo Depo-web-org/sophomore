@@ -1,10 +1,11 @@
 import React from "react";
 import AddMessage from "../components/AddMessage";
+import ApplicationSection from "../components/options/ApplicationSection";
 
 const AddNewCourse = () => {
   return (
-    <>
-      <div className="max-w-96 sm:mx-auto lg:mx-0">
+    <div className="lg:flex justify-between">
+      <div className="min-w-80 sm:mx-auto lg:mx-0">
         <span className="text-2xl lg:text-4xl font-semibold">Add a new Course</span>
         <p className="text-sm text-white pt-5">Upload Thumbnail</p>
 
@@ -43,7 +44,8 @@ const AddNewCourse = () => {
         </div>
         <AddMessage />
       </div>
-    </>
+        <ApplicationSection/>
+    </div>
   );
 };
 

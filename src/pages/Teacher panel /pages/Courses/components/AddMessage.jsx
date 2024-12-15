@@ -33,6 +33,15 @@ const AddMessage = () => {
           rows="4"
           placeholder="Enter any additional order notes..."
         ></textarea>
+ 
+         <button
+          type="button"
+          data-twe-ripple-init
+          data-twe-ripple-color="light"
+          className="w-full mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+        >
+          Continue
+        </button>
       </div>
     </>
   );
