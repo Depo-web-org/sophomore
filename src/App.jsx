@@ -156,11 +156,10 @@ function App() {
               {/* Nested Routes Courses */}
 
               <Route path="chooseunit" element={<ChooseUnit />}>
-            <Route index element={<ItemsUnit />} />
-            <Route path=":unit" element={<Unit />} />
-              <Route path="test" element={<Test />} />
-  </Route>
-
+                <Route index element={<ItemsUnit />} />
+                <Route path=":unit" element={<Unit />} />
+                <Route path=":unit/test" element={<Test />} />
+              </Route>
             </Route>
             <Route path="students" element={<Students />}>
               <Route element={<StudentStatistics />} index />
