@@ -8,6 +8,7 @@ export default {
         secondary: "#F15C54",
         textopacity: "#FFFFFF70",
         dark: "#0a142f",
+        mainGray: "#4B5563"
       },
       container: {
         center: true,

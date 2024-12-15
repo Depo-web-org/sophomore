@@ -5,6 +5,7 @@ import { HiHome } from "react-icons/hi";
 import { FaBook, FaLocationArrow } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { IoCloseSharp, IoPersonSharp } from "react-icons/io5";
+import SideBarHeader from "./Components/SideBarHeader";
 
 
 const menuItems = [
@@ -30,24 +31,7 @@ const menuItems = [
   },
 ];
 
-function SideBarHeader({ setSidebarOpen, sidebarOpen }) {
-  return (
-    <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-      <Link  to="/" className="py-3 flex items-center justify-center">
-        <img src={Logo} alt="Logo" />
-        <p className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
-          Sophomore
-        </p>
-      </Link>
-      <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="block lg:hidden text-gray-500 hover:text-gray-700"
-      >
-    <IoCloseSharp className=" text-primary text-2xl " />
-      </button>
-    </div>
-  );
-}
+
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
@@ -59,7 +43,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   // Close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
-      console.log(sidebarOpen)
       if (!sidebar.current || !trigger.current) return;
       if (
         !sidebarOpen ||
@@ -119,16 +102,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             {menuItems.map((item, index) => (
               
               <li key={index}>
-                <Link
-                  to={item.to}
-                  className={`group relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium duration-300 ease-in-out ${
-                    pathname === item.to
-                      ? "bg-primary text-white"
-                      : item.to === "/teacherPanel" && pathname.startsWith("/teacherPanel") && !pathname.includes("/", "/teacherPanel".length)
-                      ? "bg-primary text-white"
-                      : "text-[#4B5563]"
-                  }`}
-                >
+               <Link
+                    to={item.to}
+                    className={`group relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium duration-300 ease-in-out ${
+                    
+                      pathname.slice("/teacherPanel".length).split("/")[1] ===  item.to.split('/')[2]  ? "bg-primary text-white"   : "text-mainGray"
+                    }`}
+                  >
                   {item.icon}
                   {item.label}
                 </Link>
