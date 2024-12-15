@@ -52,7 +52,7 @@ const ApplicationSection = () => {
             <div key={item.id}>
               <label
                 htmlFor="HeadlineAct"
-                className="text-gray-400 font-semibold text-base lg:text-lg"
+                className="text-gray-400 font-semibold text-sm lg:text-md"
               >
                 {item.title}
               </label>
@@ -60,11 +60,15 @@ const ApplicationSection = () => {
                 id={`dropdown-${index}`}
                 value={selectedValues[index]}
                 onChange={(e) => handleSelectChange(index, e.target.value)}
-                className="mt-1.5 py-2 w-full rounded-lg text-lg font-semibold text-gray-600 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1.5 py-2 w-full rounded-lg text-sm lg:text-md font-semibold text-gray-600 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option >{item.name}</option>
+                <option className="text-md font-semibold">{item.name}</option>
                 {item.opations?.map((option, index) => (
-                  <option key={index} value={option}>
+                  <option
+                    className="text-md font-semibold"
+                    key={index}
+                    value={option}
+                  >
                     {option}
                   </option>
                 ))}
@@ -73,7 +77,7 @@ const ApplicationSection = () => {
           );
         })}
         {allFilled && (
-          <p className="text-3xl text-red-400">All dropdowns are filled!</p>
+          <p className="text-xl text-red-400">All dropdowns are filled!</p>
         )}
       </div>
     </>

@@ -38,7 +38,7 @@ const Form = () => {
           <input
             type="Password"
             id="UserEmail"
-            placeholder="*********"
+            placeholder=" *********"
             className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
           />
         </div>
@@ -55,7 +55,7 @@ const Form = () => {
           <input
             type="Password"
             id="UserEmail"
-            placeholder="*********"
+            placeholder=" *********"
             className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
           />
         </div>
