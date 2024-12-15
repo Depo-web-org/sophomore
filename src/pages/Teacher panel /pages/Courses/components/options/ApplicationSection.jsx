@@ -35,7 +35,7 @@ const ApplicationSection = () => {
     <>
       <div
         id="options"
-        className="h-auto w-full tracking-wide lg:pt-20 lg:ps-5"
+        className="h-auto w-full tracking-wide lg:pt-16 lg:ps-5"
       >
         {options.map((item) => {
           return (

@@ -8,7 +8,7 @@ const AddNewCourse = () => {
   return (
     <div className="lg:flex justify-between">
       <div className="min-w-80 sm:mx-auto lg:mx-0">
-        <span className="text-2xl lg:text-4xl font-semibold">
+        <span className="block text-2xl lg:text-3xl font-semibold">
           Add a new Course
         </span>
         <p className="text-sm text-white pt-5">Upload Thumbnail</p>

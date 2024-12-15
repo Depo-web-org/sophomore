@@ -16,7 +16,7 @@ const AddMessage = () => {
           type="username"
           id="username"
           placeholder=" "
-          className="border-2  pt-5 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+          className="border-2 py-2.5 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
         />
       </div>
 
