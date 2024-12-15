@@ -51,12 +51,11 @@ const ApplicationSection = () => {
                 id="HeadlineAct"
                 className="mt-1.5 py-2 w-full rounded-lg text-lg font-semibold text-gray-600 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
               >
-                <option value="">{item.name}</option>
+                <option value="" >{item.name}</option>
                 {item.opations?.map((option, index) => (
                   <option
                     key={index}
                     value={option}
-                    className="bg-transparent hover:bg-transparent focus:bg-transparent"
                   >
                     {option}
                   </option>
