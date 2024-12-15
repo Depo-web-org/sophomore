@@ -56,27 +56,6 @@ export default function StudentProfile() {
   );
 }
 
-// <div className="p-6">
-//   <h1 className="text-2xl font-bold">Student Profile</h1>
-//   <div className="mt-4">
-//     <p>
-//       <strong>Name:</strong> {student.name}
-//     </p>
-//     <p>
-//       <strong>ID:</strong> {student.id}
-//     </p>
-//     <p>
-//       <strong>Enrollment Date:</strong> {student.enrollmentDate}
-//     </p>
-//     <p>
-//       <strong>Progress:</strong> {student.progress}%
-//     </p>
-//     <p>
-//       <strong>Course Name:</strong> {student.courseName}
-//     </p>
-//   </div>
-// </div>
-
 function CoursesCard() {
   const location = useLocation();
   const { student } = location.state || {};
