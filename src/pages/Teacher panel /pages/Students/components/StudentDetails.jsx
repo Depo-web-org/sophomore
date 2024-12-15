@@ -1,5 +1,6 @@
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const students = [
   {
@@ -7,44 +8,60 @@ const students = [
     id: "#34152",
     enrollmentDate: "Jun 24, 2024",
     progress: 45,
-    courseName: "Math, Grade2",
+    courseName: "Math",
     progressColor: "bg-yellow-400",
+    email: "rami.zayd@example.com",
+    phone: "+1234567890",
+    grade: "Grade 2",
   },
   {
     name: "Samir Khalid",
     id: "#21450",
     enrollmentDate: "Mar 10, 2024",
     progress: 60,
-    courseName: "Math, Grade1",
+    courseName: "Math",
     progressColor: "bg-red-400",
+    email: "samir.khalid@example.com",
+    phone: "+1234567891",
+    grade: "Grade 1",
   },
   {
     name: "Jana Fadila",
     id: "#40152",
     enrollmentDate: "Nov 10, 2024",
     progress: 70,
-    courseName: "Math, Grade2",
+    courseName: "Math",
     progressColor: "bg-pink-400",
+    email: "jana.fadila@example.com",
+    phone: "+1234567892",
+    grade: "Grade 2",
   },
   {
     name: "Layla Noor",
     id: "#81153",
     enrollmentDate: "Dec 20, 2024",
     progress: 20,
-    courseName: "Math, Grade1",
+    courseName: "Math",
     progressColor: "bg-green-400",
+    email: "layla.noor@example.com",
+    phone: "+1234567893",
+    grade: "Grade 1",
   },
   {
     name: "Ali Karim",
     id: "#24152",
     enrollmentDate: "Jul 25, 2024",
     progress: 90,
-    courseName: "Math, Grade2",
+    courseName: "Math",
     progressColor: "bg-purple-400",
+    email: "ali.karim@example.com",
+    phone: "+1234567894",
+    grade: "Grade 2",
   },
 ];
 
 export default function StudentDetails() {
+  const navigate = useNavigate();
   return (
     <div className="bg-white rounded-2xl w-full p-6 overflow-x-auto">
       <div className="flex flex-col md:flex-row gap-2 justify-between items-center w-full">
@@ -77,6 +94,11 @@ export default function StudentDetails() {
           <tbody>
             {students.map((student, index) => (
               <tr
+                onClick={() =>
+                  navigate("/teacherPanel/students/studentprofile", {
+                    state: { student },
+                  })
+                }
                 key={student.id}
                 className={`${
                   index % 2 === 0 ? "bg-[#E6F1FD]" : "bg-[#C3CCE5]"
