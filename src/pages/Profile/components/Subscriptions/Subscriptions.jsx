@@ -36,7 +36,7 @@ export default function Subscriptions() {
         {Subscriptions.map((item) => {
           return (
             <>
-              <div className="flex flex-col w-[auto] min-h-[328px]  hover:opacity-45 transition-all duration-300">
+              <div className="flex flex-col w-[auto] min-h-[300px]  hover:opacity-45 transition-all duration-300">
                 <div className="relative w-full min-h-[285px] overflow-hidden bg-cover bg-no-repeat rounded-lg">
                   <img
                     src={item.img}
@@ -45,8 +45,8 @@ export default function Subscriptions() {
                   />
                 </div>
                 <div className="flex items-center justify-between w-full pt-2">
-                  <p className="text-xl font-medium text-white">{item.name}</p>
-                  <p className="text-base font-normal text-[#FFFFFF57]">
+                  <p className="text-sm lg:text-xl font-medium text-white">{item.name}</p>
+                  <p className="text-sm lg:text-xl font-normal text-[#FFFFFF57]">
                     {item.grade}
                   </p>
                 </div>

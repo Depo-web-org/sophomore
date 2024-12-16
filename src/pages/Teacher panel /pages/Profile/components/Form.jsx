@@ -20,7 +20,7 @@ const Form = () => {
             placeholder="Email"
           />
 
-          <span className="pointer-events-none absolute left-2 top-2 -translate-y-1/2 p-0.5 text-xs text-gray-500 font-bold transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+          <span className="pointer-events-none absolute left-2 top-2 -translate-y-1/2 p-0.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
             hamada@gmail.com
           </span>
         </label>

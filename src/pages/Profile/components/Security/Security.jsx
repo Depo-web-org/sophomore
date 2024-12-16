@@ -4,7 +4,7 @@ export default function Security() {
   return (
     <>
       {/* first section */}
-      <div className="w-full min-h-40">
+      <div className="w-full h-72 ">
         <div className="relative bg-gradient-to-r from-[#F15C54] from-10% to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
           {/* img */}
           <img
@@ -44,15 +44,15 @@ export default function Security() {
               placeholder="Email"
             />
 
-            <span className="pointer-events-none absolute left-2 top-2 -translate-y-1/2 p-0.5 text-xs text-gray-500 font-bold transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+            <span className="pointer-events-none absolute left-2 top-2 -translate-y-1/2 p-0.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
               hamada@gmail.com
             </span>
           </label>
         </div>
 
-        <hr className=" my-5" />
+        <hr className="my-5" />
 
-        <div className="pt-10">
+        <div >
           <div className="pb-5">
             <label
               htmlFor="UserEmail"
@@ -64,7 +64,7 @@ export default function Security() {
             <input
               type="Password"
               id="Password"
-              placeholder="*********"
+              placeholder=" *********"
               className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
             />
           </div>
@@ -83,7 +83,7 @@ export default function Security() {
             <input
               type="Password"
               id="Change Password"
-              placeholder="*********"
+              placeholder=" *********"
               className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
             />
           </div>
