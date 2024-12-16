@@ -71,7 +71,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/quiz" element={<Quiz />} />
+            {/* Quiz */}
+            <Route path="/mylearning/course/:courseName/quiz" element={<Quiz />} />
             {/* course video nested route */}
             <Route
               path="/mylearning/course/:courseName"

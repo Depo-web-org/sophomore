@@ -27,7 +27,7 @@ export default function ChooseSchool() {
           <CardInfo item={item} path={`/school/${item.name}`} />
         </div>
       );
-    }) : <div  className="col-span-6 sm:col-span-3 lg:col-span-4"> 
+    }) : <div  className="col-span-12 w-full grid grid-cols-1 lg:grid-cols-3 "> 
      <SkeletonCard/>
   </div>
 }
