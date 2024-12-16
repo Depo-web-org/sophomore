@@ -24,7 +24,7 @@ export default function Statistics() {
       {statisticsData.map((item, index) => (
         <StatisticCard
           style={
-            "flex justify-center items-center gap-8 bg-white p-8 group hover:shadow-lg rounded-md"
+            "flex justify-center items-center gap-8 bg-white p-8 group hover:shadow-lg rounded-md "
           }
           key={index}
           image={item.image}
@@ -39,12 +39,12 @@ export default function Statistics() {
 export function StatisticCard({ image, title, stats, style }) {
   return (
     <div className={`${style}`}>
-      <img src={image} alt={title} className="w-14 h-14 mb-4" />
+      <img src={image} alt={title} className="w-12 lg:w-14 h-12 lg:h-14 mb-4" />
       <div className="flex flex-col items-start justify-start ">
-        <p className="text-lg font-medium text-gray-500 group-hover:text-secondary duration-300 transition-all ">
+        <p className="text-base lg:text-lg font-medium text-gray-500 group-hover:text-secondary duration-300 transition-all ">
           {title}
         </p>
-        <p className="text-2xl font-bold text-gray-900  ">{stats}</p>
+        <p className="text-base lg:text-2xl font-bold text-gray-900  ">{stats}</p>
       </div>
     </div>
   );

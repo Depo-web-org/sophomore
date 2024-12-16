@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoBack from '../../../components/GoBack';
 import { Link } from 'react-router-dom';
+import SubmitUnitsModel from './components/SubmitUnitsModel';
 
 const units = [
   "Unit 1",
@@ -18,7 +19,7 @@ const units = [
 
 
 const ItemsUnit = () => {
-  
+  const [modelOpen, setModelOpen] = useState()
   return (
     <>
       <div className=" w-full">
@@ -43,10 +44,13 @@ const ItemsUnit = () => {
         </div>
         {/* Submit Button  */}
         <div className="w-full  flex items-center justify-end">
-          <button className="bg-primary py-2 px-10 text-white rounded-md">
+          <button onClick={()=>setModelOpen(true)} className="bg-primary py-2 px-10 text-white rounded-md">
             Submit All
           </button>
         </div>
+        {
+          modelOpen&&<SubmitUnitsModel setModelOpen={setModelOpen}/>
+        }
       </div>
     </>
   );
