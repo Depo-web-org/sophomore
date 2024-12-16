@@ -4,61 +4,62 @@ const courses = [
   {
     name: "Math",
     grade: "Grade 1",
-    image: "https://example.com/math-image.jpg",
+    image: "/public/MyLearning/subject1.webp",
     isFinished: false,
   },
   {
     name: "Science",
     grade: "Grade 2",
-    image: "https://example.com/science-image.jpg",
+    image: "/public/MyLearning/subject2.webp",
     isFinished: true,
   },
   {
     name: "History",
     grade: "Grade 3",
-    image: "https://example.com/history-image.jpg",
+    image: "/public/MyLearning/subject3.webp",
     isFinished: false,
   },
   {
     name: "English",
     grade: "Grade 4",
-    image: "https://example.com/english-image.jpg",
+    image: "/public/MyLearning/subject1.webp",
     isFinished: true,
   },
   {
     name: "Geography",
     grade: "Grade 5",
-    image: "https://example.com/geography-image.jpg",
+    image: "/public/MyLearning/subject1.webp",
     isFinished: false,
   },
   {
     name: "Physics",
     grade: "Grade 6",
-    image: "https://example.com/physics-image.jpg",
+    image: "/public/MyLearning/subject2.webp",
+
     isFinished: true,
   },
   {
     name: "Chemistry",
     grade: "Grade 7",
-    image: "https://example.com/chemistry-image.jpg",
+    image: "/public/MyLearning/subject1.webp",
     isFinished: false,
   },
   {
     name: "Biology",
     grade: "Grade 8",
-    image: "https://example.com/biology-image.jpg",
+    image: "/public/MyLearning/subject4.webp",
     isFinished: true,
   },
   {
     name: "Computer Science",
     grade: "Grade 9",
-    image: "https://example.com/computer-science-image.jpg",
+    image: "/public/MyLearning/subject2.webp",
     isFinished: false,
   },
   {
     name: "Art",
     grade: "Grade 10",
-    image: "https://example.com/art-image.jpg",
+    image: "/public/MyLearning/subject3.webp",
     isFinished: true,
   },
 ];
@@ -75,6 +76,7 @@ export default function Courses() {
               <LearningCard
                 key={course.name}
                 course={course}
+                image={course.image}
                 path={`/mylearning/course/${course.name}`}
               />
             ))}
@@ -89,6 +91,7 @@ export default function Courses() {
               <LearningCard
                 key={course.name}
                 course={course}
+                image={course.image}
                 path={`/mylearning/course/${course.name}`}
               />
             ))}

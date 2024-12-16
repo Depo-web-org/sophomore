@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/UseFetch";
 import Breadcrumbs from "../../Components/Common/BreadCrumbs/Breadcrumbs";
 import { useState } from "react";
+import { SkeletonCard } from "../../Components/Common/SkeletonCard/SkeletonCard";
 
 const Teachers = () => {
   // eslint-disable-next-line no-unused-vars
@@ -22,8 +23,8 @@ const Teachers = () => {
             Which Teacher do you want ?
           </h2>
         </div>
-        <div className="grid grid-cols-6w-full lg:grid-cols-12 gap-4 items-center justify-center">
-          {data?.Teacher.map((teacher) => (
+        <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
+          { data?  data?.Teacher.map((teacher) => (
             <TeacherCard
               key={teacher.id}
               gradeName={gradeName}
@@ -32,7 +33,8 @@ const Teachers = () => {
               teacher={teacher}
               isSelecteted={false}
             />
-          ))}
+          )) : <div className=" w-full  col-span-6 lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 "><SkeletonCard/></div>
+        }
         </div>
       </section>
     </>
