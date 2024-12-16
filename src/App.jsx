@@ -28,7 +28,7 @@ import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
 import Register from "./pages/Register";
 import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
-import Teacher from "./pages/Teacher panel ";
+import Teacher from "./pages/Teacher panel /components/TeacherUpload/Teacher.jsx";
 import Dashboard from "./pages/Teacher panel /pages/Dashboard";
 import Students from "./pages/Teacher panel /pages/Students";
 import TeacherProfile from "./pages/Teacher panel /pages/Profile";
@@ -41,6 +41,8 @@ import Test from "./pages/Teacher panel /pages/Courses/Page/Test.jsx";
 import ItemsUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page/ItemsUnit.jsx";
 import Unit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page/Unit/Unit.jsx";
 import ChooseUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/Index.jsx";
+import IndexTeacher from "./pages/Teacher panel /index.jsx";
+ 
 
 function App() {
   return (
@@ -144,9 +146,12 @@ function App() {
             <Route path="/register" element={<Register />} />
 
             {/* page Teacherrrr */}
+            <Route path="IndexTeacher" element={<IndexTeacher />} />
+
             <Route path="/Teacher" element={<Teacher />} />
             {/*  Add New Course*/}
           </Route>
+          
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="courses" element={<Courses />}>
