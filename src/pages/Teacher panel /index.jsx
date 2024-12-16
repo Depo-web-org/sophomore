@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import TopText from "./components/Top Text Cards/TopText";
 import Useoptions from "../../Hooks/Useoptions";
 
@@ -7,6 +7,21 @@ const IndexTeacher = () => {
   //  custom hook
   const { options, allFilled, selectedValues, handleSelectChange } =
     Useoptions();
+ 
+
+    const [showMasege, setshowMasege] = useState(false);
+    const Navigate = useNavigate()
+
+    const handleButtonClick = () => {
+      if (allFilled !== true) {
+        console.log("Try Again");
+        setshowMasege(true);  
+      } else {
+        console.log("trueee");
+        setshowMasege(false);  
+        Navigate("/Teacherr")
+      }
+    };
 
   return (
     <div>
@@ -59,13 +74,21 @@ const IndexTeacher = () => {
                 </div>
               );
             })}
-            {allFilled && (
-              <p className="text-xl text-red-400">All dropdowns are filled!</p>
-            )}
+            
+                {showMasege && (
+                <p className="mt-4 text-red-500 font-semibold">
+                   All dropdowns are filled!
+                </p>
+                )}
+            
           </div>
 
-          <Link to="/Teacher">
+
+
+
+     
             <button
+              onClick={() => { handleButtonClick()}}
               type="button"
               data-twe-ripple-init
               data-twe-ripple-color="light"
@@ -73,7 +96,7 @@ const IndexTeacher = () => {
             >
               Next step
             </button>
-          </Link>
+          
         </div>
       </div>
     </div>

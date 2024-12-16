@@ -4,6 +4,8 @@ import Footer from "../Components/Footer/Footer";
 import { useState } from "react";
 import Sidebar from "../pages/Teacher panel /components/Sidebar";
 import Header from "../pages/Teacher panel /components/Header";
+import NavbarTeacher from "../Components/NavBarTeacher/NavbarTeacher";
+import Cards from "../pages/Teacher panel /components/Cards/Cards";
 
 // AuthLayout.js
 const AuthLayout = () => {
@@ -38,4 +40,26 @@ const PublicLayout = () => {
   );
 };
 
-export { AuthLayout, DashboardLayout, PublicLayout };
+
+
+ 
+
+// PublicLayout.js
+const NavTeacher = () => {
+  return (
+    <>
+      <NavbarTeacher/>
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
+
+
+
+
+
+
+
+
+export { AuthLayout, DashboardLayout, PublicLayout,NavTeacher };

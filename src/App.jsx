@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/index";
 import About from "./pages/About/index";
 import ScrollTop from "./Helpers/ScrollTop";
-import { DashboardLayout, PublicLayout } from "./utils/layouts";
+import { DashboardLayout, PublicLayout,NavTeacher } from "./utils/layouts";
 import { Grade } from "./pages/Grades";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
@@ -28,7 +28,7 @@ import MyProfile from "./pages/Profile/components/MyProfile/MyProfile";
 import Register from "./pages/Register";
 import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
-import Teacher from "./pages/Teacher panel /components/TeacherUpload/Teacher.jsx";
+ 
 import Dashboard from "./pages/Teacher panel /pages/Dashboard";
 import Students from "./pages/Teacher panel /pages/Students";
 import TeacherProfile from "./pages/Teacher panel /pages/Profile";
@@ -42,6 +42,9 @@ import ItemsUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page
 import Unit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page/Unit/Unit.jsx";
 import ChooseUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/Index.jsx";
 import IndexTeacher from "./pages/Teacher panel /index.jsx";
+import Cardss from "./pages/Teacher panel /components/Cards/Cards.jsx";
+import Teacherr from "./pages/Teacher panel /components/TeacherUpload/Teacher.jsx";
+ 
  
 
 function App() {
@@ -144,14 +147,27 @@ function App() {
               />
             </Route>
             <Route path="/register" element={<Register />} />
-
-            {/* page Teacherrrr */}
-            <Route path="IndexTeacher" element={<IndexTeacher />} />
-
-            <Route path="/Teacher" element={<Teacher />} />
-            {/*  Add New Course*/}
+              
+         
           </Route>
           
+
+
+
+   {/* page Teacherrrr */}
+      <Route  path="/"element={<NavTeacher />}>
+        <Route index path="/IndexTeacher" element={<IndexTeacher />} />
+        <Route path="/Teacherr" element={<Teacherr />} />
+      </Route>
+
+
+
+
+
+
+
+
+
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="courses" element={<Courses />}>

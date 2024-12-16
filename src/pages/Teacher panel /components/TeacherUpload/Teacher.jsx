@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TopText from "../Top Text Cards/TopText";
 import DownText from "../Down text cards/DownText";
 import Cards from "../Cards/Cards";
-const Teacher = () => {
+const Teacherr = () => {
   const [buttonStates, setButtonStates] = useState([]);
 
   const allApproved =
@@ -40,4 +40,4 @@ const Teacher = () => {
   );
 };
 
-export default Teacher;
+export default Teacherr;

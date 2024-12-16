@@ -18,13 +18,15 @@ const Navbar = () => {
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
       { text: "Profile", link: "/profile" },
-    ];
+
+    ]; 
 
     if (isAuthenticated && role === "student") {
       // Add protected items only if authenticated
       items.push(
         { text: "My Learning", link: "/mylearning" },
-
+        { text: "Wishlist", link: "/wishlist" },
+        { text: "Cart", link: "/cart" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );

@@ -69,7 +69,7 @@ export function TeacherCard({
           </button>
 
           <img
-            src="https://s3-alpha-sig.figma.com/img/c6cc/c303/5f3463c46702ca958707ee622be1a7cf?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SQ7DSyC836TLL5OJbQBdNnrTh5KQxOcVTNontmE8mm3e7GokLGf636amy86SKe7dtQYxe5001VaO0yPn-ASA14mSX7qKbBY4Jp8KG3Y4NQbKyMPwi0mI~iG8Ca0shRhSghWOW5d7j6Q9~F4r-rrsDxn~6oW-hTo7NkASP6~d6rC6uTbpoNtr3fK9NqhV6Uz0c1Qur8gK2ZVwKvAvbHAZiff3pfE75EelZKyHImd4W4seZ5szu4v8N8U92OE~bgmUs6~zN8rqUOaaNeFdBCTAz-Wvy6n178pn0V0v-qhS1guv~0nU6nP5k2uUOh5g8AGyxyvnPSaG3tgSfRquDnsGFw__"
+            src="https://s3-alpha-sig.figma.com/img/c6cc/c303/5f3463c46702ca958707ee622be1a7cf?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=T5x~sh73Q1i0dsSiFXOrTw~62kZaMWI52TMA4R~KKf1dTOwb1S0D2Z9L4uYcsk9pGhpIwF~smkTCbU0MleeGq5ibG8bIWNBcLDNcoi9ijh-i-AIeoRoY9j6uYJ9H2A8GsyAMwHAbMuNWxKknRNvPxoB3-Pkm9sfbgN-HzmacQ0~1toa3V0m-rfsjTxKleVCf~k~AAPdrh1y1KGUjtZdX3s0BhwKiH4eouH8CLXlBh7SSXd33hVdjq7JzA9kQM-l3vG0grV6U4aMAjCgMMIoGFm0kxaBdepFHFi9u~EpRE0zkhBMHAKyaskvJwS4vzKYva2HU5kc9I703BdoNMCPIdQ__"
             alt=""
             className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
           />
