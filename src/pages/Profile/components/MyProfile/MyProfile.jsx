@@ -5,7 +5,7 @@ export default function MyProfile() {
   return (
     <>
       {/* first section */}
-      <div className="w-full h-72">
+      <div className="w-full min-h-40">
         <div className="relative bg-gradient-to-r from-[#F15C54] from-10%  to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
           {/* icon */}
           <BsFillCameraFill className="absolute top-4 right-7 h-6 w-6 text-white" />
@@ -40,7 +40,7 @@ export default function MyProfile() {
       </div>
 
       {/* form */}
-      <div className="flex flex-col sm:flex-row items-center my-5 lg:w-[calc(100%-30%)] ms-auto">
+      <div className="flex flex-col sm:flex-row items-center mb-5 lg:w-[calc(100%-30%)] ms-auto">
         <span className="font-medium text-white text-base sm:text-lg me-auto pb-2">
           User Name
         </span>
@@ -56,7 +56,7 @@ export default function MyProfile() {
             placeholder="User Name"
           />
 
-          <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2  p-0.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+          <span className="pointer-events-none absolute start-1 top-0 -translate-y-1/2  p-0.5 text-xs text-gray-400  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
             Username
           </span>
         </label>

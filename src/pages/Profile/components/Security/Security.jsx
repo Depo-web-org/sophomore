@@ -64,7 +64,7 @@ export default function Security() {
             <input
               type="Password"
               id="Password"
-              placeholder=" *********"
+              placeholder="  *********"
               className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
             />
           </div>
@@ -76,14 +76,13 @@ export default function Security() {
               htmlFor="UserEmail"
               className="block text-sm font-medium text-white pb-2"
             >
-              {" "}
-              Retype new Password{" "}
+              Retype new Password 
             </label>
 
             <input
               type="Password"
               id="Change Password"
-              placeholder=" *********"
+              placeholder="  *********"
               className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
             />
           </div>
