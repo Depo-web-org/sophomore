@@ -25,9 +25,9 @@ const ChooseCard = () => {
   return (
     <section className="min-h-[498px] pb-8 lg:pb-20  ">
       <div className="text-white pb-4 lg:pb-8">
-        <p className=" text-2xl lg:text-4xl font-bold md:leading-10  inline ">
+        <p className=" text-2xl lg:text-4xl font-bold md:leading-10  inline text-nowrap">
           Why Choose
-          <span className=" mx-1 bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent inline-block">
+          <span className=" text-lg lg:text-4xl mx-1 bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent inline-block">
             Sophomore
           </span>
         </p>

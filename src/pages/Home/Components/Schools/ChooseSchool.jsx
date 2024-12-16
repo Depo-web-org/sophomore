@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 import CardInfo from "../../../../Components/Common/CardInfo/CardInfo";
+import { SkeletonCard } from "../../../../Components/Common/SkeletonCard/SkeletonCard";
 import useFetch from "../../../../Hooks/UseFetch";
 
 export default function ChooseSchool() {
-  const { data, error, loading } = useFetch(
+  const { data } = useFetch(
     "https://os1907.github.io/Schools/Schools.json"
   );
   return (
@@ -19,14 +19,22 @@ export default function ChooseSchool() {
       </div>
 
       <div className="grid grid-cols-6 lg:grid-cols-12 gap-2 sm:gap-4 ">
-        {data?.Schools?.map((item) => {
-          return (
-            <div key={item.id} className="col-span-6 sm:col-span-3 lg:col-span-4">
-              <CardInfo item={item} path={`/school/${item.name}`} />
-            </div>
-          );
-        })}
+{
+  data ? 
+    data?.Schools?.map((item) => {
+      return (
+        <div key={item.id} className="col-span-6 sm:col-span-3 lg:col-span-4"> 
+          <CardInfo item={item} path={`/school/${item.name}`} />
+        </div>
+      );
+    }) : <div  className="col-span-6 sm:col-span-3 lg:col-span-4"> 
+     <SkeletonCard/>
+  </div>
+}
+
       </div>
     </section>
   );
 }
+
+

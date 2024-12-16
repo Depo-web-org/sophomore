@@ -69,7 +69,7 @@ export default function StudentDetails() {
         <div className="flex items-center flex-col md:flex-row justify-center md:justify-evenly w-full md:w-1/2 ">
           <div className="relative w-4/5 md:w-1/2">
             <input
-              className="border-[1px] w-full border-gray-400 rounded-lg outline-none ring-0 py-1 px-2 pl-10" // Add padding to the left for the icon
+              className="border-[1px] w-full bg-gray-100  rounded-lg outline-none ring-0 py-1 px-2 pl-10" // Add padding to the left for the icon
               type="search"
               placeholder="Search"
             />

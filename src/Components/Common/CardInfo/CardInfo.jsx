@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+
+
 const CardInfo = ({ item, path }) => {
   return (
     <>
@@ -19,6 +21,7 @@ const CardInfo = ({ item, path }) => {
           </h4>
         </Link>
       </div>
+      
     </>
   );
 };
