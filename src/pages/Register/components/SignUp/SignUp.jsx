@@ -2,21 +2,21 @@ import React from "react";
 
 export default function SignUp({ toggleForm, handleSendOtp }) {
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-12 justify-between w-full md:w-1/2">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full md:w-1/2 pb-4">
       <div className=" flex flex-col items-start gap-6 w-full">
         <div className="flex flex-col justify-start items-start gap-2">
-          <img src="/logos/logo.svg" alt="" />
-          <p className="text-white text-4xl font-semibold pt-4">
-            Join our team{" "}
+          {/* <img src="/logos/logo.svg" alt=""  className="hidden lg:block"/> */}
+          <p className="text-white  text-3xl lg:text-4xl  font-semibold pt-4">
+            Join our team
           </p>
           <p className="text-gray-600">Fill the form to join our team</p>
         </div>
         <div className="w-full">
           <form
             action="#"
-            className=" mb-0 mt-8 w-full space-y-4 flex flex-col gap-5"
+            className="mb-0 w-full space-y-4 flex flex-col gap-5"
           >
-            <div className="w-full flex justify-center items-center gap-8 ">
+            <div className="w-full flex justify-center items-center gap-4 lg:gap-8 ">
               <button className="text-white text-base font-bold p-[10px] bg-secondary  rounded-lg">
                 Student
               </button>
@@ -164,7 +164,7 @@ export default function SignUp({ toggleForm, handleSendOtp }) {
       </div>
       <div className="mx-auto ">
         <p className="text-sm text-gray-500">
-          Aleardy have account?
+          Already have account?
           <button
             onClick={toggleForm}
             className="underline px-2 text-secondary"

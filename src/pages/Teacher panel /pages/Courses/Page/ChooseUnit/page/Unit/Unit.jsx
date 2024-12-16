@@ -29,7 +29,6 @@ const [video, setVideo] = useState(true)
     const title = form.title.value;
     const description = form.description.value;
 
-    // log  data
     if (!video || !pdf) {
       setMessage('Both video and PDF files are required!');
       return;

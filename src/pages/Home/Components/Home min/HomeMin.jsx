@@ -22,19 +22,20 @@ export default function HomeMin() {
 
   return (
     <>
-      <section className="text-white my-5 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
+      <section className="text-white  pt-8 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
     
         <div className="py-5">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center flex-wrap gap-y-2">
 
-            <span className="font-bold text-lg md:text-4xl">
-              Let&apos;s Continue learning
+            <span className="text-2xl lg:text-3xl
+          xl:text-4xl pb-1 sm:pb-2  font-bold">
+              Let&apos;s Continue learning 
             </span>
-            <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer">
+            <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer hidden lg:block">
               My learning
             </p>
           </div>
-          <p className="text-sm font-medium py-2">Pick up from where you left</p>
+          <p className="text-sm lg:text-base font-bold py-2 ">Pick up from where you left</p>
         </div>
 
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
@@ -48,14 +49,14 @@ export default function HomeMin() {
                 <img
                   src={item.img}
                   alt={item.Name}
-                  className="w-full h-44 sm:h-48 lg:h-48 xl:h-52 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
+                  className="w-full h-40  lg:h-48 xl:h-52 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                 />
               </div>
               {/* Text */}
-              <div className="font-semibold text-white mt-3 ps-2">
-                <p className="text-lg">{item.Name}</p>
+              <div className="font-semibold text-white mt-1 lg:mt-3 ps-2">
+                <p className="text-base lg:text-lg">{item.Name}</p>
 
-                <h3 className="text-lg">{item.dec}</h3>
+                <h3 className="text-base lg:text-lg">{item.dec}</h3>
               </div>
             </div>
           ))}

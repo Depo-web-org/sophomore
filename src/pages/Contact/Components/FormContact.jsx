@@ -207,9 +207,9 @@ const FormContact = () => {
 
         </div>
         {/* ReCAPTCHA */}
-        <div className="recaptcha-dir ">
+        {/* <div className="recaptcha-dir ">
           <ReCAPTCHA ref={recaptcha} sitekey="6Lcl6YEqAAAAANdKLVZywDSMl7iLTh24k9QaXGnu" />
-        </div>
+        </div> */}
         {isSubmitted && !recaptcha?.current?.getValue() && (
           <span className="text-red-500 block">Please complete the recaptcha</span>
         )}

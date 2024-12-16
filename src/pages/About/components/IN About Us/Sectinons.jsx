@@ -8,13 +8,13 @@ export default function Sectinons() {
   return (
     <section >
       {/* item 1*/}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden ">
         <img
-          className="w-full min-h-96 object-cover "
+          className="w-full min-h-96 object-cover  "
           src="/public/About Us/header1.svg"
           alt="img header1"
         />
-        <div data-aos="fade-down" className="absolute inset-0 pt-[25%] sm:pt-[15%] px-[3%] lg:px-[24%] text-center text-white font-bold ">
+        <div data-aos="fade-down" className="  absolute inset-0 pt-28 lg:pt-[15%] px-[3%] lg:px-[24%] text-center text-white font-bold ">
           <span className="text-3xl lg:text-5xl font-bold ">
             About Us
           </span>

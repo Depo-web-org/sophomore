@@ -15,21 +15,21 @@ export default function Login({ toggleForm }) {
     } else navigate("/");
   };
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-44 w-full md:w-4/5 lg:w-1/2">
-      <div className=" flex flex-col items-start gap-24 w-full">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full md:w-4/5 lg:w-1/2   overflow-hidden">
+      <div className=" flex flex-col items-start gap-8 lg:gap-24 w-full ">
         <div className="flex flex-col justify-start items-start gap-2">
-          <img src="/logos/logo.svg" alt="" />
-          <p className="text-white text-4xl font-semibold pt-4">
+          <img src="/logos/logo.svg" alt="" className="hidden lg:block" />
+          <p className="text-white text-3xl lg:text-4xl font-semibold pt-4">
             Welcome Back!
           </p>
-          <p className="text-gray-600">Please login to your account</p>
+          <p className="text-sm lg:text-base text-gray-600">Please login to your account</p>
         </div>
         <div className="w-full">
           <form
             action="#"
             form
             onSubmit={handleLogin}
-            className=" mb-0 mt-8 w-full space-y-4 flex flex-col gap-8"
+            className=" mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8 "
           >
             <div>
               <label htmlFor="email" className="sr-only">
@@ -99,7 +99,7 @@ export default function Login({ toggleForm }) {
               </div>
             </div>
 
-            <div className="flex items-end justify-between">
+            <div className="flex items-end justify-center lg:justify-between flex-wrap gap-y-4">
               <label
                 htmlFor="Option1"
                 className="flex cursor-pointer items-start gap-2"
@@ -124,6 +124,9 @@ export default function Login({ toggleForm }) {
                 forgot password
               </button>
             </div>
+
+
+
             <button
               type="submit"
               className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
@@ -133,7 +136,7 @@ export default function Login({ toggleForm }) {
           </form>
         </div>
       </div>
-      <div className="mx-auto ">
+      <div className="mx-auto  ">
         <p className="text-sm text-gray-500">
           No account?
           <button
