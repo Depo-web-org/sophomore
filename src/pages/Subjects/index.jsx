@@ -2,10 +2,11 @@ import { useParams } from "react-router-dom";
 import CardInfo from "../../Components/Common/CardInfo/CardInfo";
 import useFetch from "../../Hooks/UseFetch";
 import Breadcrumbs from "../../Components/Common/BreadCrumbs/Breadcrumbs";
+import { SkeletonCard } from "../../Components/Common/SkeletonCard/SkeletonCard";
 /* eslint-disable no-unused-vars */
 
 const Subjects = () => {
-  const { data, error, loading } = useFetch(
+  const { data } = useFetch(
     "https://os1907.github.io/Schools/grades/subject/subject.json"
   );
   const { gradeName, schoolName } = useParams();
@@ -20,14 +21,14 @@ const Subjects = () => {
           </h2>
         </div>
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-4">
-          {data?.subject.map((subj) => (
+          { data ? data?.subject.map((subj) => (
             <div key={subj.id} className=" col-span-3 lg:col-span-4">
               <CardInfo
                 item={subj}
                 path={`/school/${schoolName}/grade/${gradeName}/subject/${subj.name}`}
               />
             </div>
-          ))}
+          )) : <div className=" w-full  col-span-6 lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 "><SkeletonCard/></div> }
         </div>
       </section>
     </>

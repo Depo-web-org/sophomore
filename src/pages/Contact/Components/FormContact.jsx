@@ -69,7 +69,7 @@ const FormContact = () => {
   };
 
   return (
-    <section className="pt-4 text-white ">
+    <section className="pt-4 text-white  ">
       <form onSubmit={handleFormSubmit} action="submit" className=" p-2 lg:p-10 xl:p-20 flex flex-col gap-y-5 ">
         {/* First Name and Last Name Fields */}
         <div className="flex  flex-col lg:flex-row justify-between  lg:gap-4 ">
@@ -220,7 +220,7 @@ const FormContact = () => {
           disabled={isLoading}
           className="bg-primary w-full  rounded-[5px] text-white px-8 py-4 font-bold transition-colors ease-out duration-300 hover:bg-primary-hover"
         >
-          {isLoading ? <LoadingAnimation /> : "Submit"}
+          {isLoading ? <LoadingAnimation /> : "Send Message "}
         </button>
       </form>
 

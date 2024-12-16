@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function LearningCard({ course, path }) {
+export default function LearningCard({ course, path ,image }) {
   return (
     <div>
       <div className="flex flex-col w-[auto]  min-h-[328px]">
