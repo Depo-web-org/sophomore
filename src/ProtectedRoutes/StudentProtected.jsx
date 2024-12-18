@@ -3,7 +3,6 @@ import { useAuth } from "./AuthContext";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, role } = useAuth();
-  console.log(role);
 
   if (!isAuthenticated || role !== "student") {
     // If not authenticated, redirect to login page

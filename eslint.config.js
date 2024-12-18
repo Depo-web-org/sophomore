@@ -1,8 +1,9 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
   { ignores: ['dist'] },
@@ -17,11 +18,17 @@ export default [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18.3' },
+      'import/resolver': {
+        node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+      },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      import: importPlugin,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -34,7 +41,19 @@ export default [
         { allowConstantExport: true },
       ],
       'react/prop-types': 'off',
-       "no-unused-vars": "off"
+      'no-unused-vars': 'off',
+      // 'import/no-unresolved': 'error', // Flag unresolved imports
+      // 'import/named': 'error', // Ensure named imports exist in the module
+      // 'import/default': 'error', // Ensure a default export is available
+      // 'import/export': 'error', // Ensure exports match correctly
+      // 'import/no-duplicates': 'warn', // Avoid duplicate imports
+      'import/order': [
+        'warn',
+        {
+          groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
+          'newlines-between': 'always',
+        },
+      ], 
     },
   },
-]
+];

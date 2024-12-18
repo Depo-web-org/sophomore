@@ -2,11 +2,9 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 import Footer from "../Components/Footer/Footer";
 import { useState } from "react";
-import Sidebar from "../pages/Teacher panel /components/Sidebar";
-import Header from "../pages/Teacher panel /components/Header";
+import Sidebar from "../Modules/Teacher/components/Sidebar";
+import Header from "../Modules/Teacher/components/Header";
 import NavbarTeacher from "../Components/NavBarTeacher/NavbarTeacher";
-import Cards from "../pages/Teacher panel /components/Cards/Cards";
-
 // AuthLayout.js
 const AuthLayout = () => {
   return <Outlet />;
