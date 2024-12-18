@@ -3,25 +3,37 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import { ImSpinner9 } from "react-icons/im";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 export default function SignUp({ toggleForm, handleSendOtp }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student")
+  const [loadingSending, setLoadingSending] = useState(false)
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   // console.log(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoints}`);
   const onSubmit = async (data) => {
     console.log(data)
-await axios.post(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoints}`, data).then((res)=>console.log(res)).catch((err)=>console.log(err))
+    setLoadingSending(true)
+await axios.post(`http://192.168.1.26:8000/api/v1/register/provider/`, data)
+.then(()=> handleSendOtp()).catch(err=>{ console.log(err)
+  setLoadingSending(false)
+ }) 
     // handleSendOtp()
     // handleSendOtp(); // Trigger OTP function
     //zio.then(success => navigate("otp")
   };
-
+console.log(errors)
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full md:w-1/2 pb-4">
       <div className="flex flex-col items-start gap-6 w-full">
@@ -54,19 +66,26 @@ await axios.post(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoin
             </div>
             {/* Name Field */}
             <div>
-              <label htmlFor="full_name" className="sr-only">
-              Full Name
-              </label>
+              <label htmlFor="full_name"   className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between ">
               <input
-                type="text"
-                id="full_name"
-                {...register("full_name", { required: "Name is required" })}
-                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
-                placeholder="Enter your Full Name"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name.message}</p>
+  type="text"
+  id="full_name"
+  {...register("full_name", {
+    required: "Name is required",
+    validate: (value) => {
+      // Check for at least two words separated by a space
+      const nameParts = value.trim().split(" ");
+      return nameParts.length >= 2 || "Please enter at least two names";
+    },
+  })}
+  className="outline-none w-full "
+  placeholder="Enter your Full Name"
+/>
+              </label>
+              {errors.full_name && (
+               <p className="text-red-500 text-sm mt-4  ">{errors.full_name.message}</p>
               )}
+
             </div>
             {/* Phone Number Field */}
             <div>
@@ -91,19 +110,7 @@ await axios.post(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoin
                   />
                 )}
               />
-              {/* <input
-                type="tel"
-                id="phone_number"
-                {...register("phone_number", {
-                  required: "Phone number is required",
-                  pattern: {
-                    value: /^[0-9]{10}$/,
-                    message: "Invalid phone number",
-                  },
-                })}
-                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
-                placeholder="Enter your phone number"
-              /> */}
+             
               {errors.number && (
                 <p className="text-red-500 text-sm">{errors.number.message}</p>
               )}
@@ -125,49 +132,66 @@ await axios.post(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoin
                 })}
                 className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
                 placeholder="Enter your email"
-              />
+              /> 
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
               )}
             </div>
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
-                placeholder="Enter password"
-              />
+            <label
+      htmlFor="password"
+      className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+    >
+      <input
+        type={showPassword ? "text" : "password"}
+        id="password"
+        {...register("password", {
+          required: "Password is required",
+          minLength: {
+            value: 6,
+            message: "Password must be at least 6 characters",
+          },
+        })}
+        className="outline-none flex-1"
+        placeholder="Enter password"
+      />
+      <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        className="ml-2 text-gray-500 focus:outline-none"
+      >
+        {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+      </button>
+    </label>
               {errors.password && (
                 <p className="text-red-500 text-sm">{errors.password.message}</p>
               )}
             </div>
             {/* Confirm Password Field */}
             <div>
-              <label htmlFor="password2" className="sr-only">
-                Confirm Password
-              </label>
+              <label htmlFor="password2"  className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between">
               <input
-                type="password"
+        type={showPassword ? "text" : "password"}
                 id="password2"
                 {...register("password2", {
                   required: "Confirm Password is required",
                   validate: (value, data) =>
                     value === data.password || "Passwords must match",
                 })}
-                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+        className="outline-none flex-1"
+
                 placeholder="Confirm password"
               />
+         <button
+        type="button"
+        onClick={togglePasswordVisibility}
+        className="ml-2 text-gray-500 focus:outline-none"
+      >
+        {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+      </button>
+
+              </label>
               {errors.confirmPassword && (
                 <p className="text-red-500 text-sm">
                   {errors.confirmPassword.message}
@@ -177,9 +201,12 @@ await axios.post(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoin
             {/* Submit Button */}
             <button
               type="submit"
-              className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
+          disabled={loadingSending}
+              className={`inline-flex w-full rounded-lg ${loadingSending ? "bg-white" : 'bg-primary'} px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
             >
-              Send OTP
+              {loadingSending? <ImSpinner9 className="animate-spin text-3xl text-secondary " /> : " Sign Up"}
+              
+             
             </button>
           </form>
         </div>
