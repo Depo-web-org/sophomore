@@ -1,7 +1,9 @@
-import React from "react";
+ 
+import React,{useState} from "react";
 import { useForm } from "react-hook-form";
 
 export default function Security() {
+  const [errorMasege, seterrorMasege] = useState(false);
   const {
     register,
     handleSubmit,
@@ -9,15 +11,31 @@ export default function Security() {
     formState: { errors },
   } = useForm();
 
+
+
   const onSubmit = (data) => {
     console.log("Form Data:", data);
+    
+ 
     if (data.Password === data.ChangePassword) {
-      console.log("trueee");
-      reset();
-    } else {
-      console.log("false");
-    }
-  };
+      seterrorMasege(false);
+      console.log("true");
+      reset(); 
+
+      }else{
+        console.log("false");
+
+       seterrorMasege(true);
+
+      }
+
+
+ 
+  }
+
+
+
+
 
   return (
     <>
@@ -110,21 +128,26 @@ export default function Security() {
 
             <input
               type="Password"
-              id="ChangePassword"
+              id="password2"
               placeholder="  *********"
               className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
               {...register("ChangePassword", {
-                required: "ChangePassword required",
+                required: "password2 required",
               })}
             />
-            {errors.ChangePassword && (
+            {errors.password2 && (
               <p className="text-red-500 text-sm">
-                {errors.ChangePassword.message}
+                {errors.password2.message}
               </p>
             )}
           </div>
 
-          <hr className="mb-10" />
+          <hr className="" />
+
+          {errorMasege && (
+            <p className="text-red-500 text-sm">Password is filde</p>
+          )}
+
 
           <button
             type="submit"
