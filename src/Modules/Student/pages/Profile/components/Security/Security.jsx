@@ -1,6 +1,24 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 export default function Security() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+    if (data.Password === data.ChangePassword) {
+      console.log("trueee");
+      reset();
+    } else {
+      console.log("false");
+    }
+  };
+
   return (
     <>
       {/* first section */}
@@ -26,7 +44,10 @@ export default function Security() {
       </div>
 
       {/* form */}
-      <div className=" w-[calc(100%-10%)] m-auto min-h-96 mt-16 sm:mt-10">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className=" w-[calc(100%-10%)] m-auto min-h-96 mt-16 sm:mt-10"
+      >
         {/*first email */}
         <div className="flex flex-col sm:flex-row items-center  gap-4">
           <span className="font-medium text-white text-base sm:text-lg me-auto">
@@ -42,7 +63,11 @@ export default function Security() {
               id="email"
               className="w-full py-2 bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
               placeholder="Email"
+              {...register("email", { required: "email required" })}
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
 
             <span className="pointer-events-none absolute left-2 top-2 -translate-y-1/2 p-0.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
               hamada@gmail.com
@@ -52,7 +77,7 @@ export default function Security() {
 
         <hr className="my-5" />
 
-        <div >
+        <div>
           <div className="pb-5">
             <label
               htmlFor="UserEmail"
@@ -66,7 +91,11 @@ export default function Security() {
               id="Password"
               placeholder="  *********"
               className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+              {...register("Password", { required: "Password required" })}
             />
+            {errors.Password && (
+              <p className="text-red-500 text-sm">{errors.Password.message}</p>
+            )}
           </div>
 
           <hr className="" />
@@ -76,21 +105,29 @@ export default function Security() {
               htmlFor="UserEmail"
               className="block text-sm font-medium text-white pb-2"
             >
-              Retype new Password 
+              Retype new Password
             </label>
 
             <input
               type="Password"
-              id="Change Password"
+              id="ChangePassword"
               placeholder="  *********"
               className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+              {...register("ChangePassword", {
+                required: "ChangePassword required",
+              })}
             />
+            {errors.ChangePassword && (
+              <p className="text-red-500 text-sm">
+                {errors.ChangePassword.message}
+              </p>
+            )}
           </div>
 
           <hr className="mb-10" />
 
           <button
-            type="button"
+            type="submit"
             data-twe-ripple-init
             data-twe-ripple-color="light"
             className="rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
@@ -99,7 +136,7 @@ export default function Security() {
           </button>
         </div>
         {/* end */}
-      </div>
+      </form>
     </>
   );
 }
