@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 
@@ -8,19 +9,24 @@ export default function OTP({ handleValidateOtp }) {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const otp_code = data.otp.join("");
-    // handleValidateOtp(otpCode); 
-    console.log(JSON.stringify(({otp_code})))
-    
-    // await axios
-    //     .post(`${location_URL}/api/api/form`, formData, {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     })
+    console.log(`otp_code:${otp_code}`);
+    console.log(data);
 
-    // Pass OTP to parent function
+    try {
+      const response = await axios.post(
+        `http://192.168.1.26:8000/api/v1/verify-email/`,
+        {
+          otp_code: otp_code,
+        }
+      );
+
+      console.log(response);
+      handleValidateOtp();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleInput = (e, index, fields, setValue) => {
