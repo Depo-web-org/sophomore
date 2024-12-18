@@ -17,8 +17,7 @@ const Navbar = () => {
       { text: `Home`, link: "/" },
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
-      // { text: "Profile", link: "/profile" },
-
+      { text: "Profile", link: "/profile" },
     ]; 
 
     if (isAuthenticated && role === "student") {
@@ -34,7 +33,7 @@ const Navbar = () => {
      return items
   }, [isAuthenticated]);
 
-  console.log(navItems.filter(item => item.text != "Cart"|| item.text != "Wishlist"))
+  console.log(navItems.filter(item => item.text !== "Cart" && item.text !== "Wishlist" && item.text !== "Profile"))
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -44,7 +43,7 @@ const Navbar = () => {
           <div className="flex justify-start items-center pt-1 lg:ml-5 w-full">
             <img src={logo} alt="logo" className=" h-12 lg:h-8 w-auto" />
            
-            <p   style={{ textShadow: "0px 5 px 6px rgba(0, 0, 0, 0.25)" }} className=" hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
+            <p style={{ textShadow: "0px 5 px 6px rgba(0, 0, 0, 0.25)" }} className=" hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
               Sophomore
             </p>
           </div>
@@ -53,18 +52,38 @@ const Navbar = () => {
         <div className="hidden md:flex items-center mr-5">
           <div className="w-auto text-white flex items-center gap-[-5px]">
             <ul className="flex gap-x-[14px] lg:gap-x-7 font-semibold">
-              {navItems.map((item, index) => (
-                <li key={index + item.text + item.link}>
-                  <NavLink
-                    to={item.link}
-                    style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
-                    className="text-white text-sm lg:text-base flex items-center justify-center "
-                  >
-                    <span className="text-base md:text-lg"> {item.icon}</span>
-                    {item.text}
-                  </NavLink>
-                </li>
-              ))}
+            {role === "student" ? (
+         navItems
+    .filter(item => item.text !== "Cart" && item.text !== "Wishlist")
+    .map((item, index) => (
+      <li key={index + item.text + item.link}>
+        <NavLink
+          to={item.link}
+          style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
+          className="text-white text-sm lg:text-base flex items-center justify-center "
+        >
+          <span className="text-base md:text-lg"> {item.icon}</span>
+          {item.text}
+        </NavLink>
+      </li>
+    ))
+) : (
+  navItems
+.filter(item => item.text !== "Cart" && item.text !== "Wishlist" && item.text !== "Profile")
+.map((item, index) => (
+<li key={index + item.text + item.link}>
+ <NavLink
+   to={item.link}
+   style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)" }}
+   className="text-white text-sm lg:text-base flex items-center justify-center "
+ >
+   <span className="text-base md:text-lg"> {item.icon}</span>
+   {item.text}
+ </NavLink>
+</li>
+))
+)}
+
             </ul>
 
             {!isAuthenticated && (

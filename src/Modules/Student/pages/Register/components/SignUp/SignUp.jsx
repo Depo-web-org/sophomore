@@ -1,160 +1,159 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function SignUp({ toggleForm, handleSendOtp }) {
+  const [requestEndPoints, setRequestEndPoints] = useState("student")
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // console.log(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoints}`);
+  const onSubmit = (data) => {
+    console.log(data)
+    handleSendOtp()
+    // handleSendOtp(); // Trigger OTP function
+    //zio.then(success => navigate("otp")
+  };
+
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full md:w-1/2 pb-4">
-      <div className=" flex flex-col items-start gap-6 w-full">
+      <div className="flex flex-col items-start gap-6 w-full">
         <div className="flex flex-col justify-start items-start gap-2">
-          {/* <img src="/logos/logo.svg" alt=""  className="hidden lg:block"/> */}
-          <p className="text-white  text-3xl lg:text-4xl  font-semibold pt-4">
+          <p className="text-white text-3xl lg:text-4xl font-semibold pt-4">
             Join our team
           </p>
           <p className="text-gray-600">Fill the form to join our team</p>
         </div>
         <div className="w-full">
           <form
-            action="#"
+            onSubmit={handleSubmit(onSubmit)}
             className="mb-0 w-full space-y-4 flex flex-col gap-5"
           >
-            <div className="w-full flex justify-center items-center gap-4 lg:gap-8 ">
-              <button className="text-white text-base font-bold p-[10px] bg-secondary  rounded-lg">
+            <div className="w-full flex justify-center items-center gap-4 lg:gap-8">
+              <button
+              onClick={()=>setRequestEndPoints('student')}
+                type="button"
+                className={`text-white text-base font-bold px-10 py-2 outline-none ${requestEndPoints ==='student'  ? "bg-secondary ":'bg-opacity-0  border border-gray-600'} rounded-lg duration-200 transition-all`}
+              >
                 Student
               </button>
-              <button className="text-white text-base font-bold p-[10px] active:bg-secondary border-[1px] border-gray-600 rounded-lg">
+              <button
+                onClick={()=>setRequestEndPoints('teacher')}
+                type="button"
+                className={`text-white text-base font-bold px-10 py-2 outline-none ${requestEndPoints ==='teacher'  ? "bg-secondary ":'bg-opacity-0  border border-gray-600'} rounded-lg duration-200 transition-all`}
+              >
                 Teacher
               </button>
             </div>
+            {/* Name Field */}
             <div>
-              <label htmlFor="name" className="sr-only">
-                Name
+              <label htmlFor="full_name" className="sr-only">
+              Full Name
               </label>
-
-              <div className="relative">
-                <input
-                  type="name"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter your name"
-                />
-              </div>
+              <input
+                type="text"
+                id="full_name"
+                {...register("full_name", { required: "Name is required" })}
+                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                placeholder="Enter your Full Name"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
             </div>
+            {/* Phone Number Field */}
             <div>
-              <label htmlFor="number" className="sr-only">
-                number
+              <label htmlFor="phone" className="sr-only">
+                Phone Number
               </label>
-
-              <div className="relative">
-                <input
-                  type="number"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter your phone number"
-                />
-              </div>
+              <input
+                type="tel"
+                id="phone"
+                {...register("phone", {
+                  required: "Phone number is required",
+                  pattern: {
+                    value: /^[0-9]{10}$/,
+                    message: "Invalid phone number",
+                  },
+                })}
+                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                placeholder="Enter your phone number"
+              />
+              {errors.number && (
+                <p className="text-red-500 text-sm">{errors.number.message}</p>
+              )}
             </div>
+            {/* Email Field */}
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
               </label>
-
-              <div className="relative">
-                <input
-                  type="email"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter email"
-                />
-
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                    />
-                  </svg>
-                </span>
-              </div>
+              <input
+                type="email"
+                id="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                    message: "Invalid email address",
+                  },
+                })}
+                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                placeholder="Enter your email"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </div>
+            {/* Password Field */}
             <div>
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
-
-              <div className="relative">
-                <input
-                  type="password"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter password"
-                />
-
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    />
-                  </svg>
-                </span>
-              </div>
+              <input
+                type="password"
+                id="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                placeholder="Enter password"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm">{errors.password.message}</p>
+              )}
             </div>
+            {/* Confirm Password Field */}
             <div>
-              <label htmlFor="confirm-password" className="sr-only">
+              <label htmlFor="password2" className="sr-only">
                 Confirm Password
               </label>
-
-              <div className="relative">
-                <input
-                  type="cofirm-password"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="confirm password"
-                />
-
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    />
-                  </svg>
-                </span>
-              </div>
+              <input
+                type="password"
+                id="password2"
+                {...register("password2", {
+                  required: "Confirm Password is required",
+                  validate: (value, data) =>
+                    value === data.password || "Passwords must match",
+                })}
+                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                placeholder="Confirm password"
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
+            {/* Submit Button */}
             <button
               type="submit"
-              onClick={handleSendOtp}
               className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
             >
               Send OTP
@@ -162,13 +161,12 @@ export default function SignUp({ toggleForm, handleSendOtp }) {
           </form>
         </div>
       </div>
-      <div className="mx-auto ">
+      <div className="mx-auto">
         <p className="text-sm text-gray-500">
-          Already have account?
+          Already have an account?
           <button
             onClick={toggleForm}
             className="underline px-2 text-secondary"
-            href="#"
           >
             Login
           </button>
