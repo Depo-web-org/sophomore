@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaLocationArrow } from "react-icons/fa";
 import { HiChevronDoubleUp } from "react-icons/hi";
 
 const ButtomTop = () => {
@@ -22,15 +23,16 @@ const ButtomTop = () => {
   return (
     <>
       {isVisible && (
-        <HiChevronDoubleUp
-          className="text-blue-500 size-7 fixed bottom-10 right-10 z-40"
-          onClick={() => {
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          }}
-        />
+        <div  onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }} className="bg-white size-12 fixed bottom-10 right-10 z-40 flex justify-center items-center rounded-xl shadow-xl cursor-pointer">
+        <FaLocationArrow  className="text-primary size-7  -rotate-45 mt-1"
+        
+      />
+      </div>
       )}
     </>
   );

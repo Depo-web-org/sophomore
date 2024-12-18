@@ -42,7 +42,6 @@ import ItemsUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page
 import Unit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/page/Unit/Unit.jsx";
 import ChooseUnit from "./pages/Teacher panel /pages/Courses/Page/ChooseUnit/Index.jsx";
 import IndexTeacher from "./pages/Teacher panel /index.jsx";
-import Cardss from "./pages/Teacher panel /components/Cards/Cards.jsx";
 import Teacherr from "./pages/Teacher panel /components/TeacherUpload/Teacher.jsx";
  
  
@@ -147,13 +146,13 @@ function App() {
                 }
               />
             </Route>
-            <Route path="/register" element={<Register />} />
               
          
           </Route>
           
 
-
+{/* login */}
+            <Route path="/register" element={<Register />} />
 
    {/* page Teacherrrr */}
       <Route  path="/"element={<NavTeacher />}>

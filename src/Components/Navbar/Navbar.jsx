@@ -17,7 +17,7 @@ const Navbar = () => {
       { text: `Home`, link: "/" },
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
-      { text: "Profile", link: "/profile" },
+      // { text: "Profile", link: "/profile" },
 
     ]; 
 
@@ -25,16 +25,16 @@ const Navbar = () => {
       // Add protected items only if authenticated
       items.push(
         { text: "My Learning", link: "/mylearning" },
-        { text: "Wishlist", link: "/wishlist" },
-        { text: "Cart", link: "/cart" },
+        // { text: "Wishlist", link: "/wishlist" },
+        // { text: "Cart", link: "/cart" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
-      );
+      )
     }
-
-    return items;
+     return items
   }, [isAuthenticated]);
 
+  console.log(navItems.filter(item => item.text != "Cart"|| item.text != "Wishlist"))
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -43,7 +43,8 @@ const Navbar = () => {
         <Link to={"/"}>
           <div className="flex justify-start items-center pt-1 lg:ml-5 w-full">
             <img src={logo} alt="logo" className=" h-12 lg:h-8 w-auto" />
-            <p className=" hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
+           
+            <p   style={{ textShadow: "0px 5 px 6px rgba(0, 0, 0, 0.25)" }} className=" hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
               Sophomore
             </p>
           </div>
@@ -69,7 +70,7 @@ const Navbar = () => {
             {!isAuthenticated && (
               <button
                 onClick={() => navigate("/register")}
-                className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
+                className="bg-primary py-2 px-8 rounded-full font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
               >
                 Login
               </button>

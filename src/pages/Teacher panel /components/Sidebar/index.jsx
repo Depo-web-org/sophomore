@@ -97,7 +97,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Sidebar Items */}
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear mt-1">
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
-          <ul onClick={() => setSidebarOpen(!sidebarOpen)}  className="mb-6 flex flex-col gap-5">
+          <ul onClick={() => setSidebarOpen(false)}  className="mb-6 flex flex-col gap-5">
    
             {menuItems.map((item, index) => (
               
@@ -119,7 +119,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
 
     </aside>
-             <div  onClick={() => setSidebarOpen(!sidebarOpen)} className={`absolute top-0 left-0 z-[9998]  ${sidebarOpen ? " w-full translate-x-0" : "-translate-x-full"     }   h-full `}> </div>
+             <div  onClick={() => setSidebarOpen(false)} className={`absolute top-0 left-0 z-[9998]  ${sidebarOpen ? " w-full translate-x-0" : "-translate-x-full"     }   h-full `}> </div>
   </>
   );
 };
