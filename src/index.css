@@ -15,3 +15,9 @@ body{
   textarea {
     resize: none;
   }
+
+
+  input[type="tel"]{
+    outline: none;
+    color: black;
+  }
