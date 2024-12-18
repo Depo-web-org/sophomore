@@ -1,18 +1,23 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import "react-phone-number-input/style.css";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 export default function SignUp({ toggleForm, handleSendOtp }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student")
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
 
   // console.log(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoints}`);
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data)
-    handleSendOtp()
+await axios.post(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoints}`, data).then((res)=>console.log(res)).catch((err)=>console.log(err))
+    // handleSendOtp()
     // handleSendOtp(); // Trigger OTP function
     //zio.then(success => navigate("otp")
   };
@@ -65,13 +70,31 @@ export default function SignUp({ toggleForm, handleSendOtp }) {
             </div>
             {/* Phone Number Field */}
             <div>
-              <label htmlFor="phone" className="sr-only">
-                Phone Number
+              <label htmlFor="phone_number" className="sr-only">
+                phone Number
               </label>
-              <input
+              <Controller
+                name="phone_number"
+                control={control}
+                rules={{
+                  required: "Phone number is required",
+                  validate: (value) =>
+                    isValidPhoneNumber(value) || "Invalid phone number",
+                }}
+                render={({ field }) => (
+                  <PhoneInput
+                    {...field}
+                    id="user-phone"
+                    placeholder="Enter your phone number"
+                    defaultCountry="EG"
+                    className="w-full bg-white p-4 rounded-lg border-gray-200 text-sm shadow-sm outline-none focus-visible:outline-none"
+                  />
+                )}
+              />
+              {/* <input
                 type="tel"
-                id="phone"
-                {...register("phone", {
+                id="phone_number"
+                {...register("phone_number", {
                   required: "Phone number is required",
                   pattern: {
                     value: /^[0-9]{10}$/,
@@ -80,7 +103,7 @@ export default function SignUp({ toggleForm, handleSendOtp }) {
                 })}
                 className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
                 placeholder="Enter your phone number"
-              />
+              /> */}
               {errors.number && (
                 <p className="text-red-500 text-sm">{errors.number.message}</p>
               )}
