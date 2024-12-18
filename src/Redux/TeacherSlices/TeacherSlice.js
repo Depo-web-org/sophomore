@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = JSON.parse(localStorage.getItem("teacher")) || {
+const initialState = {
   uid: null,
   name: null,
   phone: null,
@@ -16,23 +16,17 @@ const TeacherSlice = createSlice({
       state.uid = uid;
       state.email = email;
       state.name = name;
-      // save teacher data to localStorage (on sign in or login)
-      localStorage.setItem("teacher", JSON.stringify(state));
     },
     clearTeacher: (state) => {
       state.uid = null;
       state.email = null;
       state.name = null;
       state.phone = null;
-      // clear teacher data from localStorage (on logout)
-      localStorage.removeItem("teacher");
     },
     updateTeacher: (state, action) => {
       state.name = action.payload.name;
       state.phone = action.payload.phone;
       state.email = action.payload.email;
-      // update teacher data to localStorage
-      localStorage.setItem("teacher", JSON.stringify(state));
     },
   },
 });
