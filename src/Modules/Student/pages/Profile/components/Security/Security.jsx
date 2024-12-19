@@ -1,5 +1,4 @@
- 
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Security() {
@@ -11,31 +10,19 @@ export default function Security() {
     formState: { errors },
   } = useForm();
 
-
-
   const onSubmit = (data) => {
     console.log("Form Data:", data);
-    
- 
-    if (data.Password === data.ChangePassword) {
+
+    if (data.Password === data.password2) {
       seterrorMasege(false);
       console.log("true");
-      reset(); 
+      reset();
+    } else {
+      console.log("false");
 
-      }else{
-        console.log("false");
-
-       seterrorMasege(true);
-
-      }
-
-
- 
-  }
-
-
-
-
+      seterrorMasege(true);
+    }
+  };
 
   return (
     <>
@@ -64,34 +51,24 @@ export default function Security() {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className=" w-[calc(100%-10%)] m-auto min-h-96 mt-16 sm:mt-10"
+        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] m-auto min-h-96 mt-16 sm:mt-10"
       >
         {/*first email */}
-        <div className="flex flex-col sm:flex-row items-center  gap-4">
-          <span className="font-medium text-white text-base sm:text-lg me-auto">
-            Email
-          </span>
 
-          <label
-            htmlFor="Username"
-            className="w-full sm:w-64 relative block rounded-md border bg-white border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-          >
-            <input
-              type="email"
-              id="email"
-              className="w-full py-2 bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-              placeholder="Email"
-              {...register("email", { required: "email required" })}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
+        <span className="text-sm font-medium text-white  pb-2">
+          Enter your current password
+        </span>
 
-            <span className="pointer-events-none absolute left-2 top-2 -translate-y-1/2 p-0.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-              hamada@gmail.com
-            </span>
-          </label>
-        </div>
+        <input
+          type="Password"
+          id="Currentpassword"
+          placeholder="  Current password"
+          className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+          {...register("Currentpassword", { required: "Current password required" })}
+        />
+        {errors.Currentpassword && (
+          <p className="text-red-500 text-sm">{errors.Currentpassword.message}</p>
+        )}
 
         <hr className="my-5" />
 
@@ -131,14 +108,12 @@ export default function Security() {
               id="password2"
               placeholder="  *********"
               className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
-              {...register("ChangePassword", {
+              {...register("password2", {
                 required: "password2 required",
               })}
             />
             {errors.password2 && (
-              <p className="text-red-500 text-sm">
-                {errors.password2.message}
-              </p>
+              <p className="text-red-500 text-sm">{errors.password2.message}</p>
             )}
           </div>
 
@@ -148,12 +123,11 @@ export default function Security() {
             <p className="text-red-500 text-sm">Password is filde</p>
           )}
 
-
           <button
             type="submit"
             data-twe-ripple-init
             data-twe-ripple-color="light"
-            className="rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+            className="rounded bg-primary mt-3 px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
           >
             Change Password
           </button>
