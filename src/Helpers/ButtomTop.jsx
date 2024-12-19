@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaLocationArrow } from "react-icons/fa";
-import { HiChevronDoubleUp } from "react-icons/hi";
+import { VscFoldUp } from "react-icons/vsc";
+ 
 
 const ButtomTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,8 +28,8 @@ const ButtomTop = () => {
             top: 0,
             behavior: "smooth",
           });
-        }} className="bg-white size-12 fixed bottom-10 right-10 z-40 flex justify-center items-center rounded-xl shadow-xl cursor-pointer">
-        <FaLocationArrow  className="text-primary size-7  -rotate-45 mt-1"
+        }} className="  fixed bottom-10 right-10 z-50 flex justify-center items-center rounded-xl shadow-xl cursor-pointer">
+        <VscFoldUp  className="text-blue-600 size-7 font-bold mt-1"
         
       />
       </div>
