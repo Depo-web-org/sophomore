@@ -25,12 +25,11 @@ export default function Login({ toggleForm }) {
           <p className="text-sm lg:text-base text-gray-600">Please login to your account</p>
         </div>
         <div className="w-full">
-          <form
-            action="#"
-            form
-            onSubmit={handleLogin}
-            className=" mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8 "
-          >
+        <form
+  action="#"
+  onSubmit={handleLogin}
+  className="mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8"
+>
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
