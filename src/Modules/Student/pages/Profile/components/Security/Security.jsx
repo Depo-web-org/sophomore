@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -10,7 +11,7 @@ export default function Security() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmitt = (data) => {
     console.log("Form Data:", data);
 
     if (data.Password === data.password2) {
@@ -23,6 +24,42 @@ export default function Security() {
       seterrorMasege(true);
     }
   };
+
+
+
+  const onSubmit = async (data) => {
+    // التحقق من تطابق كلمة المرور الجديدة مع تأكيد كلمة المرور
+    if (data.Password === data.Password2) {
+      console.log  ("كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقين.");
+     
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://your-api-endpoint.com/change-password",
+        {
+          Password: data.Password,
+          Password2: data.Password2,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log ("تم تغيير كلمة المرور بنجاح!");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        console.log ("كلمة المرور القديمة غير صحيحة.");
+      } else {
+        console.log ("حدث خطأ أثناء تغيير كلمة المرور. حاول مرة أخرى.");
+      }
+    }
+  };
+
+
+
+
+
 
   return (
     <>
@@ -63,7 +100,7 @@ export default function Security() {
           type="Password"
           id="Currentpassword"
           placeholder="  Current password"
-          className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+          className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           {...register("Currentpassword", { required: "Current password required" })}
         />
         {errors.Currentpassword && (
@@ -85,7 +122,7 @@ export default function Security() {
               type="Password"
               id="Password"
               placeholder="  *********"
-              className="py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+              className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               {...register("Password", { required: "Password required" })}
             />
             {errors.Password && (
@@ -107,7 +144,7 @@ export default function Security() {
               type="Password"
               id="password2"
               placeholder="  *********"
-              className=" py-2 mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+              className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               {...register("password2", {
                 required: "password2 required",
               })}
