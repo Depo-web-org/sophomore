@@ -9,7 +9,7 @@ export default function Register() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [isOTP, setIsOTP] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
+const [mail, setMail] = useState()
   const toggleForm = () => {
     setIsSignUp(!isSignUp);
     setIsLogin(!isLogin);
@@ -24,7 +24,6 @@ export default function Register() {
     setIsOTP(false);
     setIsSuccess(true);
   };
-
   return (
     <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
       {isLogin && <Login toggleForm={toggleForm} />}
@@ -37,10 +36,10 @@ export default function Register() {
         } object-cover rounded-xl z-10`}
       />
       {isSignUp && (
-        <SignUp toggleForm={toggleForm} handleSendOtp={handleSendOtp} />
+        <SignUp toggleForm={toggleForm} handleSendOtp={handleSendOtp} setMail={setMail} />
       )}
 
-      {isOTP && <OTP handleValidateOtp={handleValidateOtp} />}
+      {isOTP && <OTP handleValidateOtp={handleValidateOtp} mail={mail}/>}
 
       {isSuccess && <SucessOtp />}
     </div>

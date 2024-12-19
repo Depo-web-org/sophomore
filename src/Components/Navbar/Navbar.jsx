@@ -33,7 +33,6 @@ const Navbar = () => {
      return items
   }, [isAuthenticated]);
 
-  console.log(navItems.filter(item => item.text !== "Cart" && item.text !== "Wishlist" && item.text !== "Profile"))
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
