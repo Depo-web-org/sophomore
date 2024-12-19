@@ -26,9 +26,9 @@ export default function Login({ toggleForm }) {
         </div>
         <div className="w-full">
         <form
-  action="#"
-  onSubmit={handleLogin}
-  className="mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8"
+        action="#"
+      onSubmit={handleLogin}
+      className="mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8"
 >
             <div>
               <label htmlFor="email" className="sr-only">

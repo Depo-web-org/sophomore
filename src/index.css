@@ -21,3 +21,11 @@ body{
     outline: none;
     color: black;
   }
+
+
+
+.handFont {
+    font-family: "Indie Flower", serif !important;
+    font-weight: 400;
+    font-style: normal;
+  }

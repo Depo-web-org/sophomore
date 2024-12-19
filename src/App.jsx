@@ -1,4 +1,3 @@
-
 import { AuthProvider } from './ProtectedRoutes/AuthContext';
 import ScrollTop from './Helpers/ScrollTop';
 import ButtomTop from './Helpers/ButtomTop';
@@ -39,11 +38,15 @@ import Students from './Modules/Teacher/pages/Students/index';
 import StudentStatistics from './Modules/Teacher/pages/Students/components/StudentStatistics';
 import StudentProfile from './Modules/Teacher/pages/Students/components/StudentProfile';
 import TeacherProfile from './Modules/Teacher/pages/Profile/index';
-import { AuthLayout, DashboardLayout, PublicLayout,NavTeacher } from './utils/layouts';
+import {
+  AuthLayout,
+  DashboardLayout,
+  PublicLayout,
+  NavTeacher,
+} from './utils/layouts';
 import ProtectedRoute from './ProtectedRoutes/StudentProtected';
 import Quiz from './Modules/Student/pages/Quiz/Index';
 import MyLearning from './Modules/Student/pages/MyLearning/index';
- 
 
 function App() {
   return (
@@ -73,7 +76,10 @@ function App() {
               }
             />
             {/* Quiz */}
-            <Route path="/mylearning/course/:courseName/quiz" element={<Quiz />} />
+            <Route
+              path="/mylearning/course/:courseName/quiz"
+              element={<Quiz />}
+            />
             {/* course video nested route */}
             <Route
               path="/mylearning/course/:courseName"
@@ -145,27 +151,16 @@ function App() {
                 }
               />
             </Route>
-              
-         
           </Route>
-          
 
-{/* login */}
-            <Route path="/register" element={<Register />} />
+          {/* login */}
+          <Route path="/register" element={<Register />} />
 
-   {/* page Teacherrrr */}
-      <Route  path="/"element={<NavTeacher />}>
-        <Route index path="/IndexTeacher" element={<IndexTeacher />} />
-        <Route path="/Teacherr" element={<Teacherr />} />
-      </Route>
-
-
-
-
-
-
-
-
+          {/* page Teacherrrr */}
+          <Route path="/" element={<NavTeacher />}>
+            <Route index path="/IndexTeacher" element={<IndexTeacher />} />
+            <Route path="/Teacherr" element={<Teacherr />} />
+          </Route>
 
           <Route path="/teacherPanel" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />

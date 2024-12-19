@@ -6,7 +6,7 @@ export default function ContactFooter() {
       <p className="bg-gradient-to-r from-primary  via-primary uppercase   to-secondary bg-clip-text text-transparent text-2xl font-bold inline-block">
         Sophomore
       </p>
-      <h2 className="text-3xl font-extrabold text-white sm:text-5xl font-serif ">
+      <h2 className="text-3xl font-extrabold text-white sm:text-5xl handFont">
         Request More Information
       </h2>
 
