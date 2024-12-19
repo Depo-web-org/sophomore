@@ -6,15 +6,20 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
-export default function SignUp({ toggleForm, handleSendOtp }) {
+export default function SignUp({ toggleForm, handleSendOtp ,setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student")
   const [loadingSending, setLoadingSending] = useState(false)
+ 
+ 
+ 
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+
+  
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -23,17 +28,17 @@ export default function SignUp({ toggleForm, handleSendOtp }) {
 
   // console.log(`http://192.168.1.18:8000/api/v1/user/register/${requestEndPoints}`);
   const onSubmit = async (data) => {
-    console.log(data)
+    setMail(data)
     setLoadingSending(true)
 await axios.post(`http://192.168.1.26:8000/api/v1/register/provider/`, data)
-.then(()=> handleSendOtp()).catch(err=>{ console.log(err)
+.then(()=> handleSendOtp()).catch(err =>{
+   console.log(err .request.responseText)
   setLoadingSending(false)
  }) 
     // handleSendOtp()
     // handleSendOtp(); // Trigger OTP function
     //zio.then(success => navigate("otp")
   };
-console.log(errors)
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full md:w-1/2 pb-4">
       <div className="flex flex-col items-start gap-6 w-full">
@@ -44,10 +49,17 @@ console.log(errors)
           <p className="text-gray-600">Fill the form to join our team</p>
         </div>
         <div className="w-full">
+
+
+
+
+          {/* form starting */}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="mb-0 w-full space-y-4 flex flex-col gap-5"
           >
+
+
             <div className="w-full flex justify-center items-center gap-4 lg:gap-8">
               <button
               onClick={()=>setRequestEndPoints('student')}
@@ -64,6 +76,11 @@ console.log(errors)
                 Teacher
               </button>
             </div>
+
+
+
+
+
             {/* Name Field */}
             <div>
               <label htmlFor="full_name"   className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between ">
@@ -89,32 +106,32 @@ console.log(errors)
             </div>
             {/* Phone Number Field */}
             <div>
-              <label htmlFor="phone_number" className="sr-only">
-                phone Number
-              </label>
-              <Controller
-                name="phone_number"
-                control={control}
-                rules={{
-                  required: "Phone number is required",
-                  validate: (value) =>
-                    isValidPhoneNumber(value) || "Invalid phone number",
-                }}
-                render={({ field }) => (
-                  <PhoneInput
-                    {...field}
-                    id="user-phone"
-                    placeholder="Enter your phone number"
-                    defaultCountry="EG"
-                    className="w-full bg-white p-4 rounded-lg border-gray-200 text-sm shadow-sm outline-none focus-visible:outline-none"
-                  />
-                )}
-              />
-             
-              {errors.number && (
-                <p className="text-red-500 text-sm">{errors.number.message}</p>
-              )}
-            </div>
+  <label htmlFor="phone_number" className="sr-only">
+    Phone Number
+  </label>
+  <Controller
+    name="phone_number"
+    control={control}
+    rules={{
+      required: "Phone number is required",
+      validate: (value) =>
+        value && isValidPhoneNumber(value) || "Invalid phone number",
+    }}
+    render={({ field }) => (
+      <PhoneInput
+        {...field}
+        id="phone_number"
+        placeholder="Enter your phone number"
+        defaultCountry="EG"
+        className="w-full bg-white p-4 rounded-lg border-gray-200 text-sm shadow-sm outline-none focus-visible:outline-none"
+      />
+    )}
+  />
+  {errors.phone_number && (
+    <p className="text-red-500 text-sm mt-2">{errors.phone_number.message}</p>
+  )}
+</div>
+
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="sr-only">
@@ -205,9 +222,12 @@ console.log(errors)
               className={`inline-flex w-full rounded-lg ${loadingSending ? "bg-white" : 'bg-primary'} px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
             >
               {loadingSending? <ImSpinner9 className="animate-spin text-3xl text-secondary " /> : " Sign Up"}
-              
-             
             </button>
+
+            {/* Submit Button */}
+
+
+
           </form>
         </div>
       </div>
