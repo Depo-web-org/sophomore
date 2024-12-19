@@ -187,6 +187,16 @@ function AppRoutes() {
     </AuthProvider>
   );
 }
+function LoadingComponents() {
+  return (
+    <div className="min-h-screen bg-dark flex justify-center items-center flex-col">
+      <span className=" text-white text-8xl text-gradient font-extrabold my-5">
+        Sophomore
+      </span>
+      <span className="loader"></span>
+    </div>
+  );
+}
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -200,16 +210,11 @@ function App() {
     handleResourceLoad();
   }, []);
 
-  return <>{loading ? <loadingComponents /> : <AppRoutes/>}</>;
+  return <>{loading ? <LoadingComponents /> : <AppRoutes />}</>;
 }
 
 export default App;
 
-const loadingComponents = (
-  <div className="min-h-screen bg-dark flex justify-center items-center flex-col">
-    <span className=" text-white text-8xl text-gradient font-extrabold my-5">
-      Sophomore
-    </span>
-    <span className="loader"></span>
-  </div>
-);
+
+
+
