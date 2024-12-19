@@ -1,19 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../../../../ProtectedRoutes/AuthContext";
+// import { useAuth } from "../../../../../../ProtectedRoutes/AuthContext";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 export default function Login({ toggleForm }) {
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const navigate = useNavigate();
+  const [errorMasege, seterrorMasege] = useState(false); 
+  
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const isTeacher = document.getElementById("rememberMe").checked;
-    login(isTeacher); // Pass role based on "Remember Me"
-    if (isTeacher) {
-      navigate("/teacherPanel");
-    } else navigate("/");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const handleLogin = async (data) => {
+    console.log("Form Data:", data);
+
+    try {
+      const response = await axios.post(
+        "http://192.168.1.26:8000/api/v1/login/consumer/",
+        {
+          email: data.email,
+          password: data.password,
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Login successful:", response.data);
+        // You can token or handle the response here
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error Response:", error.response.data);
+        seterrorMasege(true)
+      } else {
+        console.error("Error:", error.message);
+      }
+    }
   };
+
+  // Aa313123@gj     mohamed.taher@depowebeg.com
+
+  // const isTeacher = document.getElementById("rememberMe").checked;
+  // login(isTeacher); // Pass role based on "Remember Me"
+  // if (isTeacher) {
+  //   navigate("/teacherPanel");
+  // } else navigate("/");
+
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full md:w-4/5 lg:w-1/2   overflow-hidden">
       <div className=" flex flex-col items-start gap-8 lg:gap-24 w-full ">
@@ -22,14 +60,16 @@ export default function Login({ toggleForm }) {
           <p className="text-white text-3xl lg:text-4xl font-semibold pt-4">
             Welcome Back!
           </p>
-          <p className="text-sm lg:text-base text-gray-600">Please login to your account</p>
+          <p className="text-sm lg:text-base text-gray-600">
+            Please login to your account
+          </p>
         </div>
         <div className="w-full">
-        <form
-        action="#"
-      onSubmit={handleLogin}
-      className="mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8"
->
+          <form
+            action="#"
+            onSubmit={handleSubmit(handleLogin)}
+            className="mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8"
+          >
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -38,9 +78,14 @@ export default function Login({ toggleForm }) {
               <div className="relative">
                 <input
                   type="email"
+                  id="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
+                  {...register("email", { required: "email required" })}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
@@ -69,9 +114,16 @@ export default function Login({ toggleForm }) {
               <div className="relative">
                 <input
                   type="password"
+                  id="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
+                  {...register("password", { required: "password required" })}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </p>
+                )}
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
@@ -97,6 +149,7 @@ export default function Login({ toggleForm }) {
                 </span>
               </div>
             </div>
+            {errorMasege && <p className="text-sm text-red-500"> There was an error with the email or password. Please check your entries . </p>}
 
             <div className="flex items-end justify-center lg:justify-between flex-wrap gap-y-4">
               <label
@@ -124,8 +177,6 @@ export default function Login({ toggleForm }) {
               </button>
             </div>
 
-
-
             <button
               type="submit"
               className="inline-block w-full rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white"
@@ -133,6 +184,7 @@ export default function Login({ toggleForm }) {
               Login
             </button>
           </form>
+
         </div>
       </div>
       <div className="mx-auto  ">
