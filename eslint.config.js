@@ -47,13 +47,13 @@ export default [
       // 'import/default': 'error', // Ensure a default export is available
       // 'import/export': 'error', // Ensure exports match correctly
       // 'import/no-duplicates': 'warn', // Avoid duplicate imports
-      'import/order': [
-        'warn',
-        {
-          groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
-          'newlines-between': 'always',
-        },
-      ], 
+      // 'import/order': [
+      //   'warn',
+      //   {
+      //     groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
+      //     'newlines-between': 'always',
+      //   },
+      // ], 
     },
   },
 ];

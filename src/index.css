@@ -21,3 +21,43 @@ body{
     outline: none;
     color: black;
   }
+
+
+
+.handFont {
+    font-family: "Indie Flower", serif !important;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* HTML: <div class="loader"></div> */
+.loader {
+
+  height: 8px;
+  width: 250px;
+  --c:no-repeat linear-gradient(#536CB3 0 0);
+  background: var(--c),var(--c),#0a142f;
+  background-size: 60% 100%;
+  animation: l16 3s infinite;
+}
+@keyframes l16 {
+  0%   {background-position:-150% 0,-150% 0}
+  66%  {background-position: 250% 0,-150% 0}
+  100% {background-position: 250% 0, 250% 0}
+}
