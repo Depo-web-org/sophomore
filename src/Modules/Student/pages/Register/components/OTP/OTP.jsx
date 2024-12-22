@@ -13,8 +13,6 @@ export default function OTP({ handleValidateOtp , mail }) {
   const onSubmit = async (data) => {
     setLoadingSending(true)
     const otp_code = data.otp.join("");
-    console.log(`otp_code:${otp_code}`);
-    console.log(data);
 
     try {
       const response = await axios.post(
