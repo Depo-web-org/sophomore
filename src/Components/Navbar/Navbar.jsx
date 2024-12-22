@@ -40,7 +40,7 @@ const Navbar = () => {
       <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl  transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
         <Link to={"/"}>
           <div className="flex justify-start items-center pt-1 lg:ml-5 w-full">
-            <img src={logo} alt="logo" className=" h-12 lg:h-8 w-auto" />
+            <img src={logo} alt="logo" className=" h-12 lg:h-8 w-auto hover:rotate-[360deg] duration-1000" />
            
             <p style={{ textShadow: "0px 5 px 6px rgba(0, 0, 0, 0.25)" }} className=" hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
               Sophomore
