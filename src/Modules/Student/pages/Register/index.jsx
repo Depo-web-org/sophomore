@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import OTP from "./components/OTP/OTP";
@@ -24,9 +24,17 @@ const [mail, setMail] = useState()
     setIsOTP(false);
     setIsSuccess(true);
   };
+  const  processFinished =()=>{
+    setIsLogin(true)
+    setIsSignUp(false)
+    setIsOTP(false)
+    setIsSuccess(false)
+  }
+  
   return (
     <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
       {isLogin && <Login toggleForm={toggleForm} />}
+
 
       <img
         src="/public/register/login.webp"
@@ -41,7 +49,7 @@ const [mail, setMail] = useState()
 
       {isOTP && <OTP handleValidateOtp={handleValidateOtp} mail={mail}/>}
 
-      {isSuccess && <SucessOtp />}
+      {isSuccess && <SucessOtp  processFinished={processFinished}/>}
     </div>
   );
 }

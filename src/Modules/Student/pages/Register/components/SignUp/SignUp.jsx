@@ -5,6 +5,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { HeadTitle } from "../Login/Login";
 
 export default function SignUp({ toggleForm, handleSendOtp ,setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student")
@@ -32,7 +33,7 @@ export default function SignUp({ toggleForm, handleSendOtp ,setMail }) {
     setLoadingSending(true)
 await axios.post(`http://192.168.1.26:8000/api/v1/register/provider/`, data)
 .then(()=> handleSendOtp()).catch(err =>{
-   console.log(err .request.responseText)
+   console.log(err .request.statusText)
   setLoadingSending(false)
  }) 
     // handleSendOtp()
@@ -40,14 +41,15 @@ await axios.post(`http://192.168.1.26:8000/api/v1/register/provider/`, data)
     //zio.then(success => navigate("otp")
   };
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full md:w-1/2 pb-4">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full">
-        <div className="flex flex-col justify-start items-start gap-2">
-          <p className="text-white text-3xl lg:text-4xl font-semibold pt-4">
-            Join our team
-          </p>
-          <p className="text-gray-600">Fill the form to join our team</p>
-        </div>
+         <HeadTitle
+                  title={{
+                    head: " Join our team !",
+                    subTitle: "  Fill the form to join our team",
+                  }}
+                />
+     
         <div className="w-full">
 
 
@@ -147,7 +149,7 @@ await axios.post(`http://192.168.1.26:8000/api/v1/register/provider/`, data)
                     message: "Invalid email address",
                   },
                 })}
-                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm outline-none" 
                 placeholder="Enter your email"
               /> 
               {errors.email && (

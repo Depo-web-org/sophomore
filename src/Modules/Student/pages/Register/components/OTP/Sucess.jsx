@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SucessOtp() {
+export default function SucessOtp({ processFinished}) {
   const navigate = useNavigate();
+  console.log("test")
   return (
-    <div className="w-full my-auto flex justify-center ">
+    <div className="w-full my-auto flex justify-center  ">
       <div className="flex flex-col items-start justify-start gap-2 ">
         <p className="text-4xl font-bold text-white">Amazing</p>
         <p className="text-base font-bold text-textopacity">
@@ -26,10 +27,10 @@ export default function SucessOtp() {
             Pending your verification paper
           </p>
           <button
-            onClick={() => navigate("/")}
+            onClick={() =>processFinished()}
             className="w-[478px] bg-primary py-2 rounded-md text-white text-lg font-semibold mt-8"
           >
-            Go to Homepage{" "}
+            Go to Login
           </button>
         </div>
       </div>
