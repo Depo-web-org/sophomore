@@ -27,10 +27,10 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     setMail(data);
     setLoadingSending(true);
     await axios
-      .post(`http://192.168.1.26:8000/api/v1/register/provider/`, data)
+      .post(`http://192.168.1.26:8000/api/v1/register/consumer/`, data)
       .then(() => handleSendOtp())
       .catch((err) => {
-        console.log(err.request.responseText);
+        console.log(err.request.message);
         setLoadingSending(false);
       });
   };

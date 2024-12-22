@@ -1,49 +1,69 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../../../../../../ProtectedRoutes/AuthContext";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import OtpContent from "./Components/OtpContent";
 import LogInContent from "./Components/LogInContent";
+import axios from "axios";
+
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import { setCredentials } from "../../../../../../Redux/Auth/authSlice";
 
 export default function Login({ toggleForm }) {
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [forgetPassword, setForgetPassword] = useState(false);
+  const [loadingSending, setLoadingSending] = useState(false);
+
+  const dispatch = useDispatch();
+
+  // Setup react-hook-form
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState(false);
-  const [forgetPassword, setForgetPassword] = useState(false);
-  const [loadingSending, setLoadingSending] = useState(false);
+
+  // Use login mutation from authApiSlice
+  const [login, { isLoading, isError }] = useLoginMutation();
 
   const handleLogin = async (data) => {
-    console.log("Form Data:", data);
-
     try {
-      const response = await axios.post(
-        "http://192.168.1.26:8000/api/v1/login/provider/",
-        {
-          email: data.email,
-          password: data.password,
-        },
-        {
-          withCredentials: true, // Enables sending cookies
-        }
-      );
+      console.log("Login request data:", data);
 
-      if (response.status === 200) {
-        console.log("Login successful:", response.data);
-        // You can token or handle the response here
+      // Call the login mutation using data from the form
+      const response = await login({
+        email: data.email,
+        password: data.password,
+      }).unwrap();
+
+      console.log("Login response:", response);
+
+      if (response) {
+        console.log("Login successful:", response);
+
+        // Dispatch the setCredentials action to save the user data in the Redux store
+        dispatch(setCredentials(response));
+
+        // Reset the form after successful login
+        reset();
+
+        // Redirect to home page or the dashboard
         navigate("/");
       }
     } catch (error) {
-      if (error.response) {
-        console.error("Error Response:", error.response.data);
-        setErrorMessage(true);
+      // Log the full error details for debugging
+      console.error("Login Error:", error);
+
+      // Check if there is an error response and display the error message
+      if (error?.data?.message) {
+        setErrorMessage(error.data.message);
+      } else if (error?.status === 401) {
+        setErrorMessage("Invalid email or password.");
       } else {
-        console.error("Error:", error.message);
+        setErrorMessage("There was an unexpected error. Please try again.");
       }
     }
   };
@@ -79,12 +99,16 @@ export default function Login({ toggleForm }) {
           toggleForm={toggleForm}
           register={register}
           handleSubmit={handleSubmit}
-          errorMessage={errorMessage}
+          errorMessage={
+            isError
+              ? errors?.data?.message || "There was an error during login"
+              : ""
+          }
           handleLogin={handleLogin}
           errors={errors}
           forgetPassword={forgetPassword}
           setForgetPassword={setForgetPassword}
-          loadingSending={loadingSending}
+          loadingSending={isLoading}
         />
       )}
     </div>
