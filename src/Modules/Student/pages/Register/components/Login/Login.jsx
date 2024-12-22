@@ -27,7 +27,7 @@ export default function Login({ toggleForm }) {
   } = useForm();
 
   // Use login mutation from authApiSlice
-  const [login, { isLoading, isError }] = useLoginMutation();
+  const [login, { isLoading, isError, error }] = useLoginMutation();
 
   const handleLogin = async (data) => {
     try {
@@ -101,7 +101,7 @@ export default function Login({ toggleForm }) {
           handleSubmit={handleSubmit}
           errorMessage={
             isError
-              ? errors?.data?.message || "There was an error during login"
+              ? error?.data?.message || "There was an error during login"
               : ""
           }
           handleLogin={handleLogin}

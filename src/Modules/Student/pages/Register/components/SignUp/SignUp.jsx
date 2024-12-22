@@ -1,14 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useSignupMutation } from "../../../../../../Redux/Auth/authApiSlice";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
   const [loadingSending, setLoadingSending] = useState(false);
+
+  // Redux Toolkit's useSignupMutation hook
+  const [signup, { isLoading, isSuccess, isError, error }] =
+    useSignupMutation();
 
   const {
     register,
@@ -26,14 +30,17 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const onSubmit = async (data) => {
     setMail(data);
     setLoadingSending(true);
-    await axios
-      .post(`http://192.168.1.26:8000/api/v1/register/consumer/`, data)
-      .then(() => handleSendOtp())
-      .catch((err) => {
-        console.log(err.request.message);
-        setLoadingSending(false);
-      });
+
+    try {
+      // Call the signup mutation here instead of axios
+      await signup(data).unwrap();
+      handleSendOtp(); // If successful, send OTP
+    } catch (err) {
+      console.error(err); // Log the error
+      setLoadingSending(false); // Stop loading on error
+    }
   };
+
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full">
@@ -86,7 +93,6 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                   {...register("full_name", {
                     required: "Name is required",
                     validate: (value) => {
-                      // Check for at least two words separated by a space
                       const nameParts = value.trim().split(" ");
                       return (
                         nameParts.length >= 2 ||
@@ -224,12 +230,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={loadingSending}
+              disabled={loadingSending || isLoading} // Disable if loading
               className={`inline-flex w-full rounded-lg ${
-                loadingSending ? "bg-white" : "bg-primary"
+                loadingSending || isLoading ? "bg-white" : "bg-primary"
               } px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
             >
-              {loadingSending ? (
+              {loadingSending || isLoading ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary " />
               ) : (
                 " Sign Up"
