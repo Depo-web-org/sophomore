@@ -8,7 +8,6 @@ import { useSignupMutation } from "../../../../../../Redux/Auth/authApiSlice";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
-  const [loadingSending, setLoadingSending] = useState(false);
 
   // Redux Toolkit's useSignupMutation hook
   const [signup, { isLoading, isSuccess, isError, error }] =
@@ -29,7 +28,6 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
   const onSubmit = async (data) => {
     setMail(data);
-    setLoadingSending(true);
 
     try {
       // Call the signup mutation here instead of axios
@@ -37,7 +35,6 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       handleSendOtp(); // If successful, send OTP
     } catch (err) {
       console.error(err); // Log the error
-      setLoadingSending(false); // Stop loading on error
     }
   };
 
@@ -230,12 +227,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={loadingSending || isLoading} // Disable if loading
+              disabled={isLoading} // Disable if loading
               className={`inline-flex w-full rounded-lg ${
-                loadingSending || isLoading ? "bg-white" : "bg-primary"
+                isLoading ? "bg-white" : "bg-primary"
               } px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
             >
-              {loadingSending || isLoading ? (
+              {isLoading ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary " />
               ) : (
                 " Sign Up"
