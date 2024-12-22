@@ -5,11 +5,13 @@ import { HeadTitle } from '../Login/Login';
 import { ImSpinner9 } from 'react-icons/im';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
+import { decodeEmail } from '../../../../../../Helpers/deCode';
 
 const ResetPassword = () => {
   const { userMail } = useParams(); // Get encoded email from the URL
   const navigate = useNavigate();
-  
+ //deCode the User mail
+  const email = decodeEmail(userMail)
   const [showPassword, setShowPassword] = useState(false);
   const [loadingSending, setLoadingSending] = useState(false);
 
@@ -25,17 +27,17 @@ const ResetPassword = () => {
 
   const onSubmit = async (data) => {
     setLoadingSending(true)
-    const otp_code = data.otp_code.join("");
+    const otp = data.otp_code.join("");
     const dataSend = {
-      otp_code,
+      otp,
       password: data.password,
       password2: data.password2
     };
 
     console.log(dataSend);
     
-    axios.post('http://192.168.1.26:8000/api/v1/verify-email/', dataSend).then(()=>setLoadingSending(false) ).catch(err =>{
-      console.log(err .request.statusText)
+    axios.post('http://192.168.1.26:8000/api/v1/confirm-reset-password/consumer/', dataSend).then(()=>navigate('/register') ).catch(err =>{
+      console.log(err .request)
      setLoadingSending(false)
     }) 
   };
@@ -64,8 +66,8 @@ const ResetPassword = () => {
         <div className="">
           <HeadTitle
             title={{
-              head: 'Check Your Mail for otp_code',
-              // subTitle: `Email: ${decodedEmail}`,
+              head: 'Check Your Mail for OTP',
+              subTitle: ` We have sent an otp to your mail ${email.split("@")[0].slice(0, 3)}****@${email.split("@")[1].slice(0, 2)}***.com`,
             }}
           />
         </div>

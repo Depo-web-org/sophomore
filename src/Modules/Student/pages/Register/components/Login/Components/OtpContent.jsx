@@ -1,3 +1,4 @@
+import { ImSpinner9 } from "react-icons/im";
 import { HeadTitle } from "../Login";
 
 export default function OtpContent({
@@ -9,7 +10,7 @@ export default function OtpContent({
   loadingSending
 }) {
   return (
-    <div className="flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-left">
+    <div className="flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right">
       <HeadTitle
         title={{
           head: "Forget Password?",
@@ -54,10 +55,15 @@ export default function OtpContent({
               </span>
             </div>
           </div>
-          <button type="submit" className="bg-primary w-full text-white py-2 rounded-md">
-            Send OTP
-          </button>
+          <button
+                          type="submit"
+                      disabled={loadingSending}
+                          className={`inline-flex w-full rounded-lg ${loadingSending ? "bg-white" : 'bg-primary'} px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
+                        >
+                          {loadingSending? <ImSpinner9 className="animate-spin text-3xl text-secondary " /> : "    Send OTP"}
+                        </button>
         </form>
+        {/* loadingSending */}
         <div className="w-full flex justify-center mt-4">
           <button
             onClick={() => setForgetPassword(false)}

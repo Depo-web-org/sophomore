@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { setCredentials } from "../../../../../../Redux/Auth/authSlice";
+import { encodeEmail } from "../../../../../../Helpers/enCodedMail";
 
 export default function Login({ toggleForm }) {
   const navigate = useNavigate();
@@ -74,8 +75,9 @@ export default function Login({ toggleForm }) {
     });
     //  setMail(data)
     setLoadingSending(true);
+    const enCodedMail=encodeEmail(data.email)
     await axios
-      .post(`http://192.168.1.26:8000/api/v1/resend-otp/consumer/`, data)
+      .post(`http://192.168.1.26:8000/api/v1/reset-password/consumer/`, data) .then(() => navigate(`/register/reset-password/${enCodedMail}`))
       .catch((err) => {
         console.log(err.request.responseText);
         setLoadingSending(false);
