@@ -6,9 +6,6 @@ import { useForm } from "react-hook-form";
 import OtpContent from "./Components/OtpContent";
 import LogInContent from "./Components/LogInContent";
 
-
-
-
 export default function Login({ toggleForm }) {
   const {
     register,
@@ -19,7 +16,7 @@ export default function Login({ toggleForm }) {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
-  const [loadingSending, setLoadingSending] = useState(false)
+  const [loadingSending, setLoadingSending] = useState(false);
 
   const handleLogin = async (data) => {
     console.log("Form Data:", data);
@@ -35,7 +32,6 @@ export default function Login({ toggleForm }) {
           withCredentials: true, // Enables sending cookies
         }
       );
-      
 
       if (response.status === 200) {
         console.log("Login successful:", response.data);
@@ -50,48 +46,47 @@ export default function Login({ toggleForm }) {
         console.error("Error:", error.message);
       }
     }
-
   };
 
   const handleOtp = async (data) => {
     console.log("Form Data:", {
-            email: data.email,
-          });
-  //  setMail(data)
-    setLoadingSending(true)
-await axios.post(`http://192.168.1.26:8000/api/v1/resend-otp/consumer/`, data)
-              .catch(err =>{
-   console.log(err .request.responseText)
-  setLoadingSending(false)
- }) 
-   
+      email: data.email,
+    });
+    //  setMail(data)
+    setLoadingSending(true);
+    await axios
+      .post(`http://192.168.1.26:8000/api/v1/resend-otp/consumer/`, data)
+      .catch((err) => {
+        console.log(err.request.responseText);
+        setLoadingSending(false);
+      });
   };
 
   return (
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
-      {
-         forgetPassword ? <OtpContent
-         register={register}
-         handleSubmit={handleSubmit}
-         handleOtp={handleOtp}
-         forgetPassword={forgetPassword}
-         setForgetPassword={setForgetPassword}
-         toggleForm={toggleForm}
-         loadingSending={loadingSending}
-       />  :  <LogInContent
-           toggleForm={toggleForm}
-           register={register}
-           handleSubmit={handleSubmit}
-           errorMessage={errorMessage}
-           handleLogin={handleLogin}
-           errors={errors}
-             forgetPassword={forgetPassword}
-           setForgetPassword={setForgetPassword}
-           loadingSending={loadingSending}
-         />
-      }
-     
-     
+      {forgetPassword ? (
+        <OtpContent
+          register={register}
+          handleSubmit={handleSubmit}
+          handleOtp={handleOtp}
+          forgetPassword={forgetPassword}
+          setForgetPassword={setForgetPassword}
+          toggleForm={toggleForm}
+          loadingSending={loadingSending}
+        />
+      ) : (
+        <LogInContent
+          toggleForm={toggleForm}
+          register={register}
+          handleSubmit={handleSubmit}
+          errorMessage={errorMessage}
+          handleLogin={handleLogin}
+          errors={errors}
+          forgetPassword={forgetPassword}
+          setForgetPassword={setForgetPassword}
+          loadingSending={loadingSending}
+        />
+      )}
     </div>
   );
 }
