@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaCheck } from "react-icons/fa";
 
 export default function Security() {
   const [errorMasege, seterrorMasege] = useState(false);
+  const [showbuttom, setshowbuttom] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -11,55 +14,57 @@ export default function Security() {
     formState: { errors },
   } = useForm();
 
-  const onSubmitt = (data) => {
-    console.log("Form Data:", data);
-
-    if (data.Password === data.password2) {
-      seterrorMasege(false);
-      console.log("true");
-      reset();
-    } else {
-      console.log("false");
-
-      seterrorMasege(true);
-    }
-  };
-
-
-
   const onSubmit = async (data) => {
-    // التحقق من تطابق كلمة المرور الجديدة مع تأكيد كلمة المرور
-    if (data.Password === data.Password2) {
-      console.log  ("كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقين.");
-     
+    if (data.new_password !== data.confirm_password) {
+      console.log("Passwords do not match!");
+      seterrorMasege(true);
       return;
     }
+    seterrorMasege(false);
+
+    const refresh_token = localStorage.getItem("refresh_token");
+    console.log("Retrieved Refresh Token:", refresh_token);
 
     try {
+      // إرسال الطلب إلى API
       const response = await axios.post(
-        "https://your-api-endpoint.com/change-password",
+        "http://192.168.1.26:8000/api/v1/change-password/consumer/",
         {
-          Password: data.Password,
-          Password2: data.Password2,
+          refresh_token: refresh_token,
+          old_password: data.old_password,
+          new_password: data.new_password,
+          confirm_password: data.confirm_password,
         }
       );
 
-      if (response.status === 200) {
-        console.log ("تم تغيير كلمة المرور بنجاح!");
-      }
+      reset();
+
+      console.log("Password changed successfully!");
+
+      setshowbuttom(true)
+       
+      setTimeout(() => {
+      setshowbuttom(false)
+        
+      }, 1000);
+
+
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        console.log ("كلمة المرور القديمة غير صحيحة.");
+      if (error.response) {
+        if (error.response.status === 400) {
+          console.log("The old password is incorrect.");
+        } else if (error.response.status === 401) {
+          console.error("Unauthorized: Invalid token.");
+        } else {
+          console.log(
+            "An error occurred while changing the password. Please try again."
+          );
+        }
       } else {
-        console.log ("حدث خطأ أثناء تغيير كلمة المرور. حاول مرة أخرى.");
+        console.log("An unknown error occurred. Please check your connection.");
       }
     }
   };
-
-
-
-
-
 
   return (
     <>
@@ -98,13 +103,13 @@ export default function Security() {
 
         <input
           type="Password"
-          id="Currentpassword"
-          placeholder="  Current password"
+          id="old_password"
+          placeholder=" Old password"
           className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          {...register("Currentpassword", { required: "Current password required" })}
+          {...register("old_password", { required: "old_password required" })}
         />
-        {errors.Currentpassword && (
-          <p className="text-red-500 text-sm">{errors.Currentpassword.message}</p>
+        {errors.old_password && (
+          <p className="text-red-500 text-sm">{errors.old_password.message}</p>
         )}
 
         <hr className="my-5" />
@@ -120,13 +125,17 @@ export default function Security() {
 
             <input
               type="Password"
-              id="Password"
-              placeholder="  *********"
+              id="new_password"
+              placeholder=" New password"
               className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              {...register("Password", { required: "Password required" })}
+              {...register("new_password", {
+                required: "new_password required",
+              })}
             />
-            {errors.Password && (
-              <p className="text-red-500 text-sm">{errors.Password.message}</p>
+            {errors.new_password && (
+              <p className="text-red-500 text-sm">
+                {errors.new_password.message}
+              </p>
             )}
           </div>
 
@@ -142,15 +151,17 @@ export default function Security() {
 
             <input
               type="Password"
-              id="password2"
-              placeholder="  *********"
+              id="confirm_password"
+              placeholder=" Confirm password"
               className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              {...register("password2", {
-                required: "password2 required",
+              {...register("confirm_password", {
+                required: "confirm_password required",
               })}
             />
-            {errors.password2 && (
-              <p className="text-red-500 text-sm">{errors.password2.message}</p>
+            {errors.confirm_password && (
+              <p className="text-red-500 text-sm">
+                {errors.confirm_password.message}
+              </p>
             )}
           </div>
 
@@ -166,7 +177,7 @@ export default function Security() {
             data-twe-ripple-color="light"
             className="rounded bg-primary mt-3 px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
           >
-            Change Password
+         {!showbuttom ? " Change Password" :   <FaCheck className="w-32 my-1 size-5 text-green-500 " />}   
           </button>
         </div>
         {/* end */}

@@ -39,7 +39,7 @@ export default function Login({ toggleForm }) {
         password: data.password,
       }).unwrap();
 
-      console.log("Login response:", response);
+      // Aa313123@gj   mohamed.taher@depowebeg.com
 
       if (response) {
         console.log("Login successful:", response);
@@ -50,8 +50,10 @@ export default function Login({ toggleForm }) {
         // Reset the form after successful login
         reset();
 
+        localStorage.setItem("refresh_token", response.refresh_token);
+
         // Redirect to home page or the dashboard
-        navigate("/");
+        navigate("/profile/security");
       }
     } catch (error) {
       // Log the full error details for debugging
