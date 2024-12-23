@@ -1,6 +1,6 @@
 import React from "react";
 
-const Alert = ({ showAlert, setShowAlert }) => {
+const Alert = ({ showAlert, setShowAlert ,Name,title }) => {
   return (
     <>
       <div
@@ -28,10 +28,13 @@ const Alert = ({ showAlert, setShowAlert }) => {
           </span>
           <div className="flex-1">
             <strong className="block font-medium text-gray-900">
-            Password changed successfully! 
+            {/* Password changed successfully!  */}
+            {Name}
             </strong>
             <p className="mt-1 text-sm text-gray-700">
-            Your password has been updated successfully.
+            {/* Your password has been updated successfully. */}
+            {title}
+
             </p>
           </div>
           <button

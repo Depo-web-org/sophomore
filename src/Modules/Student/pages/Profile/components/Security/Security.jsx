@@ -86,7 +86,9 @@ export default function Security() {
   return (
     <>
     
-    <Alert showAlert={showAlert} setShowAlert={setShowAlert}/>
+    <Alert Name="Password changed successfully!" 
+    title={"Your password has been updated successfully."} 
+    showAlert={showAlert} setShowAlert={setShowAlert}/>
 
      
       {/* first section */}
@@ -210,19 +212,7 @@ export default function Security() {
            >Loading...</span>
            
            </div>
-           
-           
-           
-           
-           
-           
            :  "Change Password  " }  
-
-
-
-
-
-
           </button>
 
 
