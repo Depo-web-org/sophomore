@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { ImSpinner9 } from "react-icons/im";
 import {
@@ -11,6 +11,12 @@ import { useNavigate } from "react-router-dom";
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
+
+  // time format
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [isResendDisabled, setIsResendDisabled] = useState(true);
+
+  // react hook form
   const { handleSubmit, control, setFocus } = useForm({
     defaultValues: {
       otp: ["", "", "", "", "", ""],
@@ -53,12 +59,32 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     }
   };
 
-  console.log();
+  // time format
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
+  };
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const interval = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setIsResendDisabled(false);
+    }
+  }, [timeLeft]);
 
   // ===> resend-otp endpoints name
 
   const reSendOtp = async () => {
     setResendOTPModal(false);
+    setIsResendDisabled(true);
+    setTimeLeft(60);
     await resendOtp({ email: mail.email })
       .unwrap()
       .then(() => console.log("Successfully sent"))
@@ -119,15 +145,26 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
           </form>
           <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
             <p
+              className={`${
+                isResendDisabled ? "text-white" : "text-gray-500"
+              } text-base font-medium `}
+            >
+              {formatTime(timeLeft)}
+            </p>
+            <p
               className={`text-base font-medium leading-[18.75px] text-center  ${
-                isLoading ? "text-textopacity" : "text-white"
+                isLoading || isResendDisabled
+                  ? "text-textopacity"
+                  : "text-white"
               }`}
             >
               Didn’t got your OTP ?
               <button
-                disabled={isLoading}
+                disabled={isLoading || isResendDisabled}
                 onClick={() => setResendOTPModal(true)}
-                className="text-base font-medium leading-[18.75px] text-center underline text-white mx-2"
+                className={`text-base font-medium leading-[18.75px] text-center underline mx-2 ${
+                  isResendDisabled ? "text-gray-500" : "text-white"
+                }`}
               >
                 Resend OTP
               </button>
