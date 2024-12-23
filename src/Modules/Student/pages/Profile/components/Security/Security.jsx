@@ -1,9 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaCheck } from "react-icons/fa";
+import Alert from "../Alerts/Alert";
 
 export default function Security() {
   const [errorMasege, seterrorMasege] = useState(false);
+  const [Loading, setLoading] = useState(false);
+
+  const [showAlert, setShowAlert] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -11,51 +17,67 @@ export default function Security() {
     formState: { errors },
   } = useForm();
 
-  const onSubmitt = (data) => {
-    console.log("Form Data:", data);
+    // alert
+    const handleShowAlert = () => {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    };
 
-    if (data.Password === data.password2) {
-      seterrorMasege(false);
-      console.log("true");
-      reset();
-    } else {
-      console.log("false");
-
-      seterrorMasege(true);
-    }
-  };
-
-
-
+ 
   const onSubmit = async (data) => {
-    // التحقق من تطابق كلمة المرور الجديدة مع تأكيد كلمة المرور
-    if (data.Password === data.Password2) {
-      console.log  ("كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقين.");
-     
+    if (data.new_password !== data.confirm_password) {
+      console.log("Passwords do not match!");
+      seterrorMasege(true);
       return;
     }
+    seterrorMasege(false);
+    setLoading(true)
+
+    const refresh_token = localStorage.getItem("refresh_token");
+    console.log("Retrieved Refresh Token:", refresh_token);
 
     try {
+      // إرسال الطلب إلى API
       const response = await axios.post(
-        "https://your-api-endpoint.com/change-password",
+        "http://192.168.1.26:8000/api/v1/change-password/consumer/",
         {
-          Password: data.Password,
-          Password2: data.Password2,
+          refresh_token: refresh_token,
+          old_password: data.old_password,
+          new_password: data.new_password,
+          confirm_password: data.confirm_password,
         }
       );
 
-      if (response.status === 200) {
-        console.log ("تم تغيير كلمة المرور بنجاح!");
-      }
+
+      handleShowAlert()
+
+      reset();
+
+      console.log("Password changed successfully!");
+
+    
+
+
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        console.log ("كلمة المرور القديمة غير صحيحة.");
+      if (error.response) {
+        if (error.response.status === 400) {
+          console.log("The old password is incorrect.");
+        } else if (error.response.status === 401) {
+          console.error("Unauthorized: Invalid token.");
+        } else {
+          console.log(
+            "An error occurred while changing the password. Please try again."
+          );
+        }
       } else {
-        console.log ("حدث خطأ أثناء تغيير كلمة المرور. حاول مرة أخرى.");
+        console.log("An unknown error occurred. Please check your connection.");
       }
+    }finally{
+      setLoading(false)
     }
   };
-
 
 
 
@@ -63,6 +85,10 @@ export default function Security() {
 
   return (
     <>
+    
+    <Alert showAlert={showAlert} setShowAlert={setShowAlert}/>
+
+     
       {/* first section */}
       <div className="w-full h-72 ">
         <div className="relative bg-gradient-to-r from-[#F15C54] from-10% to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
@@ -98,13 +124,13 @@ export default function Security() {
 
         <input
           type="Password"
-          id="Currentpassword"
-          placeholder="  Current password"
+          id="old_password"
+          placeholder=" Old password"
           className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          {...register("Currentpassword", { required: "Current password required" })}
+          {...register("old_password", { required: "old_password required" })}
         />
-        {errors.Currentpassword && (
-          <p className="text-red-500 text-sm">{errors.Currentpassword.message}</p>
+        {errors.old_password && (
+          <p className="text-red-500 text-sm">{errors.old_password.message}</p>
         )}
 
         <hr className="my-5" />
@@ -120,13 +146,17 @@ export default function Security() {
 
             <input
               type="Password"
-              id="Password"
-              placeholder="  *********"
+              id="new_password"
+              placeholder=" New password"
               className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              {...register("Password", { required: "Password required" })}
+              {...register("new_password", {
+                required: "new_password required",
+              })}
             />
-            {errors.Password && (
-              <p className="text-red-500 text-sm">{errors.Password.message}</p>
+            {errors.new_password && (
+              <p className="text-red-500 text-sm">
+                {errors.new_password.message}
+              </p>
             )}
           </div>
 
@@ -142,15 +172,17 @@ export default function Security() {
 
             <input
               type="Password"
-              id="password2"
-              placeholder="  *********"
+              id="confirm_password"
+              placeholder=" Confirm password"
               className="py-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              {...register("password2", {
-                required: "password2 required",
+              {...register("confirm_password", {
+                required: "confirm_password required",
               })}
             />
-            {errors.password2 && (
-              <p className="text-red-500 text-sm">{errors.password2.message}</p>
+            {errors.confirm_password && (
+              <p className="text-red-500 text-sm">
+                {errors.confirm_password.message}
+              </p>
             )}
           </div>
 
@@ -160,14 +192,43 @@ export default function Security() {
             <p className="text-red-500 text-sm">Password is filde</p>
           )}
 
+
+
           <button
             type="submit"
             data-twe-ripple-init
             data-twe-ripple-color="light"
             className="rounded bg-primary mt-3 px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
           >
-            Change Password
+           {Loading ?                                       
+           
+           <div
+           className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
+           role="status">
+           <span
+            className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+           >Loading...</span>
+           
+           </div>
+           
+           
+           
+           
+           
+           
+           :  "Change Password  " }  
+
+
+
+
+
+
           </button>
+
+
+
+
+
         </div>
         {/* end */}
       </form>
