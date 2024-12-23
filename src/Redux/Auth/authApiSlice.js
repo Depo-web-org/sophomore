@@ -23,6 +23,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    verify_email: builder.mutation({
+      query: (data) => ({
+        url: "/verify-email/",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -30,4 +37,5 @@ export const {
   useLoginMutation,
   useSignupMutation,
   useForget_passwordMutation,
+  useVerify_emailMutation,
 } = authApiSlice;
