@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
@@ -14,7 +14,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [alreadyAv, setAlreadyAv] = useState(false);
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
-  const [signup, { isLoading, isSuccess, isError, error }] =
+  const [signup, { isLoading }] =
     useSignupMutation();
 
   const {
