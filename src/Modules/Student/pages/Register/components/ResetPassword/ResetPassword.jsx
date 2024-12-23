@@ -1,45 +1,48 @@
-import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import { HeadTitle } from '../Login/Login';
-import { ImSpinner9 } from 'react-icons/im';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import axios from 'axios';
-import { decodeEmail } from '../../../../../../Helpers/deCode';
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { HeadTitle } from "../Login/Login";
+import { ImSpinner9 } from "react-icons/im";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import axios from "axios";
+import { decodeEmail } from "../../../../../../Helpers/deCode";
+import { useReset_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
 
 const ResetPassword = () => {
   const { userMail } = useParams(); // Get encoded email from the URL
   const navigate = useNavigate();
- //deCode the User mail
-  const email = decodeEmail(userMail)
+  //deCode the User mail
+  const email = decodeEmail(userMail);
   const [showPassword, setShowPassword] = useState(false);
-  const [loadingSending, setLoadingSending] = useState(false);
 
   const { handleSubmit, control, setFocus, register } = useForm({
     defaultValues: {
       otp_code: ["", "", "", "", "", ""],
     },
   });
+  const [resetPassword, { isLoading, isError, error }] =
+    useReset_passwordMutation();
 
   const togglePasswordVisibility = () => {
-    setShowPassword(prevState => !prevState);
+    setShowPassword((prevState) => !prevState);
   };
 
   const onSubmit = async (data) => {
-    setLoadingSending(true)
     const otp = data.otp_code.join("");
     const dataSend = {
       otp,
       password: data.password,
-      password2: data.password2
+      password2: data.password2,
     };
 
-    console.log(dataSend);
-    
-    axios.post('http://192.168.1.26:8000/api/v1/confirm-reset-password/consumer/', dataSend).then(()=>navigate('/register') ).catch(err =>{
-      console.log(err .request)
-     setLoadingSending(false)
-    }) 
+    try {
+      const response = await resetPassword(dataSend)
+        .unwrap()
+        .then((response) => console.log(response));
+      navigate("/register");
+    } catch (err) {
+      console.error("Error occurred:", err);
+    }
   };
 
   const handleInput = (e, index) => {
@@ -60,19 +63,52 @@ const ResetPassword = () => {
     }
   };
 
+  const [timeLeft, setTimeLeft] = useState(10);
+  const [isResendDisabled, setIsResendDisabled] = useState(true);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
+  };
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const interval = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setIsResendDisabled(false);
+    }
+  }, [timeLeft]);
+  const handleResendOtp = () => {
+    setIsResendDisabled(true);
+    setTimeLeft(60); // Reset the timer to 60 seconds
+    // Add logic to resend the OTP if required
+    console.log("Resend OTP triggered");
+  };
+
   return (
     <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
       <div className="flex flex-col items-start gap-8 w-full slide-in-left">
         <div className="">
           <HeadTitle
             title={{
-              head: 'Check Your Mail for OTP',
-              subTitle: ` We have sent an otp to your mail ${email.split("@")[0].slice(0, 3)}****@${email.split("@")[1].slice(0, 2)}***.com`,
+              head: "Check Your Mail for OTP",
+              subTitle: ` We have sent an otp to your mail ${email
+                .split("@")[0]
+                .slice(0, 3)}****@${email.split("@")[1].slice(0, 2)}***.com`,
             }}
           />
         </div>
         <div className="w-full">
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-2"
+          >
             <div className="flex justify-center items-center gap-8 text-white text-center text-2xl w-4/5 mx-auto">
               {[0, 1, 2, 3, 4, 5].map((index) => (
                 <Controller
@@ -149,12 +185,36 @@ const ResetPassword = () => {
                 </button>
               </label>
             </div>
+            <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
+              <p
+                className={`${
+                  isResendDisabled ? "text-white" : "text-gray-500"
+                } text-base font-medium `}
+              >
+                {formatTime(timeLeft)}
+              </p>
+              <button
+                onClick={handleResendOtp}
+                disabled={isResendDisabled}
+                className={`text-base font-medium leading-[18.75px] text-center underline ${
+                  isResendDisabled ? "text-gray-500" : "text-white"
+                }`}
+              >
+                Resend your One Time Password
+              </button>
+            </div>
             <button
               type="submit"
-              disabled={loadingSending}
-              className={`inline-flex rounded-lg ${loadingSending ? "bg-white" : 'bg-primary'}  w-full lg:w-4/5 mx-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+              disabled={isLoading}
+              className={`inline-flex rounded-lg ${
+                isLoading ? "bg-white" : "bg-primary"
+              }  w-full lg:w-4/5 mx-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
             >
-              {loadingSending ? <ImSpinner9 className="animate-spin text-3xl text-secondary" /> : "Reset"}
+              {isLoading ? (
+                <ImSpinner9 className="animate-spin text-3xl text-secondary" />
+              ) : (
+                "Reset"
+              )}
             </button>
           </form>
         </div>

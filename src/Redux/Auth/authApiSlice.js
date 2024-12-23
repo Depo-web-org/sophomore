@@ -37,6 +37,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    reset_password: builder.mutation({
+      query: (data) => ({
+        url: "/confirm-reset-password/consumer/",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -46,4 +53,5 @@ export const {
   useForget_passwordMutation,
   useVerify_emailMutation,
   useResend_otpMutation,
+  useReset_passwordMutation,
 } = authApiSlice;
