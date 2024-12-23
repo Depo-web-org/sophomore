@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../../../../../../ProtectedRoutes/AuthContext";
 import { useForm } from "react-hook-form";
-import OtpContent from "./Components/ForgetPassword";
 import LogInContent from "./Components/LogInContent";
-import axios from "axios";
-
 import { useDispatch } from "react-redux";
-import { useLoginMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import {
+  useLoginMutation,
+  useForget_passwordMutation,
+} from "../../../../../../Redux/Auth/authApiSlice";
 import { setCredentials } from "../../../../../../Redux/Auth/authSlice";
 import { encodeEmail } from "../../../../../../Helpers/enCodedMail";
 import ForgetPassword from "./Components/ForgetPassword";
@@ -16,11 +15,9 @@ export default function Login({ toggleForm }) {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
-  const [loadingSending, setLoadingSending] = useState(false);
 
   const dispatch = useDispatch();
 
-  // Setup react-hook-form
   const {
     register,
     handleSubmit,
@@ -28,14 +25,14 @@ export default function Login({ toggleForm }) {
     formState: { errors },
   } = useForm();
 
-  // Use login mutation from authApiSlice
   const [login, { isLoading, isError, error }] = useLoginMutation();
+  const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
+    useForget_passwordMutation();
 
   const handleLogin = async (data) => {
     try {
       console.log("Login request data:", data);
 
-      // Call the login mutation using data from the form
       const response = await login({
         email: data.email,
         password: data.password,
@@ -46,20 +43,15 @@ export default function Login({ toggleForm }) {
       if (response) {
         console.log("Login successful:", response);
 
-        // Dispatch the setCredentials action to save the user data in the Redux store
         dispatch(setCredentials(response));
 
         // Reset the form after successful login
         reset();
-
-        // Redirect to home page or the dashboard
         navigate("/");
       }
     } catch (error) {
-      // Log the full error details for debugging
       console.error("Login Error:", error);
 
-      // Check if there is an error response and display the error message
       if (error?.data?.message) {
         setErrorMessage(error.data.message);
       } else if (error?.status === 401) {
@@ -70,19 +62,16 @@ export default function Login({ toggleForm }) {
     }
   };
 
-  const handleOtp = async (data) => {
-    console.log("Form Data:", {
-      email: data.email,
-    });
-    //  setMail(data)
-    setLoadingSending(true);
-    const enCodedMail=encodeEmail(data.email)
-    await axios
-      .post(`http://192.168.1.26:8000/api/v1/reset-password/consumer/`, data) .then(() => navigate(`/register/reset-password/${enCodedMail}`))
-      .catch((err) => {
-        console.log(err.request.responseText);
-        setLoadingSending(false);
-      });
+  const handleForgetPassword = async (data) => {
+    try {
+      const response = await forgetpassword({ email: data.email }).unwrap();
+      const enCodedMail = encodeEmail(data.email);
+      navigate(`/register/reset-password/${enCodedMail}`);
+    } catch (err) {
+      setErrorMessage(
+        err?.data?.message || "There was an unexpected error. Please try again."
+      );
+    }
   };
 
   return (
@@ -91,11 +80,11 @@ export default function Login({ toggleForm }) {
         <ForgetPassword
           register={register}
           handleSubmit={handleSubmit}
-          handleOtp={handleOtp}
+          handleForgetPassword={handleForgetPassword}
           forgetPassword={forgetPassword}
           setForgetPassword={setForgetPassword}
           toggleForm={toggleForm}
-          loadingSending={loadingSending}
+          loadingSending={isForgetPasswordLoading}
         />
       ) : (
         <LogInContent
