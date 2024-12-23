@@ -41,7 +41,7 @@ export default function Security() {
     try {
       // إرسال الطلب إلى API
       const response = await axios.post(
-        "http://192.168.1.26:8000/api/v1/change-password/consumer/",
+        "http://192.168.1.26:7000/api/v1/change-password/consumer/",
         {
           refresh_token: refresh_token,
           old_password: data.old_password,
