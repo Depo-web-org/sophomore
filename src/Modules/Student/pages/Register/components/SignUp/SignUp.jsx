@@ -8,6 +8,7 @@ import {
   useResend_otpMutation,
   useSignupMutation,
 } from "../../../../../../Redux/Auth/authApiSlice";
+import { HeadTitle } from "../Login/Login";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
@@ -64,12 +65,13 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full">
-        <div className="flex flex-col justify-start items-start gap-2">
-          <p className="text-white text-3xl lg:text-4xl font-semibold pt-4">
-            Join our team
-          </p>
-          <p className="text-gray-600">Fill the form to join our team</p>
-        </div>
+  
+        <HeadTitle
+                  title={{
+                    head: "Join Our Team",
+                    subTitle: "  Fill the form to join our team",
+                  }}
+                />
         <div className="w-full">
           {/* form starting */}
           <form

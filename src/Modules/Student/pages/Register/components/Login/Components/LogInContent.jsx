@@ -135,7 +135,7 @@ export default function LogInContent({
               </p>
             )}
   
-            <div className="flex items-end justify-center lg:justify-between flex-wrap gap-y-4">
+            <div className="flex items-end justify-between flex-wrap gap-4">
               <label
                 htmlFor="Option1"
                 className="flex cursor-pointer items-start gap-2"
@@ -166,7 +166,7 @@ export default function LogInContent({
             disabled={loadingSending}
                 className={`inline-flex w-full rounded-lg ${loadingSending ? "bg-white" : 'bg-primary'} px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
               >
-                {loadingSending? <ImSpinner9 className="animate-spin text-3xl text-secondary " /> : " Sign Up"}
+                {loadingSending? <ImSpinner9 className="animate-spin text-3xl text-secondary " /> : " Log In"}
               </button>
           </form>
         </div>
