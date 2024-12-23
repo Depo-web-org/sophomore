@@ -6,7 +6,11 @@ import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { decodeEmail } from "../../../../../../Helpers/deCode";
-import { useReset_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import {
+  useForget_passwordMutation,
+  useReset_passwordMutation,
+} from "../../../../../../Redux/Auth/authApiSlice";
+import { ResendOtpModal } from "../OTP/OTP";
 
 const ResetPassword = () => {
   const { userMail } = useParams(); // Get encoded email from the URL
@@ -14,6 +18,10 @@ const ResetPassword = () => {
   //deCode the User mail
   const email = decodeEmail(userMail);
   const [showPassword, setShowPassword] = useState(false);
+  const [resendOTPModal, setResendOTPModal] = useState(false);
+
+  const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
+    useForget_passwordMutation();
 
   const { handleSubmit, control, setFocus, register } = useForm({
     defaultValues: {
@@ -63,7 +71,7 @@ const ResetPassword = () => {
     }
   };
 
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   const formatTime = (time) => {
@@ -84,148 +92,176 @@ const ResetPassword = () => {
       setIsResendDisabled(false);
     }
   }, [timeLeft]);
-  const handleResendOtp = () => {
+
+  const reSendOtp = async () => {
+    setResendOTPModal(false);
     setIsResendDisabled(true);
-    setTimeLeft(60); // Reset the timer to 60 seconds
+    setTimeLeft(60);
+    await forgetpassword({ email })
+      .unwrap()
+      .then(() => console.log("Successfully sent"))
+      .catch((err) => console.log("Error", err));
+  };
+  const handleResendOtp = () => {
     // Add logic to resend the OTP if required
     console.log("Resend OTP triggered");
   };
 
   return (
-    <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
-      <div className="flex flex-col items-start gap-8 w-full slide-in-left">
-        <div className="">
-          <HeadTitle
-            title={{
-              head: "Check Your Mail for OTP",
-              subTitle: ` We have sent an otp to your mail ${email
-                .split("@")[0]
-                .slice(0, 3)}****@${email.split("@")[1].slice(0, 2)}***.com`,
-            }}
-          />
-        </div>
-        <div className="w-full">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2"
-          >
-            <div className="flex justify-center items-center gap-8 text-white text-center text-2xl w-4/5 mx-auto">
-              {[0, 1, 2, 3, 4, 5].map((index) => (
-                <Controller
-                  key={index}
-                  name={`otp_code[${index}]`}
-                  control={control}
-                  render={({ field: { onChange, value, ref } }) => (
-                    <input
-                      ref={ref}
-                      type="text"
-                      value={value}
-                      maxLength="1"
-                      className=" w-full lg:w-4/5 mx-auto bg-transparent border-b-[1px] ring-0 outline-none font-bold"
-                      onChange={(e) => {
-                        onChange(e.target.value);
-                        handleInput(e, index);
-                      }}
-                      onFocus={(e) => e.target.select()}
-                      onPaste={(e) => handlePaste(e, onChange)}
-                    />
-                  )}
-                />
-              ))}
-            </div>
-            <div className="mt-8 mb-4">
-              <label
-                htmlFor="password"
-                className="w-full lg:w-4/5 mx-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
-              >
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
-                    },
-                  })}
-                  className="outline-none flex-1"
-                  placeholder="Enter New password"
-                />
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="ml-2 text-gray-500 focus:outline-none"
-                >
-                  {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-                </button>
-              </label>
-              <label
-                htmlFor="password2"
-                className=" w-full lg:w-4/5 mx-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
-              >
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password2"
-                  {...register("password2", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
-                    },
-                  })}
-                  className="outline-none flex-1"
-                  placeholder="Confirm password"
-                />
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="ml-2 text-gray-500 focus:outline-none"
-                >
-                  {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-                </button>
-              </label>
-            </div>
-            <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
-              <p
-                className={`${
-                  isResendDisabled ? "text-white" : "text-gray-500"
-                } text-base font-medium `}
-              >
-                {formatTime(timeLeft)}
-              </p>
-              <button
-                onClick={handleResendOtp}
-                disabled={isResendDisabled}
-                className={`text-base font-medium leading-[18.75px] text-center underline ${
-                  isResendDisabled ? "text-gray-500" : "text-white"
-                }`}
-              >
-                Resend your One Time Password
-              </button>
-            </div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`inline-flex rounded-lg ${
-                isLoading ? "bg-white" : "bg-primary"
-              }  w-full lg:w-4/5 mx-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+    <>
+      <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
+        <div className="flex flex-col items-start gap-8 w-full slide-in-left">
+          <div className="">
+            <HeadTitle
+              title={{
+                head: "Check Your Mail for OTP",
+                subTitle: ` We have sent an otp to your mail ${email
+                  .split("@")[0]
+                  .slice(0, 3)}****@${email.split("@")[1].slice(0, 2)}***.com`,
+              }}
+            />
+          </div>
+          <div className="w-full">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-2"
             >
-              {isLoading ? (
-                <ImSpinner9 className="animate-spin text-3xl text-secondary" />
-              ) : (
-                "Reset"
-              )}
-            </button>
-          </form>
+              <div className="flex justify-center items-center gap-8 text-white text-center text-2xl w-4/5 mx-auto">
+                {[0, 1, 2, 3, 4, 5].map((index) => (
+                  <Controller
+                    key={index}
+                    name={`otp_code[${index}]`}
+                    control={control}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <input
+                        ref={ref}
+                        type="text"
+                        value={value}
+                        maxLength="1"
+                        className=" w-full lg:w-4/5 mx-auto bg-transparent border-b-[1px] ring-0 outline-none font-bold"
+                        onChange={(e) => {
+                          onChange(e.target.value);
+                          handleInput(e, index);
+                        }}
+                        onFocus={(e) => e.target.select()}
+                        onPaste={(e) => handlePaste(e, onChange)}
+                      />
+                    )}
+                  />
+                ))}
+              </div>
+              <div className="mt-8 mb-4">
+                <label
+                  htmlFor="password"
+                  className="w-full lg:w-4/5 mx-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
+                >
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                    })}
+                    className="outline-none flex-1"
+                    placeholder="Enter New password"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="ml-2 text-gray-500 focus:outline-none"
+                  >
+                    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                  </button>
+                </label>
+                <label
+                  htmlFor="password2"
+                  className=" w-full lg:w-4/5 mx-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
+                >
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password2"
+                    {...register("password2", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                    })}
+                    className="outline-none flex-1"
+                    placeholder="Confirm password"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="ml-2 text-gray-500 focus:outline-none"
+                  >
+                    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                  </button>
+                </label>
+              </div>
+              <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
+                <p
+                  className={`${
+                    isResendDisabled ? "text-white" : "text-gray-500"
+                  } text-base font-medium `}
+                >
+                  {formatTime(timeLeft)}
+                </p>
+                <p
+                  className={`text-base font-medium leading-[18.75px] text-center  ${
+                    isLoading || isResendDisabled
+                      ? "text-textopacity"
+                      : "text-white"
+                  }`}
+                >
+                  Didn’t got your OTP ?
+                  <button
+                    disabled={isLoading || isResendDisabled}
+                    onClick={() => setResendOTPModal(true)}
+                    className={`text-base font-medium leading-[18.75px] text-center underline mx-2 ${
+                      isResendDisabled ? "text-gray-500" : "text-white"
+                    }`}
+                  >
+                    Resend OTP
+                  </button>
+                </p>
+              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`inline-flex rounded-lg ${
+                  isLoading ? "bg-white" : "bg-primary"
+                }  w-full lg:w-4/5 mx-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+              >
+                {isLoading ? (
+                  <ImSpinner9 className="animate-spin text-3xl text-secondary" />
+                ) : (
+                  "Reset"
+                )}
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <img
-        src="/register/login.webp"
-        alt="register img"
-        className="hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] slide-in-right object-cover rounded-xl z-10"
-      />
-    </div>
+        <img
+          src="/register/login.webp"
+          alt="register img"
+          className="hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] slide-in-right object-cover rounded-xl z-10"
+        />
+      </div>
+      {
+        // Resend OTP Modal
+        resendOTPModal && (
+          <ResendOtpModal
+            setResendOTPModal={setResendOTPModal}
+            reSendOtp={reSendOtp}
+          ></ResendOtpModal>
+        )
+      }
+    </>
   );
 };
 
