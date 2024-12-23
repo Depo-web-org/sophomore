@@ -45,7 +45,7 @@ export default function Login({ toggleForm }) {
 
       if (response) {
         console.log("Login successful:", response);
-
+        localStorage.setItem("refresh_token", response.refresh_token);
         // Dispatch the setCredentials action to save the user data in the Redux store
         dispatch(setCredentials(response));
 
@@ -54,6 +54,8 @@ export default function Login({ toggleForm }) {
 
         // Redirect to home page or the dashboard
         navigate("/");
+
+        // Aa313123@gj   mohamed.taher@depowebeg.com
       }
     } catch (error) {
       // Log the full error details for debugging
