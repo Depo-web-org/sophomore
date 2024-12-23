@@ -1,7 +1,7 @@
 import { ImSpinner9 } from "react-icons/im";
 import { HeadTitle } from "../Login";
 
-export default function OtpContent({
+export default function ForgetPassword({
   register,
   handleSubmit,
   errors,

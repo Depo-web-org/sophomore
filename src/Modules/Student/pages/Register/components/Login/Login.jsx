@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../../../../../../ProtectedRoutes/AuthContext";
 import { useForm } from "react-hook-form";
-import OtpContent from "./Components/OtpContent";
+import OtpContent from "./Components/ForgetPassword";
 import LogInContent from "./Components/LogInContent";
 import axios from "axios";
 
@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { setCredentials } from "../../../../../../Redux/Auth/authSlice";
 import { encodeEmail } from "../../../../../../Helpers/enCodedMail";
+import ForgetPassword from "./Components/ForgetPassword";
 
 export default function Login({ toggleForm }) {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function Login({ toggleForm }) {
   return (
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
       {forgetPassword ? (
-        <OtpContent
+        <ForgetPassword
           register={register}
           handleSubmit={handleSubmit}
           handleOtp={handleOtp}
