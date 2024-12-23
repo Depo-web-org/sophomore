@@ -19,7 +19,7 @@ export default function LogInContent({
         setShowPassword((prevState) => !prevState);
       };
     return (
-      <div className=" flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-left b">
+      <div className=" flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right b">
         <HeadTitle
           title={{
             head: "Welcome Back !",

@@ -49,6 +49,7 @@ import Quiz from './Modules/Student/pages/Quiz/Index';
 import MyLearning from './Modules/Student/pages/MyLearning/index';
 import { useEffect, useState } from 'react';
 import { ImSpinner9 } from 'react-icons/im';
+import ResetPassword from './Modules/Student/pages/Register/components/ResetPassword/ResetPassword';
 
 function AppRoutes() {
   return (
@@ -155,7 +156,12 @@ function AppRoutes() {
         </Route>
 
         {/* login */}
-        <Route path="/register" element={<Register />} />
+        <Route path="/register">
+    <Route index element={<Register />} />
+    <Route path="reset-password/" >
+    <Route index path=":userMail" element={<ResetPassword />} />
+    </Route>
+  </Route>
 
         {/* page Teacherrrr */}
         <Route path="/" element={<NavTeacher />}>

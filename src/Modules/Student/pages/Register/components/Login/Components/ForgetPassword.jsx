@@ -1,15 +1,16 @@
+import { ImSpinner9 } from "react-icons/im";
 import { HeadTitle } from "../Login";
 
-export default function OtpContent({
+export default function ForgetPassword({
   register,
   handleSubmit,
   errors,
-  handleOtp,
+  handleForgetPassword,
   setForgetPassword,
-  loadingSending
+  loadingSending,
 }) {
   return (
-    <div className="flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-left">
+    <div className="flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right">
       <HeadTitle
         title={{
           head: "Forget Password?",
@@ -18,7 +19,7 @@ export default function OtpContent({
       />
       <div className="w-full">
         <form
-          onSubmit={handleSubmit(handleOtp)} 
+          onSubmit={handleSubmit(handleForgetPassword)}
           className="w-full space-y-4 flex flex-col gap-4 pb-8 border-b border-gray-600"
         >
           <div>
@@ -54,10 +55,21 @@ export default function OtpContent({
               </span>
             </div>
           </div>
-          <button type="submit" className="bg-primary w-full text-white py-2 rounded-md">
-            Send OTP
+          <button
+            type="submit"
+            disabled={loadingSending}
+            className={`inline-flex w-full rounded-lg ${
+              loadingSending ? "bg-white" : "bg-primary"
+            } px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
+          >
+            {loadingSending ? (
+              <ImSpinner9 className="animate-spin text-3xl text-secondary " />
+            ) : (
+              "    Send OTP"
+            )}
           </button>
         </form>
+        {/* loadingSending */}
         <div className="w-full flex justify-center mt-4">
           <button
             onClick={() => setForgetPassword(false)}

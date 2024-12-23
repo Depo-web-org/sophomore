@@ -5,10 +5,22 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useSignupMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import axios from "axios";
 
+
+
+
+//Resend
+const ResendOTP=  (  data , handleSendOtp ,setAlreadyAv)=> {
+   axios.post('http://192.168.1.26:8000/api/v1/resend-otp/consumer/', {email: data.email}).then(()=>handleSendOtp()).catch((err)=>{ 
+    err.response.data.message === "Your account has already been verified. Please go to the login page." ?setAlreadyAv(true):    console.log(err.response.data.message)
+ 
+  })
+}
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
-
+  const [alreadyAv, setAlreadyAv] = useState(false)
+// const [ResendOtp, setResendOtp] = useState(second)
   // Redux Toolkit's useSignupMutation hook
   const [signup, { isLoading, isSuccess, isError, error }] =
     useSignupMutation();
@@ -32,9 +44,9 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     try {
       // Call the signup mutation here instead of axios
       await signup(data).unwrap();
-      handleSendOtp(); // If successful, send OTP
+      handleSendOtp(); 
     } catch (err) {
-      console.error(err); // Log the error
+      err.data.email[0] === 'Consumer with this email already exists.'? ResendOTP(data,handleSendOtp , setAlreadyAv) :  console.log(err.response)
     }
   };
 
@@ -243,13 +255,15 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           </form>
         </div>
       </div>
-      <div className="mx-auto">
-        <p className="text-sm text-gray-500">
-          Already have an account?
+      <div className="mx-auto ">
+       
+        <p className={`text-sm  ${alreadyAv ? 'text-secondary font-bold text-4xl' : 'text-gray-500' } `}>
+          Already have an account {alreadyAv ? "please check your email" :  "  ?  please "}
           <button
             onClick={toggleForm}
             className="underline px-2 text-secondary"
           >
+
             Login
           </button>
         </p>
