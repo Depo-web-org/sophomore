@@ -27,7 +27,7 @@ export default function Profile() {
 
     try {
       const response = await axios.post(
-        "http://192.168.1.26:7000/api/v1/logout/consumer/",
+        "http://192.168.1.26:8000/api/v1/logout/consumer/",
         {
           refresh_token: refresh_token,
         }
