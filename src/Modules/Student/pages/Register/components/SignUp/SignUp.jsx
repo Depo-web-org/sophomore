@@ -9,9 +9,13 @@ import {
   useSignupMutation,
 } from "../../../../../../Redux/Auth/authApiSlice";
 import { HeadTitle } from "../Login/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
+  const role = useSelector((state) => state.role.role);
+  const dispatch = useDispatch()
   const [alreadyAv, setAlreadyAv] = useState(false);
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
@@ -36,7 +40,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
     try {
       // Call the signup mutation here instead of axios
-      await signup(data).unwrap();
+      await signup({ userData: data, role }).unwrap();
       handleSendOtp();
     } catch (err) {
       err.data.email[0] === "Consumer with this email already exists."
@@ -48,7 +52,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   // Redux Toolkit's useResend_otpMutation hook
   const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
     try {
-      await resendOtp({ email: data.email }).unwrap();
+      await resendOtp({ email: data.email },role).unwrap();
       handleSendOtp(); // Call the success callback
     } catch (err) {
       if (
@@ -62,6 +66,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     }
   };
 
+console.log(role)
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full">
@@ -80,10 +85,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           >
             <div className="w-full flex justify-center items-center gap-4 lg:gap-8">
               <button
-                onClick={() => setRequestEndPoints("student")}
+                onClick={() => 
+                  dispatch(setRole("consumer"))
+                }
                 type="button"
                 className={`text-white text-base font-bold px-10 py-2 outline-none ${
-                  requestEndPoints === "student"
+                  role === "consumer"
                     ? "bg-secondary "
                     : "bg-opacity-0  border border-gray-600"
                 } rounded-lg duration-200 transition-all`}
@@ -91,10 +98,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                 Student
               </button>
               <button
-                onClick={() => setRequestEndPoints("teacher")}
+                onClick={() =>
+                  dispatch(setRole("provider"))
+                }
                 type="button"
                 className={`text-white text-base font-bold px-10 py-2 outline-none ${
-                  requestEndPoints === "teacher"
+                  role === "provider"
                     ? "bg-secondary "
                     : "bg-opacity-0  border border-gray-600"
                 } rounded-lg duration-200 transition-all`}
