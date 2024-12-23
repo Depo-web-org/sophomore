@@ -2,10 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck } from "react-icons/fa";
+import Alert from "../Alerts/Alert";
 
 export default function Security() {
   const [errorMasege, seterrorMasege] = useState(false);
-  const [showbuttom, setshowbuttom] = useState(false);
+  const [Loading, setLoading] = useState(false);
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const {
     register,
@@ -14,6 +17,15 @@ export default function Security() {
     formState: { errors },
   } = useForm();
 
+    // alert
+    const handleShowAlert = () => {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    };
+
+ 
   const onSubmit = async (data) => {
     if (data.new_password !== data.confirm_password) {
       console.log("Passwords do not match!");
@@ -21,6 +33,7 @@ export default function Security() {
       return;
     }
     seterrorMasege(false);
+    setLoading(true)
 
     const refresh_token = localStorage.getItem("refresh_token");
     console.log("Retrieved Refresh Token:", refresh_token);
@@ -37,16 +50,14 @@ export default function Security() {
         }
       );
 
+
+      handleShowAlert()
+
       reset();
 
       console.log("Password changed successfully!");
 
-      setshowbuttom(true)
-       
-      setTimeout(() => {
-      setshowbuttom(false)
-        
-      }, 1000);
+    
 
 
     } catch (error) {
@@ -63,11 +74,21 @@ export default function Security() {
       } else {
         console.log("An unknown error occurred. Please check your connection.");
       }
+    }finally{
+      setLoading(false)
     }
   };
 
+
+
+
+
   return (
     <>
+    
+    <Alert showAlert={showAlert} setShowAlert={setShowAlert}/>
+
+     
       {/* first section */}
       <div className="w-full h-72 ">
         <div className="relative bg-gradient-to-r from-[#F15C54] from-10% to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
@@ -171,14 +192,43 @@ export default function Security() {
             <p className="text-red-500 text-sm">Password is filde</p>
           )}
 
+
+
           <button
             type="submit"
             data-twe-ripple-init
             data-twe-ripple-color="light"
             className="rounded bg-primary mt-3 px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
           >
-         {!showbuttom ? " Change Password" :   <FaCheck className="w-32 my-1 size-5 text-green-500 " />}   
+           {Loading ?                                       
+           
+           <div
+           className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
+           role="status">
+           <span
+            className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+           >Loading...</span>
+           
+           </div>
+           
+           
+           
+           
+           
+           
+           :  "Change Password  " }  
+
+
+
+
+
+
           </button>
+
+
+
+
+
         </div>
         {/* end */}
       </form>
