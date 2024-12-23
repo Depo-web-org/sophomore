@@ -30,10 +30,15 @@ const [mail, setMail] = useState()
     setIsOTP(false)
     setIsSuccess(false)
   }
-  
+  const registerAgain = () => {
+    setIsSignUp(true);
+    setIsLogin(false);
+    setIsOTP(false);
+
+  };
   return (
     <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
-      {isLogin && <Login toggleForm={toggleForm} />}
+      {isLogin && <Login toggleForm={toggleForm} />} 
 
 
       <img
@@ -47,8 +52,8 @@ const [mail, setMail] = useState()
         <SignUp toggleForm={toggleForm} handleSendOtp={handleSendOtp} setMail={setMail} />
       )}
 
-      {isOTP && <OTP handleValidateOtp={handleValidateOtp} mail={mail}/>}
-
+     {isOTP && <OTP handleValidateOtp={handleValidateOtp}  registerAgain={registerAgain} mail={mail}/>}
+ {/* <OTP handleValidateOtp={handleValidateOtp} mail={'sadasd@ssad'}  registerAgain={registerAgain}/> */}
       {isSuccess && <SucessOtp  processFinished={processFinished}/>}
     </div>
   );
