@@ -7,6 +7,7 @@ import {
 } from "../../../../../../Redux/Auth/authApiSlice";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { HeadTitle } from "../Login/Login";
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const navigate = useNavigate();
@@ -95,11 +96,12 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     <>
       <div className="w-full my-auto flex justify-center">
         <div className="flex flex-col items-start justify-start gap-2">
-          <p className="text-4xl font-bold text-white">Check your mail</p>
-          <p className="text-base font-bold text-textopacity">
-            We have sent an otp to your mail {mail?.email?.split("", 3)}*****@
-            {mail?.email?.split("@")[1]?.split("", 2)}***.com
-          </p>
+        <HeadTitle
+                   title={{
+                     head: "Check your mail",
+                    subTitle: `We have sent an OTP to your mail ${mail?.email?.slice(0, 3)}*****@${mail?.email?.split("@")[1]?.slice(0, 2)}***.com`,
+                   }}
+                 />
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-2"
