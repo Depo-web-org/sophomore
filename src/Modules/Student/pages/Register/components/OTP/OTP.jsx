@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { ImSpinner9 } from "react-icons/im";
-import { useResend_otpMutation, useVerify_emailMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import {
+  useResend_otpMutation,
+  useVerify_emailMutation,
+} from "../../../../../../Redux/Auth/authApiSlice";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-
-
-export default function OTP({ handleValidateOtp, mail , registerAgain}) {
-  const navigate = useNavigate()
+export default function OTP({ handleValidateOtp, mail, registerAgain }) {
+  const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const { handleSubmit, control, setFocus } = useForm({
     defaultValues: {
       otp: ["", "", "", "", "", ""],
     },
   });
-  const [resendOtp , {isLoading}] = useResend_otpMutation();
+  const [resendOtp, { isLoading }] = useResend_otpMutation();
 
   // Use verifyEmail mutation
   const [verifyEmail, { isLoading: loadingSending }] =
@@ -52,17 +53,17 @@ export default function OTP({ handleValidateOtp, mail , registerAgain}) {
     }
   };
 
-console.log()
+  console.log();
 
+  // ===> resend-otp endpoints name
 
-  // ===> resend-otp endpoints name 
-
-const reSendOtp= async()=>{
-  setResendOTPModal(false)
-   await resendOtp({email:mail.email}).unwrap().then(()=> console.log("Successfully sent"))
-   .catch(err =>console.log("Error",err))
-}
-
+  const reSendOtp = async () => {
+    setResendOTPModal(false);
+    await resendOtp({ email: mail.email })
+      .unwrap()
+      .then(() => console.log("Successfully sent"))
+      .catch((err) => console.log("Error", err));
+  };
 
   return (
     <>
@@ -104,12 +105,12 @@ const reSendOtp= async()=>{
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={loadingSending || isLoading }
+              disabled={loadingSending || isLoading}
               className={`inline-flex w-full rounded-lg ${
                 loadingSending || isLoading ? "bg-white" : "bg-primary"
               } px-5 py-3 text-sm font-medium text-white justify-center items-center mt-8`}
             >
-              {loadingSending|| isLoading ? (
+              {loadingSending || isLoading ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary " />
               ) : (
                 "Validate"
@@ -117,10 +118,14 @@ const reSendOtp= async()=>{
             </button>
           </form>
           <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
-            <p className={`text-base font-medium leading-[18.75px] text-center  ${isLoading ? "text-textopacity" : "text-white"}`}>
+            <p
+              className={`text-base font-medium leading-[18.75px] text-center  ${
+                isLoading ? "text-textopacity" : "text-white"
+              }`}
+            >
               Didn’t got your OTP ?
               <button
-              disabled={isLoading}
+                disabled={isLoading}
                 onClick={() => setResendOTPModal(true)}
                 className="text-base font-medium leading-[18.75px] text-center underline text-white mx-2"
               >
@@ -128,36 +133,35 @@ const reSendOtp= async()=>{
               </button>
             </p>
 
-
-
-
             <p className="text-base  leading-[18.75px] text-center  text-white">
-            Wrong Email ?
+              Wrong Email ?
               <button
                 onClick={() => {
-                  setResendOTPModal(false)
-                  registerAgain()
+                  setResendOTPModal(false);
+                  registerAgain();
                 }}
-                className="text-sm  leading-[18.75px] text-center underline text-white mx-2">
-               Register again
+                className="text-sm  leading-[18.75px] text-center underline text-white mx-2"
+              >
+                Register again
               </button>
             </p>
-           
           </div>
         </div>
       </div>
       {
         // Resend OTP Modal
         resendOTPModal && (
-          <Modal setResendOTPModal={setResendOTPModal}  reSendOtp={reSendOtp}></Modal>
+          <ResendOtpModal
+            setResendOTPModal={setResendOTPModal}
+            reSendOtp={reSendOtp}
+          ></ResendOtpModal>
         )
       }
     </>
   );
 }
 
-
-function Modal(props) {
+export function ResendOtpModal(props) {
   return (
     <div
       onClick={() => props.setResendOTPModal(false)}
@@ -175,19 +179,23 @@ function Modal(props) {
             <IoClose size={24} />
           </button>
         </div>
-        <div className="flex items-center justify-center flex-col gap-2">
+        <div className="flex items-center justify-center flex-col gap-2 ">
           <p className="mb-4 text-white text-2xl font-bold text-center">
             Resend OTP <br />
             <span className="text-base font-medium"> Are you sure ?</span>
           </p>
-          <div className="flex gap-4">
-            <button 
-            onClick={(()=> props.reSendOtp())}
-             className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold">
+          <div className="flex gap-4 flex-wrap justify-center">
+            <button
+              onClick={() => props.reSendOtp()}
+              className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold"
+            >
               Yes, Resend
             </button>
 
-            <button onClick={() => props.setResendOTPModal(false)} className="bg-slate-900 text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold">
+            <button
+              onClick={() => props.setResendOTPModal(false)}
+              className="bg-slate-900 text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold"
+            >
               Discard
             </button>
           </div>
