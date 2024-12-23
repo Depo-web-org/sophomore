@@ -1,28 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { useSignupMutation } from "../../../../../../Redux/Auth/authApiSlice";
-import axios from "axios";
+import {
+  useResend_otpMutation,
+  useSignupMutation,
+} from "../../../../../../Redux/Auth/authApiSlice";
 
-
-
-
-//Resend
-const ResendOTP=  (  data , handleSendOtp ,setAlreadyAv)=> {
-   axios.post('http://192.168.1.26:8000/api/v1/resend-otp/consumer/', {email: data.email}).then(()=>handleSendOtp()).catch((err)=>{ 
-    err.response.data.message === "Your account has already been verified. Please go to the login page." ?setAlreadyAv(true):    console.log(err.response.data.message)
- 
-  })
-}
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
-  const [alreadyAv, setAlreadyAv] = useState(false)
-// const [ResendOtp, setResendOtp] = useState(second)
+  const [alreadyAv, setAlreadyAv] = useState(false);
   // Redux Toolkit's useSignupMutation hook
-  const [signup, { isLoading, isSuccess, isError, error }] =
+  const [resendOtp] = useResend_otpMutation();
+  const [signup, { isLoading }] =
     useSignupMutation();
 
   const {
@@ -44,9 +36,28 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     try {
       // Call the signup mutation here instead of axios
       await signup(data).unwrap();
-      handleSendOtp(); 
+      handleSendOtp();
     } catch (err) {
-      err.data.email[0] === 'Consumer with this email already exists.'? ResendOTP(data,handleSendOtp , setAlreadyAv) :  console.log(err.response)
+      err.data.email[0] === "Consumer with this email already exists."
+        ? ResendOTP(data, handleSendOtp, setAlreadyAv)
+        : console.log(err.response);
+    }
+  };
+
+  // Redux Toolkit's useResend_otpMutation hook
+  const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
+    try {
+      await resendOtp({ email: data.email }).unwrap();
+      handleSendOtp(); // Call the success callback
+    } catch (err) {
+      if (
+        err?.data?.message ===
+        "Your account has already been verified. Please go to the login page."
+      ) {
+        setAlreadyAv(true); // Set the already verified flag
+      } else {
+        console.error("Resend OTP Error:", err?.data?.message || err);
+      }
     }
   };
 
@@ -256,14 +267,17 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
         </div>
       </div>
       <div className="mx-auto ">
-       
-        <p className={`text-sm  ${alreadyAv ? 'text-secondary font-bold text-4xl' : 'text-gray-500' } `}>
-          Already have an account {alreadyAv ? "please check your email" :  "  ?  please "}
+        <p
+          className={`text-sm  ${
+            alreadyAv ? "text-secondary font-bold text-4xl" : "text-gray-500"
+          } `}
+        >
+          Already have an account{" "}
+          {alreadyAv ? "please check your email" : "  ?  please "}
           <button
             onClick={toggleForm}
             className="underline px-2 text-secondary"
           >
-
             Login
           </button>
         </p>
