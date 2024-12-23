@@ -1,55 +1,55 @@
-import { AuthProvider } from './ProtectedRoutes/AuthContext';
-import ScrollTop from './Helpers/ScrollTop';
-import ButtomTop from './Helpers/ButtomTop';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Home from './Modules/Student/pages/Home/index';
-import About from './Modules/Student/pages/About/index';
-import Contact from './Modules/Student/pages/Contact/index';
-import Cart from './Modules/Student/pages/Cart/index';
-import CourseVideo from './Modules/Student/pages/CourseVideo/index';
-import CourseDetails from './Modules/Student/pages/CourseVideo/components/CourseInfos/CourseDetails';
-import CourseComments from './Modules/Student/pages/CourseVideo/components/CourseInfos/CourseComments';
-import CourseMaterial from './Modules/Student/pages/CourseVideo/components/CourseInfos/CourseMaterial';
-import WishList from './Modules/Student/pages/Wishlist/index';
-import Wishlistempty from './Modules/Student/pages/Wishlist/components/Wishlistempty';
-import { Grade } from './Modules/Student/pages/Grades/index';
-import Subjects from './Modules/Student/pages/Subjects/index';
-import Teachers from './Modules/Student/pages/Teachers';
-import TeacherDetails from './Modules/Student/pages/TeacherDetails/index';
-import { AboutTab } from './Modules/Student/pages/TeacherDetails/components/TeacherInfos';
-import CourseDetailsTab from './Modules/Student/pages/TeacherDetails/components/CourseDetailsTab';
-import ReviewsTab from './Modules/Student/pages/TeacherDetails/components/ReviewsTab';
-import Profile from './Modules/Student/pages/Profile/index';
-import MyProfile from './Modules/Student/pages/Profile/components/MyProfile/MyProfile';
-import Subscriptions from './Modules/Student/pages/Profile/components/Subscriptions/Subscriptions';
-import Security from './Modules/Student/pages/Profile/components/Security/Security';
-import Register from './Modules/Student/pages/Register/index';
-import IndexTeacher from './Modules/Teacher/pages';
-import Teacherr from './Modules/Teacher/components/TeacherUpload/Teacher';
-import Dashboard from './Modules/Teacher/pages/Dashboard/index';
-import Courses from './Modules/Teacher/pages/Courses/Index';
-import CourseStatistics from './Modules/Teacher/pages/Courses/Page/CourseStatistics';
-import AddNewCourse from './Modules/Teacher/pages/Courses/Page/AddNewCourse';
-import ChooseUnit from './Modules/Teacher/pages/Courses/Page/ChooseUnit/Index';
-import ItemsUnit from './Modules/Teacher/pages/Courses/Page/ChooseUnit/page/ItemsUnit';
-import Unit from './Modules/Teacher/pages/Courses/Page/ChooseUnit/page/Unit/Unit';
-import Test from './Modules/Teacher/pages/Courses/Page/Test';
-import Students from './Modules/Teacher/pages/Students/index';
-import StudentStatistics from './Modules/Teacher/pages/Students/components/StudentStatistics';
-import StudentProfile from './Modules/Teacher/pages/Students/components/StudentProfile';
-import TeacherProfile from './Modules/Teacher/pages/Profile/index';
+import { AuthProvider } from "./ProtectedRoutes/AuthContext";
+import ScrollTop from "./Helpers/ScrollTop";
+import ButtomTop from "./Helpers/ButtomTop";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Modules/Student/pages/Home/index";
+import About from "./Modules/Student/pages/About/index";
+import Contact from "./Modules/Student/pages/Contact/index";
+import Cart from "./Modules/Student/pages/Cart/index";
+import CourseVideo from "./Modules/Student/pages/CourseVideo/index";
+import CourseDetails from "./Modules/Student/pages/CourseVideo/components/CourseInfos/CourseDetails";
+import CourseComments from "./Modules/Student/pages/CourseVideo/components/CourseInfos/CourseComments";
+import CourseMaterial from "./Modules/Student/pages/CourseVideo/components/CourseInfos/CourseMaterial";
+import WishList from "./Modules/Student/pages/Wishlist/index";
+import Wishlistempty from "./Modules/Student/pages/Wishlist/components/Wishlistempty";
+import { Grade } from "./Modules/Student/pages/Grades/index";
+import Subjects from "./Modules/Student/pages/Subjects/index";
+import Teachers from "./Modules/Student/pages/Teachers";
+import TeacherDetails from "./Modules/Student/pages/TeacherDetails/index";
+import { AboutTab } from "./Modules/Student/pages/TeacherDetails/components/TeacherInfos";
+import CourseDetailsTab from "./Modules/Student/pages/TeacherDetails/components/CourseDetailsTab";
+import ReviewsTab from "./Modules/Student/pages/TeacherDetails/components/ReviewsTab";
+import Profile from "./Modules/Student/pages/Profile/index";
+import MyProfile from "./Modules/Student/pages/Profile/components/MyProfile/MyProfile";
+import Subscriptions from "./Modules/Student/pages/Profile/components/Subscriptions/Subscriptions";
+import Security from "./Modules/Student/pages/Profile/components/Security/Security";
+import Register from "./Modules/Student/pages/Register/index";
+import IndexTeacher from "./Modules/Teacher/pages";
+import Teacherr from "./Modules/Teacher/components/TeacherUpload/Teacher";
+import Dashboard from "./Modules/Teacher/pages/Dashboard/index";
+import Courses from "./Modules/Teacher/pages/Courses/Index";
+import CourseStatistics from "./Modules/Teacher/pages/Courses/Page/CourseStatistics";
+import AddNewCourse from "./Modules/Teacher/pages/Courses/Page/AddNewCourse";
+import ChooseUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/Index";
+import ItemsUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/ItemsUnit";
+import Unit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/Unit/Unit";
+import Test from "./Modules/Teacher/pages/Courses/Page/Test";
+import Students from "./Modules/Teacher/pages/Students/index";
+import StudentStatistics from "./Modules/Teacher/pages/Students/components/StudentStatistics";
+import StudentProfile from "./Modules/Teacher/pages/Students/components/StudentProfile";
+import TeacherProfile from "./Modules/Teacher/pages/Profile/index";
 import {
   AuthLayout,
   DashboardLayout,
   PublicLayout,
   NavTeacher,
-} from './utils/layouts';
-import ProtectedRoute from './ProtectedRoutes/StudentProtected';
-import Quiz from './Modules/Student/pages/Quiz/Index';
-import MyLearning from './Modules/Student/pages/MyLearning/index';
-import { useEffect, useState } from 'react';
-import { ImSpinner9 } from 'react-icons/im';
-import ResetPassword from './Modules/Student/pages/Register/components/ResetPassword/ResetPassword';
+} from "./utils/layouts";
+import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
+import Quiz from "./Modules/Student/pages/Quiz/Index";
+import MyLearning from "./Modules/Student/pages/MyLearning/index";
+import { useEffect, useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
+import ResetPassword from "./Modules/Student/pages/Register/components/ResetPassword/ResetPassword";
 
 function AppRoutes() {
   return (
@@ -122,34 +122,34 @@ function AppRoutes() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <Profile />
+              // </ProtectedRoute>
             }
           >
             <Route index element={<Navigate to="myprofile" />} />
             <Route
               path="myprofile"
               element={
-                <ProtectedRoute>
-                  <MyProfile />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <MyProfile />
+                // </ProtectedRoute>
               }
             />
             <Route
               path="subscriptions"
               element={
-                <ProtectedRoute>
-                  <Subscriptions />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Subscriptions />
+                // </ProtectedRoute>
               }
             />
             <Route
               path="security"
               element={
-                <ProtectedRoute>
-                  <Security />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Security />
+                // </ProtectedRoute>
               }
             />
           </Route>
@@ -157,11 +157,11 @@ function AppRoutes() {
 
         {/* login */}
         <Route path="/register">
-    <Route index element={<Register />} />
-    <Route path="reset-password/" >
-    <Route index path=":userMail" element={<ResetPassword />} />
-    </Route>
-  </Route>
+          <Route index element={<Register />} />
+          <Route path="reset-password/">
+            <Route index path=":userMail" element={<ResetPassword />} />
+          </Route>
+        </Route>
 
         {/* page Teacherrrr */}
         <Route path="/" element={<NavTeacher />}>
@@ -220,7 +220,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
