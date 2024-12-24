@@ -8,7 +8,7 @@ import { MdOutlineLogout } from "react-icons/md";
 import axios from "axios";
 import Alert from "./components/Alerts/Alert";
 import OpseModels from "./components/Opse Models/OpseModel";
-import { useLogoutMutation } from "../../../../Redux/Auth/authApiSlice";
+import { useStudent_logoutMutation } from "../../../../Redux/Auth/authApiSlice";
 export default function Profile() {
   const [Active, setActive] = useState("close");
 
@@ -16,7 +16,7 @@ export default function Profile() {
 
   const navigate = useNavigate();
 
-  const [logout, { isLoading, isError, error }] = useLogoutMutation();
+  const [logout, { isLoading, isError, error }] = useStudent_logoutMutation();
 
   const handleLogout = async () => {
     const refresh_token = localStorage.getItem("refresh_token");

@@ -63,17 +63,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-    change_password: builder.mutation({
-      query: ({ data, role }) => {
-        console.log("Data=>", data, role); // Debugging log
-        return {
-          url: `/change-password/${role}/`,
-          method: "POST",
-          body: { data },
-        };
-      },
+    student_change_password: builder.mutation({
+      query: ({ data }) => ({
+        url: "/change-password/consumer/",
+        method: "POST",
+        body: data,
+      }),
     }),
-    logout: builder.mutation({
+    student_logout: builder.mutation({
       query: (data) => ({
         url: "/logout/consumer/",
         method: "POST",
@@ -90,6 +87,6 @@ export const {
   useVerify_emailMutation,
   useResend_otpMutation,
   useReset_passwordMutation,
-  useChange_passwordMutation,
-  useLogoutMutation,
+  useStudent_change_passwordMutation,
+  useStudent_logoutMutation,
 } = authApiSlice;

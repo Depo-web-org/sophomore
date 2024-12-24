@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { FaCheck, FaRegEyeSlash } from "react-icons/fa";
 import Alert from "../Alerts/Alert";
 import { FaRegEye } from "react-icons/fa6";
-import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import { useStudent_change_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { useSelector } from "react-redux";
 
 export default function Security() {
@@ -28,7 +28,7 @@ export default function Security() {
   };
 
   const [changePassword, { isLoading, isError, error }] =
-    useChange_passwordMutation();
+    useStudent_change_passwordMutation();
 
   const onSubmit = async (data) => {
     if (data.new_password !== data.confirm_password) {
