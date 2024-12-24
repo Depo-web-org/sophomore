@@ -5,9 +5,12 @@ import { FaCheck, FaRegEyeSlash } from "react-icons/fa";
 import Alert from "../Alerts/Alert";
 import { FaRegEye } from "react-icons/fa6";
 import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import { useSelector } from "react-redux";
 
 export default function Security() {
   const [showAlert, setShowAlert] = useState(false);
+  const role = useSelector((state) => state.role.role);
+  console.log(role);
 
   const {
     register,
@@ -38,16 +41,15 @@ export default function Security() {
       console.error("Refresh token is missing!");
       return;
     }
-
+    console.log(refresh_token);
+    const infos = {
+      refresh_token,
+      old_password: data.old_password,
+      new_password: data.new_password,
+      confirm_password: data.confirm_password,
+    };
     try {
-      const response = await changePassword({
-        data: {
-          refresh_token,
-          old_password: data.old_password,
-          new_password: data.new_password,
-          confirm_password: data.confirm_password,
-        },
-      }).unwrap();
+      const response = await changePassword({ data: infos, role }).unwrap();
 
       console.log("Password change successful:", response);
 
