@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LogInContent from "./Components/LogInContent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useLoginMutation,
   useForget_passwordMutation,
@@ -15,8 +15,9 @@ export default function Login({ toggleForm }) {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
-
+  const role = useSelector((state) => state.role.role);
   const dispatch = useDispatch();
+
 
   const {
     register,
@@ -29,45 +30,35 @@ export default function Login({ toggleForm }) {
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
 
-  const handleLogin = async (data) => {
-    try {
-      console.log("Login request data:", data);
-
-      const response = await login({
-        email: data.email,
-        password: data.password,
-      }).unwrap();
-
-      console.log("Login response:", response);
-
-      if (response) {
-        console.log("Login successful:", response);
-        localStorage.setItem("refresh_token", response.refresh_token);
-        // Dispatch the setCredentials action to save the user data in the Redux store
-        dispatch(setCredentials(response));
-
-        // Reset the form after successful login
-        reset();
-        navigate("/");
-
-        // Aa313123@jjj   mohamed.taher@depowebeg.com
+    const handleLogin = async (data) => {
+      try {
+        const userData = { email: data.email, password: data.password };
+        const response = await login({ userData, role }).unwrap();
+        if (response) {
+          console.log("Login successful:", response);
+          localStorage.setItem("refresh_token", response.refresh_token);
+          // Dispatch the setCredentials action to save the user data in the Redux store
+          dispatch(setCredentials(response));
+  
+          // Reset the form after successful login
+          reset();
+          navigate("/");
+  
+          // Aa313123@jjj   mohamed.taher@depowebeg.com
+        }
+        // Handle successful login logic here
+      } catch (error) {
+        console.error("Login Error:", error);
+        // Handle errors here
       }
-    } catch (error) {
-      console.error("Login Error:", error);
-
-      if (error?.data?.message) {
-        setErrorMessage(error.data.message);
-      } else if (error?.status === 401) {
-        setErrorMessage("Invalid email or password.");
-      } else {
-        setErrorMessage("There was an unexpected error. Please try again.");
-      }
-    }
-  };
+    };
+    
+    
 
   const handleForgetPassword = async (data) => {
+    // console.log("Form data:", {email: data.email})
     try {
-      const response = await forgetpassword({ email: data.email }).unwrap();
+      const response = await forgetpassword({ email: data.email, role }).unwrap();
       const enCodedMail = encodeEmail(data.email);
       navigate(`/register/reset-password/${enCodedMail}`);
     } catch (err) {
@@ -81,6 +72,8 @@ export default function Login({ toggleForm }) {
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
       {forgetPassword ? (
         <ForgetPassword
+          errorMessage={errorMessage}
+          errors={errors}
           register={register}
           handleSubmit={handleSubmit}
           handleForgetPassword={handleForgetPassword}

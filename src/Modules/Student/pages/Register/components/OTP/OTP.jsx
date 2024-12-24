@@ -8,10 +8,12 @@ import {
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { HeadTitle } from "../Login/Login";
+import { useSelector } from "react-redux";
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
+  const role = useSelector((state) => state.role.role);
 
   // time format
   const [timeLeft, setTimeLeft] = useState(60);
@@ -33,10 +35,11 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     const otp_code = data.otp.join("");
 
     try {
-      const response = await verifyEmail({ otp_code }).unwrap();
+      const response = await verifyEmail({ otp_code}).unwrap();
       console.log("Verify Email Response:", response);
       handleValidateOtp(); // Call the provided callback on success
     } catch (err) {
+
       console.error("Verification Error:", err?.data?.message || err);
     }
   };
@@ -86,7 +89,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     setResendOTPModal(false);
     setIsResendDisabled(true);
     setTimeLeft(60);
-    await resendOtp({ email: mail.email })
+    await resendOtp({ email: mail.email , role})
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));

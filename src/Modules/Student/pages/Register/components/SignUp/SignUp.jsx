@@ -11,16 +11,25 @@ import {
 import { HeadTitle } from "../Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
+import UserRole from "../components/UserRole/UserRole";
+
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
+
   const role = useSelector((state) => state.role.role);
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
+  
   const [alreadyAv, setAlreadyAv] = useState(false);
+
+
+
+
+
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
-  const [signup, { isLoading }] =
-    useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
 
   const {
     register,
@@ -37,27 +46,28 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
   const onSubmit = async (data) => {
     setMail(data);
-
     try {
       // Call the signup mutation here instead of axios
       await signup({ userData: data, role }).unwrap();
       handleSendOtp();
     } catch (err) {
-      err.data.email[0] === "Consumer with this email already exists."
+      console.error("Signup Error:", err.data.email[0]);
+      err.data.email[0] === "Consumer with this email already exists." || err.data.email[0] === "Provider with this email already exists."
+        // ? handleSendOtp()
         ? ResendOTP(data, handleSendOtp, setAlreadyAv)
         : console.log(err.response);
     }
   };
-
+//645838
   // Redux Toolkit's useResend_otpMutation hook
   const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
     try {
-      await resendOtp({ email: data.email },role).unwrap();
+      await resendOtp({ email:data.email, role }).unwrap();
       handleSendOtp(); // Call the success callback
     } catch (err) {
       if (
         err?.data?.message ===
-        "Your account has already been verified. Please go to the login page."
+        "Your account has already been verified. Please go to the login page." 
       ) {
         setAlreadyAv(true); // Set the already verified flag
       } else {
@@ -66,52 +76,23 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     }
   };
 
-console.log(role)
+  console.log(role);
   return (
     <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full">
-  
         <HeadTitle
-                  title={{
-                    head: "Join Our Team",
-                    subTitle: "  Fill the form to join our team",
-                  }}
-                />
+          title={{
+            head: "Join Our Team",
+            subTitle: "  Fill the form to join our team",
+          }}
+        />
         <div className="w-full">
           {/* form starting */}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="mb-0 w-full space-y-4 flex flex-col gap-5"
           >
-            <div className="w-full flex justify-center items-center gap-4 lg:gap-8">
-              <button
-                onClick={() => 
-                  dispatch(setRole("consumer"))
-                }
-                type="button"
-                className={`text-white text-base font-bold px-10 py-2 outline-none ${
-                  role === "consumer"
-                    ? "bg-secondary "
-                    : "bg-opacity-0  border border-gray-600"
-                } rounded-lg duration-200 transition-all`}
-              >
-                Student
-              </button>
-              <button
-                onClick={() =>
-                  dispatch(setRole("provider"))
-                }
-                type="button"
-                className={`text-white text-base font-bold px-10 py-2 outline-none ${
-                  role === "provider"
-                    ? "bg-secondary "
-                    : "bg-opacity-0  border border-gray-600"
-                } rounded-lg duration-200 transition-all`}
-              >
-                Teacher
-              </button>
-            </div>
-
+            <UserRole role={role} dispatch={dispatch}/>
             {/* Name Field */}
             <div>
               <label

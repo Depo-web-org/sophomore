@@ -11,6 +11,7 @@ import {
   useReset_passwordMutation,
 } from "../../../../../../Redux/Auth/authApiSlice";
 import { ResendOtpModal } from "../OTP/OTP";
+import { useSelector } from "react-redux";
 
 const ResetPassword = () => {
   const { userMail } = useParams(); // Get encoded email from the URL
@@ -19,6 +20,7 @@ const ResetPassword = () => {
   const email = decodeEmail(userMail);
   const [showPassword, setShowPassword] = useState(false);
   const [resendOTPModal, setResendOTPModal] = useState(false);
+  const role = useSelector((state) => state.role.role);
 
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
@@ -44,7 +46,7 @@ const ResetPassword = () => {
     };
 
     try {
-      const response = await resetPassword(dataSend)
+      const response = await resetPassword({dataSend,role})
         .unwrap()
         .then((response) => console.log(response));
       navigate("/register");
@@ -71,7 +73,7 @@ const ResetPassword = () => {
     }
   };
 
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(3);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   const formatTime = (time) => {
@@ -97,7 +99,7 @@ const ResetPassword = () => {
     setResendOTPModal(false);
     setIsResendDisabled(true);
     setTimeLeft(60);
-    await forgetpassword({ email })
+    await forgetpassword({ email ,role})
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
