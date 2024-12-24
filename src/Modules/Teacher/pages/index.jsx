@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useForm } from "react-hook-form";
 import TopText from "../components/Top Text Cards/TopText";
 import Useoptions from "../../../Hooks/Useoptions";
 import Teacherr from "../components/TeacherUpload/Teacher";
