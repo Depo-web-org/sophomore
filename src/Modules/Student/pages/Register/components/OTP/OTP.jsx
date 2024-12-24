@@ -210,7 +210,7 @@ export function ResendOtpModal(props) {
       className="fixed inset-0 bg-slate-600 bg-opacity-75 flex items-center justify-center z-50 "
     >
       <div
-        className="bg-slate-900 rounded-lg p-6 w-3/5 mx-auto border-r-2 border-b-2 border-primary "
+        className="bg-slate-900 rounded-lg p-6 w-full mx-4 lg:w-3/5 lg:mx-auto border-r-2 border-b-2 border-primary "
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-end justify-end">

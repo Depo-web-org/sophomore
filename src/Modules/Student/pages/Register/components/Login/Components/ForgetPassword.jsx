@@ -1,77 +1,89 @@
 import { ImSpinner9 } from "react-icons/im";
 import { HeadTitle } from "../Login";
+import { MdAlternateEmail } from "react-icons/md";
 
 export default function ForgetPassword({
   register,
   handleSubmit,
-  errorMessage,
-  errors,
+  ResponseError,
+  errorsForm,
   handleForgetPassword,
   setForgetPassword,
   loadingSending,
 }) {
 
-  console.log(errorMessage)
+  console.log(errorsForm)
   return (
-    <div className="flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right">
-      <HeadTitle
+    <div className="flex flex-col items-start gap-8 justify-center lg:gap-24 slide-in-right min-h-screen w-full 2xl:w-4/5 mr-auto">
+     <div className="w-full -mt-20"> 
+     <HeadTitle
         title={{
           head: "Forget Password?",
           subTitle: "Please write your email",
         }}
       />
-      <div className="w-full">
+     </div>
+      <div className="w-full  ">
         <form
           onSubmit={handleSubmit(handleForgetPassword)}
           className="w-full space-y-4 flex flex-col gap-4 pb-8 border-b border-gray-600"
         >
           <div>
-            <label htmlFor="email" className="sr-only">
-              Email
-            </label>
-            <div className="relative">
-              <input
-                type="email"
-                id="email"
-                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm outline-none"
-                placeholder="Enter email"
-                {...register("email", { required: "Email is required" })}
-              />
-              {errors?.email || errorMessage && (
-                <p className="text-red-500  mt-4 text-center ">{errors?.email?.message || errorMessage}</p>
-              )}
-              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-4 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                  />
-                </svg>
-              </span>
-            </div>
+            <div className="relative  ">
+                          <label
+                            htmlFor="loginMail"
+                            className={`w-full bg-white rounded-lg  ${
+                              errorsForm?.loginMail &&
+                              "border-2 border-red-600 "
+                            }  p-4 text-sm shadow-sm flex items-center justify-between`}
+                          >
+                            <input
+                              id="loginMail"
+                              className="outline-none flex-1"
+                               // className={`w-full rounded-lg  ${errorsForm?.loginMai?  "outline-red-600":  "  outline-none"} p-4 pe-12 text-sm shadow-sm `}
+                              placeholder="Enter email"
+                              {...register("loginMail", {
+                                required: `Email is required`,
+                                pattern: {
+                                  value:
+                                    /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                  message: `Please enter a valid email address.  e.g: user.name@domain.com `,
+                                 },
+                               })}
+                             />
+                             <MdAlternateEmail className="ml-2 text-gray-500 focus:outline-none" />
+                           </label>
+                           {errorsForm?.loginMail && (
+                             <p className="text-red-500 text-sm mt-4 text-center font-medium">
+                               {errorsForm?.loginMail.message}
+                             </p>
+                           )}
+                         </div>
           </div>
+
           <button
             type="submit"
-            disabled={loadingSending}
+            disabled={loadingSending || errorsForm.loginMail } 
             className={`inline-flex w-full rounded-lg ${
-              loadingSending ? "bg-white" : "bg-primary"
-            } px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
+              loadingSending ? "bg-white text-white " : ` ${errorsForm.loginMail ? "bg-primary bg-opacity-5 text-white cursor-not-allowed text-opacity-60  ": "bg-primary text-white hover:bg-secondary duration-150 transition-all" } `
+            } px-5 py-3 text-sm font-medium  justify-center items-center`}
           >
             {loadingSending ? (
               <ImSpinner9 className="animate-spin text-3xl text-secondary " />
             ) : (
-              "    Send OTP"
+              "Send OTP"
             )}
           </button>
         </form>
+        {
+          ResponseError&& <div className="w-full mt-4 ">
+          <p   className=" px-2 text-secondary text-sm text-center font-semibold underline ">
+
+          {ResponseError}
+          </p>
+        </div>
+        }
+       
         {/* loadingSending */}
         <div className="w-full flex justify-center mt-4">
           <button

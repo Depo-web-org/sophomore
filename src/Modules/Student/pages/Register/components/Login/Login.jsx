@@ -32,7 +32,7 @@ export default function Login({ toggleForm }) {
 
     const handleLogin = async (data) => {
       try {
-        const userData = { email: data.email, password: data.password };
+        const userData = { email: data.loginMail, password: data.password };
         const response = await login({ userData, role }).unwrap();
         if (response) {
           console.log("Login successful:", response);
@@ -48,7 +48,12 @@ export default function Login({ toggleForm }) {
         }
         // Handle successful login logic here
       } catch (error) {
-        console.error("Login Error:", error);
+        console.error("Login Error:", error?.data?.message
+        );
+        setErrorMessage(
+          error?.data?.message
+
+        );
         // Handle errors here
       }
     };
@@ -58,13 +63,17 @@ export default function Login({ toggleForm }) {
   const handleForgetPassword = async (data) => {
     // console.log("Form data:", {email: data.email})
     try {
-      const response = await forgetpassword({ email: data.email, role }).unwrap();
-      const enCodedMail = encodeEmail(data.email);
+      const response = await forgetpassword({ email: data.loginMail, role }).unwrap();
+      const enCodedMail = encodeEmail(data.loginMail);
       navigate(`/register/reset-password/${enCodedMail}`);
-    } catch (err) {
-      setErrorMessage(
-        err?.data?.message || "There was an unexpected error. Please try again."
+    }catch (error) {
+      console.error("Login Error:", error?.data?.message
       );
+      setErrorMessage(
+        error?.data?.message
+
+      );
+      // Handle errors here
     }
   };
 
@@ -72,8 +81,8 @@ export default function Login({ toggleForm }) {
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
       {forgetPassword ? (
         <ForgetPassword
-          errorMessage={errorMessage}
-          errors={errors}
+          ResponseError={errorMessage}
+          errorsForm={errors}
           register={register}
           handleSubmit={handleSubmit}
           handleForgetPassword={handleForgetPassword}
@@ -87,13 +96,11 @@ export default function Login({ toggleForm }) {
           toggleForm={toggleForm}
           register={register}
           handleSubmit={handleSubmit}
-          errorMessage={
-            isError
-              ? error?.data?.message || "There was an error during login"
-              : ""
+          ResponseError={
+            errorMessage
           }
           handleLogin={handleLogin}
-          errors={errors}
+          errorsForm={errors}
           forgetPassword={forgetPassword}
           setForgetPassword={setForgetPassword}
           loadingSending={isLoading}
@@ -108,10 +115,10 @@ export const HeadTitle = ({ title }) => {
     <div className="flex flex-col justify-start items-center lg:items-start gap-2  w-full">
      
       <img src="/logos/logo.svg" alt="" className="size-52 lg:size-auto lg:hidden" />
-      <p className="text-white text-3xl lg:text-4xl font-semibold pt-4">
+      <p className="text-white text-2xl md:text-3xl lg:text-5xl font-extrabold pt-4 text-center lg:text-start">
         {title.head}
       </p>
-      <p className="text-sm lg:text-base text-gray-600">{title.subTitle}</p>
+      <p className="text-sm lg:text-base text-gray-600 text-center lg:text-start">{title.subTitle}</p>
     </div>
   );
 };

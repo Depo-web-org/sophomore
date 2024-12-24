@@ -1,0 +1,12 @@
+@keyframes skew-x-shakeng {
+    0% { transform: skewX(-30deg); }
+    5% { transform: skewX(30deg); }
+    10% { transform: skewX(-30deg); }
+    15% { transform: skewX(30deg); }
+    20% { transform: skewX(0deg); }
+    100% { transform: skewX(0deg); }
+  }
+  
+  .skew-animation {
+    animation: skew-x-shakeng 1s ease-in-out 4;
+  }
