@@ -1,20 +1,27 @@
 import { apiSlice } from "../api/apiSclice";
+import { setCredentials } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: ({ userData, role }) => {
-        console.log("Sending data to login:", { userData, role }); // Debugging log
         return {
           url: `/login/${role}/`,
           method: "POST",
           body: userData,
         };
       },
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setCredentials(data)); // Store user and token
+        } catch (err) {
+          console.error(err);
+        }
+      },
     }),
     signup: builder.mutation({
       query: ({ userData, role }) => {
-        console.log("Sending data to signup:", { userData, role }); // Debugging log
         return {
           url: `/register/${role}/`,
           method: "POST",
@@ -24,7 +31,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     forget_password: builder.mutation({
       query: ({ email, role }) => {
-        console.log("Sending data to forget password:", { email, role }); // Debugging log
         return {
           url: `/reset-password/${role}/`,
           method: "POST",
@@ -34,7 +40,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     verify_email: builder.mutation({
       query: ({ otp_code }) => {
-        console.log("Sending data to otp:", otp_code); // Debugging log
         return {
           url: "/verify-email/",
           method: "POST",
@@ -45,7 +50,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 
     resend_otp: builder.mutation({
       query: ({ email, role }) => {
-        console.log("user mail ==> :", email); // Debugging log
         return {
           url: `/resend-otp/${role}/`,
           method: "POST",
@@ -55,7 +59,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     reset_password: builder.mutation({
       query: ({ dataSend, role }) => {
-        console.log("Data=>", dataSend); // Debugging log)
         return {
           url: `/confirm-reset-password/${role}/`,
           method: "POST",
