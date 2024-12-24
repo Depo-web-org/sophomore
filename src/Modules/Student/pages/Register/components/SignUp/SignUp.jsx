@@ -13,23 +13,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
 import UserRole from "../components/UserRole/UserRole";
 
-
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [requestEndPoints, setRequestEndPoints] = useState("student");
 
   const role = useSelector((state) => state.role.role);
 
   const dispatch = useDispatch();
-  
+
   const [alreadyAv, setAlreadyAv] = useState(false);
-
-
-
-
 
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
-  const [signup, { isLoading }] = useSignupMutation();
+  const [signup, { isLoading, isError, error }] = useSignupMutation();
+  console.log(error?.data.message);
 
   const {
     register,
@@ -51,23 +47,24 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       await signup({ userData: data, role }).unwrap();
       handleSendOtp();
     } catch (err) {
-      console.error("Signup Error:", err.data.email[0]);
-      err.data.email[0] === "Consumer with this email already exists." || err.data.email[0] === "Provider with this email already exists."
-        // ? handleSendOtp()
-        ? ResendOTP(data, handleSendOtp, setAlreadyAv)
+      console.error("Signup Error:", err.data.message);
+      err?.data.message === "Consumer with this email already exists." ||
+      err?.data.message === "Provider with this email already exists."
+        ? // ? handleSendOtp()
+          ResendOTP(data, handleSendOtp, setAlreadyAv)
         : console.log(err.response);
     }
   };
-//645838
+  //645838
   // Redux Toolkit's useResend_otpMutation hook
   const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
     try {
-      await resendOtp({ email:data.email, role }).unwrap();
+      await resendOtp({ email: data.email, role }).unwrap();
       handleSendOtp(); // Call the success callback
     } catch (err) {
       if (
         err?.data?.message ===
-        "Your account has already been verified. Please go to the login page." 
+        "Your account has already been verified. Please go to the login page."
       ) {
         setAlreadyAv(true); // Set the already verified flag
       } else {
@@ -83,7 +80,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
         <HeadTitle
           title={{
             head: "Join Our Team",
-            subTitle: "  Fill the form to join our team",
+            subTitle: "Fill the form to join our team",
           }}
         />
         <div className="w-full">
@@ -92,32 +89,30 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             onSubmit={handleSubmit(onSubmit)}
             className="mb-0 w-full space-y-4 flex flex-col gap-5"
           >
-            <UserRole role={role} dispatch={dispatch}/>
+            <UserRole role={role} dispatch={dispatch} />
             {/* Name Field */}
             <div>
               <label
                 htmlFor="full_name"
-                className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between "
+                className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
               >
                 <input
                   type="text"
                   id="full_name"
                   {...register("full_name", {
                     required: "Name is required",
-                    validate: (value) => {
-                      const nameParts = value.trim().split(" ");
-                      return (
-                        nameParts.length >= 2 ||
-                        "Please enter at least two names"
-                      );
+                    pattern: {
+                      value: /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/,
+                      message:
+                        "Enter a valid full name with two words, each at least 3 letters",
                     },
                   })}
-                  className="outline-none w-full "
+                  className="outline-none w-full"
                   placeholder="Enter your Full Name"
                 />
               </label>
               {errors.full_name && (
-                <p className="text-red-500 text-sm mt-4  ">
+                <p className="text-red-500 text-sm text-center font-medium mt-4">
                   {errors.full_name.message}
                 </p>
               )}
@@ -131,7 +126,6 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                 name="phone_number"
                 control={control}
                 rules={{
-                  required: "Phone number is required",
                   validate: (value) =>
                     (value && isValidPhoneNumber(value)) ||
                     "Invalid phone number",
@@ -147,32 +141,32 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                 )}
               />
               {errors.phone_number && (
-                <p className="text-red-500 text-sm mt-2">
+                <p className="text-red-500 text-sm text-center font-medium mt-4">
                   {errors.phone_number.message}
                 </p>
               )}
             </div>
-
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
               </label>
               <input
-                type="email"
                 id="email"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                    message: "Invalid email address",
+                    value: /^[a-zA-Z]{2,}[^@]*@[^@]+\.[^@ .]{2,}$/,
+                    message: `Enter a valid email address e.g:user.name@domain.com`,
                   },
                 })}
                 className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
                 placeholder="Enter your email"
               />
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+                <p className="text-red-500 text-sm text-center font-medium mt-4">
+                  {errors.email.message}
+                </p>
               )}
             </div>
             {/* Password Field */}
@@ -186,9 +180,11 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                   id="password"
                   {...register("password", {
                     required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
+                    pattern: {
+                      value:
+                        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
+                      message:
+                        "Password must contain at least one uppercase letter, one number, and one special character",
                     },
                   })}
                   className="outline-none flex-1"
@@ -203,7 +199,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                 </button>
               </label>
               {errors.password && (
-                <p className="text-red-500 text-sm">
+                <p className="text-red-500 text-sm text-center font-medium mt-4">
                   {errors.password.message}
                 </p>
               )}
@@ -233,42 +229,58 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                   {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                 </button>
               </label>
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
+              {errors.password2 && (
+                <p className="text-red-500 text-sm text-center font-medium mt-4">
+                  {errors.password2.message}
                 </p>
               )}
             </div>
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading} // Disable if loading
+              disabled={
+                isLoading ||
+                errors.full_name ||
+                errors.password2 ||
+                errors.password ||
+                errors.email ||
+                errors.phone_number
+              } // Disable if loading
               className={`inline-flex w-full rounded-lg ${
-                isLoading ? "bg-white" : "bg-primary"
-              } px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
+                isLoading
+                  ? "bg-white text-white "
+                  : ` ${
+                      errors.full_name ||
+                      errors.password2 ||
+                      errors.password ||
+                      errors.email ||
+                      errors.phone_number
+                        ? "bg-primary bg-opacity-5 cursor-not-allowed text-white text-opacity-60  "
+                        : "bg-primary text-white hover:bg-secondary duration-150 transition-all"
+                    } `
+              } px-5 py-3 text-sm font-medium text-white justify-center items-center`}
             >
               {isLoading ? (
-                <ImSpinner9 className="animate-spin text-3xl text-secondary " />
+                <ImSpinner9 className="animate-spin text-3xl text-secondary" />
               ) : (
                 " Sign Up"
               )}
             </button>
-
-            {/* Submit Button */}
           </form>
         </div>
       </div>
-      <div className="mx-auto ">
+      <div className="mx-auto">
         <p
-          className={`text-sm  ${
-            alreadyAv ? "text-secondary font-bold text-4xl" : "text-gray-500"
-          } `}
+          className={`text-sm ${
+            alreadyAv
+              ? "text-secondary font-bold text-xl  underline"
+              : "text-gray-500"
+          }`}
         >
-          Already have an account{" "}
-          {alreadyAv ? "please check your email" : "  ?  please "}
+          Already have an account {alreadyAv ? "" : " ? "}
           <button
             onClick={toggleForm}
-            className="underline px-2 text-secondary"
+            className="underline mx-1 text-secondary"
           >
             Login
           </button>
