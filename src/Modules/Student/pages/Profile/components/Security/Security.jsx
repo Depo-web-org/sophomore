@@ -4,11 +4,9 @@ import { useForm } from "react-hook-form";
 import { FaCheck, FaRegEyeSlash } from "react-icons/fa";
 import Alert from "../Alerts/Alert";
 import { FaRegEye } from "react-icons/fa6";
+import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
 
 export default function Security() {
-  const [errorMasege, seterrorMasege] = useState(false);
-  const [Loading, setLoading] = useState(false);
-
   const [showAlert, setShowAlert] = useState(false);
 
   const {
@@ -26,37 +24,37 @@ export default function Security() {
     }, 3000);
   };
 
+  const [changePassword, { isLoading, isError, error }] =
+    useChange_passwordMutation();
+
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.new_password !== data.confirm_password) {
       console.log("Passwords do not match!");
-      seterrorMasege(true);
       return;
     }
-    seterrorMasege(false);
-    setLoading(true);
 
     const refresh_token = localStorage.getItem("refresh_token");
-    console.log("Retrieved Refresh Token:", refresh_token);
+    if (!refresh_token) {
+      console.error("Refresh token is missing!");
+      return;
+    }
 
     try {
-      const response = await axios.post(
-        "http://192.168.1.26:7000/api/v1/change-password/consumer/",
-        {
-          refresh_token: refresh_token,
+      const response = await changePassword({
+        data: {
+          refresh_token,
           old_password: data.old_password,
           new_password: data.new_password,
           confirm_password: data.confirm_password,
-        }
-      );
+        },
+      }).unwrap();
+
+      console.log("Password change successful:", response);
 
       handleShowAlert();
-
       reset();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      console.error("Error changing password:", err);
     }
   };
   const [showPassword, setShowPassword] = useState(false);
@@ -208,9 +206,7 @@ export default function Security() {
           )}
         </div>
 
-        {errorMasege && (
-          <p className="text-red-500 text-sm">Password is filde</p>
-        )}
+        {isError && <p className="text-red-500 text-sm">Password is filde</p>}
 
         <button
           type="submit"
@@ -218,7 +214,7 @@ export default function Security() {
           data-twe-ripple-color="light"
           className="rounded bg-primary mt-3 px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
         >
-          {Loading ? (
+          {isLoading ? (
             <div
               className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
               role="status"
