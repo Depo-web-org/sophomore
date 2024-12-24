@@ -4,11 +4,14 @@ import { HeadTitle } from "../Login";
 export default function ForgetPassword({
   register,
   handleSubmit,
+  errorMessage,
   errors,
   handleForgetPassword,
   setForgetPassword,
   loadingSending,
 }) {
+
+  console.log(errorMessage)
   return (
     <div className="flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right">
       <HeadTitle
@@ -34,8 +37,8 @@ export default function ForgetPassword({
                 placeholder="Enter email"
                 {...register("email", { required: "Email is required" })}
               />
-              {errors?.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              {errors?.email || errorMessage && (
+                <p className="text-red-500  mt-4 text-center ">{errors?.email?.message || errorMessage}</p>
               )}
               <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                 <svg

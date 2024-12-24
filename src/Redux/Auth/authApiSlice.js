@@ -3,46 +3,65 @@ import { apiSlice } from "../api/apiSclice";
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: ({ credentials, role }) => ({
-        url: `/login/${role}/`,
-        method: "POST",
-        body: { ...credentials },
-      }),
+      query: ({ userData, role }) => {
+        console.log("Sending data to login:", { userData, role }); // Debugging log
+        return {
+          url: `/login/${role}/`,
+          method: "POST",
+          body: userData, 
+        };
+      },
     }),
     signup: builder.mutation({
-      query: ({ userData, role }) => ({
-        url: `/register/${role}/`,
+      query: ({userData, role }) => {
+        console.log("Sending data to signup:", { userData, role }); // Debugging log
+        return {
+          url: `/register/${role}/`,
         method: "POST",
         body: userData,
-      }),
+        }
+      },
     }),
     forget_password: builder.mutation({
-      query: ({ data, role }) => ({
-        url: `/reset-password/${role}/`,
+      query: ({ email, role }) => {
+        console.log("Sending data to forget password:", { email, role }); // Debugging log
+        return {
+          url: `/reset-password/${role}/`,
         method: "POST",
-        body: data,
-      }),
+        body: {email},
+        }
+      },
     }),
     verify_email: builder.mutation({
-      query: ({ data }) => ({
-        url: `/verify-email/`,
+      query: ({otp_code }) => {
+        console.log("Sending data to otp:", otp_code); // Debugging log
+        return {
+          url: "/verify-email/",
         method: "POST",
-        body: data,
-      }),
+        body: {otp_code },
+        }
+      },
     }),
+    
     resend_otp: builder.mutation({
-      query: ({ data, role }) => ({
+      query: ({ email, role }) => {
+        console.log("user mail ==> :",email ); // Debugging log
+        return {
         url: `/resend-otp/${role}/`,
         method: "POST",
-        body: data,
-      }),
+        body: {email},
+      }
+      },
     }),
     reset_password: builder.mutation({
-      query: ({ data, role }) => ({
+      query: ({ dataSend, role }) => {
+       console.log("Data=>",dataSend); // Debugging log)
+       return {
         url: `/confirm-reset-password/${role}/`,
         method: "POST",
-        body: data,
-      }),
+        body: dataSend,
+       }
+      },
     }),
     change_password: builder.mutation({
       query: ({ data }) => ({

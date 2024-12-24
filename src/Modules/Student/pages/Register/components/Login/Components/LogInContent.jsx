@@ -2,6 +2,8 @@ import { ImSpinner9 } from "react-icons/im";
 import { HeadTitle } from "../Login";
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import UserRole from "../../components/UserRole/UserRole";
 
 export default function LogInContent({
     register,
@@ -18,8 +20,12 @@ export default function LogInContent({
       const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
       };
+      const role = useSelector((state) => state.role.role);
+      const dispatch = useDispatch();
+
     return (
-      <div className=" flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right b">
+      <div className=" flex flex-col items-start gap-8 lg:gap-24 w-full slide-in-right ">
+        
         <HeadTitle
           title={{
             head: "Welcome Back !",
@@ -33,6 +39,8 @@ export default function LogInContent({
             onSubmit={handleSubmit(handleLogin)}
             className="mb-0 mt-0 lg:mt-8 w-full space-y-4 flex flex-col gap-4 lg:gap-8"
           >
+                    <UserRole role={role} dispatch={dispatch}/>
+
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
