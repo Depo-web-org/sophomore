@@ -271,17 +271,14 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       </div>
       <div className="mx-auto">
         <p
-          className={`text-sm ${
+          className={`${
             alreadyAv
               ? "text-secondary font-bold text-xl  underline"
               : "text-gray-500"
           }`}
         >
           Already have an account {alreadyAv ? "" : " ? "}
-          <button
-            onClick={toggleForm}
-            className="underline mx-1 text-secondary"
-          >
+          <button onClick={toggleForm} className="underline mx-1 text-primary">
             Login
           </button>
         </p>
