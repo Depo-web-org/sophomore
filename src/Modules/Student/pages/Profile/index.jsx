@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { TiFlash } from "react-icons/ti";
 import "./profile.css";
 import { MdOutlineLogout } from "react-icons/md";
-import axios from "axios";
-import Alert from "./components/Alerts/Alert";
 import OpseModels from "./components/Opse Models/OpseModel";
 import { useStudent_logoutMutation } from "../../../../Redux/Auth/authApiSlice";
 export default function Profile() {
@@ -16,25 +14,28 @@ export default function Profile() {
 
   const navigate = useNavigate();
 
-  const [logout, { isLoading, isError, error }] = useStudent_logoutMutation();
+  const [student_logout, { isLoading, isError, error }] =
+    useStudent_logoutMutation();
 
   const handleLogout = async () => {
     const refresh_token = localStorage.getItem("refresh_token");
-    console.log("Retrieved Refresh Token:", refresh_token);
     if (!refresh_token) {
       console.error("Refresh token is missing!");
       return;
     }
 
+    console.log("Attempting logout with token:", refresh_token);
+
     try {
-      const response = await logout({
-        refresh_token,
-      }).unwrap();
-      console.log("Logged out successfully!", response);
+      const response = await student_logout({ refresh_token }).unwrap();
+      console.log("Logout successful:", response);
       localStorage.removeItem("refresh_token");
       navigate("/register");
     } catch (error) {
-      console.log(error);
+      console.error("Logout failed:", error);
+      if (error.status === 401 && error.data.code === "user_not_found") {
+        console.warn("Token might be invalid or expired.");
+      }
     }
   };
 

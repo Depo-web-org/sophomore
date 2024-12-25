@@ -39,7 +39,12 @@ export default function Login({ toggleForm }) {
         // Dispatch the setCredentials action to save the user data in the Redux store
         const loginResponse = { ...response, role };
 
-        dispatch(setCredentials(loginResponse));
+        dispatch(
+          setCredentials({
+            token: loginResponse.access_token,
+            user: loginResponse,
+          })
+        );
         console.log("from login getting role:", loginResponse);
 
         // Reset the form after successful login

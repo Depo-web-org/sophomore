@@ -74,11 +74,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     student_logout: builder.mutation({
-      query: (data) => ({
-        url: "/logout/consumer/",
-        method: "POST",
-        body: data,
-      }),
+      query: (refresh_token) => {
+        console.log("data from logout slice", refresh_token);
+        return {
+          url: "/logout/consumer/",
+          method: "POST",
+          body: refresh_token,
+        };
+      },
     }),
   }),
 });

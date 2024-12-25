@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const StudentProtectedRoute = () => {
+const StudentProtectedRoute = ({ children }) => {
   const { token, user } = useSelector((state) => state.auth);
 
   if (!token) {
@@ -10,13 +10,13 @@ const StudentProtectedRoute = () => {
     return <Navigate to="/register" />;
   }
 
-  if (user?.role !== "student") {
+  if (user?.role !== "consumer") {
     // Redirect to register page if not a student
     return <Navigate to="/register" />;
   }
 
   // Render child routes if authenticated and authorized as a student
-  return <Outlet />;
+  return children;
 };
 
 export default StudentProtectedRoute;

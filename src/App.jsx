@@ -38,22 +38,18 @@ import Students from "./Modules/Teacher/pages/Students/index";
 import StudentStatistics from "./Modules/Teacher/pages/Students/components/StudentStatistics";
 import StudentProfile from "./Modules/Teacher/pages/Students/components/StudentProfile";
 import TeacherProfile from "./Modules/Teacher/pages/Profile/index";
-import {
-  AuthLayout,
-  DashboardLayout,
-  PublicLayout,
-  NavTeacher,
-} from "./utils/layouts";
-import ProtectedRoute from "./ProtectedRoutes/StudentProtected";
+import { DashboardLayout, PublicLayout, NavTeacher } from "./utils/layouts";
 import Quiz from "./Modules/Student/pages/Quiz/Index";
 import MyLearning from "./Modules/Student/pages/MyLearning/index";
 import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import ResetPassword from "./Modules/Student/pages/Register/components/ResetPassword/ResetPassword";
+import StudentProtectedRoute from "./ProtectedRoutes/StudentProtected";
+import TeacherProtectedRoute from "./ProtectedRoutes/TeacherProtectedRoute";
 
 function AppRoutes() {
   return (
-    <AuthProvider>
+    <>
       <ScrollTop />
       <ButtomTop />
       <Routes>
@@ -64,17 +60,17 @@ function AppRoutes() {
           <Route
             path="/cart"
             element={
-              <ProtectedRoute>
+              <StudentProtectedRoute>
                 <Cart />
-              </ProtectedRoute>
+              </StudentProtectedRoute>
             }
           />
           <Route
             path="/mylearning"
             element={
-              <ProtectedRoute>
+              <StudentProtectedRoute>
                 <MyLearning />
-              </ProtectedRoute>
+              </StudentProtectedRoute>
             }
           />
           {/* Quiz */}
@@ -94,9 +90,9 @@ function AppRoutes() {
           <Route
             path="/wishlist"
             element={
-              <ProtectedRoute>
+              <StudentProtectedRoute>
                 <WishList />
-              </ProtectedRoute>
+              </StudentProtectedRoute>
             }
           />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
@@ -122,34 +118,34 @@ function AppRoutes() {
           <Route
             path="/profile"
             element={
-              // <ProtectedRoute>
-              <Profile />
-              // </ProtectedRoute>
+              <StudentProtectedRoute>
+                <Profile />/{" "}
+              </StudentProtectedRoute>
             }
           >
             <Route index element={<Navigate to="myprofile" />} />
             <Route
               path="myprofile"
               element={
-                // <ProtectedRoute>
-                <MyProfile />
-                // </ProtectedRoute>
+                <StudentProtectedRoute>
+                  <MyProfile />
+                </StudentProtectedRoute>
               }
             />
             <Route
               path="subscriptions"
               element={
-                // <ProtectedRoute>
-                <Subscriptions />
-                // </ProtectedRoute>
+                <StudentProtectedRoute>
+                  <Subscriptions />
+                </StudentProtectedRoute>
               }
             />
             <Route
               path="security"
               element={
-                // <ProtectedRoute>
-                <Security />
-                // </ProtectedRoute>
+                <StudentProtectedRoute>
+                  <Security />
+                </StudentProtectedRoute>
               }
             />
           </Route>
@@ -170,8 +166,22 @@ function AppRoutes() {
         </Route>
 
         <Route path="/teacherPanel" element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="courses" element={<Courses />}>
+          <Route
+            index
+            element={
+              <TeacherProtectedRoute>
+                <Dashboard />
+              </TeacherProtectedRoute>
+            }
+          />
+          <Route
+            path="courses"
+            element={
+              <TeacherProtectedRoute>
+                <Courses />
+              </TeacherProtectedRoute>
+            }
+          >
             <Route element={<CourseStatistics />} index />
             <Route path="addnewcourse" element={<AddNewCourse />} />
 
@@ -187,10 +197,17 @@ function AppRoutes() {
             <Route element={<StudentStatistics />} index />
             <Route path="studentprofile" element={<StudentProfile />} />
           </Route>
-          <Route path="profile" element={<TeacherProfile />} />
+          <Route
+            path="profile"
+            element={
+              <TeacherProtectedRoute>
+                <TeacherProfile />
+              </TeacherProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
-    </AuthProvider>
+    </>
   );
 }
 function LoadingComponents() {
