@@ -88,7 +88,7 @@ const IndexTeacher = () => {
       console.log("Selected Item:", data);
       handleShowAlert();
       setTimeout(() => {
-        // nav("/Teacherr");
+        nav("/Teacherr");
       }, 2000);
     }
   };
