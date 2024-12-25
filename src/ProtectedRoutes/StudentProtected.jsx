@@ -1,24 +1,22 @@
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
 
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, role } = useAuth();
+const StudentProtectedRoute = ({ children }) => {
+  const { token, user } = useSelector((state) => state.auth);
 
-  if (!isAuthenticated || role !== "student") {
-    // If not authenticated, redirect to login page
+  // Check if token exists in localStorage if it's not in Redux state
+  const storedToken = localStorage.getItem("refresh_token");
+  const isAuthenticated = token || storedToken;
+
+  if (!isAuthenticated) {
     return <Navigate to="/register" />;
   }
 
-  // If authenticated, render children
-  return children;
-};
-export const TeacherProtectedRoute = ({ children }) => {
-  const { isAuthenticated, role } = useAuth();
-
-  if (!isAuthenticated || role !== "teacher") {
+  if (user?.role !== "consumer") {
     return <Navigate to="/register" />;
   }
 
   return children;
 };
-export default ProtectedRoute;
+
+export default StudentProtectedRoute;
