@@ -1,16 +1,16 @@
 import React from "react";
 
-const Alert = ({ showAlert, setShowAlert ,Name,title }) => {
+const Alert = ({ showAlert , setShowAlert , Name , title , color }) => {
   return (
     <>
       <div
-        className={`fixed top-20 right-0 w-96 rounded-xl border border-gray-100 bg-white p-4 shadow-lg transform transition-transform duration-700 ease-in-out ${
+        className={`fixed top-20 right-5 w-96 rounded-xl border border-gray-100 bg-white z-[9999] p-4 shadow-lg transform transition-transform duration-700 ease-in-out ${
           showAlert ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ zIndex: 40 }}
+       
       >
         <div className="flex items-start gap-4">
-          <span className="text-green-600">
+          <span className={`${color}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
