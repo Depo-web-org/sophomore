@@ -66,9 +66,9 @@ export default function Login({ toggleForm }) {
     }catch (error) {
         console.error("Login Error:", error?.data?.message
         );
-        setErrorMessage(
-          error?.data?.message
-        )
+        error?.data?.message
+        ? setErrorMessage(error?.data?.message) :   setErrorMessage("Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com   " )
+      
         setUserEmail(data.loginMail)
         // Handle errors here
       }
@@ -139,7 +139,7 @@ export const HeadTitle = ({ title }) => {
   return (
     <div className="flex flex-col justify-start items-center lg:items-start gap-2  w-full">
       <img src="/logos/logo.svg" alt="" className="size-52 lg:size-auto lg:hidden" />
-      <p className="text-white text-2xl md:text-3xl lg:text-5xl font-extrabold pt-4 text-center lg:text-start">
+      <p className="text-white text-3xl lg:text-5xl font-extrabold pt-4 text-center lg:text-start">
         {title.head}
       </p>
       <p className="text-sm lg:text-base text-gray-600 text-center lg:text-start">{title.subTitle}</p>
