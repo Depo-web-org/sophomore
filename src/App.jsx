@@ -50,6 +50,7 @@ import MyLearning from "./Modules/Student/pages/MyLearning/index";
 import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import ResetPassword from "./Modules/Student/pages/Register/components/ResetPassword/ResetPassword";
+import VerifyAccount from "./Modules/Student/pages/Register/components/VerifyAccount/VerifyAccount";
 
 function AppRoutes() {
   return (
@@ -160,6 +161,9 @@ function AppRoutes() {
           <Route index element={<Register />} />
           <Route path="reset-password/">
             <Route index path=":userMail" element={<ResetPassword />} />
+          </Route>
+          <Route path="verify-account/">
+            <Route index path=":userMail" element={<VerifyAccount />} />
           </Route>
         </Route>
 

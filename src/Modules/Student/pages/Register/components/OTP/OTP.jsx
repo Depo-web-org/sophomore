@@ -9,6 +9,7 @@ import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { HeadTitle } from "../Login/Login";
 import { useSelector } from "react-redux";
+import { formatTime } from "../../../../../../Helpers/Timer";
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const navigate = useNavigate();
@@ -64,13 +65,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   };
 
   // time format
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes < 10 ? "0" : ""}${minutes}:${
-      seconds < 10 ? "0" : ""
-    }${seconds}`;
-  };
+ 
 
   useEffect(() => {
     if (timeLeft > 0) {

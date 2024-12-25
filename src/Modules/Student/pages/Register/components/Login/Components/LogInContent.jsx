@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserRole from "../../components/UserRole/UserRole";
 import { MdAlternateEmail } from "react-icons/md";
 import '../../style/animation.css'
+import { Link } from "react-router-dom";
 export default function LogInContent({
     register,
     handleSubmit,
@@ -14,8 +15,8 @@ export default function LogInContent({
     ResponseError,
     setForgetPassword,
     toggleForm,
-    loadingSending
-
+    loadingSending,
+    VerifyAccount
   }) {
       const [showPassword, setShowPassword] = useState(false);
       const togglePasswordVisibility = () => {
@@ -23,7 +24,7 @@ export default function LogInContent({
       };
       const role = useSelector((state) => state.role.role);
       const dispatch = useDispatch();
-      console.log(ResponseError)
+
     return (
       <div className=" flex flex-col items-start gap-8 lg:gap-10 w-full 2xl:w-4/5 mr-auto slide-in-right  ">
         <div className=" mt-20 w-full">
@@ -151,14 +152,22 @@ export default function LogInContent({
           </form>
         </div>
         {
-          ResponseError&& <div className="w-full ">
-          <p   className=" px-2 text-secondary text-sm text-center font-semibold underline ">
-
+          ResponseError&& <div className="w-full -mb-5  ">
+          <p   className=" px-2 text-secondary text-sm text-center font-semibold  ">
           {ResponseError}
           </p>
         </div>
         }
-       
+
+
+        {/* Link To Navigate to verify account */}
+       { ResponseError === "Your account is not verified. Please verify your account to proceed." &&  <div className="w-full  flex justify-center  ">
+          <button onClick={()=> VerifyAccount()}  className="text-base font-semibold text-white text-center underline ">
+           Verify your account Now 
+          </button>
+        </div>}
+        {/* Link To Navigate to verify account */}
+        
         <div className="  w-full   ">
           <p className="text-sm text-gray-500 text-center ">
             No account?

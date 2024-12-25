@@ -15,11 +15,12 @@ import { useSelector } from "react-redux";
 
 const ResetPassword = () => {
   const { userMail } = useParams(); // Get encoded email from the URL
-  const navigate = useNavigate();
   //deCode the User mail
   const email = decodeEmail(userMail);
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [resendOTPModal, setResendOTPModal] = useState(false);
+  const [StatusOfChangesPassword, setStatusOfChangesPassword] = useState()
   const role = useSelector((state) => state.role.role);
 
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
@@ -45,14 +46,14 @@ const ResetPassword = () => {
       password2: data.password2,
     };
 
-    try {
+ 
   await resetPassword({dataSend,role})
         .unwrap()
-        .then((response) => console.log(response));
-      navigate("/register");
-    } catch (err) {
-      console.error("Error occurred:", err);
-    }
+        .then(()=>  setStatusOfChangesPassword('Reset Password Confirmation') )
+        .then(()=> setTimeout(()=> navigate("/register"),3000))
+        .catch((err)=> {
+          console.error("Error occurred:", err);
+        } )
   };
 
   const handleInput = (e, index) => {
@@ -101,7 +102,6 @@ const ResetPassword = () => {
     setTimeLeft(60);
     await forgetpassword({ email ,role})
       .unwrap()
-      .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
   };
  
@@ -234,13 +234,26 @@ const ResetPassword = () => {
                 )}
               </button>
 
-              <div className="w-4/5 mr-auto" >
-                {isError && (
+              {/* response error */}
+               {isError && (
+              <div className="w-full lg:w-4/5 mr-auto" >
                   <p className="text-red-500 text-sm text-center font-medium">
                     {error?.data?.message}
                   </p>
-                )}
+                
               </div>
+               )}
+
+
+          {/* Password Changed Successfully */}
+            {StatusOfChangesPassword && (
+              <div className="w-full lg:w-4/5 mr-auto" >
+                  <p className="text-emerald-600  text-center font-semibold">
+                    {StatusOfChangesPassword}
+                  </p>
+              </div>
+              )}
+               {/* StatusOfChangesPassword */}
             </form>
 
 

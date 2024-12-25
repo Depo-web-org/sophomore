@@ -16,6 +16,7 @@ export default function Login({ toggleForm }) {
   const [errorMessage, setErrorMessage] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
   const role = useSelector((state) => state.role.role);
+  const [userEmail, setUserEmail] = useState(null);
   const dispatch = useDispatch();
 
 
@@ -52,8 +53,8 @@ export default function Login({ toggleForm }) {
         );
         setErrorMessage(
           error?.data?.message
-
-        );
+        )
+        setUserEmail(data.loginMail)
         // Handle errors here
       }
     };
@@ -73,10 +74,18 @@ export default function Login({ toggleForm }) {
         error?.data?.message
 
       );
+      setUserEmail(data.loginMail)
       // Handle errors here
     }
   };
 
+
+  // If the user is not logged in, redirect them to the login page
+  const VerifyAccount=()=>{
+    const enCodedMail = encodeEmail(userEmail);
+    navigate(`/register/verify-account/${enCodedMail}`);
+  }
+ 
   return (
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
       {forgetPassword ? (
@@ -99,6 +108,7 @@ export default function Login({ toggleForm }) {
           ResponseError={
             errorMessage
           }
+          VerifyAccount={VerifyAccount}
           handleLogin={handleLogin}
           errorsForm={errors}
           forgetPassword={forgetPassword}
