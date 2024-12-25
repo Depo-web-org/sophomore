@@ -7,7 +7,10 @@ import "./profile.css";
 import { MdOutlineLogout } from "react-icons/md";
 import OpseModels from "./components/Opse Models/OpseModel";
 import { useStudent_logoutMutation } from "../../../../Redux/Auth/authApiSlice";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../../Redux/Auth/authSlice";
 export default function Profile() {
+  const dispatch = useDispatch();
   const [Active, setActive] = useState("close");
 
   const [OpseModel, setOpseModel] = useState(false);
@@ -17,6 +20,7 @@ export default function Profile() {
   const [student_logout, { isLoading, isError, error }] =
     useStudent_logoutMutation();
 
+  // Inside your handleLogout function:
   const handleLogout = async () => {
     const refresh_token = localStorage.getItem("refresh_token");
     if (!refresh_token) {
@@ -24,18 +28,17 @@ export default function Profile() {
       return;
     }
 
-    console.log("Attempting logout with token:", refresh_token);
-
+    // Try to log out
     try {
       const response = await student_logout({ refresh_token }).unwrap();
       console.log("Logout successful:", response);
+
+      // Clear localStorage and Redux store
       localStorage.removeItem("refresh_token");
+      dispatch(logOut()); // Dispatch logout action
       navigate("/register");
     } catch (error) {
       console.error("Logout failed:", error);
-      if (error.status === 401 && error.data.code === "user_not_found") {
-        console.warn("Token might be invalid or expired.");
-      }
     }
   };
 

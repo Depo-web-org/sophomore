@@ -11,6 +11,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
           body: userData,
         };
       },
+      invalidatesTags: ["Auth"],
+
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -82,6 +84,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           body: refresh_token,
         };
       },
+      invalidatesTags: ["Auth"],
     }),
   }),
 });

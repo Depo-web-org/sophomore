@@ -1,21 +1,21 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const StudentProtectedRoute = ({ children }) => {
   const { token, user } = useSelector((state) => state.auth);
 
-  if (!token) {
-    // Redirect to register if not authenticated
+  // Check if token exists in localStorage if it's not in Redux state
+  const storedToken = localStorage.getItem("refresh_token");
+  const isAuthenticated = token || storedToken;
+
+  if (!isAuthenticated) {
     return <Navigate to="/register" />;
   }
 
   if (user?.role !== "consumer") {
-    // Redirect to register page if not a student
     return <Navigate to="/register" />;
   }
 
-  // Render child routes if authenticated and authorized as a student
   return children;
 };
 
