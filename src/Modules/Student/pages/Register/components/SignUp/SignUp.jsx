@@ -75,8 +75,8 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
   console.log(role);
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
-      <div className="flex flex-col items-start gap-6 w-full">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full  pb-4 ">
+      <div className="flex flex-col items-start gap-6 w-full 2xl:w-4/5 ml-auto ">
         <HeadTitle
           title={{
             head: "Join Our Team",
@@ -87,14 +87,14 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           {/* form starting */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mb-0 w-full space-y-4 flex flex-col gap-5"
+            className="mb-0 w-full space-y-4 flex flex-col gap-2 lg:gap-5 "
           >
             <UserRole role={role} dispatch={dispatch} />
             {/* Name Field */}
             <div>
               <label
                 htmlFor="full_name"
-                className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
               >
                 <input
                   type="text"
@@ -136,7 +136,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     id="phone_number"
                     placeholder="Enter your phone number"
                     defaultCountry="EG"
-                    className="w-full bg-white p-4 rounded-lg border-gray-200 text-sm shadow-sm outline-none focus-visible:outline-none"
+                    className="w-full bg-white px-2 py-3 lg:p-4  rounded-lg border-gray-200 text-sm shadow-sm outline-none focus-visible:outline-none"
                   />
                 )}
               />
@@ -160,7 +160,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     message: `Enter a valid email address e.g:user.name@domain.com`,
                   },
                 })}
-                className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm outline-none"
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -173,7 +173,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             <div>
               <label
                 htmlFor="password"
-                className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between "
               >
                 <input
                   type={showPassword ? "text" : "password"}
@@ -187,7 +187,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                         "Password must contain at least one uppercase letter, one number, and one special character",
                     },
                   })}
-                  className="outline-none flex-1"
+                  className="outline-none w-4/5"
                   placeholder="Enter password"
                 />
                 <button
@@ -208,7 +208,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             <div>
               <label
                 htmlFor="password2"
-                className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
               >
                 <input
                   type={showPassword ? "text" : "password"}
@@ -218,7 +218,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     validate: (value, data) =>
                       value === data.password || "Passwords must match",
                   })}
-                  className="outline-none flex-1"
+                  className="outline-none w-4/5"
                   placeholder="Confirm password"
                 />
                 <button
@@ -258,7 +258,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                         ? "bg-primary bg-opacity-5 cursor-not-allowed text-white text-opacity-60  "
                         : "bg-primary text-white hover:bg-secondary duration-150 transition-all"
                     } `
-              } px-5 py-3 text-sm font-medium text-white justify-center items-center`}
+              } px-5 py-3 text-sm lg:text-base font-semibold text-white justify-center items-center`}
             >
               {isLoading ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary" />
@@ -269,11 +269,11 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           </form>
         </div>
       </div>
-      <div className="mx-auto">
+      <div className="mx-auto pb-10 lg:pb-0 ">
         <p
-          className={`${
+          className={`  text-sm  lg:text-xl ${
             alreadyAv
-              ? "text-secondary font-bold text-xl  underline"
+              ? "text-secondary font-bold  underline"
               : "text-gray-500"
           }`}
         >
