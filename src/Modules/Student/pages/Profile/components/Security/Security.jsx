@@ -6,6 +6,7 @@ import Alert from "../Alerts/Alert";
 import { FaRegEye } from "react-icons/fa6";
 import { useStudent_change_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { useSelector } from "react-redux";
+import { ImSpinner9 } from "react-icons/im";
 
 export default function Security() {
   const [showAlert, setShowAlert] = useState(false);
@@ -15,10 +16,10 @@ export default function Security() {
   const {
     register,
     handleSubmit,
+    getValues,
     reset,
     formState: { errors },
   } = useForm();
-
   // alert
   const handleShowAlert = () => {
     setShowAlert(true);
@@ -29,6 +30,7 @@ export default function Security() {
 
   const [changePassword, { isLoading, isError, error }] =
     useStudent_change_passwordMutation();
+  console.log(error);
 
   const onSubmit = async (data) => {
     if (data.new_password !== data.confirm_password) {
@@ -113,9 +115,11 @@ export default function Security() {
               id="old_password"
               {...register("old_password", {
                 required: "old Password is required",
-                minLength: {
-                  value: 6,
-                  message: "old Password must be at least 6 characters",
+                pattern: {
+                  value:
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
+                  message:
+                    "Password must contain at least one uppercase letter, one number, and one special character",
                 },
               })}
               className="outline-none flex-1"
@@ -149,9 +153,11 @@ export default function Security() {
               id="new_password"
               {...register("new_password", {
                 required: "new Password is required",
-                minLength: {
-                  value: 6,
-                  message: "The new Password must be at least 6 characters",
+                pattern: {
+                  value:
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
+                  message:
+                    "Password must contain at least one uppercase letter, one number, and one special character",
                 },
               })}
               className="outline-none flex-1"
@@ -165,15 +171,15 @@ export default function Security() {
               {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </label>
-          {errors.old_password && (
+          {errors.new_password && (
             <p className="text-red-500 text-sm">
-              {errors.old_password.message}
+              {errors.new_password.message}
             </p>
           )}
         </div>
 
         <div className="relative border-b py-5">
-          <span className="text-sm font-medium text-white  pb-2">
+          <span className="text-sm font-medium text-white pb-2">
             Retype new Password
           </span>
           <label
@@ -184,11 +190,9 @@ export default function Security() {
               type={showPassword ? "text" : "password"}
               id="confirm_password"
               {...register("confirm_password", {
-                required: "new Password is required",
-                minLength: {
-                  value: 6,
-                  message: "The new Password must be at least 6 characters",
-                },
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === getValues("new_password") || "Passwords must match",
               })}
               className="outline-none flex-1"
               placeholder="Confirm new Password"
@@ -201,9 +205,9 @@ export default function Security() {
               {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </label>
-          {errors.old_password && (
+          {errors.confirm_password && (
             <p className="text-red-500 text-sm">
-              {errors.old_password.message}
+              {errors.confirm_password.message}
             </p>
           )}
         </div>
@@ -212,23 +216,29 @@ export default function Security() {
 
         <button
           type="submit"
-          data-twe-ripple-init
-          data-twe-ripple-color="light"
-          className="rounded bg-primary mt-3 px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+          disabled={
+            isLoading ||
+            errors.old_password ||
+            errors.confirm_password ||
+            errors.new_password
+          }
+          className={`inline-flex w-full mt-5 rounded-lg px-2 py-2 text-md font-semibold transition-all duration-300 ${
+            isLoading
+              ? "bg-white text-white cursor-not-allowed"
+              : errors.old_password ||
+                errors.confirm_password ||
+                errors.new_password
+              ? "bg-primary bg-opacity-5 text-white text-opacity-60 cursor-not-allowed"
+              : "bg-primary text-white hover:bg-secondary"
+          } px-5 py-3 text-sm font-medium text-white justify-center items-center`}
         >
           {isLoading ? (
-            <div
-              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
-              role="status"
-            >
-              <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                Loading...
-              </span>
-            </div>
+            <ImSpinner9 className="animate-spin text-3xl text-secondary" />
           ) : (
-            "Change Password  "
+            "Change Password"
           )}
         </button>
+
         {/* end */}
       </form>
     </>

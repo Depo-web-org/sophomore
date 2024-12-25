@@ -5,15 +5,15 @@ import { logOut, setCredentials } from "../Auth/authSlice";
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://192.168.1.26:8000/api/v1",
   credentials: "include",
-  prepareHeaders: (headers, { getState, endpoint }) => {
-    const token = getState().auth.token;
+  // prepareHeaders: (headers, { getState, endpoint }) => {
+  //   const token = getState().auth.token;
 
-    if (token && endpoint !== "login/consumer") {
-      headers.set("authorization", `Bearer ${token}`);
-    }
+  //   if (token && endpoint !== "login/consumer") {
+  //     headers.set("authorization", `Bearer ${token}`);
+  //   }
 
-    return headers;
-  },
+  //   return headers;
+  // },
 });
 
 // token refresh
@@ -24,7 +24,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     console.log("sending refresh token");
 
     // Send refresh token to get a new access token
-    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    const refreshResult = await baseQuery("/token/refresh/", api, extraOptions);
 
     if (refreshResult?.data) {
       const user = api.getState().auth.user;
@@ -47,5 +47,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithReauth,
+  tagTypes: ["Auth"],
   endpoints: (builder) => ({}),
 });

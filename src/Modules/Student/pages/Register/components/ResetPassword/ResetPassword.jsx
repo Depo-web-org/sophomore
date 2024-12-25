@@ -15,17 +15,18 @@ import { useSelector } from "react-redux";
 
 const ResetPassword = () => {
   const { userMail } = useParams(); // Get encoded email from the URL
-  const navigate = useNavigate();
   //deCode the User mail
   const email = decodeEmail(userMail);
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [resendOTPModal, setResendOTPModal] = useState(false);
+  const [StatusOfChangesPassword, setStatusOfChangesPassword] = useState()
   const role = useSelector((state) => state.role.role);
 
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
 
-  const { handleSubmit, control, setFocus, register } = useForm({
+  const { handleSubmit, control, setFocus, register , formState: { errors }, }   = useForm({
     defaultValues: {
       otp_code: ["", "", "", "", "", ""],
     },
@@ -45,14 +46,14 @@ const ResetPassword = () => {
       password2: data.password2,
     };
 
-    try {
-      const response = await resetPassword({dataSend,role})
+ 
+  await resetPassword({dataSend,role})
         .unwrap()
-        .then((response) => console.log(response));
-      navigate("/register");
-    } catch (err) {
-      console.error("Error occurred:", err);
-    }
+        .then(()=>  setStatusOfChangesPassword('Reset Password Confirmation') )
+        .then(()=> setTimeout(()=> navigate("/register"),3000))
+        .catch((err)=> {
+          console.error("Error occurred:", err);
+        } )
   };
 
   const handleInput = (e, index) => {
@@ -101,19 +102,14 @@ const ResetPassword = () => {
     setTimeLeft(60);
     await forgetpassword({ email ,role})
       .unwrap()
-      .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
   };
-  const handleResendOtp = () => {
-    // Add logic to resend the OTP if required
-    console.log("Resend OTP triggered");
-  };
-
+ 
   return (
     <>
-      <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
-        <div className="flex flex-col items-start gap-8 w-full slide-in-left">
-          <div className="">
+      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
+        <div className="flex flex-col items-start b justify-center lg:gap-8  w-full slide-in-left   lg:min-h-screen">
+          <div className=" w-full ">
             <HeadTitle
               title={{
                 head: "Check Your Mail for OTP",
@@ -123,12 +119,12 @@ const ResetPassword = () => {
               }}
             />
           </div>
-          <div className="w-full">
+          <div className="w-full ">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"
             >
-              <div className="flex justify-center items-center gap-8 text-white text-center text-2xl w-4/5 mx-auto">
+              <div className="flex justify-center items-start b gap-8 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
@@ -152,19 +148,21 @@ const ResetPassword = () => {
                   />
                 ))}
               </div>
-              <div className="mt-8 mb-4">
+              <div className="lg:mt-8 mt-4 mb-0 lg:mb-4  flex flex-col gap-y-2 lg:gap-y-4">
                 <label
                   htmlFor="password"
-                  className="w-full lg:w-4/5 mx-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
+                  className="w-full lg:w-4/5 mr-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
                 >
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
                     {...register("password", {
                       required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
+                      pattern: {
+                        value:
+                          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
+                        message:
+                          "Password must contain at least one uppercase letter, one number, and one special character",
                       },
                     })}
                     className="outline-none flex-1"
@@ -177,19 +175,29 @@ const ResetPassword = () => {
                   >
                     {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                   </button>
+
                 </label>
+                <div className="w-full lg:w-4/5 mr-auto ">
+                  {errors && (
+                    <p className="text-red-500 text-sm text-center font-medium">
+                      {errors?.password?.message}
+                    </p>
+                  )}
+                </div>
                 <label
                   htmlFor="password2"
-                  className=" w-full lg:w-4/5 mx-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
+                  className=" w-full lg:w-4/5 mr-auto  bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
                 >
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password2"
                     {...register("password2", {
                       required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
+                      pattern: {
+                        value:
+                          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
+                        message:
+                          "Password must contain at least one uppercase letter, one number, and one special character",
                       },
                     })}
                     className="outline-none flex-1"
@@ -203,17 +211,68 @@ const ResetPassword = () => {
                     {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                   </button>
                 </label>
+                <div className="w-full lg:w-4/5 mr-auto ">
+                  {errors && (
+                    <p className="text-red-500 text-sm text-center font-medium">
+                      {errors?.password2?.message}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
-                <p
+            
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`inline-flex rounded-lg ${
+                  isLoading ? "bg-white" : "bg-primary"
+                }  w-full lg:w-4/5 mr-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+              >
+                {isLoading ? (
+                  <ImSpinner9 className="animate-spin text-3xl text-secondary" />
+                ) : (
+                  "Reset"
+                )}
+              </button>
+
+              {/* response error */}
+               {isError && (
+              <div className="w-full lg:w-4/5 mr-auto" >
+                  <p className="text-red-500 text-sm text-center font-medium">
+                    {error?.data?.message}
+                  </p>
+                
+              </div>
+               )}
+
+
+          {/* Password Changed Successfully */}
+            {StatusOfChangesPassword && (
+              <div className="w-full lg:w-4/5 mr-auto" >
+                  <p className="text-emerald-600  text-center font-semibold">
+                    {StatusOfChangesPassword}
+                  </p>
+              </div>
+              )}
+               {/* StatusOfChangesPassword */}
+            </form>
+
+
+
+
+
+            {/* Resend OTP Button  */}
+            <div className="flex w-full flex-col justify-center items-center gap-2 py-4 lg:w-4/5 mr-auto">
+                {
+                  isResendDisabled && <p
                   className={`${
                     isResendDisabled ? "text-white" : "text-gray-500"
                   } text-base font-medium `}
                 >
                   {formatTime(timeLeft)}
                 </p>
+                } 
                 <p
-                  className={`text-base font-medium leading-[18.75px] text-center  ${
+                  className={` text-sm lg:text-base font-medium leading-[18.75px] text-center  ${
                     isLoading || isResendDisabled
                       ? "text-textopacity"
                       : "text-white"
@@ -223,7 +282,7 @@ const ResetPassword = () => {
                   <button
                     disabled={isLoading || isResendDisabled}
                     onClick={() => setResendOTPModal(true)}
-                    className={`text-base font-medium leading-[18.75px] text-center underline mx-2 ${
+                    className={`text-sm lg:text-base font-medium leading-[18.75px] text-center underline mx-2 ${
                       isResendDisabled ? "text-gray-500" : "text-white"
                     }`}
                   >
@@ -231,20 +290,8 @@ const ResetPassword = () => {
                   </button>
                 </p>
               </div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`inline-flex rounded-lg ${
-                  isLoading ? "bg-white" : "bg-primary"
-                }  w-full lg:w-4/5 mx-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
-              >
-                {isLoading ? (
-                  <ImSpinner9 className="animate-spin text-3xl text-secondary" />
-                ) : (
-                  "Reset"
-                )}
-              </button>
-            </form>
+
+              
           </div>
         </div>
 
