@@ -4,8 +4,8 @@ const Alert = ({ showAlert , setShowAlert , Name , title , color }) => {
   return (
     <>
       <div
-        className={`fixed top-20 right-2 max-w-[350px] rounded-xl border border-gray-100 bg-white z-[9999] p-4 shadow-lg transform transition-transform duration-700 ease-in-out ${
-          showAlert ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-20 right-0 max-w-[350px] rounded-xl border border-gray-100 bg-white z-[9999] p-4 shadow-lg transform transition-transform duration-700 ease-in-out ${
+          showAlert ? "translate-x-0 right-2" : "translate-x-full"
         }`}
        
       >

@@ -70,6 +70,7 @@ export default function Security() {
       <Alert
         Name="Password changed successfully!"
         title={"Your password has been updated successfully."}
+        color={"text-green-600"}
         showAlert={showAlert}
         setShowAlert={setShowAlert}
       />
