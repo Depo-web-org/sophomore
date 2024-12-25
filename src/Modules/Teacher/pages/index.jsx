@@ -13,9 +13,9 @@ const IndexTeacher = () => {
       title: "What School type do you teach?",
       name: "e.g American",
       opations: [
-        "American International School",
-        "British Academy",
-        "Canadian Learning Center",
+        { id: "101", value: "American International School" },
+        { id: "102", value: "British Academy" },
+        { id: "103", value: "Canadian Learning Center" },
       ],
     },
     {
@@ -23,16 +23,21 @@ const IndexTeacher = () => {
       title: "What Grades are you applying for?",
       name: "e.g grade 1",
       opations: [
-        "Grade 1 - Grade 5 (Elementary)",
-        "Grade 6 - Grade 8 (Middle School)",
-        "Grade 9 - Grade 12 (High School)",
+        { id: "201", value: "Grade 1 - Grade 5 (Elementary)" },
+        { id: "202", value: "Grade 6 - Grade 8 (Middle School)" },
+        { id: "203", value: "Grade 9 - Grade 12 (High School)" },
       ],
     },
     {
       id: "003",
       title: "Choose the subject you are applying for",
       name: "e.g Science",
-      opations: ["Mathematics", "Science", "History", "English Literature"],
+      opations: [
+        { id: "301", value: "Mathematics" },
+        { id: "302", value: "Science" },
+        { id: "303", value: "History" },
+        { id: "304", value: "English Literature" },
+      ],
     },
   ];
 
@@ -53,11 +58,13 @@ const IndexTeacher = () => {
   const [showAlertError, setshowAlertError] = useState(false);
 
   const handleFormSubmit = (data) => {
-    // Add selected options to the data array
+    // Add selected options to the data array\
     const selectedOptions = Object.values(data).filter((item) => item);
     setdata((prevData) => [...prevData, selectedOptions]);
-    reset();
     console.log(data);
+  
+      reset()
+    
   };
 
   // alert
@@ -69,7 +76,7 @@ const IndexTeacher = () => {
     }, 3000);
   };
 
-  const handleSendData = (item) => {
+  const handleSendData = (id) => {
     if (data.length === 0) {
       console.log("The array is empty");
       setshowAlertError(true);
@@ -78,10 +85,10 @@ const IndexTeacher = () => {
         setshowAlertError(false);
       }, 3000);
     } else {
-      console.log("Final Data to send:", data);
+      console.log("Selected Item:", data);
       handleShowAlert();
       setTimeout(() => {
-        nav("/Teacherr");
+        // nav("/Teacherr");
       }, 2000);
     }
   };
@@ -108,29 +115,18 @@ const IndexTeacher = () => {
               title={"Please Upload Your Papers"}
             />
 
-            {/* Show selected options as badges */}
-            {/* {data.map((item, index) => (
-              <div key={index}>
-                {!data.includes(item) ? (
-                  <span className="text-red-500 text-sm font-bold">
-                    This item already exists!
-                  </span>
-                ) : (
-                  <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
-                    {item.join(" , ")}
-                    <VscChromeClose
-                      className="font-bold text-white hover:text-red-600 duration-500 w-5 h-5 cursor-pointer"
-                      onClick={() => handleRemoveBadge(item)}
-                    />
-                  </span>
-                )}
-              </div>
-            ))} */}
-
             {data.map((item, index) => (
               <div key={index}>
                 <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
-                  {item.join(" , ")}
+                  {item
+                    .map((optionId) => {
+                      const option = options
+                        .flatMap((optionGroup) => optionGroup.opations)
+                        .find((option) => option.id === optionId);
+                      return option ? option.value : null;
+                    })
+                    .join(" , ")}
+
                   <VscChromeClose
                     className="font-bold text-white hover:text-red-600 duration-500 w-5 h-5 cursor-pointer"
                     onClick={() => handleRemoveBadge(item)}
@@ -149,12 +145,15 @@ const IndexTeacher = () => {
               <div id="options" className="h-auto w-full tracking-wide">
                 {options.map((item, index) => (
                   <div key={item.id}>
+                    {/* Label */}
                     <label
                       htmlFor={`dropdown-${index}`}
                       className="text-gray-400 font-semibold text-sm lg:text-md"
                     >
                       {item.title}
                     </label>
+
+                    {/* Dropdown */}
                     <select
                       {...register(`option${index}`, {
                         required: "This field is required",
@@ -162,15 +161,18 @@ const IndexTeacher = () => {
                       id={`dropdown-${index}`}
                       className="mt-1.5 py-2 w-full rounded-lg text-sm lg:text-md font-semibold text-gray-600 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
-                      <option hidden value="">
+                      <option value="" selected >
                         {item.name}
                       </option>
-                      {item.opations?.map((option, idx) => (
-                        <option key={idx} value={option}>
-                          {option}
+
+                      {item.opations?.map((option) => (
+                        <option key={option.id} value={option.id}>
+                          {option.value}
                         </option>
                       ))}
                     </select>
+
+                    {/* Error Handling */}
                     {errors[`option${index}`] && (
                       <p className="text-red-500 text-sm">
                         {errors[`option${index}`].message}
@@ -180,16 +182,16 @@ const IndexTeacher = () => {
                 ))}
               </div>
             </div>
-            {/* bottom */}
+
+            {/* Bottom Buttons */}
             <div>
               <button
                 type="submit"
                 className="me-10 rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
               >
                 Add Another
-              </button>
-
-              <button
+              </button>  
+               <button
                 type="button"
                 className="rounded mt-4 bg-green-600 px-4 py-2 text-md font-semibold text-white hover:bg-green-800 transition-all duration-300"
                 onClick={handleSendData}
@@ -197,7 +199,9 @@ const IndexTeacher = () => {
                 Next
               </button>
             </div>
+           
           </form>
+
         </div>
       ) : (
         <Teacherr />
