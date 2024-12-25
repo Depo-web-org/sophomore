@@ -15,6 +15,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const role = useSelector((state) => state.role.role);
+    const [responseError, setResponseError] = useState(null)
 
   // time format
   const [timeLeft, setTimeLeft] = useState(60);
@@ -40,7 +41,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
       console.log("Verify Email Response:", response);
       handleValidateOtp(); // Call the provided callback on success
     } catch (err) {
-
+      setResponseError(err?.data?.message)
       console.error("Verification Error:", err?.data?.message || err);
     }
   };
@@ -92,8 +93,8 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
   return (
     <>
-      <div className="w-full my-auto flex justify-center">
-        <div className="flex flex-col items-start justify-start gap-2">
+      <div className="w-full my-auto flex justify-center ">
+        <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
                    title={{
                      head: "Check your mail",
@@ -102,9 +103,9 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                  />
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2"
+            className="flex flex-col gap-2 "
           >
-            <div className="flex justify-center items-center gap-8 text-white text-center text-2xl">
+            <div className="flex justify-center items-center gap-8 text-white text-center text-2xl  mx-4 ">
               {[0, 1, 2, 3, 4, 5].map((index) => (
                 <Controller
                   key={index}
@@ -116,7 +117,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                       type="text"
                       value={value}
                       maxLength="1"
-                      className="w-[53px] bg-transparent border-b-[1px] ring-0 outline-none"
+                      className="w-full lg:w-4/5 mx-auto  bg-transparent border-b-[1px] ring-0 outline-none text-base lg:text-2xl"
                       onChange={(e) => {
                         onChange(e.target.value);
                         handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
@@ -142,6 +143,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                 "Validate"
               )}
             </button>
+            {responseError && <p className="text-red-500 text-center">{responseError}</p>}
           </form>
           <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
             <p
@@ -152,7 +154,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
               {formatTime(timeLeft)}
             </p>
             <p
-              className={`text-base font-medium leading-[18.75px] text-center  ${
+              className={`text-sm lg:text-base font-medium leading-[18.75px] text-center  ${
                 isLoading || isResendDisabled
                   ? "text-textopacity"
                   : "text-white"
@@ -162,7 +164,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
               <button
                 disabled={isLoading || isResendDisabled}
                 onClick={() => setResendOTPModal(true)}
-                className={`text-base font-medium leading-[18.75px] text-center underline mx-2 ${
+                className={`text-sm lg:text-base font-medium leading-[18.75px] text-center underline mx-2 ${
                   isResendDisabled ? "text-gray-500" : "text-white"
                 }`}
               >
@@ -170,7 +172,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
               </button>
             </p>
 
-            <p className="text-base  leading-[18.75px] text-center  text-white">
+            <p className="text-sm lg:text-base leading-[18.75px] text-center  text-white">
               Wrong Email ?
               <button
                 onClick={() => {

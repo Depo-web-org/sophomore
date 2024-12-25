@@ -1,4 +1,3 @@
-import { AuthProvider } from "./ProtectedRoutes/AuthContext";
 import ScrollTop from "./Helpers/ScrollTop";
 import ButtomTop from "./Helpers/ButtomTop";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -217,7 +216,7 @@ function AppRoutes() {
 function LoadingComponents() {
   return (
     <div className="min-h-screen bg-dark flex justify-center items-center flex-col">
-      <span className=" text-white text-8xl text-gradient font-extrabold my-5">
+      <span className=" text-white text-4xl md:text-6xl lg:text-8xl text-gradient font-extrabold my-5">
         Sophomore
       </span>
       <span className="loader"></span>

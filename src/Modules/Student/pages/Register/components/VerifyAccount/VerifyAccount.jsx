@@ -176,7 +176,7 @@ const subTitle = statusOfAccount
               </p>
             </div>
             {
-          errorOtp&& <div className="w-full -mb-5  ">
+          errorOtp&& <div className="w-full lg:w-4/5 mr-auto -mb-5   ">
           <p   className=" px-2 text-secondary text-sm text-center font-semibold  ">
           {errorOtp}
           </p>

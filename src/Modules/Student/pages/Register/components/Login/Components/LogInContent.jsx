@@ -27,7 +27,7 @@ export default function LogInContent({
 
     return (
       <div className=" flex flex-col items-start gap-8 lg:gap-10 w-full 2xl:w-4/5 mr-auto slide-in-right  ">
-        <div className=" mt-20 w-full">
+        <div className=" lg:mt-20 w-full">
 
         <HeadTitle
           title={{
@@ -41,7 +41,7 @@ export default function LogInContent({
           <form
             action="#"
             onSubmit={handleSubmit(handleLogin)}
-            className="mb-0 mt-0 lg:mt-8 w-full  flex flex-col gap-4 "
+            className="mb-0 mt-0 lg:mt-8 w-full  flex flex-col gap-y-2  lg:gap-4  "
           >
             <UserRole role={role} dispatch={dispatch} />
 
@@ -52,12 +52,12 @@ export default function LogInContent({
                   className={`w-full bg-white rounded-lg  ${
                     errorsForm.loginMail &&
                     "border-2 border-red-600 "
-                  }  p-4 text-sm shadow-sm flex items-center justify-between`}
+                  }  px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between`}
                 >
                   <input
                     id="loginMail"
                     className="outline-none flex-1"
-                    // className={`w-full rounded-lg  ${errorsForm?.loginMai?  "outline-red-600":  "  outline-none"} p-4 pe-12 text-sm shadow-sm `}
+                    // className={`w-full rounded-lg  ${errorsForm?.loginMai?  "outline-red-600":  "  outline-none"} px-2 py-3 lg:p-4 pe-12 text-sm shadow-sm `}
                     placeholder="Enter email"
                     {...register("loginMail", {
                       required: `Email is required`,
@@ -85,7 +85,7 @@ export default function LogInContent({
                   className={`w-full bg-white rounded-lg ${
                     errorsForm.password &&
                     "border-2 border-red-600  "
-                  } p-4 text-sm shadow-sm flex items-center justify-between`}
+                  } px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between`}
                 >
                   <input
                     type={showPassword ? "text" : "password"}
@@ -99,7 +99,7 @@ export default function LogInContent({
                           "Password must contain at least one uppercase letter, one number, and one special character",
                       },
                     })}
-                    className="outline-none flex-1"
+                    className="outline-none  w-4/5"
                     placeholder="Enter password"
                   />
 
@@ -125,7 +125,7 @@ export default function LogInContent({
               </p>
             )}
 
-            <div className="flex items-end justify-center flex-wrap gap-4  -mt-4 ">
+            <div className="flex items-end justify-center flex-wrap gap-4  mt-0 lg:-mt-4 ">
 
         
               <button
@@ -139,9 +139,9 @@ export default function LogInContent({
             <button
               type="submit"
               disabled={loadingSending || errorsForm.loginMail || errorsForm.password } 
-              className={`inline-flex w-full rounded-lg ${
+              className={`inline-flex w-full rounded-lg  ${
                  loadingSending ? "bg-white text-white " : ` ${errorsForm.loginMail || errorsForm.password ? "bg-primary bg-opacity-5 text-white cursor-not-allowed text-opacity-60  ": "bg-primary text-white hover:bg-secondary duration-150 transition-all" } `
-              } px-5 py-3 text-sm font-medium text-white  justify-center items-center`}
+              } px-5 py-3 text-sm lg:text-base font-semibold text-white  justify-center items-center`}
             >
               {loadingSending ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary " />

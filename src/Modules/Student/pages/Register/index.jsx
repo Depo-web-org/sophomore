@@ -37,7 +37,7 @@ const [mail, setMail] = useState()
 
   };
   return (
-    <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
+    <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-10 overflow-hidden">
       {isLogin && <Login toggleForm={toggleForm} />} 
 
 
