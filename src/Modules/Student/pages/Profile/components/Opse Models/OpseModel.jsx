@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../../../../Redux/Auth/authSlice";
 import { ImSpinner9 } from "react-icons/im";
+import { getRole } from "../../../../../../Helpers/enCodeRole";
 
 const OpseModels = ({ setOpseModel }) => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ const OpseModels = ({ setOpseModel }) => {
 
   // Inside your handleLogout function:
   const handleLogout = async () => {
-    const refresh_token = localStorage.getItem("refresh_token");
+    const refresh_token = getRole("RE_REV2_2024");
+    console.log(refresh_token);
     if (!refresh_token) {
       console.error("Refresh token is missing!");
       return;
