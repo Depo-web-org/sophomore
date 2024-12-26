@@ -17,17 +17,15 @@ export default function Subscriptions() {
   ];
 
   return (
-    <>
+    <div className="container md:w-custom-md xl:w-custom-xl mx-auto">
       {/* top Text */}
-      <div>
-        <div className="flex justify-between text-white font-bold text-sm sm:text-lg">
-          <p>Subscriptions</p>
-          <p>Available until</p>
-        </div>
-        <div className="flex justify-between my-2 text-gray-500 font-normal text-sm ">
-          <p>Subscriptions</p>
-          <p>Available until</p>
-        </div>
+      <div className="flex justify-between text-white font-bold text-sm sm:text-lg">
+        <p>Subscriptions</p>
+        <p>Available until</p>
+      </div>
+      <div className="flex justify-between my-2 text-gray-500 font-normal text-sm ">
+        <p>Subscriptions</p>
+        <p>Available until</p>
       </div>
 
       {/* Card Subscriptions*/}
@@ -45,7 +43,9 @@ export default function Subscriptions() {
                   />
                 </div>
                 <div className="flex items-center justify-between w-full pt-2">
-                  <p className="text-sm lg:text-xl font-medium text-white">{item.name}</p>
+                  <p className="text-sm lg:text-xl font-medium text-white">
+                    {item.name}
+                  </p>
                   <p className="text-sm lg:text-xl font-normal text-[#FFFFFF57]">
                     {item.grade}
                   </p>
@@ -55,6 +55,6 @@ export default function Subscriptions() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
