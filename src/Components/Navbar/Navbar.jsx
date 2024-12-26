@@ -12,7 +12,9 @@ const Navbar = () => {
 
   // Fetch authentication state from Redux
   const { token, user } = useSelector((state) => state.auth);
-  console.log(user?.role )
+  const {role} = useSelector((state) => state.role);
+  console.log(token)
+  console.log(role)
 
   const navItems = useMemo(() => {
     const items = [
@@ -20,7 +22,7 @@ const Navbar = () => {
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
     ];
-    if (token && user?.role === "consumer") {
+    if (token && role === "consumer") {
       // Add protected items only if authenticated as a consumer
       items.push(
         { text: "My Learning", link: "/mylearning" },
@@ -28,14 +30,18 @@ const Navbar = () => {
         { icon: <IoHeartOutline />, link: "/wishlist" },
         { text: "Profile", link: "/profile" }
       );
+    }else if(token && role !== "consumer"){
+      items.push(
+        { text: "Dashboard", link: "/teacherPanel" },
+      );
     }
     return items;
-  }, [token, user]);
+  }, [token, role]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="z-50 fixed top-4 w-full px-4 md:px-0">
+    <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
       <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
         <Link to={"/"}>
           <div className="flex justify-start items-center pt-1 lg:ml-5 w-full">

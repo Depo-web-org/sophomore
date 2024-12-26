@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import CryptoJS from "crypto-js";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LogInContent from "./Components/LogInContent";
@@ -10,15 +11,19 @@ import {
 import { setCredentials } from "../../../../../../Redux/Auth/authSlice";
 import { encodeEmail } from "../../../../../../Helpers/enCodedMail";
 import ForgetPassword from "./Components/ForgetPassword";
+import useRole, { secretKey } from "../../../../../../Hooks/UseRole";
+import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
+import { getRole } from "../../../../../../Helpers/enCodeRole";
 
 export default function Login({ toggleForm }) {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
+  const userRole= useRole('RO_V1_2024')
   const role = useSelector((state) => state.role.role);
   const [userEmail, setUserEmail] = useState(null);
+ 
   const dispatch = useDispatch();
-
   const {
     register,
     handleSubmit,
@@ -30,53 +35,157 @@ export default function Login({ toggleForm }) {
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
 
-  const handleLogin = async (data) => {
-    try {
-      const userData = { email: data.loginMail, password: data.password };
-      const response = await login({ userData, role }).unwrap();
-      if (response) {
-        console.log("Login successful:", response);
-        localStorage.setItem("refresh_token", response.refresh_token);
-        localStorage.setItem('role', role)
+  // const handleLogin = async (data) => {
+  //   try {
+  //     const userData = { email: data.loginMail, password: data.password };
+  //     const response = await login({ userData, role }).unwrap();
+  //     if (response) {
+  //       console.log("Login successful:", response);
+  //       localStorage.setItem("refresh_token", response.refresh_token);
+  //       localStorage.setItem('role', role)
 
-        // Dispatch the setCredentials action to save the user data in the Redux store
-        const loginResponse = { ...response, role };
+  //       // Dispatch the setCredentials action to save the user data in the Redux store
+  //       const loginResponse = { ...response, role };
 
-        dispatch(
-          setCredentials({
-            token: loginResponse.access_token,
-            user: loginResponse,
-          })
-        );
-        console.log("from login getting role:", loginResponse);
+  //       dispatch(
+  //         setCredentials({
+  //           token: loginResponse.access_token,
+  //           user: loginResponse,
+  //         })
+  //       );
+  //       console.log("from login getting role:", loginResponse);
 
-        // Reset the form after successful login
-        reset();
-        // Navigate to the appropriate dashboard or page based on the role
-        if (role === "consumer") {
-          navigate("/");
-        } else if (role === "provider") {
-          navigate("/teacherPanel");
-        } else {
-          navigate("/register");
-        }
+  //       // Reset the form after successful login
+  //       reset();
+  //       // Navigate to the appropriate dashboard or page based on the role
+  //       if (role === "consumer") {
+  //         navigate("/");
+  //       } else if (role === "provider") {
+  //         navigate("/teacherPanel");
+  //       } else {
+  //         navigate("/register");
+  //       }
 
-        // Aa313123@jjj   mohamed.taher@depowebeg.com
-      }
-      // Handle successful login logic here
+  //       // Aa313123@jjj   mohamed.taher@depowebeg.com
+  //     }
+  //     // Handle successful login logic here
  
-    }catch (error) {
-        console.error("Login Error:", error?.data?.message
-        );
-        error?.data?.message
-        ? setErrorMessage(error?.data?.message) :   setErrorMessage("Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com   " )
+  //   }catch (error) {
+  //       console.error("Login Error:", error?.data?.message
+  //       );
+  //       error?.data?.message
+  //       ? setErrorMessage(error?.data?.message) :   setErrorMessage("Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com   " )
       
-        setUserEmail(data.loginMail)
-        // Handle errors here
+  //       setUserEmail(data.loginMail)
+  //       // Handle errors here
+  //     }
+  //   };
+    
+//   const handleLogin = async (data) => {
+//     try {
+//       const userData = { email: data.loginMail, password: data.password };
+//       const response = await login({ userData, role }).unwrap();
+//       if (response) {
+//         console.log("Login successful:", response);
+  
+     
+//         //Encrypt the refresh token and store it
+//         const encryptedRe = CryptoJS.AES.encrypt(response.refresh_token, secretKey).toString();
+//         localStorage.setItem("RE_REV2_2024", encryptedRole);
+
+//          //Encrypt the Role  and store it
+//         const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString();
+//         localStorage.setItem("RO_V1_2024", encryptedRole);
+  
+//         // تخزين البيانات في الـ Redux
+//         const loginResponse = { ...response, userRole };
+//         console.log(loginResponse)
+//         dispatch(
+//           setCredentials({
+//             token: loginResponse.access_token,
+//             user: userRole,
+//           })
+//         );
+  
+//         // console.log("from login getting role:", loginResponse);
+
+//         reset();
+  
+//         // توجيه المستخدم حسب الدور
+//         if (role === "consumer") {
+// console.log(role)
+//           navigate("/");
+//         } else if (role === "provider") {
+//           navigate("/teacherPanel");
+//         } else {
+//           navigate("/register");
+//         }
+//       }
+//     }catch (error) {
+//             console.error("Login Error:", error?.data?.message
+//             );
+//             error?.data?.message
+//             ? setErrorMessage(error?.data?.message) :   setErrorMessage("Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com   " )
+          
+//             setUserEmail(data.loginMail)
+//             // Handle errors here
+//           }
+//         };
+        
+const handleLogin = async (data) => {
+  try {
+    
+    const userData = { email: data.loginMail, password: data.password };
+    const response = await login({ userData, role }).unwrap();
+
+    if (response) {
+      console.log("Login successful:", response);
+
+
+
+      // Encrypt the refresh token and store it
+      const encryptedRe = CryptoJS.AES.encrypt(response.refresh_token, secretKey).toString();
+      localStorage.setItem("RE_REV2_2024", encryptedRe);  
+
+
+        // Encrypt the Role and store it
+      const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString();
+      localStorage.setItem("RO_V1_2024", encryptedRole);
+
+      //Store In Redux
+      const roleOfUser =getRole('RO_V1_2024')
+
+      const loginResponse = { ...response, role };  
+      dispatch(
+        setCredentials({
+          token: loginResponse.access_token,
+          user: loginResponse,
+        })
+      );
+      dispatch(setRole(roleOfUser))
+
+      // RestForm
+      reset();
+
+      // Navigate the user based on the role
+      if (role === "consumer") {
+        navigate("/");
+      } else if (role === "provider") {
+        navigate("/teacherPanel");
+      } else {
+        navigate("/register");
       }
-    };
-    
-    
+    }
+  } catch (error) {
+      console.error("Login Error:", error?.data?.message);
+      error?.data?.message
+      ? setErrorMessage(error?.data?.message) 
+      : setErrorMessage("Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com.");
+      
+      setUserEmail(data.loginMail);
+  }
+};
+
 
   const handleForgetPassword = async (data) => {
     // console.log("Form data:", {email: data.email})
@@ -103,6 +212,7 @@ export default function Login({ toggleForm }) {
     navigate(`/register/verify-account/${enCodedMail}`);
   }
  
+
   return (
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
       {forgetPassword ? (
