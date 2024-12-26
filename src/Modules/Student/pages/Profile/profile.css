@@ -1,10 +1,10 @@
 .close {
-  width: 50px !important;
+  width: 55px !important;
   transition: all 1s !important;
 }
 
 .open {
-  width: 200px !important;
+  width: 250px !important;
   transition: all 1s !important;
 }
 

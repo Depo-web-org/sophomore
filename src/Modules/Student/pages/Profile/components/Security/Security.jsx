@@ -66,7 +66,7 @@ export default function Security() {
     setShowPassword((prevState) => !prevState);
   };
   return (
-    <>
+    <div className="container">
       <Alert
         Name="Password changed successfully!"
         title={"Your password has been updated successfully."}
@@ -108,7 +108,7 @@ export default function Security() {
           </span>
           <label
             htmlFor="old_password"
-            className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+            className=" bg-white rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between"
           >
             <input
               type={showPassword ? "text" : "password"}
@@ -122,13 +122,13 @@ export default function Security() {
                     "Password must contain at least one uppercase letter, one number, and one special character",
                 },
               })}
-              className="outline-none flex-1"
+              className="outline-none w-[90%] py-4"
               placeholder="Enter Your Old Password"
             />
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="ml-2 text-gray-500 focus:outline-none"
+              className=" text-gray-500 focus:outline-none"
             >
               {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
@@ -146,7 +146,7 @@ export default function Security() {
           </span>
           <label
             htmlFor="new_password"
-            className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+            className=" bg-white rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between"
           >
             <input
               type={showPassword ? "text" : "password"}
@@ -160,7 +160,7 @@ export default function Security() {
                     "Password must contain at least one uppercase letter, one number, and one special character",
                 },
               })}
-              className="outline-none flex-1"
+              className="outline-none w-[90%] py-4"
               placeholder="Enter Your Old Password"
             />
             <button
@@ -178,13 +178,13 @@ export default function Security() {
           )}
         </div>
 
-        <div className="relative border-b py-5">
+        <div className="relative">
           <span className="text-sm font-medium text-white pb-2">
             Retype new Password
           </span>
           <label
-            htmlFor="confirm_password"
-            className="w-full bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between"
+            htmlFor="password"
+            className=" bg-white rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between"
           >
             <input
               type={showPassword ? "text" : "password"}
@@ -194,7 +194,7 @@ export default function Security() {
                 validate: (value) =>
                   value === getValues("new_password") || "Passwords must match",
               })}
-              className="outline-none flex-1"
+              className="outline-none w-[90%] py-4"
               placeholder="Confirm new Password"
             />
             <button
@@ -241,6 +241,6 @@ export default function Security() {
 
         {/* end */}
       </form>
-    </>
+    </div>
   );
 }
