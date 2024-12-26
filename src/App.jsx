@@ -46,12 +46,14 @@ import ResetPassword from "./Modules/Student/pages/Register/components/ResetPass
 import StudentProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import TeacherProtectedRoute from "./ProtectedRoutes/TeacherProtectedRoute";
 import VerifyAccount from "./Modules/Student/pages/Register/components/VerifyAccount/VerifyAccount";
+import NotFound from "./Modules/Student/pages/404/NotFound";
 
 function AppRoutes() {
   return (
     <>
       <ScrollTop />
       <ButtomTop />
+      
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
@@ -209,7 +211,9 @@ function AppRoutes() {
             }
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
+
     </>
   );
 }

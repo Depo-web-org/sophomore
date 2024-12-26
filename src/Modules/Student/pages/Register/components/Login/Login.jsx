@@ -37,6 +37,8 @@ export default function Login({ toggleForm }) {
       if (response) {
         console.log("Login successful:", response);
         localStorage.setItem("refresh_token", response.refresh_token);
+        localStorage.setItem('role', role)
+
         // Dispatch the setCredentials action to save the user data in the Redux store
         const loginResponse = { ...response, role };
 
