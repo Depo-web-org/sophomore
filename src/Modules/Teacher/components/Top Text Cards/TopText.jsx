@@ -1,6 +1,9 @@
 import React from "react";
 
 const TopText = ({name,title}) => {
+
+
+  
   return (
     <div className="relative flex flex-col items-center justify-center my-10">
       <p className="text-2xl sm:text-3xl lg:text-4xl text-white font-bold">

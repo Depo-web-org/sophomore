@@ -42,8 +42,10 @@ const IndexTeacher = () => {
   ];
 
   const [showMessage, setShowMessage] = useState(true);
-
-  const nav = useNavigate();
+  const [data, setdata] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [showAlertError, setshowAlertError] = useState(false);
+  const Navigate = useNavigate();
 
   // React Hook Form
   const {
@@ -53,18 +55,12 @@ const IndexTeacher = () => {
     formState: { errors },
   } = useForm();
 
-  const [data, setdata] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
-  const [showAlertError, setshowAlertError] = useState(false);
-
   const handleFormSubmit = (data) => {
-    // Add selected options to the data array\
+    // Add selected options to the data array
     const selectedOptions = Object.values(data).filter((item) => item);
     setdata((prevData) => [...prevData, selectedOptions]);
     console.log(data);
-  
-      reset()
-    
+    reset();
   };
 
   // alert
@@ -88,20 +84,20 @@ const IndexTeacher = () => {
       console.log("Selected Item:", data);
       handleShowAlert();
       setTimeout(() => {
-        nav("/Teacherr");
+        Navigate("/Teacherr");
       }, 2000);
     }
   };
 
   // Remove item
   const handleRemoveBadge = (item) => {
-    setdata((prevData) => prevData.filter((id) => id !== item));
+    setdata((id) => id.filter((id) => id !== item));
   };
 
   return (
     <>
       {showMessage ? (
-        <div className="relative w-full h-screen bg-red-400">
+        <div className="relative w-full h-screen ">
           {/* photo */}
           <img
             src="/public/Teacher/Teacher panel.svg"
@@ -118,6 +114,7 @@ const IndexTeacher = () => {
             {data.map((item, index) => (
               <div key={index}>
                 <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
+                  {/* code change num to string */}
                   {item
                     .map((optionId) => {
                       const option = options
@@ -136,72 +133,76 @@ const IndexTeacher = () => {
             ))}
           </div>
 
-          {/* options */}
-          <form
-            onSubmit={handleSubmit(handleFormSubmit)}
-            className="relative z-10 py-12 px-5 max-w-[600px] lg:w-calc(100%-50%)"
-          >
-            <div className="flex justify-center">
-              <div id="options" className="h-auto w-full tracking-wide">
-                {options.map((item, index) => (
-                  <div key={item.id}>
-                    {/* Label */}
-                    <label
-                      htmlFor={`dropdown-${index}`}
-                      className="text-gray-400 font-semibold text-sm lg:text-md"
-                    >
-                      {item.title}
-                    </label>
+          {/* options  py-12 px-5 max-w-[600px] lg:w-calc(100%-50%)*/}
+          <div className="bg-red-400 w-full py-12 px-5 flex justify-center">
+            <form
+              onSubmit={handleSubmit(handleFormSubmit)}
+              className="relative z-10 w-[500px] "
+            >
+              <div className="flex justify-center">
+                <div id="options" className="h-auto w-full tracking-wide">
+                  {options.map((item, index) => (
+                    <div key={item.id}>
+                      {/* Label */}
+                      <label
+                        htmlFor={`dropdown-${index}`}
+                        className="text-gray-400 font-semibold text-sm lg:text-md "
+                      >
+                        {item.title}
+                      </label>
 
-                    {/* Dropdown */}
-                    <select
-                      {...register(`option${index}`, {
-                        required: "This field is required",
-                      })}
-                      id={`dropdown-${index}`}
-                      className="mt-1.5 py-2 w-full rounded-lg text-sm lg:text-md font-semibold text-gray-600 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    >
-                      <option value="" selected >
-                        {item.name}
-                      </option>
-
-                      {item.opations?.map((option) => (
-                        <option key={option.id} value={option.id}>
-                          {option.value}
+                      {/* Dropdown */}
+                      <select
+                        id={`dropdown-${index}`}
+                        className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border  focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        {...register(`option${index}`, {
+                          required: "This field is required",
+                        })}
+                      >
+                        <option value="" selected>
+                          {item.name}
                         </option>
-                      ))}
-                    </select>
 
-                    {/* Error Handling */}
-                    {errors[`option${index}`] && (
-                      <p className="text-red-500 text-sm">
-                        {errors[`option${index}`].message}
-                      </p>
-                    )}
-                  </div>
-                ))}
+                        {item.opations?.map((option) => (
+                          <option
+                            className="font-semibold text-gray-600"
+                            key={option.id}
+                            value={option.id}
+                          >
+                            {option.value}
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* Error Handling */}
+                      {errors[`option${index}`] && (
+                        <p className="text-red-500 text-sm">
+                          {errors[`option${index}`].message}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Bottom Buttons */}
-            <div>
-              <button
-                type="submit"
-                className="me-10 rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
-              >
-                Add Another
-              </button>  
-               <button
-                type="button"
-                className="rounded mt-4 bg-green-600 px-4 py-2 text-md font-semibold text-white hover:bg-green-800 transition-all duration-300"
-                onClick={handleSendData}
-              >
-                Next
-              </button>
-            </div>
-           
-          </form>
-
+              {/* Bottom Buttons */}
+              <div>
+                <button
+                  type="submit"
+                  className="me-10 rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+                >
+                  Add Another
+                </button>
+                <button
+                  type="button"
+                  className="rounded mt-4 bg-green-600 px-4 py-2 text-md font-semibold text-white hover:bg-green-800 transition-all duration-300"
+                  onClick={handleSendData}
+                >
+                  Next
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       ) : (
         <Teacherr />
