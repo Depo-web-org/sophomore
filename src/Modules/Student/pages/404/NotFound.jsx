@@ -5,10 +5,10 @@ const NotFound = () => {
   return (
     <>
     <div className='min-h-screen flex items-center justify-center bg-dark flex-col'> 
-    <img src="/404/Oops! 404 Error with a broken robot-cuate.svg" alt="404"  className='size-4/5'/>
+    <img src="/404/Oops! 404 Error with a broken robot-cuate.svg" alt="404"  className='size-4/5 lg:w-3/5 xl:size-2/5'/>
     <div className='w-full '>
     <p className='text-2xl font-bold text-white -mt-10 text-center'>Page Not Found</p>
-    <div className='w-1/2 mx-auto '>
+    <div className='w-1/2 lg:w-3/5 xl:w-2/5 mx-auto '>
         <button className='bg-primary hover:bg-secondary duration-200 transition-all text-white px-10 py-2 rounded-md mt-4  w-full font-semibold text-nowrap'>
             <Link to='/'>
             Back To Home

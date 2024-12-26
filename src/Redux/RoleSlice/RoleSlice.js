@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getRole } from "../../Helpers/enCodeRole";
 
 
-
+const userRole = getRole('RO_V1_2024') 
 const roleSlice = createSlice({
   name: "role",
-  initialState: { role: "consumer" }, 
+  initialState: { role: userRole|| "consumer" }, 
   reducers: {
     setRole: (state, action) => {
         console.log(action.payload)
