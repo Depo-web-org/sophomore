@@ -93,7 +93,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
   return (
     <>
-      <div className="w-full my-auto flex justify-center ">
+      <div className="w-full my-auto flex justify-center  ">
         <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
                    title={{
@@ -105,29 +105,33 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-2 "
           >
-            <div className="flex justify-center items-center gap-8 text-white text-center text-2xl  mx-4 ">
-              {[0, 1, 2, 3, 4, 5].map((index) => (
-                <Controller
-                  key={index}
-                  name={`otp[${index}]`}
-                  control={control}
-                  render={({ field: { onChange, value, ref } }) => (
-                    <input
-                      ref={ref}
-                      type="text"
-                      value={value}
-                      maxLength="1"
-                      className="w-full lg:w-4/5 mx-auto  bg-transparent border-b-[1px] ring-0 outline-none text-base lg:text-2xl"
-                      onChange={(e) => {
-                        onChange(e.target.value);
-                        handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
-                      }}
-                      onFocus={(e) => e.target.select()}
-                      onPaste={(e) => handlePaste(e, onChange)}
-                    />
-                  )}
-                />
-              ))}
+            <div className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl  mx-4 ">
+            {[0, 1, 2, 3, 4, 5].map((index) => (
+  <Controller
+    key={index}
+    name={`otp[${index}]`}
+    control={control}
+    render={({ field: { onChange, value, ref } }) => (
+      <input
+        ref={ref}
+        type="text"
+        value={value}
+        maxLength="1"
+           className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md  border-b ring-0 outline-none text-center font-bold"
+        onChange={(e) => {
+          const inputValue = e.target.value;
+          if (/^\d*$/.test(inputValue)) { // Only allow digits
+            onChange(inputValue);
+            handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
+          }
+        }}
+        onFocus={(e) => e.target.select()}
+        onPaste={(e) => handlePaste(e, onChange)}
+      />
+    )}
+  />
+))}
+
             </div>
             {/* Submit Button */}
             <button

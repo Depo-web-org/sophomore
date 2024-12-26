@@ -124,7 +124,7 @@ const ResetPassword = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"
             >
-              <div className="flex justify-center items-start b gap-8 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
+              <div className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
@@ -136,10 +136,13 @@ const ResetPassword = () => {
                         type="text"
                         value={value}
                         maxLength="1"
-                        className=" w-full lg:w-4/5 mx-auto bg-transparent border-b-[1px] ring-0 outline-none font-bold"
+                  className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary  rounded-md border-b ring-0 outline-none text-center font-bold"
                         onChange={(e) => {
-                          onChange(e.target.value);
-                          handleInput(e, index);
+                          const inputValue = e.target.value;
+                          if (/^\d*$/.test(inputValue)) { // Only allow digits
+                            onChange(inputValue);
+                            handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
+                          }
                         }}
                         onFocus={(e) => e.target.select()}
                         onPaste={(e) => handlePaste(e, onChange)}

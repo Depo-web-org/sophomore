@@ -107,7 +107,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                         "Enter a valid full name with two words, each at least 3 letters",
                     },
                   })}
-                  className="outline-none w-full"
+                  className="outline-none text-base w-full"
                   placeholder="Enter your Full Name"
                 />
               </label>
@@ -136,7 +136,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     id="phone_number"
                     placeholder="Enter your phone number"
                     defaultCountry="EG"
-                    className="w-full bg-white px-2 py-3 lg:p-4  rounded-lg border-gray-200 text-sm shadow-sm outline-none focus-visible:outline-none"
+                    className="w-full text-base bg-white px-2 py-3 lg:p-4  rounded-lg border-gray-200  shadow-sm outline-none focus-visible:outline-none"
                   />
                 )}
               />
@@ -153,6 +153,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
               </label>
               <input
                 id="email"
+                autoComplete="userMail"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -160,7 +161,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     message: `Enter a valid email address e.g:user.name@domain.com`,
                   },
                 })}
-                className="w-full rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm outline-none"
+                className="w-full text-base rounded-lg border-gray-200 px-2 py-3 lg:p-4  shadow-sm outline-none"
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -173,11 +174,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             <div>
               <label
                 htmlFor="password"
-                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between "
+                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-base shadow-sm flex items-center justify-between "
               >
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
+                  autoComplete="new-password"
                   {...register("password", {
                     required: "Password is required",
                     pattern: {
@@ -187,7 +189,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                         "Password must contain at least one uppercase letter, one number, and one special character",
                     },
                   })}
-                  className="outline-none w-4/5"
+                  className="outline-none text-base w-4/5"
                   placeholder="Enter password"
                 />
                 <button
@@ -218,13 +220,13 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     validate: (value, data) =>
                       value === data.password || "Passwords must match",
                   })}
-                  className="outline-none w-4/5"
+                  className="outline-none text-base w-4/5"
                   placeholder="Confirm password"
                 />
                 <button
                   type="button"
                   onClick={togglePasswordVisibility}
-                  className="ml-2 text-gray-500 focus:outline-none"
+                  className="ml-2 text-gray-500 focus:outline-none text-base"
                 >
                   {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                 </button>
@@ -268,10 +270,9 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             </button>
           </form>
         </div>
-      </div>
-      <div className="mx-auto pb-10 lg:pb-0 ">
+        <div className="mx-auto pb-10 lg:pb-0 w-full text-center lg:w-4/5 lg:ml-auto">
         <p
-          className={`  text-sm  lg:text-xl ${
+          className={`  text-sm  ${
             alreadyAv
               ? "text-secondary font-bold  underline"
               : "text-gray-500"
@@ -283,6 +284,8 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           </button>
         </p>
       </div>
+      </div>
+      
     </div>
   );
 }
