@@ -83,7 +83,9 @@ const [errorOtp, setErrorOtp] = useState(null)
       await resendOtp({ email, role }).unwrap().then(()=>  setTimeLeft(60));
       console.log('Successfully sent');
     } catch (err) {
+
         err.data.message === "Your account has already been verified. Please go to the login page." ? setStatusOfAccount("Your account has already been verified") : setStatusOfAccount(null)
+        setTimeout(()=> navigate('/register'), 3000)
     }
   };
 
@@ -100,7 +102,7 @@ const subTitle = statusOfAccount
   return (
     <>
       <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-center gap-4 overflow-hidden">
-        <div className="flex flex-col items-start justify-center lg:gap-8 w-full slide-in-left lg:min-h-screen">
+        <div className="flex flex-col items-start justify-center gap-4 lg:gap-8 w-full slide-in-left lg:min-h-screen">
           <div className="w-full">
             <HeadTitle
             title={{
@@ -115,8 +117,8 @@ const subTitle = statusOfAccount
             statusOfAccount ? <>
             
             </> :   <div className="w-full">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-              <div className="flex justify-center items-start gap-8 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ">
+              <div className="flex justify-center items-start  gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
@@ -128,13 +130,16 @@ const subTitle = statusOfAccount
                         type="text"
                         value={value}
                         maxLength="1"
-                        className="w-full lg:w-4/5 mx-auto bg-transparent border-b-[1px] ring-0 outline-none font-bold"
+                        className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary  rounded-md border-b ring-0 outline-none text-center font-bold"
                         onChange={(e) => {
-                          onChange(e.target.value);
-                          handleInput(e, index);
+                          const inputValue = e.target.value;
+                          if (/^\d*$/.test(inputValue)) { // Only allow digits
+                            onChange(inputValue);
+                            handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
+                          }
                         }}
                         onFocus={(e) => e.target.select()}
-                        onPaste={handlePaste}
+                        onPaste={(e) => handlePaste(e, onChange)}
                       />
                     )}
                   />

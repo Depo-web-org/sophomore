@@ -12,7 +12,7 @@ const Navbar = () => {
 
   // Fetch authentication state from Redux
   const { token, user } = useSelector((state) => state.auth);
-  console.log(token, user);
+  console.log(user?.role )
 
   const navItems = useMemo(() => {
     const items = [
@@ -20,7 +20,6 @@ const Navbar = () => {
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
     ];
-
     if (token && user?.role === "consumer") {
       // Add protected items only if authenticated as a consumer
       items.push(
@@ -45,7 +44,6 @@ const Navbar = () => {
               alt="logo"
               className="h-12 lg:h-8 w-auto hover:rotate-[360deg] duration-1000"
             />
-
             <p
               style={{ textShadow: "0px 5px 6px rgba(0, 0, 0, 0.25)" }}
               className="hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2"

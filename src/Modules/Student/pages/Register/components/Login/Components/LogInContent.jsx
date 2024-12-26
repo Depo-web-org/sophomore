@@ -56,8 +56,8 @@ export default function LogInContent({
                 >
                   <input
                     id="loginMail"
-                    className="outline-none flex-1"
-                    // className={`w-full rounded-lg  ${errorsForm?.loginMai?  "outline-red-600":  "  outline-none"} px-2 py-3 lg:p-4 pe-12 text-sm shadow-sm `}
+                    className="outline-none flex-1 text-base"
+                    autoComplete="userMail"
                     placeholder="Enter email"
                     {...register("loginMail", {
                       required: `Email is required`,
@@ -90,6 +90,7 @@ export default function LogInContent({
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
+                    autoComplete="new-password"
                     {...register("password", {
                       required: "Password is required",
                       pattern: {
@@ -99,7 +100,7 @@ export default function LogInContent({
                           "Password must contain at least one uppercase letter, one number, and one special character",
                       },
                     })}
-                    className="outline-none  w-4/5"
+                    className="outline-none  w-4/5  text-base"
                     placeholder="Enter password"
                   />
 

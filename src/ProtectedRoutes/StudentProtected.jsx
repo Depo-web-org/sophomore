@@ -8,11 +8,10 @@ const StudentProtectedRoute = ({ children }) => {
   const storedToken = localStorage.getItem("refresh_token");
   const isAuthenticated = token || storedToken;
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated ) {
     return <Navigate to="/register" />;
   }
-
-  if (user?.role !== "consumer") {
+  if (user?.role !== "consumer" && !storedToken ) {
     return <Navigate to="/register" />;
   }
 
