@@ -188,8 +188,22 @@ function AppRoutes() {
               </TeacherProtectedRoute>
             }
           >
-            <Route element={<CourseStatistics />} index />
-            <Route path="addnewcourse" element={<AddNewCourse />} />
+            <Route
+              element={
+                <TeacherProtectedRoute>
+                  <CourseStatistics />
+                </TeacherProtectedRoute>
+              }
+              index
+            />
+            <Route
+              path="addnewcourse"
+              element={
+                <TeacherProtectedRoute>
+                  <AddNewCourse />{" "}
+                </TeacherProtectedRoute>
+              }
+            />
 
             {/* Nested Routes Courses */}
 
