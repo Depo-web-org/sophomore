@@ -3,7 +3,7 @@ import { BsFillCameraFill } from "react-icons/bs";
 
 const Profile = () => {
   return (
-    <div className="w-full min-h-40 container">
+    <div className="w-full min-h-40 ">
       <div className="relative bg-gradient-to-r from-[#F15C54] from-10%  to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
         {/* icon */}
         <BsFillCameraFill className="absolute top-4 right-7 h-6 w-6 text-white" />
@@ -16,7 +16,7 @@ const Profile = () => {
       </div>
 
       {/* section Name */}
-      <div className="relative min-h-36 sm:px-4 py-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
+      <div className="relative min-h-36 sm:px-4 py-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto px-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <p className="font-bold  text-md">Mohamed Ayman</p>
@@ -29,7 +29,7 @@ const Profile = () => {
             type="button"
             data-twe-ripple-init
             data-twe-ripple-color="light"
-            className="rounded bg-primary px-4 py-2 text-sm font-semibold text-white  hover:bg-blue-800 transition-all duration-300"
+            className="rounded bg-primary px-4 py-2 text-sm font-semibold text-white transition-all duration-300"
           >
             Save
           </button>
