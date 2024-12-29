@@ -122,7 +122,7 @@ function AppRoutes() {
             path="/profile"
             element={
               <StudentProtectedRoute>
-                <Profile />/{" "}
+                <Profile />
               </StudentProtectedRoute>
             }
           >
