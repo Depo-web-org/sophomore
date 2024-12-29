@@ -81,13 +81,13 @@ export default function Security() {
           {/* img */}
           <img
             className="border-2 border-white absolute top-36 left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full"
-            src="https://s3-alpha-sig.figma.com/img/56b7/1855/5f70fa6b93cdb06490b027b82b3d0038?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d~bHqR3Tnv7B87ZkS7dnOnou3OMgxYRho3-0Bqmcf-zAhiGMsCqsiaTptyesTYF88SfmX9gDzNRtv1fpPKRuUivv-RnoebIHkc0q4oMpOxHFKWE8RK7gJ~N-t-0YMK4oGuxV7zMQoCbJzcuSFo~H2Pz5rF6suHciwMVFb3w64UxO~nHxVBdaScrD2payUGDss3VR~lPMsn1QwLb9l2-RMEO5ESy~Ax5qv~yWXJWM7YyXzZpMSFjJb~N6pbDZ2njGFj1wFD-eXjelqC4ITfIPzjT5N8EpwtNX0BW6IkaZQvIOdTA~7gEOY8hyUnj-7AXCEsx-upowkIE9zc6-FSoANA__"
+            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="profile"
           />
         </div>
 
         {/* section Name */}
-        <div className="relative min-h-36 sm:px-5 w-full sm:w-[60%] ms-auto sm:ms-auto ">
+        <div className="relative min-h-36 container sm:px-5 w-full sm:w-[60%] ms-auto sm:ms-auto ">
           <div className="absolute bottom-1 sm:top-2">
             <p className="font-bold text-white text-md">Sara Johnson</p>
             <p className="text-gray-500 text-sm">
@@ -100,7 +100,7 @@ export default function Security() {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] m-auto min-h-96 mt-16 sm:mt-10"
+        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] container m-auto min-h-96 mt-16 sm:mt-10"
       >
         {/*first email */}
         <div className="relative border-b py-5">
