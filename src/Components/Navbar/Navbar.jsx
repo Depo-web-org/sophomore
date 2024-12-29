@@ -12,9 +12,13 @@ const Navbar = () => {
 
   // Fetch authentication state from Redux
   const { token, user } = useSelector((state) => state.auth);
-  const {role} = useSelector((state) => state.role);
-  console.log(token)
-  console.log(role)
+  const { role } = useSelector((state) => state.role);
+  console.log(token);
+  console.log(role);
+
+  // const student=[
+  //     home, about, contact, myLearning, cart, wishlist, profile
+  // ]
 
   const navItems = useMemo(() => {
     const items = [
@@ -27,13 +31,10 @@ const Navbar = () => {
       items.push(
         { text: "My Learning", link: "/mylearning" },
         { icon: <IoCartOutline />, link: "/cart" },
-        { icon: <IoHeartOutline />, link: "/wishlist" },
-        { text: "Profile", link: "/profile" }
+        { icon: <IoHeartOutline />, link: "/wishlist" }
       );
-    }else if(token && role !== "consumer"){
-      items.push(
-        { text: "Dashboard", link: "/teacherPanel" },
-      );
+    } else if (token && role !== "consumer") {
+      items.push({ text: "Dashboard", link: "/teacherPanel" });
     }
     return items;
   }, [token, role]);
@@ -71,12 +72,24 @@ const Navbar = () => {
                     }}
                     className="text-white text-sm lg:text-base flex items-center justify-center"
                   >
-                    <span className="text-base md:text-lg">{item.icon}</span>
+                    <span className="text-base md:text-2xl">{item.icon}</span>
                     {item.text}
                   </NavLink>
                 </li>
               ))}
             </ul>
+            {token && role === "consumer" && (
+              <Link
+                to={"/profile"}
+                className="ml-3 overflow-hidden rounded-full border border-gray-300 shadow-inner"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="profile avatar"
+                  className="size-8 object-cover"
+                />
+              </Link>
+            )}
 
             {!token && (
               <button
