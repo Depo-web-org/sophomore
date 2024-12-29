@@ -16,6 +16,10 @@ const Navbar = () => {
   console.log(token)
   console.log(role)
 
+  // const student=[
+  //     home, about, contact, myLearning, cart, wishlist, profile
+  // ]
+  
   const navItems = useMemo(() => {
     const items = [
       { text: `Home`, link: "/" },
@@ -26,9 +30,9 @@ const Navbar = () => {
       // Add protected items only if authenticated as a consumer
       items.push(
         { text: "My Learning", link: "/mylearning" },
+        { text: "Profile", link: "/profile" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" },
-        { text: "Profile", link: "/profile" }
       );
     }else if(token && role !== "consumer"){
       items.push(
