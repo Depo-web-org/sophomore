@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import TopText from "../components/Top Text Cards/TopText";
-import Teacherr from "../components/TeacherUpload/Teacher";
+import TeacherUpload from "../components/TeacherUpload/Teacher";
 import { VscChromeClose } from "react-icons/vsc";
 import Alert from "../../Student/pages/Profile/components/Alerts/Alert";
 import { useNavigate } from "react-router-dom";
@@ -205,7 +205,7 @@ const IndexTeacher = () => {
           </div>
         </div>
       ) : (
-        <Teacherr />
+        <TeacherUpload />
       )}
 
       {showAlert && (

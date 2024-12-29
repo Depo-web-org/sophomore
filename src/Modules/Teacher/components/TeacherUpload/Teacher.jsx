@@ -1,42 +1,43 @@
 import React, { useState } from "react";
 import TopText from "../Top Text Cards/TopText";
+import { useNavigate } from "react-router-dom";
 
-const Teacherr = () => {
-  const cardteacher = [
-    {
-      id: "item1",
-      name: "CV",
-      img: "/public/Teacher/CardTeacher_1.svg",
-    },
-    {
-      id: "item2",
-      name: "Graduation Certificate",
-      img: "/public/Teacher/CardTeachet_3.svg",
-    },
-    {
-      id: "item3",
-      name: "Intro Video",
-      img: "/public/Teacher/CardTeachet_4.svg",
-    },
-    {
-      id: "item4",
-      name: `Additional Documents`,
-      img: "/public/Teacher/CardTeachet_2.svg",
-    },
-  ];
-
+const cardteacher = [
+  {
+    id: "item1",
+    name: "CV",
+    img: "/public/Teacher/CardTeacher_1.svg",
+  },
+  {
+    id: "item2",
+    name: "Graduation Certificate",
+    img: "/public/Teacher/CardTeachet_3.svg",
+  },
+  {
+    id: "item3",
+    name: "Intro Video",
+    img: "/public/Teacher/CardTeachet_4.svg",
+  },
+  {
+    id: "item4",
+    name: `Additional Documents`,
+    img: "/public/Teacher/CardTeachet_2.svg",
+  },
+];
+const TeacherUpload = () => {
   const [buttonStates, setButtonStates] = useState([]);
+  const navigate = useNavigate();
 
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
-      const fileSrc = URL.createObjectURL(file);  
+      const fileSrc = URL.createObjectURL(file);
       setButtonStates((prevState) => ({
         ...prevState,
         [index]: { status: "Approved", src: fileSrc },
       }));
 
-      console.log(`File ${index} source:`, fileSrc);  
+      console.log(`File ${index} source:`, fileSrc);
     }
   };
 
@@ -47,6 +48,7 @@ const Teacherr = () => {
   const handleSubmitt = () => {
     console.log("Uploaded Data:", buttonStates);
     console.log("Check the console for uploaded data!", allApproved);
+    navigate("/teacherPanel");
   };
 
   return (
@@ -133,4 +135,4 @@ const Teacherr = () => {
   );
 };
 
-export default Teacherr;
+export default TeacherUpload;
