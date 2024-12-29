@@ -5,8 +5,8 @@ import ApplicationSection from "../components/options/ApplicationSection";
 const AddNewCourse = () => {
 
   return (
-    <div className="lg:flex justify-between">
-      <div className="min-w-80 sm:mx-auto lg:mx-0">
+    <div className="">
+      <div className="w-96 sm:mx-auto lg:mx-0">
         <span className="block text-2xl lg:text-3xl font-semibold">
           Add a new Course
         </span>
