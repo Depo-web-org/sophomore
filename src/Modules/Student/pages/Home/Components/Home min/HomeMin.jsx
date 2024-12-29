@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function HomeMin() {
   const HomeMin = [
     {
@@ -41,17 +43,20 @@ export default function HomeMin() {
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
           {HomeMin.map((item) => (
             <div
-              className="col-span-6 md:col-span-3 lg:col-span-4 hover:cursor-pointer"
+              className="col-span-6 md:col-span-3 lg:col-span-4 "
               key={item.id}
             >
+              
               {/* img */}
-              <div className="group block overflow-hidden rounded-3xl">
+              <Link to={'/mylearning/course/Science'}>
+              <div className="group block overflow-hidden rounded-3xl hover:cursor-pointer">
                 <img
                   src={item.img}
                   alt={item.Name}
                   className="w-full h-40  lg:h-48 xl:h-52 object-cover rounded-3xl group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
-                />
+                  />
               </div>
+                  </Link>
               {/* Text */}
               <div className="font-semibold text-white mt-1 lg:mt-3 ps-2">
                 <p className="text-base lg:text-lg">{item.Name}</p>
