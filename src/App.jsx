@@ -167,8 +167,8 @@ function AppRoutes() {
 
         {/* page Teacherrrr */}
         <Route path="/" element={<NavTeacher />}>
-          <Route index path="/IndexTeacher" element={<IndexTeacher />} />
-          <Route path="/Teacherr" element={<TeacherUpload />} />
+          <Route index path="/teacherupload" element={<IndexTeacher />} />
+          <Route path="/Teacherdocs" element={<TeacherUpload />} />
         </Route>
 
         <Route path="/teacherPanel" element={<DashboardLayout />}>
