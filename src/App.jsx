@@ -24,7 +24,7 @@ import Subscriptions from "./Modules/Student/pages/Profile/components/Subscripti
 import Security from "./Modules/Student/pages/Profile/components/Security/Security";
 import Register from "./Modules/Student/pages/Register/index";
 import IndexTeacher from "./Modules/Teacher/pages";
-import Teacherr from "./Modules/Teacher/components/TeacherUpload/Teacher";
+import TeacherUpload from "./Modules/Teacher/components/TeacherUpload/Teacher";
 import Dashboard from "./Modules/Teacher/pages/Dashboard/index";
 import Courses from "./Modules/Teacher/pages/Courses/Index";
 import CourseStatistics from "./Modules/Teacher/pages/Courses/Page/CourseStatistics";
@@ -50,12 +50,11 @@ import NotFound from "./Modules/Student/pages/404/NotFound";
 import { useSelector } from "react-redux";
 
 function AppRoutes() {
-  
   return (
     <>
       <ScrollTop />
       <ButtomTop />
-      
+
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
@@ -168,8 +167,8 @@ function AppRoutes() {
 
         {/* page Teacherrrr */}
         <Route path="/" element={<NavTeacher />}>
-          <Route index path="/IndexTeacher" element={<IndexTeacher />} />
-          <Route path="/Teacherr" element={<Teacherr />} />
+          <Route index path="/teacherupload" element={<IndexTeacher />} />
+          <Route path="/Teacherdocs" element={<TeacherUpload />} />
         </Route>
 
         <Route path="/teacherPanel" element={<DashboardLayout />}>
@@ -215,7 +214,6 @@ function AppRoutes() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-
     </>
   );
 }

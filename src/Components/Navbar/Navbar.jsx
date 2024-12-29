@@ -34,7 +34,7 @@ const Navbar = () => {
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );
     } else if (token && role !== "consumer") {
-      items.push({ text: "Dashboard", link: "/teacherPanel" });
+      items.push({ text: "Dashboard", link: "/teacherupload" });
     }
     return items;
   }, [token, role]);
