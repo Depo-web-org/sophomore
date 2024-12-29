@@ -25,7 +25,7 @@ const Teacherr = () => {
     },
   ];
 
-  const [buttonStates, setButtonStates] = useState({});
+  const [buttonStates, setButtonStates] = useState([]);
 
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
