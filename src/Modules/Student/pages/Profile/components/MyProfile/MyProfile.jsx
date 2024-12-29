@@ -34,7 +34,7 @@ export default function MyProfile() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <p className="font-bold text-white text-md">Sara Johnson</p>
-                <p className="text-gray-300 text-sm">
+                <p className="text-gray-500 font-normal text-sm">
                   Update your photos and personal Details
                 </p>
               </div>
@@ -53,14 +53,14 @@ export default function MyProfile() {
         <div className="   flex flex-col sm:flex-row items-center mb-5 lg:w-[calc(100%-30%)] ms-auto">
           <label
             htmlFor="Username"
-            className="w-full ml-2 text-white text-base border-gray-200 p-2 flex  items-center justify-between gap-4"
+            className="w-full text-white text-sm md:text-base  p-2 flex  items-center justify-between gap-2 flex-wrap"
           >
             Update UserName
             <input
               type="text"
               defaultValue={"username"}
               id="Username"
-              className=" p-2 w-full text-gray-600  rounded-md bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+              className=" p-2 w-full text-gray-600 text-base rounded-md bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
             />
           </label>
         </div>
@@ -68,18 +68,12 @@ export default function MyProfile() {
 
         {/* last section */}
 
-        <div className="h-36 my-2 lg:w-[calc(100%-30%)] ms-auto">
-          <div className=" text-right py-1 cursor-pointer text-white">
-            <button>Delete </button>
-            <span className="px-3">|</span>
-            <button>Update</button>
-          </div>
-
+        <div className="h-36  lg:w-[calc(100%-30%)] ms-auto  flex justify-between items-start py-3 flex-wrap">
           <div>
             <div className="flex justify-start items-start">
               <label
                 htmlFor="upload"
-                className=" text-white font-medium cursor-pointer  px-5 flex items-center gap-4"
+                className=" text-white font-medium cursor-pointer flex items-center gap-4"
               >
                 upload Photo
                 <input
@@ -96,13 +90,18 @@ export default function MyProfile() {
                 />
               </label>
             </div>
-            <p className=" text-gray-500 font-normal text-sm px-5 my-2">
+            <p className=" text-gray-500 font-normal text-sm my-2">
               Update your photo or edit and delete it
             </p>
           </div>
+          <div className=" text-right py-1 cursor-pointer text-white">
+            <button>Delete </button>
+            <span className="px-3">|</span>
+            <button>Update</button>
+          </div>
         </div>
 
-        <hr className="ms-auto lg:w-[calc(100%-30%)]" />
+        <hr className="ms-auto lg:w-[calc(100%-30%)] mt-2" />
       </div>
     </div>
   );

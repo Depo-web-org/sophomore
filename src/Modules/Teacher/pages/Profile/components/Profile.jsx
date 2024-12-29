@@ -3,7 +3,7 @@ import { BsFillCameraFill } from "react-icons/bs";
 
 const Profile = () => {
   return (
-    <div className="w-full min-h-40">
+    <div className="w-full min-h-40 container">
       <div className="relative bg-gradient-to-r from-[#F15C54] from-10%  to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
         {/* icon */}
         <BsFillCameraFill className="absolute top-4 right-7 h-6 w-6 text-white" />
