@@ -73,7 +73,7 @@ export default function Login({ toggleForm }) {
         if (role === "consumer") {
           navigate("/");
         } else if (role === "provider") {
-          navigate("/IndexTeacher");
+          navigate("/teacherupload");
         } else {
           navigate("/register");
         }
