@@ -4,11 +4,18 @@
 }
 
 .open {
-  width: 250px !important;
+  /* width: 250px !important; */
   transition: all 1s !important;
+  width: 200px;
 }
 
+@media (min-width: 1280px) {
+  .open {
+    width: 250px !important;
+  }
+}
 .custom-rotate-x:hover {
   transform: rotateY(180deg);
   transition: transform 0.5s ease-in-out;
+  
 }

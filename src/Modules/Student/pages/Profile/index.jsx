@@ -23,7 +23,7 @@ function SideBarProfile(props) {
       />
 
       <div className="flex flex-col gap-2 justify-between     ">
-        <div className="flex flex-col gap-2 justify-start  w-full  ">
+        <div className="flex flex-col gap-2 justify-start   ">
           <NavLink
             to="myprofile"
             className={({ isActive }) =>
@@ -94,7 +94,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="mt-24   container md:w-custom-md  xl:w-custom-xl mx-auto relative flex gap-6  min-h-screen">
+    <div className="mt-24   container md:w-custom-md  xl:w-custom-xl mx-auto relative flex  lg:gap-6  min-h-screen">
       <SideBarProfile
         Active={Active}
         setActive={setActive}
@@ -102,7 +102,7 @@ export default function Profile() {
       ></SideBarProfile>
       {OpseModel && <OpseModels setOpseModel={setOpseModel} />}
 
-      <div className="w-4/5 ml-auto ">
+      <div className="w-4/5 ml-auto lg:pl-8 xl:pl-0 ">
         <Outlet />
       </div>
     </div>
