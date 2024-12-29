@@ -54,7 +54,7 @@ export default function HomeMin() {
                   <img
                     src={item.img}
                     alt={item.Name}
-                    className="w-full h-72 object-cover rounded-3xl opacity-70 group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
+                    className="w-full h-72 object-cover rounded-3xl opacity-70 blur-[1px] group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                   />
                   <img
                     src="public/Frame.svg"
