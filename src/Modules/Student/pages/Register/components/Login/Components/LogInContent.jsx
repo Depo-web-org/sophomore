@@ -22,9 +22,8 @@ export default function LogInContent({
       const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
       };
-      const role = useSelector((state) => state.role.role);
+      const {role} = useSelector((state) => state.role);
       const dispatch = useDispatch();
-
     return (
       <div className=" flex flex-col items-start gap-8 lg:gap-10 w-full 2xl:w-4/5 mr-auto slide-in-right  ">
         <div className=" lg:mt-20 w-full">
