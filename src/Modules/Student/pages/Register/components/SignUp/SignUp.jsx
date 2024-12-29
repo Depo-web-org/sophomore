@@ -25,7 +25,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
   const [signup, { isLoading, isError, error }] = useSignupMutation();
-  console.log(error?.data.message);
+  console.log(error?.data?.message);
 
   const {
     register,
@@ -47,12 +47,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       await signup({ userData: data, role }).unwrap();
       handleSendOtp();
     } catch (err) {
-      console.error("Signup Error:", err.data.message);
-      err?.data.message === "Consumer with this email already exists." ||
-      err?.data.message === "Provider with this email already exists."
+      console.error("Signup Error:", err.data?.message);
+      err?.data?.message === "Consumer with this email already exists." ||
+      err?.data?.message === "Provider with this email already exists."
         ? // ? handleSendOtp()
           ResendOTP(data, handleSendOtp, setAlreadyAv)
-        : console.log(err.response);
+        : console.log(err?.response);
     }
   };
   //645838
