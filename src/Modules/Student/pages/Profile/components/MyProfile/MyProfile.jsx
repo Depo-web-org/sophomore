@@ -14,7 +14,7 @@ export default function MyProfile() {
     }
   };
   return (
-    <div className=" container">
+    <div className=" ">
       {/* first section */}
       <div className="w-full min-h-40">
         <div className="relative bg-gradient-to-r from-[#F15C54] from-10% to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">

@@ -24,13 +24,13 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="pt-24  relative flex gap-6 overflow-x-hidden ">
+    <div className="pt-24 container relative flex gap-6 overflow-x-hidden ">
       <div
         className={`${Active} flex flex-col bg-[#111827] z-50 gap-2 justify-start overflow-hidden items-start border-r h-screen border-gray-500 px-2`}
       >
         <MdOutlineKeyboardDoubleArrowLeft
           onClick={() => setActive(Active === "open" ? "close" : "open")}
-          className={`mb-3 ms-auto w-7 h-7 text-gray-500 transition-transform duration-300 ${
+          className={` lg:hidden mb-3 ms-auto w-7 h-7 text-gray-500 transition-transform duration-300 ${
             Active === "open" ? "rotate-180" : ""
           }`}
         />
@@ -91,7 +91,7 @@ export default function Profile() {
 
       {OpseModel && <OpseModels setOpseModel={setOpseModel} />}
 
-      <div className="pb-8 w-full absolute pl-16 md:pl-[150px]  ">
+      <div className="pb-8 w-full absolute pl-14 lg:pl-[250px]  ">
         <Outlet />
       </div>
     </div>

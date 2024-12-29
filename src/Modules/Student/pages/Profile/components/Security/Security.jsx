@@ -66,7 +66,7 @@ export default function Security() {
     setShowPassword((prevState) => !prevState);
   };
   return (
-    <div className="container">
+    <div className="">
       <Alert
         Name="Password changed successfully!"
         title={"Your password has been updated successfully."}
