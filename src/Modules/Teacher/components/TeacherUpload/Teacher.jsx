@@ -30,10 +30,13 @@ const Teacherr = () => {
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
+      const fileSrc = URL.createObjectURL(file);  
       setButtonStates((prevState) => ({
         ...prevState,
-        [index]: { status: "Approved", fileName: file.name },
+        [index]: { status: "Approved", src: fileSrc },
       }));
+
+      console.log(`File ${index} source:`, fileSrc);  
     }
   };
 
