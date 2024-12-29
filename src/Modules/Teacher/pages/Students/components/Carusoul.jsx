@@ -64,19 +64,23 @@ const Carusoul = () => {
   };
   return (
     <div className=" bg-[#F8F9FA] flex flex-col justify-start items-start gap-8 w-full">
-      <div className="bg-white w-full  h-52 rounded-3xl px-8">
+      <div className="bg-white w-full  h-[180px] rounded-3xl px-8 pt-4">
         <Swiper
           breakpoints={{
             1280: {
               slidesPerView: 4,
               spaceBetween: 40,
             },
+            528: {
+              slidesPerView: 2,
+              spaceBetween: 25,
+            },
             768: {
               slidesPerView: 3,
               spaceBetween: 25,
             },
           }}
-          slidesPerView={2}
+          slidesPerView={1}
           spaceBetween={15}
           navigation={true}
           pagination={pagination}
