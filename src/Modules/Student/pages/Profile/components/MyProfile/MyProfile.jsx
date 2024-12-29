@@ -26,7 +26,7 @@ export default function MyProfile() {
           />
         </div>
       </div>
-      <div className="px-8">
+      <div className="">
         <div>
           {/* section Name */}
           <div className="relative min-h-36 sm:px-4 py-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">

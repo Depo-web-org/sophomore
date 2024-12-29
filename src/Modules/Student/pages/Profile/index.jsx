@@ -24,7 +24,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="pt-24 container relative flex gap-6 overflow-x-hidden ">
+    <div className="pt-24  container md:w-custom-md xl:w-custom-xl mx-auto relative flex gap-6 overflow-x-hidden ">
       <div
         className={`${Active} flex flex-col bg-[#111827] z-50 gap-2 justify-start overflow-hidden items-start border-r h-screen border-gray-500 px-2`}
       >
