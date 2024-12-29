@@ -91,7 +91,7 @@ export default function Profile() {
 
       {OpseModel && <OpseModels setOpseModel={setOpseModel} />}
 
-      <div className="pb-8 w-full absolute pl-14 lg:pl-[250px]  ">
+      <div className="pb-8 w-full absolute pl-14 lg:pl-[255px]  ">
         <Outlet />
       </div>
     </div>
