@@ -8,12 +8,13 @@ const TeacherProfile = () => {
     <>
       {/* Profile */}
       <Profile />
+      <div className="conatiner">
+        {/* MinProfile */}
+        <MinProfile />
 
-      {/* MinProfile */}
-      <MinProfile />
-
-      {/* form */}
-      <Form />
+        {/* form */}
+        <Form />
+      </div>
     </>
   );
 };

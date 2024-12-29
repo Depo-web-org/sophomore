@@ -17,69 +17,64 @@ export default function MyProfile() {
   return (
     <div className=" ">
       {/* first section */}
-      <div className="w-full min-h-40">
-        <div className="relative bg-gradient-to-r from-[#F15C54] from-10% to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
+      <div className="w-full min-h-40 ">
+        {/* cover */}
+        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
           {/* Image */}
           <img
-            className="border-2 border-white absolute top-36 left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full"
+            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
             src={profileImage}
             alt="profile"
           />
         </div>
-      </div>
-      <div className="px-8">
-        <div>
+        <div className="px-1 lg:px-8">
           {/* section Name */}
-          <div className="relative min-h-36 sm:px-4 py-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <p className="font-bold text-white text-md">Sara Johnson</p>
-                <p className="text-gray-300 text-sm">
+          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 lg:gap-4  ">
+              <div className="w-full text-center lg:text-start">
+                <p className="font-bold text-white text-lg">Sara Johnson</p>
+                <p className="text-gray-500 font-normal text-xs lg:text-sm text-n">
                   Update your photos and personal Details
                 </p>
               </div>
 
               <button
                 type="button"
-                className="rounded bg-primary p-2 text-lg font-semibold text-white "
+                className="rounded bg-primary p-2 text-xs lg:text-base font-semibold text-white "
               >
                 Save
               </button>
             </div>
           </div>
         </div>
+      </div>
+      <div className="px-1 lg:px-8">
 
         {/* form */}
-        <div className="   flex flex-col sm:flex-row items-center mb-5 lg:w-[calc(100%-30%)] ms-auto">
+        <div className="   flex flex-col sm:flex-row items-center mb-5 lg:w-[70%] ms-auto border-b border-gray-50 pb-2">
           <label
             htmlFor="Username"
-            className="w-full ml-2 text-white text-base border-gray-200 p-2 flex  items-center justify-between gap-4"
+            className="w-full text-white font-medium text-sm md:text-base  py-2 flex  items-center justify-between gap-2 flex-wrap"
           >
             Update UserName
             <input
               type="text"
               defaultValue={"username"}
               id="Username"
-              className=" p-2 w-full text-gray-600  rounded-md bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+              className=" p-2 w-full text-gray-600 font-normal rounded-md bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm md:text-base"
             />
           </label>
         </div>
-        <hr className=" ms-auto lg:w-[calc(100%-30%)]" />
+        {/* <hr className=" ms-auto lg:w-[70%]" /> */}
 
         {/* last section */}
 
-        <div className="h-36 my-2 lg:w-[calc(100%-30%)] ms-auto">
-          <div className=" text-right py-1 cursor-pointer text-white">
-            <button>Delete </button>
-            <span className="px-3">|</span>
-            <button>Update</button>
-          </div>
-
+        <div className=" mb-5 border-b border-gray-50  lg:w-[70%] ms-auto gap-y-2  flex justify-center lg:justify-between  items-center pb-3 flex-wrap">
           <div>
-            <div className="flex justify-start items-start">
+            <div className="flex justify-center lg:justify-start items-start ">
               <label
                 htmlFor="upload"
-                className=" text-white font-medium cursor-pointer  px-5 flex items-center gap-4"
+                className=" text-white font-medium cursor-pointer flex items-center gap-2 lg:gap-4"
               >
                 upload Photo
                 <input
@@ -90,19 +85,24 @@ export default function MyProfile() {
                   onChange={handleImageUpload}
                 />
                 <img
-                  className="w-14 h-14"
+                  className=" size-10 lg:size-14"
                   src="/public/Profile/Camera.svg"
                   alt="photo"
                 />
               </label>
             </div>
-            <p className=" text-gray-500 font-normal text-sm px-5 my-2">
-              Update your photo or edit and delete it
-            </p>
+            
+          </div>
+          <div className=" text-right py-1 cursor-pointer text-white ">
+            <button>Delete </button>
+            <span className="px-3">|</span>
+            <button>Update</button>
           </div>
         </div>
+        <p className=" text-gray-500 font-normal text-xs lg:text-sm text-nowrap my-2 pb-4 text-center ">
+              Update your photo or edit and delete it
+            </p>
 
-        <hr className="ms-auto lg:w-[calc(100%-30%)]" />
       </div>
     </div>
   );

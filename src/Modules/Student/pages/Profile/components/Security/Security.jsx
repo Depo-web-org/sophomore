@@ -66,7 +66,7 @@ export default function Security() {
     setShowPassword((prevState) => !prevState);
   };
   return (
-    <div className="">
+    <div className=" pb-10 lg:pb-0">
       <Alert
         Name="Password changed successfully!"
         title={"Your password has been updated successfully."}
@@ -77,22 +77,31 @@ export default function Security() {
 
       {/* first section */}
       <div className="w-full h-72 ">
-        <div className="relative bg-gradient-to-r from-[#F15C54] from-10% to-[#536CB3] to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
-          {/* img */}
+       
+        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
+          {/* Image */}
           <img
-            className="border-2 border-white absolute top-36 left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full"
+            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
             alt="profile"
           />
         </div>
 
         {/* section Name */}
-        <div className="relative min-h-36 container sm:px-5 w-full sm:w-[60%] ms-auto sm:ms-auto ">
-          <div className="absolute bottom-1 sm:top-2">
-            <p className="font-bold text-white text-md">Sara Johnson</p>
-            <p className="text-gray-500 text-sm">
-              Update your photos and personal Details
-            </p>
+        <div className="px-1 lg:px-8">
+          {/* section Name */}
+          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 lg:gap-4  ">
+              <div className="w-full text-center lg:text-start">
+                <p className="font-bold text-white text-lg">Sara Johnson</p>
+                <p className="text-gray-500 font-normal text-xs lg:text-sm text-n">
+                  Update your photos and personal Details
+                </p>
+              </div>
+
+              
+            </div>
           </div>
         </div>
       </div>
@@ -100,7 +109,7 @@ export default function Security() {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] container m-auto min-h-96 mt-16 sm:mt-10"
+        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] container m-auto min-h-96 mt-8"
       >
         {/*first email */}
         <div className="relative border-b py-5">
