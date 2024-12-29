@@ -30,14 +30,17 @@ const TeacherUpload = () => {
 
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
-    if (file) {
-      const fileSrc = URL.createObjectURL(file);
-      setButtonStates((prevState) => ({
-        ...prevState,
-        [index]: { status: "Approved", src: fileSrc },
-      }));
+    setButtonStates((prevState) => ({
+      ...prevState,
+      [index]: { status: "Approved", urlfile: file.name },
+    }));
 
-      console.log(`File ${index} source:`, fileSrc);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        console.log("Base64 Source:", reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
