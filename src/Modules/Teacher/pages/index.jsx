@@ -42,6 +42,7 @@ const IndexTeacher = () => {
       ],
     },
   ];
+
   const [selectedSchool, setSelectedSchool] = useState(null);
   const [selectedGrade, setSelectedGrade] = useState(null);
   const [data, setData] = useState([]);
@@ -50,7 +51,7 @@ const IndexTeacher = () => {
 
   const navigate = useNavigate();
 
-// hook form
+  // hook form
   const {
     register,
     handleSubmit,
@@ -59,20 +60,21 @@ const IndexTeacher = () => {
   } = useForm();
 
   const handleFormSubmit = (formData) => {
-    const selectedData = {
-      school: selectedSchool?.id || "",
-      grade: selectedGrade?.id || "",
-      subject: parseInt(formData.subject) || "",
-    };
+    const selectedData = [
+      selectedSchool?.id || "",
+      selectedGrade?.id || "",
+      parseInt(formData.subject) || "",
+    ];
 
-    if (selectedData.school && selectedData.grade && selectedData.subject) {
+    if (selectedData[0] && selectedData[1] && selectedData[2]) {
       setData((prevData) => [...prevData, selectedData]);
       reset();
       setSelectedSchool(null);
       setSelectedGrade(null);
     }
   };
-// send data to backend
+
+  // send data to backend
   const handleSendData = () => {
     if (data.length === 0) {
       setShowAlertError(true);
@@ -89,7 +91,7 @@ const IndexTeacher = () => {
     console.log(data);
   };
 
-// Remove item
+  // Remove item
   const handleRemoveBadge = (item) => {
     setData((prevData) => prevData.filter((d) => d !== item));
   };
@@ -104,31 +106,29 @@ const IndexTeacher = () => {
         />
         <div className="relative z-10 pt-28 lg:pt-32 text-center">
           <TopText name="Welcome Mohamed" title="Please Upload Your Papers" />
-              {/* whatch data a user */}
-             {data.map((item, index) => (
-            <div key={index}>
-              <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
-                {` ${
-                  School_categories.find((school) => school.id === item.school)
-                    ?.school_category
-                } ,  ${
-                  School_categories.find(
-                    (school) => school.id === item.school
-                  )?.grades.find((grade) => grade.id === item.grade)?.grade_no
-                } ,  ${
-                  School_categories.find((school) => school.id === item.school)
-                    ?.grades.find((grade) => grade.id === item.grade)
-                    ?.subjects.find((subject) => subject.id === item.subject)
-                    ?.name
-                }`}
+          {/* whatch data a user */}
+          {data.map((item, index) => {
+            const school = School_categories.find(
+              (school) => school.id === item[0]
+            );
+            const grade = school?.grades.find((grade) => grade.id === item[1]);
+            const subject = grade?.subjects.find(
+              (subject) => subject.id === item[2]
+            );
 
-                <VscChromeClose
-                  className="font-bold text-white hover:text-red-600 duration-500 w-5 h-5 cursor-pointer"
-                  onClick={() => handleRemoveBadge(item)}
-                />
-              </span>
-            </div>
-              ))}
+            return (
+              <div key={index}>
+                <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
+                  {`${school?.school_category} , ${grade?.grade_no} , ${subject?.name}`}
+
+                  <VscChromeClose
+                    className="font-bold text-white hover:text-red-600 duration-500 w-5 h-5 cursor-pointer"
+                    onClick={() => handleRemoveBadge(item)}
+                  />
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <div className="bg-red-400 w-full py-12 px-5 flex justify-center">
