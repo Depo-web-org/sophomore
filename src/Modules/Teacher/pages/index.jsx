@@ -100,7 +100,7 @@ const IndexTeacher = () => {
         <div className="relative w-full h-screen ">
           {/* photo */}
           <img
-            src="/public/Teacher/Teacher panel.svg"
+            src="/images/Teacher/Teacher panel.svg"
             alt="Teacher"
             className="w-full h-[100%] object-cover absolute"
           />

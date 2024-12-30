@@ -31,17 +31,16 @@ const MinProfile = () => {
 
       <div className="h-36 my-2 lg:w-[calc(100%-30%)] ms-auto">
         <div className=" text-right py-1 cursor-pointer">
-          <pre className=" text-gray-400 font-light hover:text-black duration-700 "> Delete | Update </pre>
+          <pre className=" text-gray-400 font-light hover:text-black duration-700 ">
+            {" "}
+            Delete | Update{" "}
+          </pre>
         </div>
 
         <div>
           <div className="flex justify-start items-center py-1">
             <p className=" font-bold  px-5">Photo</p>
-            <img
-              className="w-14 h-14"
-              src="/public/Profile/Camera.svg"
-              alt="photo"
-            />
+            <img className="w-14 h-14" src="//Profile/Camera.svg" alt="photo" />
           </div>
           <p className=" text-gray-500 font-normal text-sm px-5 my-2">
             Update your photo or edit and delete it

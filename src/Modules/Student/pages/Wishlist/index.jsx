@@ -14,22 +14,21 @@ export default function WishList() {
         </h2>
       </div>
 
-      <center> 
-      <div className="grid grid-cols-6 lg:grid-cols-12 gap-4 w-full">
-        {data?.Teacher.map((teacher) => (
-          <TeacherCard
-            key={teacher.id}
-            gradeName={"grade 1"}
-            schoolName={"IG"}
-            subjectName={"math"}
-            teacher={teacher}
-            isSelecteted={true}
-          />
-        ))}
-      </div>
+      <center>
+        <div className="grid grid-cols-6 lg:grid-cols-12 gap-4 w-full">
+          {data?.Teacher.map((teacher) => (
+            <TeacherCard
+              key={teacher.id}
+              gradeName={"grade 1"}
+              schoolName={"IG"}
+              subjectName={"math"}
+              teacher={teacher}
+              isSelecteted={true}
+              image={teacher.imageUrl}
+            />
+          ))}
+        </div>
       </center>
-
-
     </div>
   );
 }

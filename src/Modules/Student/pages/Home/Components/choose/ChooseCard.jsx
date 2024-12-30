@@ -3,21 +3,21 @@ const Sophomore = [
     id: "Personalized",
     Name: "Personalized Learning Paths",
     dec: "Customized curriculum based on your goals and current skill level",
-    img: "/public/Schools/Group-1.svg",
+    img: "/images/Schools/Group-1.svg",
   },
   {
     id: "Expert",
     Name: "Expert Instructors",
     dec: "Learn from industry professionals with real-world experience",
 
-    img: "/public/Schools/Icon-2.svg",
+    img: "/images/Schools/Icon-2.svg",
   },
   {
     id: "Interactive",
     Name: "Interactive Content",
     dec: "Engage with hands-on projects and real-time feedback",
 
-    img: "/public/Schools/Icon-3.svg",
+    img: "/images/Schools/Icon-3.svg",
   },
 ];
 
@@ -47,8 +47,12 @@ const ChooseCard = () => {
                 />
               </div>
               <div className="text-sm sm:text-sm xl:text-lg font-normal text-center">
-                <p className="leading-[18.75px]  py-1 text-black">{item.Name}</p>
-                <p className="leading-[16.41px]  pt-1 text-[#0000007D]">{item.dec}</p>
+                <p className="leading-[18.75px]  py-1 text-black">
+                  {item.Name}
+                </p>
+                <p className="leading-[16.41px]  pt-1 text-[#0000007D]">
+                  {item.dec}
+                </p>
               </div>
             </div>
           );
