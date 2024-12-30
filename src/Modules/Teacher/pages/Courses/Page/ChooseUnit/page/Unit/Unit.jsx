@@ -132,7 +132,7 @@ const Unit = () => {
               <div className="w-full h-72 border-dashed border-gray-300 border rounded-md flex items-center justify-center mt-4">
                 <div className="flex justify-center w-full flex-col items-center pb-10">
                   <img
-                    src="/images/Video/video.svg"
+                    src="./images/Video/video.svg"
                     alt=""
                     className="w-auto absolute cursor-pointer"
                   />
@@ -187,7 +187,7 @@ const Unit = () => {
               <div className="w-full h-72 border-dashed border-gray-300 border rounded-md flex items-center justify-center mt-4">
                 <div className="flex justify-center w-full flex-col items-center pb-10">
                   <img
-                    src="/images/Video/pdfIcon.svg"
+                    src="./images/Video/pdfIcon.svg"
                     alt=""
                     className="w-auto absolute cursor-pointer"
                   />
@@ -213,7 +213,7 @@ const Unit = () => {
                 <div className="w-full h-32 mt-4 flex items-start  flex-col">
                   <div className="relative w-28 h-24 text-white flex items-center justify-center rounded-2xl">
                     <img
-                      src="/images/Video/pdfIcon.svg"
+                      src="./images/Video/pdfIcon.svg"
                       alt=""
                       className="w-auto absolute cursor-pointer"
                     />

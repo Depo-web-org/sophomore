@@ -1,5 +1,5 @@
 .hero-Background {
-  background-image: url("/images/hero/sophomore-hero.webp");
+  background-image: url("./images/hero/sophomore-hero.webp");
   background-position: center top;
   background-size: cover;
   object-fit: cover;
