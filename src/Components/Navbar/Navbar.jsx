@@ -1,4 +1,4 @@
-import logo from "../../../public/logos/logo.svg";
+import logo from "/images/logos/logo.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useMemo, useState } from "react";

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
-export default function LearningCard({ course, path ,image }) {
+export default function LearningCard({ course, path, image }) {
   return (
     <div>
       <div className="flex flex-col w-[auto]  min-h-[328px]">
         <Link to={path}>
           <div className="relative w-full min-h-[285px]">
             <img
-              src="/public/hero/sophomore-hero.webp"
+              src="/images/hero/sophomore-hero.webp"
               alt="learning card"
               className="w-full min-h-[285px] object-cover rounded-lg"
             />
@@ -15,8 +15,8 @@ export default function LearningCard({ course, path ,image }) {
               <img
                 src={
                   course.isFinished
-                    ? "/MyLearning/Group.svg"
-                    : "/MyLearning/Group1.svg"
+                    ? "/images/MyLearning/Group.svg"
+                    : "/images/MyLearning/Group1.svg"
                 }
                 alt="play"
                 className="w-16 lg:w-20 h-20"

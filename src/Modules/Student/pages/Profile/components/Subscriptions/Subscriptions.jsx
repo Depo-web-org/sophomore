@@ -6,13 +6,13 @@ export default function Subscriptions() {
       id: "0987",
       name: "Math ",
       grade: "Grade 1",
-      img: "/Profile/a57668df10fd5bd8d75fd99351111818.jpeg",
+      img: "/images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg",
     },
     {
       id: "7654",
       name: "French",
       grade: "Grade 2",
-      img: "/Profile/a57668df10fd5bd8d75fd99351111818.jpeg",
+      img: "/images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg",
     },
   ];
 

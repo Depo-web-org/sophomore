@@ -2,8 +2,8 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import useFetch from "../../../../Hooks/UseFetch";
-import { SkeletonCard } from '../../../../Components/Common/SkeletonCard/SkeletonCard';
-import Breadcrumbs from '../../../../Components/Common/BreadCrumbs/Breadcrumbs';
+import { SkeletonCard } from "../../../../Components/Common/SkeletonCard/SkeletonCard";
+import Breadcrumbs from "../../../../Components/Common/BreadCrumbs/Breadcrumbs";
 
 const Teachers = () => {
   // eslint-disable-next-line no-unused-vars
@@ -24,17 +24,23 @@ const Teachers = () => {
           </h2>
         </div>
         <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
-          { data?  data?.Teacher.map((teacher) => (
-            <TeacherCard
-              key={teacher.id}
-              gradeName={gradeName}
-              schoolName={schoolName}
-              subjectName={subjectName}
-              teacher={teacher}
-              isSelecteted={false}
-            />
-          )) : <div className=" w-full  col-span-6 lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 "><SkeletonCard/></div>
-        }
+          {data ? (
+            data?.Teacher.map((teacher) => (
+              <TeacherCard
+                key={teacher.id}
+                gradeName={gradeName}
+                schoolName={schoolName}
+                subjectName={subjectName}
+                teacher={teacher}
+                isSelecteted={false}
+                image={teacher.imageUrl}
+              />
+            ))
+          ) : (
+            <div className=" w-full  col-span-6 lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 ">
+              <SkeletonCard />
+            </div>
+          )}
         </div>
       </section>
     </>
@@ -46,6 +52,7 @@ export function TeacherCard({
   subjectName,
   teacher,
   isSelecteted,
+  image,
 }) {
   return (
     <div className=" col-span-6 md:col-span-3 lg:col-span-4 items-center justify-center">
@@ -71,8 +78,8 @@ export function TeacherCard({
           </button>
 
           <img
-            src="https://s3-alpha-sig.figma.com/img/c6cc/c303/5f3463c46702ca958707ee622be1a7cf?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=T5x~sh73Q1i0dsSiFXOrTw~62kZaMWI52TMA4R~KKf1dTOwb1S0D2Z9L4uYcsk9pGhpIwF~smkTCbU0MleeGq5ibG8bIWNBcLDNcoi9ijh-i-AIeoRoY9j6uYJ9H2A8GsyAMwHAbMuNWxKknRNvPxoB3-Pkm9sfbgN-HzmacQ0~1toa3V0m-rfsjTxKleVCf~k~AAPdrh1y1KGUjtZdX3s0BhwKiH4eouH8CLXlBh7SSXd33hVdjq7JzA9kQM-l3vG0grV6U4aMAjCgMMIoGFm0kxaBdepFHFi9u~EpRE0zkhBMHAKyaskvJwS4vzKYva2HU5kc9I703BdoNMCPIdQ__"
-            alt=""
+            src={image}
+            alt="teacher profile"
             className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
           />
 

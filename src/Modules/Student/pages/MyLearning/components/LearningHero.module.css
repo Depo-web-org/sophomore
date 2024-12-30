@@ -1,6 +1,6 @@
-.heroBg{
-    background-image: url('/public/MyLearning/myLearningHero.webp');
-    background-position: center bottom;
-    background-size: cover;
-    object-fit: cover;
-  }
+.heroBg {
+  background-image: url("/images/MyLearning/myLearningHero.webp");
+  background-position: center bottom;
+  background-size: cover;
+  object-fit: cover;
+}

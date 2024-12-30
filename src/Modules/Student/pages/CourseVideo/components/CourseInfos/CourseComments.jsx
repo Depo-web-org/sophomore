@@ -5,8 +5,7 @@ export default function CourseComments() {
       name: "Omar Gad",
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       date: "July 12, 2022",
-      avatar:
-        "https://s3-alpha-sig.figma.com/img/3d5c/b72f/ae1e058c2ed75ab981a9f8bb62e96a13?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V9aUXrOdAI5FZjUKHeV~BgcnVz~mfV350VXTgrT39gljeoqiJBbMUFRT4Eit4I5LZm3kpj76gO5YJ1Mzrzy6QRjuGbxG4YBTdt~FIrHEsXc7KmHpQ36MT8Vl5TKaKTJwb~AmMKnkuivyoKjxVFblwvOS1sQHARAeg-04p-dwR8d-nZJFdjHldIAVXQ7Fzh6MrSiHdCRjp34pQE77Fyhjef-An~58Tuw8UHlrEjcC8j4JSpaRpjqg30h-ZX-q6p0wViVXbtqBoYoIluXhX~U3kHKyxeyiqQTGDV7DIBX2bTal62YDfOe-bso1o9X-Sda1m7gOmP2hrDkJNYxj8sItuA__",
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     },
     {
       id: 2,

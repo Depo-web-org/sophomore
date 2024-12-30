@@ -1,6 +1,6 @@
-.contact-Background{
-    background-image: url('/public/contact/contactHeo.webp');
-    background-position: center center;
-    background-size: cover;
-    object-fit: cover;
-  }
+.contact-Background {
+  background-image: url("/images/contact/contactHeo.webp");
+  background-position: center center;
+  background-size: cover;
+  object-fit: cover;
+}
