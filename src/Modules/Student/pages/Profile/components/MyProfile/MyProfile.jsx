@@ -49,7 +49,6 @@ export default function MyProfile() {
         </div>
       </div>
       <div className="px-1 lg:px-8">
-
         {/* form */}
         <div className="   flex flex-col sm:flex-row items-center mb-5 lg:w-[70%] ms-auto border-b border-gray-50 pb-2">
           <label
@@ -86,12 +85,11 @@ export default function MyProfile() {
                 />
                 <img
                   className=" size-10 lg:size-14"
-                  src="/public/Profile/Camera.svg"
+                  src="./images/Profile/Camera.svg"
                   alt="photo"
                 />
               </label>
             </div>
-            
           </div>
           <div className=" text-right py-1 cursor-pointer text-white  ">
             <button>Delete </button>
@@ -100,9 +98,8 @@ export default function MyProfile() {
           </div>
         </div>
         <p className=" text-gray-500 font-normal text-xs lg:text-sm text-nowrap my-2 pb-4 text-center ">
-              Update your photo or edit and delete it
-            </p>
-
+          Update your photo or edit and delete it
+        </p>
       </div>
     </div>
   );

@@ -6,19 +6,19 @@ export default function HomeMin() {
       id: "Personalized",
       Name: "Math ",
       dec: "3. Introduction to subtraction",
-      img: "/hero/88bda3f5e8251f816cf6fbad299c1495.jpeg",
+      img: "./images/hero/88bda3f5e8251f816cf6fbad299c1495.jpeg",
     },
     {
       id: "Expert",
       Name: "English",
       dec: "4. Conversation",
-      img: "/hero/b3e1eb33bbb37fa47b995b39e56d9eb2.png",
+      img: "./images/hero/b3e1eb33bbb37fa47b995b39e56d9eb2.png",
     },
     {
       id: "Interactive",
       Name: "Science",
       dec: "5. The cell",
-      img: "/hero/224001c9565c195e993e6ec692025720.jpeg",
+      img: "./images/hero/224001c9565c195e993e6ec692025720.jpeg",
     },
   ];
 
@@ -57,7 +57,7 @@ export default function HomeMin() {
                     className="w-full h-72 object-cover rounded-3xl opacity-70 blur-[1px] group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                   />
                   <img
-                    src="public/Frame.svg"
+                    src="./images/Frame.svg"
                     alt="you"
                     className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
                   />{" "}
