@@ -69,7 +69,7 @@ export default function CourseManagement() {
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   <button>
                     <img
-                      src="/dashboard/Group3.svg"
+                      src="./images/dashboard/Group3.svg"
                       alt="edit"
                       className="w-5 h-5"
                     />

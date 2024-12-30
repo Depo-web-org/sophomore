@@ -42,7 +42,7 @@ export default function StudentProfile() {
           <p>{student.phone}</p>
         </div>
         <div className="flex items-center justify-center gap-1 text-[#4B5563]">
-          <img src="/dashboard/grade.svg" alt="" className="w-5 h-5" />{" "}
+          <img src="./images/dashboard/grade.svg" alt="" className="w-5 h-5" />{" "}
           <p>{student.grade}</p>
         </div>
       </div>

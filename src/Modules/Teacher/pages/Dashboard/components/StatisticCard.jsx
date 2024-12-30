@@ -2,17 +2,17 @@ import React from "react";
 
 export const statisticsData = [
   {
-    image: "/dashboard/Vector (3).svg",
+    image: "./images/dashboard/Vector (3).svg",
     title: "Total Courses",
     stats: 12,
   },
   {
-    image: "/dashboard/Group.svg",
+    image: "./images/dashboard/Group.svg",
     title: "Active Users",
     stats: 34,
   },
   {
-    image: "/dashboard/Group (1).svg",
+    image: "./images/dashboard/Group (1).svg",
     title: "Total Profit",
     stats: 56,
   },
@@ -44,7 +44,9 @@ export function StatisticCard({ image, title, stats, style }) {
         <p className="text-base lg:text-lg font-medium text-gray-500 group-hover:text-secondary duration-300 transition-all ">
           {title}
         </p>
-        <p className="text-base lg:text-2xl font-bold text-gray-900  ">{stats}</p>
+        <p className="text-base lg:text-2xl font-bold text-gray-900  ">
+          {stats}
+        </p>
       </div>
     </div>
   );

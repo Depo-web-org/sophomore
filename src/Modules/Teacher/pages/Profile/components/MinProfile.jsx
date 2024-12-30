@@ -40,7 +40,11 @@ const MinProfile = () => {
         <div>
           <div className="flex justify-start items-center py-1">
             <p className=" font-bold  px-5">Photo</p>
-            <img className="w-14 h-14" src="//Profile/Camera.svg" alt="photo" />
+            <img
+              className="w-14 h-14"
+              src="./images/profile/Camera.svg"
+              alt="photo"
+            />
           </div>
           <p className=" text-gray-500 font-normal text-sm px-5 my-2">
             Update your photo or edit and delete it
