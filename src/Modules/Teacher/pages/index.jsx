@@ -131,7 +131,7 @@ const IndexTeacher = () => {
           })}
         </div>
 
-        <div className="bg-red-400 w-full py-12 px-5 flex justify-center">
+        <div className=" w-full py-12 px-5 flex justify-center">
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
             className="relative z-10 w-[500px]"
