@@ -43,6 +43,7 @@ const ApplicationSection = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
   const [data, setdata] = useState([]);
@@ -57,11 +58,79 @@ const ApplicationSection = () => {
 
   return (
     <>
-      <div className="my-10 lg:my-0 lg:mt-auto lg:ms-5 h-auto ">
+      <div className="my-10 lg:my-0 lg:ms-5 h-auto ">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
+          <div className="w-full sm:mx-auto lg:mx-0">
+            <span className="block text-2xl lg:text-3xl font-semibold">
+              Add a new Course
+            </span>
+            <p className="text-sm text-white">Upload Thumbnail</p>
+
+            <div
+              className={`relative border-2 border-dashed rounded-lg p-6 ${
+                errors.file ? "border-red-500" : "border-gray-300"
+              }`}
+            >
+              <input
+                id="file"
+                type="file"
+                className="absolute inset-0 w-full h-full opacity-0 "
+                accept="image/png, image/jpeg, image/gif"
+                {...register("file", {
+                  required: "File is required",
+                  validate: {
+                    lessThan10MB: (files) =>
+                      files[0]?.size < 10 * 1024 * 1024 ||
+                      "File size exceeds 10MB",
+                    acceptedFormats: (files) =>
+                      ["image/png", "image/jpeg", "image/gif"].includes(
+                        files[0]?.type
+                      ) || "Unsupported file format",
+                  },
+                })}
+              />
+
+              <div className="text-center">
+                <img
+                  className="mx-auto h-12 w-12"
+                  src="/Add New Courses.svg"
+                  alt="add New courses"
+                />
+                <h3 className="mt-2 text-sm font-medium text-gray-900">
+                  <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer"
+                  >
+                    <span>Drag and drop</span>
+                    <span className="text-indigo-600"> or browse</span>
+                    <span>to upload</span>
+
+                    <input
+                     onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setValue("file", e.target.files);
+                      }
+                    }}
+                      id="file-upload"
+                      name="file-upload"
+                      type="file"
+                      className="sr-only"
+                    />
+                  </label>
+                </h3>
+                <p className="mt-1 text-xs text-gray-500">
+                  PNG, JPG, GIF up to 10MB
+                </p>
+              </div>
+
+              <img src className="mt-4 mx-auto max-h-40 hidden" id="preview" />
+            </div>
+          </div>
+
           <div
             id="options"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-5 h-auto items-center tracking-wide my-4"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-5 h-auto  tracking-wide my-4"
           >
             {/* Form  */}
             <div className=" ">
@@ -83,7 +152,7 @@ const ApplicationSection = () => {
                   className={`border-2 py-2.5 mt-1 w-full rounded-md shadow-sm sm:text-sm ${
                     errors.title ? "border-red-500" : "border-gray-200"
                   }`}
-                  placeholder="Title"
+                  placeholder=" Title"
                 />
                 {errors.title && (
                   <p className="text-red-500 text-sm">{errors.title.message}</p>
@@ -106,7 +175,7 @@ const ApplicationSection = () => {
                     errors.orderNotes ? "border-red-500" : "border-gray-200"
                   }`}
                   rows="4"
-                  placeholder="Enter any additional order notes..."
+                  placeholder=" Enter any additional order notes..."
                 ></textarea>
                 {errors.orderNotes && (
                   <p className="text-red-500 text-sm">
@@ -159,12 +228,11 @@ const ApplicationSection = () => {
                 </div>
               ))}
             </div>
-
             <button
               type="submit"
               data-twe-ripple-init
               data-twe-ripple-color="light"
-              className="w-full lg:w-1/2    rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+              className="w-full lg:w-1/2  lg:-mt-10  rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
             >
               Continue
             </button>

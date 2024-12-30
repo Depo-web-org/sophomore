@@ -1,16 +1,15 @@
 import React from "react";
-import AddMessage from "../components/AddMessage";
 import ApplicationSection from "../components/options/ApplicationSection";
 
 const AddNewCourse = () => {
 
   return (
-    <div className="">
-      <div className="w-96 sm:mx-auto lg:mx-0">
+    <  >
+      {/* <div className="w-full sm:mx-auto lg:mx-0">
         <span className="block text-2xl lg:text-3xl font-semibold">
           Add a new Course
         </span>
-        <p className="text-sm text-white pt-5">Upload Thumbnail</p>
+        <p className="text-sm text-white">Upload Thumbnail</p>
 
         <div
           className="relative border-2 border-gray-300 border-dashed rounded-lg p-6"
@@ -55,10 +54,10 @@ const AddNewCourse = () => {
           <img src className="mt-4 mx-auto max-h-40 hidden" id="preview" />
         </div>
 
-        <AddMessage />
-      </div>
+       
+      </div> */}
       <ApplicationSection />
-    </div>
+    </>
   );
 };
 
