@@ -29,8 +29,8 @@ export default function MyProfile() {
         </div>
         <div className="px-1 lg:px-8">
           {/* section Name */}
-          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 lg:gap-4  ">
+          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
               <div className="w-full text-center lg:text-start">
                 <p className="font-bold text-white text-lg">Sara Johnson</p>
                 <p className="text-gray-500 font-normal text-xs lg:text-sm text-n">
@@ -69,7 +69,7 @@ export default function MyProfile() {
 
         {/* last section */}
 
-        <div className=" mb-5 border-b border-gray-50  lg:w-[70%] ms-auto gap-y-2  flex justify-center lg:justify-between  items-center pb-3 flex-wrap">
+        <div className=" mb-5 border-b border-gray-50  lg:w-[70%] ms-auto gap-2  flex justify-center sm:justify-between  items-center pb-3 flex-wrap">
           <div>
             <div className="flex justify-center lg:justify-start items-start ">
               <label
@@ -93,7 +93,7 @@ export default function MyProfile() {
             </div>
             
           </div>
-          <div className=" text-right py-1 cursor-pointer text-white ">
+          <div className=" text-right py-1 cursor-pointer text-white  ">
             <button>Delete </button>
             <span className="px-3">|</span>
             <button>Update</button>
