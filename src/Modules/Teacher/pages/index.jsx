@@ -44,10 +44,10 @@ const IndexTeacher = () => {
   ];
 
   const [selectedSchool, setSelectedSchool] = useState(null);
-  const [selectedGrade, setSelectedGrade] = useState(null);
-  const [data, setData] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -59,6 +59,7 @@ const IndexTeacher = () => {
     formState: { errors },
   } = useForm();
 
+  // add items a user in Array
   const handleFormSubmit = (formData) => {
     const selectedData = [
       selectedSchool?.id || "",
