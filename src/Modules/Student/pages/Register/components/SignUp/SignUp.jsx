@@ -75,7 +75,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
   console.log(role);
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full  pb-4 ">
+    <div className="min-h-[calc(100vh-112px)]  flex flex-col gap-8 lg:gap-12 justify-between w-full  pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full 2xl:w-4/5 ml-auto ">
         <HeadTitle
           title={{
@@ -271,21 +271,23 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           </form>
         </div>
         <div className="mx-auto pb-10 lg:pb-0 w-full text-center lg:w-4/5 lg:ml-auto">
-        <p
-          className={`  text-sm  ${
-            alreadyAv
-              ? "text-secondary font-bold  underline"
-              : "text-gray-500"
-          }`}
-        >
-          Already have an account {alreadyAv ? "" : " ? "}
-          <button onClick={toggleForm} className="underline mx-1 text-primary">
-            Login
-          </button>
-        </p>
+          <p
+            className={`  text-sm  ${
+              alreadyAv
+                ? "text-secondary font-bold  underline"
+                : "text-gray-500"
+            }`}
+          >
+            Already have an account {alreadyAv ? "" : " ? "}
+            <button
+              onClick={toggleForm}
+              className="underline mx-1 text-primary"
+            >
+              Login
+            </button>
+          </p>
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 }
