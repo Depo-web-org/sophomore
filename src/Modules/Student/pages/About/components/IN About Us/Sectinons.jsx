@@ -12,7 +12,7 @@ export default function Sectinons() {
       <div className="relative overflow-hidden ">
         <img
           className="w-full min-h-96 object-cover  "
-          src="./images/About Us/header1.svg"
+          src="images/About Us/header1.svg"
           alt="img header1"
         />
         <div
@@ -38,7 +38,7 @@ export default function Sectinons() {
       <div className="relative overflow-hidden italic">
         <img
           className="w-full min-h-96 object-cover  "
-          src="./images/About Us/header2.svg"
+          src="images/About Us/header2.svg"
           alt="img header2"
         />
 
@@ -61,7 +61,7 @@ export default function Sectinons() {
       <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover "
-          src="./images/About Us/header3.svg"
+          src="images/About Us/header3.svg"
           alt="img header3"
         />
 
@@ -84,7 +84,7 @@ export default function Sectinons() {
       <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover"
-          src="./images/About Us/header4.svg"
+          src="images/About Us/header4.svg"
           alt="img header4"
         />
 

@@ -1,18 +1,18 @@
 import React from "react";
-
+import CardImage from "/images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg";
 export default function Subscriptions() {
   const Subscriptions = [
     {
       id: "0987",
       name: "Math ",
       grade: "Grade 1",
-      img: "./images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg",
+      img: CardImage,
     },
     {
       id: "7654",
       name: "French",
       grade: "Grade 2",
-      img: "./images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg",
+      img: CardImage,
     },
   ];
 
