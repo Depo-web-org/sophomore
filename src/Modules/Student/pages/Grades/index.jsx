@@ -16,14 +16,14 @@ export const Grade = () => {
       <div className="bg- min-h-screen py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
         <div className="w-full">
           <Breadcrumbs />
-          <p className="text-4xl text-white font-semibold leading-[54px] text-left pb-4 md:pb-10 xl:pb-20">
+          <p className="text-lg lg:text-4xl text-white font-semibold leading-[54px] text-left pb-4 md:pb-10 xl:pb-20">
             What is your current school grade?
           </p>
         </div>
         <div className="flex flex-col py-3 lg:gap-y-10 ">
           {
             data ? data?.Schoolgrades.map((grade) => (
-              <div className="pt-8" key={grade.name}>
+              <div className="pt-2" key={grade.name}>
                 <p className="text-white text-2xl font-semibold leading-[42px]">
                   {grade.name}
                 </p>
