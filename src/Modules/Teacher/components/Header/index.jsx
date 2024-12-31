@@ -22,7 +22,7 @@ const Header = (props) => {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden " to="/teacherPanel">
-            <img src='/logos/logo.svg' alt="Logo" />
+            <img src='./images/logos/logo.svg' alt="Logo" />
           </Link>
         </div>
 
