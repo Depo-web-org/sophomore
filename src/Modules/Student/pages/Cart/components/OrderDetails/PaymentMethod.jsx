@@ -1,4 +1,4 @@
-import creditCard from "/images/Cart/CreditCard.svg";
+import creditCard from "//images/Cart/CreditCard.svg";
 
 export const PaymentMethod = ({ onPay }) => (
   <div>

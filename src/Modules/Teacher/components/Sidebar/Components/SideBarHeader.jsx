@@ -1,6 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import Logo from "/images/logos/logo.svg";
+import Logo from "//images/logos/logo.svg";
 
 const SideBarHeader = ({ setSidebarOpen, sidebarOpen }) => {
   return (

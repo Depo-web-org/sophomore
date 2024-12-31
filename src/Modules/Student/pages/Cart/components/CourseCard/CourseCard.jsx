@@ -1,5 +1,5 @@
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import courseSVG from "/images/Cart/Course.svg";
+import courseSVG from "//images/Cart/Course.svg";
 
 const CourseCard = ({ course }) => {
   return (

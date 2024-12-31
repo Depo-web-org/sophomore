@@ -1,5 +1,5 @@
 import React from "react";
-import CardImage from "/images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg";
+import CardImage from "//images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg";
 export default function Subscriptions() {
   const Subscriptions = [
     {

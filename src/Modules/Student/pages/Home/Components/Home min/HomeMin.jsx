@@ -8,19 +8,19 @@ export default function HomeMin() {
       id: "Personalized",
       Name: "Math ",
       dec: "3. Introduction to subtraction",
-      img: "images/hero/88bda3f5e8251f816cf6fbad299c1495.jpeg",
+      img: "/images/hero/88bda3f5e8251f816cf6fbad299c1495.jpeg",
     },
     {
       id: "Expert",
       Name: "English",
       dec: "4. Conversation",
-      img: "images/hero/b3e1eb33bbb37fa47b995b39e56d9eb2.png",
+      img: "/images/hero/b3e1eb33bbb37fa47b995b39e56d9eb2.png",
     },
     {
       id: "Interactive",
       Name: "Science",
       dec: "5. The cell",
-      img: "images/hero/224001c9565c195e993e6ec692025720.jpeg",
+      img: "/images/hero/224001c9565c195e993e6ec692025720.jpeg",
     },
   ];
 

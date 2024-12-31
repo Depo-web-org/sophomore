@@ -41,7 +41,7 @@ const Results = ({ Answers, TrueAnswers }) => {
     <div className="relative ">
       <img
         className="w-full  "
-        src="images/MyLearning/MyLearning.svg"
+        src="/images/MyLearning/MyLearning.svg"
         alt="MyLearning"
       />
       <div className="absolute top-10 md:top-0 left-1/2 transform -translate-x-1/2 w-full container   ">

@@ -6,22 +6,22 @@ const cardteacher = [
   {
     id: "item1",
     name: "CV",
-    img: "images/Teacher/CardTeacher_1.svg",
+    img: "/images/Teacher/CardTeacher_1.svg",
   },
   {
     id: "item2",
     name: "Graduation Certificate",
-    img: "images/Teacher/CardTeachet_3.svg",
+    img: "/images/Teacher/CardTeachet_3.svg",
   },
   {
     id: "item3",
     name: "Intro Video",
-    img: "images/Teacher/CardTeachet_4.svg",
+    img: "/images/Teacher/CardTeachet_4.svg",
   },
   {
     id: "item4",
     name: `Additional Documents`,
-    img: "images/Teacher/CardTeachet_2.svg",
+    img: "/images/Teacher/CardTeachet_2.svg",
   },
 ];
 const TeacherUpload = () => {
@@ -59,7 +59,7 @@ const TeacherUpload = () => {
       <div className="relative w-full h-screen">
         {/* photo */}
         <img
-          src="images/Teacher/Teacher panel.svg"
+          src="/images/Teacher/Teacher panel.svg"
           alt="Teacher"
           className="w-full h-[100%] object-cover absolute "
         />

@@ -36,7 +36,7 @@ export default function EnrollCard() {
         <div className="flex flex-col items-start justify-start gap-4 pt-4">
           <div className="flex items-center justify-center gap-2">
             <img
-              src="images/TeacherDetailsimages/Frame.svg"
+              src="/images/TeacherDetails/images/Frame.svg"
               alt="Duration icon"
             />
             <p className="text-[16px] font-normal leading-[18.75px] text-white">
@@ -45,7 +45,7 @@ export default function EnrollCard() {
           </div>
           <div className="flex items-center justify-center gap-2">
             <img
-              src="images/TeacherDetails/Frame (1).svg"
+              src="/images/TeacherDetails/Frame (1).svg"
               alt="Sessions icon"
             />
             <p className="text-[16px] font-normal leading-[18.75px] text-white">
