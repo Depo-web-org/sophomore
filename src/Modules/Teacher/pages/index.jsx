@@ -86,7 +86,7 @@ const IndexTeacher = () => {
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-        // navigate("/Teacherdocs");
+        navigate("/Teacherdocs");
       }, 2000);
     }
     console.log(data);
@@ -146,6 +146,7 @@ const IndexTeacher = () => {
                   className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none focus:ring-1 focus:ring-blue-500"
                   onChange={(e) =>
                     setSelectedSchool(
+                          // find item or splis streng to integer
                       School_categories.find(
                         (school) => school.id === parseInt(e.target.value)
                       )
@@ -172,7 +173,6 @@ const IndexTeacher = () => {
                       className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none focus:ring-1 focus:ring-blue-500"
                       onChange={(e) =>
                         setSelectedGrade(
-                          // find item or splis streng to integer
                           selectedSchool.grades.find(
                             (grade) => grade.id === parseInt(e.target.value)
                           )
