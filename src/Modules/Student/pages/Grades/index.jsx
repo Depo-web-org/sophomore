@@ -13,7 +13,7 @@ export const Grade = () => {
   const { schoolName } = useParams();
   return (
     <>
-      <div className="bg-slate-900 min-h-screen py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+      <div className="bg- min-h-screen py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
         <div className="w-full">
           <Breadcrumbs />
           <p className="text-4xl text-white font-semibold leading-[54px] text-left pb-4 md:pb-10 xl:pb-20">
