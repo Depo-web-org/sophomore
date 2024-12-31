@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import DropdownUser from "./DropdownUser";
+import Logo from "/images/logos/logo.svg";
+
 const Header = (props) => {
   const location = useLocation();
   const pathname = location.pathname.split("/").filter((x) => x);
@@ -22,7 +24,7 @@ const Header = (props) => {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden " to="/teacherPanel">
-            <img src='./images/logos/logo.svg' alt="Logo" />
+            <img src={Logo} alt="Logo" />
           </Link>
         </div>
 
