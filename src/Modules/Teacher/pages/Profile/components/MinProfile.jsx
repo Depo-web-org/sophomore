@@ -1,58 +1,54 @@
 import React from "react";
+import { IoCamera } from "react-icons/io5";
 
 const MinProfile = () => {
   return (
-    <div className="mx-5 lg:pe-20">
+    <div className="mx-5 lg:pe-20 ">
       {/* form */}
-      <div className="flex flex-col sm:flex-row items-center my-5 lg:w-[calc(100%-30%)] ms-auto">
-        <span className="font-medium text-base sm:text-lg me-auto pb-2">
-          User Name
-        </span>
+      <div className="flex flex-col sm:flex-row items-center mb-4 lg:my-5 lg:w-[calc(100%-30%)] ms-auto">
+        
 
         <label
           htmlFor="Username"
-          className="w-full sm:w-64 relative block rounded-md border bg-white border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+         className="w-full font-semibold text-lg text-gray-600 rounded-md flex flex-wrap gap-y-4 justify-between items-center    "
         >
+          User Name
           <input
             type="text"
             id="Username"
-            className="w-full py-2 bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+            className=" w-full lg:w-1/3 p-2 bg-[#e2e4e6] text-base placeholder:text-sm  rounded-lg border-none   text-gray-500  font-semibold focus:outline-gray-400 focus:outline focus:ring-0"
             placeholder="User Name"
           />
 
-          <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2  p-0.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-            Mohamed Ayman
-          </span>
+        
         </label>
       </div>
-      <hr className="ms-auto lg:w-[calc(100%-30%)]" />
+      <hr className="ms-auto lg:w-[70%]" />
 
       {/* last section */}
 
-      <div className="h-36 my-2 lg:w-[calc(100%-30%)] ms-auto">
-        <div className=" text-right py-1 cursor-pointer">
+      <div className="h-36 my-2 lg:w-[70%] ms-auto flex  flex-col ">
+        <div className=" text-center lg:text-right py-1 cursor-pointer order-2 lg:order-1 ">
           <pre className=" text-gray-400 font-light hover:text-black duration-700 ">
-            {" "}
-            Delete | Update{" "}
+        
+            Delete | Update
           </pre>
         </div>
 
-        <div>
-          <div className="flex justify-start items-center py-1">
+        <div className="order-1">
+          <div className="flex justify-center lg:justify-start items-center py-1 ">
             <p className=" font-bold  px-5">Photo</p>
-            <img
-              className="w-14 h-14"
-              src="./images/profile/Camera.svg"
-              alt="photo"
-            />
+            <span className="bg-slate-200 p-3 rounded-full text-primary text-lg lg:text-3xl cursor-pointer">
+            <IoCamera />
+            </span>
           </div>
-          <p className=" text-gray-500 font-normal text-sm px-5 my-2">
+          <p className=" text-gray-500 font-normal text-xs text-center lg:text-start lg:text-sm px-5 my-2">
             Update your photo or edit and delete it
           </p>
         </div>
       </div>
 
-      <hr className="ms-auto lg:w-[calc(100%-30%)]" />
+      <hr className="ms-auto lg:w-[70%]" />
     </div>
   );
 };

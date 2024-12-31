@@ -1,18 +1,21 @@
 import React from "react";
+import { FaSackDollar } from "react-icons/fa6";
+import { HiUserGroup } from "react-icons/hi";
+import { ImBooks } from "react-icons/im";
 
 export const statisticsData = [
   {
-    image: "./images/dashboard/Vector (3).svg",
+    image: <ImBooks />,
     title: "Total Courses",
     stats: 12,
   },
   {
-    image: "./images/dashboard/Group.svg",
+    image: <HiUserGroup />,
     title: "Active Users",
     stats: 34,
   },
   {
-    image: "./images/dashboard/Group (1).svg",
+    image: <FaSackDollar />,
     title: "Total Profit",
     stats: 56,
   },
@@ -39,7 +42,10 @@ export default function Statistics() {
 export function StatisticCard({ image, title, stats, style }) {
   return (
     <div className={`${style}`}>
-      <img src={image} alt={title} className="w-12 lg:w-14 h-12 lg:h-14 mb-4" />
+      <span  className=" text-5xl lg:text-6xl mb-4 text-primary  inline" >
+      {image}
+      </span>
+      {/* <img src={image} alt={title} className="w-12 lg:w-14 h-12 lg:h-14 mb-4" /> */}
       <div className="flex flex-col items-start justify-start ">
         <p className="text-base lg:text-lg font-medium text-gray-500 group-hover:text-secondary duration-300 transition-all ">
           {title}

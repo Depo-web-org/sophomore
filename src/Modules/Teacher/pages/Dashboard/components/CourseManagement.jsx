@@ -1,4 +1,5 @@
 import React from "react";
+import { TbEdit } from "react-icons/tb";
 
 export default function CourseManagement() {
   // Array of objects representing course details
@@ -66,13 +67,12 @@ export default function CourseManagement() {
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
                   {course.status}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700 ">
                   <button>
-                    <img
-                      src="./images/dashboard/Group3.svg"
-                      alt="edit"
-                      className="w-5 h-5"
-                    />
+                   
+                     <span className="text-primary  text-2xl cursor-pointer ">
+                    <TbEdit />
+                                        </span>
                   </button>
                 </td>
               </tr>
