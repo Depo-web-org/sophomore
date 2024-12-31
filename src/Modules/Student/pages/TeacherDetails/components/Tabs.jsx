@@ -4,9 +4,9 @@ export default function Tabs() {
   const { schoolName, gradeName, subjectName, teacherName } = useParams();
   return (
     <div>
-      <div className="">
-        <div className="border-b  border-gray-200">
-          <nav className="mb-[4px] flex gap-6" aria-label="Tabs">
+      <div className=" pt-5 ">
+        <div className="border-b  border-gray-200    ">
+          <nav className="mb-1 flex gap-6  w-auto " aria-label="Tabs">
             <NavLink
               to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacherName}`}
               end

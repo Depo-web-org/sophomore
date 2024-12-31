@@ -24,7 +24,7 @@ export default function EnrollCard() {
 
   return (
     <>
-      <div className="max-w-[320px] md:min-w-[376px] min-h-[406px] bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
+      <div className=" md:min-w-[376px] lg:min-h-[406px] bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
         <p className="text-[18px] font-semibold leading-[27px] text-primary">
           Grade 1 Math - Fundamentals of Numbers & Operations
         </p>
