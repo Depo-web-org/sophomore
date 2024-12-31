@@ -22,7 +22,7 @@ const AddNewCourse = () => {
           <div className="text-center">
             <img
               className="mx-auto h-12 w-12"
-              src="images/Add New Courses.svg"
+              src="/images/Add New Courses.svg"
               alt="add New courses"
             />
             <h3 className="mt-2 text-sm font-medium text-gray-900">

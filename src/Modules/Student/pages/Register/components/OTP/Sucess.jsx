@@ -14,7 +14,7 @@ export default function SucessOtp({ processFinished }) {
         <div className="flex flex-col justify-center items-center gap-2 w-full pt-8">
           <img
             className="size-12"
-            src="images/register/Vector (3).svg"
+            src="/images/register/Vector (3).svg"
             alt="register svg"
           />
           <p className=" text-xl lg:text-3xl font-semibold  text-center text-white">

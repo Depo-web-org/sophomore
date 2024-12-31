@@ -28,7 +28,7 @@ export default function EnrollCard() {
         <p className="text-[18px] font-semibold leading-[27px] text-primary">
           Grade 1 Math - Fundamentals of Numbers & Operations
         </p>
-        <p className="text-[16px] pt-3 font-normal leading-[18.75px] text-[#FFFFFF66]">
+        <p className="text-base pt-3 font-normal leading-[18.75px] text-[#FFFFFF66]">
           This course covers the essential concepts of mathematics for Grade 1
           students, focusing on basic arithmetic, problem-solving, and logical
           reasoning through engaging activities and interactive lessons.
@@ -36,19 +36,19 @@ export default function EnrollCard() {
         <div className="flex flex-col items-start justify-start gap-4 pt-4">
           <div className="flex items-center justify-center gap-2">
             <img
-              src="images/TeacherDetailsimages/Frame.svg"
+              src="/images/TeacherDetails/Frame.svg"
               alt="Duration icon"
             />
-            <p className="text-[16px] font-normal leading-[18.75px] text-white">
+            <p className="text-base font-normal leading-[18.75px] text-white">
               Till the end of semester
             </p>
           </div>
           <div className="flex items-center justify-center gap-2">
             <img
-              src="images/TeacherDetails/Frame (1).svg"
+              src="/images/TeacherDetails/Frame (1).svg"
               alt="Sessions icon"
             />
-            <p className="text-[16px] font-normal leading-[18.75px] text-white">
+            <p className="text-base font-normal leading-[18.75px] text-white">
               Recorded Sessions
             </p>
           </div>

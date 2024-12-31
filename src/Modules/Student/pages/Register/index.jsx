@@ -40,7 +40,7 @@ export default function Register() {
       {isLogin && <Login toggleForm={toggleForm} />}
 
       <img
-        src="images/register/login.webp"
+        src="/images/register/login.webp"
         alt="register img"
         className={`hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] ${
           !isSignUp || isLogin ? "slide-in-left" : "slide-in-right"
