@@ -1,7 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import logo from "/images/logos/logo.svg";
-
+import Logo from "/images/logos/logo.svg";
 
 const SideBarHeader = ({ setSidebarOpen, sidebarOpen }) => {
   return (
@@ -10,7 +9,7 @@ const SideBarHeader = ({ setSidebarOpen, sidebarOpen }) => {
         to="/teacherPanel"
         className="py-3 flex items-center justify-center"
       >
-        <img src={logo} alt="Logo" />
+        <img src={Logo} alt="Logo" />
         <p className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2">
           Sophomore
         </p>
