@@ -3,21 +3,21 @@ const Sophomore = [
     id: "Personalized",
     Name: "Personalized Learning Paths",
     dec: "Customized curriculum based on your goals and current skill level",
-    img: "./images/Schools/Group-1.svg",
+    img: "images/Schools/Group-1.svg",
   },
   {
     id: "Expert",
     Name: "Expert Instructors",
     dec: "Learn from industry professionals with real-world experience",
 
-    img: "./images/Schools/Icon-2.svg",
+    img: "images/Schools/Icon-2.svg",
   },
   {
     id: "Interactive",
     Name: "Interactive Content",
     dec: "Engage with hands-on projects and real-time feedback",
 
-    img: "./images/Schools/Icon-3.svg",
+    img: "images/Schools/Icon-3.svg",
   },
 ];
 
