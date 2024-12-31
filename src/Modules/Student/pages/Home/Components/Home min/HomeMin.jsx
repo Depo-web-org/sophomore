@@ -1,3 +1,5 @@
+import { FaPlayCircle } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 export default function HomeMin() {
@@ -44,30 +46,26 @@ export default function HomeMin() {
 
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
           {HomeMin.map((item) => (
-            <div
-              className="col-span-6 md:col-span-3 lg:col-span-4 "
-              key={item.id}
-            >
+            <div className="col-span-3 lg:col-span-4 " key={item.id}>
               {/* img */}
               <Link to={"/mylearning/course/Science"}>
                 <div className="group block overflow-hidden relative rounded-3xl hover:cursor-pointer">
                   <img
                     src={item.img}
                     alt={item.Name}
-                    className="w-full h-72 object-cover rounded-3xl opacity-70 blur-[1px] group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
+                    className="w-full h-36 md:h-44 lg:h-72 object-cover rounded-3xl opacity-70 blur-[1px] group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                   />
-                  <img
-                    src="images/Frame.svg"
-                    alt="you"
-                    className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
-                  />{" "}
+
+                  <span className="  text-white flex items-center justify-center w-12 lg:w-16 pl-1  h-12 lg:h-16  rounded-full  bg-rose-600 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
+                    <FaPlay className="text-3xl lg:text-4xl" />
+                  </span>
                 </div>
               </Link>
               {/* Text */}
-              <div className="font-semibold text-white mt-1 lg:mt-3 ps-2">
-                <p className="text-base lg:text-lg">{item.Name}</p>
+              <div className="font-semibold text-white mt-1 lg:mt-4 ">
+                <p className="text-sm sm:text-base lg:text-lg">{item.Name}</p>
 
-                <h3 className="text-base lg:text-lg">{item.dec}</h3>
+                <h3 className="text-sm sm:text-base lg:text-lg ">{item.dec}</h3>
               </div>
             </div>
           ))}
