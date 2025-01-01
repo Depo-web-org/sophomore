@@ -43,9 +43,9 @@ function Comment({ name, text, date, avatar }) {
     <div className="flex items-start gap-4 mb-4">
       <img className="w-12 h-12 rounded-full" src={avatar} alt={name} />
       <div>
-        <h3 className="text-lg font-semibold text-white">{name}</h3>
-        <p className="text-gray-400">{text}</p>
-        <p className="text-gray-600 text-sm">{date}</p>
+        <h3 className="text-base lg:text-lg font-semibold text-white">{name}</h3>
+        <p className="text-sm lg:text-base text-gray-400">{text}</p>
+        <p className="text-xs lg:text-base text-gray-600 ">{date}</p>
       </div>
     </div>
   );

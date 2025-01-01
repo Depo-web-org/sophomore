@@ -29,7 +29,9 @@ const Subjects = () => {
                 path={`/school/${schoolName}/grade/${gradeName}/subject/${subj.name}`}
               />
             </div>
-          )) : <div className=" w-full  col-span-6 lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 "><SkeletonCard/></div> }
+          )) : <div  className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4 "> 
+          <SkeletonCard/>
+       </div> }
         </div>
       </section>
     </>

@@ -63,7 +63,7 @@ const students = [
 export default function StudentDetails() {
   const navigate = useNavigate();
   return (
-    <div className="bg-white rounded-2xl w-full p-6 overflow-x-auto">
+    <div className="bg-white rounded-2xl w-full p-6">
       <div className="flex flex-col md:flex-row gap-2 justify-between items-center w-full">
         <p className="text-xl font-semibold text-primary">Student details</p>
         <div className="flex items-center flex-col md:flex-row justify-center md:justify-evenly w-full md:w-1/2 ">
@@ -80,7 +80,7 @@ export default function StudentDetails() {
           </button>
         </div>
       </div>
-      <div className="bg-white rounded-xl shadow-sm">
+      <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="text-left text-sm text-gray-500">

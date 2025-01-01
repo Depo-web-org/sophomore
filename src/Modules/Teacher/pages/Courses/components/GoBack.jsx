@@ -8,15 +8,15 @@ const GoBack =  ({title}) => {
     navigate(-1); 
   };
     return (
-      <div className=" flex justify-start items-center gap-x-2 ">
+      <div className=" flex justify-start items-center gap-x-2">
         <div
           className="cursor-pointer bg-white rounded-full p-2 "
           onClick={goBack}
         >
-          <TiArrowBack className="text-2xl text-mainGray  " />
+          <TiArrowBack className="text-lg md:text-2xl text-mainGray  " />
         </div>
   
-        <h2 className="text-mainGray font-semibold text-4xl"> {title}</h2>
+        <h2 className="text-mainGray font-semibold text-2xl md:text-4xl"> {title}</h2>
       </div>
     );
   }

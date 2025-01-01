@@ -37,6 +37,9 @@ body::-webkit-scrollbar-thumb {
   @apply bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent;
 }
 
+.buttonHover{
+  @apply bg-primary hover:bg-secondary duration-150 transition-all
+}
 textarea {
   resize: none;
 }

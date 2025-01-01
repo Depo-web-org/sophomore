@@ -1,5 +1,6 @@
 import React from "react";
 import { TbEdit } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 export default function CourseManagement() {
   // Array of objects representing course details
@@ -26,7 +27,7 @@ export default function CourseManagement() {
 
   return (
     <div className="w-full lg:w-[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg  ">
-      <p className="text-[28px] font-semibold text-center py-4 text-black">
+      <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
         Course Management
       </p>
 
@@ -68,12 +69,10 @@ export default function CourseManagement() {
                   {course.status}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 ">
-                  <button>
-                   
-                     <span className="text-primary  text-2xl cursor-pointer ">
-                    <TbEdit />
-                                        </span>
-                  </button>
+                  <Link to={"courses/chooseunit"} 
+                  className="text-primary  text-2xl cursor-pointer ">  
+                    <TbEdit />                                  
+                  </Link>
                 </td>
               </tr>
             ))}

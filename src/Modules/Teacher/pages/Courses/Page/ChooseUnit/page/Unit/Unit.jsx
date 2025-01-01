@@ -6,7 +6,7 @@ import { RiCloseFill } from "react-icons/ri";
 
 function Button({ classButton, events, title, type }) {
   return (
-    <div className="flex items-center justify-end">
+    <div className="flex items-center justify-end ">
       <button type={type} className={`${classButton}`}>
         {title}
       </button>
@@ -76,11 +76,11 @@ const Unit = () => {
       {/* Body */}
       <div className="flex w-full items-start flex-col">
         <form onSubmit={handleFormSubmit} className="w-full">
-          <div className="flex">
+          <div className="flex flex-wrap justify-between w-full gap-y-4">
             <GoBack title={unit} />
-            <div className="flex-1 flex justify-end gap-x-2">
-              <div className="flex items-center justify-end">
-                <button className="bg-primary hover:bg-secondary py-2 px-2 text-white rounded-md transition-all duration-300">
+            <div className=" flex  gap-x-2">
+              <div className="flex items-center j">
+                <button className="bg-primary hover:bg-secondary text-nowrap  py-2 px-2 text-white rounded-md transition-all duration-300">
                   <Link to={`/teacherpanel/courses/chooseunit/${unit}/test`}>
                     Add Unit Test
                   </Link>

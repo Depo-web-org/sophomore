@@ -20,7 +20,7 @@ export default function StudentProfile() {
         {/* img */}
         <div className="absolute top-32 md:top-[102px] left-2 md:left-24 flex items-center justify-start gap-4">
           <img
-            className="border-[6px] border-white  w-24 h-24 md:w-36 md:h-36 s rounded-full object-cover"
+            className="border-4 border-white  w-24 h-24 md:w-36 md:h-36 s rounded-full object-cover"
             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="profile"
           />

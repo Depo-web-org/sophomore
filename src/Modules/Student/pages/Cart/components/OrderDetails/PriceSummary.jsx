@@ -16,7 +16,7 @@ export const PriceSummary = ({ cartInfo }) => {
         <p className="text-lg">Total</p>
         <span>{cartInfo?.Total} EGP</span>
       </div>
-      <button className="bg-primary text-white rounded-md p-2 xl:p-3 text-center font-semibold mt-3">
+      <button className="buttonHover text-white rounded-md p-2 xl:p-3 text-center font-semibold mt-3">
         Checkout
       </button>
     </div>

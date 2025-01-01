@@ -26,20 +26,20 @@ export default function HomeMin() {
 
   return (
     <>
-      <section className="text-white  pt-8 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
-        <div className="py-5">
+      <section className="text-white  pt-8 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+        <div className="lg:py-5">
           <div className="flex justify-between items-center flex-wrap gap-y-2">
-            <span
+            <p
               className="text-2xl lg:text-3xl
-          xl:text-4xl pb-1 sm:pb-2  font-bold"
+          xl:text-4xl pb-8 lg:pb-2  font-bold"
             >
               Let&apos;s Continue learning
-            </span>
+            </p>
             <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer hidden lg:block">
               My learning
             </p>
           </div>
-          <p className="text-sm lg:text-base font-bold py-2 ">
+          <p className="hidden lg:block text-sm lg:text-base font-bold py-1 lg:py-2 ">
             Pick up from where you left
           </p>
         </div>
@@ -62,10 +62,10 @@ export default function HomeMin() {
                 </div>
               </Link>
               {/* Text */}
-              <div className="font-semibold text-white mt-1 lg:mt-4 ">
+              <div className="font-semibold text-white   mt-1 lg:mt-4 ">
                 <p className="text-sm sm:text-base lg:text-lg">{item.Name}</p>
 
-                <h3 className="text-sm sm:text-base lg:text-lg ">{item.dec}</h3>
+                <h3 className="text-xs sm:text-base lg:text-lg ">{item.dec}</h3>
               </div>
             </div>
           ))}
