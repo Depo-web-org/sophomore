@@ -101,7 +101,6 @@ const IndexTeacher = () => {
         setShowAlertError(false);
       }, 3000);
     } else {
-      
       setloading(true);
       setShowAlert(true);
 
@@ -110,20 +109,14 @@ const IndexTeacher = () => {
           "http://192.168.1.26:7000/api/v1/teachers/complete-profile-1/",
 
           data
-
         );
         console.log(" Success ✔ ", response.data);
-        
       } catch (error) {
-
         console.error(" Error fetching school categories:", error);
-          
       } finally {
-
         setloading(false);
         setShowAlert(false);
         navigate("/Teacherdocs");
-    
       }
     }
     console.log(data);
@@ -146,13 +139,16 @@ const IndexTeacher = () => {
           <TopText name="Welcome Mohamed" title="Please Upload Your Papers" />
           {/* whatch data a user or find data in Arrays*/}
           {data.map((item, index) => {
+            const school = School_categories.find(
+              (school) => school.id === item[0]
+            );
 
-            const school = School_categories.find((school) => school.id === item[0] );
-              
             const grade = school?.grades.find((grade) => grade.id === item[1]);
 
-            const subject = grade?.subjects.find((subject) => subject.id === item[2]);
-              
+            const subject = grade?.subjects.find(
+              (subject) => subject.id === item[2]
+            );
+
             return (
               <div key={index}>
                 <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
