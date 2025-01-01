@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   // base: '/sophomore',
-  logLevel: 'silent',  
+  // logLevel: 'silent',  
   plugins: [react()],
 });
 

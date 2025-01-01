@@ -11,7 +11,7 @@ const TeacherProtectedRoute = ({ children }) => {
     return <Navigate to="/register" />;
   }
 
-  if (role !== "provider") {
+  if (role !== "teacher") {
     // Redirect to register page if not a teacher
     return <Navigate to="/NotFoundPage" />;
   }else

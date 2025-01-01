@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      {token && role === "consumer" && <HomeMin />}
+      {token && role === "student" && <HomeMin />}
       <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
         <ChooseSchool />
         <ChooseCard />
