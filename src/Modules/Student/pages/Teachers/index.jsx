@@ -36,9 +36,9 @@ const Teachers = () => {
               />
             ))
           ) : (
-            <div className=" w-full  col-span-6 lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 ">
-              <SkeletonCard />
-            </div>
+            <div  className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4 "> 
+     <SkeletonCard/>
+  </div>
           )}
         </div>
       </section>
@@ -84,9 +84,9 @@ export function TeacherCard({
           </button>
 
           <img
-            src={image}
+            src="/images/TeacherDetails/Frame 38.png"
             alt="teacher profile"
-            className=" h-40 md:h-48 lg:h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+            className="  h-40 md:h-48 lg:h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
           />
 
           <div className="relative border border-gray-100 bg-white f p-2 lg:p-6">

@@ -37,7 +37,7 @@ const ChooseCard = () => {
           return (
             <div
               key={item.id}
-              className="sm:h-60 xl:h-auto w-full flex-initial sm:flex-auto md:flex-1 rounded-[5px] bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8"
+              className="sm:h-60 xl:h-auto w-full flex-initial sm:flex-auto md:flex-1 rounded-md   bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8"
             >
               <div>
                 <img
@@ -47,10 +47,10 @@ const ChooseCard = () => {
                 />
               </div>
               <div className="text-sm sm:text-sm xl:text-lg font-normal text-center">
-                <p className="leading-[18.75px]  py-1 text-black">
+                <p className="leading-[18.75px]  py-1 text-black font-semibold">
                   {item.Name}
                 </p>
-                <p className="leading-[16.41px]  pt-1 text-[#0000007D]">
+                <p className="leading-[16.41px]  pt-1 text-[#0000007D] mx-10 lg:mx-0">
                   {item.dec}
                 </p>
               </div>

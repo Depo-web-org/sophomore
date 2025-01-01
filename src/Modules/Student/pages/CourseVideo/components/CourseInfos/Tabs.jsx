@@ -4,9 +4,9 @@ export default function Tabs() {
   const { courseName } = useParams();
   return (
     <div>
-      <div className="">
-        <div className="border-b  border-gray-200">
-          <nav className="mb-[4px] flex gap-6" aria-label="Tabs">
+      <div className="w-full ">
+        <div className="border-b  border-gray-200 ">
+          <nav className="mb-1 flex gap-6 justify-center lg:justify-start" aria-label="Tabs">
             <NavLink
               to={`/mylearning/course/${courseName}`}
               end

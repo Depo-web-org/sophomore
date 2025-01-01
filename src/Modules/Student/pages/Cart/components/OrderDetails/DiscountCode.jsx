@@ -10,7 +10,7 @@ export const DiscountCode = ({ onApply }) => (
           className="bg-dark p-2 border-white border rounded-md w-4/5 text-white placeholder:text-gray-500 placeholder:font-semibold"
         />
         <button
-          className="bg-primary text-white rounded-md p-2 xl:p-3 w-1/5 text-center font-semibold"
+          className="buttonHover text-white rounded-md p-2 xl:p-3 w-1/5 text-center font-semibold"
           onClick={onApply}
         >
           Apply

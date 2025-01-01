@@ -24,7 +24,7 @@ export default function TeacherInfos() {
           <Tabs />
         </div>
 
-        <div className="py-6">
+        <div className=" py-4">
           <Outlet />
         </div>
       </div>

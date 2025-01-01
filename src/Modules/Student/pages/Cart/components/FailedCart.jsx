@@ -5,9 +5,9 @@ import WishCartTitle from '../../../../../Components/Common/WishCartTitle/WishCa
 const FailedCart = ({info}) => {
   return (
     <>
-     <section className="min-h-screen ">
+     <section className="min-h-screen  ">
 
-<div className=" pt-32 relative container w-full md:w-custom-md xl:w-custom-xl mx-auto   ">
+<div className=" pt-24 lg:pt-32 relative container w-full md:w-custom-md xl:w-custom-xl mx-auto   ">
     <WishCartTitle name={'Your Cart'} items={info?.numberOfItems}/>
 
 </div>

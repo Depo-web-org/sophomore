@@ -5,7 +5,7 @@ export default function CourseMaterial() {
   const {courseName}=useParams()
 
   return (
-    <div className="flex flex-col items-start justify-start gap-8">
+    <div className="flex flex-col items-start justify-start gap-4 lg:gap-8">
       <UnitTest params={courseName} />
       <Material />
     </div>
@@ -16,12 +16,11 @@ function UnitTest({params}) {
   return (
     <div className="flex flex-col md:items-start justify-center w-full gap-2">
       <p className="text-lg md:text-xl font-bold text-white">Unit Test</p>
-      <div className="flex justify-between items-center gap-2 w-full border-[1px] p-4 rounded-lg">
+      <div className="flex justify-between items-center gap-2 w-full border p-2 lg:p-4 rounded-lg">
         <p className="text-base md:text-lg font-semibold text-white">
-         
           Unit Test
         </p>
-        <button className="text-white text-base md:text-lg font-semibold  hover:text-gray-700 px-4 py-2 bg-primary rounded-md">
+        <button className="text-white text-sm md:text-lg font-semibold  hover:text-gray-700 px-2  lg:px-4 py-2 bg-primary rounded-md">
         <Link to={`/mylearning/course/${params.toLowerCase()}/quiz`}>
           Start Test
           </Link>
@@ -60,7 +59,7 @@ function Material() {
         {courseMaterials.map((material, index) => (
           <div
             key={index}
-            className="flex justify-between items-center w-full gap-2 border-[1px] p-4 rounded-lg"
+            className="flex justify-between items-center w-full gap-2 border p-2 lg:p-4 rounded-lg"
           >
             <p className="text-sm md:text-lg font-semibold text-white">
               {material.name}
@@ -68,8 +67,7 @@ function Material() {
             <a
               href={material.url}
               download={material.name}
-              className="text-white text-sm md:text-lg font-semibold hover:text-gray-700 px-4 py-2 bg-primary rounded-md"
-            >
+            className="text-white text-sm md:text-lg font-semibold  hover:text-gray-700 px-2  lg:px-4 py-2 bg-primary rounded-md">
               Download
             </a>
           </div>

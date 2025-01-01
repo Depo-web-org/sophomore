@@ -3,21 +3,23 @@ import { useState } from "react";
 
 export default function Video() {
   return (
-    <div className="flex justify-between items-start flex-wrap gap-8 w-full">
+    <div className="flex justify-between items-start flex-wrap gap-4 lg:gap-8 w-full ">
       <div className="flex flex-col items-start justify-start gap-2">
         <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/ntaNl6kaoHk"
-          title="YouTube video player"
+          src="https://www.youtube.com/embed/OQjkFQAIOck?si=wEdNFopy_U2h5_tD"
+          // title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          className="w-full lg:min-w-[560px]  h-[315px] rounded-lg"
         ></iframe>
-        <p className="text-2xl text-white font-medium">Unit 1</p>
-        <p className="text-2xl text-[#FFFFFF70] font-medium">
+        <div className="flex flex-row w-full  justify-between items-center  lg:flex-col lg:items-start gap-2 mt-4">
+
+        <p className=" text-lg lg:text-2xl text-white font-medium ">Unit 1</p>
+        <p className=" text-sm lg:text-2xl text-[#FFFFFF70] font-medium">
           Introduction to mathematics
         </p>
+        </div>
       </div>
       <Units />
     </div>
@@ -34,7 +36,7 @@ function Units() {
   };
 
   return (
-    <div className="bg-slate-900 rounded-lg  p-6 w-[90%] max-w-md shadow-[4px_4px_0px_0px_#F15C54]">
+    <div className="bg-slate-900 rounded-lg  p-6 w-full lg:max-w-md hover:shadow-[6px_6px_0px_0px_#F15C54] duration-150 transition-all shadow-[4px_4px_0px_0px_#F15C54]">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-bold text-white">Choose The Unit</h1>
       </div>
