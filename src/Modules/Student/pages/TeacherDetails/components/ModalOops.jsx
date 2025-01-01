@@ -3,10 +3,10 @@ export default function ModalOops({ setIsModalOopsOpen }) {
   return (
     <div
       onClick={() => setIsModalOopsOpen(false)}
-      className="fixed inset-0 bg-slate-600 bg-opacity-50 flex items-center justify-center"
+      className="fixed inset-0 bg-slate-600 bg-opacity-50 flex items-center justify-center px-4"
     >
       <div
-        className="bg-slate-900 rounded-lg p-6 min-w-[327px] border-r-2 border-b-2 border-primary"
+        className="bg-slate-900  rounded-lg p-6 min-w-[280px] border-r-2 border-b-2 border-primary"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-end justify-end">
