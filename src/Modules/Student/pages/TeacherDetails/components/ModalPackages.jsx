@@ -8,11 +8,10 @@ export default function ModalPackages({
   return (
     <div
       onClick={() => setIsModalPackagesOpen(false)}
-      className="fixed inset-0 bg-slate-600 bg-opacity-50 flex items-center justify-center overflow-y-auto px-4 scrollbar-hide z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
     >
       <div
-        className="bg-slate-900 rounded-lg p-6 relative mt-[590px] mb-5 md:mt-0 
-         "
+        className="bg-slate-900 rounded-lg p-6 w-full max-w-[90%] md:w-2/3 lg:w-1/2 h-full max-h-[70%] absolute top-32 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Icon */}
@@ -24,7 +23,7 @@ export default function ModalPackages({
         </button>
 
         {/* Modal Content */}
-        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 w-full h-full overflow-y-auto scrollbar-hide ">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8 h-full ">
             {/* Full Pack */}
             <FullPackage handleButtonClick={handleButtonClick} />
