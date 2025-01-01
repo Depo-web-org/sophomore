@@ -5,7 +5,7 @@ import { getRole } from "../../Helpers/enCodeRole";
 const userRole = getRole('RO_V1_2024') 
 const roleSlice = createSlice({
   name: "role",
-  initialState: { role: userRole|| "consumer" }, 
+  initialState: { role: userRole|| "student" }, 
   reducers: {
     setRole: (state, action) => {
         console.log(action.payload)
