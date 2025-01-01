@@ -111,10 +111,10 @@ const IndexTeacher = () => {
 
           return (
             <div key={index}>
-              <span className="m-1 bg-blue-500 text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-semibold">
+              <span className="m-1 bg-[#24386d] text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-medium">
                 {`${school?.school_category} , ${grade?.grade_no} , ${subject?.name}`}
                 <VscChromeClose
-                  className="font-bold text-white hover:text-red-600 duration-500 w-5 h-5 cursor-pointer"
+                  className="font-bold text-secondary hover:text-red-800 hover:rotate-180  duration-500 w-5 h-5 cursor-pointer"
                   onClick={() => handleRemoveBadge(item)}
                 />
               </span>
