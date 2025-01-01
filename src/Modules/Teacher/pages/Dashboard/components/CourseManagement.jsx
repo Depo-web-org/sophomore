@@ -69,7 +69,8 @@ export default function CourseManagement() {
                   {course.status}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 ">
-                  <Link to={"courses/chooseunit"} className="text-primary  text-2xl cursor-pointer ">  
+                  <Link to={"courses/chooseunit"} 
+                  className="text-primary  text-2xl cursor-pointer ">  
                     <TbEdit />                                  
                   </Link>
                 </td>

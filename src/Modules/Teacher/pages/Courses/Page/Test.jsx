@@ -4,7 +4,7 @@ import GoBack from "../components/GoBack";
 
 export default function Test() {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <GoBack title={"Q01"} />
       <TestIndex />
     </div>
@@ -22,8 +22,8 @@ function TestIndex() {
   };
 
   return (
-    <div className="pt-12 w-full">
-      <p className="text-2xl font-medium text-[#4B5563]">
+    <div className="pt-6 md:pt-12 w-full">
+      <p className="text-lg md:text-2xl font-medium text-[#4B5563]">
         Write your question title and answers{" "}
       </p>
       <form
