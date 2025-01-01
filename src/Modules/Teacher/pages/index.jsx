@@ -58,9 +58,10 @@ const IndexTeacher = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.1.26:7000/api/v1/academics/school-hierarchy"
+          "https://dev.depowebeg.com/schools/api/getSchools.php?grades=true&viewOnly=true"
         );
-        setSchoolCategories(response.data.School_categories);
+        setSchoolCategories(response.data);
+        // .School_categories
       } catch (err) {
         console.error(err);
       }
@@ -142,6 +143,7 @@ const IndexTeacher = () => {
           alt="Teacher"
           className="w-full h-[100%] object-cover absolute"
         />
+        {/* add items users */}
         <div className="relative z-10 pt-28 lg:pt-32 text-center">
           <TopText name="Welcome Mohamed" title="Please Upload Your Papers" />
           {/* whatch data a user or find data in Arrays*/}
@@ -167,7 +169,7 @@ const IndexTeacher = () => {
             );
           })}
         </div>
-
+        {/* options  */}
         <div className=" w-full py-12 px-5 flex justify-center">
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
