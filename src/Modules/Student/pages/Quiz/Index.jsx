@@ -27,7 +27,7 @@ useEffect(()=>{
     },[data])
   return (
     <>
-<section className='relative pb-20 xl:pb-0 '>
+<section className='relative pb-20 xl:pb-0 bg-dark '>
   <div  className='min-h-[calc(100vh-128px)] xl:min-h-screen pt-20 lg:pt-32  overflow-hidden   '>
 
     <div className='py-10'>

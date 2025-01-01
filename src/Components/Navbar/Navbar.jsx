@@ -13,8 +13,8 @@ const Navbar = () => {
   // Fetch authentication state from Redux
   const { token, user } = useSelector((state) => state.auth);
   const { role } = useSelector((state) => state.role);
-  console.log(token);
-  console.log(role);
+  // console.log(token);
+  // console.log(role);
 
   // const student=[
   //     home, about, contact, myLearning, cart, wishlist, profile
@@ -108,7 +108,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-1/2 -translate-x-1/2 right-0 bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-lg mt-2 py-4 px-6 w-5/6">
+        <div className="md:hidden absolute top-16 left-1/2 -translate-x-1/2 right-0 bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-2xl mt-2 py-4 px-6 w-5/6">
           <ul className="flex flex-col gap-4 font-semibold">
             {navItems.map((item, index) => (
               <li key={index + item.text + item.link}>

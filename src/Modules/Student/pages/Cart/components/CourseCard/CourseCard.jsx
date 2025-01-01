@@ -1,5 +1,5 @@
-import { MdOutlineDeleteOutline } from "react-icons/md";
 import courseSVG from "/images/Cart/Course.svg";
+import { ImBin } from "react-icons/im";
 
 const CourseCard = ({ course }) => {
   return (
@@ -9,13 +9,13 @@ const CourseCard = ({ course }) => {
           {/* Div which have SVG and Course information */}
           <div className="flex  gap-x-3 items-center ">
             <div>
-              <img src={courseSVG} alt="Grade" />
+              <img src={courseSVG} alt="Grade" className="w-20" />
             </div>
-            <div className="text-white">
-              <p className=" text-xl md:text-2xl font-medium">
+            <div className="text-white ">
+              <p className=" text-lg  md:text-xl lg:text-2xl font-medium">
                 {course.subject}
               </p>
-              <p className="font-medium  text-sm md:text-base">
+              <p className="font-medium  text-sm lg:text-base">
                 {course.teacher}
               </p>
               <span className="text-gray-300 text-sm sm:text-base">
@@ -25,14 +25,14 @@ const CourseCard = ({ course }) => {
           </div>
           {/* Price and Delete */}
           <div className="flex flex-col items-center justify-between ">
-            <span className="text-white text-xl font-medium block">
+            <span className="text-white text-base lg:text-xl font-medium block bg-secondary px-2 rounded-full">
               {course.price} EGP
             </span>
             <span
               onClick={() => console.log(course)}
-              className="text-red-700 text-4xl mb-3"
+              className="text-secondary  text-2xl mb-3 cursor-pointer"
             >
-              <MdOutlineDeleteOutline />
+              <ImBin />
             </span>
           </div>
         </div>

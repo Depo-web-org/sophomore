@@ -132,7 +132,7 @@ function TestIndex() {
             />
             {errors.answer4 && (
               <p className="text-red-500">{errors.answer4.message}</p>
-            )}{" "}
+            )}
             {/* Error for Answer 4 */}
           </div>
         </div>

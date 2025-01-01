@@ -1,5 +1,6 @@
 import React from "react";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
+import {  FaRegCircle } from "react-icons/fa";
 import { Link, Links } from "react-router-dom";
 const compareAnswers = (Answers, trueAnswers) => {
   let result = Answers.map((answer, index) => {
@@ -36,37 +37,34 @@ const compareAnswers = (Answers, trueAnswers) => {
 
 const Results = ({ Answers, TrueAnswers }) => {
   const result = compareAnswers(Answers, TrueAnswers);
-  console.log(result);
   return (
-    <div className="relative ">
-      <img
-        className="w-full  "
-        src="/images/MyLearning/MyLearning.svg"
-        alt="MyLearning"
-      />
+    <div className="relative h-screen  ">
+      
+<FaRegCircle className=" text-9xl lg:text-[300px] text-primary absolute -left-10" />
+<FaRegCircle className=" text-9xl lg:text-[300px] text-secondary absolute bottom-1/4 -right-10" />
       <div className="absolute top-10 md:top-0 left-1/2 transform -translate-x-1/2 w-full container   ">
-        <div className="text-white w-96 mx-auto text-center font-semibold">
+        <div className="text-white  w-full lg:w-96 mx-auto text-center font-semibold">
           <p className="text-8xl pb-2">{result.successPercentage}%</p>
           <p className="text-2xl sm:text-3xl">
             You got {result.totalCorrect}/{result.totalQuestions} Questions
           </p>
         </div>
 
-        <div className="mx-auto font-bold rounded bg-dark text-white  min-w-96 h-auto py-5   mb-5 lg:mb-10 mt-3 lg:mt-5 text-center flex justify-center items-center ">
+        <div className="mx-auto font-bold rounded  text-white  w-full lg:min-w-96 h-auto py-5   mb-5 lg:mb-10 mt-3 lg:mt-5 text-center flex justify-center items-center ">
           <div>
             {result?.result.map((answers) => {
               return (
                 <div
                   key={answers.answer}
-                  className="flex justify-items-center items-center"
+                  className="flex justify-items-center items-center flex-wrap"
                 >
                   {answers.result ? (
                     <AiFillCheckCircle className="text-green-400 w-6 h-6 my-2 me-1" />
                   ) : (
                     <AiFillCloseCircle className="text-red-500 w-6 h-6 my-2 me-1" />
                   )}
-                  -<p className="mx-1"> {answers.answer}</p>{" "}
-                  <p className="mx-1 text-green-400"> {answers.trueAnswer}</p>
+                  -<p className="text-sm lg:text-base mx-1"> {answers.answer}</p>{" "}
+                  <p className="text-sm lg:text-base mx-1 text-green-400"> {answers.trueAnswer}</p>
                 </div>
               );
             })}
@@ -78,7 +76,7 @@ const Results = ({ Answers, TrueAnswers }) => {
             type="button"
             data-twe-ripple-init
             data-twe-ripple-color="light"
-            className="mx-auto block rounded bg-primary px-4 lg:px-6 pb-2 pt-2.5 text-base lg:text-lg font-semibold text-white"
+            className="mx-auto block rounded buttonHover px-4 lg:px-6 pb-2 pt-2.5 text-base lg:text-lg font-semibold text-white"
           >
             My learning
           </button>
