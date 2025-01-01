@@ -85,7 +85,7 @@ export default function MyProfile() {
                 />
                 <img
                   className=" size-10 lg:size-14"
-                  src="/images/Profile/Camera.svg"
+                  src="/images/Camera.svg"
                   alt="photo"
                 />
               </label>

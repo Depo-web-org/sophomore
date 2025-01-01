@@ -26,14 +26,14 @@ const Navbar = () => {
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
     ];
-    if (token && role === "consumer") {
-      // Add protected items only if authenticated as a consumer
+    if (token && role === "student") {
+      // Add protected items only if authenticated as a student
       items.push(
         { text: "My Learning", link: "/mylearning" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );
-    } else if (token && role !== "consumer") {
+    } else if (token && role !== "student") {
       items.push({ text: "Dashboard", link: "/teacherupload" });
     }
     return items;
@@ -78,7 +78,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            {token && role === "consumer" && (
+            {token && role === "student" && (
               <Link
                 to={"/profile"}
                 className="ml-3 overflow-hidden rounded-full border border-gray-300 shadow-inner"
@@ -129,7 +129,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
-            {token && role === "consumer" && (
+            {token && role === "student" && (
               <NavLink
                 to={"/profile"}
                 onClick={toggleMenu}

@@ -6,7 +6,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     login: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `/login/${role}/`,
+          url: `/auth/login/${role}/`,
           method: "POST",
           body: userData,
         };
@@ -25,7 +25,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     signup: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `/register/${role}/`,
+          url: `/auth/register/${role}/`,
           method: "POST",
           body: userData,
         };
@@ -34,7 +34,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     forget_password: builder.mutation({
       query: ({ email, role }) => {
         return {
-          url: `/reset-password/${role}/`,
+          url: `/auth/reset-password/${role}/`,
           method: "POST",
           body: { email },
         };
@@ -43,7 +43,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     verify_email: builder.mutation({
       query: ({ otp_code }) => {
         return {
-          url: "/verify-email/",
+          url: "/auth/verify-email/",
           method: "POST",
           body: { otp_code },
         };
@@ -53,7 +53,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     resend_otp: builder.mutation({
       query: ({ email, role }) => {
         return {
-          url: `/resend-otp/${role}/`,
+          url: `/auth/resend-otp/${role}/`,
           method: "POST",
           body: { email },
         };
@@ -62,7 +62,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     reset_password: builder.mutation({
       query: ({ dataSend, role }) => {
         return {
-          url: `/confirm-reset-password/${role}/`,
+          url: `/auth/confirm-reset-password/${role}/`,
           method: "POST",
           body: dataSend,
         };
@@ -70,7 +70,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     student_change_password: builder.mutation({
       query: ({ data }) => ({
-        url: "/change-password/consumer/",
+        url: "/auth/change-password/student/",
         method: "POST",
         body: data,
       }),
@@ -79,7 +79,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: (refresh_token) => {
         console.log("data from logout slice", refresh_token);
         return {
-          url: "/logout/consumer/",
+          url: "/auth/logout/student/",
           method: "POST",
           body: refresh_token,
         };

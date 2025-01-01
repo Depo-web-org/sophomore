@@ -14,7 +14,7 @@ export default function ChooseSchool() {
           xl:text-4xl pb-1 sm:pb-2">
           Get Started Now!
         </p>
-        <p className="text-sm md:text-base lg:text-2xl cursor-pointer lg:leading-10">
+        <p className=" text-sm md:text-base lg:text-2xl cursor-pointer lg:leading-10">
           What type of school do you attend ?
         </p>
       </div>

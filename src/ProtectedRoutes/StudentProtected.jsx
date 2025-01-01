@@ -68,7 +68,7 @@ const StudentProtectedRoute = ({ children }) => {
     return <Navigate to="/register" />;
   }
 
-  if (role !== "consumer") {
+  if (role !== "student") {
     // Redirect if the user is not a student
     return <Navigate to="/NotFoundPage" />;
   }

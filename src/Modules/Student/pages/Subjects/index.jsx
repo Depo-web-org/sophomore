@@ -14,7 +14,7 @@ const Subjects = () => {
 
   return (
     <>
-      <section className="min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 pt-32 ">
+      <section className="min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto 3 py-24 lg:py-32 ">
         <div>
           <Breadcrumbs />
           <h2 className="text-white  text-lg lg:text-4xl font-semibold  pb-4 md:pb-10 xl:pb-20">

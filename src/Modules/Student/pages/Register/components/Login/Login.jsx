@@ -70,16 +70,16 @@ export default function Login({ toggleForm }) {
         reset();
 
         // Navigate the user based on the role
-        if (role === "consumer") {
+        if (role === "student") {
           navigate("/");
-        } else if (role === "provider") {
+        } else if (role === "teacher") {
           navigate("/teacherupload");
         } else {
           navigate("/register");
         }
       }
     } catch (error) {
-      console.error("Login Error:", error?.data?.message);
+      // console.error("Login Error:", error?.data?.message);
       error?.data?.message
         ? setErrorMessage(error?.data?.message)
         : setErrorMessage(
