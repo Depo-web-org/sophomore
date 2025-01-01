@@ -19,10 +19,10 @@ const SubmitUnitsModel = ({setModelOpen}) => {
            Submit Units
           </span>
           <div className='flex  gap-4 flex-wrap w-full justify-center '>
-          <button  onClick={()=> console.log('DATA send')} className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-full">
+          <button  onClick={()=> console.log('DATA send')} className="bg-primary text-white px-4 py-2 w-full md:w-1/3  rounded-full">
             Yes
           </button>
-          <button  onClick={() => setModelOpen(false)} className="bg-slate-900 border-white  border text-white px-4 py-2 min-w-[279px] rounded-full">
+          <button  onClick={() => setModelOpen(false)} className="bg-slate-900 border-white  border text-white px-4 py-2 w-full md:w-2/5 rounded-full">
             Discard
           </button>
           </div>
