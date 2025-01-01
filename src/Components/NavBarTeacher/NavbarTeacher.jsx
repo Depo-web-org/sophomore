@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "//images/logos/logo.svg";
+import logo from "/images/logos/logo.svg";
 import { Link } from "react-router-dom";
 import "../../Components/Navbar/Navbar";
 

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import DropdownUser from "./DropdownUser";
-import Logo from "//images/logos/logo.svg";
+import Logo from "/images/logos/logo.svg";
 
 const Header = (props) => {
   const location = useLocation();
