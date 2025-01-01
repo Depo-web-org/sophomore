@@ -35,19 +35,19 @@ export default function StudentProfile() {
       <div className="bg-white min-h-32 flex flex-col md:flex-row items-center justify-start  pl-[8%] pt-16 md:pt-5 gap-8 ">
         <div className="flex items-center justify-center gap-1 text-[#4B5563]">
           <span className="mb-1 text-primary text-xl ">
-          <IoMdMail />
+            <IoMdMail />
           </span>
           <p>{student.email}</p>
         </div>
         <div className="flex items-center justify-center gap-1 text-[#4B5563]">
           <span className="mb-1 text-primary text-xl ">
-          <MdLocalPhone />
+            <MdLocalPhone />
           </span>
           <p>{student.phone}</p>
         </div>
         <div className="flex items-center justify-center gap-1 text-[#4B5563]">
-        <span className="mb-1 text-primary text-xl ">
-          <RiGraduationCapFill />
+          <span className="mb-1 text-primary text-xl ">
+            <RiGraduationCapFill />
           </span>
           <p>{student.grade}</p>
         </div>
@@ -70,7 +70,7 @@ function CoursesCard() {
       <div className="flex flex-col w-[auto]">
         <div className="relative w-full ">
           <img
-            src="https://dev.depowebeg.com/sophomore/images/subjects/math.webp"
+            src="https://dev.depowebeg.com/sophomore//images/subjects/math.webp"
             alt="learning card"
             className="w-full min-h-[168px]  object-cover rounded-t-lg"
           />
@@ -86,7 +86,7 @@ function CoursesCard() {
           </div>
           <div className="flex items-center justify-between pt-8">
             <p className="text-base font-medium text-[#4B5563] flex items-baseline gap-1">
-              <FaSchoolFlag className="text-2xl "/>
+              <FaSchoolFlag className="text-2xl " />
               American
             </p>
             <p className="text-base font-normal  text-[#4B5563]">4 units </p>

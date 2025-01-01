@@ -48,8 +48,8 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       handleSendOtp();
     } catch (err) {
       console.error("Signup Error:", err.data?.message);
-      err?.data?.message === "Consumer with this email already exists." ||
-      err?.data?.message === "Provider with this email already exists."
+      err?.data?.message === "student with this email already exists." ||
+      err?.data?.message === "Teacher with this email already exists."
         ? // ? handleSendOtp()
           ResendOTP(data, handleSendOtp, setAlreadyAv)
         : console.log(err?.response);

@@ -7,7 +7,7 @@ export default function LearningCard({ course, path, image }) {
         <Link to={path}>
           <div className="relative w-full min-h-[285px]">
             <img
-              src="images/hero/sophomore-hero.webp"
+              src="/images/hero/sophomore-hero.webp"
               alt="learning card"
               className="w-full min-h-[285px] object-cover rounded-lg"
             />
@@ -15,8 +15,8 @@ export default function LearningCard({ course, path, image }) {
               <img
                 src={
                   course.isFinished
-                    ? "images/MyLearning/Group.svg"
-                    : "images/MyLearning/Group1.svg"
+                    ? "/images/MyLearning/Group.svg"
+                    : "/images/MyLearning/Group1.svg"
                 }
                 alt="play"
                 className="w-16 lg:w-20 h-20"

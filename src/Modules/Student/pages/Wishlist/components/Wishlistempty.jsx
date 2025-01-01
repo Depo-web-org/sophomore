@@ -9,7 +9,7 @@ export default function Wishlistempty() {
         <div className="w-full flex justify-center pt-20">
           <img
             className="object-cover pb-[5%]"
-            src="images/Cart/Wishlistempty.svg"
+            src="/images/Cart/Wishlistempty.svg"
             alt="Wishlistempty"
           />
         </div>

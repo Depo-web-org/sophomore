@@ -23,7 +23,7 @@ const EmptyCart = () => {
             <div></div>
           </div>
           <div className="xl:w-2/5  ">
-            <img src="images/empty.svg" alt="" className="w-full " />
+            <img src="/images/empty.svg" alt="" className="w-full " />
           </div>
         </div>
       </section>

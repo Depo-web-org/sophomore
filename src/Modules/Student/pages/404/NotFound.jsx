@@ -6,7 +6,7 @@ const NotFound = () => {
     <>
       <div className="min-h-screen flex items-center justify-center bg-dark flex-col">
         <img
-          src="images/404/Oops! 404 Error with a broken robot-cuate.svg"
+          src="/images/404/Oops! 404 Error with a broken robot-cuate.svg"
           alt="404"
           className="size-4/5 lg:w-3/5 xl:size-2/5"
         />
