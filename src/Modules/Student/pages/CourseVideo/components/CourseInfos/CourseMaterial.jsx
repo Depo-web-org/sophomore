@@ -20,7 +20,7 @@ function UnitTest({params}) {
         <p className="text-base md:text-lg font-semibold text-white">
           Unit Test
         </p>
-        <button className="text-white text-sm md:text-lg font-semibold  hover:text-gray-700 px-2  lg:px-4 py-2 bg-primary rounded-md">
+        <button className="text-white text-sm md:text-lg font-semibold buttonHover px-2  lg:px-4 py-2  rounded-md">
         <Link to={`/mylearning/course/${params.toLowerCase()}/quiz`}>
           Start Test
           </Link>
@@ -67,7 +67,7 @@ function Material() {
             <a
               href={material.url}
               download={material.name}
-            className="text-white text-sm md:text-lg font-semibold  hover:text-gray-700 px-2  lg:px-4 py-2 bg-primary rounded-md">
+            className="text-white text-sm md:text-lg font-semibold  px-2  lg:px-4 py-2 buttonHover  rounded-md">
               Download
             </a>
           </div>

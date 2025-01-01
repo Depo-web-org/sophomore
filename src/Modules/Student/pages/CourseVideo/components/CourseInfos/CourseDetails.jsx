@@ -4,7 +4,7 @@ export default function CourseDetails() {
   return (
     <div className="flex items-start justify-start gap-2">
       
-      <p className="text-xs lg:text-sm font-semibold text-white">
+      <p className="text-xs lg:text-lg xl:text-xl font-semibold text-white">
       <HiInformationCircle className="text-lg h-8 w-8 text-secondary inline-block " /> Dive into the world of mathematics with this beginner-friendly course
         designed to build a strong foundation. Explore essential topics like
         basic arithmetic, fractions, decimals, and an introduction to algebra

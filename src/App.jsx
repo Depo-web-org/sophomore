@@ -41,13 +41,12 @@ import { DashboardLayout, PublicLayout, NavTeacher } from "./utils/layouts";
 import Quiz from "./Modules/Student/pages/Quiz/Index";
 import MyLearning from "./Modules/Student/pages/MyLearning/index";
 import { useEffect, useState } from "react";
-import { ImSpinner9 } from "react-icons/im";
 import ResetPassword from "./Modules/Student/pages/Register/components/ResetPassword/ResetPassword";
 import StudentProtectedRoute from "./ProtectedRoutes/StudentProtected";
 import TeacherProtectedRoute from "./ProtectedRoutes/TeacherProtectedRoute";
 import VerifyAccount from "./Modules/Student/pages/Register/components/VerifyAccount/VerifyAccount";
 import NotFound from "./Modules/Student/pages/404/NotFound";
-import { useSelector } from "react-redux";
+
 
 function AppRoutes() {
   return (

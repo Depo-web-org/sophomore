@@ -4,14 +4,14 @@ import { useState } from "react";
 export default function Video() {
   return (
     <div className="flex justify-between items-start flex-wrap gap-4 lg:gap-8 w-full ">
-      <div className="flex flex-col items-start justify-start gap-2">
+      <div className="flex flex-col items-start justify-start gap-2 w-full lg:w-1/2 ">
         <iframe
           src="https://www.youtube.com/embed/OQjkFQAIOck?si=wEdNFopy_U2h5_tD"
           // title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          className="w-full lg:min-w-[560px]  h-[315px] rounded-lg"
+          className="w-full    h-[315px] rounded-lg"
         ></iframe>
         <div className="flex flex-row w-full  justify-between items-center  lg:flex-col lg:items-start gap-2 mt-4">
 

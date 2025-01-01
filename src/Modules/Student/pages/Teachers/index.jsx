@@ -14,7 +14,7 @@ const Teachers = () => {
 
   return (
     <>
-      <section className="min-h-screen   py-24  lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+      <section className="min-h-screen   py-24  lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto  ">
         <Breadcrumbs />
 
         <div>
