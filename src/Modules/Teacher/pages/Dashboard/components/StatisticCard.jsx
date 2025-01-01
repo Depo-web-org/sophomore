@@ -23,11 +23,11 @@ export const statisticsData = [
 
 export default function Statistics() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-4 w-full">
       {statisticsData.map((item, index) => (
         <StatisticCard
           style={
-            "flex justify-center items-center gap-8 bg-white p-8 group hover:shadow-lg rounded-md "
+            "flex justify-center items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
           }
           key={index}
           image={item.image}
