@@ -3,7 +3,7 @@ import { logOut, setCredentials } from "../Auth/authSlice";
 
 // Base URL
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://192.168.1.26:7000/api/v1",
+  baseUrl: "https://auth-lms.next.depowebeg.com/api/v1",
   credentials: "include",
   // prepareHeaders: (headers, { getState, endpoint }) => {
   //   const token = getState().auth.token;
