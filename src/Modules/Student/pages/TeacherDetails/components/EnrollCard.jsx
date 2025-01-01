@@ -54,7 +54,7 @@ export default function EnrollCard() {
           </div>
           <div className="flex items-center justify-between gap-5 min-w-full">
             <button
-              className="bg-primary cursor-pointer text-white rounded-md p-2 w-[120px] md:w-[160px] "
+              className="buttonHover cursor-pointer text-white rounded-md p-2 w-[120px] md:w-[160px] "
               onClick={handleModalPackages}
             >
               Enroll now

@@ -2,11 +2,11 @@ import { FaStar } from "react-icons/fa6";
 
 export default function ReviewsTab() {
   return (
-    <section className="w-full flex flex-col items-start justify-start lg:pr-12  ">
-      <div className="grid grid-cols-1 gap-8">
+    <section className="w-full flex flex-col items-start justify-start xl:pr-12  ">
+      <div className="grid grid-cols-1 gap-8  ">
         <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto border-b border-gray-500">
           <div className="col-span-12 lg:col-span-10  ">
-            <div className="flex  gap-4 lg:gap-6 justify-center lg:justify-start flex-wrap items-center w-full ">
+            <div className="flex  gap-4 lg:gap-6 justify-center lg:justify-start flex-wrap items-center w-full  ">
               <div className="w-full  flex justify-between gap-2">
 
               <img
@@ -14,11 +14,12 @@ export default function ReviewsTab() {
                 alt="Robert image"
                 className=" w-14 lg:w-16  h-14 lg:h-16 rounded-full object-cover"
               />
-              <div className="flex justify-center flex-col lg:flex-row lg:justify-between  items-start lg:items-center   w-full">
+              <div className="flex justify-center flex-col xl:flex-row xl:justify-between  items-start xl:items-center gap-x-4   w-full">
 
-               <p className="font-medium text-base lg:text-lg lg:leading-8 text-white ">
-                 Sara Gamal
+              <p className="font-medium text-base lg:text-lg lg:leading-8 text-white ">
+              Sara Gamal
                 </p>
+
                 <div className="flex items-center gap-1    ">
                   <FaStar className="text-secondary " />
                   <FaStar className="text-secondary " />
@@ -29,9 +30,9 @@ export default function ReviewsTab() {
              
               </div>
               </div>
-              <div className=" w-full  ">
+              <div className=" w-full">
                
-                <p className="font-normal text-xs lg:text-sm  text-gray-400 mb-4 lg:pr-8 ">
+                <p className="font-normal text-xs lg:text-sm   text-gray-400 mb-4 xl:pr-8 ">
                   One of the standout features of Pagedone is its intuitive and
                   user-friendly interface. Navigating through the system feels
                   natural, and the layout makes it easy to locate and utilize
