@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../../../../../Redux/Auth/authSlice";
 import { ImSpinner9 } from "react-icons/im";
 
-const OpseModels = ({ setOpseModel }) => {
+const LogoutModal = ({ setOpseModel }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -95,4 +95,4 @@ const OpseModels = ({ setOpseModel }) => {
   );
 };
 
-export default OpseModels;
+export default LogoutModal;

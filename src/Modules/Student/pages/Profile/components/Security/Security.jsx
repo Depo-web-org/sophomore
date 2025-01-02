@@ -72,31 +72,27 @@ export default function Security() {
       />
 
       {/* first section */}
-      <div className="w-full h-72 ">
-       
+
+      <div className="w-full min-h-40 ">
+        {/* cover */}
         <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
           {/* Image */}
           <img
             className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
             src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-
             alt="profile"
           />
         </div>
-
-        {/* section Name */}
         <div className="px-1 lg:px-8">
           {/* section Name */}
-          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-0 sm:w-[60%] ms-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 lg:gap-4  ">
+          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
               <div className="w-full text-center lg:text-start">
                 <p className="font-bold text-white text-lg">Sara Johnson</p>
                 <p className="text-gray-500 font-normal text-xs lg:text-sm text-n">
                   Update your photos and personal Details
                 </p>
               </div>
-
-              
             </div>
           </div>
         </div>

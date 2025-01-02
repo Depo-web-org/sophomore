@@ -4,7 +4,7 @@ import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TiFlash } from "react-icons/ti";
 import "./profile.css";
-import OpseModels from "./components/Opse Models/OpseModel";
+import LogoutModal from "./components/Security/LogoutModal";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
@@ -100,7 +100,7 @@ export default function Profile() {
         setActive={setActive}
         setOpseModel={setOpseModel}
       ></SideBarProfile>
-      {OpseModel && <OpseModels setOpseModel={setOpseModel} />}
+      {OpseModel && <LogoutModal setOpseModel={setOpseModel} />}
 
       <div className="w-4/5 ml-auto lg:pl-8 xl:pl-0 ">
         <Outlet />
