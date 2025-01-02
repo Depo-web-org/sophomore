@@ -7,11 +7,11 @@ export default function LearningCard({ course, path, image }) {
         <Link to={path}>
           <div className="relative w-full min-h-[285px]">
             <img
-              src="/images/hero/sophomore-hero.webp"
+              src={image}
               alt="learning card"
               className="w-full min-h-[285px] object-cover rounded-lg"
             />
-            <div className="absolute bottom-[-38px] left-[50%] translate-x-[-50%]">
+            <div className="absolute -bottom-5 left-[50%] translate-x-[-50%]">
               <img
                 src={
                   course.isFinished
@@ -19,13 +19,13 @@ export default function LearningCard({ course, path, image }) {
                     : "/images/MyLearning/Group1.svg"
                 }
                 alt="play"
-                className="w-16 lg:w-20 h-20"
+                className="w-12 lg:w-14 "
               />
             </div>
           </div>
           <div className="flex items-center justify-between w-full pt-2">
             <p className="text-xl font-medium text-white">{course.name}</p>
-            <p className="text-base font-normal  text-[#FFFFFF57]">
+            <p className="text-base font-normal my-4 text-[#FFFFFF57]">
               {course.grade}
             </p>
           </div>

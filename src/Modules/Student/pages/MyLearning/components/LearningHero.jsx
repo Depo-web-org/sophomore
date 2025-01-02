@@ -47,10 +47,11 @@ const TimeCard =() => {
         </div>
 
         <div>
-          <p className="text-white text-sm lg:text-base font-semibold">
-            {timeLeft.days}D {timeLeft.hours}H {timeLeft.minutes}M {timeLeft.seconds}S 
+          <p className="text-white text-sm lg:text-base font-semibold  rounded-full">
+            {timeLeft.days} <span className="text-sm text-primary">D</span>  {timeLeft.hours} <span className="text-sm text-primary">H</span> {timeLeft.minutes} <span className="text-sm text-primary">M</span>  {timeLeft.seconds}<span className="text-sm text-secondary">S</span> 
           </p>
         </div>
+
       </div>
     </div>
   );
@@ -62,7 +63,7 @@ export default function LearningHero() {
     <section
       className={`text-white relative min-h-[720px] bg  ${style.heroBg} flex flex-col items-center justify-center`}
     >
-      <div className="  container w-full md:w-custom-md xl:w-custom-xl mx-auto py-32 grid grid-cols-12 gap-y-3    relative z-10   ">
+      <div className="  container w-full md:w-custom-md xl:w-custom-xl mx-auto py-32 grid grid-cols-12 gap-y-3    relative z-10  bg-red6 ">
         {/* Right  */}
         <div className="col-span-12 lg:col-span-7 flex items-center   ">
           <div>

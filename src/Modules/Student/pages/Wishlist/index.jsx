@@ -9,7 +9,7 @@ export default function WishList() {
   return (
     <div className="min-h-screen w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3">
       <div>
-        <h2 className="text-white  text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
+        <h2 className="text-white  text-3xl lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
           Your Wishlist
         </h2>
       </div>

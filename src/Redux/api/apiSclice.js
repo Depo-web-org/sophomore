@@ -1,49 +1,71 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setCredentials } from "../Auth/authSlice";
 
-// Base URL
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://auth-lms.next.depowebeg.com/api/v1",
+  baseUrl: "http://192.168.1.26:8000/api/v1",
   credentials: "include",
-  // prepareHeaders: (headers, { getState, endpoint }) => {
-  //   const token = getState().auth.token;
+  prepareHeaders: (headers, { getState, endpoint }) => {
+    const token = getState().auth.token;
 
-  //   if (token && endpoint !== "login/student") {
-  //     headers.set("authorization", `Bearer ${token}`);
-  //   }
+    // Add Authorization header for all requests except login and logout
+    if (token && endpoint !== "/auth/login/student") {
+      headers.set("authorization", `Bearer ${token}`);
+    }
 
-  //   return headers;
-  // },
+    return headers;
+  },
 });
 
-// token refresh
+
+
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+  console.log(result)
 
-  if (result?.error?.originalStatus === 403) {
-    console.log("sending refresh token");
+  if (result?.error?.status==403 ||result?.error?.status=== 'FETCH_ERROR') {
+    console.log("Access token expired, attempting to refresh...");
+    const refreshToken = localStorage.getItem('RE_REV2_2024');
+    console.log(refreshToken)
 
-    // Send refresh token to get a new access token
-    const refreshResult = await baseQuery("/token/refresh/", api, extraOptions);
 
-    if (refreshResult?.data) {
-      const user = api.getState().auth.user;
 
-      // Store the new token x
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
+    if (refreshToken) {
+      // Attempt to refresh the access token
+      const refreshResult = await baseQuery(
+        {
+          url: "/auth/token/refresh/",
+          method: "POST",
+          body: { refresh: refreshToken },
+        },
+        api,
+        extraOptions
+      );
 
-      // Retry the original query with the new access token
-      result = await baseQuery(args, api, extraOptions);
+      if (refreshResult?.data) {
+        const user = JSON.parse(localStorage.getItem('USER'));
+
+        // Store new access token
+        api.dispatch(setCredentials({
+          token: refreshResult.data.access,
+          user,
+          refresh: refreshToken, // Optionally persist refresh token
+        }));
+
+        // Retry the original query with the new access token
+        result = await baseQuery(args, api, extraOptions);
+      } else {
+        console.error("Failed to refresh token. Logging out...");
+        // api.dispatch(logOut());
+      }
     } else {
-      // log out
-      api.dispatch(logOut());
+      console.error("No refresh token available. Logging out...");
+      // api.dispatch(logOut());
     }
   }
 
   return result;
 };
 
-// Create the API slice with reauthentication logic
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithReauth,

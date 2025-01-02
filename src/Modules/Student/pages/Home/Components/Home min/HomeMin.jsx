@@ -56,8 +56,8 @@ export default function HomeMin() {
                     className="w-full h-36 md:h-44 lg:h-72 object-cover rounded-3xl opacity-70 blur-[1px] group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
                   />
 
-                  <span className="  text-white flex items-center justify-center w-12 lg:w-16 pl-1  h-12 lg:h-16  rounded-full  bg-rose-600 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                    <FaPlay className="text-3xl lg:text-4xl" />
+                  <span className="  text-white flex items-center justify-center w-12 lg:w-16 pl-1  h-12 lg:h-16  group rounded-full  bg-rose-600 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
+                    <FaPlay className="text-3xl lg:text-4xl group-hover:rotate-[360deg] duration-700" />
                   </span>
                 </div>
               </Link>

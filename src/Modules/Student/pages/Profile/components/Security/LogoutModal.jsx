@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../../../../Redux/Auth/authSlice";
 import { ImSpinner9 } from "react-icons/im";
-import { getRole } from "../../../../../../Helpers/enCodeRole";
 
-const OpseModels = ({ setOpseModel }) => {
+const LogoutModal = ({ setOpseModel }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -15,7 +14,7 @@ const OpseModels = ({ setOpseModel }) => {
 
   // Inside your handleLogout function:
   const handleLogout = async () => {
-    const refresh_token = getRole("RE_REV2_2024");
+    const refresh_token =localStorage.getItem("RE_REV2_2024");
     console.log(refresh_token);
     if (!refresh_token) {
       console.error("Refresh token is missing!");
@@ -28,7 +27,7 @@ const OpseModels = ({ setOpseModel }) => {
       console.log("Logout successful:", response);
 
       // Clear localStorage and Redux store
-      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("RE_REV2_2024");
       dispatch(logOut()); // Dispatch logout action
       navigate("/register");
     } catch (error) {
@@ -96,4 +95,4 @@ const OpseModels = ({ setOpseModel }) => {
   );
 };
 
-export default OpseModels;
+export default LogoutModal;

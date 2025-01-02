@@ -10,15 +10,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch authentication state from Redux
   const { token, user } = useSelector((state) => state.auth);
   const { role } = useSelector((state) => state.role);
-  // console.log(token);
-  // console.log(role);
-
-  // const student=[
-  //     home, about, contact, myLearning, cart, wishlist, profile
-  // ]
 
   const navItems = useMemo(() => {
     const items = [
@@ -101,58 +94,70 @@ const Navbar = () => {
             )}
           </div>
         </div>
-        <button onClick={toggleMenu} className="md:hidden mr-5 text-white">
+        <button
+          onClick={(e) => {
+            toggleMenu();
+            e.stopPropagation();
+          }}
+          className="md:hidden mr-5 text-white"
+        >
           {isMenuOpen ? <HiX size={30} /> : <HiMenuAlt3 size={30} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-1/2 -translate-x-1/2 right-0 bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-2xl mt-2 py-4 px-6 w-5/6">
-          <ul className="flex flex-col gap-4 font-semibold">
-            {navItems.map((item, index) => (
-              <li key={index + item.text + item.link}>
+        <>
+          <div
+            className="md:hidden absolute top-16 left-1/2 -translate-x-1/2 right-0 bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-2xl mt-2 py-4 px-6 w-5/6 z-[9999]"
+            onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
+          >
+            <ul className="flex flex-col gap-4 font-semibold">
+              {navItems.map((item, index) => (
+                <li key={index + item.text + item.link}>
+                  <NavLink
+                    onClick={toggleMenu}
+                    to={item.link}
+                    className="text-primary block"
+                  >
+                    <span className="text-base flex items-center gap-2">
+                      {/* {item.icon} */}
+                      {item.link === "/cart"
+                        ? "Cart"
+                        : item.link === "/wishlist"
+                        ? "Wishlist"
+                        : ""}
+                    </span>
+                    {item.text}
+                  </NavLink>
+                </li>
+              ))}
+              {token && role === "student" && (
                 <NavLink
+                  to={"/profile"}
                   onClick={toggleMenu}
-                  to={item.link}
-                  className="text-primary block"
+                  className="font-semibold text-primary flex items-end gap-2"
                 >
-                  <span className="text-base flex items-center gap-2">
-                    {item.icon}{" "}
-                    {item.link === "/cart"
-                      ? "Cart"
-                      : item.link === "/wishlist"
-                      ? "wishlist"
-                      : ""}
-                  </span>
-                  {item.text}
+                
+                  Profile
                 </NavLink>
-              </li>
-            ))}
-            {token && role === "student" && (
-              <NavLink
-                to={"/profile"}
-                onClick={toggleMenu}
-                className=" font-semibold text-primary flex items-end gap-2"
+              )}
+            </ul>
+            {!token && (
+              <button
+                onClick={() => navigate("/register")}
+                className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
               >
-                <img
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="profile avatar"
-                  className="size-8 object-cover rounded-full"
-                />
-                Profile
-              </NavLink>
+                Login
+              </button>
             )}
-          </ul>
-          {!token && (
-            <button
-              onClick={() => navigate("/register")}
-              className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
-            >
-              Login
-            </button>
-          )}
-        </div>
+          </div>
+          {/* Overlay */}
+          <div
+            onClick={() => setIsMenuOpen(false)} 
+            className="fixed inset-0 z-[9998]"
+          ></div>
+        </>
       )}
     </nav>
   );
