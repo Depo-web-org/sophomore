@@ -9,8 +9,8 @@ import axios from "axios";
 const IndexTeacher = () => {
   const [SchoolCategories, setSchoolCategories] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState(null);
-  const [showAlertError, setShowAlertError] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState(null);
+  const [showAlertError, setShowAlertError] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -20,12 +20,15 @@ const IndexTeacher = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://dev.depowebeg.com/schools/api/getSchools.php?grades=true&recursive=true&viewOnly=true"
+          "http://192.168.1.26:8000/api/v1/academics/school-hierarchy"
         );
-        setSchoolCategories(response.data.data);
-        console.log(response.data.data);
+        if (response.data.code === "0" && response.data.data) {
+          setSchoolCategories(response.data.data);
+        } else {
+          console.error("Failed to fetch school categories");
+        }
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching data:", err);
       }
     };
 
@@ -39,12 +42,11 @@ const IndexTeacher = () => {
     formState: { errors },
   } = useForm();
 
-  // add items a user in Array
   const handleFormSubmit = (formData) => {
     const selectedData = [
       selectedSchool?.id || "",
       selectedGrade?.id || "",
-      formData.subject || "",
+      parseInt(formData.subject) || "",
     ];
 
     if (selectedData[0] && selectedData[1] && selectedData[2]) {
@@ -60,19 +62,19 @@ const IndexTeacher = () => {
     if (data.length === 0) {
       setShowAlertError(true);
     } else {
-      //
       setLoading(true);
+      const access_token = localStorage.getItem("access_token");
+
       try {
         const response = await axios.post(
-          " https://dev.depowebeg.com/schools/api/getSchools.php?grades=true&recursive=true&viewOnly=true",
-          data
+          "http://192.168.1.26:8000/api/v1/teachers/complete-profile-1/",
+          data,
+          access_token
         );
 
-        console.log("Success", response.data);
+        console.log(response.data);
         setShowAlert(true);
       } catch (error) {
-        console.log(data);
-
         console.error("Error sending data:", error);
         setShowAlertError(true);
       } finally {
@@ -81,13 +83,27 @@ const IndexTeacher = () => {
         setTimeout(() => {
           setShowAlertError(false);
         }, 3000);
-        // navigate("/Teacherdocs");
       }
     }
   };
 
   const handleRemoveBadge = (item) => {
     setData((prevData) => prevData.filter((d) => d !== item));
+  };
+
+  const handleSchoolChange = (e) => {
+    const school = SchoolCategories.find(
+      (school) => school.id === parseInt(e.target.value)
+    );
+    setSelectedSchool(school);
+    setSelectedGrade(null); // Reset grade when school changes
+  };
+
+  const handleGradeChange = (e) => {
+    const grade = selectedSchool?.grades.find(
+      (grade) => grade.id === parseInt(e.target.value)
+    );
+    setSelectedGrade(grade);
   };
 
   return (
@@ -97,13 +113,17 @@ const IndexTeacher = () => {
         alt="Teacher"
         className="w-full h-[100%] object-cover absolute"
       />
-      {/* add item  a user */}
+      {/* Add item for user */}
       <div className="relative z-10 pt-28 lg:pt-32 text-center">
         <TopText name="Welcome Mohamed" title="Please Upload Your Papers" />
         {data.map((item, index) => {
-          const school = SchoolCategories.find((school) => school.id === item[0]);
+          const school = SchoolCategories.find(
+            (school) => school.id === item[0]
+          );
           const grade = school?.grades.find((grade) => grade.id === item[1]);
-          const subject = grade?.subjects.find((subject) => subject.id === item[2]);
+          const subject = grade?.subjects.find(
+            (subject) => subject.id === item[2]
+          );
           return (
             <div key={index}>
               <span className="m-1 bg-[#24386d] text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-medium">
@@ -117,7 +137,7 @@ const IndexTeacher = () => {
           );
         })}
       </div>
-      {/* options */}
+      {/* Options */}
       <div className="w-full py-12 px-5 flex justify-center">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
@@ -130,13 +150,7 @@ const IndexTeacher = () => {
               </label>
               <select
                 className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none focus:ring-1 focus:ring-blue-500"
-                onChange={(e) =>
-                  setSelectedSchool(
-                    SchoolCategories.find(
-                      (school) => school.id === e.target.value
-                    )
-                  )
-                }
+                onChange={handleSchoolChange}
                 value={selectedSchool?.id || ""}
               >
                 <option value="" disabled>
@@ -156,13 +170,7 @@ const IndexTeacher = () => {
                   </label>
                   <select
                     className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    onChange={(e) =>
-                      setSelectedGrade(
-                        selectedSchool.grades.find(
-                          (grade) => grade.id === e.target.value
-                        )
-                      )
-                    }
+                    onChange={handleGradeChange}
                     value={selectedGrade?.id || ""}
                   >
                     <option value="" disabled>
@@ -206,7 +214,7 @@ const IndexTeacher = () => {
               )}
             </div>
           </div>
-          {/* buttoms */}
+          {/* Buttons */}
           <div>
             <button
               type="submit"
