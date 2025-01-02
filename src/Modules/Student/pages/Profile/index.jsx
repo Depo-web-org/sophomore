@@ -22,7 +22,7 @@ function SideBarProfile(props) {
         }`}
       />
 
-      <div className="flex flex-col gap-2 justify-between     ">
+      <div className="flex flex-col gap-2 justify-between h-full    ">
         <div className="flex flex-col gap-2 justify-start   ">
           <NavLink
             to="myprofile"
