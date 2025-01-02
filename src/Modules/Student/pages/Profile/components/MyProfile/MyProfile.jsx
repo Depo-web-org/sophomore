@@ -58,7 +58,7 @@ export default function MyProfile() {
             Update UserName
             <input
               type="text"
-              defaultValue={"username"}
+              defaultValue={"user name"}
               id="Username"
               className=" p-2 w-full text-gray-600 font-normal rounded-md bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm md:text-base"
             />
@@ -85,13 +85,13 @@ export default function MyProfile() {
                 />
                 <img
                   className=" size-10 lg:size-14"
-                  src="/images/Camera.svg"
+                  src="/images/Profile/Camera.svg"
                   alt="photo"
                 />
               </label>
             </div>
           </div>
-          <div className=" text-right py-1 cursor-pointer text-white  ">
+          <div className=" text-right py-1 cursor-pointer text-white">
             <button>Delete </button>
             <span className="px-3">|</span>
             <button>Update</button>

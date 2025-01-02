@@ -101,14 +101,9 @@ const IndexTeacher = () => {
       <div className="relative z-10 pt-28 lg:pt-32 text-center">
         <TopText name="Welcome Mohamed" title="Please Upload Your Papers" />
         {data.map((item, index) => {
-          const school = SchoolCategories.find(
-            (school) => school.id === item[0]
-          );
+          const school = SchoolCategories.find((school) => school.id === item[0]);
           const grade = school?.grades.find((grade) => grade.id === item[1]);
-          const subject = grade?.subjects.find(
-            (subject) => subject.id === item[2]
-          );
-
+          const subject = grade?.subjects.find((subject) => subject.id === item[2]);
           return (
             <div key={index}>
               <span className="m-1 bg-[#24386d] text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-medium">
