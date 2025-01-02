@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 
-const CardInfo = ({ item, path }) => {
+ const CardInfo = ({ item, path }) => {
   return (
     <>
       <div className="relative overflow-hidden mt-2 lg:mt-4 rounded-3xl group ">
@@ -26,4 +26,4 @@ const CardInfo = ({ item, path }) => {
   );
 };
 
-export default CardInfo;
+export  default CardInfo;

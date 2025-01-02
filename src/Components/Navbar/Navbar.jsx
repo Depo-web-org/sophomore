@@ -112,13 +112,13 @@ const Navbar = () => {
             className="md:hidden absolute top-16 left-1/2 -translate-x-1/2 right-0 bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-2xl mt-2 py-4 px-6 w-5/6 z-[9999]"
             onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
           >
-            <ul className="flex flex-col gap-4 font-semibold">
+            <ul className="flex flex-col gap-4 font-semibold ">
               {navItems.map((item, index) => (
                 <li key={index + item.text + item.link}>
                   <NavLink
                     onClick={toggleMenu}
                     to={item.link}
-                    className="text-primary block"
+                    className="text-primary hover:text-secondary duration-150 transition-all block"
                   >
                     <span className="text-base flex items-center gap-2">
                       {/* {item.icon} */}
