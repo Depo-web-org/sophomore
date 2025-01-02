@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
 
 export default function Security() {
+
+
   const [showAlert, setShowAlert] = useState(false);
   const role = useSelector((state) => state.role.role);
   console.log(role);
@@ -38,14 +40,8 @@ export default function Security() {
       return;
     }
 
-    const refresh_token = localStorage.getItem("refresh_token");
-    if (!refresh_token) {
-      console.error("Refresh token is missing!");
-      return;
-    }
-    console.log(refresh_token);
+
     const infos = {
-      refresh_token,
       old_password: data.old_password,
       new_password: data.new_password,
       confirm_password: data.confirm_password,
