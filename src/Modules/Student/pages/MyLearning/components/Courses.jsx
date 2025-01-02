@@ -64,12 +64,13 @@ const courses = [
   },
 ];
 
+
 export default function Courses() {
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="w-full flex flex-col gap-4 ">
         <p className="text-2xl font-semibold text-white py-8">
-          Not finished yet{" "}
+          Not finished yet
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
           {courses
@@ -84,10 +85,10 @@ export default function Courses() {
             ))}
         </div>
       </div>
-      <div className="w-full flex flex-col gap-4 pt-2 border-t-[1px] border-gray-500">
+      <div className="w-full flex flex-col gap-4 py-2 border-t border-gray-500">
         <p className="text-2xl font-semibold text-white py-8">
-          {" "}
-          Finished Courses{" "}
+          
+          Finished Courses
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
           {courses
