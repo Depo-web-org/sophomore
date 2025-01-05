@@ -77,7 +77,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     logout: builder.mutation({
       query: ({refresh_token, role}) => {
-        console.log("data from logout slice", refresh_token);
         return {
           url: `/auth/logout/${role}/`,
           method: "POST",

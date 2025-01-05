@@ -32,7 +32,6 @@ const StudentProtectedRoute = ({ children }) => {
   }, [token, dispatch, user, triggerRefreshToken]);
 
 
-  useEffect(()=>console.log("rednder"),[])
   if (!token || user?.role !== "student") return <Navigate to="/register" />;
 
   return children;
@@ -45,8 +44,6 @@ const isTokenExpired = (token) => {
   if (!token) return true;
   try {
     const { exp } = JSON.parse(atob(token.split(".")[1]));
-    console.log(exp * 1000)
-    console.log(Date.now())
     return Date.now() >= exp * 1000;
   } catch (err) {
     console.error("Invalid token format:", err);

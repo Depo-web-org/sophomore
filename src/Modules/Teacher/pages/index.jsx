@@ -79,8 +79,6 @@ const IndexTeacher = () => {
           }
         );
 
-        console.log( data);
-        console.log(response.data);
         setShowAlert(true);
 
       } catch (error) {

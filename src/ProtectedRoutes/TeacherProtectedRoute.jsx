@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const TeacherProtectedRoute = ({ children }) => {
   const { token, user } = useSelector((state) => state.auth);
-  console.log(token, user);
   const {role}=useSelector((state)=>state.role)|| user.role;
   if (!token) {
     // Redirect to login if not authenticated

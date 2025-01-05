@@ -9,7 +9,6 @@ const LogoutModal = ({ setOpseModel }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {role} = useSelector((state)=>state.role)
-  console.log(role)
 
   const [student_logout, { isLoading, isError, error }] =
   useLogoutMutation();
@@ -17,7 +16,6 @@ const LogoutModal = ({ setOpseModel }) => {
   // Inside your handleLogout function:
   const handleLogout = async () => {
     const refresh_token =localStorage.getItem("refresh_token");
-    console.log(refresh_token);
     if (!refresh_token) {
       console.error("Refresh token is missing!");
       return;

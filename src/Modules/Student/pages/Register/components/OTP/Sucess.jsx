@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function SucessOtp({ processFinished }) {
   const navigate = useNavigate();
-  console.log("test");
   return (
     <div className="w-full my-auto flex justify-center   ">
       <div className="flex flex-col items-center lg:items-start justify-start gap-2  w-4/5 lg:w-full ">

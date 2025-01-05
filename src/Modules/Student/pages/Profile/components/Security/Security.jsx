@@ -13,7 +13,6 @@ export default function Security() {
 
   const [showAlert, setShowAlert] = useState(false);
   const role = useSelector((state) => state.role.role);
-  console.log(role);
 
   const {
     register,
@@ -32,14 +31,8 @@ export default function Security() {
 
   const [changePassword, { isLoading, isError, error }] =
   useChange_passwordMutation();
-  console.log(error);
 
   const onSubmit = async (data) => {
-    if (data.new_password !== data.confirm_password) {
-      console.log("Passwords do not match!");
-      return;
-    }
-
 
     const infos = {
       old_password: data.old_password,
@@ -49,7 +42,6 @@ export default function Security() {
     try {
       const response = await changePassword({ data: infos, role }).unwrap();
 
-      console.log("Password change successful:", response);
 
       handleShowAlert();
       reset();

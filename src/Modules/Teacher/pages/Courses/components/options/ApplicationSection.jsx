@@ -52,7 +52,6 @@ const ApplicationSection = () => {
     // Add selected options to the data array
     const selectedOptions = Object.values(data).filter((item) => item);
     setdata((prevData) => [...prevData, selectedOptions]);
-    console.log(data);
     reset();
   };
 
