@@ -35,7 +35,7 @@ const menuItems = [
 
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const [LogOutState, setLogOutState] = useState(true)
+  const [LogOutState, setLogOutState] = useState(false)
   const location = useLocation();
   const { pathname } = location;
 
