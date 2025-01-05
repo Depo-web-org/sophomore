@@ -61,22 +61,33 @@ const IndexTeacher = () => {
   const handleSendData = async () => {
     if (data.length === 0) {
       setShowAlertError(true);
+
     } else {
+
       setLoading(true);
+      
       const access_token = localStorage.getItem("access_token");
 
       try {
         const response = await axios.post(
           "http://192.168.1.26:8000/api/v1/teachers/complete-profile-1/",
           data,
-          access_token
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`, // Set the token in the Authorization header
+            },
+          }
         );
 
+        console.log( data);
         console.log(response.data);
         setShowAlert(true);
+
       } catch (error) {
+
         console.error("Error sending data:", error);
         setShowAlertError(true);
+
       } finally {
         setLoading(false);
         setShowAlert(false);
