@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import TopText from "../Top Text Cards/TopText";
@@ -32,7 +32,8 @@ const TeacherUpload = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
+
+  // hook form
   const {
     register,
     handleSubmit,
@@ -49,45 +50,50 @@ const TeacherUpload = () => {
     }
   };
 
+  // Send Data
   const onSubmit = async (data) => {
     const formData = new FormData();
-    
     Object.keys(buttonStates).forEach((index) => {
       const file = buttonStates[index]?.file;
       if (file) {
-        formData.append(cardteacher[index].name.toLowerCase().replace(/ /g, "_"), file);
+        formData.append(
+          cardteacher[index].name.toLowerCase().replace(/ /g, "_"),
+          file
+        );
       }
     });
-  
-      console.log("DATA :", buttonStates);
-  
+
     try {
-      setLoading(true)
+      setLoading(true);
       const access_token = localStorage.getItem("access_token");
-      const response = await axios.post("http://192.168.1.26:8000/api/v1/teachers/complete-profile-2/", formData, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
+      const response = await axios.post(
+        "http://192.168.1.26:8000/api/v1/teachers/complete-profile-2/",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
       console.log("Upload successful:", response.data);
       navigate("/teacherPanel");
     } catch (error) {
       console.error("Error uploading files:", error);
-    }finally{
-      setLoading(false)
+      setError(true);
+    } finally {
+      setLoading(false);
     }
- 
-
-
- 
   };
-
+// Check if all files are approved  
   const allApproved =
     Object.keys(buttonStates).length === cardteacher.length &&
     Object.values(buttonStates).every((state) => state.status === "Approved");
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}  className="relative w-full h-screen">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="relative w-full h-screen"
+    >
       <img
         src="/images/Teacher/Teacher panel.svg"
         alt="Teacher"
@@ -139,7 +145,7 @@ const TeacherUpload = () => {
 
       <div className="relative inset-x-0 text-center py-14">
         {error ? (
-          <p className="text-red-500 mt-2">{error}</p>
+          <p className="text-red-500 mt-2">Error Uploading Files </p>
         ) : (
           <p className="text-lg sm:text-2xl lg:text-3xl text-white font-bold">
             Kindly wait until you get approved
@@ -153,17 +159,17 @@ const TeacherUpload = () => {
             className="rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
           >
             {loading ? (
-                <div
-                  className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                  role="status"
-                >
-                  <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                    Loading...
-                  </span>
-                </div>
-              ) : (
-                "Get Started"
-              )}
+              <div
+                className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            ) : (
+              "Get Started"
+            )}
           </button>
         )}
       </div>
