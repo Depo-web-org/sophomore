@@ -40,7 +40,7 @@ const PublicLayout = () => {
 
 
 
-// PublicLayout.js
+// NavTeacher.js
 const NavTeacher = () => {
   return (
     <>
