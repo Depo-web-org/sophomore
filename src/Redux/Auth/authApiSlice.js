@@ -80,7 +80,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         return {
           url: `/auth/logout/${role}/`,
           method: "POST",
-          body: refresh_token,
+          body: {refresh_token},
         };
       },
       invalidatesTags: ["Auth"],
