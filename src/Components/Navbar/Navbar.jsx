@@ -120,38 +120,42 @@ const Navbar = () => {
                     to={item.link}
                     className="text-primary hover:text-secondary duration-150 transition-all block"
                   >
-                    <span className="text-base flex items-center gap-2">
-                      {/* {item.icon} */}
-                      {item.link === "/cart"
-                        ? "Cart"
-                        : item.link === "/wishlist"
-                        ? "Wishlist"
-                        : ""}
-                    </span>
-                    {item.text}
-                  </NavLink>
-                </li>
-              ))}
-              {token && role === "student" && (
-                <NavLink
-                  to={"/profile"}
-                  onClick={toggleMenu}
-                  className="font-semibold text-primary flex items-end gap-2"
-                >
-                
-                  Profile
+                                     <span className="text-base flex items-center gap-2">
+                    {item.icon}{" "}
+                    {item.link === "/cart"
+                      ? "Cart"
+                      : item.link === "/wishlist"
+                      ? "wishlist"
+                      : ""}
+                  </span>
+                  {item.text}
                 </NavLink>
-              )}
-            </ul>
-            {!token && (
-              <button
-                onClick={() => navigate("/register")}
-                className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
+              </li>
+            ))}
+            {token && role === "student" && (
+              <NavLink
+                to={"/profile"}
+                onClick={toggleMenu}
+                className=" font-semibold text-primary flex items-end gap-2"
               >
-                Login
-              </button>
+                <img
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="profile avatar"
+                  className="size-8 object-cover rounded-full"
+                />
+                Profile
+              </NavLink>
             )}
-          </div>
+          </ul>
+          {!token && (
+            <button
+              onClick={() => navigate("/register")}
+              className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
+            >
+              Login
+            </button>
+          )}
+        </div>
           {/* Overlay */}
           <div
             onClick={() => setIsMenuOpen(false)} 
