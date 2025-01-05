@@ -7,9 +7,12 @@ import { FaRegEye } from "react-icons/fa6";
 import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { useSelector } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
+import useFetch from "../../../../../../Hooks/UseFetch";
 
 export default function Security() {
-
+  const { data } = useFetch(
+    "https://os1907.github.io/Schools/Profile/Profile.json"
+  );
 
   const [showAlert, setShowAlert] = useState(false);
   const role = useSelector((state) => state.role.role);
@@ -71,19 +74,16 @@ export default function Security() {
           {/* Image */}
           <img
             className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={data?.profile}
             alt="profile"
           />
         </div>
         <div className="px-1 lg:px-8">
           {/* section Name */}
-          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto">
+          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto ">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
               <div className="w-full text-center lg:text-start">
-                <p className="font-bold text-white text-lg">Sara Johnson</p>
-                <p className="text-gray-500 font-normal text-xs lg:text-sm text-n">
-                  Update your photos and personal Details
-                </p>
+                <p className="font-bold text-white text-lg">{data?.name}</p>
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function Security() {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] container m-auto min-h-96 mt-8"
+        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] container m-auto min-h-96 "
       >
         {/*first email */}
         <div className="relative border-b py-5">

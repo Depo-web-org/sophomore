@@ -1,21 +1,24 @@
 import React from "react";
 import CardImage from "/images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg";
+import useFetch from "../../../../../../Hooks/UseFetch";
 export default function Subscriptions() {
-  const Subscriptions = [
-    {
-      id: "0987",
-      name: "Math ",
-      grade: "Grade 1",
-      img: CardImage,
-    },
-    {
-      id: "7654",
-      name: "French",
-      grade: "Grade 2",
-      img: CardImage,
-    },
-  ];
-
+  const { data } = useFetch(
+    "https://os1907.github.io/Schools/Profile/Profile.json"
+  );
+  // const Subscriptions = [
+  //   {
+  //     id: "0987",
+  //     name: "Math ",
+  //     grade: "Grade 1",
+  //     img: CardImage,
+  //   },
+  //   {
+  //     id: "7654",
+  //     name: "French",
+  //     grade: "Grade 2",
+  //     img: CardImage,
+  //   },
+  // ];
   return (
     <div className="container pr-8 ">
       {/* top Text */}
@@ -25,7 +28,7 @@ export default function Subscriptions() {
             Subscriptions
           </p>
           <span className="text-gray-500 font-normal  text-xs lg:text-sm">
-            View your active courses{" "}
+            View your active courses
           </span>
         </div>
         <div className="flex flex-col justify-between   ">
@@ -39,11 +42,12 @@ export default function Subscriptions() {
       </div>
       {/* Card Subscriptions*/}
 
-      <div className=" grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-5 pt-2 lg:pt-10">
-        {Subscriptions.map((item) => {
+      <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3  lg:gap-5 pt-2 lg:pt-10">
+        {data?.Subscriptions.map((item) => {
           return (
             <>
-              <div className="flex flex-col hover:opacity-45 transition-all duration-300">
+              <div key={item.id} className="flex flex-col hover:opacity-45 transition-all duration-300">
+
                 <div className="relative w-full overflow-hidden bg-cover bg-no-repeat rounded-lg">
                   <img
                     src={item.img}
@@ -51,6 +55,7 @@ export default function Subscriptions() {
                     className="w-full object-cover rounded-lg transition duration-300 ease-in-out hover:scale-110"
                   />
                 </div>
+
                 <div className="flex items-center justify-between w-full pt-2">
                   <p className="text-xs sm:text-sm lg:text-xl font-medium text-white">
                     {item.name}

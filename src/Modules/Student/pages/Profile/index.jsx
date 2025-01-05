@@ -7,6 +7,7 @@ import "./profile.css";
 import LogoutModal from "./components/Security/LogoutModal";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
+import useFetch from "../../../../Hooks/UseFetch";
 
 function SideBarProfile(props) {
   return (
@@ -81,7 +82,7 @@ function SideBarProfile(props) {
 export default function Profile() {
   const [Active, setActive] = useState("close");
   const [OpseModel, setOpseModel] = useState(false);
-
+  
   useEffect(() => {
     const handleResize = () => {
       const isLargeScreen = window.matchMedia("(min-width: 640px)").matches;
