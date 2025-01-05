@@ -24,7 +24,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   if (result?.error?.status==403 ||result?.error?.status=== 'FETCH_ERROR') {
     console.log("Access token expired, attempting to refresh...");
-    const refreshToken = localStorage.getItem('RE_REV2_2024');
+    const refreshToken = localStorage.getItem('refresh_token');
     console.log(refreshToken)
 
 
