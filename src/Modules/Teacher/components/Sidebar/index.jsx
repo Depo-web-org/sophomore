@@ -125,7 +125,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
        <div
                 onClick={() => setLogOutState(!LogOutState)}
-                className={`  mb-4 group p-2 w-full flex items-center gap-2 rounded-lg transition-all duration-500  px-4 lg:px-10 text-mainGray `}
+                className={`  mb-4 group p-2 w-full flex items-center gap-2 rounded-lg transition-all duration-500  px-8 lg:px-12 text-mainGray font-semibold text-lg`}
               >
                 
                 <button><IoExitOutline className="w-6 h-6 inline rotate-180" /> Logout</button>
