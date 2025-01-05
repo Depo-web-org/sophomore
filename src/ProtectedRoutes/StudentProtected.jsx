@@ -22,7 +22,6 @@ const StudentProtectedRoute = ({ children }) => {
             dispatch(logOut());
           }
         } else {
-          console.error("No refresh token found.");
           dispatch(logOut());
         }
       }
