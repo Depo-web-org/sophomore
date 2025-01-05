@@ -14,7 +14,7 @@ const LogoutModal = ({ setOpseModel }) => {
 
   // Inside your handleLogout function:
   const handleLogout = async () => {
-    const refresh_token =localStorage.getItem("RE_REV2_2024");
+    const refresh_token =localStorage.getItem("refresh_token");
     console.log(refresh_token);
     if (!refresh_token) {
       console.error("Refresh token is missing!");
@@ -27,7 +27,7 @@ const LogoutModal = ({ setOpseModel }) => {
       console.log("Logout successful:", response);
 
       // Clear localStorage and Redux store
-      localStorage.removeItem("RE_REV2_2024");
+      localStorage.removeItem("refresh_token");
       dispatch(logOut()); // Dispatch logout action
       navigate("/register");
     } catch (error) {
