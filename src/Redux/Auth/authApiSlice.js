@@ -86,6 +86,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["Auth"],
     }),
+    refreshToken: builder.mutation({
+      query: ({ refresh }) => ({
+        url: "/auth/token/refresh/",
+        method: "POST",
+        body: { refresh },
+      }),
+    }),
   }),
 });
 
@@ -98,4 +105,5 @@ export const {
   useReset_passwordMutation,
   useStudent_change_passwordMutation,
   useStudent_logoutMutation,
+  useRefreshTokenMutation
 } = authApiSlice;

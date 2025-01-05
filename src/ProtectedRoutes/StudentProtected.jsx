@@ -1,80 +1,55 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import useRole from "../Hooks/UseRole";
 import { logOut, setCredentials } from "../Redux/Auth/authSlice";
-import { apiSlice } from "../Redux/api/apiSclice";
+import { useRefreshTokenMutation } from "../Redux/Auth/authApiSlice";
 
 const StudentProtectedRoute = ({ children }) => {
-  const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
-  const { role } = useSelector((state) => state.role) || user.role;
-
-  // Manage loading and error states
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const dispatch = useDispatch();
+  const [triggerRefreshToken] = useRefreshTokenMutation();
 
   useEffect(() => {
-    if (!token && !isRefreshing) {
-      // Trigger refresh token only if no token is available
-      const refreshToken = async () => {
-        setIsRefreshing(true);
-        setHasError(false);
-
-        try {
-          // Trigger the refresh token logic automatically handled by `apiSlice`
-          const refreshResponse = await dispatch(
-            apiSlice.endpoints.refreshToken.initiate()
-          );
-
-          if (refreshResponse?.data) {
-            // Update the token and user in the store if refresh is successful
-            dispatch(
-              setCredentials({
-                token: refreshResponse.data.token,
-                user: refreshResponse.data.user,
-              })
-            );
-          } else {
-            // If refresh fails, log out
+    const refreshAccessToken = async () => {
+      if (isTokenExpired(token)) {
+        const refresh = localStorage.getItem("refresh_token");
+        if (refresh) {
+          try {
+            const data = await triggerRefreshToken({ refresh }).unwrap();
+            dispatch(setCredentials({ token: data.access, user, refresh }));
+          } catch (err) {
+            console.error("Token refresh failed:", err);
             dispatch(logOut());
-            setHasError(true);
           }
-        } catch (error) {
-          // If there is an error during refresh
+        } else {
+          console.error("No refresh token found.");
           dispatch(logOut());
-          setHasError(true);
-        } finally {
-          setIsRefreshing(false);
         }
-      };
+      }
+    };
 
-      refreshToken();
-    }
-  }, [token, isRefreshing, dispatch]);
+    refreshAccessToken();
+  }, [token, dispatch, user, triggerRefreshToken]);
 
-  if (isRefreshing) {
-    // If refreshing, show a loading state
-    return <div>Refreshing token...</div>;
-  }
 
-  if (hasError) {
-    // If there was an error refreshing, redirect to login
-    return <Navigate to="/register" />;
-  }
+  useEffect(()=>console.log("rednder"),[])
+  if (!token || user?.role !== "student") return <Navigate to="/register" />;
 
-  if (!token) {
-    // If no token is available after refresh attempt, redirect to login
-    return <Navigate to="/register" />;
-  }
-
-  if (role !== "student") {
-    // Redirect if the user is not a student
-    return <Navigate to="/NotFoundPage" />;
-  }
-
-  // If everything is fine, render child routes
   return children;
 };
 
 export default StudentProtectedRoute;
+
+
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  try {
+    const { exp } = JSON.parse(atob(token.split(".")[1]));
+    console.log(exp * 1000)
+    console.log(Date.now())
+    return Date.now() >= exp * 1000;
+  } catch (err) {
+    console.error("Invalid token format:", err);
+    return true;
+  }
+};
