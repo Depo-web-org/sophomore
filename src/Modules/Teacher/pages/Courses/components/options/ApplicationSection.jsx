@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Useoptions from "../../../../../../Hooks/Useoptions";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { IoImage } from "react-icons/io5"; // Import IoImage
+import { RiCloseFill } from "react-icons/ri"; // Import RiCloseFill
 
 const ApplicationSection = () => {
   const options = [
@@ -46,122 +46,152 @@ const ApplicationSection = () => {
     setValue,
     formState: { errors },
   } = useForm();
-  const [data, setdata] = useState([]);
+  const [uploadImage, setUploadImage] = useState(null);
+
+  // Handle image upload
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadImage(file);
+      setValue("image", file); // Manually set the file in the form state
+    }
+  };
 
   const handleFormSubmit = (data) => {
-    // Add selected options to the data array
-    const selectedOptions = Object.values(data).filter((item) => item);
-    setdata((prevData) => [...prevData, selectedOptions]);
-    reset();
+    // Log all form data, including the file
+    console.log("Form Data:", data);
+
+    // Prepare form data for backend submission
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("orderNotes", data.orderNotes);
+    formData.append("image", data.image); // Append the image file
+    options.forEach((item, index) => {
+      formData.append(`option${index}`, data[`option${index}`]);
+    });
+    // Send formData to the backend (example using fetch)
+    // fetch("https://your-backend-endpoint.com/upload", {
+    //   method: "POST",
+    //   body: formData,
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     console.log("Success:", result);
+    //     reset(); // Reset the form after successful submission
+    //     setUploadImage(null); // Clear the uploaded image
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   };
 
   return (
     <>
-      <div className="my-10 lg:my-0 lg:ms-5 h-auto ">
+      <div className="lg:ms-5 h-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <div className="w-full sm:mx-auto lg:mx-0">
-            <span className="block text-2xl lg:text-3xl font-semibold">
+          <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
+            <p className="block text-2xl lg:text-3xl font-semibold ">
               Add a new Course
-            </span>
-            <p className="text-sm text-white">Upload Thumbnail</p>
+            </p>
+            <span className="text-sm font-medium text-gray-400 my-2  ">Upload Thumbnail</span>
 
             <div
               className={`relative border-2 border-dashed rounded-lg p-6 ${
-                errors.file ? "border-red-500" : "border-gray-300"
+                errors.image ? "border-red-500" : "border-gray-300"
               }`}
             >
-              <input
-                id="file"
-                type="file"
-                className="absolute inset-0 w-full h-full opacity-0 "
-                accept="image/png, image/jpeg, image/gif"
-                {...register("file", {
-                  required: "File is required",
-                  validate: {
-                    lessThan10MB: (files) =>
-                      files[0]?.size < 10 * 1024 * 1024 ||
-                      "File size exceeds 10MB",
-                    acceptedFormats: (files) =>
-                      ["image/png", "image/jpeg", "image/gif"].includes(
-                        files[0]?.type
-                      ) || "Unsupported file format",
-                  },
-                })}
-              />
-
-              <div className="text-center">
+              <div className="flex justify-center w-full flex-col items-center pb-10 relative">
                 <img
-                  className="mx-auto h-12 w-12"
-                  src="/Add New Courses.svg"
-                  alt="add New courses"
+                  src={
+                    uploadImage
+                      ? "/images/correct.svg"
+                      : "/images/Add New Courses.svg"
+                  }
+                  alt=""
+                  className="w-auto absolute cursor-pointer mb-2"
                 />
-                <h3 className="mt-2 text-sm font-medium text-gray-900">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer"
-                  >
-                    <span>Drag and drop</span>
-                    <span className="text-indigo-600"> or browse</span>
-                    <span>to upload</span>
 
-                    <input
-                     onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setValue("file", e.target.files);
-                      }
-                    }}
-                      id="file-upload"
-                      name="file-upload"
-                      type="file"
-                      className="sr-only"
-                    />
-                  </label>
-                </h3>
-                <p className="mt-1 text-xs text-gray-500">
-                  PNG, JPG, GIF up to 10MB
-                </p>
+                <input
+                  id="Upload-Image"
+                  name="image"
+                  type="file"
+                  onChange={handleImageChange}
+                  accept="image/*"
+                  className="cursor-pointer opacity-0 z-20 py-7 mt-24"
+                  required
+                />
+                {!uploadImage && (
+                  <>
+                    <span className="mt-2">
+                      Drop Your Image Here or{" "}
+                      <span className="text-blue-600">Browse</span>
+                    </span>
+                    <span className="text-[#00000078] text-sm">
+                      Supports JPEG, PNG & Webp
+                    </span>
+                  </>
+                )}
+                {uploadImage && (
+                  <>
+                    <span className="text-emerald-600">
+                      Uploaded Successfully{" "}
+                      <IoImage className="inline mx-1" />
+                    </span>
+                    <span className="block text-gray-500 font-semibold">
+                      {uploadImage.name}
+                    </span>
+                    <div
+                      className="bg-red-600 text-white cursor-pointer rounded-md px-1 mt-2 font-semibold"
+                      onClick={() => {
+                        setUploadImage(null);
+                        document.getElementById("Upload-Image").value = "";
+                        setValue("image", null); // Clear the image value in React Hook Form
+                      }}
+                    >
+                      <span className="mx-1">Delete</span>
+                      <RiCloseFill className="text-2xl inline" />
+                    </div>
+                  </>
+                )}
               </div>
-
-              <img src className="mt-4 mx-auto max-h-40 hidden" id="preview" />
+              {errors.image && (
+                <p className="text-red-500 text-sm">{errors.image.message}</p>
+              )}
             </div>
           </div>
 
           <div
             id="options"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-5 h-auto  tracking-wide my-4"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-5 h-auto tracking-wide my-4"
           >
             {/* Form  */}
-            <div className=" ">
+            <div className="">
               <div>
                 <label
                   htmlFor="UserEmail"
-                  className=" block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Title
                 </label>
 
                 <input
-                  onChange={(eo) => {
-                    console.log(eo.target.value);
-                  }}
-                  type="username"
-                  id="username"
+                  type="text"
+                  id="title"
                   {...register("title", { required: "Title is required" })}
-                  className={`border-2 py-2.5 mt-1 w-full rounded-md shadow-sm sm:text-sm ${
-                    errors.title ? "border-red-500" : "border-gray-200"
+                  className={`border-2 py-2.5 mt-1 w-full text-gray-600 font-semibold placeholder:font-normal rounded-md shadow-sm sm:text-sm p-2 focus-within:outline-gray-200 bg-[#EFEFEF] ${
+                    errors.title ? "border-red-500" : "border-[#EFEFEF]"
                   }`}
-                  placeholder=" Title"
+                  placeholder="Title"
                 />
                 {errors.title && (
                   <p className="text-red-500 text-sm">{errors.title.message}</p>
                 )}
               </div>
 
-              <div>
+              <div className="my-4">
                 <label
                   htmlFor="OrderNotes"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Order Notes
                 </label>
@@ -170,11 +200,11 @@ const ApplicationSection = () => {
                   {...register("orderNotes", {
                     required: "Order notes are required",
                   })}
-                  className={`border-2 mt-2 w-full rounded-lg shadow-sm sm:text-sm ${
-                    errors.orderNotes ? "border-red-500" : "border-gray-200"
+                  className={`border-2 mt-2 w-full rounded-lg h-[7.5rem] shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
+                    errors.orderNotes ? "border-red-500" : "border-[#EFEFEF]"
                   }`}
                   rows="4"
-                  placeholder=" Enter any additional order notes..."
+                  placeholder="Enter any additional order notes..."
                 ></textarea>
                 {errors.orderNotes && (
                   <p className="text-red-500 text-sm">
@@ -184,13 +214,13 @@ const ApplicationSection = () => {
               </div>
             </div>
 
-            <div className=" ">
+            <div className="h-full">
               {options.map((item, index) => (
                 <div key={item.id}>
                   {/* Label */}
                   <label
                     htmlFor={`dropdown-${index}`}
-                    className="text-gray-400 font-semibold text-sm lg:text-md "
+                    className="text-gray-400 font-semibold text-sm lg:text-md"
                   >
                     {item.title}
                   </label>
@@ -198,14 +228,12 @@ const ApplicationSection = () => {
                   {/* Dropdown */}
                   <select
                     id={`dropdown-${index}`}
-                    className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border  focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
                     {...register(`option${index}`, {
                       required: "This field is required",
                     })}
                   >
-                    <option value="" selected>
-                      {item.name}
-                    </option>
+                    <option value="">{item.name}</option>
 
                     {item.opations?.map((option) => (
                       <option
@@ -231,7 +259,7 @@ const ApplicationSection = () => {
               type="submit"
               data-twe-ripple-init
               data-twe-ripple-color="light"
-              className="w-full lg:w-1/2  lg:-mt-10  rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+              className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
             >
               Continue
             </button>

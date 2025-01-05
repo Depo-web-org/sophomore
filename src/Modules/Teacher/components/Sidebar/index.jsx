@@ -1,11 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link,  useLocation } from "react-router-dom";
 
 import { HiHome } from "react-icons/hi";
 import { FaBook, FaLocationArrow } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
-import { IoCloseSharp, IoPersonSharp } from "react-icons/io5";
+import {  IoExitOutline, IoPersonSharp } from "react-icons/io5";
 import SideBarHeader from "./Components/SideBarHeader";
+import LogoutModal from "../../../Student/pages/Profile/components/Security/LogoutModal";
 
 
 const menuItems = [
@@ -34,6 +35,7 @@ const menuItems = [
 
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const [LogOutState, setLogOutState] = useState(true)
   const location = useLocation();
   const { pathname } = location;
 
@@ -82,21 +84,24 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   <>
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-[9999] flex h-screen w-72.5
+      className={`absolute left-0 top-0 z-[9999] flex h-screen w-72.5 
         flex-col overflow-y-hidden bg-white duration-300 ease-linear 
-        lg:static lg:translate-x-0 
+        lg:static lg:translate-x-0  justify-between
         ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`
+          
         }
     >
 
+      <div>
       {/* Sidebar Header with Logo */}
+
       <SideBarHeader trigger={trigger} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Sidebar Items */}
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear mt-1">
-        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+      <div className="flex flex-col overflow-y-auto duration-300 ease-linear mt-1  ">
+        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6 ">
           <ul onClick={() => setSidebarOpen(false)}  className="mb-6 flex flex-col gap-5">
    
             {menuItems.map((item, index) => (
@@ -117,8 +122,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </ul>
         </nav>
       </div>
-
+      </div>
+       <div
+                onClick={() => setLogOutState(!LogOutState)}
+                className={`  mb-4 group p-2 w-full flex items-center gap-2 rounded-lg transition-all duration-500  px-8 lg:px-12 text-mainGray font-semibold text-lg`}
+              >
+                
+                <button><IoExitOutline className="w-6 h-6 inline rotate-180" /> Logout</button>
+              </div>
     </aside>
+    <div className="bg-emerald-600">
+      {LogOutState && <LogoutModal setOpseModel={setLogOutState} />}
+
+      </div>
              <div  onClick={() => setSidebarOpen(false)} className={`absolute top-0 left-0 z-[9998]  ${sidebarOpen ? " w-full translate-x-0" : "-translate-x-full"     }   h-full `}> </div>
   </>
   );
