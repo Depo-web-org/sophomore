@@ -41,7 +41,6 @@ export default function Login({ toggleForm }) {
       const response = await login({ userData, role }).unwrap();
 
       if (response) {
-        console.log("Login successful:", response);
 
         // Encrypt the refresh token and store it
         const encryptedRe = CryptoJS.AES.encrypt(
@@ -101,7 +100,6 @@ export default function Login({ toggleForm }) {
       const enCodedMail = encodeEmail(data.loginMail);
       navigate(`/register/reset-password/${enCodedMail}`);
     } catch (error) {
-      console.error("Login Error:", error?.data?.message);
       setErrorMessage(error?.data?.message);
       setUserEmail(data.loginMail);
       // Handle errors here

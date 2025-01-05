@@ -81,7 +81,6 @@ const [errorOtp, setErrorOtp] = useState(null)
       setResendOTPModal(false);
       setIsResendDisabled(true);
       await resendOtp({ email, role }).unwrap().then(()=>  setTimeLeft(60));
-      console.log('Successfully sent');
     } catch (err) {
 
         err.data.message === "Your account has already been verified. Please go to the login page." ? setStatusOfAccount("Your account has already been verified") : setStatusOfAccount(null)

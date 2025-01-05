@@ -22,9 +22,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error?.status==403 ||result?.error?.status=== 'FETCH_ERROR') {
-    console.log("Access token expired, attempting to refresh...");
     const refreshToken = localStorage.getItem('refresh_token');
-    console.log(refreshToken)
 
 
 
@@ -54,11 +52,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         result = await baseQuery(args, api, extraOptions);
       } else {
         console.error("Failed to refresh token. Logging out...");
-        // api.dispatch(logOut());
+        api.dispatch(logOut());
       }
     } else {
       console.error("No refresh token available. Logging out...");
-      // api.dispatch(logOut());
+      api.dispatch(logOut());
     }
   }
 

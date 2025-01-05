@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { FaCheck, FaRegEyeSlash } from "react-icons/fa";
 import Alert from "../Alerts/Alert";
 import { FaRegEye } from "react-icons/fa6";
-import { useStudent_change_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { useSelector } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
 
@@ -13,7 +13,6 @@ export default function Security() {
 
   const [showAlert, setShowAlert] = useState(false);
   const role = useSelector((state) => state.role.role);
-  console.log(role);
 
   const {
     register,
@@ -31,15 +30,9 @@ export default function Security() {
   };
 
   const [changePassword, { isLoading, isError, error }] =
-    useStudent_change_passwordMutation();
-  console.log(error);
+  useChange_passwordMutation();
 
   const onSubmit = async (data) => {
-    if (data.new_password !== data.confirm_password) {
-      console.log("Passwords do not match!");
-      return;
-    }
-
 
     const infos = {
       old_password: data.old_password,
@@ -49,7 +42,6 @@ export default function Security() {
     try {
       const response = await changePassword({ data: infos, role }).unwrap();
 
-      console.log("Password change successful:", response);
 
       handleShowAlert();
       reset();

@@ -1,21 +1,21 @@
 import React from "react";
-import { useStudent_logoutMutation } from "../../../../../../Redux/Auth/authApiSlice";
+import { useLogoutMutation } from "../../../../../../Redux/Auth/authApiSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../../../../Redux/Auth/authSlice";
 import { ImSpinner9 } from "react-icons/im";
 
 const LogoutModal = ({ setOpseModel }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {role} = useSelector((state)=>state.role)
 
   const [student_logout, { isLoading, isError, error }] =
-    useStudent_logoutMutation();
+  useLogoutMutation();
 
   // Inside your handleLogout function:
   const handleLogout = async () => {
     const refresh_token =localStorage.getItem("refresh_token");
-    console.log(refresh_token);
     if (!refresh_token) {
       console.error("Refresh token is missing!");
       return;
@@ -23,7 +23,7 @@ const LogoutModal = ({ setOpseModel }) => {
 
     // Try to log out
     try {
-      const response = await student_logout({ refresh_token }).unwrap();
+      const response = await student_logout({ refresh_token, role }).unwrap();
       console.log("Logout successful:", response);
 
       // Clear localStorage and Redux store

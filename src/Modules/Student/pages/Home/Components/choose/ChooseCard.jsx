@@ -37,9 +37,9 @@ const ChooseCard = () => {
           return (
             <div
               key={item.id}
-              className="sm:h-60 xl:h-auto w-full flex-initial sm:flex-auto md:flex-1 rounded-md   bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8"
+              className="sm:h-60 xl:h-auto w-full flex-initial sm:flex-auto md:flex-1 rounded-md   bg-white cursor-pointer flex  flex-col items-center  justify-center  lg:gap-y-5 py-6 px-4 xl:py-14 xl:px-8 hover:shadow-[4px_4px_0px_0px_#F15C54]"
             >
-              <div>
+              <div className="choose-icon" >
                 <img
                   src={item.img}
                   alt={item.Name}

@@ -22,6 +22,10 @@ export default {
         "custom-md": "calc(100% - 124px)",
         "custom-xl": "80%",
       },
+      rotate: {
+        '-90': '-90deg',
+        '90': '90deg',
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],

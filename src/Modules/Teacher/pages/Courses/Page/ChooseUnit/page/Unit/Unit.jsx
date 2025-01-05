@@ -3,6 +3,7 @@ import GoBack from "../../../../components/GoBack";
 import { useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { RiCloseFill } from "react-icons/ri";
+import { useForm } from "react-hook-form";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -16,71 +17,81 @@ function Button({ classButton, events, title, type }) {
 
 const Unit = () => {
   const { unit } = useParams();
-  const [uploadedVideo, setUploadedVideo] = useState();
-  const [uploadedPDF, setUploadedPDF] = useState();
+  const [uploadedVideo, setUploadedVideo] = useState(null);
+  const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
-  const [video, setVideo] = useState(true);
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const video = form.video.files[0];
-    const pdf = form.pdf.files[0];
-    const title = form.title.value;
-    const description = form.description.value;
 
-    if (!video || !pdf) {
-      setMessage("Both video and PDF files are required!");
-      return;
-    }
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-    const formData = new FormData();
-    formData.append("video", video);
-    formData.append("pdf", pdf);
-    formData.append("title", title);
-    formData.append("description", description);
-
-    setUploading(true);
-    setMessage("Uploading...");
-    try {
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to upload files");
-      }
-
-      const result = await response.json();
-      setMessage("Upload successful!");
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
-    } finally {
-      setUploading(false);
-    }
-  };
+  // Handle video upload
   const handleVideoChange = (event) => {
     const video = event.target.files[0];
     setUploadedVideo(video);
+    setValue("video", video); // Manually set the video file in the form state
   };
 
+  // Handle PDF upload
   const handlePDFChange = (event) => {
     const pdf = event.target.files[0];
     setUploadedPDF(pdf);
+    setValue("pdf", pdf); // Manually set the PDF file in the form state
   };
+
+  // Handle form submission
+  const handleFormSubmit = async (data) => {
+    if (!data.video || !data.pdf) {
+      setMessage("Both video and PDF files are required!");
+      return;
+    }
+console.log(data)
+    const formData = new FormData();
+    formData.append("video", data.video);
+    formData.append("pdf", data.pdf);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+
+    setUploading(true);
+    setMessage("Uploading...");
+
+    // Example: Send formData to the backend
+    // try {
+    //   const response = await fetch("/api/upload", {
+    //     method: "POST",
+    //     body: formData,
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error("Failed to upload files");
+    //   }
+
+    //   const result = await response.json();
+    //   setMessage("Upload successful!");
+    // } catch (error) {
+    //   setMessage(`Error: ${error.message}`);
+    // } finally {
+    //   setUploading(false);
+    // }
+  };
+
   return (
     <div>
       {/* Head */}
 
       {/* Body */}
       <div className="flex w-full items-start flex-col">
-        <form onSubmit={handleFormSubmit} className="w-full">
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
             <GoBack title={unit} />
-            <div className=" flex  gap-x-2">
-              <div className="flex items-center j">
-                <button className="bg-primary hover:bg-secondary text-nowrap  py-2 px-2 text-white rounded-md transition-all duration-300">
+            <div className="flex gap-x-2">
+              <div className="flex items-center">
+                <button className="bg-primary hover:bg-secondary text-nowrap py-2 px-2 text-white rounded-md transition-all duration-300">
                   <Link to={`/teacherpanel/courses/chooseunit/${unit}/test`}>
                     Add Unit Test
                   </Link>
@@ -94,7 +105,9 @@ const Unit = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4 ">
+
+          {/* Title Input */}
+          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
             <label
               htmlFor="title"
               className="text-base font-normal text-[#00000078]"
@@ -103,12 +116,17 @@ const Unit = () => {
             </label>
             <input
               id="title"
-              name="title"
               type="text"
+              {...register("title", { required: "Title is required" })}
               className="bg-[#E8E8E8] min-h-[51px] rounded-lg outline-none ring-0 py-1 px-2"
-              required
             />
+            {errors.title && (
+              <p className="text-red-500 text-sm">{errors.title.message}</p>
+            )}
+          </div>
 
+          {/* Description Input */}
+          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
             <label
               htmlFor="description"
               className="text-base font-normal text-[#00000078]"
@@ -117,14 +135,18 @@ const Unit = () => {
             </label>
             <textarea
               id="description"
-              name="description"
+              {...register("description", {
+                required: "Description is required",
+              })}
               className="bg-[#E8E8E8] h-36 rounded-lg outline-none ring-0 py-1 px-2"
-              required
             />
+            {errors.description && (
+              <p className="text-red-500 text-sm">{errors.description.message}</p>
+            )}
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between gap-x-8 gap-y-4 ">
-            {/* Upload Video */}
+          {/* Upload Video */}
+          <div className="flex flex-col lg:flex-row justify-between gap-x-8 gap-y-4">
             <div className="w-full">
               <label htmlFor="Upload-Video" className="text-[#00000078] py-4">
                 Upload Video :
@@ -138,7 +160,6 @@ const Unit = () => {
                   />
                   <input
                     id="Upload-Video"
-                    name="video"
                     type="file"
                     onChange={handleVideoChange}
                     accept="video/*"
@@ -155,7 +176,7 @@ const Unit = () => {
 
               {/* Display uploaded video */}
               {uploadedVideo && (
-                <div className="w-full h-32 mt-4 flex items-start  flex-col">
+                <div className="w-full h-32 mt-4 flex items-start flex-col">
                   <div className="bg-[#4B5563] relative w-28 h-24 text-white flex items-center justify-center rounded-2xl">
                     <FaPlay className="text-4xl" />
                     <div
@@ -163,17 +184,17 @@ const Unit = () => {
                       onClick={() => {
                         setUploadedVideo(null);
                         document.getElementById("Upload-Video").value = "";
+                        setValue("video", null); // Clear the video value in React Hook Form
                       }}
                     >
                       <RiCloseFill className="text-2xl" />
                     </div>
                   </div>
-                  <span className=" font-bold text-sm mt-2">
+                  <span className="font-bold text-sm mt-2">
                     {uploadedVideo.name}
                   </span>
                 </div>
               )}
-              {/* Check If Video Uploaded or not */}
             </div>
 
             {/* Upload PDF */}
@@ -193,7 +214,6 @@ const Unit = () => {
                   />
                   <input
                     id="Upload-Material"
-                    name="pdf"
                     type="file"
                     onChange={handlePDFChange}
                     accept="application/pdf"
@@ -208,35 +228,35 @@ const Unit = () => {
                 </div>
               </div>
 
-              {/* Display uploaded video */}
+              {/* Display uploaded PDF */}
               {uploadedPDF && (
-                <div className="w-full h-32 mt-4 flex items-start  flex-col">
+                <div className="w-full h-32 mt-4 flex items-start flex-col">
                   <div className="relative w-28 h-24 text-white flex items-center justify-center rounded-2xl">
                     <img
                       src="/images/Video/pdfIcon.svg"
                       alt=""
                       className="w-auto absolute cursor-pointer"
                     />
-
                     <div
                       className="bg-red-600 rounded-full absolute -top-2 -right-2 cursor-pointer"
                       onClick={() => {
                         setUploadedPDF(null);
                         document.getElementById("Upload-Material").value = "";
+                        setValue("pdf", null); // Clear the PDF value in React Hook Form
                       }}
                     >
                       <RiCloseFill className="text-2xl" />
                     </div>
                   </div>
-                  <span className=" font-bold text-sm mt-2">
+                  <span className="font-bold text-sm mt-2">
                     {uploadedPDF.name}
                   </span>
                 </div>
               )}
-              {/* Check If Video Uploaded or not */}
             </div>
           </div>
 
+          {/* Display message */}
           {message && (
             <p
               className={`mt-4 ${

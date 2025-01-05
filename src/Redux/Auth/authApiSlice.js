@@ -68,23 +68,29 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-    student_change_password: builder.mutation({
-      query: ({ data }) => ({
-        url: "/auth/change-password/student/",
+    change_password: builder.mutation({
+      query: ({ data, role  }) => ({
+        url: `/auth/change-password/${role}/`,
         method: "POST",
         body: data,
       }),
     }),
-    student_logout: builder.mutation({
-      query: (refresh_token) => {
-        console.log("data from logout slice", refresh_token);
+    logout: builder.mutation({
+      query: ({refresh_token, role}) => {
         return {
-          url: "/auth/logout/student/",
+          url: `/auth/logout/${role}/`,
           method: "POST",
-          body: refresh_token,
+          body: {refresh_token},
         };
       },
       invalidatesTags: ["Auth"],
+    }),
+    refreshToken: builder.mutation({
+      query: ({ refresh }) => ({
+        url: "/auth/token/refresh/",
+        method: "POST",
+        body: { refresh },
+      }),
     }),
   }),
 });
@@ -96,6 +102,7 @@ export const {
   useVerify_emailMutation,
   useResend_otpMutation,
   useReset_passwordMutation,
-  useStudent_change_passwordMutation,
-  useStudent_logoutMutation,
+  useChange_passwordMutation,
+  useLogoutMutation,
+  useRefreshTokenMutation
 } = authApiSlice;

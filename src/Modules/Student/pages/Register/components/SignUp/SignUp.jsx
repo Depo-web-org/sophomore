@@ -25,7 +25,6 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
   const [signup, { isLoading, isError, error }] = useSignupMutation();
-  console.log(error?.data?.message);
 
   const {
     register,
@@ -73,7 +72,6 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     }
   };
 
-  console.log(role);
   return (
     <div className="min-h-[calc(100vh-112px)]  flex flex-col gap-8 lg:gap-12 justify-between w-full  pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full 2xl:w-4/5 ml-auto ">
