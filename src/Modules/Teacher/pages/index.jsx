@@ -16,6 +16,7 @@ const IndexTeacher = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
+  // git data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,14 +35,14 @@ const IndexTeacher = () => {
 
     fetchData();
   }, []);
-
+  // hook form
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
+  //  add items
   const handleFormSubmit = (formData) => {
     const selectedData = [
       selectedSchool?.id || "",
@@ -58,14 +59,13 @@ const IndexTeacher = () => {
     }
   };
 
+  // Send Data
   const handleSendData = async () => {
     if (data.length === 0) {
       setShowAlertError(true);
-
     } else {
-
       setLoading(true);
-      
+
       const access_token = localStorage.getItem("access_token");
 
       try {
@@ -79,15 +79,16 @@ const IndexTeacher = () => {
           }
         );
 
-        console.log( data);
+        console.log(data);
         console.log(response.data);
         setShowAlert(true);
 
+        navigate("/Teacherdocs")
+      
+
       } catch (error) {
-
-        console.error("Error sending data:", error);
+        console.error("Error sending data:", error); 
         setShowAlertError(true);
-
       } finally {
         setLoading(false);
         setShowAlert(false);
@@ -98,10 +99,12 @@ const IndexTeacher = () => {
     }
   };
 
+  // Remove Badge
   const handleRemoveBadge = (item) => {
     setData((prevData) => prevData.filter((d) => d !== item));
   };
 
+  // SchoolChange
   const handleSchoolChange = (e) => {
     const school = SchoolCategories.find(
       (school) => school.id === parseInt(e.target.value)
@@ -119,6 +122,7 @@ const IndexTeacher = () => {
 
   return (
     <div className="relative w-full h-screen">
+      
       <img
         src="/images/Teacher/Teacher panel.svg"
         alt="Teacher"
@@ -128,13 +132,9 @@ const IndexTeacher = () => {
       <div className="relative z-10 pt-28 lg:pt-32 text-center">
         <TopText name="Welcome Mohamed" title="Please Upload Your Papers" />
         {data.map((item, index) => {
-          const school = SchoolCategories.find(
-            (school) => school.id === item[0]
-          );
+          const school = SchoolCategories.find((school) => school.id === item[0]);
           const grade = school?.grades.find((grade) => grade.id === item[1]);
-          const subject = grade?.subjects.find(
-            (subject) => subject.id === item[2]
-          );
+          const subject = grade?.subjects.find((subject) => subject.id === item[2]);
           return (
             <div key={index}>
               <span className="m-1 bg-[#24386d] text-white inline-flex items-center gap-x-2 py-1.5 ps-3 pe-2 rounded-full text-sm font-medium">
@@ -229,7 +229,7 @@ const IndexTeacher = () => {
           <div>
             <button
               type="submit"
-              className="me-10 rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+              className="capitalize me-10 rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
             >
               Add Another
             </button>
@@ -275,6 +275,8 @@ const IndexTeacher = () => {
           setShowAlert={setShowAlertError}
         />
       )}
+
+
     </div>
   );
 };
