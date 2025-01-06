@@ -93,7 +93,7 @@ export default function Security() {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[calc(100%-10%)] lg:w-[calc(100%-40%)] container m-auto min-h-96 "
+        className="w-full md:w-4/5 lg:w-3/5 m-auto min-h-96 mt-8"
       >
         {/*first email */}
         <div className="relative border-b py-5">
