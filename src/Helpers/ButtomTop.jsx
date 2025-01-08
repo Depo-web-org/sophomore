@@ -31,9 +31,9 @@ const ButtomTop = () => {
           });
         }}
        
-        className="  fixed bottom-10 right-10 z-50 flex justify-center items-center shadow-2xl  shadow-black cursor-pointer bg-white border border-gray-200 p-2 rounded-2xl">
+        className="  fixed bottom-10 right-10 z-50 flex justify-center items-center shadow-2xl  shadow-black cursor-pointer bg-white border border-gray-200 p-2 rounded-3xl">
         
-        <FaLocationArrow    className="text-primary -rotate-45 text-lg lg:size-8 font-bold" />
+        <FaLocationArrow className="text-primary -rotate-45 text-lg lg:size-7 font-bold" />
       </div>
       )}
     </>
