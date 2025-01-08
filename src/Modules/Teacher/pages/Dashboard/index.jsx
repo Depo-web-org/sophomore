@@ -12,7 +12,7 @@ export default function Dashboard() {
       <Statistics />
       <CourseManagement />
       <div className="flex flex-col xl:flex-row items-start w-full justify-between gap-8">
-        <div className="flex flex-wrap lg:flex-col items-start justify-start gap-8 w-full xl:w-[25%] ">
+        <div className="flex flex-wrap lg:flex-col items-start justify-start gap-8 w-full xl:w-1/4 ">
           <Activity />
           <QuickAction Text={'Upload a new course'}/>
         </div>

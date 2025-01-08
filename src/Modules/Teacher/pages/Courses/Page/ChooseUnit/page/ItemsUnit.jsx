@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import GoBack from '../../../components/GoBack';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SubmitUnitsModel from './components/SubmitUnitsModel';
 
 const units = [
@@ -20,13 +20,16 @@ const units = [
 
 const ItemsUnit = () => {
   const [modelOpen, setModelOpen] = useState()
+  const location = useLocation();
+  
   return (
     <>
       <div className=" w-full">
 
         
         {/* Head Title */}
-        <GoBack  title={"Choose Unit"}/>
+        {/* location.pathname.split('/')[3]=== 'editUnit' ? "Edit Units" :"Choose Unit" */}
+        <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Units" :"Choose Units"}/>
 
         <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2  my-8 w-full ">
           {units.map((i, index) => {
@@ -42,6 +45,7 @@ const ItemsUnit = () => {
             );
           })}
         </div>
+        
         {/* Submit Button  */}
         <div className="w-full  flex items-center justify-end">
           <button onClick={()=>setModelOpen(true)} className="bg-primary py-2 px-10 text-white rounded-md">

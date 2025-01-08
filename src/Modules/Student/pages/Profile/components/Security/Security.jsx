@@ -8,6 +8,7 @@ import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApi
 import { useSelector } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
 import useFetch from "../../../../../../Hooks/UseFetch";
+import useChangePassword from "../../../../../../Hooks/UseChangePassword";
 
 export default function Security() {
   const { data } = useFetch(
@@ -32,27 +33,12 @@ export default function Security() {
     }, 3000);
   };
 
-  const [changePassword, { isLoading, isError, error }] =
-  useChange_passwordMutation();
+  // Hook For Change Password
+  const { submitChangePassword, isLoading, isError } = useChangePassword({ role,handleShowAlert,reset,});
 
-  const onSubmit = async (data) => {
-    const refresh_token = localStorage.getItem('refresh_token');
-    const infos = {
-      old_password: data.old_password,
-      new_password: data.new_password,
-      confirm_password: data.confirm_password,
-      refresh_token,
-    };
-    console.log(infos)
-    try {
-      const response = await changePassword({ data: infos, role }).unwrap();
+  // Submit
+  const onSubmit = (data) => submitChangePassword(data);
 
-      handleShowAlert();
-      reset();
-    } catch (err) {
-      console.error("Error changing password:", err);
-    }
-  };
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);

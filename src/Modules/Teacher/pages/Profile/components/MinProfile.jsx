@@ -3,9 +3,9 @@ import { IoCamera } from "react-icons/io5";
 
 const MinProfile = () => {
   return (
-    <div className="mx-5 lg:pe-20 ">
+    <div className="mx-5 lg:pe-20   ">
       {/* form */}
-      <div className="flex flex-col sm:flex-row items-center mb-4 lg:my-5 lg:w-[calc(100%-30%)] ms-auto">
+      {/* <div className="flex flex-col sm:flex-row items-center mb-4 lg:my-5 lg:w-[calc(100%-30%)] ms-auto">
         
 
         <label
@@ -22,12 +22,12 @@ const MinProfile = () => {
 
         
         </label>
-      </div>
-      <hr className="ms-auto lg:w-[70%]" />
+      </div> */}
+      <hr className="ms-auto lg:w-[70%] " />
 
       {/* last section */}
 
-      <div className="h-36 my-2 lg:w-[70%] ms-auto flex  flex-col ">
+      <div className="h-36 my-2 lg:w-3/4 ms-auto flex  flex-col  ">
         <div className=" text-center lg:text-right py-1 cursor-pointer order-2 lg:order-1 ">
           <pre className=" text-gray-400 font-light hover:text-black duration-700 ">
         

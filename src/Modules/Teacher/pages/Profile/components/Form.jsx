@@ -4,45 +4,41 @@ import { useChange_passwordMutation } from "../../../../../Redux/Auth/authApiSli
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { ImSpinner9 } from "react-icons/im";
 import { useSelector } from "react-redux";
+import Alert from "../../../../Student/pages/Profile/components/Alerts/Alert";
+import useChangePassword from "../../../../../Hooks/UseChangePassword";
 
 const Form = () => {
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    reset,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const [changePassword, { isLoading, isError, error }] =
-    useChange_passwordMutation();
+  const { register, handleSubmit, getValues,reset, watch,formState: { errors },} = useForm();
   const role = useSelector((state) => state.role.role);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-
-  const onSubmit = async (data) => {
-    const infos = {
-      old_password: data.old_password,
-      new_password: data.new_password,
-      confirm_password: data.confirm_password,
-    };
-    try {
-      const response = await changePassword({ data: infos, role }).unwrap();
-      console.log("Password changed successfully:", response);
-      reset(); // Reset the form after successful submission
-    } catch (err) {
-      console.error("Error changing password:", err);
-    }
+  const handleShowAlert = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
   };
 
-  // Watch the new password field to compare with retype new password
-  const newPassword = watch("newPassword");
+  // Hook For Change Password
+  const { submitChangePassword, isLoading, isError } = useChangePassword({ role,handleShowAlert,reset,});
+
+  // Submit
+  const onSubmit = (data) => submitChangePassword(data);
+
 
   return (
     <div className="lg:w-[calc(70%)] min-h-96 sm:ms-auto my-4 lg:my-16 sm:mt-10 px-5 lg:px-0 ">
+       <Alert
+        Name="Password changed successfully!"
+        title={"Your password has been updated successfully."}
+        color={"text-green-600"}
+        showAlert={showAlert}
+        setShowAlert={setShowAlert}
+      />
       {/* Email Input */}
       <div className="md:pr-24 flex flex-col sm:flex-row items-center gap-4">
         <label
