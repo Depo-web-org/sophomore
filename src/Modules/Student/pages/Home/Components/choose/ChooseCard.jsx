@@ -46,11 +46,11 @@ const ChooseCard = () => {
                   className="size-16 md:size-20 xl:size-32  rounded-md"
                 />
               </div>
-              <div className="text-sm sm:text-sm xl:text-lg font-normal text-center">
+              <div className=" min-h-24 text-sm sm:text-sm xl:text-lg font-normal text-center">
                 <p className="leading-[18.75px]  py-1 text-black font-semibold">
                   {item.Name}
                 </p>
-                <p className="leading-[16.41px]  pt-1 text-[#0000007D] mx-10 lg:mx-0">
+                <p className="leading-[16.41px] font-medium pt-1 text-[#0000007D] mx-10 lg:mx-0">
                   {item.dec}
                 </p>
               </div>

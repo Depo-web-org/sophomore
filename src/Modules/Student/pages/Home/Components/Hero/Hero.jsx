@@ -18,7 +18,8 @@ const Hero = () => {
 
       <div className="lg:mt-8 xl:mt-4 flex flex-wrap justify-center gap-4">
         <Link
-          className="block w-full rounded bg-white mx-2  px-12 py-3 text-sm font-medium text-primary hover:bg-opacity-95 sm:w-auto"
+          className="block w-full rounded bg-white mx-2  px-12 py-3 text-sm font-semibold
+         text-primary hover:bg-opacity-70 hover:scale-95 duration-700 sm:w-auto"
           to="about"
         >
           Learn More
