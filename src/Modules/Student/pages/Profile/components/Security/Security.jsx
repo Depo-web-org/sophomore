@@ -36,15 +36,16 @@ export default function Security() {
   useChange_passwordMutation();
 
   const onSubmit = async (data) => {
-
+    const refresh_token = localStorage.getItem('refresh_token');
     const infos = {
       old_password: data.old_password,
       new_password: data.new_password,
       confirm_password: data.confirm_password,
+      refresh_token,
     };
+    console.log(infos)
     try {
       const response = await changePassword({ data: infos, role }).unwrap();
-
 
       handleShowAlert();
       reset();

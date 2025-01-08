@@ -2,16 +2,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setCredentials } from "../Auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://192.168.1.26:8000/api/v1",
+   // baseUrl: "http://192.168.1.26:8000/api/v1",
+   baseUrl: "https://auth-lms.next.depowebeg.com/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState, endpoint }) => {
     const token = getState().auth.token;
-
-    // Add Authorization header for all requests except login and logout
-    if (token && endpoint !== "/auth/login/student") {
+    // Add Authorization header for all requests except login , logout and Change Password 
+    if (token && endpoint !== "/auth/login/student" && endpoint !==('logout') &&  endpoint !== ('change_password')) {
       headers.set("authorization", `Bearer ${token}`);
     }
-
     return headers;
   },
 });
@@ -23,9 +22,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   if (result?.error?.status==403 ||result?.error?.status=== 'FETCH_ERROR') {
     const refreshToken = localStorage.getItem('refresh_token');
-
-
-
     if (refreshToken) {
       // Attempt to refresh the access token
       const refreshResult = await baseQuery(

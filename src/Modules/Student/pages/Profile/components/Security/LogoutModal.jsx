@@ -20,12 +20,9 @@ const LogoutModal = ({ setOpseModel }) => {
       console.error("Refresh token is missing!");
       return;
     }
-
     // Try to log out
     try {
       const response = await student_logout({ refresh_token, role }).unwrap();
-      console.log("Logout successful:", response);
-
       // Clear localStorage and Redux store
       localStorage.removeItem("refresh_token");
       dispatch(logOut()); // Dispatch logout action
