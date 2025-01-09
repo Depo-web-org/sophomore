@@ -1,12 +1,18 @@
 import logo from "/images/logos/logo.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./style.css";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserInformation } from "../../Redux/ UserInformation/ UserInformationSlice";
 
 const Navbar = () => {
+
+  const dispatch = useDispatch();
+  // Get User Information 
+  const { data, status, error } = useSelector((state) => state.userInformation);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -33,6 +39,12 @@ const Navbar = () => {
   }, [token, role]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchUserInformation());
+    }
+  }, [dispatch, status]);
+
 
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
@@ -77,7 +89,7 @@ const Navbar = () => {
                 className="ml-3 overflow-hidden rounded-full border border-gray-300 shadow-inner"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src={data?.profile}
                   alt="profile avatar"
                   className="size-8 object-cover"
                 />
@@ -139,7 +151,7 @@ const Navbar = () => {
                 className=" font-semibold text-primary flex items-end gap-2"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                   src={data?.profile}
                   alt="profile avatar"
                   className="size-8 object-cover rounded-full"
                 />

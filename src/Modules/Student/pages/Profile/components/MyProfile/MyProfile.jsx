@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { BsFillCameraFill } from "react-icons/bs";
 import useFetch from "../../../../../../Hooks/UseFetch";
+import { fetchUserInformation } from "../../../../../../Redux/ UserInformation/ UserInformationSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function MyProfile() {
-  const { data } = useFetch(
-      "https://os1907.github.io/Schools/Profile/Profile.json"
-    );
+  // const { data } = useFetch(
+  //     "https://os1907.github.io/Schools/Profile/Profile.json"
+  //   );
+
+
+  // Get User Information 
+  const { data, status, error } = useSelector((state) => state.userInformation);
+
   const [profileImage, setProfileImage] = useState(
     data?.profile || null);
-
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -22,16 +28,61 @@ export default function MyProfile() {
       {/* first section */}
       <div className="w-full min-h-40 ">
         {/* cover */}
-        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
-          {/* Image */}
+        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg mb-40">
+
+
+
+
+
+        <div className=" flex flex-col  lg:flex-row justify-center items-center absolute -bottom-[75%] lg:-bottom-[45%]   left-1/2 -translate-x-1/2 xl:translate-x-0  xl:left-[5%] w-full   ">
           <img
-            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
+            className="border-2 border-white w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
             src={data?.profile}
             alt="profile"
           />
-        </div>
-        <div className="px-1 lg:px-8">
+          <div className="flex flex-col lg:flex-row justify-between  items-center lg:flex-1 xl:mr-[5%]   ">
           {/* section Name */}
+          <div className="relative sm:px-4 pt-4     ">
+              <div className="w-full text-center lg:text-start text-nowrap">
+                <p className="font-bold text-white lg:text-lg">{data?.name}</p>
+                <span className="text-mainGray text-xs lg:text-sm ">Update your Passwords</span>
+              </div>
+             
+          </div>
+          <button
+                type="button"
+                className="rounded bg-primary  text-xs lg:text-base font-semibold text-white  px-5 py-3 mt-2 xl:mt-8 w-full lg:w-auto "
+              >
+                Save
+              </button>
+        </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          {/* Image */}
+          {/* <img
+            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
+            src={data?.profile}
+            alt="profile"
+          /> */}
+        </div>
+
+        {/* <div className="px-1 lg:px-8">
           <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
               <div className="w-full text-center lg:text-start">
@@ -49,8 +100,18 @@ export default function MyProfile() {
               </button>
             </div>
           </div>
-        </div>
+
+        </div> */}
+
+
+
+        
       </div>
+
+
+
+
+
       <div className="px-1 lg:px-8">
         {/* form */}
         <div className="   flex flex-col sm:flex-row items-center mb-5 lg:w-[70%] ms-auto border-b border-gray-50 pb-2">
