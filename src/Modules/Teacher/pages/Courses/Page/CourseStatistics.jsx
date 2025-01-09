@@ -9,17 +9,17 @@ import { TbEdit } from "react-icons/tb";
 export default function CourseStatistics() {
   return (
     <>
-      <div className="grid grid-cols-1   gap-8 gap-y-4 w-full ">
+      <div className="grid grid-cols-1   gap-8 gap-y-4 w-full bgred ">
         {statisticsData
-          .filter((i) => i.title != "Completed Tasks")
+          .filter((i) => i.title != "Total Profit")
           .map((item, index) => (
         <StatisticCard
           style={
-            "flex justify-center items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
+            "flex justify-start items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
           }
           key={index}
-              image={item.image}
-              title={item.title}
+            image={item.image}
+            title={item.title}
               stats={item.stats}
             />
           ))}
@@ -60,7 +60,7 @@ const AllCourses = () => {
 
   return (
     <div className="w-full lg:w-4/5  bg-white rounded-3xl py-4 ">
-      <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between pb-4">
+      <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between pb-4 px-4">
         <p className=" text-base md:text-lg lg:text-3xl font-semibold text-start py-4 text-black ">
           All Course
         </p>
@@ -106,7 +106,7 @@ const AllCourses = () => {
                   {course.status}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <Link to={"chooseunit"} 
+                  <Link to={"editUnit"} 
                   className="text-primary  text-2xl cursor-pointer ">  
                     <TbEdit />                                  
                   </Link>

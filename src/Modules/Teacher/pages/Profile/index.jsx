@@ -6,15 +6,16 @@ import Profile from "./components/Profile";
 const TeacherProfile = () => {
   return (
     <>
-      {/* Profile */}
-      <Profile />
-      <div className="conatiner">
+     <div className="min-h-screen">
+       {/* Profile */}
+       <Profile />
+      <div >
         {/* MinProfile */}
         <MinProfile />
-
         {/* form */}
         <Form />
       </div>
+     </div>
     </>
   );
 };

@@ -343,6 +343,8 @@ import TeacherProtectedRoute from "./ProtectedRoutes/TeacherProtectedRoute";
 import VerifyAccount from "./Modules/Student/pages/Register/components/VerifyAccount/VerifyAccount";
 import NotFound from "./Modules/Student/pages/404/NotFound";
 import { useSelector } from "react-redux";
+import EditUnit from "./Modules/Teacher/pages/Courses/Page/EditUnit/Index";
+import EditSpecificUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditSpecificUnit/EditSpecificUnit";
 
 function AppRoutes() {
   return (
@@ -475,22 +477,8 @@ function AppRoutes() {
               </TeacherProtectedRoute>
             }
           />
-          <Route
-            path="courses"
-            element={
-              <TeacherProtectedRoute>
-                <Courses />
-              </TeacherProtectedRoute>
-            }
-          >
-            <Route
-              element={
-                <TeacherProtectedRoute>
-                  <CourseStatistics />
-                </TeacherProtectedRoute>
-              }
-              index
-            />
+          <Route  path="courses"  element={  <TeacherProtectedRoute>      <Courses />  </TeacherProtectedRoute>  }   >
+            <Route element={  <TeacherProtectedRoute>     <CourseStatistics /> </TeacherProtectedRoute>      }    index />
             <Route
               path="addnewcourse"
               element={
@@ -507,6 +495,18 @@ function AppRoutes() {
               <Route path=":unit" element={<Unit />} />
               <Route path=":unit/test" element={<Test />} />
             </Route>
+
+
+                  {/* Edit Unit */}
+            <Route path="editUnit" element={<EditUnit />}>
+              <Route index element={<ItemsUnit />} />
+              <Route path=":unit" element={<EditSpecificUnit />} />
+              <Route path=":unit/test" element={<Test />} />
+            </Route>
+
+
+
+
           </Route>
           <Route path="students" element={<Students />}>
             <Route element={<StudentStatistics />} index />

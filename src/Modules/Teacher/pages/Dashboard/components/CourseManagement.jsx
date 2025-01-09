@@ -1,30 +1,30 @@
 import React from "react";
 import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
+const courses = [
+  {
+    name: "Introduction to math",
+    dob: "Jan 12 , 2024",
+    enrollment: "500",
+    status: "Active",
+  },
+  {
+    name: "Introduction to math",
+    dob: "Jan 12 , 2024",
+    enrollment: "500",
+    status: "Active",
+  },
+  {
+    name: "Introduction to math",
+    dob: "Jan 12 , 2024",
+    enrollment: "500",
+    status: "Active",
+  },
+];
 
 export default function CourseManagement() {
   // Array of objects representing course details
-  const courses = [
-    {
-      name: "Introduction to math",
-      dob: "Jan 12 , 2024",
-      enrollment: "500",
-      status: "Active",
-    },
-    {
-      name: "Introduction to math",
-      dob: "Jan 12 , 2024",
-      enrollment: "500",
-      status: "Active",
-    },
-    {
-      name: "Introduction to math",
-      dob: "Jan 12 , 2024",
-      enrollment: "500",
-      status: "Active",
-    },
-  ];
-
+ 
   return (
     <div className="w-full lg:w-[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg  ">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">

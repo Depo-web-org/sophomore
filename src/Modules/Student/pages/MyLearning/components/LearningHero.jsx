@@ -47,7 +47,7 @@ const TimeCard =() => {
         </div>
 
         <div>
-          <p className="text-white text-sm lg:text-base font-semibold  rounded-full">
+          <p className="text-white text-sm lg:text-base font-semibold  rounded-full text-nowrap">
             {timeLeft.days} <span className="text-sm text-primary">D</span>  {timeLeft.hours} <span className="text-sm text-primary">H</span> {timeLeft.minutes} <span className="text-sm text-primary">M</span>  {timeLeft.seconds}<span className="text-sm text-secondary">S</span> 
           </p>
         </div>

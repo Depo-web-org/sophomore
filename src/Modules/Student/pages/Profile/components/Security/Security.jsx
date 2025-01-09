@@ -8,11 +8,10 @@ import { useChange_passwordMutation } from "../../../../../../Redux/Auth/authApi
 import { useSelector } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
 import useFetch from "../../../../../../Hooks/UseFetch";
+import useChangePassword from "../../../../../../Hooks/UseChangePassword";
 
 export default function Security() {
-  const { data } = useFetch(
-    "https://os1907.github.io/Schools/Profile/Profile.json"
-  );
+  const { data, status, error } = useSelector((state) => state.userInformation);
 
   const [showAlert, setShowAlert] = useState(false);
   const role = useSelector((state) => state.role.role);
@@ -32,27 +31,12 @@ export default function Security() {
     }, 3000);
   };
 
-  const [changePassword, { isLoading, isError, error }] =
-  useChange_passwordMutation();
+  // Hook For Change Password
+  const { submitChangePassword, isLoading, isError } = useChangePassword({ role,handleShowAlert,reset,});
 
-  const onSubmit = async (data) => {
-    const refresh_token = localStorage.getItem('refresh_token');
-    const infos = {
-      old_password: data.old_password,
-      new_password: data.new_password,
-      confirm_password: data.confirm_password,
-      refresh_token,
-    };
-    console.log(infos)
-    try {
-      const response = await changePassword({ data: infos, role }).unwrap();
+  // Submit
+  const onSubmit = (data) => submitChangePassword(data);
 
-      handleShowAlert();
-      reset();
-    } catch (err) {
-      console.error("Error changing password:", err);
-    }
-  };
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -68,33 +52,65 @@ export default function Security() {
       />
 
       {/* first section */}
-
       <div className="w-full min-h-40 ">
         {/* cover */}
-        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg">
+        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg mb-24
+        ">
           {/* Image */}
+
+
+
+          <div className=" flex flex-col lg:flex-row justify-center items-center absolute -bottom-[45%]  left-1/2 -translate-x-1/2 xl:translate-x-0  xl:left-[5%]   ">
           <img
-            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
+            className="border-2 border-white w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
             src={data?.profile}
             alt="profile"
           />
-        </div>
-        <div className="px-1 lg:px-8">
+          <div className=" lg:flex-1 ">
           {/* section Name */}
-          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto ">
+          <div className="relative sm:px-4 pt-4 w-full   ">
+              <div className="w-full text-center lg:text-start text-nowrap">
+              <p className="font-bold text-white lg:text-lg">{data?.name}</p>
+              <span className="text-mainGray text-xs lg:text-sm ">Update your Passwords</span>
+              </div>
+          </div>
+        </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+          {/* <img
+            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
+            src={data?.profile}
+            alt="profile"
+          /> */}
+        </div>
+          {/* section Name */}
+        {/* <div className="px-1 lg:px-8">
+          <div className="relative sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-3/5 xl:w-4/5 ml-auto  ">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
-              <div className="w-full text-center lg:text-start">
+              <div className="w-full text-center lg:text-start  ">
                 <p className="font-bold text-white text-lg">{data?.name}</p>
+                <span className="text-mainGray">Update your Passwords</span>
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full md:w-4/5 lg:w-3/5 m-auto min-h-96 mt-8"
+        className="w-full md:w-4/5 lg:w-3/5 m-auto  min-h-96  "
       >
         {/*first email */}
         <div className="relative border-b py-5">
