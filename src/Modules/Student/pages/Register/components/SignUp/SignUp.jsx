@@ -39,22 +39,75 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
     setShowPassword((prevState) => !prevState);
   };
 
+  // const onSubmit = async (data) => {
+  //   setMail(data);
+  //   // try {
+  //   //   // Call the signup mutation here instead of axios
+  //   //   await signup({ userData: data, role }).unwrap();
+  //   //   handleSendOtp();
+  //   // } catch (err) {
+  //   //   console.error("Signup Error:", err.data?.message);
+  //   //   err?.data?.message === "student with this email already exists." ||
+  //   //   err?.data?.message === "Teacher with this email already exists."
+  //   //     ? // ? handleSendOtp()
+  //   //       ResendOTP(data, handleSendOtp, setAlreadyAv)
+  //   //     : console.log(err?.response);
+  //   // }
+  // };
+
+
+
+
   const onSubmit = async (data) => {
-    setMail(data);
     
+    const provider = role === "teacher" ? true : false;
+    
+
+    const payload = {
+      email: data.email,
+      first_name: data.first_name,
+      last_name: data.last_name,
+      phone_number: data.phone_number,
+      password: data.password,
+      password2: data.password2,
+      provider: provider,
+    };
+    console.log("Data to Send:", payload);
     try {
-      // Call the signup mutation here instead of axios
-      await signup({ userData: data, role }).unwrap();
-      handleSendOtp();
-    } catch (err) {
-      console.error("Signup Error:", err.data?.message);
-      err?.data?.message === "student with this email already exists." ||
-      err?.data?.message === "Teacher with this email already exists."
-        ? // ? handleSendOtp()
-          ResendOTP(data, handleSendOtp, setAlreadyAv)
-        : console.log(err?.response);
+     const response= await signup({ userData: payload }).unwrap()
+     console.log(response.message  )
+        
+        if(response.code === 0){
+          handleSendOtp();
+        }else{
+          console.error("Signup Error:", response.message );
+        }
+    } 
+    catch (err) {
+      console.error("Signup Error:", err?.data?.message || err);
+      // if (
+      //   err?.data?.message === "student with this email already exists." ||
+      //   err?.data?.message === "Teacher with this email already exists."
+      // ) {
+      //   ResendOTP(data, handleSendOtp, setAlreadyAv);
+      // } else {
+      //   console.log("Other Error:", err?.response);
+      // }
     }
   };
+  
+
+
+
+
+
+
+
+
+
+
+
+
   //645838
   // Redux Toolkit's useResend_otpMutation hook
   const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
@@ -90,10 +143,10 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           >
             <UserRole role={role} dispatch={dispatch} />
             {/*First Name Field */}
-            <div className='flex gap-x-2'> 
+            <div className='flex gap-x-2 '> 
               <label
                 htmlFor="first_name"
-                className="w-1/2 bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
+                className="w-1/2 bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between "
               >
                 <input
                   type="text"
@@ -101,10 +154,9 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                   {...register("first_name", {
                     required: "First Name is required",
                     pattern: {
-                      value: /^[a-zA-Z]{1,}\s[a-zA-Z]{1,}$/,
-                      message:
-                        "Enter a valid full name with two words, each at least 3 letters",
-                    },
+                      value: /^[a-zA-Z]+$/,
+                      message: "Name must contain only letters",
+                    }
                   })}
                   className="outline-none text-base w-full"
                   placeholder="First Name"
@@ -123,10 +175,9 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                   {...register("last_name", {
                     required: "Last Name is required",
                     pattern: {
-                      value: /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/,
-                      message:
-                        "Enter a valid full name with two words, each at least 3 letters",
-                    },
+                      value: /^[a-zA-Z]+$/,
+                      message: "Name must contain only letters",
+                    }
                   })}
                   className="outline-none text-base w-full"
                   placeholder=" Last Name"
@@ -134,19 +185,21 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
               </label>
            
             </div>
-            <div className='flex justify-evenly  '>
-            {errors.first_name && (
-                <p className="text-red-500 text-sm text-center font-medium ">
-                  {errors.first_name.message}
-                </p>
-              )}
-                {errors.last_name && (
-                <p className="text-red-500 text-sm text-center font-medium ">
-                  {errors.last_name.message}
-                </p>
-              )}
+            {/* {errors.first_name || errors.last_name && <>
+  <div className='flex justify-evenly'>
+    {errors.first_name && (
+      <p className="text-red-500 text-sm text-center font-medium">
+        {errors.first_name.message} 
+      </p>
+    )}
+    {errors.last_name && (
+      <p className="text-red-500 text-sm text-center font-medium">
+        {errors.last_name.message} 
+      </p>
+    )}
+  </div>
+</>} */}
 
-            </div>
             
 
   {/*Last Name Field */}
