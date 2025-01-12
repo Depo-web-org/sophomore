@@ -25,7 +25,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     signup: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `/auth/register/${role}/`,
+          url: `/signupConsumer.php/`,
           method: "POST",
           body: userData,
         };

@@ -41,6 +41,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
   const onSubmit = async (data) => {
     setMail(data);
+    
     try {
       // Call the signup mutation here instead of axios
       await signup({ userData: data, role }).unwrap();
@@ -88,16 +89,76 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
             className="mb-0 w-full space-y-4 flex flex-col gap-2 lg:gap-5 "
           >
             <UserRole role={role} dispatch={dispatch} />
-            {/* Name Field */}
-            <div>
+            {/*First Name Field */}
+            <div className='flex gap-x-2'> 
               <label
-                htmlFor="full_name"
+                htmlFor="first_name"
+                className="w-1/2 bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
+              >
+                <input
+                  type="text"
+                  id="first_name"
+                  {...register("first_name", {
+                    required: "First Name is required",
+                    pattern: {
+                      value: /^[a-zA-Z]{1,}\s[a-zA-Z]{1,}$/,
+                      message:
+                        "Enter a valid full name with two words, each at least 3 letters",
+                    },
+                  })}
+                  className="outline-none text-base w-full"
+                  placeholder="First Name"
+                />
+              </label>
+             
+  {/*Last Name Field */}
+
+               <label
+                htmlFor="last_name"
+                className="w-1/2 bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
+              >
+                <input
+                  type="text"
+                  id="last_name"
+                  {...register("last_name", {
+                    required: "Last Name is required",
+                    pattern: {
+                      value: /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/,
+                      message:
+                        "Enter a valid full name with two words, each at least 3 letters",
+                    },
+                  })}
+                  className="outline-none text-base w-full"
+                  placeholder=" Last Name"
+                />
+              </label>
+           
+            </div>
+            <div className='flex justify-evenly  '>
+            {errors.first_name && (
+                <p className="text-red-500 text-sm text-center font-medium ">
+                  {errors.first_name.message}
+                </p>
+              )}
+                {errors.last_name && (
+                <p className="text-red-500 text-sm text-center font-medium ">
+                  {errors.last_name.message}
+                </p>
+              )}
+
+            </div>
+            
+
+  {/*Last Name Field */}
+  {/* <div>
+              <label
+                htmlFor="last_name"
                 className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
               >
                 <input
                   type="text"
-                  id="full_name"
-                  {...register("full_name", {
+                  id="last_name"
+                  {...register("last_name", {
                     required: "Name is required",
                     pattern: {
                       value: /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/,
@@ -106,15 +167,18 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     },
                   })}
                   className="outline-none text-base w-full"
-                  placeholder="Enter your Full Name"
+                  placeholder="Enter your Last Name"
                 />
               </label>
-              {errors.full_name && (
+              {errors.last_name && (
                 <p className="text-red-500 text-sm text-center font-medium mt-4">
-                  {errors.full_name.message}
+                  {errors.last_name.message}
                 </p>
               )}
-            </div>
+            </div> */}
+
+
+
             {/* Phone Number Field */}
             <div>
               <label htmlFor="phone_number" className="sr-only">

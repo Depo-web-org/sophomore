@@ -1,9 +1,101 @@
+// import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { IoImage } from "react-icons/io5"; // Import IoImage
+// import { RiCloseFill } from "react-icons/ri"; // Import RiCloseFill
+
+// const ApplicationSection = () => {
+//   const options = [
+//     {
+//       id: "001",
+//       title: "What School type do you teach?",
+//       name: "e.g American",
+//       opations: [
+//         { id: "101", value: "American International School" },
+//         { id: "102", value: "British Academy" },
+//         { id: "103", value: "Canadian Learning Center" },
+//       ],
+//     },
+//     {
+//       id: "002",
+//       title: "What Grades are you applying for?",
+//       name: "e.g grade 1",
+//       opations: [
+//         { id: "201", value: "Grade 1 - Grade 5 (Elementary)" },
+//         { id: "202", value: "Grade 6 - Grade 8 (Middle School)" },
+//         { id: "203", value: "Grade 9 - Grade 12 (High School)" },
+//       ],
+//     },
+//     {
+//       id: "003",
+//       title: "Choose the subject you are applying for",
+//       name: "e.g Science",
+//       opations: [
+//         { id: "301", value: "Mathematics" },
+//         { id: "302", value: "Science" },
+//         { id: "303", value: "History" },
+//         { id: "304", value: "English Literature" },
+//       ],
+//     },
+//   ];
+
+//   // React Hook Form
+//   const {
+//     register,
+//     handleSubmit,
+//     reset,
+//     setValue,
+//     formState: { errors },
+//   } = useForm();
+//   const [uploadImage, setUploadImage] = useState(null);
+
+//   // Handle image upload
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setUploadImage(file);
+//       setValue("image", file); // Manually set the file in the form state
+//     }
+//   };
+
+//   const handleFormSubmit = (data) => {
+//     // Log all form data, including the file
+//     console.log("Form Data:", data);
+
+//     // Prepare form data for backend submission
+//     const formData = new FormData();
+//     formData.append("title", data.title);
+//     formData.append("orderNotes", data.orderNotes);
+//     formData.append("image", data.image); // Append the image file
+//     options.forEach((item, index) => {
+//       formData.append(`option${index}`, data[`option${index}`]);
+//     });
+//     // Send formData to the backend (example using fetch)
+//     // fetch("https://your-backend-endpoint.com/upload", {
+//     //   method: "POST",
+//     //   body: formData,
+//     // })
+//     //   .then((response) => response.json())
+//     //   .then((result) => {
+//     //     console.log("Success:", result);
+//     //     reset(); // Reset the form after successful submission
+//     //     setUploadImage(null); // Clear the uploaded image
+//     //   })
+//     //   .catch((error) => {
+//     //     console.error("Error:", error);
+//     //   });
+//   };
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoImage } from "react-icons/io5"; // Import IoImage
 import { RiCloseFill } from "react-icons/ri"; // Import RiCloseFill
+import { useDispatch } from "react-redux";
+import { addCourse } from "../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
+import { useNavigate } from 'react-router-dom';
 
 const ApplicationSection = () => {
+  const dispatch = useDispatch(); // Initialize Redux dispatch
+  const navigate = useNavigate()
   const options = [
     {
       id: "001",
@@ -56,38 +148,32 @@ const ApplicationSection = () => {
       setValue("image", file); // Manually set the file in the form state
     }
   };
-
   const handleFormSubmit = (data) => {
-    // Log all form data, including the file
-    console.log("Form Data:", data);
+    const formData = {
+      title: data.title,
+      orderNotes: data.orderNotes,
+      image: uploadImage,
+      options: options.map((item, index) => ({
+        id: item.id,
+        selectedOption: data[`option${index}`],
+      })),
+    };
+  
+    // Dispatch data to Redux slice
+    dispatch(addCourse(formData));
+    // Reset form and state
+    reset();
+    
+    setUploadImage(null);
+    setTimeout(()=>{
+      navigate('/teacherPanel/courses/chooseunit')
+    },500)
 
-    // Prepare form data for backend submission
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("orderNotes", data.orderNotes);
-    formData.append("image", data.image); // Append the image file
-    options.forEach((item, index) => {
-      formData.append(`option${index}`, data[`option${index}`]);
-    });
-    // Send formData to the backend (example using fetch)
-    // fetch("https://your-backend-endpoint.com/upload", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     console.log("Success:", result);
-    //     reset(); // Reset the form after successful submission
-    //     setUploadImage(null); // Clear the uploaded image
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   };
 
   return (
     <>
-      <div className="lg:ms-5 h-auto">
+      <div className="lg:ms-5 h-auto  ">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
             <p className="block text-2xl lg:text-3xl font-semibold ">

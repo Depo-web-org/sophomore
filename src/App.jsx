@@ -483,7 +483,7 @@ function AppRoutes() {
               path="addnewcourse"
               element={
                 <TeacherProtectedRoute>
-                  <AddNewCourse />{" "}
+                  <AddNewCourse />
                 </TeacherProtectedRoute>
               }
             />
