@@ -36,18 +36,17 @@ export default function Login({ toggleForm }) {
     useForget_passwordMutation();
 
   const handleLogin = async (data) => {
+    const provider= role==='teacher'?true:false;
+    console.log(provider)
     try {
-      const userData = { email: data.loginMail, password: data.password };
+      const userData = { email: data.loginMail, password: data.password, provider };
       const response = await login({ userData, role }).unwrap();
+      console.log(response)
 
-      if (response) {
+      if (response.code===0) {
 
         // Encrypt the refresh token and store it
-        const encryptedRe = CryptoJS.AES.encrypt(
-          response.refresh_token,
-          secretKey
-        ).toString();
-        // localStorage.setItem("refresh_token", encryptedRe);
+
         localStorage.setItem("refresh_token", response.refresh_token);
 
         // Encrypt the Role and store it
@@ -77,6 +76,8 @@ export default function Login({ toggleForm }) {
         } else {
           navigate("/register");
         }
+      }else{
+        setErrorMessage(response?.message)
       }
     } catch (error) {
       // console.error("Login Error:", error?.data?.message);
