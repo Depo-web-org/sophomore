@@ -23,6 +23,11 @@ export default function Login({ toggleForm }) {
   const role = useSelector((state) => state.role.role);
   const [userEmail, setUserEmail] = useState(null);
 
+  const VerifyAccount = (email) => {
+    const enCodedMail = encodeEmail(email);
+    navigate(`/register/verify-account/${enCodedMail}`);
+  };
+
   const dispatch = useDispatch();
   const {
     register,
@@ -38,10 +43,14 @@ export default function Login({ toggleForm }) {
   const handleLogin = async (data) => {
     const provider= role==='teacher'?true:false;
     console.log(provider)
+
     try {
       const userData = { email: data.loginMail, password: data.password, provider };
       const response = await login({ userData, role }).unwrap();
       console.log(response)
+      setUserEmail(data.loginMail);
+    
+
 
       if (response.code===0) {
 
@@ -76,7 +85,16 @@ export default function Login({ toggleForm }) {
         } else {
           navigate("/register");
         }
-      }else{
+      }
+     else if(response.code===10){
+
+      navigate(`/register/verify-account/${encodeEmail(data.loginMail)}`);
+    }
+      else if(response.code===20){
+        navigate(`/register/verify-account/${encodeEmail(data.loginMail)}`);
+        // VerifyAccount(userEmail)
+      }
+      else{
         setErrorMessage(response?.message)
       }
     } catch (error) {
@@ -87,7 +105,6 @@ export default function Login({ toggleForm }) {
             "Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com."
           );
 
-      setUserEmail(data.loginMail);
     }
   };
 
@@ -108,10 +125,7 @@ export default function Login({ toggleForm }) {
   };
 
   // If the user is not logged in, redirect them to the login page
-  const VerifyAccount = () => {
-    const enCodedMail = encodeEmail(userEmail);
-    navigate(`/register/verify-account/${enCodedMail}`);
-  };
+
 
   return (
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
