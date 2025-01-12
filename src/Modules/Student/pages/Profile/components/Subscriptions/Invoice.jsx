@@ -4,7 +4,8 @@ import { MdOutlineClose } from "react-icons/md";
 const Invoice = ({ toggleInvoice }) => {
   return (
     <>
-      <div className="fixed top-28 left-40 right-40 z-50 overflow-y-auto h-[85%] bg-white overflow-hidden  rounded-lg shadow-lg max-w-4xl mx-auto font-sans">
+    {/*  max-w-4xl mx-auto */}
+      <div className="fixed top-28 mx-5 inset-0 z-50  max-w-1/2  h-[85%] bg-white  overflow-x-auto  rounded-lg shadow-lg font-sans">
         {/*  name and logo and Company data */}
         <div className=" p-5">
           {/*  name and logo */}
