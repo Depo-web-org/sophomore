@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import GoBack from '../../../components/GoBack';
 import { Link, useLocation } from 'react-router-dom';
 import SubmitUnitsModel from './components/SubmitUnitsModel';
+import { useSelector } from 'react-redux';
 
 const units = [
   "Unit 1",
@@ -21,6 +22,11 @@ const units = [
 const ItemsUnit = () => {
   const [modelOpen, setModelOpen] = useState()
   const location = useLocation();
+
+  // Log All CourseInfo which added by teacher
+  const CourseInformation = useSelector((state) => state.AddTeacherCourse)
+  
+  console.log(CourseInformation) 
   
   return (
     <>
