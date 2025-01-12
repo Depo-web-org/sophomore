@@ -6,7 +6,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     login: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `doConsumerSignin.php/${role}/`,
+          url: `doConsumerSignin.php`,
           method: "POST",
           body: userData,
         };
@@ -34,7 +34,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     forget_password: builder.mutation({
       query: ({ email, role }) => {
         return {
-          url: `getConsumerResetPasswordToken.php/${role}/`,
+          url: `getConsumerResetPasswordToken.php`,
           method: "POST",
           body: { email },
         };
@@ -53,7 +53,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     resend_otp: builder.mutation({
       query: ({ email, role }) => {
         return {
-          url: `doResendOTP.php/${role}/`,
+          url: `doResendOTP.php`,
           method: "POST",
           body: { email },
         };
@@ -62,7 +62,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     reset_password: builder.mutation({
       query: ({ dataSend, role }) => {
         return {
-          url: `getConsumerPasswordReset.php${role}/`,
+          url: `getConsumerPasswordReset.php`,
           method: "POST",
           body: dataSend,
         };
@@ -70,7 +70,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     change_password: builder.mutation({
       query: ({ data, role  }) => ({
-        url: `doConsumerChangePassword.php/${role}/`,
+        url: `doConsumerChangePassword.php`,
         method: "POST",
         body: data,
       }),
@@ -78,7 +78,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     logout: builder.mutation({
       query: ({refresh_token, role}) => {
         return {
-          url: `doConsumerLogout.php/${role}/`,
+          url: `doConsumerLogout.php`,
           method: "POST",
           body: {refresh_token},
         };
