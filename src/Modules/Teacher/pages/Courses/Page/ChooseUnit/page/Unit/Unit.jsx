@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { RiCloseFill } from "react-icons/ri";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { setUnit } from "../../../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -21,7 +23,8 @@ const Unit = () => {
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
-
+const dispatch=useDispatch()
+const CourseInformation = useSelector((state) => state.AddTeacherCourse)
   // React Hook Form
   const {
     register,
@@ -44,42 +47,65 @@ const Unit = () => {
     setValue("pdf", pdf); // Manually set the PDF file in the form state
   };
 
-  // Handle form submission
-  const handleFormSubmit = async (data) => {
+  // old Handle form submission
+  // const handleFormSubmit = async (data) => {
+  //   if (!data.video || !data.pdf) {
+  //     setMessage("Both video and PDF files are required!");
+  //     return;
+  //   }
+  //   const formData = new FormData();
+  //   formData.append("video", data.video);
+  //   formData.append("pdf", data.pdf);
+  //   formData.append("title", data.title);
+  //   formData.append("description", data.description);
+
+  //   setUploading(true);
+  //   setMessage("Uploading...");
+
+  //   // Example: Send formData to the backend
+  //   // try {
+  //   //   const response = await fetch("/api/upload", {
+  //   //     method: "POST",
+  //   //     body: formData,
+  //   //   });
+
+  //   //   if (!response.ok) {
+  //   //     throw new Error("Failed to upload files");
+  //   //   }
+
+  //   //   const result = await response.json();
+  //   //   setMessage("Upload successful!");
+  //   // } catch (error) {
+  //   //   setMessage(`Error: ${error.message}`);
+  //   // } finally {
+  //   //   setUploading(false);
+  //   // }
+  // };
+
+  const handleFormSubmit = (data) => {
     if (!data.video || !data.pdf) {
       setMessage("Both video and PDF files are required!");
       return;
     }
-console.log(data)
-    const formData = new FormData();
-    formData.append("video", data.video);
-    formData.append("pdf", data.pdf);
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-
-    setUploading(true);
-    setMessage("Uploading...");
-
-    // Example: Send formData to the backend
-    // try {
-    //   const response = await fetch("/api/upload", {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error("Failed to upload files");
-    //   }
-
-    //   const result = await response.json();
-    //   setMessage("Upload successful!");
-    // } catch (error) {
-    //   setMessage(`Error: ${error.message}`);
-    // } finally {
-    //   setUploading(false);
-    // }
+  
+    const newUnit = {
+      UnitNumber: unit, 
+      Name: data.title,
+      Description: data.description,
+      UploadedVideo: uploadedVideo,
+      UploadedMaterial: uploadedPDF,
+    };
+  
+    // Dispatch the new unit data
+    dispatch(setUnit(newUnit));
+  console.log(CourseInformation)
+    setMessage("Unit saved successfully!");
+    setUploadedVideo(null);
+    setUploadedPDF(null);
+    setValue("title", ""); // Clear form values
+    setValue("description", "");
   };
-
+  
   return (
     <div>
       {/* Head */}
@@ -98,11 +124,14 @@ console.log(data)
                 </button>
               </div>
 
-              <Button
+              <button type="submit" className="bg-primary py-2 px-2 text-white rounded-md hover:bg-secondary transition-all duration-300">
+                  submit
+                </button>
+              {/* <Button
                 classButton="bg-primary py-2 px-2 text-white rounded-md hover:bg-secondary transition-all duration-300"
                 title="Submit"
                 type="submit"
-              />
+              /> */}
             </div>
           </div>
 
