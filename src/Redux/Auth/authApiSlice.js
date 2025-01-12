@@ -6,7 +6,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     login: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `/auth/login/${role}/`,
+          url: `doConsumerSignin.php/${role}/`,
           method: "POST",
           body: userData,
         };
@@ -25,7 +25,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     signup: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `/signupConsumer.php/`,
+          url: `/signupConsumer.php`,
           method: "POST",
           body: userData,
         };
@@ -34,7 +34,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     forget_password: builder.mutation({
       query: ({ email, role }) => {
         return {
-          url: `/auth/reset-password/${role}/`,
+          url: `getConsumerResetPasswordToken.php/${role}/`,
           method: "POST",
           body: { email },
         };
@@ -43,7 +43,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     verify_email: builder.mutation({
       query: ({ otp_code }) => {
         return {
-          url: "/auth/verify-email/",
+          url: "getOTPForDepo.php",
           method: "POST",
           body: { otp_code },
         };
@@ -53,7 +53,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     resend_otp: builder.mutation({
       query: ({ email, role }) => {
         return {
-          url: `/auth/resend-otp/${role}/`,
+          url: `doResendOTP.php/${role}/`,
           method: "POST",
           body: { email },
         };
@@ -62,7 +62,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     reset_password: builder.mutation({
       query: ({ dataSend, role }) => {
         return {
-          url: `/auth/confirm-reset-password/${role}/`,
+          url: `getConsumerPasswordReset.php${role}/`,
           method: "POST",
           body: dataSend,
         };
@@ -70,7 +70,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     change_password: builder.mutation({
       query: ({ data, role  }) => ({
-        url: `/auth/change-password/${role}/`,
+        url: `doConsumerChangePassword.php/${role}/`,
         method: "POST",
         body: data,
       }),
@@ -78,7 +78,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     logout: builder.mutation({
       query: ({refresh_token, role}) => {
         return {
-          url: `/auth/logout/${role}/`,
+          url: `doConsumerLogout.php/${role}/`,
           method: "POST",
           body: {refresh_token},
         };
