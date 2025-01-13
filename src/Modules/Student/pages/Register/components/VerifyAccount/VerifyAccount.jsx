@@ -35,9 +35,11 @@ const [errorOtp, setErrorOtp] = useState(null)
   const [verifyEmail, { isLoading: loadingSending ,error}] = useVerify_emailMutation();
 
   const onSubmit = async (data) => {
-    const otp_code = data.otp.join('');
+    const otp = data.otp.join('');
+    const dataSend={otp,email,provider}
+    console.log(dataSend)
     try {
-      const response = await verifyEmail({ otp_code }).unwrap();
+      const response = await verifyEmail({ dataSend }).unwrap();
       setStatusOfAccount("Your account has already been verified")
         setTimeout(()=> navigate('/register'), 3000)
     //   handleValidateOtp(); // Callback on successful verification

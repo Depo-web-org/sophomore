@@ -45,7 +45,11 @@ export default function Login({ toggleForm }) {
     console.log(provider)
 
     try {
-      const userData = { email: data.loginMail, password: data.password, provider };
+        const userData = { email: data.loginMail, password: data.password };
+
+        if (provider) {
+          userData.provider = provider;
+        }
       const response = await login({ userData, role }).unwrap();
       console.log(response)
       setUserEmail(data.loginMail);
