@@ -22,6 +22,8 @@ export default function Login({ toggleForm }) {
   const userRole = useRole("RO_V1_2024");
   const role = useSelector((state) => state.role.role);
   const [userEmail, setUserEmail] = useState(null);
+  const provider= role==='teacher'?true:false;
+
 
   const VerifyAccount = (email) => {
     const enCodedMail = encodeEmail(email);
@@ -41,8 +43,6 @@ export default function Login({ toggleForm }) {
     useForget_passwordMutation();
 
   const handleLogin = async (data) => {
-    const provider= role==='teacher'?true:false;
-    console.log(provider)
 
     try {
         const userData = { email: data.loginMail, password: data.password };
@@ -115,9 +115,13 @@ export default function Login({ toggleForm }) {
   const handleForgetPassword = async (data) => {
     // console.log("Form data:", {email: data.email})
     try {
+      const userData = { email: data.loginMail };
+
+      if (provider) {
+        userData.provider = provider;
+      }
       const response = await forgetpassword({
-        email: data.loginMail,
-        role,
+        userData,
       }).unwrap();
       const enCodedMail = encodeEmail(data.loginMail);
       navigate(`/register/reset-password/${enCodedMail}`);
