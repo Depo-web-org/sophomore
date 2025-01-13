@@ -93,6 +93,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { refresh },
       }),
     }),
+    getOTp: builder.mutation({
+      query: ({ userData}) => ({
+        url: "getOTPForDepo.php",
+        method: "POST",
+        body:  userData ,
+      }),
+    }),
   }),
 });
 
@@ -105,5 +112,6 @@ export const {
   useReset_passwordMutation,
   useChange_passwordMutation,
   useLogoutMutation,
-  useRefreshTokenMutation
+  useRefreshTokenMutation,
+  useGetOTpMutation
 } = authApiSlice;
