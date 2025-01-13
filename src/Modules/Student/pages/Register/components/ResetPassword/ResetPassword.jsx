@@ -22,6 +22,8 @@ const ResetPassword = () => {
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const [StatusOfChangesPassword, setStatusOfChangesPassword] = useState()
   const role = useSelector((state) => state.role.role);
+  const provider= role==='teacher'?true:false;
+
 
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
@@ -45,7 +47,9 @@ const ResetPassword = () => {
       password: data.password,
       password2: data.password2,
     };
-
+    if (provider) {
+      dataSend.provider = provider;
+    }
  
   await resetPassword({dataSend,role})
         .unwrap()
