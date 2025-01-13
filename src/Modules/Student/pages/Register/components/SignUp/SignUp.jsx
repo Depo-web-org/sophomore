@@ -59,8 +59,11 @@ const [errorSubmit, setErrorSubmit] = useState(null)
       phone_number: data.phone_number,
       password: data.password,
       password2: data.password2,
-      provider: provider,
     };
+
+    if (provider) {
+      payload.provider = provider;
+    }
     console.log("Data to Send:", payload);
     setMail( data.email)
     try {

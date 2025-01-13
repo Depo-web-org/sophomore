@@ -36,7 +36,10 @@ const [errorOtp, setErrorOtp] = useState(null)
 
   const onSubmit = async (data) => {
     const otp = data.otp.join('');
-    const dataSend={otp,email,provider}
+    const dataSend={otp,email}
+    if (provider) {
+      dataSend.provider = provider;
+    }
     console.log(dataSend)
     try {
       const response = await verifyEmail({ dataSend }).unwrap();
@@ -84,7 +87,10 @@ const [errorOtp, setErrorOtp] = useState(null)
     try {
       setResendOTPModal(false);
       setIsResendDisabled(true);
-      const userData = { email,provider };
+      const userData = { email };
+      if (provider) {
+        userData.provider = provider;
+      }
       console.log(userData)
       await resendOtp({ userData, role }).unwrap().then(()=>  setTimeLeft(60));
     } catch (err) {
