@@ -52,11 +52,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
 
     resend_otp: builder.mutation({
-      query: ({ email, role }) => {
+      query: ({ userData}) => {
         return {
           url: `doResendOTP.php`,
           method: "POST",
-          body: { email },
+          body: userData,
         };
       },
     }),
