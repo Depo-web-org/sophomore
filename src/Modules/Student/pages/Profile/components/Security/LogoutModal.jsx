@@ -9,6 +9,8 @@ const LogoutModal = ({ setOpseModel }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {role} = useSelector((state)=>state.role)
+  const provider= role==='teacher'?true:false;
+
 
   const [student_logout, { isLoading, isError, error }] =
   useLogoutMutation();
@@ -22,7 +24,11 @@ const LogoutModal = ({ setOpseModel }) => {
     }
     // Try to log out
     try {
-      const response = await student_logout({ Token, role }).unwrap();
+      const userData={}
+      if (provider) {
+        userData.provider = provider;
+      }
+      const response = await student_logout({ userData }).unwrap();
       // Clear localStorage and Redux store
       localStorage.removeItem("Token");
       dispatch(logOut()); // Dispatch logout action

@@ -76,35 +76,8 @@ export default function Security() {
           </div>
         </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-          {/* <img
-            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
-            src={data?.profile}
-            alt="profile"
-          /> */}
         </div>
-          {/* section Name */}
-        {/* <div className="px-1 lg:px-8">
-          <div className="relative sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-3/5 xl:w-4/5 ml-auto  ">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
-              <div className="w-full text-center lg:text-start  ">
-                <p className="font-bold text-white text-lg">{data?.name}</p>
-                <span className="text-mainGray">Update your Passwords</span>
-              </div>
-            </div>
-          </div>
-        </div> */}
+
       </div>
 
       {/* form */}
