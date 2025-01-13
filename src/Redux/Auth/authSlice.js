@@ -18,7 +18,7 @@ const authSlice = createSlice({
         localStorage.setItem('access_token', token);
       }
       if (refresh) {
-        localStorage.setItem('refresh_token', refresh); // Refresh token
+        localStorage.setItem('Token', refresh); // Refresh token
       }
       if (user) {
         localStorage.setItem('USER', JSON.stringify(user));
@@ -30,7 +30,7 @@ const authSlice = createSlice({
 
       // Clear tokens and user info from localStorage
       localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('Token');
       localStorage.removeItem('USER');
     },
   },

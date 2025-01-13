@@ -77,11 +77,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     logout: builder.mutation({
-      query: ({refresh_token, role}) => {
+      query: ({Token, role}) => {
         return {
           url: `doConsumerLogout.php`,
           method: "POST",
-          body: {refresh_token},
+          body: {Token},
         };
       },
       invalidatesTags: ["Auth"],
