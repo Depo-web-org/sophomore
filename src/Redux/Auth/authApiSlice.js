@@ -32,11 +32,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
     }),
     forget_password: builder.mutation({
-      query: ({ email, role }) => {
+      query: ({ userData }) => {
         return {
           url: `getConsumerResetPasswordToken.php`,
           method: "POST",
-          body: { email },
+          body: userData,
         };
       },
     }),
@@ -77,11 +77,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     logout: builder.mutation({
-      query: ({Token, role}) => {
+      query: ({userData}) => {
         return {
           url: `doConsumerLogout.php`,
           method: "POST",
-          body: {Token},
+          body: userData,
         };
       },
       invalidatesTags: ["Auth"],

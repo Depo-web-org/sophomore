@@ -7,9 +7,10 @@ const baseQuery = fetchBaseQuery({
   // credentials: "true",
   prepareHeaders: (headers, { getState, endpoint }) => {
     const token = getState().auth.token;
+    const Token = localStorage.getItem('Token')
     // Add Authorization header for all requests except login , logout and Change Password 
-    if (token && endpoint !== "/auth/login/student" && endpoint !==('logout') &&  endpoint !== ('change_password')) {
-      headers.set("authorization", `Bearer ${token}`);
+    if (Token && endpoint !== "/auth/login/student") {
+      headers.set("Authorization", `${Token}`);
     }
     return headers;
   },
