@@ -15,16 +15,16 @@ const LogoutModal = ({ setOpseModel }) => {
 
   // Inside your handleLogout function:
   const handleLogout = async () => {
-    const refresh_token =localStorage.getItem("refresh_token");
-    if (!refresh_token) {
+    const Token =localStorage.getItem("Token");
+    if (!Token) {
       console.error("Refresh token is missing!");
       return;
     }
     // Try to log out
     try {
-      const response = await student_logout({ refresh_token, role }).unwrap();
+      const response = await student_logout({ Token, role }).unwrap();
       // Clear localStorage and Redux store
-      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("Token");
       dispatch(logOut()); // Dispatch logout action
       navigate("/register");
     } catch (error) {

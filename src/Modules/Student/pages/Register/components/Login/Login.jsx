@@ -60,7 +60,7 @@ export default function Login({ toggleForm }) {
 
         // Encrypt the refresh token and store it
 
-        localStorage.setItem("refresh_token", response.refresh_token);
+        localStorage.setItem("Token", response.data.token);
 
         // Encrypt the Role and store it
         const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString();

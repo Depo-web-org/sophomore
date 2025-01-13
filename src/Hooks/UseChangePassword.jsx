@@ -4,12 +4,12 @@ const useChangePassword = ({ role, handleShowAlert, reset }) => {
   const [changePassword, { isLoading, isError }] = useChange_passwordMutation();
 
   const submitChangePassword = async (data) => {
-    const refresh_token = localStorage.getItem("refresh_token");
+    const Token = localStorage.getItem("Token");
     const infos = {
       old_password: data.old_password,
       new_password: data.new_password,
       confirm_password: data.confirm_password,
-      refresh_token,
+      Token,
     };
 
     try {
