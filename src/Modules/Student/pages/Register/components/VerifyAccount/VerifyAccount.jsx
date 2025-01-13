@@ -15,6 +15,8 @@ const VerifyAccount = () => {
   const { userMail } = useParams();
   const email = decodeEmail(userMail); // Decode email
   const role = useSelector((state) => state.role.role);
+  const provider= role==='teacher'?true:false;
+
 
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const [timeLeft, setTimeLeft] = useState(null);
@@ -80,7 +82,9 @@ const [errorOtp, setErrorOtp] = useState(null)
     try {
       setResendOTPModal(false);
       setIsResendDisabled(true);
-      await resendOtp({ email, role }).unwrap().then(()=>  setTimeLeft(60));
+      const userData = { email,provider };
+      console.log(userData)
+      await resendOtp({ userData, role }).unwrap().then(()=>  setTimeLeft(60));
     } catch (err) {
 
         err.data.message === "Your account has already been verified. Please go to the login page." ? setStatusOfAccount("Your account has already been verified") : setStatusOfAccount(null)

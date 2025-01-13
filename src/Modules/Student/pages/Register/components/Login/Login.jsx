@@ -91,8 +91,8 @@ export default function Login({ toggleForm }) {
       navigate(`/register/verify-account/${encodeEmail(data.loginMail)}`);
     }
       else if(response.code===20){
-        navigate(`/register/verify-account/${encodeEmail(data.loginMail)}`);
-        // VerifyAccount(userEmail)
+        setErrorMessage(response?.message)
+
       }
       else{
         setErrorMessage(response?.message)
