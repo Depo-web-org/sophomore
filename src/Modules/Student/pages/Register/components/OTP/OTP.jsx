@@ -16,6 +16,8 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const role = useSelector((state) => state.role.role);
     const [responseError, setResponseError] = useState(null)
+    const provider = role === "teacher" ? true : false;
+
 
   // time format
   const [timeLeft, setTimeLeft] = useState(60);
@@ -35,8 +37,10 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const onSubmit = async (data) => {
     const otp = data.otp.join("");
    
-  const provider = role === "teacher" ? true : false;
-  const dataSend =  { email:mail,otp, provider,}
+  const dataSend =  { email:mail,otp}
+  if (provider) {
+    dataSend.provider = provider;
+  }
     try {
       const response = await verifyEmail({dataSend}).unwrap();
       console.log("Verify Email Response:", response);
