@@ -28,21 +28,27 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     },
   });
   const [resendOtp, { isLoading }] = useResend_otpMutation();
-
   // Use verifyEmail mutation
   const [verifyEmail, { isLoading: loadingSending }] =
     useVerify_emailMutation();
 
   const onSubmit = async (data) => {
-    const otp_code = data.otp.join("");
-
+    const otp = data.otp.join("");
+   
+  const provider = role === "teacher" ? true : false;
+  const dataSend =  { email:mail,otp, provider,}
     try {
-      const response = await verifyEmail({ otp_code}).unwrap();
+      const response = await verifyEmail({dataSend}).unwrap();
       console.log("Verify Email Response:", response);
-      handleValidateOtp(); // Call the provided callback on success
+      if(response.code === 0){
+        handleValidateOtp(); // Call the provided callback on success
+      }else if(response.code === 1) {
+        setResponseError(response.message)
+        console.error("Verification Error:", response.message || response);
+      }
     } catch (err) {
-      setResponseError(err?.data?.message)
-      console.error("Verification Error:", err?.data?.message || err);
+      // setResponseError(err?.data?.message)
+      // console.error("Verification Error:", err?.data?.message || err);
     }
   };
 
@@ -98,7 +104,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
         <HeadTitle
                    title={{
                      head: "Check your mail",
-                    subTitle: `We have sent an OTP to your mail ${mail?.email?.slice(0, 3)}*****@${mail?.email?.split("@")[1]?.slice(0, 2)}***.com`,
+                    subTitle: `We have sent an OTP to your mail ${mail?.slice(0, 3)}*****@${mail?.split("@")[1]?.slice(0, 2)}***.com`,
                    }}
                  />
           <form

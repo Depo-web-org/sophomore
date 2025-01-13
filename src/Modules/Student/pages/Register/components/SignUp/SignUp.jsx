@@ -4,13 +4,9 @@ import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import {
-  useResend_otpMutation,
-  useSignupMutation,
-} from "../../../../../../Redux/Auth/authApiSlice";
+import { useResend_otpMutation,  useSignupMutation,} from "../../../../../../Redux/Auth/authApiSlice";
 import { HeadTitle } from "../Login/Login";
 import { useDispatch, useSelector } from "react-redux";
-import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
 import UserRole from "../components/UserRole/UserRole";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
@@ -25,20 +21,12 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   // Redux Toolkit's useSignupMutation hook
   const [resendOtp] = useResend_otpMutation();
   const [signup, { isLoading, isError, error }] = useSignupMutation();
-
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
-
+  const {  register, handleSubmit,  control, formState: { errors }, } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-
+const [errorSubmit, setErrorSubmit] = useState(null)
   // const onSubmit = async (data) => {
   //   setMail(data);
   //   // try {
@@ -73,14 +61,16 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       provider: provider,
     };
     console.log("Data to Send:", payload);
+    setMail( data.email)
     try {
      const response= await signup({ userData: payload }).unwrap()
-     console.log(response.message  )
-        
         if(response.code === 0){
           handleSendOtp();
+        }else if(response.code ===1){
+          ResendOTP(data, handleSendOtp, setAlreadyAv);
         }else{
           console.error("Signup Error:", response.message );
+          
         }
     } 
     catch (err) {
@@ -143,10 +133,10 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
           >
             <UserRole role={role} dispatch={dispatch} />
             {/*First Name Field */}
-            <div className='flex gap-x-2 '> 
+            <div className='flex gap-2 flex-wrap  '> 
               <label
                 htmlFor="first_name"
-                className="w-1/2 bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between "
+                className="w-[calc(50%-8px)] bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between "
               >
                 <input
                   type="text"
@@ -155,7 +145,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     required: "First Name is required",
                     pattern: {
                       value: /^[a-zA-Z]+$/,
-                      message: "Name must contain only letters",
+                      message: "First Name must contain only letters",
                     }
                   })}
                   className="outline-none text-base w-full"
@@ -167,7 +157,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
                <label
                 htmlFor="last_name"
-                className="w-1/2 bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
+                className="w-[calc(50%-8px)] bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
               >
                 <input
                   type="text"
@@ -176,7 +166,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                     required: "Last Name is required",
                     pattern: {
                       value: /^[a-zA-Z]+$/,
-                      message: "Name must contain only letters",
+                      message: "Last Name must contain only letters",
                     }
                   })}
                   className="outline-none text-base w-full"
@@ -184,9 +174,13 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
                 />
               </label>
            
-            </div>
-            {/* {errors.first_name || errors.last_name && <>
-  <div className='flex justify-evenly'>
+
+
+
+
+
+              {errors.first_name || errors.last_name ? <>
+  <div className='flex justify-evenly w-full'>
     {errors.first_name && (
       <p className="text-red-500 text-sm text-center font-medium">
         {errors.first_name.message} 
@@ -198,7 +192,9 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
       </p>
     )}
   </div>
-</>} */}
+</> : null}
+            </div>
+           
 
             
 
@@ -357,17 +353,20 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
               type="submit"
               disabled={
                 isLoading ||
-                errors.full_name ||
+                errors.first_name || 
+                errors.last_name ||
                 errors.password2 ||
                 errors.password ||
                 errors.email ||
                 errors.phone_number
               } // Disable if loading
+
               className={`inline-flex w-full rounded-lg ${
                 isLoading
                   ? "bg-white text-white "
                   : ` ${
-                      errors.full_name ||
+                errors.first_name || 
+                errors.last_name ||
                       errors.password2 ||
                       errors.password ||
                       errors.email ||

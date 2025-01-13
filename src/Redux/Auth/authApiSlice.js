@@ -6,7 +6,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     login: builder.mutation({
       query: ({ userData, role }) => {
         return {
-          url: `doConsumerSignin.php/${role}/`,
+          url: `doConsumerSignin.php`,
           method: "POST",
           body: userData,
         };
@@ -41,11 +41,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
     }),
     verify_email: builder.mutation({
-      query: ({ otp_code }) => {
+      query: ({dataSend}) => {
+        console.log(dataSend)
         return {
-          url: "getOTPForDepo.php",
+          url: "getConsumerVerified.php",
           method: "POST",
-          body: { otp_code },
+          body:  dataSend ,
         };
       },
     }),
