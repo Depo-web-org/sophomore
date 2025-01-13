@@ -4,7 +4,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { useResend_otpMutation,  useSignupMutation,} from "../../../../../../Redux/Auth/authApiSlice";
+import { useGetOTpMutation,  useSignupMutation,} from "../../../../../../Redux/Auth/authApiSlice";
 import { HeadTitle } from "../Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import UserRole from "../components/UserRole/UserRole";
@@ -19,7 +19,8 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const [alreadyAv, setAlreadyAv] = useState(false);
 
   // Redux Toolkit's useSignupMutation hook
-  const [resendOtp] = useResend_otpMutation();
+  const [ getOTp] = useGetOTpMutation();
+  
   const [signup, { isLoading, isError, error }] = useSignupMutation();
   const {  register, handleSubmit,  control, formState: { errors }, } = useForm();
   const [showPassword, setShowPassword] = useState(false);
@@ -101,8 +102,9 @@ const [errorSubmit, setErrorSubmit] = useState(null)
   //645838
   // Redux Toolkit's useResend_otpMutation hook
   const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
+    const provider = role === "teacher" ? true : false;
     try {
-      await resendOtp({ email: data.email, role }).unwrap();
+      await  getOTp({ email: data.email }).unwrap();
       handleSendOtp(); // Call the success callback
     } catch (err) {
       if (
