@@ -5,12 +5,14 @@ import ChooseSchool from "./Components/Schools/ChooseSchool";
 import ChooseCard from "./Components/choose/ChooseCard";
 
 const Home = () => {
-  const { token, user } = useSelector((state) => state.auth);
+  const {  user } = useSelector((state) => state.auth);
   const {role}=useSelector((state)=>state.role)|| user.role;
+  const Token= localStorage.getItem('Token');
+
   return (
     <>
       <Hero />
-      {token && role === "student" && <HomeMin />}
+      {Token && role === "student" && <HomeMin />}
       <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
         <ChooseSchool />
         <ChooseCard />

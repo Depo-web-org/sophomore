@@ -16,7 +16,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { token, user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  const Token= localStorage.getItem('Token');
+
   const { role } = useSelector((state) => state.role);
 
   const navItems = useMemo(() => {
@@ -25,18 +27,18 @@ const Navbar = () => {
       { text: `About Us`, link: "/about" },
       { text: `Contact Us`, link: "/contact" },
     ];
-    if (token && role === "student") {
+    if (Token && role === "student") {
       // Add protected items only if authenticated as a student
       items.push(
         { text: "My Learning", link: "/mylearning" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );
-    } else if (token && role !== "student") {
+    } else if (Token && role !== "student") {
       items.push({ text: "Dashboard", link: "/teacherupload" });
     }
     return items;
-  }, [token, role]);
+  }, [Token, role]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   useEffect(() => {
@@ -83,7 +85,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            {token && role === "student" && (
+            {Token && role === "student" && (
               <Link
                 to={"/profile"}
                 className="ml-3 overflow-hidden rounded-full border border-gray-300 shadow-inner"
@@ -96,7 +98,7 @@ const Navbar = () => {
               </Link>
             )}
 
-            {!token && (
+            {!Token && (
               <button
                 onClick={() => navigate("/register")}
                 className="bg-primary py-2 px-8 rounded-full font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
@@ -144,7 +146,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
-            {token && role === "student" && (
+            {Token && role === "student" && (
               <NavLink
                 to={"/profile"}
                 onClick={toggleMenu}
@@ -159,7 +161,7 @@ const Navbar = () => {
               </NavLink>
             )}
           </ul>
-          {!token && (
+          {!Token && (
             <button
               onClick={() => navigate("/register")}
               className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"

@@ -8,30 +8,20 @@ const StudentProtectedRoute = ({ children }) => {
   const { token, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [triggerRefreshToken] = useRefreshTokenMutation();
+  const Token= localStorage.getItem('Token');
+  console.log(Token)
 
   useEffect(() => {
     const refreshAccessToken = async () => {
-      if (isTokenExpired(token)) {
-        const refresh = localStorage.getItem("refresh_token");
-        if (refresh) {
-          try {
-            const data = await triggerRefreshToken({ refresh }).unwrap();
-            dispatch(setCredentials({ token: data.access, user, refresh }));
-          } catch (err) {
-            console.error("Token refresh failed:", err);
-            dispatch(logOut());
-          }
-        } else {
-          dispatch(logOut());
-        }
-      }
+      if (isTokenExpired(Token)) {
+        dispatch(logOut());
     };
 
     refreshAccessToken();
-  }, [token, dispatch, user, triggerRefreshToken]);
+  }}, [Token, dispatch,]);
 
 
-  if (!token || user?.role !== "student") return <Navigate to="/register" />;
+  if (!Token || user?.role !== "student") return <Navigate to="/register" />;
 
   return children;
 };
