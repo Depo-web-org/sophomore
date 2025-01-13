@@ -3,9 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const TeacherProtectedRoute = ({ children }) => {
-  const { token, user } = useSelector((state) => state.auth);
+  const Token= localStorage.getItem('Token');
+
+  const {  user } = useSelector((state) => state.auth);
   const {role}=useSelector((state)=>state.role)|| user.role;
-  if (!token) {
+  if (!Token) {
     // Redirect to login if not authenticated
     return <Navigate to="/register" />;
   }
