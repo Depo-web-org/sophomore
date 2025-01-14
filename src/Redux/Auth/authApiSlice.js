@@ -122,5 +122,6 @@ export const {
   useChange_passwordMutation,
   useLogoutMutation,
   useRefreshTokenMutation,
-  useGetOTpMutation
+  useGetOTpMutation,
+  useUpdateProfileMutation
 } = authApiSlice;

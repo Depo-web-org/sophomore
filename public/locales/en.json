@@ -1,0 +1,17 @@
+{
+  "footer":{  "brand": "Sophomore",
+  "request_info": "Request More Information",
+  "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",
+  "contact_us": "Contact Us",
+  "menu": {
+    "home": "Home",
+    "about_us": "About Us",
+    "contact_us": "Contact Us"
+  }
+},
+ "my_learning": {
+    "title": "Continue your learning Journey",
+    "description": "Access all the courses you’ve purchased and continue learning at your own pace."
+  }
+
+}

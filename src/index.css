@@ -28,6 +28,18 @@ body::-webkit-scrollbar-thumb {
   border-radius: 1px;
 }
 
+
+/* lang direction  */
+html[lang="ar"] {
+  direction: rtl;
+  text-align: right;
+}
+html[lang="en"] {
+  direction: ltr;
+  text-align: left;
+}
+
+ 
 @supports not selector(::-webkit-scrollbar) {
   body {
     scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);

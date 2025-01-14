@@ -6,7 +6,8 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInformation } from "../../Redux/ UserInformation/ UserInformationSlice";
-
+import i18n from "../../i18n";
+ 
 const Navbar = () => {
 
   const dispatch = useDispatch();
@@ -48,6 +49,26 @@ const Navbar = () => {
   }, [dispatch, status]);
 
 
+
+
+ 
+
+
+  const toggleLanguage = () => {
+    const newLanguage = i18n.language === "en" ? "ar" : "en";
+   // change in Html 
+     document.documentElement.setAttribute("lang", newLanguage);
+     document.documentElement.setAttribute("dir", newLanguage === "ar" ? "rtl" : "ltr");
+   // change in i18n Lang
+     i18n.changeLanguage(newLanguage)
+     .then(() => localStorage.setItem("language", newLanguage))
+ };
+
+
+
+
+
+
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
       <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
@@ -58,12 +79,26 @@ const Navbar = () => {
               alt="logo"
               className="h-12 lg:h-8 w-auto hover:rotate-[360deg] duration-1000"
             />
+
+
+
             <p
               style={{ textShadow: "0px 5px 6px rgba(0, 0, 0, 0.25)" }}
               className="hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2"
             >
-              Sophomore
+              Sophomore       
+
             </p>
+
+        <button
+        className="text-secondary ps-1 font-bold text-[24px] z-40 leading-[29.05px] "
+        onClick={toggleLanguage}
+       >
+       {i18n.language === "en" ?  "  ع "  :"En"}
+        </button>
+
+
+
           </div>
         </Link>
 
