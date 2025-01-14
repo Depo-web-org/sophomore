@@ -6,11 +6,11 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInformation } from "../../Redux/ UserInformation/ UserInformationSlice";
- 
+import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
  
 const Navbar = () => {
-  const {  i18n } = useTranslation();
+  const { t } = useTranslation(); 
 
   const dispatch = useDispatch();
   // Get User Information 
@@ -26,22 +26,22 @@ const Navbar = () => {
 
   const navItems = useMemo(() => {
     const items = [
-      { text: `Home`, link: "/" },
-      { text: `About Us`, link: "/about" },
-      { text: `Contact Us`, link: "/contact" },
+      { text: t("header.menu.home"), link: "/" },
+      { text: t("header.menu.about_us"), link: "/about" },
+      { text: t("header.menu.contact_us"), link: "/contact" },
     ];
     if (Token && role === "student") {
       // Add protected items only if authenticated as a student
       items.push(
-        { text: "My Learning", link: "/mylearning" },
+        { text: t("header.menu.my_learning"), link: "/mylearning" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );
     } else if (Token && role !== "student") {
-      items.push({ text: "Dashboard", link: "/teacherupload" });
+      items.push({ text: t("header.menu.dashboard"), link: "/teacherupload" });
     }
     return items;
-  }, [Token, role]);
+  }, [Token, role,t]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   useEffect(() => {
@@ -140,7 +140,7 @@ const Navbar = () => {
                 onClick={() => navigate("/register")}
                 className="bg-primary py-2 px-8 rounded-full font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
               >
-                Login
+              {t("header.menu.login")}
               </button>
             )}
           </div>
@@ -160,7 +160,7 @@ const Navbar = () => {
       {isMenuOpen && (
         <>
           <div
-            className="md:hidden absolute top-16 left-1/2 -translate-x-1/2 right-0 bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-2xl mt-2 py-4 px-6 w-5/6 z-[9999]"
+            className="md:hidden absolute top-16 left-1/2 -translate-x-1/2  bg-white backdrop-blur-[5px] border border-white/20 shadow-md rounded-2xl mt-2 py-4 px-6 w-5/6 z-[9999]"
             onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
           >
             <ul className="flex flex-col gap-4 font-semibold ">
@@ -174,9 +174,9 @@ const Navbar = () => {
                                      <span className="text-base flex items-center gap-2">
                     {item.icon}{" "}
                     {item.link === "/cart"
-                      ? "Cart"
+                      ? t("header.menu.cart")
                       : item.link === "/wishlist"
-                      ? "wishlist"
+                      ?  t("header.menu.wishlist")
                       : ""}
                   </span>
                   {item.text}
@@ -194,7 +194,7 @@ const Navbar = () => {
                   alt="profile avatar"
                   className="size-8 object-cover rounded-full"
                 />
-                Profile
+                {t("header.menu.profile")}
               </NavLink>
             )}
           </ul>
@@ -203,7 +203,7 @@ const Navbar = () => {
               onClick={() => navigate("/register")}
               className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
             >
-              Login
+              {t("header.menu.login")}
             </button>
           )}
         </div>

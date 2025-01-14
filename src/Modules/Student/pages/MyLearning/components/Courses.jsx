@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import LearningCard from "./LearningCard";
 
 const courses = [
@@ -66,11 +67,13 @@ const courses = [
 
 
 export default function Courses() {
+  const { t } = useTranslation(); // Initialize the translation hook
+
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="w-full flex flex-col gap-4 ">
         <p className="text-2xl font-semibold text-white py-8">
-          Not finished yet
+        {t("courses.not_finished_yet")}
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6  ">
           {courses
@@ -88,7 +91,7 @@ export default function Courses() {
       <div className="w-full flex flex-col gap-4 py-2 border-t border-gray-500">
         <p className="text-2xl font-semibold text-white py-8">
           
-          Finished Courses
+        {t("courses.finished_courses")}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
           {courses

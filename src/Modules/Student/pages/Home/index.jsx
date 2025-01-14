@@ -3,6 +3,7 @@ import Hero from "./Components/Hero/Hero";
 import HomeMin from "./Components/Home min/HomeMin";
 import ChooseSchool from "./Components/Schools/ChooseSchool";
 import ChooseCard from "./Components/choose/ChooseCard";
+import { Grade } from "../Grades";
 
 const Home = () => {
   const {  user } = useSelector((state) => state.auth);
@@ -14,7 +15,8 @@ const Home = () => {
       <Hero />
       {Token && role === "student" && <HomeMin />}
       <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
-        <ChooseSchool />
+        {/* <ChooseSchool /> */}
+        <Grade/>
         <ChooseCard />
       </div>
     </>

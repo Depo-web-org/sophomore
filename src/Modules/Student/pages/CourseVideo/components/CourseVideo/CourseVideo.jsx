@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Video() {
   return (
@@ -27,6 +28,8 @@ export default function Video() {
 }
 
 function Units() {
+  const { t } = useTranslation(); // Initialize translation hook
+
   const [selectedUnits, setSelectedUnits] = useState([]);
 
   const handleUnitToggle = (unit) => {
@@ -38,7 +41,7 @@ function Units() {
   return (
     <div className="bg-slate-900 rounded-lg  p-6 w-full lg:max-w-md hover:shadow-[6px_6px_0px_0px_#F15C54] duration-150 transition-all shadow-[4px_4px_0px_0px_#F15C54]">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-bold text-white">Choose The Unit</h1>
+        <h1 className="text-xl font-bold text-white"> {t("choose_unit")} </h1>
       </div>
 
       <div className="space-y-4">
