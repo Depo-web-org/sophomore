@@ -74,35 +74,32 @@ const Navbar = () => {
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
       <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
-        <Link to={"/"}>
-          <div className="flex justify-start items-center pt-1 lg:ml-5 w-full">
+       <div className=" flex justify-center items-center ">
+       <Link to={"/"}>
+          <div className="flex justify-start items-center pt-1 lg:ms-5 w-full ">
             <img
               src={logo}
               alt="logo"
               className="h-12 lg:h-8 w-auto hover:rotate-[360deg] duration-1000"
             />
-
-
-
             <p
               style={{ textShadow: "0px 5px 6px rgba(0, 0, 0, 0.25)" }}
               className="hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent text-xl lg:text-2xl font-bold ml-2"
             >
-              Sophomore       
-
+                  {t("footer.brand")}
+              {/* Sophomore        */}
             </p>
-
-        <button
-        className="text-secondary ps-1 font-bold text-[24px] z-40 leading-[29.05px] "
-        onClick={toggleLanguage}
-       >
-       {i18n.language === "en" ?  "  ع "  :"En"}
-        </button>
-
-
-
           </div>
         </Link>
+        <button
+  
+        onClick={toggleLanguage}
+       >
+       {i18n.language === "en" ?  <img src="/images/eg.png" alt=""  className="size-5 rounded-full mx-1"/>  : <img src="/images/en.png" alt=""  className="size-5 rounded-full mx-1"/>}
+        </button>
+        </div>
+        
+        
 
         <div className="hidden md:flex items-center mr-5">
           <div className="w-auto text-white flex items-center gap-[-5px]">
