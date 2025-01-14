@@ -3,7 +3,7 @@ import Aos from "aos";
 import { useTranslation } from "react-i18next";
 
 export default function Sectinons() {
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -45,10 +45,10 @@ export default function Sectinons() {
           data-aos="fade-right"
           className="w-[85%] sm:w-[45%] absolute inset-0 pt-[20%] sm:pt-[10%] pl-[5%] text-left text-white font-medium"
         >
-          <span className="text-3xl lg:text-5xl bg-gradient-to-r from-sky-600 to-red-400 bg-clip-text text-transparent">
+          <span className={` ${i18n.language ===  "ar" ?  "flex justify-start p-5 " :""} text-3xl lg:text-5xl bg-gradient-to-r from-sky-600 to-red-400 bg-clip-text text-transparent`}>
             {t("mission.title")}
           </span>
-          <p className="text-sm sm:text-lg pt-3 text-gray-400">
+          <p className={`text-sm sm:text-lg pt-3 text-gray-400 ${i18n.language ===  "ar" ?  "text-right ps-5" :""} `}>
             {t("mission.description")}
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function Sectinons() {
           data-aos="fade-left"
           className="w-[80%] sm:w-[45%] italic absolute inset-y-0 right-0 mt-[20%] sm:mt-[10%] pr-[5%] text-white font-medium"
         >
-          <span className="text-3xl lg:text-5xl bg-gradient-to-r from-red-500 to-sky-400 bg-clip-text text-transparent">
+          <span className={`${i18n.language ===  "ar" ?  "flex justify-start p-5 " :""}  text-3xl lg:text-5xl bg-gradient-to-r from-red-500 to-sky-400 bg-clip-text text-transparent`}>
             {t("vision.title")}
           </span>
           <p className="text-sm sm:text-lg pt-3 text-gray-400">
@@ -85,16 +85,17 @@ export default function Sectinons() {
           data-aos="fade-right"
           className="italic w-full lg:w-[45%] absolute inset-0 pt-[23%] sm:pt-[10%] pl-[5%] text-left font-medium"
         >
-          <span className="text-3xl lg:text-5xl bg-gradient-to-r from-sky-500 to-red-400 bg-clip-text text-transparent">
-            {t("coreValues.title")}
-          </span>
-          <p className="text-sm sm:text-lg pt-3 text-gray-500">
-            {t("coreValues.values.0")} <br />
-            <span className="pl-8 block">{t("coreValues.values.1")}</span>
-            <span className="pl-14 block">{t("coreValues.values.2")}</span>
-            <span className="pl-20 block">{t("coreValues.values.3")}</span>
-            <span className="pl-28 block">{t("coreValues.values.4")}</span>
-          </p>
+        <span className={`text-3xl lg:text-5xl bg-gradient-to-r from-sky-500 to-red-400 bg-clip-text text-transparent ${i18n.language === "ar" ? "flex justify-start p-5" : ""}`}>
+  {t("coreValues.title")}
+</span>
+<p className={`text-sm sm:text-lg pt-3 text-gray-500 ${i18n.language === "ar" ? "rtl text-right p-5" : ""}`}>
+  <span className="block">{t("coreValues.values.0")}</span>
+  <span className={`pl-8 block ${i18n.language === "ar" ? "pr-8" : ""}`}>{t("coreValues.values.1")}</span>
+  <span className={`pl-14 block ${i18n.language === "ar" ? "pr-14" : ""}`}>{t("coreValues.values.2")}</span>
+  <span className={`pl-20 block ${i18n.language === "ar" ? "pr-20" : ""}`}>{t("coreValues.values.3")}</span>
+  <span className={`pl-28 block ${i18n.language === "ar" ? "pr-24" : ""}`}>{t("coreValues.values.4")}</span>
+</p>
+
         </div>
       </div>
     </section>

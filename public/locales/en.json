@@ -93,6 +93,11 @@
     "successMessage": "Form submitted successfully!",
     "errorMessage": "Something went wrong, please try again"
   },
+  "cart": {
+    "title": "Your Cart",
+    "emptyMessage": "Your Cart Is Empty",
+    "startShopping": "Start Shopping"
+  },
   "footer": {
     "brand": "Sophomore",
     "request_info": "Request More Information",
@@ -133,269 +138,84 @@
   },
   "choose_unit": "Choose The Unit",
 
-
-
  
-    "navItems": {
-      "home": "Home",
+    "aboutUs": {
+      "title": "About Us",
+      "subtext": "At Sophomore",
+      "description": ", we believe that education is the key to unlocking potential and shaping the future. Our platform is designed to provide students with access to high-quality, flexible learning experiences tailored to their unique needs and goals."
+    },
+    "mission": {
+      "title": "Mission",
+      "description": "To be the leading educational platform that empowers learners worldwide by providing innovative, accessible, and personalized learning experiences, shaping a future where knowledge knows no boundaries."
+    },
+    "vision": {
+      "title": "Vision",
+      "description": "To be the leading educational platform that empowers learners worldwide by providing innovative, accessible, and personalized learning experiences, shaping a future where knowledge knows no boundaries."
+    },
+    "coreValues": {
+      "title": "Core Values",
+      "values": ["Excellence", "Innovation", "Integrity", "Collaboration", "Accessibility"]
+    },
+    "navbar_profile": {
+      "profile": "Profile",
+      "security": "Security",
+      "subscriptions": "Subscriptions",
+      "logout": "Log Out"
+    },
+    "profile": {
+      "updatePassword": "Update Password",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "phoneNumber": "Phone Number",
+      "uploadPhoto": "Upload Photo",
+      "delete": "Delete",
+      "save": "Save"
+    },
+    "Security": {
+      "updatePassword": "Update Password",
+      "currentPassword": "Enter your current password",
+      "newPassword": "Enter New Password",
+      "Retype new Password": "Retype New Password",
+      "changePassword": "Change Password"
+    },
+    "logoutModal": {
+      "title": "Logout Confirmation",
+      "description": "Logging out will end your current session. You can always log back in to access your account.",
+      "logoutButton": "Logout",
+      "cancelButton": "Cancel"
+    },
+    "subscriptions": {
+      "title": "Subscriptions",
+      "description": "View your active courses",
+      "availableUntil": "Available until",
+      "date": "Nov 2025"
+    },
+    "invoice": {
+      "title": "Invoice",
+      "bilento": "Bilento",
+      "sophomore": "Sophomore",
+      "businessAddress": "Business address",
+      "cityCountry": "City, Country - 00000",
+      "cityState": "City, State, IM-000 000",
+      "taxId": "TAX ID: 00000012345678",
+      "invoiceNumber": "Invoice #",
+      "invoiceDate": "Invoice date",
+      "reference": "Reference",
+      "dueDate": "Due date",
       "services": "Services",
-      "career": "Career",
-      "portfolio": "Portfolio",
-      "about": "About Us",
-      "button-nav": "Contact Us"
-    },
-    "Hero": {
-      "h1-partOne": "Innovative ",
-      "span-One": "Digital",
-      "span-Two": " Solutions",
-      "h1-partTwo": "Tailored to Your Needs ",
-      "h2": "Leading the way in custom software and app development to enhance business efficiency and productivity",
-      "button-Home": "Services"
-    },
-    "HeaderInfo": {
-      "h2": "The Software Development Company",
-      "span": "That Empowers Businesses",
-      "box-one": " At Depo Web, we are a forward-thinking company specializing in innovative digital development and programming solutions that meet the evolving needs of modern businesses. Our goal is    simple yet impactful: to empower organizations by creating tailored digital solutions that not only meet their current needs but also position them for future growth.",
-      "box-Two-span-One": "Mission:",
-      "box-Two-p-One": "Highlight your mission to enhance business efficiency and productivity with tailored digital solutions",
-      "box-Two-span-Two": "Vision:",
-      "box-Two-p-Two": "To lead in digital innovation by empowering businesses with high-quality, customized technology solutions. At Depo, we transform ideas into digital realities that drive impact and enhance business success."
-    },
-    "OurServices": {
-      "title-OurServices": "Services",
-      "Graphic": "Graphic Design",
-      "FrontEND": "Front End Development",
-      "Game": "Game Design",
-      "Accounting": "Accounting and Financial analysis systems",
-      "UIUX": "UI/UX Design",
-      "Testing": "Software Testing",
-      "Mobile": "Mobile App Development",
-      "swipe-text": "Swipe to see all services"
-    },
-    "NotFound": {
-      "head-title": "Page Not Found",
-      "title": "Page Not Found",
-      "message": "The page you were looking for was not found",
-      "not-found-button": "Home"
-    },
-    "Contact": {
-      "pageInfo": "Got a Question?",
-      "Left Side": {
-        "h3": "Need Help ?",
-        "p": "Fill out the form and we will do all we can to help you",
-        "name": "Name",
-        "name-placeholder": "Full Name",
-        "name-require": "Name is required",
-        "email": "Email",
-        "email-placeholder": "Example@gmail.com",
-        "email-require": "Email is required",
-        "phone": " Phone Number",
-        "phone-placeholder": "Enter phone number",
-        "phone-require": "Phone is required",
-        "textarea": "Your Message",
-        "textarea-placeholder": "Write your inquiry",
-        "textarea-numberOfWords": "500 characters used. ",
-        "textarea-numberUsed": "/ 500 characters",
-        "textarea-require": "Message is required",
-        "button": "Confirm",
-        "recaptcha-error": "Please complete the reCAPTCHA verification.",
-        "success": "Thank you for contacting us! Your message has been received, and we will get back to you shortly. 👀❤️"
-      },
-      "Right Side": {
-        "h3": "For Direct inquiries",
-        "p": "Feel free to contact us through the following",
-        "Location": "Zahraa Al Maadi, Sama Towers, Building No. 9, 9th Floor, Apartment No. 93"
-      }
-    },
-    "services": {
-      "title": "What do we have to offer",
-      "header-title": "Our Services",
-      "header-content": "we specialize in delivering high-quality digital solutions tailored to meet modern business needs.",
-      "button-title": "Learn More About Our Solutions",
-      "web-title": "Web Application",
-      "web-content": "We create engaging web apps designed to captivate a global audience using React and Next js for Front-end and Django for Back-end.",
-      "application-title": "Application Development",
-      "application-content": "Custom mobile and desktop apps to elevate your business’s digital presence using Flutter framework.",
-      "website-title": "Website Development",
-      "website-content": "Well-designed websites that boost trust, user engagement, and lead generation.",
-      "games-title": "Games Development",
-      "games-content": "Combining creativity and technology to create engaging games across platforms.",
-      "financial-title": "Financial Analysis Systems",
-      "financial-content": "Simplify financial analysis with our reliable accounting management tools.",
-      "database-title": "Integrated Database Systems",
-      "database-content": "Efficiently manage, store, and analyze data with our database solutions.",
-      "consulting-title": "Consulting and Study Centers",
-      "consulting-content": "Consulting and research for informed decision-making in information and communications.",
-      "marketing-title": "Digital Marketing Solutions",
-      "marketing-content": "Comprehensive digital marketing to maximize your brand’s reach and impact.",
-      "career-title": "Career Development Coaching",
-      "career-content": "Coaching in key areas like security, testing, analytics, and UX design.",
-      "saas-title": "SaaS Development",
-      "saas-content": "Tailored SaaS solutions for efficient, cloud-based business operations.",
-      "ux-title": "User Experience Design",
-      "ux-content": "Crafting intuitive, visually appealing interfaces for an exceptional user experience."
-    },
-    "career": {
-      "title": "Join Our Team"
-    },
-    "no-career": {
-      "header-title": "There are no jobs available right now"
-    },
-    "footer": {
-      "address-title": "Address",
-      "address-content": "Zahraa Al Maadi, Sama Towers, Building No. 9, 9th Floor, Apartment No. 93",
-      "support-title": "Support",
-      "support-about": "About Us",
-      "support-contact": "Contact Us",
-      "support-faq": "FAQs",
-      "services-title": "Services",
-      "services-web": "Web Development",
-      "services-apps": "Application Development",
-      "services-games": "Games Development",
-      "services-database": "Integrated Database systems",
-      "map-button": "Get Directions",
-      "rights-title": " 2024 Depo Web - All rights reserved"
-    },
-    "helmet": {
-      "home": {
-        "title": "Depo Web | Transforming Ideas into Digital Solutions",
-        "description": "Depo Web specializes in innovative website and application development with a focus on achieving top-tier SEO. Our expert team delivers impactful, scalable solutions to drive your business growth.",
-        "keywords": "Depo Web, digital solutions, website development, SEO, scalable applications"
-      },
-      "about": {
-        "title": "About Depo Web | Empowering Businesses with Innovation",
-        "description": "Learn more about Depo Web's mission and values. We are dedicated to providing top-quality digital development services, empowering businesses with creative, impactful solutions.",
-        "keywords": "Depo Web, about us, digital development, business empowerment, scalable solutions"
-      },
-      "career": {
-        "title": "Careers at Depo Web | Join Our Innovative Team",
-        "description": "Explore career opportunities at Depo Web, where you can work with a team of skilled developers and creative thinkers to build impactful digital solutions.",
-        "keywords": "Depo Web careers, join our team, digital development jobs, innovation, skilled developers"
-      },
-      "portfolio": {
-        "title": "My Portfolio - Showcasing Projects & Skills",
-        "description": "Explore my portfolio showcasing my skills, projects, and achievements in web development, design, and programming.",
-        "keywords": "portfolio, web development, programming, projects, skills, achievements, design"
-      },
-      "services": {
-        "title": "Our Services | Comprehensive Digital Solutions by Depo Web",
-        "description": "Depo Web offers a range of services including web development, mobile app creation, and SEO optimization to ensure your digital presence stands out and performs.",
-        "keywords": "Depo Web, services, web development, app creation, SEO optimization, digital solutions"
-      },
-      "contact": {
-        "title": "Contact Depo Web | Let’s Build Your Digital Presence",
-        "description": "Get in touch with Depo Web for expert website and app development services. We’re here to help you create a digital presence that drives growth and success.",
-        "keywords": "Depo Web contact, website development, app development, digital solutions, growth"
-      }
-    },
-    "FAQsSection": {
-      "Title": "FAQs",
-      "Questions": [
-        {
-          "question": "What services does Depo web provide?",
-          "answer": "Depo web offers a wide range of digital development and programming services, including custom website design, mobile app development, e-commerce solutions, digital marketing, and software consulting. We aim to deliver solutions tailored to meet the unique needs of each client."
-        },
-        {
-          "question": "How long does it take to complete a project?",
-          "answer": "Project timelines vary based on the complexity and specific requirements. Typically, smaller projects may take a few weeks, while larger or more complex solutions might take several months. After an initial consultation, we provide an estimated timeline that aligns with your goals and deadlines."
-        },
-        {
-          "question": "How can I contact customer support?",
-          "answer": "You can reach our support team through our Contact Us page, by phone, or by email. We’re here to answer questions, provide updates, and offer assistance as needed. We strive to respond to all inquiries within 24 hours during business days."
-        }
-      ]
-    },
-  
-    "AboutUsSection": {
-      "propsTitle": " Get to know us better",
-      "Title": "About Depo web",
-      "Description": "At Depo Web, we are passionate about innovation and committed to transforming ideas into impactful digital solutions. With a team of skilled developers and creative thinkers, we specialize in providing a wide range of digital development and programming services tailored to meet the unique needs of each client. Our mission is to empower businesses by delivering high-quality scalable solutions that drive growth and success."
-    },
-  
-    "CardsSection": {
-      "Title": "Our Core Values",
-      "Cards": [
-        {
-          "Title": "Our Vision",
-          "Points": [
-            "• Become a leading digital solutions provider recognized for commitment to quality, innovation, and client success.",
-            "• Envision a future where Depo Web sets new standards in the digital industry.",
-            "• Help businesses worldwide reach their full potential through cutting-edge technology."
-          ]
-        },
-        {
-          "Title": "Our Mission",
-          "Points": [
-            "• Deliver customized, user-centered digital solutions that empower businesses in a rapidly evolving digital landscape.",
-            "• Commit to excellence in every project, with a focus on continuous improvement, collaboration, and integrity.",
-            "• Bring clients' visions to life through seamless and innovative digital experiences.",
-            "• Aim to support business growth through digital innovation and tailored solutions."
-          ]
-        },
-        {
-          "Title": "Our Values",
-          "Values": [
-            {
-              "Title": "• Innovation:",
-              "Description": "We embrace creativity and stay ahead of industry trends to deliver cutting-edge solutions."
-            },
-            {
-              "Title": "• Client-Centricity:",
-              "Description": "We prioritize our clients' needs, tailoring solutions to help them succeed."
-            },
-            {
-              "Title": "• Integrity:",
-              "Description": "We operate with transparency and honesty in every aspect of our work."
-            },
-            {
-              "Title": "• Excellence:",
-              "Description": "We focus on high-quality results that make a real impact."
-            },
-            {
-              "Title": "• Collaboration:",
-              "Description": "We believe in teamwork, combining ideas to create the best solutions."
-            }
-          ]
-        }
-      ]
-    },
-  
-    "portfolio": {
-      "Our portfolio":"Our portfolio",
-      "Title page":"Projects Underway",
-      "description page":"Our team is actively engaged in delivering these projects. Check back for progress updates as we work toward successful outcomes.",
-     
-      
-      "Delivendor": {
-        "name": "Delivendor",
-        "description": "Delevendor is a modern delivery app connecting users with a wide range of vendors, including restaurants and stores. It offers an intuitive interface, real-time order tracking, and secure payment options, ensuring a seamless and convenient delivery experience.",
-        "textClick": "click play"
-      },
-      "TheFaster": {
-        "name": "The Faster",
-        "description": "Faster is a cutting-edge mobile app for on-demand transportation, offering quick, reliable rides with real-time tracking, upfront pricing, and flexible payment options. Designed for speed and comfort, Faster ensures a seamless and satisfying user experience.",
-        "textClick": "click play"
-      },
-    
-      "Sophomore": {
-        "name": "Sophomore",
-        "description": "Sophomore is an innovative educational platform designed to empower students at every stage of their learning journey. By providing tailored courses, expert instructors, and interactive learning experiences, Sophomore bridges the gap between knowledge and practical application.",
-        "textClick": "click play"
-      
-      }
+      "qty": "Qty",
+      "base": "Base",
+      "lineTotal": "Line total",
+      "itemName": "Item Name",
+      "subtotal": "Subtotal",
+      "tax": "Tax (10%)",
+      "totalDue": "Total due",
+      "website": "www.punta.hz",
+      "phone": "+31 00030 00000",
+      "email": "info@punta.com"
     }
- 
-
-
-
-
-
-
-
-
-
-
-
+  
+  
 
 
 
