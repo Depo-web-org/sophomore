@@ -16,7 +16,9 @@
   },
   "courses": {
     "not_finished_yet": "Not finished yet",
-    "finished_courses": "Finished Courses"
+    "finished_courses": "Finished Courses",
+    "availability":"Available Until"
+
   },
   "header": {
     "brand": "Sophomore",
@@ -30,5 +32,13 @@
       "my_learning": "My Learning",
       "wishlist": "Wishlist"
     }
-  }
+  },
+  "tabs": {
+    "details": "Details",
+    "comments": "Comments",
+    "material": "Material"
+  },
+  
+    "choose_unit": "Choose The Unit"
+  
 }

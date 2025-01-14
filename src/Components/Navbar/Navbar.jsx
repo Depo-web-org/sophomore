@@ -140,7 +140,7 @@ const Navbar = () => {
                 onClick={() => navigate("/register")}
                 className="bg-primary py-2 px-8 rounded-full font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
               >
-                Login
+              {t("header.menu.login")}
               </button>
             )}
           </div>
@@ -203,7 +203,7 @@ const Navbar = () => {
               onClick={() => navigate("/register")}
               className="bg-primary py-2 px-6 rounded-md font-semibold hover:bg-secondary transition-all duration-200 text-white mt-4 w-full"
             >
-              Login
+              {t("header.menu.login")}
             </button>
           )}
         </div>

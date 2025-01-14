@@ -16,7 +16,8 @@
   },
   "courses": {
     "not_finished_yet": "لم تنتهِ بعد",
-    "finished_courses": "الدورات المنتهية"
+    "finished_courses": "الدورات المنتهية",
+    "availability":"متاح حتى"
   },
   "header": {
     "brand": "سوفومور",
@@ -30,5 +31,12 @@
       "my_learning": "تعليمي",
       "wishlist": "قائمة الرغبات"
     }
-  }
+  },
+  "tabs": {
+    "details": "التفاصيل",
+    "comments": "التعليقات",
+    "material": "المواد"
+  },
+  "choose_unit": "اختر الوحدة"
+
 }

@@ -34,11 +34,13 @@ const TimeCard =() => {
     return () => clearInterval(timer);
   }, []);
 
+  const { t } = useTranslation(); // Initialize the translation hook
+
   return (
     <div className="col-span-12 lg:col-span-5 flex justify-center lg:justify-end">
       <div className="bg-dark lg:w-52 lg:h-96 text-center p-8 rounded-3xl flex flex-col justify-between">
         <div>
-          <p className="font-bold text-base lg:text-xl">Available Until</p>
+          <p className="font-bold text-base lg:text-xl"> {t("courses.availability")}</p>
           <div className="bg-zinc-300 rounded-3xl overflow-hidden mt-5 m-5 lg:m-9">
             <div className="bg-red-500 p-1">
               <p className="font-bold text-base lg:text-xl">Nov</p>
