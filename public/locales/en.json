@@ -93,6 +93,11 @@
     "successMessage": "Form submitted successfully!",
     "errorMessage": "Something went wrong, please try again"
   },
+  "cart": {
+    "title": "Your Cart",
+    "emptyMessage": "Your Cart Is Empty",
+    "startShopping": "Start Shopping"
+  },
   "footer": {
     "brand": "Sophomore",
     "request_info": "Request More Information",
