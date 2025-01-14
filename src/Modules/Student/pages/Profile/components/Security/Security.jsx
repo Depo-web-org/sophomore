@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { ImSpinner9 } from "react-icons/im";
 import useFetch from "../../../../../../Hooks/UseFetch";
 import useChangePassword from "../../../../../../Hooks/UseChangePassword";
+import { useTranslation } from "react-i18next";
 
 export default function Security() {
+  const { t,i18n} = useTranslation();
+
   const { data, status, error } = useSelector((state) => state.userInformation);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -71,7 +74,7 @@ export default function Security() {
           <div className="relative sm:px-4 pt-4 w-full   ">
               <div className="w-full text-center lg:text-start text-nowrap">
               <p className="font-bold text-white lg:text-lg">{data?.name}</p>
-              <span className="text-mainGray text-xs lg:text-sm ">Update your Passwords</span>
+              <span className="text-mainGray text-xs lg:text-sm ">{t("Security.updatePassword")}</span>
               </div>
           </div>
         </div>
@@ -79,16 +82,16 @@ export default function Security() {
         </div>
 
       </div>
-
+ 
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full md:w-4/5 lg:w-3/5 m-auto  min-h-96  "
+        className={`w-full md:w-4/5 lg:w-3/5 min-h-96 ${i18n.language ===  "ar" ?  "ms-auto" :"m-auto"}`}
       >
         {/*first email */}
         <div className="relative border-b py-5">
           <span className="text-sm font-medium text-white  pb-2">
-            Enter your current password
+          {t("Security.currentPassword")}
           </span>
           <label
             htmlFor="old_password"
@@ -107,7 +110,8 @@ export default function Security() {
                 },
               })}
               className="outline-none w-[90%] py-4"
-              placeholder="Enter Your Old Password"
+              placeholder=  {t("Security.currentPassword")}
+
             />
             <button
               type="button"
@@ -126,7 +130,8 @@ export default function Security() {
 
         <div className="relative border-b py-5">
           <span className="text-sm font-medium text-white  pb-2">
-            Enter New Password
+            
+            {t("Security.newPassword")}
           </span>
           <label
             htmlFor="new_password"
@@ -145,7 +150,8 @@ export default function Security() {
                 },
               })}
               className="outline-none w-[90%] py-4"
-              placeholder="Enter Your Old Password"
+              placeholder={t("Security.newPassword")}
+
             />
             <button
               type="button"
@@ -164,7 +170,8 @@ export default function Security() {
 
         <div className="relative">
           <span className="text-sm font-medium text-white pb-2">
-            Retype new Password
+            {t("Security.Retype new Password")}
+            
           </span>
           <label
             htmlFor="password"
@@ -179,7 +186,8 @@ export default function Security() {
                   value === getValues("new_password") || "Passwords must match",
               })}
               className="outline-none w-[90%] py-4"
-              placeholder="Confirm new Password"
+              placeholder=  {t("Security.Retype new Password")}
+
             />
             <button
               type="button"
@@ -219,7 +227,7 @@ export default function Security() {
           {isLoading ? (
             <ImSpinner9 className="animate-spin text-3xl text-secondary" />
           ) : (
-            "Change Password"
+            `${t("Security.changePassword")}`
           )}
         </button>
 

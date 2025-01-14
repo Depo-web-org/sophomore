@@ -8,17 +8,20 @@ import LogoutModal from "./components/Security/LogoutModal";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import useFetch from "../../../../Hooks/UseFetch";
+import { useTranslation } from "react-i18next";
 
 function SideBarProfile(props) {
+  const { t} = useTranslation();
+
   return (
     <div
-      className={`${props.Active}  flex flex-col bg-[#111827] w-1/5 border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden   absolute items-start   h-full    px-2`}
+      className={`${props.Active}  flex flex-col bg-[#111827] w-1/5 border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden absolute items-start h-full px-2`}
     >
       <MdOutlineKeyboardDoubleArrowLeft
         onClick={() =>
           props.setActive(props.Active === "open" ? "close" : "open")
         }
-        className={` lg:hidden mb-3 ms-auto  w-7 h-7 text-gray-500 transition-transform duration-300 ${
+        className={` mb-3 ms-auto  w-7 h-7 text-gray-500 transition-transform duration-300 ${
           props.Active === "open" ? "rotate-180" : ""
         }`}
       />
@@ -36,7 +39,7 @@ function SideBarProfile(props) {
             }
           >
             <HiUserCircle className="w-6 h-6" />
-            <span className="text-sm sm:text-lg">Profile</span>
+            <span className="text-sm sm:text-lg">{t("navbar_profile.profile")}</span>
           </NavLink>
 
           <NavLink
@@ -50,7 +53,7 @@ function SideBarProfile(props) {
             }
           >
             <HiClipboardList className="w-6 h-6" />
-            <span className="text-sm sm:text-lg">Security</span>
+            <span className="text-sm sm:text-lg">{t("navbar_profile.security")}</span>
           </NavLink>
 
           <NavLink
@@ -64,7 +67,7 @@ function SideBarProfile(props) {
             }
           >
             <FaRegHeart className="w-6 h-6" />
-            <span className="text-sm sm:text-lg">Subscriptions</span>
+            <span className="text-sm sm:text-lg">{t("navbar_profile.subscriptions")}</span>
           </NavLink>
         </div>
         <div
@@ -72,7 +75,7 @@ function SideBarProfile(props) {
           className={`tab text-white mb-44 group p-2 w-full flex items-center gap-4 rounded-lg transition-all duration-500`}
         >
           <RiLogoutBoxLine className="w-6 h-6" />
-          <button>Log out</button>
+          <button>{t("navbar_profile.logout")}</button>
         </div>
       </div>
     </div>
@@ -80,6 +83,8 @@ function SideBarProfile(props) {
 }
 
 export default function Profile() {
+  const {  i18n} = useTranslation();
+
   const [Active, setActive] = useState("close");
   const [OpseModel, setOpseModel] = useState(false);
   
@@ -103,7 +108,7 @@ export default function Profile() {
       ></SideBarProfile>
       {OpseModel && <LogoutModal setOpseModel={setOpseModel} />}
 
-      <div className="w-4/5 ml-auto lg:pl-8 xl:pl-0 ">
+      <div className={`w-4/5 ml-auto lg:pl-8 xl:pl-0  ${i18n.language ===  "ar" ?  "ms-auto" :"me-auto"}`}>
         <Outlet />
       </div>
     </div>
