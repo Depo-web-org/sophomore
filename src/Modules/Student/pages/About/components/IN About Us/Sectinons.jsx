@@ -20,7 +20,7 @@ export default function Sectinons() {
         />
         <div
           data-aos="fade-down"
-          className="absolute inset-0 pt-28 lg:pt-[15%] px-[3%] lg:px-[24%] text-center text-white font-semibold"
+          className="absolute inset-0 pt-28 lg:pt-[15%] px-[3%] lg:px-[24%] text-center text-white font-semibold "
         >
           <span className="text-3xl lg:text-5xl font-bold bg-gradient-to-r from-white to-red-500 bg-clip-text text-transparent">
             {t("aboutUs.title")}
@@ -35,15 +35,15 @@ export default function Sectinons() {
       </div>
 
       {/* item 2 */}
-      <div className="relative overflow-hidden italic">
+      <div className="relative overflow-hidden italic ">
         <img
           className="w-full min-h-96 object-cover"
           src="/images/About Us/header2.svg"
           alt="img header2"
         />
         <div
-          data-aos="fade-right"
-          className="w-[85%] sm:w-[45%] absolute inset-0 pt-[20%] sm:pt-[10%] pl-[5%] text-left text-white font-medium"
+          data-aos={i18n.language ===  "ar" ? "fade-left" :"fade-right"}
+          className={`w-[85%] sm:w-[45%] ${ i18n.language ===  "ar" ?"ms-auto":"me-auto "} absolute inset-0 pt-[20%] sm:pt-[10%] pl-[5%] text-left text-white font-medium `}
         >
           <span
             className={` ${
@@ -70,7 +70,7 @@ export default function Sectinons() {
           alt="img header3"
         />
         <div
-          data-aos="fade-left"
+          data-aos={i18n.language ===  "ar" ? "fade-right":"fade-left"}
           className="w-[80%] sm:w-[45%] italic absolute inset-y-0 right-0 mt-[20%] sm:mt-[10%] pr-[5%] text-white font-medium"
         >
           <span
@@ -94,8 +94,9 @@ export default function Sectinons() {
           alt="img header4"
         />
         <div
-          data-aos="fade-right"
-          className="italic w-full lg:w-[45%] absolute inset-0 pt-[23%] sm:pt-[10%] pl-[5%] text-left font-medium"
+          data-aos={i18n.language ===  "ar" ? "fade-left":"fade-right"}
+
+          className={`italic w-full lg:w-[45%]  ${i18n.language ===  "ar" ? "ms-auto":""} absolute inset-0 pt-[23%] sm:pt-[10%] pl-[5%] text-left font-medium`}
         >
           <span
             className={`text-3xl lg:text-5xl bg-gradient-to-r from-sky-500 to-red-400 bg-clip-text text-transparent ${
