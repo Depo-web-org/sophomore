@@ -30,8 +30,7 @@ const Subjects = () => {
           </h2>
         </div>
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-4">
-          {translatedData ? (
-            translatedData.map((subj, index) => {
+          {data ? translatedData?.map((subj, index) => {
               // Use English name for the URL
               const englishSubj = englishData[index];
               return (
@@ -43,11 +42,12 @@ const Subjects = () => {
                 </div>
               );
             })
-          ) : (
+         : (
             <div className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
               <SkeletonCard />
             </div>
           )}
+
         </div>
       </section>
     </>
