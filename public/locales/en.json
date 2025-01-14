@@ -1,4 +1,99 @@
 {
+
+  "hero": {
+    "title": "Your Path to Knowledge Starts Here",
+    "subtitle": "Learn. Grow. Succeed. Discover courses tailored for your success.",
+    "button": "Learn More"
+  },
+  "chooseSchool": {
+  "title": "Get Started Now!",
+  "subtitle": "What type of school do you attend?"
+},
+"chooseCard": {
+    "title": "Why Choose",
+    "sophomore": "Sophomore",
+    "features": [
+      {
+        "id": "Personalized",
+        "name": "Personalized Learning Paths",
+        "description": "Customized curriculum based on your goals and current skill level",
+        "img": "/images/Schools/Group-1.svg"
+      },
+      {
+        "id": "Expert",
+        "name": "Expert Instructors",
+        "description": "Learn from industry professionals with real-world experience",
+        "img": "/images/Schools/Icon-2.svg"
+      },
+      {
+        "id": "Interactive",
+        "name": "Interactive Content",
+        "description": "Engage with hands-on projects and real-time feedback",
+        "img": "/images/Schools/Icon-3.svg"
+      }
+    ]
+  },
+"learningSection": {
+  "title": "Let's Continue learning",
+  "myLearning": "My learning",
+  "subtitle": "Pick up from where you left",
+  "playButtonAlt": "Play",
+  "course": {
+    "name": "Course Name",
+    "description": "Course Description"
+  }
+},
+"contact": {
+  "partOne": {
+    "title": "Contact Us",
+    "description": "Have questions or need assistance? We're here to help! Reach out to us through any of the following channels, and our team will respond as soon as possible."
+  },
+  "partTwo": {
+    "title": "Get in touch with us",
+    "description": "Have an inquiry or feedback for us? Fill out the form to contact our team."
+  }
+},
+"gradePage": {
+    "title": "What is your current school grade ?",
+    "error": "An error occurred while fetching data.",
+    "noData": "No data available for the selected language."
+  },
+  "subjectsPage": {
+    "title": "What Subject do you want?"
+  },
+"formContact": {
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "firstNameError": {
+      "required": "First name is required",
+      "pattern": "First name must be 2-20 alphabetic characters"
+    },
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "lastNameError": {
+      "required": "Last name is required",
+      "pattern": "Last name must be 2-20 alphabetic characters"
+    },
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "emailError": {
+      "required": "Email is required",
+      "pattern": "Enter a valid email address"
+    },
+    "phone": "Phone",
+    "phonePlaceholder": "Enter your phone number",
+    "phoneError": "Phone number is invalid",
+    "message": "Message",
+    "messagePlaceholder": "Enter your message",
+    "messageError": {
+      "required": "Message is required",
+      "noLeadingSpaces": "Message cannot start with spaces"
+    },
+    "recaptchaError": "Please complete the recaptcha",
+    "submitButton": "Send Message",
+    "successMessage": "Form submitted successfully!",
+    "errorMessage": "Something went wrong, please try again"
+  },
   "footer":{  "brand": "Sophomore",
   "request_info": "Request More Information",
   "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",

@@ -4,7 +4,6 @@ import { useMemo } from "react";
 const Breadcrumbs = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
-
   const breadcrumbs = useMemo(
     () =>
       pathnames.map((name, index) => {
