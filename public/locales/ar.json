@@ -113,6 +113,11 @@
     "finished_courses": "الدورات المنتهية",
     "availability": "متاح حتى"
   },
+  "cart": {
+    "title": "عربة التسوق الخاصة بك",
+    "emptyMessage": "عربة التسوق الخاصة بك فارغة",
+    "startShopping": "ابدأ التسوق"
+  },
   "header": {
     "brand": "سوفومور",
     "menu": {

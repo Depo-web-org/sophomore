@@ -67,7 +67,7 @@ export default function LearningHero() {
 
   return (
     <section
-      className={`text-white relative min-h-[720px] bg  heroBg flex flex-col items-center justify-center`}
+      className={`text-white relative min-h-[720px] bg ${style.heroBg}  heroBg flex flex-col items-center justify-center`}
     >
       <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto py-32 grid grid-cols-12 gap-y-3 relative z-10">
         {/* Right */}
