@@ -171,7 +171,7 @@ export const HeadTitle = ({ title }) => {
   return (
     <div className="flex flex-col justify-start items-center lg:items-start gap-2  w-full">
       <img
-        src=".//images/logos/logo.svg"
+        src="/images/logos/logo.svg"
         alt=""
         className="size-52 lg:size-auto lg:hidden"
       />

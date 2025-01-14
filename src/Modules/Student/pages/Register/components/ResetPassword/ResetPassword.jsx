@@ -78,7 +78,7 @@ const ResetPassword = () => {
     }
   };
 
-  const [timeLeft, setTimeLeft] = useState(3);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   const formatTime = (time) => {
@@ -104,16 +104,26 @@ const ResetPassword = () => {
     setResendOTPModal(false);
     setIsResendDisabled(true);
     setTimeLeft(60);
-    await forgetpassword({ email ,role})
-      .unwrap()
-      .catch((err) => console.log("Error", err));
+    try {
+      const userData = { email, };
+
+      if (provider) {
+        userData.provider = provider;
+      }
+      const response = await forgetpassword({
+        userData,
+      }).unwrap();
+
+    } catch{
+      console.log(error)
+    }
   };
  
   return (
     <>
-      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
+      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden ">
         <div className="flex flex-col items-start b justify-center lg:gap-8  w-full slide-in-left   lg:min-h-screen">
-          <div className=" w-full ">
+          <div className=" w-full  ">
             <HeadTitle
               title={{
                 head: "Check Your Mail for OTP",
@@ -123,7 +133,7 @@ const ResetPassword = () => {
               }}
             />
           </div>
-          <div className="w-full ">
+          <div className="w-full mt-6">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"

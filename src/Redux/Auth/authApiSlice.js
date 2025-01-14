@@ -52,11 +52,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
 
     resend_otp: builder.mutation({
-      query: ({ userData}) => {
+      query: ({dataSend}) => {
+        console.log(dataSend)
+
         return {
           url: `doResendOTP.php`,
           method: "POST",
-          body: userData,
+          body: dataSend,
         };
       },
     }),
@@ -100,6 +102,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body:  userData ,
       }),
     }),
+    updateProfile: builder.mutation({
+      query: ({ userData}) => ({
+        url: "updateConsumerProfile.php",
+        method: "POST",
+        body:  userData ,
+      }),
+    }),
   }),
 });
 
@@ -113,5 +122,6 @@ export const {
   useChange_passwordMutation,
   useLogoutMutation,
   useRefreshTokenMutation,
-  useGetOTpMutation
+  useGetOTpMutation,
+  useUpdateProfileMutation
 } = authApiSlice;

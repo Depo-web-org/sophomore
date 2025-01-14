@@ -20,7 +20,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
 
   // time format
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(1);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   // react hook form
@@ -29,7 +29,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
       otp: ["", "", "", "", "", ""],
     },
   });
-  const [resendOtp, { isLoading }] = useResend_otpMutation();
+  const [resend_otp, { isLoading }] = useResend_otpMutation();
   // Use verifyEmail mutation
   const [verifyEmail, { isLoading: loadingSending }] =
     useVerify_emailMutation();
@@ -92,18 +92,24 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   // ===> resend-otp endpoints name
 
   const reSendOtp = async () => {
-    setResendOTPModal(false);
-    setIsResendDisabled(true);
-    setTimeLeft(60);
-    await resendOtp({ email: mail.email , role})
+    const dataSend =  { email:mail}
+    if (provider) {
+      dataSend.provider = provider;
+    }
+    console.log(dataSend)
+
+    await resend_otp({dataSend} )
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
+      setResendOTPModal(false);
+      setIsResendDisabled(true);
+      setTimeLeft(1);
   };
 
   return (
     <>
-      <div className="w-full my-auto flex justify-center  ">
+      <div className="w-full my-auto flex justify-center   ">
         <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
                    title={{
