@@ -102,6 +102,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body:  userData ,
       }),
     }),
+    updateProfile: builder.mutation({
+      query: ({ userData}) => ({
+        url: "updateConsumerProfile.php",
+        method: "POST",
+        body:  userData ,
+      }),
+    }),
   }),
 });
 
