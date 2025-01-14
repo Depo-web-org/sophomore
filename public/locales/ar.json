@@ -1,4 +1,99 @@
 {
+
+  "hero": {
+    "title": "طريقك إلى المعرفة يبدأ هنا",
+    "subtitle": "تعلّم. تطوّر. انجز. اكتشف دورات مصممة لنجاحك.",
+    "button": "المزيد"
+  },
+  "chooseSchool": {
+  "title": "ابدأ الآن!",
+  "subtitle": "اختار صفك الدراسي"
+},
+"chooseCard": {
+    "title": " لماذا تختار",
+    "sophomore": "سوفومور",
+    "features": [
+      {
+        "id": "Personalized",
+        "name": "مسارات التعلم المخصصة",
+        "description": "منهج دراسي مخصص بناءً على أهدافك ومستوى مهاراتك الحالي",
+        "img": "/images/Schools/Group-1.svg"
+      },
+      {
+        "id": "Expert",
+        "name": "مدربون خبراء",
+        "description": "تعلم من محترفين لديهم خبرة عملية",
+        "img": "/images/Schools/Icon-2.svg"
+      },
+      {
+        "id": "Interactive",
+        "name": "محتوى تفاعلي",
+        "description": "تفاعل مع مشاريع عملية واحصل على ملاحظات في الوقت الفعلي",
+        "img": "/images/Schools/Icon-3.svg"
+      }
+    ]
+  },
+  "formContact": {
+    "firstName": "الاسم الأول",
+    "firstNamePlaceholder": "أدخل اسمك الأول",
+    "firstNameError": {
+      "required": "الاسم الأول مطلوب",
+      "pattern": "يجب أن يكون الاسم الأول بين 2-20 حرفًا أبجديًا"
+    },
+    "lastName": "اسم العائلة",
+    "lastNamePlaceholder": "أدخل اسم العائلة",
+    "lastNameError": {
+      "required": "اسم العائلة مطلوب",
+      "pattern": "يجب أن يكون اسم العائلة بين 2-20 حرفًا أبجديًا"
+    },
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "emailError": {
+      "required": "البريد الإلكتروني مطلوب",
+      "pattern": "يرجى إدخال بريد إلكتروني صالح"
+    },
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "phoneError": "رقم الهاتف غير صالح",
+    "message": "الرسالة",
+    "messagePlaceholder": "أدخل رسالتك",
+    "messageError": {
+      "required": "الرسالة مطلوبة",
+      "noLeadingSpaces": "لا يمكن أن تبدأ الرسالة بمسافات"
+    },
+    "recaptchaError": "يرجى إكمال اختبار reCAPTCHA",
+    "submitButton": "إرسال الرسالة",
+    "successMessage": "تم إرسال النموذج بنجاح!",
+    "errorMessage": "حدث خطأ ما، يرجى المحاولة مرة أخرى"
+  },
+  "learningSection": {
+    "title": "لنواصل التعلم",
+    "myLearning": "تعلّمي",
+    "subtitle": "تابع من حيث توقفت",
+    "playButtonAlt": "تشغيل",
+    "course": {
+      "name": "اسم الدورة",
+      "description": "وصف الدورة"
+    }
+  },
+  "contact": {
+      "partOne": {
+        "title": "تواصل معنا",
+        "description": "لديك أسئلة أو تحتاج إلى مساعدة؟ نحن هنا للمساعدة! تواصل معنا عبر أي من القنوات التالية وسيرد فريقنا في أقرب وقت ممكن."
+      },
+      "partTwo": {
+        "title": "ابقَ على تواصل معنا",
+        "description": "لديك استفسار أو ملاحظات؟ املأ النموذج للتواصل مع فريقنا."
+      }
+    },
+    "gradePage": {
+    "title": "ما هو صفك الدراسي الحالي ؟",
+    "error": "حدث خطأ أثناء استرداد البيانات.",
+    "noData": "لا توجد بيانات متوفرة للغة المحددة."
+  },
+  "subjectsPage": {
+    "title": "ما هي المادة التي تريدها ؟"
+  },
   "footer": {
     "brand": "سوفومور",
     "request_info": "اطلب المزيد من المعلومات",

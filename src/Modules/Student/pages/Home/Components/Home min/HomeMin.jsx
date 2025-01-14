@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { FaPlayCircle } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 export default function HomeMin() {
-  const HomeMin = [
+  const { t } = useTranslation();
+  const HomeItem = [
     {
       id: "Personalized",
       Name: "Math ",
@@ -27,25 +29,27 @@ export default function HomeMin() {
   return (
     <>
       <section className="text-white  pt-8 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+
+        
         <div className="lg:py-5">
           <div className="flex justify-between items-center flex-wrap gap-y-2">
             <p
               className="text-2xl lg:text-3xl
           xl:text-4xl pb-8 lg:pb-2  font-bold"
             >
-              Let&apos;s Continue learning
+            {t("learningSection.title")}
             </p>
             <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer hidden lg:block">
-              My learning
+            {t("learningSection.myLearning")}
             </p>
           </div>
           <p className="hidden lg:block text-sm lg:text-base font-bold py-1 lg:py-2 ">
-            Pick up from where you left
+          {t("learningSection.subtitle")}
           </p>
         </div>
 
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
-          {HomeMin.map((item) => (
+          {HomeItem.map((item) => (
             <div className="col-span-3 lg:col-span-4 " key={item.id}>
               {/* img */}
               <Link to={"/mylearning/course/Science"}>
@@ -70,6 +74,10 @@ export default function HomeMin() {
             </div>
           ))}
         </div>
+
+
+
+
       </section>
     </>
   );
