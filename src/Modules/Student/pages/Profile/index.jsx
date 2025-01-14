@@ -15,7 +15,7 @@ function SideBarProfile(props) {
 
   return (
     <div
-      className={`${props.Active}  flex flex-col bg-[#111827] w-1/5 border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden absolute items-start h-full px-2`}
+      className={`${props.Active}  flex flex-col bg-[#111827] border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden absolute items-start h-full px-2`}
     >
       <MdOutlineKeyboardDoubleArrowLeft
         onClick={() =>
@@ -26,21 +26,25 @@ function SideBarProfile(props) {
         }`}
       />
 
-      <div className="flex flex-col gap-2 justify-between h-full    ">
+      <div className="flex flex-col gap-2 justify-between h-full w-48">
         <div className="flex flex-col gap-2 justify-start   ">
+
+
           <NavLink
             to="myprofile"
             className={({ isActive }) =>
               `tab group p-3 w-full flex items-center gap-3 rounded-lg transition-all duration-500 ${
                 isActive
-                  ? "text-black bg-white"
-                  : "text-white hover:bg-white hover:text-black"
+                  ? "text-black bg-white  "
+                  : "text-white hover:bg-white hover:text-black "
               }`
             }
           >
             <HiUserCircle className="w-6 h-6" />
             <span className="text-sm sm:text-lg">{t("navbar_profile.profile")}</span>
           </NavLink>
+
+
 
           <NavLink
             to="security"
@@ -67,8 +71,11 @@ function SideBarProfile(props) {
             }
           >
             <FaRegHeart className="w-6 h-6" />
-            <span className="text-sm sm:text-lg">{t("navbar_profile.subscriptions")}</span>
+            <span className="text-sm sm:text-lg  ">{t("navbar_profile.subscriptions")}</span>
           </NavLink>
+
+
+
         </div>
         <div
           onClick={() => props.setOpseModel(true)}

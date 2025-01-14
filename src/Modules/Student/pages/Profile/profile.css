@@ -6,7 +6,7 @@
 .open {
   /* width: 250px !important; */
   transition: all 1s !important;
-  width: 200px;
+  width: 250px;
 }
 
 @media (min-width: 1280px) {
