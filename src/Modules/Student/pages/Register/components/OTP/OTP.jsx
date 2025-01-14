@@ -20,7 +20,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
 
   // time format
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(5);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   // react hook form
@@ -92,6 +92,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   // ===> resend-otp endpoints name
 
   const reSendOtp = async () => {
+    
     setResendOTPModal(false);
     setIsResendDisabled(true);
     setTimeLeft(60);
@@ -103,7 +104,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
   return (
     <>
-      <div className="w-full my-auto flex justify-center  ">
+      <div className="w-full my-auto flex justify-center   ">
         <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
                    title={{
