@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import CardImage from "/images/Profile/a57668df10fd5bd8d75fd99351111818.jpeg";
 import useFetch from "../../../../../../Hooks/UseFetch";
 import Invoice from "./Invoice";
+import { useTranslation } from "react-i18next";
 export default function Subscriptions() {
+  const { t  } = useTranslation();
   const { data } = useFetch(
     "https://os1907.github.io/Schools/Profile/Profile.json"
   );
@@ -30,24 +32,24 @@ export default function Subscriptions() {
     <>
       <div className="container pr-8">
         {/* top Text */}
-        <div className="flex w-full justify-start lg:justify-between flex-wrap items-center gap-y-2  ">
-          <div className="flex flex-col justify-between  ">
-            <p className="text-white font-bold text-sm md:text-lg">
-              Subscriptions
-            </p>
-            <span className="text-gray-500 font-normal  text-xs lg:text-sm">
-              View your active courses
-            </span>
-          </div>
-          <div className="flex flex-col justify-between   ">
-            <p className="text-white font-bold text-sm md:text-lg">
-              Available until
-            </p>
-            <span className="text-gray-500 font-normal text-xs lg:text-sm">
-              Nov 2025
-            </span>
-          </div>
-        </div>
+        <div className="flex w-full justify-start lg:justify-between flex-wrap items-center gap-y-2">
+      <div className="flex flex-col justify-between">
+        <p className="text-white font-bold text-sm md:text-lg">
+          {t("subscriptions.title")}
+        </p>
+        <span className="text-gray-500 font-normal text-xs lg:text-sm">
+          {t("subscriptions.description")}
+        </span>
+      </div>
+      <div className="flex flex-col justify-between">
+        <p className="text-white font-bold text-sm md:text-lg">
+          {t("subscriptions.availableUntil")}
+        </p>
+        <span className="text-gray-500 font-normal text-xs lg:text-sm">
+          {t("subscriptions.date")}
+        </span>
+      </div>
+    </div>
         {/* Card Subscriptions*/}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3  lg:gap-5 pt-2 lg:pt-10">

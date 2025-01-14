@@ -6,9 +6,11 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInformation } from "../../Redux/ UserInformation/ UserInformationSlice";
-import i18n from "../../i18n";
+ 
+import { useTranslation } from "react-i18next";
  
 const Navbar = () => {
+  const {  i18n } = useTranslation();
 
   const dispatch = useDispatch();
   // Get User Information 
