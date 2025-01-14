@@ -8,8 +8,8 @@ import { useUpdateProfileMutation } from "../../../../../../Redux/Auth/authApiSl
 import { useTranslation } from "react-i18next";
 
 export default function MyProfile() {
-    const { t} = useTranslation();
-  
+  const { t,i18n } = useTranslation();
+
   const { data } = useSelector((state) => state.userInformation);
 
   const [profileImage, setProfileImage] = useState(data?.profile || null);
@@ -21,26 +21,21 @@ export default function MyProfile() {
     formState: { errors },
   } = useForm();
 
-    const [updateProfile, { isLoading, isError, error }] =
+  const [updateProfile, { isLoading, isError, error }] =
     useUpdateProfileMutation();
 
-
-
-  const onSubmit = async(formData) => {
+  const onSubmit = async (formData) => {
     console.log("Form Submitted Data:", formData);
     try {
       const response = await updateProfile({ formData }).unwrap();
-      if(response.code===0) alert("Profile updated successfully!");
+      if (response.code === 0) alert("Profile updated successfully!");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  
-
-   
   };
 
   return (
-    <div  className="min-h-screen">
+    <div className="min-h-screen ">
       <div className="relative bg-gradient-to-r from-secondary to-primary w-full h-48 rounded-tl-[100px] rounded-tr-lg mb-40">
         <div className="flex flex-col lg:flex-row justify-center items-center absolute -bottom-[75%] lg:-bottom-[45%] left-1/2 -translate-x-1/2 xl:translate-x-0 xl:left-[5%] w-full">
           <img
@@ -50,20 +45,27 @@ export default function MyProfile() {
           />
           <div className="text-center lg:text-left text-white mt-4 lg:mt-0 lg:ml-6">
             <p className="font-bold text-lg">{data?.name || "Your Name"}</p>
-            <span className="text-mainGray text-sm">{t("profile.updatePassword")}</span>
+            <span className="text-mainGray text-sm">
+              {t("profile.updatePassword")}
+            </span>
           </div>
         </div>
       </div>
-   
-      <form
+
+
+      <form  
         onSubmit={handleSubmit(onSubmit)}
-        className="px-4 lg:px-8 lg:w-[70%] mx-auto"
+    
+        className={`px-4 lg:px-8 lg:w-[70%] ${i18n.language ===  "ar" ?  "ms-auto" :"mx-auto"}`}
       >
         {/* Name Fields */}
         <div className="flex flex-col sm:flex-row gap-4 mb-5">
           <div className="w-full">
-            <label htmlFor="first_name" className="block text-gray-700 font-medium">
-            {t("profile.firstName")}
+            <label
+              htmlFor="first_name"
+              className="block text-gray-700 font-medium"
+            >
+              {t("profile.firstName")}
             </label>
             <input
               type="text"
@@ -76,16 +78,21 @@ export default function MyProfile() {
                 },
               })}
               className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
-              placeholder= {t("profile.firstName")}
+              placeholder={t("profile.firstName")}
             />
             {errors.first_name && (
-              <p className="text-red-500 text-sm mt-1">{errors.first_name.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.first_name.message}
+              </p>
             )}
           </div>
 
           <div className="w-full">
-            <label htmlFor="last_name" className="block text-gray-700 font-medium">
-            {t("profile.lastName")}
+            <label
+              htmlFor="last_name"
+              className="block text-gray-700 font-medium"
+            >
+              {t("profile.lastName")}
             </label>
             <input
               type="text"
@@ -98,39 +105,45 @@ export default function MyProfile() {
                 },
               })}
               className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
-              placeholder=  {t("profile.lastName")}
+              placeholder={t("profile.lastName")}
             />
             {errors.last_name && (
-              <p className="text-red-500 text-sm mt-1">{errors.last_name.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.last_name.message}
+              </p>
             )}
           </div>
         </div>
 
         {/* Phone Number */}
         <div className="mb-5">
-          <label htmlFor="phone_number" className="block text-gray-700 font-medium">
-          {t("profile.phoneNumber")}
+          <label
+            htmlFor="phone_number"
+            className="block text-gray-700 font-medium"
+          >
+            {t("profile.phoneNumber")}
           </label>
           <Controller
-  name="phone_number"
-  control={control}
-  rules={{
-    validate: (value) =>
-      value ? true : "Phone number is required",
-  }}
-  render={({ field }) => (
-    <PhoneInput
-      {...field}
-      id="phone_number"
-      placeholder= {t("profile.phoneNumber")}
-      defaultCountry="EG"
-      className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
-    />
-  )}
-/>
+            name="phone_number"
+            control={control}
+            rules={{
+              validate: (value) => (value ? true : "Phone number is required"),
+            }}
+            render={({ field }) => (
+              <PhoneInput
+                {...field}
+                id="phone_number"
+                placeholder={t("profile.phoneNumber")}
+                defaultCountry="EG"
+                className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
+              />
+            )}
+          />
 
           {errors.phone_number && (
-            <p className="text-red-500 text-sm mt-1">{errors.phone_number.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.phone_number.message}
+            </p>
           )}
         </div>
 

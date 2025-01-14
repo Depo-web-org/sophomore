@@ -12,7 +12,7 @@ import useChangePassword from "../../../../../../Hooks/UseChangePassword";
 import { useTranslation } from "react-i18next";
 
 export default function Security() {
-  const { t} = useTranslation();
+  const { t,i18n} = useTranslation();
 
   const { data, status, error } = useSelector((state) => state.userInformation);
 
@@ -86,7 +86,7 @@ export default function Security() {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full md:w-4/5 lg:w-3/5 m-auto  min-h-96  "
+        className={`w-full md:w-4/5 lg:w-3/5 min-h-96 ${i18n.language ===  "ar" ?  "ms-auto" :"m-auto"}`}
       >
         {/*first email */}
         <div className="relative border-b py-5">

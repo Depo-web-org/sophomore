@@ -15,7 +15,7 @@ function SideBarProfile(props) {
 
   return (
     <div
-      className={`${props.Active}  flex flex-col bg-[#111827] w-1/5 border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden   absolute items-start   h-full    px-2`}
+      className={`${props.Active}  flex flex-col bg-[#111827] w-1/5 border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden absolute items-start h-full px-2`}
     >
       <MdOutlineKeyboardDoubleArrowLeft
         onClick={() =>
@@ -83,6 +83,8 @@ function SideBarProfile(props) {
 }
 
 export default function Profile() {
+  const {  i18n} = useTranslation();
+
   const [Active, setActive] = useState("close");
   const [OpseModel, setOpseModel] = useState(false);
   
@@ -106,7 +108,7 @@ export default function Profile() {
       ></SideBarProfile>
       {OpseModel && <LogoutModal setOpseModel={setOpseModel} />}
 
-      <div className="w-4/5 ml-auto lg:pl-8 xl:pl-0 ">
+      <div className={`w-4/5 ml-auto lg:pl-8 xl:pl-0  ${i18n.language ===  "ar" ?  "ms-auto" :"me-auto"}`}>
         <Outlet />
       </div>
     </div>
