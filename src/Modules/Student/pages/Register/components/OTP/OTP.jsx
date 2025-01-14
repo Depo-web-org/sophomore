@@ -92,10 +92,14 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   // ===> resend-otp endpoints name
 
   const reSendOtp = async () => {
+    const dataSend =  { email:mail}
+    if (provider) {
+      dataSend.provider = provider;
+    }
     setResendOTPModal(false);
     setIsResendDisabled(true);
     setTimeLeft(60);
-    await resendOtp({ email: mail.email , role})
+    await resendOtp({dataSend })
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
