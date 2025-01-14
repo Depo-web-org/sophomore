@@ -40,15 +40,18 @@ const [errorOtp, setErrorOtp] = useState(null)
     if (provider) {
       dataSend.provider = provider;
     }
-    console.log(dataSend)
     try {
       const response = await verifyEmail({ dataSend }).unwrap();
-      setStatusOfAccount("Your account has already been verified")
+      if(response.code===0){
+        setStatusOfAccount("Your account has already been verified")
         setTimeout(()=> navigate('/register'), 3000)
-    //   handleValidateOtp(); // Callback on successful verification
+      }else if (response.code===1){
+        console.error('Verification Error:', response.message  );
+        setErrorOtp(response.message )
+      }
     } catch (err) {
       console.error('Verification Error:', err.data.message  );
-            setErrorOtp(err.data.message )
+      setErrorOtp("Something error happened" )
     }
   };
 
