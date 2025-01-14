@@ -1,17 +1,34 @@
 {
-  "footer":{  "brand": "Sophomore",
-  "request_info": "Request More Information",
-  "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",
-  "contact_us": "Contact Us",
-  "menu": {
-    "home": "Home",
-    "about_us": "About Us",
-    "contact_us": "Contact Us"
-  }
-},
- "my_learning": {
+  "footer": {
+    "brand": "Sophomore",
+    "request_info": "Request More Information",
+    "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",
+    "contact_us": "Contact Us",
+    "menu": {
+      "home": "Home",
+      "about_us": "About Us",
+      "contact_us": "Contact Us"
+    }
+  },
+  "my_learning": {
     "title": "Continue your learning Journey",
     "description": "Access all the courses you’ve purchased and continue learning at your own pace."
+  },
+  "courses": {
+    "not_finished_yet": "Not finished yet",
+    "finished_courses": "Finished Courses"
+  },
+  "header": {
+    "brand": "Sophomore",
+    "menu": {
+      "home": "Home",
+      "about_us": "About Us",
+      "contact_us": "Contact Us",
+      "login": "Login",
+      "profile": "Profile",
+      "cart": "Cart",
+      "my_learning": "My Learning",
+      "wishlist": "Wishlist"
+    }
   }
-
 }

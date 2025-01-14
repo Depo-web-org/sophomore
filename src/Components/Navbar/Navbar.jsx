@@ -7,8 +7,10 @@ import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInformation } from "../../Redux/ UserInformation/ UserInformationSlice";
 import i18n from "../../i18n";
+import { useTranslation } from "react-i18next";
  
 const Navbar = () => {
+  const { t } = useTranslation(); 
 
   const dispatch = useDispatch();
   // Get User Information 
@@ -24,22 +26,22 @@ const Navbar = () => {
 
   const navItems = useMemo(() => {
     const items = [
-      { text: `Home`, link: "/" },
-      { text: `About Us`, link: "/about" },
-      { text: `Contact Us`, link: "/contact" },
+      { text: t("header.menu.home"), link: "/" },
+      { text: t("header.menu.about_us"), link: "/about" },
+      { text: t("header.menu.contact_us"), link: "/contact" },
     ];
     if (Token && role === "student") {
       // Add protected items only if authenticated as a student
       items.push(
-        { text: "My Learning", link: "/mylearning" },
+        { text: t("header.menu.my_learning"), link: "/mylearning" },
         { icon: <IoCartOutline />, link: "/cart" },
         { icon: <IoHeartOutline />, link: "/wishlist" }
       );
     } else if (Token && role !== "student") {
-      items.push({ text: "Dashboard", link: "/teacherupload" });
+      items.push({ text: t("header.menu.dashboard"), link: "/teacherupload" });
     }
     return items;
-  }, [Token, role]);
+  }, [Token, role,t]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   useEffect(() => {
@@ -172,9 +174,9 @@ const Navbar = () => {
                                      <span className="text-base flex items-center gap-2">
                     {item.icon}{" "}
                     {item.link === "/cart"
-                      ? "Cart"
+                      ? t("header.menu.cart")
                       : item.link === "/wishlist"
-                      ? "wishlist"
+                      ?  t("header.menu.wishlist")
                       : ""}
                   </span>
                   {item.text}
@@ -192,7 +194,7 @@ const Navbar = () => {
                   alt="profile avatar"
                   className="size-8 object-cover rounded-full"
                 />
-                Profile
+                {t("header.menu.profile")}
               </NavLink>
             )}
           </ul>
