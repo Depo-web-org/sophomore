@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 export const Grade = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
-console.log(pathnames.length)
   const { t, i18n } = useTranslation();
   const { data, error, loading } = useFetch(
     "https://os1907.github.io/Schools/grades/Schoolgrades.json"
