@@ -1,170 +1,171 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { BsFillCameraFill } from "react-icons/bs";
-import useFetch from "../../../../../../Hooks/UseFetch";
-import { fetchUserInformation } from "../../../../../../Redux/ UserInformation/ UserInformationSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { isValidPhoneNumber } from "react-phone-number-input/core";
+import PhoneInput from "react-phone-number-input/input";
+import { useSelector } from "react-redux";
+import { useUpdateProfileMutation } from "../../../../../../Redux/Auth/authApiSlice";
 
 export default function MyProfile() {
-  // const { data } = useFetch(
-  //     "https://os1907.github.io/Schools/Profile/Profile.json"
-  //   );
+  const { data } = useSelector((state) => state.userInformation);
+
+  const [profileImage, setProfileImage] = useState(data?.profile || null);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
+    const [updateProfile, { isLoading, isError, error }] =
+    useUpdateProfileMutation();
 
 
-  // Get User Information 
-  const { data, status, error } = useSelector((state) => state.userInformation);
 
-  const [profileImage, setProfileImage] = useState(
-    data?.profile || null);
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+  const onSubmit = async(formData) => {
+    console.log("Form Submitted Data:", formData);
+    try {
+      const response = await updateProfile({ formData }).unwrap();
+      if(response.code===0) alert("Profile updated successfully!");
+    } catch (error) {
+      console.log(error)
     }
-  };
   
+
+   
+  };
+
   return (
-    <div className=" ">
-      {/* first section */}
-      <div className="w-full min-h-40 ">
-        {/* cover */}
-        <div className="relative bg-gradient-to-r from-secondary from-10% to-primary to-90% w-full h-48 rounded-tl-[100px] rounded-tr-lg mb-40">
-
-
-
-
-
-        <div className=" flex flex-col  lg:flex-row justify-center items-center absolute -bottom-[75%] lg:-bottom-[45%]   left-1/2 -translate-x-1/2 xl:translate-x-0  xl:left-[5%] w-full   ">
+    <div className="min-h-screen ">
+      <div className="relative bg-gradient-to-r from-secondary to-primary w-full h-48 rounded-tl-[100px] rounded-tr-lg mb-40">
+        <div className="flex flex-col lg:flex-row justify-center items-center absolute -bottom-[75%] lg:-bottom-[45%] left-1/2 -translate-x-1/2 xl:translate-x-0 xl:left-[5%] w-full">
           <img
             className="border-2 border-white w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
-            src={data?.profile}
+            src={profileImage || "/images/default-profile.png"}
             alt="profile"
           />
-          <div className="flex flex-col lg:flex-row justify-between  items-center lg:flex-1 xl:mr-[5%]   ">
-          {/* section Name */}
-          <div className="relative sm:px-4 pt-4     ">
-              <div className="w-full text-center lg:text-start text-nowrap">
-                <p className="font-bold text-white lg:text-lg">{data?.name}</p>
-                <span className="text-mainGray text-xs lg:text-sm ">Update your Passwords</span>
-              </div>
-             
+          <div className="text-center lg:text-left text-white mt-4 lg:mt-0 lg:ml-6">
+            <p className="font-bold text-lg">{data?.name || "Your Name"}</p>
+            <span className="text-mainGray text-sm">Update your passwords</span>
           </div>
-          <button
-                type="button"
-                className="rounded bg-primary  text-xs lg:text-base font-semibold text-white  px-5 py-3 mt-2 xl:mt-8 w-full lg:w-auto "
-              >
-                Save
-              </button>
         </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          {/* Image */}
-          {/* <img
-            className="border-2 border-white absolute top-36 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-24 w-24 h-24 sm:w-32 sm:h-32 rounded-full object-fit"
-            src={data?.profile}
-            alt="profile"
-          /> */}
-        </div>
-
-        {/* <div className="px-1 lg:px-8">
-          <div className="relative md:min-h-24 lg:min-h-36 sm:px-4 pt-4 w-full mt-10 sm:mt-20 lg:mt-0 lg:w-[60%] ms-auto">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-4  ">
-              <div className="w-full text-center lg:text-start">
-                <p className="font-bold text-white text-lg">{data?.name}</p>
-                <p className="text-gray-500 font-normal text-xs lg:text-sm text-n">
-                  Update your photos and personal Details
-                </p>
-              </div>
-
-              <button
-                type="button"
-                className="rounded bg-primary p-2 text-xs lg:text-base font-semibold text-white "
-              >
-                Save
-              </button>
-            </div>
-          </div>
-
-        </div> */}
-
-
-
-        
       </div>
 
-
-
-
-
-      <div className="px-1 lg:px-8">
-        {/* form */}
-        <div className="   flex flex-col sm:flex-row items-center mb-5 lg:w-[70%] ms-auto border-b border-gray-50 pb-2">
-          <label
-            htmlFor="Username"
-            className="w-full text-white font-medium text-sm md:text-base  py-2 flex  items-center justify-between gap-2 flex-wrap"
-          >
-            Update UserName
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="px-4 lg:px-8 lg:w-[70%] mx-auto"
+      >
+        {/* Name Fields */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-5">
+          <div className="w-full">
+            <label htmlFor="first_name" className="block text-gray-700 font-medium">
+              First Name
+            </label>
             <input
               type="text"
-              defaultValue={data?.name}
-              id="Username"
-              className=" p-2 w-full text-gray-600 font-normal rounded-md bg-white peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 text-sm md:text-base"
+              id="first_name"
+              {...register("first_name", {
+                required: "First Name is required",
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "First Name must contain only letters",
+                },
+              })}
+              className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
+              placeholder="First Name"
             />
+            {errors.first_name && (
+              <p className="text-red-500 text-sm mt-1">{errors.first_name.message}</p>
+            )}
+          </div>
+
+          <div className="w-full">
+            <label htmlFor="last_name" className="block text-gray-700 font-medium">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="last_name"
+              {...register("last_name", {
+                required: "Last Name is required",
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "Last Name must contain only letters",
+                },
+              })}
+              className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
+              placeholder="Last Name"
+            />
+            {errors.last_name && (
+              <p className="text-red-500 text-sm mt-1">{errors.last_name.message}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Phone Number */}
+        <div className="mb-5">
+          <label htmlFor="phone_number" className="block text-gray-700 font-medium">
+            Phone Number
           </label>
-        </div>
-        {/* <hr className=" ms-auto lg:w-[70%]" /> */}
+          <Controller
+  name="phone_number"
+  control={control}
+  rules={{
+    validate: (value) =>
+      value ? true : "Phone number is required",
+  }}
+  render={({ field }) => (
+    <PhoneInput
+      {...field}
+      id="phone_number"
+      placeholder="Enter your phone number"
+      defaultCountry="EG"
+      className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
+    />
+  )}
+/>
 
-        {/* last section */}
+          {errors.phone_number && (
+            <p className="text-red-500 text-sm mt-1">{errors.phone_number.message}</p>
+          )}
+        </div>
 
-        <div className=" mb-5 border-b border-gray-50  lg:w-[70%] ms-auto gap-2  flex justify-center sm:justify-between  items-center pb-3 flex-wrap">
-          <div>
-            <div className="flex justify-center lg:justify-start items-start ">
-              <label
-                htmlFor="upload"
-                className=" text-white font-medium cursor-pointer flex items-center gap-2 lg:gap-4"
-              >
-                upload Photo
-                <input
-                  type="file"
-                  id="upload"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleImageUpload}
-                />
-                <img
-                  className=" size-10 lg:size-14"
-                  src="/images/Profile/Camera.svg"
-                  alt="photo"
-                />
-              </label>
-            </div>
+        {/* Profile Image Upload */}
+        <div className="mb-5 flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex items-center gap-4">
+            <label
+              htmlFor="upload"
+              className="flex items-center gap-2 text-primary cursor-pointer font-medium"
+            >
+              <BsFillCameraFill className="text-lg" />
+              Upload Photo
+            </label>
+            <input
+              type="file"
+              id="upload"
+              accept="image/*"
+              className="hidden"
+              {...register("profile_image")}
+            />
           </div>
-          <div className=" text-right py-1 cursor-pointer text-white">
-            <button>Delete </button>
-            <span className="px-3">|</span>
-            <button>Update</button>
+          <div className="flex gap-4 mt-4 sm:mt-0">
+            <button
+              type="button"
+              className="text-red-500 font-medium"
+              onClick={() => setProfileImage(null)}
+            >
+              Delete
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-primary text-white rounded-lg font-medium shadow"
+            >
+              Save
+            </button>
           </div>
         </div>
-        <p className=" text-gray-500 font-normal text-xs lg:text-sm text-nowrap my-2 pb-4 text-center ">
-          Update your photo or edit and delete it
-        </p>
-      </div>
+      </form>
     </div>
   );
 }
