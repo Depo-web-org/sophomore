@@ -44,10 +44,9 @@ export const Grade = () => {
               // Use English grade name for the URL
               const englishGrade = englishData[index];
               return (
-                <div className="pt-2" key={grade.name}>
-                  <p className="text-white text-base lg:text-2xl font-semibold lg:leading-[42px]">
-                    {grade.name}
-                  </p>
+
+
+              <div className="pt-2" key={grade.name}>
                   <div className="grid grid-cols-6 lg:grid-cols-12 gap-4">
                     {grade.grades.map((gradeItem, gradeIndex) => {
                       // Use English grade item name for the URL
@@ -65,6 +64,7 @@ export const Grade = () => {
                       );
                     })}
                   </div>
+
                 </div>
               );
             })

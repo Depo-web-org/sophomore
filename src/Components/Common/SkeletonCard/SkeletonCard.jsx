@@ -18,4 +18,4 @@ export const SkeletonCard=()=>   {
 
 
 
-const numb = [1,2,3,4]
+const numb = [1,2,3,4,5,6]
