@@ -1,27 +1,14 @@
 {
-  "footer": {
-    "brand": "Sophomore",
-    "request_info": "Request More Information",
-    "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",
-    "contact_us": "Contact Us",
-    "menu": {
-      "home": "Home",
-      "about_us": "About Us",
-      "contact_us": "Contact Us"
-    }
-  },
-  "my_learning": {
-
   "hero": {
     "title": "Your Path to Knowledge Starts Here",
     "subtitle": "Learn. Grow. Succeed. Discover courses tailored for your success.",
     "button": "Learn More"
   },
   "chooseSchool": {
-  "title": "Get Started Now!",
-  "subtitle": "What type of school do you attend?"
-},
-"chooseCard": {
+    "title": "Get Started Now!",
+    "subtitle": "What type of school do you attend?"
+  },
+  "chooseCard": {
     "title": "Why Choose",
     "sophomore": "Sophomore",
     "features": [
@@ -45,27 +32,27 @@
       }
     ]
   },
-"learningSection": {
-  "title": "Let's Continue learning",
-  "myLearning": "My learning",
-  "subtitle": "Pick up from where you left",
-  "playButtonAlt": "Play",
-  "course": {
-    "name": "Course Name",
-    "description": "Course Description"
-  }
-},
-"contact": {
-  "partOne": {
-    "title": "Contact Us",
-    "description": "Have questions or need assistance? We're here to help! Reach out to us through any of the following channels, and our team will respond as soon as possible."
+  "learningSection": {
+    "title": "Let's Continue learning",
+    "myLearning": "My learning",
+    "subtitle": "Pick up from where you left",
+    "playButtonAlt": "Play",
+    "course": {
+      "name": "Course Name",
+      "description": "Course Description"
+    }
   },
-  "partTwo": {
-    "title": "Get in touch with us",
-    "description": "Have an inquiry or feedback for us? Fill out the form to contact our team."
-  }
-},
-"gradePage": {
+  "contact": {
+    "partOne": {
+      "title": "Contact Us",
+      "description": "Have questions or need assistance? We're here to help! Reach out to us through any of the following channels, and our team will respond as soon as possible."
+    },
+    "partTwo": {
+      "title": "Get in touch with us",
+      "description": "Have an inquiry or feedback for us? Fill out the form to contact our team."
+    }
+  },
+  "gradePage": {
     "title": "What is your current school grade ?",
     "error": "An error occurred while fetching data.",
     "noData": "No data available for the selected language."
@@ -73,7 +60,7 @@
   "subjectsPage": {
     "title": "What Subject do you want?"
   },
-"formContact": {
+  "formContact": {
     "firstName": "First Name",
     "firstNamePlaceholder": "Enter your first name",
     "firstNameError": {
@@ -106,25 +93,25 @@
     "successMessage": "Form submitted successfully!",
     "errorMessage": "Something went wrong, please try again"
   },
-  "footer":{  "brand": "Sophomore",
-  "request_info": "Request More Information",
-  "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",
-  "contact_us": "Contact Us",
-  "menu": {
-    "home": "Home",
-    "about_us": "About Us",
-    "contact_us": "Contact Us"
-  }
-},
- "my_learning": {
+  "footer": {
+    "brand": "Sophomore",
+    "request_info": "Request More Information",
+    "slogan": "Learn. Grow. Succeed. Discover courses tailored for your success.",
+    "contact_us": "Contact Us",
+    "menu": {
+      "home": "Home",
+      "about_us": "About Us",
+      "contact_us": "Contact Us"
+    }
+  },
+  "my_learning": {
     "title": "Continue your learning Journey",
     "description": "Access all the courses you’ve purchased and continue learning at your own pace."
   },
   "courses": {
     "not_finished_yet": "Not finished yet",
     "finished_courses": "Finished Courses",
-    "availability":"Available Until"
-
+    "availability": "Available Until"
   },
   "header": {
     "brand": "Sophomore",
@@ -144,7 +131,5 @@
     "comments": "Comments",
     "material": "Material"
   },
-  
-    "choose_unit": "Choose The Unit"
-}
+  "choose_unit": "Choose The Unit"
 }
