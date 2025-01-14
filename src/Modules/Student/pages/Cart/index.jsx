@@ -9,8 +9,8 @@ const Cart = () => {
   ); 
   return (
     <>
-        {/* { data?.numberOfItems ===0 ? <EmptyCart/> :   <FailedCart info={data}/> } */}
-        <EmptyCart/>
+        { data?.numberOfItems ===0 ? <EmptyCart/> :   <FailedCart info={data}/> }
+        {/* <EmptyCart/> */}
         </>
   )
 }
