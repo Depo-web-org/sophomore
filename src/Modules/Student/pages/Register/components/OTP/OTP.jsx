@@ -20,7 +20,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
 
   // time format
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(1);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   // react hook form
@@ -29,7 +29,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
       otp: ["", "", "", "", "", ""],
     },
   });
-  const [resendOtp, { isLoading }] = useResend_otpMutation();
+  const [resend_otp, { isLoading }] = useResend_otpMutation();
   // Use verifyEmail mutation
   const [verifyEmail, { isLoading: loadingSending }] =
     useVerify_emailMutation();
@@ -96,13 +96,15 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     if (provider) {
       dataSend.provider = provider;
     }
-    setResendOTPModal(false);
-    setIsResendDisabled(true);
-    setTimeLeft(60);
-    await resendOtp({dataSend })
+    console.log(dataSend)
+
+    await resend_otp({dataSend} )
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
+      setResendOTPModal(false);
+      setIsResendDisabled(true);
+      setTimeLeft(1);
   };
 
   return (
