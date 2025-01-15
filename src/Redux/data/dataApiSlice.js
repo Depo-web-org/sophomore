@@ -1,23 +1,19 @@
-import { apiSlice } from "../api/apiSclice";
+import { apiSlice } from "../api/apiSclice"; // Import the base apiSlice
 
 export const dataApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // Fetch all schools
-    getSchools: builder.query({
+    getProfile: builder.query({
       query: () => ({
-        url: "/academis/school-hirarchy",
-        method: "GET",
+        url: "getConsumerProfile.php", 
+        method: "GET", 
       }),
-      providesTags: (result = [], error, arg) =>
-        result.map(({ id }) => ({ type: "Schools", id })) || [{ type: "Schools", id: "LIST" }],
+      providesTags: ["Profile"], // Caches the data with this tag
     }),
 
-    // Add more data-related endpoints as needed...
+    // Other data fetching endpoints can go here...
+
   }),
 });
 
-export const {
-  useGetSchoolsQuery,
-  useGetGradesQuery,
-  useGetStudentsQuery,
-} = dataApiSlice;
+// Export hooks to use in your components
+export const { useGetProfileQuery } = dataApiSlice;
