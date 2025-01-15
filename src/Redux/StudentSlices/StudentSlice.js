@@ -2,9 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
   uid: null,
-  name: null,
+  first_name: null,
+  last_name: null,
   phone: null,
   email: null,
+  path:null,
+  photo:null,
 };
 
 const studentSlice = createSlice({
@@ -12,15 +15,19 @@ const studentSlice = createSlice({
   initialState,
   reducers: {
     setStudent: (state, action) => {
-      const { uid, email, name } = action.payload;
+      const { uid, email, first_name, last_name, phone,path, photo } = action.payload;
       state.uid = uid;
       state.email = email;
-      state.name = name;
+      state.last_name = last_name;
+      state.first_name = first_name;
+      state.phone= phone;
+      state.path= path;
+      state.photo= photo;
     },
     clearStudent: (state) => {
       state.uid = null;
       state.email = null;
-      state.name = null;
+      state.first_name = null;
       state.phone = null;
     },
     updateStudent: (state, action) => {

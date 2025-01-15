@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 export default function Security() {
   const { t,i18n} = useTranslation();
 
-  const { data, status, error } = useSelector((state) => state.userInformation);
 
   const [showAlert, setShowAlert] = useState(false);
   const role = useSelector((state) => state.role.role);
@@ -66,14 +65,14 @@ export default function Security() {
           <div className=" flex flex-col lg:flex-row justify-center items-center absolute -bottom-[45%]  left-1/2 -translate-x-1/2 xl:translate-x-0  xl:left-[5%]   ">
           <img
             className="border-2 border-white w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
-            src={data?.profile}
+            src={""}
             alt="profile"
           />
           <div className=" lg:flex-1 ">
           {/* section Name */}
           <div className="relative sm:px-4 pt-4 w-full   ">
               <div className="w-full text-center lg:text-start text-nowrap">
-              <p className="font-bold text-white lg:text-lg">{data?.name}</p>
+              <p className="font-bold text-white lg:text-lg">{'your name'}</p>
               <span className="text-mainGray text-xs lg:text-sm ">{t("Security.updatePassword")}</span>
               </div>
           </div>

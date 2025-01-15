@@ -530,7 +530,7 @@ function AppRoutes() {
     </>
   );
 }
-function LoadingComponents() {
+export function LoadingComponents() {
   return (
     <div className="min-h-screen bg-dark flex justify-center items-center flex-col">
       <span className=" text-white text-4xl md:text-6xl lg:text-8xl text-gradient font-extrabold my-5">

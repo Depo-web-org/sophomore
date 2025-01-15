@@ -14,7 +14,6 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   // Get User Information 
-  const { data, status, error } = useSelector((state) => state.userInformation);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ const Navbar = () => {
     if (status === "idle") {
       dispatch(fetchUserInformation());
     }
-  }, [dispatch, status]);
+  }, [dispatch]);
 
 
 
@@ -125,7 +124,7 @@ const Navbar = () => {
                 className="ml-3 overflow-hidden rounded-full border border-gray-300 shadow-inner"
               >
                 <img
-                  src={data?.profile}
+                  src={""}
                   alt="profile avatar"
                   className="size-8 object-cover"
                 />
@@ -187,7 +186,7 @@ const Navbar = () => {
                 className=" font-semibold text-primary flex items-end gap-2"
               >
                 <img
-                   src={data?.profile}
+                   src={""}
                   alt="profile avatar"
                   className="size-8 object-cover rounded-full"
                 />
