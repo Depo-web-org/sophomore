@@ -346,6 +346,9 @@ import { useSelector } from "react-redux";
 import EditUnit from "./Modules/Teacher/pages/Courses/Page/EditUnit/Index";
 import EditSpecificUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditSpecificUnit/EditSpecificUnit";
 
+
+export const baseUrl="https://dev.depowebeg.com"
+
 function AppRoutes() {
   return (
     <>
@@ -396,6 +399,7 @@ function AppRoutes() {
             }
           />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
+          
           <Route path="/school/:schoolName" element={<Grade />} />
           <Route
             path="/school/:schoolName/grade/:gradeName"

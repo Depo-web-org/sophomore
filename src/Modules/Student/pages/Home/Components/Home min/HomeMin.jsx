@@ -34,16 +34,19 @@ export default function HomeMin() {
         <div className="lg:py-5">
           <div className="flex justify-between items-center flex-wrap gap-y-2">
             <p
-              className="text-2xl lg:text-3xl
+              className="text-2xl lg:text-3xlb
+              
           xl:text-4xl pb-8 lg:pb-2  font-bold"
             >
             {t("learningSection.title")}
             </p>
-            <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer hidden lg:block">
+            <Link to='/mylearning'>
+            <p className="text-sm font-medium border-b-2 border-b-slate-700  hover:cursor-pointer hidden lg:block ">
             {t("learningSection.myLearning")}
             </p>
+            </Link>
           </div>
-          <p className="hidden lg:block text-sm lg:text-base font-bold py-1 lg:py-2 ">
+          <p className="hidden lg:block text-sm lg:text-base font-bold py-1 lg:py-2  ">
           {t("learningSection.subtitle")}
           </p>
         </div>

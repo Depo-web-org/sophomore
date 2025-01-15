@@ -6,7 +6,8 @@
   },
   "chooseSchool": {
     "title": "ابدأ الآن!",
-    "subtitle": "اختار صفك الدراسي"
+    "title2":"تصفح دورات أخري",
+     "subtitle": "اختار صفك الدراسي"
   },
   "chooseCard": {
     "title": " لماذا تختار",
@@ -31,6 +32,11 @@
         "img": "/images/Schools/Icon-3.svg"
       }
     ]
+  },
+  "teachers": {
+    "title": "اختر من بين أفضل معلمينا",
+    "teacherProfileAlt": "صورة الملف الشخصي للمعلم",
+    "viewButton": "عرض"
   },
   "formContact": {
     "firstName": "الاسم الأول",

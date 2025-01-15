@@ -4,9 +4,10 @@ import { useState } from "react";
 import useFetch from "../../../../Hooks/UseFetch";
 import { SkeletonCard } from "../../../../Components/Common/SkeletonCard/SkeletonCard";
 import Breadcrumbs from "../../../../Components/Common/BreadCrumbs/Breadcrumbs";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const Teachers = () => {
-  // eslint-disable-next-line no-unused-vars
+  const { t } = useTranslation(); // Initialize useTranslation
   const { data, error, loading } = useFetch(
     "https://os1907.github.io/Schools//grades/subject/Teacher/Teacher.json"
   );
@@ -14,12 +15,12 @@ const Teachers = () => {
 
   return (
     <>
-      <section className="min-h-screen   py-24  lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto  ">
+      <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
         <Breadcrumbs />
 
         <div>
-          <h2 className="text-white  text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
-            Which Teacher do you want ?
+          <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
+            {t("teachers.title")} {/* Translate the title */}
           </h2>
         </div>
         <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
@@ -36,9 +37,9 @@ const Teachers = () => {
               />
             ))
           ) : (
-            <div  className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4 "> 
-     <SkeletonCard/>
-  </div>
+            <div className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <SkeletonCard />
+            </div>
           )}
         </div>
       </section>
@@ -73,29 +74,25 @@ export function TeacherCard({
   isSelecteted,
   image,
 }) {
+  const { t } = useTranslation(); // Initialize useTranslation
+
   return (
-    <div className=" col-span-3 lg:col-span-4 items-center justify-center  rounded-md duration-200 transition-all hover:shadow-[4px_4px_0px_0px_#F15C54]  ">
+    <div className="col-span-3 lg:col-span-4 items-center justify-center rounded-md duration-200 transition-all hover:shadow-[4px_4px_0px_0px_#F15C54]">
       <div>
-        <div className="group relative block overflow-hidden rounded-md ">
-          <button className="absolute end-2 lg:end-4 top-2 lg:top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75 ">
-            <span className="sr-only">Wishlist</span>
-
-            <Love isSelecteted={isSelecteted}/>
-          </button>
-
+        <div className="group relative block overflow-hidden rounded-md">
           <img
             src="/images/TeacherDetails/Frame 38.png"
-            alt="teacher profile"
-            className="  h-40 md:h-48 lg:h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+            alt={t("teachers.teacherProfileAlt")} 
+            className="h-40 md:h-48 lg:h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
           />
 
-          <div className="relative border border-gray-100 bg-white f p-2 lg:p-6">
+          <div className="relative border border-gray-100 bg-white p-2 lg:p-6">
             <div className="flex items-center justify-between flex-wrap">
               <p className="mt-1.5 text-sm text-gray-700">{subjectName}</p>
               <p className="mt-1.5 text-sm text-gray-700">{gradeName}</p>
             </div>
 
-            <h3 className="mt-4 text-sm lg:text-lg font-medium text-center text-gray-900 text-nowrap ">
+            <h3 className="mt-4 text-sm lg:text-lg font-medium text-center text-gray-900 text-nowrap">
               {teacher.name}
             </h3>
 
@@ -103,7 +100,7 @@ export function TeacherCard({
               to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.name}`}
             >
               <button className="block w-full mt-4 rounded bg-primary hover:bg-secondary text-white p-2 lg:p-4 text-sm font-medium transition duration-150 hover:scale-105">
-                View
+                {t("teachers.viewButton")} {/* Translate button text */}
               </button>
             </Link>
           </div>
