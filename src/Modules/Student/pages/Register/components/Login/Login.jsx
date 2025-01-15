@@ -14,6 +14,7 @@ import ForgetPassword from "./Components/ForgetPassword";
 import useRole, { secretKey } from "../../../../../../Hooks/UseRole";
 import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
 import { getRole } from "../../../../../../Helpers/enCodeRole";
+import { setStudent } from "../../../../../../Redux/StudentSlices/StudentSlice";
 
 export default function Login({ toggleForm }) {
   const navigate = useNavigate();
@@ -57,10 +58,28 @@ export default function Login({ toggleForm }) {
 
 
       if (response.code===0) {
+        console.log(response.data)
 
         // Encrypt the refresh token and store it
 
         localStorage.setItem("Token", response.data.token);
+
+                //Store In Redux
+
+              
+                  const studentData = {
+                    uid: response.data.token, 
+                    email: response.data.email,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
+                    phone: response.data.phone_number,
+                    path: response.data.path,
+                    photo: response.data.photo,
+                  };
+          
+                  dispatch(setStudent(studentData));
+              
+          
 
         // Encrypt the Role and store it
         const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString();
