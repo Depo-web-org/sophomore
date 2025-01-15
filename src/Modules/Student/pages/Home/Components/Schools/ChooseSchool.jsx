@@ -3,13 +3,12 @@ import { SkeletonCard } from "../../../../../../Components/Common/SkeletonCard/S
 import useFetch from "../../../../../../Hooks/UseFetch";
 import { useTranslation } from "react-i18next";
 import { baseUrl } from "../../../../../../App";
+import { useGetSchoolsQuery } from "../../../../../../Redux/data/dataApiSlice";
 
 export default function ChooseSchool() {
-  // const { data } = useFetch("https://os1907.github.io/Schools/Schools.json");
-  const { data } = useFetch("https://dev.depowebeg.com/education/api/getSchools.php?grades=true&recurisec=true");
+  const {data}=useGetSchoolsQuery()
   const { t,i18n } = useTranslation();
   const token=localStorage.getItem('Token') 
-
   return (
     <section className="py-8 lg:py-20">
       <div className="text-white font-bold pb-4 lg:pb-8">
@@ -74,9 +73,7 @@ export default function ChooseSchool() {
             </div>
               ))
             }
-           
         </div>
-
           ))
         ) : (
           <div className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
