@@ -8,12 +8,13 @@ import { useUpdateProfileMutation } from "../../../../../../Redux/Auth/authApiSl
 import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../../../../../../Redux/data/dataApiSlice";
 import { LoadingComponents } from "../../../../../../App";
+import { ImSpinner9 } from "react-icons/im";
 
 export default function MyProfile() {
   const { t,i18n } = useTranslation();
 
 
-  const { data, error:dataerror, isLoading:dataLoading, refetch } = useGetProfileQuery();
+  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
   console.log('data profile:',data?.data)
 const student= data?.data;
 
@@ -57,10 +58,9 @@ const student= data?.data;
     
 
   
- if(dataLoading){
+ if(isFetching){
   return <LoadingComponents/> ;
  }
-
 
   return (
     
@@ -211,9 +211,10 @@ const student= data?.data;
             </button>
             <button
               type="submit"
+              disabled={isLoading}
               className="px-6 py-2 bg-primary text-white rounded-lg font-medium shadow"
             >
-              {t("profile.save")}
+              {       isLoading?<ImSpinner9 className="animate-spin text-3xl text-secondary " />: `${t("profile.save")}`}
             </button>
           </div>
         </div>
