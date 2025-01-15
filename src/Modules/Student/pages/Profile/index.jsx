@@ -2,7 +2,6 @@ import { HiUserCircle, HiClipboardList } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa6";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { TiFlash } from "react-icons/ti";
 import "./profile.css";
 import LogoutModal from "./components/Security/LogoutModal";
 import { RiLogoutBoxLine } from "react-icons/ri";
@@ -22,7 +21,7 @@ function SideBarProfile(props) {
           props.setActive(props.Active === "open" ? "close" : "open")
         }
         className={` mb-3 ms-auto  w-7 h-7 text-gray-500 transition-transform duration-300 ${
-          props.Active === "open" ? "rotate-180" : ""
+          props.Active === "open" ?  "" :"rotate-180" 
         }`}
       />
 
@@ -98,7 +97,7 @@ export default function Profile() {
   useEffect(() => {
     const handleResize = () => {
       const isLargeScreen = window.matchMedia("(min-width: 640px)").matches;
-      setActive(isLargeScreen ? "open" : "close");
+      setActive(isLargeScreen ?  "close" :"open" );
     };
 
     handleResize();

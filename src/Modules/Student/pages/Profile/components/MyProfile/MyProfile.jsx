@@ -73,10 +73,10 @@ const student= data?.data;
             // src={ `${student.path}${student.photo}` || 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'}
             alt="profile"
           />
-          <div className="text-center lg:text-left text-white mt-4 lg:mt-0 lg:ml-6">
+          <div className="text-center lg:text-left text-white mt-4 lg:mt-0 lg:ms-6">
             <p className="font-bold text-lg">{student?.first_name?`${student?.first_name} ${student.last_name }`:"your name" }</p>
             <span className="text-mainGray text-sm">
-              {t("profile.updatePassword")}
+              {t("profile.updateInformation")}
             </span>
           </div>
         </div>

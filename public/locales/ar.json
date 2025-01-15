@@ -175,6 +175,7 @@
   },
 
   "profile": {
+    "updateInformation": "تحديث معلوماتك الشخصية ",
     "updatePassword": "تحديث كلمة المرور",
     "firstName": "الاسم الأول",
     "lastName": "الاسم الأخير",
