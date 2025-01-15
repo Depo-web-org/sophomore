@@ -5,6 +5,7 @@ import CardInfo from "../../../../Components/Common/CardInfo/CardInfo";
 import { SkeletonCard } from "../../../../Components/Common/SkeletonCard/SkeletonCard";
 import { useTranslation } from "react-i18next";
 import { baseUrl } from "../../../../App";
+import { useGetGradesQuery } from "../../../../Redux/data/dataApiSlice";
 
 const subjectImageMap = {
   algebra: '/education/assets/meta/subjects/algebra.webp',
@@ -22,18 +23,14 @@ const subjectImageMap = {
 const Subjects = () => {
   const { t, i18n } = useTranslation();
   const { gradeName, schoolName } = useParams();
+  
+const {data}= useGetGradesQuery()
 
-  const { data } = useFetch(
-    "https://os1907.github.io/Schools/grades/subject/subject.json"
-  );
-
-
-  const Sophomore= useFetch( "https://dev.depowebeg.com/education/api/getGrades.php?subjects=true" );
 // function to filter data
-const nameOfGrade=Sophomore?.data?.data.filter(i=>i.id === gradeName)[0]
-const Subjects = Sophomore?.data?.data.filter(i=>i.id === gradeName)[0]?.subjects
+const nameOfGrade=data?.data.filter(i=>i.id === gradeName)[0]
+const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
 
-console.log(Subjects, gradeName,nameOfGrade?.name)
+// console.log(data?.data.filter(i=>i.id === gradeName)[0])
 
   return (
     <>
