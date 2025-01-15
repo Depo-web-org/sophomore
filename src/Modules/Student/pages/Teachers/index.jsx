@@ -7,7 +7,7 @@ import Breadcrumbs from "../../../../Components/Common/BreadCrumbs/Breadcrumbs";
 import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 const Teachers = () => {
-  const { t } = useTranslation(); // Initialize useTranslation
+  const { t } = useTranslation(); 
   const { data, error, loading } = useFetch(
     "https://os1907.github.io/Schools//grades/subject/Teacher/Teacher.json"
   );
