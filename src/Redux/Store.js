@@ -2,16 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSclice";
 import authReducer from "./Auth/authSlice";
 import { roleUser } from "./RoleSlice/RoleSlice";
-import { userInformationReducer } from "./ UserInformation/ UserInformationSlice";
 import { AddCourse } from "./TeacherAddCourse/TeacherAddCourse";
+import studentReducer from "./StudentSlices/StudentSlice"; 
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
     role: roleUser,
-    userInformation: userInformationReducer,
     AddTeacherCourse:AddCourse,
+    student: studentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
