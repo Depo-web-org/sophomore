@@ -6,6 +6,7 @@
   },
   "chooseSchool": {
     "title": "Get Started Now!",
+    "title2":"Browse other Courses",
     "subtitle": "What type of school do you attend?"
   },
   "chooseCard": {
@@ -31,6 +32,11 @@
         "img": "/images/Schools/Icon-3.svg"
       }
     ]
+  },
+  "teachers": {
+    "title": "Which Teacher do you want?",
+    "teacherProfileAlt": "teacher profile",
+    "viewButton": "View"
   },
   "learningSection": {
     "title": "Let's Continue learning",

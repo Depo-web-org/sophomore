@@ -15,9 +15,11 @@ const Home = () => {
       <Hero />
       {Token && role === "student" && <HomeMin />}
       <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
-        {/* <ChooseSchool /> */}
-        <Grade/>
-        <ChooseCard />
+        <ChooseSchool />
+        {/* <Grade/> */}
+      {!Token &&   <ChooseCard />}
+
+       
       </div>
     </>
   );
