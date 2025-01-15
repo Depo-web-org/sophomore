@@ -1,5 +1,7 @@
+import { useTranslation } from "react-i18next";
 import { IoClose } from "react-icons/io5";
 export default function ModalOops({ setIsModalOopsOpen }) {
+  const { t } = useTranslation();
   return (
     <div
       onClick={() => setIsModalOopsOpen(false)}
@@ -18,12 +20,12 @@ export default function ModalOops({ setIsModalOopsOpen }) {
           </button>
         </div>
         <div className="flex items-center justify-center flex-col gap-2">
-          <p className="mb-4 text-white text-2xl font-bold">Oops!</p>
+          <p className="mb-4 text-white text-2xl font-bold">{t('oops')}</p>
           <span className="text-base font-normal leading-6 text-center text-[#72777A]">
-            Please login to Continue
+          {t('login_message')}
           </span>
           <button className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-full">
-            Login
+          {t('login_button')}
           </button>
         </div>
       </div>

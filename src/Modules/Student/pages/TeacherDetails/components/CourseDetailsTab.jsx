@@ -1,34 +1,36 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FiPlus } from "react-icons/fi";
 
-// Sample data
-const accordionData = [
-  {
-    id: "item1",
-    title: "What is React?",
-    content: "React is a JavaScript library for building user interfaces.",
-  },
-  {
-    id: "item2",
-    title: "What are React Hooks?",
-    content:
-      "Hooks are functions that let you use state and other React features without writing a class.",
-  },
-  {
-    id: "item3",
-    title: "What is JSX?",
-    content:
-      "JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files.",
-  },
-  {
-    id: "item4",
-    title: "What is the Virtual DOM?",
-    content:
-      'The Virtual DOM is a programming concept where an ideal, or "virtual", representation of a UI is kept in memory and synced with the "real" DOM by a library such as ReactDOM.',
-  },
-];
 
-const CourseDetailsTab = () => {
+const CourseDetailsTab = () => { 
+   const { t } = useTranslation();
+  // Sample data
+  const accordionData = [
+    {
+      id: "item1",
+      title: t("accordion.0.title"),
+      content: t("accordion.0.content"),
+    },
+    {
+      id: "item2",
+      title: t("accordion.1.title"),
+      content: t("accordion.1.content"),
+    },
+    {
+      id: "item3",
+      title: t("accordion.2.title"),
+      content: t("accordion.2.content"),
+    },
+    {
+      id: "item4",
+      title: t("accordion.3.title"),
+      content: t("accordion.3.content"),
+    },
+  ];
+
+  
+
   const [openItems, setOpenItems] = useState([]);
 
   const toggleItem = (id) => {

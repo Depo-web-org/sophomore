@@ -138,79 +138,159 @@
   },
   "choose_unit": "Choose The Unit",
   "aboutUs": {
-      "title": "About Us",
-      "subtext": "At Sophomore",
-      "description": ", we believe that education is the key to unlocking potential and shaping the future. Our platform is designed to provide students with access to high-quality, flexible learning experiences tailored to their unique needs and goals."
-    },
-    "mission": {
-      "title": "Mission",
-      "description": "To be the leading educational platform that empowers learners worldwide by providing innovative, accessible, and personalized learning experiences, shaping a future where knowledge knows no boundaries."
-    },
-    "vision": {
-      "title": "Vision",
-      "description": "To be the leading educational platform that empowers learners worldwide by providing innovative, accessible, and personalized learning experiences, shaping a future where knowledge knows no boundaries."
-    },
-    "coreValues": {
-      "title": "Core Values",
-      "values": ["Excellence", "Innovation", "Integrity", "Collaboration", "Accessibility"]
-    },
-    "navbar_profile": {
-      "profile": "Profile",
-      "security": "Security",
-      "subscriptions": "Subscriptions",
-      "logout": "Log Out"
-    },
-    "profile": {
-      "updatePassword": "Update Password",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "phoneNumber": "Phone Number",
-      "uploadPhoto": "Upload Photo",
-      "delete": "Delete",
-      "save": "Save"
-    },
-    "Security": {
-      "updatePassword": "Update Password",
-      "currentPassword": "Enter your current password",
-      "newPassword": "Enter New Password",
-      "Retype new Password": "Retype New Password",
-      "changePassword": "Change Password"
-    },
-    "logoutModal": {
-      "title": "Logout Confirmation",
-      "description": "Logging out will end your current session. You can always log back in to access your account.",
-      "logoutButton": "Logout",
-      "cancelButton": "Cancel"
-    },
-    "subscriptions": {
-      "title": "Subscriptions",
-      "description": "View your active courses",
-      "availableUntil": "Available until",
-      "date": "Nov 2025"
-    },
-    "invoice": {
-      "title": "Invoice",
-      "bilento": "Bilento",
-      "sophomore": "Sophomore",
-      "businessAddress": "Business address",
-      "cityCountry": "City, Country - 00000",
-      "cityState": "City, State, IM-000 000",
-      "taxId": "TAX ID: 00000012345678",
-      "invoiceNumber": "Invoice #",
-      "invoiceDate": "Invoice date",
-      "reference": "Reference",
-      "dueDate": "Due date",
-      "services": "Services",
-      "qty": "Qty",
-      "base": "Base",
-      "lineTotal": "Line total",
-      "itemName": "Item Name",
-      "subtotal": "Subtotal",
-      "tax": "Tax (10%)",
-      "totalDue": "Total due",
-      "website": "www.punta.hz",
-      "phone": "+31 00030 00000",
-      "email": "info@punta.com"
+    "title": "About Us",
+    "subtext": "At Sophomore",
+    "description": ", we believe that education is the key to unlocking potential and shaping the future. Our platform is designed to provide students with access to high-quality, flexible learning experiences tailored to their unique needs and goals."
+  },
+  "mission": {
+    "title": "Mission",
+    "description": "To be the leading educational platform that empowers learners worldwide by providing innovative, accessible, and personalized learning experiences, shaping a future where knowledge knows no boundaries."
+  },
+  "vision": {
+    "title": "Vision",
+    "description": "To be the leading educational platform that empowers learners worldwide by providing innovative, accessible, and personalized learning experiences, shaping a future where knowledge knows no boundaries."
+  },
+  "coreValues": {
+    "title": "Core Values",
+    "values": [
+      "Excellence",
+      "Innovation",
+      "Integrity",
+      "Collaboration",
+      "Accessibility"
+    ]
+  },
+  "navbar_profile": {
+    "profile": "Profile",
+    "security": "Security",
+    "subscriptions": "Subscriptions",
+    "logout": "Log Out"
+  },
+  "profile": {
+    "updatePassword": "Update Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "uploadPhoto": "Upload Photo",
+    "delete": "Delete",
+    "save": "Save"
+  },
+  "Security": {
+    "updatePassword": "Update Password",
+    "currentPassword": "Enter your current password",
+    "newPassword": "Enter New Password",
+    "Retype new Password": "Retype New Password",
+    "changePassword": "Change Password"
+  },
+  "logoutModal": {
+    "title": "Logout Confirmation",
+    "description": "Logging out will end your current session. You can always log back in to access your account.",
+    "logoutButton": "Logout",
+    "cancelButton": "Cancel"
+  },
+  "subscriptions": {
+    "title": "Subscriptions",
+    "description": "View your active courses",
+    "availableUntil": "Available until",
+    "date": "Nov 2025"
+  },
+  "invoice": {
+    "title": "Invoice",
+    "bilento": "Bilento",
+    "sophomore": "Sophomore",
+    "businessAddress": "Business address",
+    "cityCountry": "City, Country - 00000",
+    "cityState": "City, State, IM-000 000",
+    "taxId": "TAX ID: 00000012345678",
+    "invoiceNumber": "Invoice #",
+    "invoiceDate": "Invoice date",
+    "reference": "Reference",
+    "dueDate": "Due date",
+    "services": "Services",
+    "qty": "Qty",
+    "base": "Base",
+    "lineTotal": "Line total",
+    "itemName": "Item Name",
+    "subtotal": "Subtotal",
+    "tax": "Tax (10%)",
+    "totalDue": "Total due",
+    "website": "www.punta.hz",
+    "phone": "+31 00030 00000",
+    "email": "info@punta.com"
+  },
+
+  "teacherInfos": {
+    "name": "Omar Gad",
+    "jobTitle": "Math Teacher",
+    "about": {
+      "title": "About",
+      "description": "Omar is a passionate and dedicated Math teacher with 4 years of experience inspiring students across Grade 1 to Grade 12. With a strong ability to simplify complex concepts, Ayman creates engaging and interactive lessons tailored to diverse learning styles."
     }
-  
+  },
+
+  "about": "About",
+  "course_details": "Course Details",
+  "reviews": "Reviews",
+
+  "course_title": "Grade 1 Math - Fundamentals of Numbers & Operations",
+  "course_description": "This course covers the essential concepts of mathematics for Grade 1 students, focusing on basic arithmetic, problem-solving, and logical reasoning through engaging activities and interactive lessons.",
+  "duration": "Till the end of semester",
+  "session_type": "Recorded Sessions",
+  "enroll_now": "Enroll now",
+  "add_to_cart": "Add to cart",
+
+  "Reviews": "One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.",
+
+  "accordion": [
+    {
+      "title": "What is React?",
+      "content": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "title": "What are React Hooks?",
+      "content": "Hooks are functions that let you use state and other React features without writing a class."
+    },
+    {
+      "title": "What is JSX?",
+      "content": "JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files."
+    },
+    {
+      "title": "What is the Virtual DOM?",
+      "content": "The Virtual DOM is a programming concept where an ideal, or 'virtual', representation of a UI is kept in memory and synced with the 'real' DOM by a library such as ReactDOM."
+    }
+  ],
+
+  "oops": "Oops!",
+  "login_message": "Please login to Continue",
+  "login_button": "Login",
+
+  "modal": {
+    "close": "Close",
+    "unit_by_unit": {
+      "title": "Unit by Unit",
+      "price": "20$",
+      "period": "/month",
+      "features": [
+        "10 users included",
+        "2GB of storage",
+        "Email support",
+        "Help center access"
+      ],
+      "button": "Get Started"
+    },
+    "full_pack": {
+      "title": "Full Pack",
+      "price": "30$",
+      "period": "/month",
+      "features": [
+        "20 users included",
+        "5GB of storage",
+        "Email support",
+        "Help center access",
+        "Phone support",
+        "Community access"
+      ],
+      "button": "Get Started"
+    }
+  }
 }

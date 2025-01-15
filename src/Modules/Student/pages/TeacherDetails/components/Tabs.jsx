@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { NavLink, useParams } from "react-router-dom";
 
 export default function Tabs() {
+  const { t } = useTranslation();
   const { schoolName, gradeName, subjectName, teacherName } = useParams();
   return (
     <div>
@@ -12,21 +14,22 @@ export default function Tabs() {
               end
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:text-gray-700"
             >
-              About
+               {t('about')}
             </NavLink>
 
             <NavLink
               to="course-details"
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:text-gray-700"
             >
-              Course Details
+                    {t('course_details')}
+
             </NavLink>
 
             <NavLink
               to="reviews"
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:text-gray-700"
             >
-              Reviews
+              {t('reviews')}
             </NavLink>
           </nav>
         </div>

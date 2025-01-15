@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { FaStar } from "react-icons/fa6";
 
 export default function ReviewsTab() {
+    const { t } = useTranslation();
+  
   return (
     <section className="w-full flex flex-col items-start justify-start xl:pr-12  ">
       <div className="grid grid-cols-1 gap-8  ">
@@ -33,11 +36,7 @@ export default function ReviewsTab() {
               <div className=" w-full">
                
                 <p className="font-normal text-xs lg:text-sm   text-gray-400 mb-4 xl:pr-8 ">
-                  One of the standout features of Pagedone is its intuitive and
-                  user-friendly interface. Navigating through the system feels
-                  natural, and the layout makes it easy to locate and utilize
-                  various design elements. This is particularly beneficial for
-                  designers looking to streamline their workflow.
+                  {t("Reviews")}
                 </p>
              
               </div>
