@@ -149,7 +149,8 @@ const student= data?.data;
 
         {/* Phone Number */}
 {
-  !student?.phone&&         
+  !student?.phone_number
+  &&         
   <div className="mb-5">
   <label
     htmlFor="phone_number"
