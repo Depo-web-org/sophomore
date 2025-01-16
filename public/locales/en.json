@@ -299,5 +299,45 @@
       ],
       "button": "Get Started"
     }
-  }
+  },
+  "login": {
+    "welcomeBack": "Welcome Back!",
+    "loginToAccount": "Please login to your account",
+    "enterEmail": "Enter email",
+    "emailRequired": "Email is required",
+    "validEmail": "Please enter a valid email address. Example: user.name@domain.com",
+    "enterPassword": "Enter password",
+    "passwordRequired": "Password is required",
+    "passwordPattern": "Password must contain at least one uppercase letter, one number, and one special character",
+    "forgetPassword": "Forget password?",
+    "logIn": "Log In",
+    "accountNotVerified": "Your account is not verified. Please verify your account to proceed.",
+    "verifyAccountNow": "Verify your account now",
+    "noAccount": "No account?",
+    "signUp": "Sign up"
+  },
+  "userRole": {
+    "student": "Student",
+    "teacher": "Teacher"
+  },
+  "forgetPassword": {
+    "title": "Forget Password?",
+    "subTitle": "Please write your email",
+    "enterEmail": "Enter email",
+    "emailRequired": "Email is required",
+    "validEmail": "Please enter a valid email address. Example: user.name@domain.com",
+    "sendOTP": "Send OTP",
+    "signIn": "Sign in"
+  },
+  "checkYourMail": "Check Your Mail for OTP",
+  "otpSent": "We have sent an OTP to your mail {{email}}",
+  "enterNewPassword": "Enter New Password",
+  "confirmPassword": "Confirm Password",
+  "reset": "Reset",
+  "passwordRequired": "Password is required",
+  "passwordValidation": "Password must contain at least one uppercase letter, one number, and one special character",
+  "didntGetOTP": "Didn’t get your OTP?",
+  "resendOTP": "Resend OTP",
+  "resetPasswordConfirmation": "Reset Password Confirmation",
+  "timeLeft": "{{minutes}}:{{seconds}}"
 }

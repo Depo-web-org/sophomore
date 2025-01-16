@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function SucessOtp({ processFinished }) {
   const navigate = useNavigate();
   return (
-    <div className="w-full my-auto flex justify-center   ">
+    <div className="w-full my-auto flex justify-center  ">
       <div className="flex flex-col items-center lg:items-start justify-start gap-2  w-4/5 lg:w-full ">
         <p className="text-5xl font-bold text-white">Amazing</p>
         <p className="text-base font-bold text-textopacity">

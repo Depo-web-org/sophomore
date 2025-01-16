@@ -308,5 +308,45 @@
       ],
       "button": "ابدأ الآن"
     }
-  }
+  },
+    "login": {
+      "welcomeBack": "مرحبًا بعودتك!",
+      "loginToAccount": "يرجى تسجيل الدخول إلى حسابك",
+      "enterEmail": "أدخل البريد الإلكتروني",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "validEmail": "يرجى إدخال عنوان بريد إلكتروني صحيح. مثال: user.name@domain.com",
+      "enterPassword": "أدخل كلمة المرور",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordPattern": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، ورقم واحد، وحرف خاص واحد",
+      "forgetPassword": "نسيت كلمة المرور؟",
+      "logIn": "تسجيل الدخول",
+      "accountNotVerified": "حسابك غير مفعل. يرجى تفعيل حسابك للمتابعة.",
+      "verifyAccountNow": "قم بتفعيل حسابك الآن",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "سجل الآن"
+    },
+    "userRole": {
+      "student": "طالب",
+      "teacher": "معلم"
+    },
+      "forgetPassword": {
+        "title": "نسيت كلمة المرور؟",
+        "subTitle": "يرجى كتابة بريدك الإلكتروني",
+        "enterEmail": "أدخل البريد الإلكتروني",
+        "emailRequired": "البريد الإلكتروني مطلوب",
+        "validEmail": "يرجى إدخال عنوان بريد إلكتروني صحيح. مثال: user.name@domain.com",
+        "sendOTP": "إرسال رمز التحقق",
+        "signIn": "تسجيل الدخول"
+      },
+        "checkYourMail": "تحقق من بريدك للحصول على رمز OTP",
+        "otpSent": "لقد أرسلنا رمز OTP إلى بريدك الإلكتروني {{email}}",
+        "enterNewPassword": "أدخل كلمة مرور جديدة",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "reset": "إعادة تعيين",
+        "passwordRequired": "كلمة المرور مطلوبة",
+        "passwordValidation": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، ورقم واحد، وحرف خاص واحد",
+        "didntGetOTP": "لم تستلم رمز OTP؟",
+        "resendOTP": "إعادة إرسال رمز OTP",
+        "resetPasswordConfirmation": "تأكيد إعادة تعيين كلمة المرور",
+        "timeLeft": "{{minutes}}:{{seconds}}"
 }
