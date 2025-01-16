@@ -11,6 +11,7 @@ import { HeadTitle } from "../Login/Login";
 import { useSelector } from "react-redux";
 import { formatTime } from "../../../../../../Helpers/Timer";
 import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const { t, i18n } = useTranslation()
@@ -18,44 +19,39 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const role = useSelector((state) => state.role.role);
-    const [responseError, setResponseError] = useState(null)
-    const provider = role === "teacher" ? true : false;
+  const [responseError, setResponseError] = useState(null);
+  const provider = role === "teacher" ? true : false;
 
-
-  // time format
+  // Time format
   const [timeLeft, setTimeLeft] = useState(1);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
-  // react hook form
+  // React Hook Form
   const { handleSubmit, control, setFocus } = useForm({
     defaultValues: {
       otp: ["", "", "", "", "", ""],
     },
   });
   const [resend_otp, { isLoading }] = useResend_otpMutation();
-  // Use verifyEmail mutation
-  const [verifyEmail, { isLoading: loadingSending }] =
-    useVerify_emailMutation();
+  const [verifyEmail, { isLoading: loadingSending }] = useVerify_emailMutation();
 
   const onSubmit = async (data) => {
     const otp = data.otp.join("");
-   
-  const dataSend =  { email:mail,otp}
-  if (provider) {
-    dataSend.provider = provider;
-  }
+    const dataSend = { email: mail, otp };
+    if (provider) {
+      dataSend.provider = provider;
+    }
     try {
-      const response = await verifyEmail({dataSend}).unwrap();
+      const response = await verifyEmail({ dataSend }).unwrap();
       console.log("Verify Email Response:", response);
-      if(response.code === 0){
+      if (response.code === 0) {
         handleValidateOtp(); // Call the provided callback on success
-      }else if(response.code === 1) {
-        setResponseError(response.message)
+      } else if (response.code === 1) {
+        setResponseError(response.message);
         console.error("Verification Error:", response.message || response);
       }
     } catch (err) {
-      // setResponseError(err?.data?.message)
-      // console.error("Verification Error:", err?.data?.message || err);
+      // Handle error
     }
   };
 
@@ -78,9 +74,6 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     }
   };
 
-  // time format
- 
-
   useEffect(() => {
     if (timeLeft > 0) {
       const interval = setInterval(() => {
@@ -92,22 +85,18 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     }
   }, [timeLeft]);
 
-  // ===> resend-otp endpoints name
-
   const reSendOtp = async () => {
-    const dataSend =  { email:mail}
+    const dataSend = { email: mail };
     if (provider) {
       dataSend.provider = provider;
     }
-    console.log(dataSend)
-
-    await resend_otp({dataSend} )
+    await resend_otp({ dataSend })
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
-      setResendOTPModal(false);
-      setIsResendDisabled(true);
-      setTimeLeft(1);
+    setResendOTPModal(false);
+    setIsResendDisabled(true);
+    setTimeLeft(1);
   };
 
   return (
@@ -223,8 +212,10 @@ export function ResendOtpModal(props) {
     <div
       onClick={() => props.setResendOTPModal(false)}
       className="fixed inset-0 bg-slate-600 bg-opacity-75 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-slate-600 bg-opacity-75 flex items-center justify-center z-50"
     >
       <div
+        className="bg-slate-900 rounded-lg p-6 w-full mx-4 lg:w-3/5 lg:mx-auto border-r-2 border-b-2 border-primary"
         className="bg-slate-900 rounded-lg p-6 w-full mx-4 lg:w-3/5 lg:mx-auto border-r-2 border-b-2 border-primary"
         onClick={(e) => e.stopPropagation()}
       >
@@ -236,6 +227,7 @@ export function ResendOtpModal(props) {
             <IoClose size={24} />
           </button>
         </div>
+        <div className="flex items-center justify-center flex-col gap-2">
         <div className="flex items-center justify-center flex-col gap-2">
           <p className="mb-4 text-white text-2xl font-bold text-center">
             {t("otpPage.resendOTPModal.title")} <br />  

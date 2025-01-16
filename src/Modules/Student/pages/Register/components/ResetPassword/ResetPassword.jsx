@@ -12,27 +12,34 @@ import {
 } from "../../../../../../Redux/Auth/authApiSlice";
 import { ResendOtpModal } from "../OTP/OTP";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const ResetPassword = () => {
+  const { t } = useTranslation(); // Initialize useTranslation
   const { userMail } = useParams(); // Get encoded email from the URL
-  //deCode the User mail
   const email = decodeEmail(userMail);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [resendOTPModal, setResendOTPModal] = useState(false);
-  const [StatusOfChangesPassword, setStatusOfChangesPassword] = useState()
+  const [StatusOfChangesPassword, setStatusOfChangesPassword] = useState();
   const role = useSelector((state) => state.role.role);
-  const provider= role==='teacher'?true:false;
-
+  const provider = role === "teacher" ? true : false;
 
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
 
-  const { handleSubmit, control, setFocus, register , formState: { errors }, }   = useForm({
+  const {
+    handleSubmit,
+    control,
+    setFocus,
+    register,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       otp_code: ["", "", "", "", "", ""],
     },
   });
+
   const [resetPassword, { isLoading, isError, error }] =
     useReset_passwordMutation();
 
@@ -50,14 +57,14 @@ const ResetPassword = () => {
     if (provider) {
       dataSend.provider = provider;
     }
- 
-  await resetPassword({dataSend,role})
-        .unwrap()
-        .then(()=>  setStatusOfChangesPassword('Reset Password Confirmation') )
-        .then(()=> setTimeout(()=> navigate("/register"),3000))
-        .catch((err)=> {
-          console.error("Error occurred:", err);
-        } )
+
+    await resetPassword({ dataSend, role })
+      .unwrap()
+      .then(() => setStatusOfChangesPassword(t("resetPasswordConfirmation")))
+      .then(() => setTimeout(() => navigate("/register"), 3000))
+      .catch((err) => {
+        console.error("Error occurred:", err);
+      });
   };
 
   const handleInput = (e, index) => {
@@ -84,9 +91,7 @@ const ResetPassword = () => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes < 10 ? "0" : ""}${minutes}:${
-      seconds < 10 ? "0" : ""
-    }${seconds}`;
+    return t("timeLeft", { minutes, seconds });
   };
 
   useEffect(() => {
@@ -105,7 +110,7 @@ const ResetPassword = () => {
     setIsResendDisabled(true);
     setTimeLeft(60);
     try {
-      const userData = { email, };
+      const userData = { email };
 
       if (provider) {
         userData.provider = provider;
@@ -113,23 +118,24 @@ const ResetPassword = () => {
       const response = await forgetpassword({
         userData,
       }).unwrap();
-
-    } catch{
-      console.log(error)
+    } catch {
+      console.log(error);
     }
   };
- 
+
   return (
     <>
-      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden ">
-        <div className="flex flex-col items-start b justify-center lg:gap-8  w-full slide-in-left   lg:min-h-screen">
-          <div className=" w-full  ">
+      <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
+        <div className="flex flex-col items-start b justify-center lg:gap-8 w-full slide-in-left lg:min-h-screen">
+          <div className="w-full">
             <HeadTitle
               title={{
-                head: "Check Your Mail for OTP",
-                subTitle: ` We have sent an otp to your mail ${email
-                  .split("@")[0]
-                  .slice(0, 3)}****@${email.split("@")[1].slice(0, 2)}***.com`,
+                head: t("checkYourMail"),
+                subTitle: t("otpSent", {
+                  email: `${email.split("@")[0].slice(0, 3)}****@${email
+                    .split("@")[1]
+                    .slice(0, 2)}***.com`,
+                }),
               }}
             />
           </div>
@@ -138,7 +144,7 @@ const ResetPassword = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"
             >
-              <div className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
+              <div dir="ltr" className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
@@ -150,10 +156,10 @@ const ResetPassword = () => {
                         type="text"
                         value={value}
                         maxLength="1"
-                  className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary  rounded-md border-b ring-0 outline-none text-center font-bold"
+                        className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md border-b ring-0 outline-none text-center font-bold"
                         onChange={(e) => {
                           const inputValue = e.target.value;
-                          if (/^\d*$/.test(inputValue)) { // Only allow digits
+                          if (/^\d*$/.test(inputValue)) {
                             onChange(inputValue);
                             handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
                           }
@@ -165,7 +171,7 @@ const ResetPassword = () => {
                   />
                 ))}
               </div>
-              <div className="lg:mt-8 mt-4 mb-0 lg:mb-4  flex flex-col gap-y-2 lg:gap-y-4">
+              <div className="lg:mt-8 mt-4 mb-0 lg:mb-4 flex flex-col gap-y-2 lg:gap-y-4">
                 <label
                   htmlFor="password"
                   className="w-full lg:w-4/5 mr-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
@@ -174,16 +180,15 @@ const ResetPassword = () => {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     {...register("password", {
-                      required: "Password is required",
+                      required: t("passwordRequired"),
                       pattern: {
                         value:
                           /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
-                        message:
-                          "Password must contain at least one uppercase letter, one number, and one special character",
+                        message: t("passwordValidation"),
                       },
                     })}
                     className="outline-none flex-1"
-                    placeholder="Enter New password"
+                    placeholder={t("enterNewPassword")}
                   />
                   <button
                     type="button"
@@ -192,9 +197,8 @@ const ResetPassword = () => {
                   >
                     {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                   </button>
-
                 </label>
-                <div className="w-full lg:w-4/5 mr-auto ">
+                <div className="w-full lg:w-4/5 mr-auto">
                   {errors && (
                     <p className="text-red-500 text-sm text-center font-medium">
                       {errors?.password?.message}
@@ -203,22 +207,21 @@ const ResetPassword = () => {
                 </div>
                 <label
                   htmlFor="password2"
-                  className=" w-full lg:w-4/5 mr-auto  bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
+                  className="w-full lg:w-4/5 mr-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
                 >
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password2"
                     {...register("password2", {
-                      required: "Password is required",
+                      required: t("passwordRequired"),
                       pattern: {
                         value:
                           /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
-                        message:
-                          "Password must contain at least one uppercase letter, one number, and one special character",
+                        message: t("passwordValidation"),
                       },
                     })}
                     className="outline-none flex-1"
-                    placeholder="Confirm password"
+                    placeholder={t("confirmPassword")}
                   />
                   <button
                     type="button"
@@ -228,7 +231,7 @@ const ResetPassword = () => {
                     {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                   </button>
                 </label>
-                <div className="w-full lg:w-4/5 mr-auto ">
+                <div className="w-full lg:w-4/5 mr-auto">
                   {errors && (
                     <p className="text-red-500 text-sm text-center font-medium">
                       {errors?.password2?.message}
@@ -236,79 +239,67 @@ const ResetPassword = () => {
                   )}
                 </div>
               </div>
-            
+
               <button
                 type="submit"
                 disabled={isLoading}
                 className={`inline-flex rounded-lg ${
                   isLoading ? "bg-white" : "bg-primary"
-                }  w-full lg:w-4/5 mr-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+                } w-full lg:w-4/5 mr-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
               >
                 {isLoading ? (
                   <ImSpinner9 className="animate-spin text-3xl text-secondary" />
                 ) : (
-                  "Reset"
+                  t("reset")
                 )}
               </button>
 
-              {/* response error */}
-               {isError && (
-              <div className="w-full lg:w-4/5 mr-auto" >
+              {isError && (
+                <div className="w-full lg:w-4/5 mr-auto">
                   <p className="text-red-500 text-sm text-center font-medium">
                     {error?.data?.message}
                   </p>
-                
-              </div>
-               )}
+                </div>
+              )}
 
-
-          {/* Password Changed Successfully */}
-            {StatusOfChangesPassword && (
-              <div className="w-full lg:w-4/5 mr-auto" >
-                  <p className="text-emerald-600  text-center font-semibold">
+              {StatusOfChangesPassword && (
+                <div className="w-full lg:w-4/5 mr-auto">
+                  <p className="text-emerald-600 text-center font-semibold">
                     {StatusOfChangesPassword}
                   </p>
-              </div>
+                </div>
               )}
-               {/* StatusOfChangesPassword */}
             </form>
 
-
-
-
-
-            {/* Resend OTP Button  */}
             <div className="flex w-full flex-col justify-center items-center gap-2 py-4 lg:w-4/5 mr-auto">
-                {
-                  isResendDisabled && <p
+              {isResendDisabled && (
+                <p
                   className={`${
                     isResendDisabled ? "text-white" : "text-gray-500"
-                  } text-base font-medium `}
+                  } text-base font-medium`}
                 >
                   {formatTime(timeLeft)}
                 </p>
-                } 
-                <p
-                  className={` text-sm lg:text-base font-medium leading-[18.75px] text-center  ${
-                    isLoading || isResendDisabled
-                      ? "text-textopacity"
-                      : "text-white"
+              )}
+              <p
+                className={`text-sm lg:text-base font-medium leading-[18.75px] text-center ${
+                  isLoading || isResendDisabled
+                    ? "text-textopacity"
+                    : "text-white"
+                }`}
+              >
+                {t("didntGetOTP")}
+                <button
+                  disabled={isLoading || isResendDisabled}
+                  onClick={() => setResendOTPModal(true)}
+                  className={`text-sm lg:text-base font-medium leading-[18.75px] text-center underline mx-2 ${
+                    isResendDisabled ? "text-gray-500" : "text-white"
                   }`}
                 >
-                  Didn’t got your OTP ?
-                  <button
-                    disabled={isLoading || isResendDisabled}
-                    onClick={() => setResendOTPModal(true)}
-                    className={`text-sm lg:text-base font-medium leading-[18.75px] text-center underline mx-2 ${
-                      isResendDisabled ? "text-gray-500" : "text-white"
-                    }`}
-                  >
-                    Resend OTP
-                  </button>
-                </p>
-              </div>
-
-              
+                  {t("resendOTP")}
+                </button>
+              </p>
+            </div>
           </div>
         </div>
 
@@ -318,15 +309,12 @@ const ResetPassword = () => {
           className="hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] slide-in-right object-cover rounded-xl z-10"
         />
       </div>
-      {
-        // Resend OTP Modal
-        resendOTPModal && (
-          <ResendOtpModal
-            setResendOTPModal={setResendOTPModal}
-            reSendOtp={reSendOtp}
-          ></ResendOtpModal>
-        )
-      }
+      {resendOTPModal && (
+        <ResendOtpModal
+          setResendOTPModal={setResendOTPModal}
+          reSendOtp={reSendOtp}
+        />
+      )}
     </>
   );
 };
