@@ -475,7 +475,58 @@
   }
 
 
+,
 
+"teacherUpload": {
+  "welcome": "مرحبًا {{name}}",
+  "uploadPapers": "يرجى تحميل أوراقك",
+  "cv": "السيرة الذاتية",
+  "graduationcertificate": "شهادة التخرج",
+  "introvideo": "فيديو التعريف",
+  "additionaldocuments": "مستندات إضافية",
+  "upload": "تحميل",
+  "uploaded": "تم التحميل", 
+  "errorUploading": "حدث خطأ أثناء التحميل",
+  "waitForApproval": "يرجى الانتظار حتى تحصل على الموافقة",
+  "getStarted": "ابدأ الآن",
+  "loading": "جاري التحميل..."
+},
+"sidebar": {
+  "dashboard": "لوحة التحكم",
+  "courses": "الكورسات",
+  "students": "الطلاب",
+  "profile": "الملف الشخصي",
+  "logout": "تسجيل الخروج"
+},
+"courseManagement": {
+  "title": "إدارة الكورسات",
+  "name": "الاسم",
+  "dob": "تاريخ الإنشاء",
+  "enrollment": "عدد المسجلين",
+  "status": "الحالة",
+  "actions": "الإجراءات"
+},
+"allCourses": {
+  "title": "جميع الكورسات",
+  "courseName": "اسم الكورس",
+  "uploadDate": "تاريخ التحميل",
+  "enrollment": "عدد المسجلين",
+  "status": "الحالة",
+  "actions": "الإجراءات"
+},
+"recentlyUploaded": {
+  "title": "الكورسات المرفوعة حديثًا",
+  "courseName": "اسم الكورس",
+  "status": "الحالة"
+},
+"addNewCourse": "إضافة كورس جديد" ,
+"teacherProfile": {
+"name":"اﻵسم",
+  "nameRequired": "الاسم مطلوب",
+  "namePlaceholder": "أدخل اسمك",
+  "updateDetails": "قم بتحديث صورك وتفاصيلك الشخصية",
+  "save": "حفظ"
+}
 
 
 

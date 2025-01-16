@@ -457,6 +457,60 @@
       }
     }
   }
+,
+
+
+
+
+  "teacherUpload": {
+    "welcome": "Welcome {{name}}",
+    "uploadPapers": "Please Upload Your Papers",
+    "cv": "CV",
+    "graduationcertificate": "Graduation Certificate",
+    "introvideo": "Intro Video",
+    "additionaldocuments": "Additional Documents",
+    "upload": "Upload",
+    "uploaded": "Uploaded", 
+    "errorUploading": "Error Uploading Files",
+    "waitForApproval": "Kindly wait until you get approved",
+    "getStarted": "Get Started",
+    "loading": "Loading..."
+  }, 
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "courses": "Courses",
+    "students": "Students",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "courseManagement": {
+    "title": "Course Management",
+    "name": "Name",
+    "dob": "Date of Birth",
+    "enrollment": "Enrollment",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "allCourses": {
+    "title": "All Course",
+    "courseName": "Course Name",
+    "uploadDate": "Upload Date",
+    "enrollment": "Enrollment",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "recentlyUploaded": {
+    "title": "Recently Uploaded Courses",
+    "courseName": "Course Name",
+    "status": "Status"
+  },
+  "addNewCourse": "Add A New Course",
+ "teacherProfile": {
+  "name":"Username",
+    "nameRequired": "Name is required",
+    "namePlaceholder": "Enter your name",
+    "updateDetails": "Update your photos and personal Details",
+    "save": "Save"
 
 
 
@@ -464,12 +518,6 @@
 
 
 
-
-
-
-
-
-
-
+ }
 
 }
