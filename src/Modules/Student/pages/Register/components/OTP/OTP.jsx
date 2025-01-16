@@ -13,7 +13,6 @@ import { formatTime } from "../../../../../../Helpers/Timer";
 import { useTranslation } from "react-i18next";
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const role = useSelector((state) => state.role.role);
@@ -101,42 +100,40 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
     <>
       <div className="w-full my-auto flex justify-center">
         <div className="flex flex-col items-start justify-start gap-2 mx-4">
-          <HeadTitle
-            title={{
-              head: t("otp.checkYourMail"),
-              subTitle: t("otp.otpSent", {
-                mailPrefix: mail?.slice(0, 3),
-                mailDomain: mail?.split("@")[1]?.slice(0, 2),
-              }),
-            }}
-          />
+        <HeadTitle
+                   title={{
+                     head: "Check your mail",
+                    subTitle: `We have sent an OTP to your mail ${mail?.slice(0, 3)}*****@${mail?.split("@")[1]?.slice(0, 2)}***.com`,
+                   }}
+                 />
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
             <div className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4">
-              {[0, 1, 2, 3, 4, 5].map((index) => (
-                <Controller
-                  key={index}
-                  name={`otp[${index}]`}
-                  control={control}
-                  render={({ field: { onChange, value, ref } }) => (
-                    <input
-                      ref={ref}
-                      type="text"
-                      value={value}
-                      maxLength="1"
-                      className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md border-b ring-0 outline-none text-center font-bold"
-                      onChange={(e) => {
-                        const inputValue = e.target.value;
-                        if (/^\d*$/.test(inputValue)) {
-                          onChange(inputValue);
-                          handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
-                        }
-                      }}
-                      onFocus={(e) => e.target.select()}
-                      onPaste={(e) => handlePaste(e, onChange)}
-                    />
-                  )}
-                />
-              ))}
+            {[0, 1, 2, 3, 4, 5].map((index) => (
+  <Controller
+    key={index}
+    name={`otp[${index}]`}
+    control={control}
+    render={({ field: { onChange, value, ref } }) => (
+      <input
+        ref={ref}
+        type="text"
+        value={value}
+        maxLength="1"
+           className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md  border-b ring-0 outline-none text-center font-bold"
+        onChange={(e) => {
+          const inputValue = e.target.value;
+          if (/^\d*$/.test(inputValue)) { // Only allow digits
+            onChange(inputValue);
+            handleInput(e, index, [0, 1, 2, 3, 4, 5], onChange);
+          }
+        }}
+        onFocus={(e) => e.target.select()}
+        onPaste={(e) => handlePaste(e, onChange)}
+      />
+    )}
+  />
+))}
+
             </div>
             {/* Submit Button */}
             <button
@@ -149,7 +146,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
               {loadingSending || isLoading ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary" />
               ) : (
-                t("otp.validate")
+                          "Validate"
               )}
             </button>
             {responseError && (
@@ -171,7 +168,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                   : "text-white"
               }`}
             >
-              {t("otp.didNotReceiveOTP")}
+              Didn’t got your OTP ?
               <button
                 disabled={isLoading || isResendDisabled}
                 onClick={() => setResendOTPModal(true)}
@@ -179,12 +176,12 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                   isResendDisabled ? "text-gray-500" : "text-white"
                 }`}
               >
-                {t("otp.resendOTP")}
+                      Resend OTP
               </button>
             </p>
 
             <p className="text-sm lg:text-base leading-[18.75px] text-center text-white">
-              {t("otp.wrongEmail")}
+            Wrong Email ?
               <button
                 onClick={() => {
                   setResendOTPModal(false);
@@ -192,7 +189,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                 }}
                 className="text-sm leading-[18.75px] text-center underline text-white mx-2"
               >
-                {t("otp.registerAgain")}
+                 Register again
               </button>
             </p>
           </div>
