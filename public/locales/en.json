@@ -441,7 +441,7 @@
       "head": "Check Your Mail for OTP",
       "subTitle": {
         "verified": "Please go to the login page.",
-        "emailSent": "We have sent an OTP to your mail {email}.",
+        "emailSent": "We have sent an OTP to your mail ",
         "emailNotFound": "We couldn’t retrieve your email. Please check again."
       }
     },

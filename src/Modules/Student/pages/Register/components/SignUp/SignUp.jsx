@@ -138,6 +138,8 @@ const [errorSubmit, setErrorSubmit] = useState(null)
             onSubmit={handleSubmit(onSubmit)}
             className="mb-0 w-full space-y-4 flex flex-col gap-2 lg:gap-5"
           >
+                    <UserRole role={role} dispatch={dispatch} />
+          
             {/* First Name Field */}
             <div className="flex gap-2 flex-wrap">
               <label

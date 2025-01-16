@@ -1,43 +1,48 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import TopText from "../Top Text Cards/TopText";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";  
-
-const cardteacher = [
-  {
-    id: "item1",
-    name: "CV",
-    img: "/images/Teacher/CardTeacher_1.svg",
-  },
-  {
-    id: "item2",
-    name: "Graduation Certificate",
-    img: "/images/Teacher/CardTeachet_3.svg",
-  },
-  {
-    id: "item3",
-    name: "Intro Video",
-    img: "/images/Teacher/CardTeachet_4.svg",
-  },
-  {
-    id: "item4",
-    name: "Additional Documents",
-    img: "/images/Teacher/CardTeachet_2.svg",
-  },
-];
+import { useTranslation } from "react-i18next";
+import { useUpdateDocumentMutation } from "../../../../Redux/Auth/authApiSlice";
 
 const TeacherUpload = () => {
-  const { t } = useTranslation(); // Initialize useTranslation
+  const { t } = useTranslation();
   const [buttonStates, setButtonStates] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [cardteacher, setCardteacher] = useState([]);
   const navigate = useNavigate();
-  const getUserInformation = JSON.parse(localStorage.getItem('USER'));
-  console.log(getUserInformation.data.first_name);
-  
-  // Hook form
+  const getUserInformation = JSON.parse(localStorage.getItem("USER"));
+ const [updateDocument, { isLoading, isError, error:UpdateEroor }] =
+ useUpdateDocumentMutation();
+  // Fetch data from backend on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://dev.depowebeg.com/education/api/getProviderDocumentCategories.php"
+        );
+        const backendData = response.data.data;
+
+        const mappedData = backendData.map((item) => ({
+          id: item.id,
+          name: item.name,
+          path: item.path,
+          icon: item.icon,
+          mandatory: item.mandatory === "1",
+        }));
+
+        setCardteacher(mappedData);
+      } catch (error) {
+        console.error("Error fetching data from backend:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -47,7 +52,6 @@ const TeacherUpload = () => {
   const handleFileChange = (e, index) => {
     const file = e.target.files[0];
     if (file) {
-      // Validate file type based on the cardteacher item
       const allowedTypes = {
         CV: "application/pdf",
         "Graduation Certificate": "application/pdf",
@@ -70,60 +74,37 @@ const TeacherUpload = () => {
     }
   };
 
-  // Convert file to base64
-  const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
+ 
+  // function For Send one by one 
 
-  // Send Data
   const onSubmit = async (data) => {
     try {
       setLoading(true);
 
-         // Helper function to convert file to base64 or return empty string
-          const getBase64 = async (file) => (file ? await fileToBase64(file) : "");
+      // Loop through each cardteacher item and send the corresponding file
+      for (let index = 0; index < cardteacher.length; index++) {
+        const item = cardteacher[index];
+        const file = buttonStates[index]?.file;
 
-          // Convert files to base64
-          const files = [
-            buttonStates[0]?.file, // CV
-            buttonStates[1]?.file, // Graduation Certificate
-            buttonStates[2]?.file, // Intro Video
-            buttonStates[3]?.file, // Additional Documents
-          ];
+        if (file) {
+          const formData = new FormData();
+          formData.append("document_category", item.id); // Use the item's ID as document_category
+          formData.append("hint", item.hint || ""); // Use hint if available, otherwise empty
+          formData.append("hint_ar", item.hint_ar || ""); // Use hint_ar if available, otherwise empty
+          formData.append("document", file);
 
-          const [cvBase64, graduationCertificateBase64, introVideoBase64, additionalDocumentsBase64] =
-            await Promise.all(files.map(getBase64));
+          // Log FormData contents
+          for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+          }
 
-          // Prepare the data to be sent
-          const payload = {
-            cv: cvBase64,
-            graduation_certificate: graduationCertificateBase64,
-            intro_video: introVideoBase64,
-            additional_documents: additionalDocumentsBase64,
-          };
-         console.log("Payload to be sent:", payload);
+          const response = await updateDocument(formData).unwrap();
+          console.log(`Upload successful for ${item.name}:`, response);
+        }
+      }
 
-      // Send data to backend
-      // const access_token = localStorage.getItem("access_token");
-      // const response = await axios.post(
-      //   "http://192.168.1.26:8000/api/v1/teachers/complete-profile-2/",
-      //   payload,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${access_token}`,
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
-
-      // console.log("Upload successful:", response.data);
-      // navigate("/teacherPanel");
-
+      // Navigate after all files are uploaded
+      navigate("/teacherPanel");
     } catch (error) {
       console.error("Error uploading files:", error);
       setError(true);
@@ -132,12 +113,46 @@ const TeacherUpload = () => {
     }
   };
 
+
+  // function For Send All 4 Files once but didn't work
+  // const onSubmit = async (data) => {
+  //   try {
+  //     setLoading(true);
+  
+  //     // إنشاء FormData واحد
+  //     const formData = new FormData();
+  
+  //     // إضافة جميع البيانات إلى FormData
+  //     cardteacher.forEach((item, index) => {
+  //       const file = buttonStates[index]?.file;
+  //       if (file) {
+  //         formData.append(`document_category_${index}`, item.id); // إضافة document_category
+  //         formData.append(`hint_${index}`, item.hint || ""); // إضافة hint
+  //         formData.append(`hint_ar_${index}`, item.hint_ar || ""); // إضافة hint_ar
+  //         formData.append(`document_${index}`, file); // إضافة الملف
+  //       }
+  //     });
+  
+  //     // Log FormData contents
+  //     for (let [key, value] of formData.entries()) {
+  //       console.log(key, value);
+  //     }
+  
+  //     // إرسال FormData في طلب واحد
+  //     const response = await updateDocument(formData).unwrap();
+  //     console.log("Upload successful:", response);
+  
+  //     // التنقل بعد الانتهاء من التحميل
+  //     navigate("/teacherPanel");
+  //   } catch (error) {
+  //     console.error("Error uploading files:", error);
+  //     setError(true);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="relative w-full "
-    >
-      
+    <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
       <div className="pt-28 lg:pt-32">
         <TopText
           name={t("teacherUpload.welcome", { name: `${getUserInformation.data.first_name}` })}
@@ -152,11 +167,11 @@ const TeacherUpload = () => {
                 buttonStates[index]?.status === "Uploaded"
                   ? "border-green-400"
                   : "border-white"
-              } h-52 text-center flex flex-col items-center justify-center p-4 rounded-lg `}
+              } h-52 text-center flex flex-col items-center justify-center p-4 rounded-lg`}
             >
               <img
                 className="w-16 h-16 object-cover"
-                src={item.img}
+                src={`https://dev.depowebeg.com/${item.path}/${item.icon}`}
                 alt={item.name}
               />
               <div>
@@ -171,7 +186,7 @@ const TeacherUpload = () => {
                   } hover:bg-blue-800 cursor-pointer rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
                 >
                   {buttonStates[index]?.status === "Uploaded"
-                    ? t("teacherUpload.uploaded") 
+                    ? t("teacherUpload.uploaded")
                     : t("teacherUpload.upload")}
                   <input
                     type="file"
@@ -223,35 +238,3 @@ const TeacherUpload = () => {
 };
 
 export default TeacherUpload;
-
-
-
-
-
-      // Convert files to base64
-      // const cvFile = buttonStates[0]?.file;
-      // const graduationCertificateFile = buttonStates[1]?.file;
-      // const introVideoFile = buttonStates[2]?.file;
-      // const additionalDocumentsFile = buttonStates[3]?.file;
-
-      // const cvBase64 = cvFile ? await fileToBase64(cvFile) : "";
-
-      // const graduationCertificateBase64 = graduationCertificateFile
-      //   ? await fileToBase64(graduationCertificateFile)
-      //   : "";
-
-      // const introVideoBase64 = introVideoFile
-      //   ? await fileToBase64(introVideoFile)
-      //   : "";
-        
-      // const additionalDocumentsBase64 = additionalDocumentsFile
-      //   ? await fileToBase64(additionalDocumentsFile)
-      //   : "";
-
-      // // Prepare the data to be sent
-      // const payload = {
-      //   cv: cvBase64,
-      //   graduation_certificate: graduationCertificateBase64,
-      //   intro_video: introVideoBase64,
-      //   additional_documents: additionalDocumentsBase64,
-      // };

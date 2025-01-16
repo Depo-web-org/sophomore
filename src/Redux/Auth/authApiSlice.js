@@ -112,7 +112,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-    
+    updateDocument: builder.mutation({
+      query: (formData) => {
+        console.log("updateDocument api slice:", formData); 
+        return {
+          url: "addProviderDocument.php", 
+          method: "POST",
+          body: formData, 
+        };
+      },
+    }),
   }),
 });
 
@@ -127,5 +136,6 @@ export const {
   useLogoutMutation,
   useRefreshTokenMutation,
   useGetOTpMutation,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useUpdateDocumentMutation
 } = authApiSlice;

@@ -97,7 +97,6 @@ const [errorOtp, setErrorOtp] = useState(null)
       if (provider) {
         userData.provider = provider;
       }
-      console.log(userData)
       await resendOtp({ userData, role }).unwrap().then(()=>  setTimeLeft(60));
     } catch (err) {
 
@@ -109,13 +108,10 @@ const [errorOtp, setErrorOtp] = useState(null)
   useEffect(() => {
     reSendOtp();
   }, []);
-
-  const subTitle = statusOfAccount
-    ? t("OtpPage.title.subTitle.verified") 
+console.log(email.split('@')[0].slice(0, 3))
+  const subTitle = statusOfAccount ? t("OtpPage.title.subTitle.verified") 
     : email
-    ? t("OtpPage.title.subTitle.emailSent", {
-        email: `${email.split('@')[0].slice(0, 3)}****@${email.split('@')[1]?.slice(0, 2)}***.com`,
-      }) 
+    ? t("OtpPage.title.subTitle.emailSent", { email: `${email.split('@')[0].slice(0, 3)}****@${email.split('@')[1]?.slice(0, 2)}***.com`,}) 
     : t("OtpPage.title.subTitle.emailNotFound");  
 
   return (
@@ -137,7 +133,7 @@ const [errorOtp, setErrorOtp] = useState(null)
           ) : (
             <div className="w-full">
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-                <div className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
+                <div dir='ltr' className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
                   {[0, 1, 2, 3, 4, 5].map((index) => (
                     <Controller
                       key={index}
@@ -182,7 +178,10 @@ const [errorOtp, setErrorOtp] = useState(null)
               <div className="flex w-full flex-col justify-center items-center gap-2 py-4 lg:w-4/5 mr-auto">
                 {isResendDisabled && (
                   <p className="text-white text-base font-medium">
-                    {t("OtpPage.form.resendOTP.timer", { time: formatTime(timeLeft) })}    
+                    {/* {t("OtpPage.form.resendOTP.timer", { time: formatTime(timeLeft) })}   */}
+                    {
+                      formatTime(timeLeft)
+                    }  
                   </p>
                 )}
                 <p

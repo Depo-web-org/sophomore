@@ -21,7 +21,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const role = useSelector((state) => state.role.role);
   const [responseError, setResponseError] = useState(null);
   const provider = role === "teacher" ? true : false;
-
+console.log(mail)
   // Time format
   const [timeLeft, setTimeLeft] = useState(1);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
@@ -101,7 +101,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
   return (
     <>
-    <div className="w-full my-auto flex justify-center">
+    <div className="w-full my-auto flex justify-center bg-red-500">
       <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
           title={{
@@ -112,7 +112,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
           }}
         />
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-          <div className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4">
+          <div  className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4 ">
             {[0, 1, 2, 3, 4, 5].map((index) => (
               <Controller
                 key={index}
@@ -121,6 +121,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
                 render={({ field: { onChange, value, ref } }) => (
                   <input
                     ref={ref}
+                
                     type="text"
                     value={value}
                     maxLength="1"
