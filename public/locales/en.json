@@ -134,7 +134,8 @@
       "profile": "Profile",
       "cart": "Cart",
       "my_learning": "My Learning",
-      "wishlist": "Wishlist"
+      "wishlist": "Wishlist",
+      "dashboard":"Dashboard"
     }
   },
   "tabs": {
