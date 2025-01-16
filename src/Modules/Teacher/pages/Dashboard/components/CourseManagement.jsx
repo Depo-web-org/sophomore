@@ -1,6 +1,8 @@
 import React from "react";
 import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // Import useTranslation
+
 const courses = [
   {
     name: "Introduction to math",
@@ -23,12 +25,12 @@ const courses = [
 ];
 
 export default function CourseManagement() {
-  // Array of objects representing course details
- 
+  const { t } = useTranslation(); // Initialize useTranslation
+
   return (
-    <div className="w-full lg:w-[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg  ">
+    <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
-        Course Management
+        {t("courseManagement.title")} {/* Translated title */}
       </p>
 
       <div className="overflow-x-auto px-4">
@@ -36,19 +38,19 @@ export default function CourseManagement() {
           <thead className="ltr:text-left rtl:text-right">
             <tr>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                Name
+                {t("courseManagement.name")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                Date of Birth
+                {t("courseManagement.dob")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                enrollment
+                {t("courseManagement.enrollment")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                status
+                {t("courseManagement.status")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                Actions{" "}
+                {t("courseManagement.actions")} {/* Translated column header */}
               </th>
             </tr>
           </thead>
@@ -68,10 +70,12 @@ export default function CourseManagement() {
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
                   {course.status}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700 ">
-                  <Link to={"courses/chooseunit"} 
-                  className="text-primary  text-2xl cursor-pointer ">  
-                    <TbEdit />                                  
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                  <Link
+                    to={"courses/chooseunit"}
+                    className="text-primary text-2xl cursor-pointer"
+                  >
+                    <TbEdit />
                   </Link>
                 </td>
               </tr>

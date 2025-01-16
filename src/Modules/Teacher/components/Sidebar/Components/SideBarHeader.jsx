@@ -4,7 +4,7 @@ import Logo from "/images/logos/logo.svg";
 
 const SideBarHeader = ({ setSidebarOpen, sidebarOpen }) => {
   return (
-    <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+    <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 ">
       <Link
         to="/teacherPanel"
         className="py-3 flex items-center justify-center"

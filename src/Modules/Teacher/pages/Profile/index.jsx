@@ -11,7 +11,7 @@ const TeacherProfile = () => {
        <Profile />
       <div >
         {/* MinProfile */}
-        <MinProfile />
+        {/* <MinProfile /> */}
         {/* form */}
         <Form />
       </div>
