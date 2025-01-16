@@ -6,31 +6,11 @@ import { IoIosPeople } from "react-icons/io";
 import { IoExitOutline, IoPersonSharp } from "react-icons/io5";
 import SideBarHeader from "./Components/SideBarHeader";
 import LogoutModal from "../../../Student/pages/Profile/components/Security/LogoutModal";
-
-const menuItems = [
-  {
-    label: "Dashboard",
-    to: "/teacherPanel",
-    icon: <HiHome className="mb-1 text-2xl" />,
-  },
-  {
-    label: "Courses",
-    to: "/teacherPanel/courses",
-    icon: <FaBook className="mb-1 text-2xl" />,
-  },
-  {
-    label: "Students",
-    to: "/teacherPanel/students",
-    icon: <IoIosPeople className="mb-1 text-2xl" />,
-  },
-  {
-    label: "Profile",
-    to: "/teacherPanel/profile",
-    icon: <IoPersonSharp className="mb-1 text-2xl" />,
-  },
-];
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const { i18n, t } = useTranslation(); // Get the i18n instance and t function
+  const isRTL = i18n.language === "ar"; // Check if the current language is Arabic
   const [LogOutState, setLogOutState] = useState(false);
   const location = useLocation();
   const { pathname } = location;
@@ -72,18 +52,42 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return () => document.removeEventListener("keydown", keyHandler);
   }, [sidebarOpen, setSidebarOpen]);
 
+  // Menu items with translated labels
+  const menuItems = [
+    {
+      label: t("sidebar.dashboard"), // Translated label
+      to: "/teacherPanel",
+      icon: <HiHome className="mb-1 text-2xl" />,
+    },
+    {
+      label: t("sidebar.courses"), // Translated label
+      to: "/teacherPanel/courses",
+      icon: <FaBook className="mb-1 text-2xl" />,
+    },
+    {
+      label: t("sidebar.students"), // Translated label
+      to: "/teacherPanel/students",
+      icon: <IoIosPeople className="mb-1 text-2xl" />,
+    },
+    {
+      label: t("sidebar.profile"), // Translated label
+      to: "/teacherPanel/profile",
+      icon: <IoPersonSharp className="mb-1 text-2xl" />,
+    },
+  ];
+
   return (
     <>
       <aside
         ref={sidebar}
-        className={`absolute left-0 top-0 z-[9999] flex h-screen w-72.5 
+        className={`absolute ${isRTL ? "right-0" : "left-0"} top-0 z-[9999] flex h-screen w-72.5 
         flex-col overflow-y-hidden bg-white duration-300 ease-linear 
-        lg:static lg:translate-x-0  justify-between
-        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+        lg:static lg:translate-x-0 justify-between
+        ${sidebarOpen ? "translate-x-0" : isRTL ? "translate-x-full" : "-translate-x-full"}`}
+        dir={isRTL ? "rtl" : "ltr"} // Set direction based on language
       >
         <div>
           {/* Sidebar Header with Logo */}
-
           <SideBarHeader
             trigger={trigger}
             sidebarOpen={sidebarOpen}
@@ -91,8 +95,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           />
 
           {/* Sidebar Items */}
-          <div className="flex flex-col overflow-y-auto duration-300 ease-linear mt-1  ">
-            <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6 ">
+          <div className="flex flex-col overflow-y-auto duration-300 ease-linear mt-1">
+            <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
               <ul
                 onClick={() => setSidebarOpen(false)}
                 className="mb-6 flex flex-col gap-5"
@@ -109,7 +113,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       }`}
                     >
                       {item.icon}
-                      {item.label}
+                      <span className={isRTL ? "mr-2" : "ml-2"}>
+                        {item.label}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -119,10 +125,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         </div>
         <div
           onClick={() => setLogOutState(!LogOutState)}
-          className={`  mb-4 group p-2 w-full flex items-center gap-2 rounded-lg transition-all duration-500  px-8 lg:px-12 text-mainGray font-semibold text-lg`}
+          className={`mb-4 group p-2 w-full flex items-center gap-2 rounded-lg transition-all duration-500 px-8 lg:px-12 text-mainGray font-semibold text-lg`}
         >
           <button>
-            <IoExitOutline className="w-6 h-6 inline rotate-180" /> Logout
+            <IoExitOutline className={`w-6 h-6 inline ${isRTL ? "rotate-0" : "rotate-180"}`} />
+            <span className={isRTL ? "mr-2" : "ml-2"}>
+              {t("sidebar.logout")} {/* Translated label */}
+            </span>
           </button>
         </div>
       </aside>
@@ -131,9 +140,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
       <div
         onClick={() => setSidebarOpen(false)}
-        className={`absolute top-0 left-0 z-[9998]  ${sidebarOpen ? " w-full translate-x-0" : "-translate-x-full"}   h-full `}
-      >
-      </div>
+        className={`absolute top-0 ${isRTL ? "right-0" : "left-0"} z-[9998] ${
+          sidebarOpen ? "w-full translate-x-0" : isRTL ? "translate-x-full" : "-translate-x-full"
+        } h-full`}
+      ></div>
     </>
   );
 };

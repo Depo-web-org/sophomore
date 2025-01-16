@@ -5,24 +5,24 @@ import {
 } from "../../Dashboard/components/StatisticCard";
 import { Link } from "react-router-dom";
 import { TbEdit } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 
 export default function CourseStatistics() {
+  const { i18n, t } = useTranslation(); // Initialize useTranslation
   return (
     <>
-      <div className="grid grid-cols-1   gap-8 gap-y-4 w-full bgred ">
-        {statisticsData
-          .filter((i) => i.title != "Total Profit")
-          .map((item, index) => (
-        <StatisticCard
-          style={
-            "flex justify-start items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
-          }
-          key={index}
+      <div className="grid grid-cols-1 gap-8 gap-y-4 w-full bgred">
+        {statisticsData.map((item, index) => (
+          <StatisticCard
+            style={
+              "flex justify-start items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
+            }
+            key={index}
             image={item.image}
-            title={item.title}
-              stats={item.stats}
-            />
-          ))}
+            title={`${i18n.language === "en" ? item.title : item.title_ar}`}
+            stats={item.stats}
+          />
+        ))}
       </div>
       <AllCourses />
       <RecentlyUploaded />
@@ -30,18 +30,20 @@ export default function CourseStatistics() {
   );
 }
 
-export function UploadCourse({title, path, width}) {
+export function UploadCourse({ title, path, width }) {
+  const { t } = useTranslation(); // Initialize useTranslation
   return (
     <Link
       to={path}
-      className={` ${width} bg-primary rounded-md px-4 py-2  lg:px-8 lg:py-2  hover:bg-secondary transition-all duration-300   font-semibold text-white text-center text-sm lg:text-base`}
+      className={`${width} bg-primary rounded-md px-4 py-2 lg:px-8 lg:py-2 hover:bg-secondary transition-all duration-300 font-semibold text-white text-center text-sm lg:text-base`}
     >
-      {title}
+      {t(title)} {/* Translated title */}
     </Link>
   );
 }
 
 const AllCourses = () => {
+  const { t, i18n } = useTranslation(); // Initialize useTranslation
   // Array of objects representing course details
   const courses = [
     {
@@ -59,33 +61,36 @@ const AllCourses = () => {
   ];
 
   return (
-    <div className="w-full lg:w-4/5  bg-white rounded-3xl py-4 ">
+    <div className="w-full  bg-white rounded-3xl py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between pb-4 px-4">
-        <p className=" text-base md:text-lg lg:text-3xl font-semibold text-start py-4 text-black ">
-          All Course
+        <p className="text-base md:text-lg lg:text-3xl font-semibold text-start py-4 text-black">
+          {t("allCourses.title")} {/* Translated title */}
         </p>
         <div className="flex items-center">
-          <UploadCourse title={"Add A New Course"} path={'/teacherPanel/courses/addnewcourse'} />
+          <UploadCourse
+            title={"addNewCourse"} // Translation key
+            path={"/teacherPanel/courses/addnewcourse"}
+          />
         </div>
       </div>
-      <div className="overflow-x-auto px-4 scrollbar-hide">
-        <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm ">
-          <thead className="ltr:text-left rtl:text-right  ">
-            <tr className="">
-              <th className="whitespace-nowrap   px-4 py-2 text-start font-medium text-[#6B7280]">
-                Course Name
+      <div className="overflow-x-auto px-4 scrollbar-hide ">
+        <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+          <thead className="ltr:text-left rtl:text-right">
+            <tr>
+              <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                {t("allCourses.courseName")} {/* Translated column header */}
               </th>
-              <th className="whitespace-nowrap  px-4 py-2 text-start font-medium text-[#6B7280]">
-                Upload Date
+              <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                {t("allCourses.uploadDate")} {/* Translated column header */}
               </th>
-              <th className="whitespace-nowrap  px-4 py-2 text-start font-medium text-[#6B7280]">
-                Enrollment
+              <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                {t("allCourses.enrollment")} {/* Translated column header */}
               </th>
-              <th className="whitespace-nowrap  px-4 py-2 text-start font-medium text-[#6B7280]">
-                status
+              <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                {t("allCourses.status")} {/* Translated column header */}
               </th>
-              <th className="whitespace-nowrap  px-4 py-2 text-start font-medium text-[#6B7280]">
-                Actions
+              <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                {t("allCourses.actions")} {/* Translated column header */}
               </th>
             </tr>
           </thead>
@@ -106,9 +111,11 @@ const AllCourses = () => {
                   {course.status}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <Link to={"editUnit"} 
-                  className="text-primary  text-2xl cursor-pointer ">  
-                    <TbEdit />                                  
+                  <Link
+                    to={"editUnit"}
+                    className="text-primary text-2xl cursor-pointer"
+                  >
+                    <TbEdit />
                   </Link>
                 </td>
               </tr>
@@ -121,6 +128,7 @@ const AllCourses = () => {
 };
 
 const RecentlyUploaded = () => {
+  const { t, i18n } = useTranslation(); // Initialize useTranslation
   // Array of objects representing course details
   const courses = [
     {
@@ -138,26 +146,26 @@ const RecentlyUploaded = () => {
   ];
 
   return (
-    <div className=" w-full lg:w-3/5  bg-white rounded-3xl py-4 ">
+    <div className="w-full lg:w -3/5 bg-white rounded-3xl py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <div className="flex justify-between mx-5">
-        <p className=" text-lg lg:text-[28px] font-semibold text-start py-4 text-black ">
-          Recently Uploaded Courses
+        <p className="text-lg lg:text-[28px] font-semibold text-start py-4 text-black">
+          {t("recentlyUploaded.title")} {/* Translated title */}
         </p>
       </div>
-      <div className="overflow-x-auto px-4">
+      <div className="overflow-x-auto px-4 ">
         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                Course Name
+                {t("recentlyUploaded.courseName")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                Status
+                {t("recentlyUploaded.status")} {/* Translated column header */}
               </th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 ">
             {courses.map((course, index) => (
               <tr key={index}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">

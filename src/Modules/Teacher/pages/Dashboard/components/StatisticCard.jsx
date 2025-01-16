@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { FaSackDollar } from "react-icons/fa6";
 import { HiUserGroup } from "react-icons/hi";
 import { ImBooks } from "react-icons/im";
@@ -7,23 +8,27 @@ export const statisticsData = [
   {
     image: <ImBooks />,
     title: "Total Courses",
+    title_ar: "أجمالي الكورسات",
     stats: 12,
   },
   {
     image: <HiUserGroup />,
     title: "Active Users",
+    title_ar: " الطﻻب الناشطين",
     stats: 34,
   },
-  {
-    image: <FaSackDollar />,
-    title: "Total Profit",
-    stats: 56,
-  },
+  // {
+  //   image: <FaSackDollar />,
+  //   title: "Total Profit",
+  //   title_ar: "Total Courses",
+  //   stats: 56,
+  // },
 ];
 
 export default function Statistics() {
+  const { i18n, t } = useTranslation(); 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-4 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-4 w-full ">
       {statisticsData.map((item, index) => (
         <StatisticCard
           style={
@@ -31,7 +36,8 @@ export default function Statistics() {
           }
           key={index}
           image={item.image}
-          title={item.title}
+          title={`${  i18n.language==="en"? item.title:item.title_ar }`}
+          
           stats={item.stats}
         />
       ))}
@@ -42,7 +48,7 @@ export default function Statistics() {
 export function StatisticCard({ image, title, stats, style }) {
   return (
     <div className={`${style}`}>
-      <span  className=" text-5xl lg:text-6xl mb-4 text-primary  inline" >
+      <span  className=" text-5xl lg:text-6xl mb-4 text-primary  inline " >
       {image}
       </span>
       {/* <img src={image} alt={title} className="w-12 lg:w-14 h-12 lg:h-14 mb-4" /> */}

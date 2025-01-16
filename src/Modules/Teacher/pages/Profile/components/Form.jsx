@@ -40,7 +40,7 @@ const Form = () => {
         setShowAlert={setShowAlert}
       />
       {/* Email Input */}
-      <div className="md:pr-24 flex flex-col sm:flex-row items-center gap-4">
+      {/* <div className="md:pr-24 flex flex-col sm:flex-row items-center gap-4">
         <label
           htmlFor="email"
           className="w-full text-gray-500 font-medium text-lg relative rounded-md flex flex-wrap gap-y-4 justify-between items-center"
@@ -60,12 +60,12 @@ const Form = () => {
             placeholder="email@example.com"
           />
         </label>
-        {/* {errors.email && (
+        {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )} */}
+        )} 
       </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className=" w-full lg:w-3/5 mt-5">
+*/}
+      <form onSubmit={handleSubmit(onSubmit)} className=" w-full lg:w-3/5 mt-5 bgred">
         {/* Password Inputs */}
         <div className="relative pb-2 pt-5">
           <span className="text-sm font-medium text-gray-500  mb-4 block">
