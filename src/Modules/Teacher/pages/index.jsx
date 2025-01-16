@@ -123,13 +123,14 @@ const IndexTeacher = () => {
   // };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className=" w-full min-h-screen ">
       
-      <img
+      {/* <img
         src="/images/Teacher/Teacher panel.svg"
         alt="Teacher"
-        className="w-full h-[100%] object-cover absolute"
-      />
+        className="w-full h-full object-cover   opacity-35 absolute"
+      /> */}
+     
     <TeacherUpload/>
 
 

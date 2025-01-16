@@ -4,6 +4,7 @@ import authReducer from "./Auth/authSlice";
 import { roleUser } from "./RoleSlice/RoleSlice";
 import { AddCourse } from "./TeacherAddCourse/TeacherAddCourse";
 import studentReducer from "./StudentSlices/StudentSlice"; 
+import AddNewCourse from "../Modules/Teacher/pages/Courses/Page/AddNewCourse";
 
 export const store = configureStore({
   reducer: {

@@ -59,7 +59,7 @@ const student= data?.data;
 
   
  if(isFetching){
-  return <LoadingComponents/> ;
+  return <p>Loading.....</p> ;
  }
 
   return (

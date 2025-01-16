@@ -526,15 +526,65 @@
   "namePlaceholder": "أدخل اسمك",
   "updateDetails": "قم بتحديث صورك وتفاصيلك الشخصية",
   "save": "حفظ"
+} ,
+"changePassword": {
+  "success": "تم تغيير كلمة المرور بنجاح!",
+  "successMessage": "تم تحديث كلمة المرور بنجاح.",
+  "error": "خطأ!",
+  "errorMessage": "فشل تغيير كلمة المرور. يرجى المحاولة مرة أخرى.",
+  "currentPassword": "أدخل كلمة المرور الحالية",
+  "currentPasswordPlaceholder": "أدخل كلمة المرور القديمة",
+  "newPassword": "أدخل كلمة المرور الجديدة",
+  "newPasswordPlaceholder": "أدخل كلمة المرور الجديدة",
+  "confirmPassword": "أعد إدخال كلمة المرور الجديدة",
+  "confirmPasswordPlaceholder": "تأكيد كلمة المرور الجديدة",
+  "required": "هذا الحقل مطلوب",
+  "patternMessage": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل، وتحتوي على حرف كبير واحد على الأقل، ورقم واحد على الأقل، وحرف خاص واحد على الأقل",
+  "passwordsMatch": "يجب أن تتطابق كلمات المرور",
+  "changePasswordButton": "تغيير كلمة المرور"
 }
-
-
-
-
-
-
-
-
-
-
+,
+"activity": {
+  "recentActivity": "أﻵنشطه الأخيرة"
+} ,
+"quickActions": {
+  "title": "إجراءات سريعة",
+  "addNewCourse": "إضافة دورة جديدة"
+},
+"application": {
+    "addNewCourse": "إضافة دورة جديدة",
+    "uploadThumbnail": "تحميل الصورة المصغرة",
+    "dropImage": "قم بإسقاط صورتك هنا أو",
+    "browse": "تصفح",
+    "supportedFormats": "يدعم JPEG و PNG و Webp",
+    "uploadSuccess": "تم التحميل بنجاح",
+    "delete": "حذف",
+    "title": "العنوان",
+    "titlePlaceholder": "العنوان",
+    "titleRequired": "العنوان مطلوب",
+    "orderNotes": "ملاحظات الطلب",
+    "orderNotesPlaceholder": "أدخل أي ملاحظات إضافية للطلب...",
+    "orderNotesRequired": "ملاحظات الطلب مطلوبة",
+    "selectSchoolType": "اختر نوع المدرسة",
+    "selectGrade": "اختر الصف",
+    "fieldRequired": "هذا الحقل مطلوب",
+    "continue": "متابعة"
+  },
+  "unit": {
+    "title": "العنوان",
+    "description": "الوصف",
+    "uploadVideo": "تحميل الفيديو",
+    "uploadMaterial": "تحميل المادة",
+    "dropVideo": "قم بإسقاط الفيديو هنا أو",
+    "dropMaterial": "قم بإسقاط المادة هنا أو",
+    "browse": "تصفح",
+    "supportsMP4": "يدعم MP4",
+    "supportsPDF": "يدعم PDF",
+    "addUnitTest": "إضافة اختبار الوحدة",
+    "submit": "إرسال",
+    "requiredTitle": "العنوان مطلوب",
+    "requiredDescription": "الوصف مطلوب",
+    "bothFilesRequired": "يجب تحميل كل من الفيديو وملف الـ PDF!",
+    "unitSaved": "تم حفظ الوحدة بنجاح!"
+  }
 }

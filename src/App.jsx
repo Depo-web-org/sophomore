@@ -494,9 +494,9 @@ function AppRoutes() {
 
             {/* Nested Routes Courses */}
 
-            <Route path="chooseunit" element={<ChooseUnit />}>
-              <Route index element={<ItemsUnit />} />
-              <Route path=":unit" element={<Unit />} />
+            <Route path=":UploadCourse" element={<ChooseUnit />}>
+              {/* <Route index element={<ItemsUnit />} /> */}
+              <Route index element={<Unit />} />
               <Route path=":unit/test" element={<Test />} />
             </Route>
 

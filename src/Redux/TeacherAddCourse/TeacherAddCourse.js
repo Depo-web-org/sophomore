@@ -1,26 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    title: "",
-    orderNotes: "",
-    image: null,
-    options: [
-    {
-        id: "001",
-        selectedOption: "", 
-    },
-    {
-        id: "002",
-        selectedOption: "", 
-    },
-    {
-        id: "003",
-        selectedOption: "", 
-    },
-    ],
-    unit: [],
-  };
-  
+  title: "",
+  orderNotes: "",
+  image: null,
+  schoolType: null,
+  selectedGrade: null,
+  courseData: [], 
+};
+
 const teacherAddCourseSlice = createSlice({
   name: "teacherAddCourse",
   initialState,
@@ -42,17 +30,19 @@ const teacherAddCourseSlice = createSlice({
       }
     },
     addCourse(state, action) {
-      const { title, orderNotes, image, options } = action.payload;
+      const { title, orderNotes, image, options, schoolType, selectedGrade } =
+        action.payload;
       state.title = title;
       state.orderNotes = orderNotes;
       state.image = image;
       state.options = options;
+      state.schoolType = schoolType;
+      state.selectedGrade = selectedGrade;
     },
     setUnit(state, action) {
-        state.unit.push(action.payload);
-        console.log(state)
-      }
-,      
+      state.courseData.push(action.payload);
+      console.log(action.payload)
+    },
     resetCourseData(state) {
       Object.assign(state, initialState);
     },

@@ -511,13 +511,64 @@
     "namePlaceholder": "Enter your name",
     "updateDetails": "Update your photos and personal Details",
     "save": "Save"
-
-
-
-
-
-
-
- }
-
+ },
+ "changePassword": {
+  "success": "Password changed successfully!",
+  "successMessage": "Your password has been updated successfully.",
+  "error": "Error!",
+  "errorMessage": "Failed to change password. Please try again.",
+  "currentPassword": "Enter your current password",
+  "currentPasswordPlaceholder": "Enter Your Old Password",
+  "newPassword": "Enter New Password",
+  "newPasswordPlaceholder": "Enter Your New Password",
+  "confirmPassword": "Retype new Password",
+  "confirmPasswordPlaceholder": "Confirm new Password",
+  "required": "This field is required",
+  "patternMessage": "Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character",
+  "passwordsMatch": "Passwords must match",
+  "changePasswordButton": "Change Password"
+},
+"activity": {
+    "recentActivity": "Recent Activity"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "addNewCourse": "Add A New Course"
+  } ,
+  "application": {
+    "addNewCourse": "Add a new Course",
+    "uploadThumbnail": "Upload Thumbnail",
+    "dropImage": "Drop Your Image Here or",
+    "browse": "Browse",
+    "supportedFormats": "Supports JPEG, PNG & Webp",
+    "uploadSuccess": "Uploaded Successfully",
+    "delete": "Delete",
+    "title": "Title",
+    "titlePlaceholder": "Title",
+    "titleRequired": "Title is required",
+    "orderNotes": "Order Notes",
+    "orderNotesPlaceholder": "Enter any additional order notes...",
+    "orderNotesRequired": "Order notes are required",
+    "selectSchoolType": "Select School Type",
+    "selectGrade": "Select Grade",
+    "fieldRequired": "This field is required",
+    "continue": "Continue"
+  },
+  "unit": {
+    "title": "Title",
+    "description": "Description",
+    "uploadVideo": "Upload Video",
+    "uploadMaterial": "Upload Material",
+    "dropVideo": "Drop Your Video Here or",
+    "dropMaterial": "Drop Your Material Here or",
+    "browse": "Browse",
+    "supportsMP4": "Supports MP4",
+    "supportsPDF": "Supports PDF",
+    "addUnitTest": "Add Unit Test",
+    "submit": "Submit",
+    "requiredTitle": "Title is required",
+    "requiredDescription": "Description is required",
+    "bothFilesRequired": "Both video and PDF files are required!",
+    "unitSaved": "Unit saved successfully!"
+  }
 }

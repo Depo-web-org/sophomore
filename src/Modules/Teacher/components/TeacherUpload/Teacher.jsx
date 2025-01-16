@@ -139,13 +139,9 @@ const TeacherUpload = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="relative w-full h-screen"
+      className="relative w-full "
     >
-      <img
-        src="/images/Teacher/Teacher panel.svg"
-        alt="Teacher"
-        className="w-full h-[100%] object-cover absolute"
-      />
+      
       <div className="pt-28 lg:pt-32">
         <TopText
           name={t("teacherUpload.welcome", { name: `${getUserInformation.data.first_name}` })}

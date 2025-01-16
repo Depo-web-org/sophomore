@@ -6,17 +6,31 @@ import { ImSpinner9 } from "react-icons/im";
 import { useSelector } from "react-redux";
 import Alert from "../../../../Student/pages/Profile/components/Alerts/Alert";
 import useChangePassword from "../../../../../Hooks/UseChangePassword";
+import { useTranslation } from "react-i18next";
 
 const Form = () => {
-  const { register, handleSubmit, getValues,reset, watch,formState: { errors },} = useForm();
+  const { t, i18n } = useTranslation();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
   const role = useSelector((state) => state.role.role);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertType, setAlertType] = useState("success"); // "success" or "error"
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-  const handleShowAlert = () => {
+
+  const handleShowAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
@@ -24,108 +38,119 @@ const Form = () => {
   };
 
   // Hook For Change Password
-  const { submitChangePassword, isLoading, isError } = useChangePassword({ role,handleShowAlert,reset,});
+  const { submitChangePassword, isLoading, isError } = useChangePassword({
+    role,
+    handleShowAlert,
+    reset,
+  });
 
   // Submit
-  const onSubmit = (data) => submitChangePassword(data);
-
+  const onSubmit = async (data) => {
+    const response = await submitChangePassword(data).then((response) => {
+      if (response?.code === 0) {
+        setShowAlert(true)
+      } else if (response?.code === 1) {
+        setShowAlert(true)
+        handleShowAlert("error", t("changePassword.error"));
+      }
+        
+      })
+  };
 
   return (
-    <div className="lg:w-[calc(70%)] min-h-96 sm:ms-auto my-4 lg:my-16 sm:mt-10 px-5 lg:px-0 ">
+    <div className="my-4 lg:my-16 sm:mt-10 px-5 lg:px-0">
+      {/* Success Alert */}
+      {/* {showAlert || alertType === "success" && (
+        <Alert
+          Name={t("changePassword.success")}
+          title={t("changePassword.successMessage")}
+          color={"text-green-600"}
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
+      )} */}
        <Alert
-        Name="Password changed successfully!"
-        title={"Your password has been updated successfully."}
-        color={"text-green-600"}
-        showAlert={showAlert}
-        setShowAlert={setShowAlert}
-      />
-      {/* Email Input */}
-      {/* <div className="md:pr-24 flex flex-col sm:flex-row items-center gap-4">
-        <label
-          htmlFor="email"
-          className="w-full text-gray-500 font-medium text-lg relative rounded-md flex flex-wrap gap-y-4 justify-between items-center"
-        >
-          Email
-          <input
-            type="email"
-            id="email"
-            // {...register("email", {
-            //   required: "Email is required",
-            //   pattern: {
-            //     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            //     message: "Invalid email address",
-            //   },
-            // })}
-            className="w-full lg:w-1/2 p-2 bg-gray-200  text-sm  rounded-lg border-none font-medium  outline-0 outline-none py-3 "
-            placeholder="email@example.com"
-          />
-        </label>
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )} 
-      </div>
-*/}
-      <form onSubmit={handleSubmit(onSubmit)} className=" w-full lg:w-3/5 mt-5 bgred">
+          Name={t("changePassword.success")}
+          title={t("changePassword.successMessage")}
+          color={"text-green-600"}
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
+
+      {/* Error Alert */}
+      {showAlert && alertType === "error" && (
+        <Alert
+          Name={t("changePassword.error")}
+          title={t("changePassword.errorMessage")}
+          color={"text-red-600"}
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
+      )}
+
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`w-full mx-auto px-4 lg:px-8 lg:w-[70%] ${
+          i18n.language === "ar" ? "me-auto" : ""
+        }`}
+      >
         {/* Password Inputs */}
         <div className="relative pb-2 pt-5">
-          <span className="text-sm font-medium text-gray-500  mb-4 block">
-            Enter your current password
+          <span className="text-sm font-medium text-gray-500 mb-4 block">
+            {t("changePassword.currentPassword")}
           </span>
           <label
             htmlFor="old_password"
-            className=" bg-gray-200 rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between "
+            className="bg-gray-200 rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between"
           >
             <input
               type={showPassword ? "text" : "password"}
               id="old_password"
               {...register("old_password", {
-                required: "old Password is required",
+                required: t("changePassword.required"),
                 pattern: {
                   value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
-                  message:
-                    "Password must contain at least one uppercase letter, one number, and one special character",
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+                  message: t("changePassword.patternMessage"),
                 },
               })}
               className="outline-none w-[90%] py-3 bg-gray-200"
-              placeholder="Enter Your Old Password"
+              placeholder={t("changePassword.currentPasswordPlaceholder")}
             />
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className=" text-gray-500 focus:outline-none"
+              className="text-gray-500 focus:outline-none"
             >
               {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </label>
           {errors.old_password && (
-            <p className="text-red-500 text-sm">
-              {errors.old_password.message}
-            </p>
+            <p className="text-red-500 text-sm">{errors.old_password.message}</p>
           )}
         </div>
-        <div className="relative  py-2 ">
-          <span className="text-sm font-medium text-gray-500  mb-4 block">
-            Enter New Password
+
+        <div className="relative py-2">
+          <span className="text-sm font-medium text-gray-500 mb-4 block">
+            {t("changePassword.newPassword")}
           </span>
           <label
             htmlFor="new_password"
-            className=" bg-gray-200 rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between "
+            className="bg-gray-200 rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between"
           >
             <input
               type={showPassword ? "text" : "password"}
               id="new_password"
               {...register("new_password", {
-                required: "new Password is required",
+                required: t("changePassword.required"),
                 pattern: {
                   value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
-                  message:
-                    "Password must contain at least one uppercase letter, one number, and one special character",
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+                  message: t("changePassword.patternMessage"),
                 },
               })}
               className="outline-none w-[90%] py-3 bg-gray-200"
-              placeholder="Enter Your Old Password"
+              placeholder={t("changePassword.newPasswordPlaceholder")}
             />
             <button
               type="button"
@@ -136,30 +161,29 @@ const Form = () => {
             </button>
           </label>
           {errors.new_password && (
-            <p className="text-red-500 text-sm">
-              {errors.new_password.message}
-            </p>
+            <p className="text-red-500 text-sm">{errors.new_password.message}</p>
           )}
         </div>
 
         <div className="relative pt-4 pb-2">
-          <span className="text-sm font-medium text-gray-500  mb-4 block">
-            Retype new Password
+          <span className="text-sm font-medium text-gray-500 mb-4 block">
+            {t("changePassword.confirmPassword")}
           </span>
           <label
-            htmlFor="password"
-            className=" bg-gray-200 rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between "
+            htmlFor="confirm_password"
+            className="bg-gray-200 rounded-lg border-gray-200 px-4 text-sm shadow-sm flex items-center justify-between"
           >
             <input
               type={showPassword ? "text" : "password"}
               id="confirm_password"
               {...register("confirm_password", {
-                required: "Confirm Password is required",
+                required: t("changePassword.required"),
                 validate: (value) =>
-                  value === getValues("new_password") || "Passwords must match",
+                  value === getValues("new_password") ||
+                  t("changePassword.passwordsMatch"),
               })}
               className="outline-none w-[90%] py-3 bg-gray-200"
-              placeholder="Confirm new Password"
+              placeholder={t("changePassword.confirmPasswordPlaceholder")}
             />
             <button
               type="button"
@@ -175,6 +199,7 @@ const Form = () => {
             </p>
           )}
         </div>
+
         <button
           type="submit"
           disabled={
@@ -187,16 +212,16 @@ const Form = () => {
             isLoading
               ? "bg-white text-white cursor-not-allowed"
               : errors.old_password ||
-                  errors.confirm_password ||
-                  errors.new_password
-                ? "bg-primary bg-opacity-5 text-white text-opacity-60 cursor-not-allowed"
-                : "bg-primary text-white hover:bg-secondary"
+                errors.confirm_password ||
+                errors.new_password
+              ? "bg-primary bg-opacity-5 text-white text-opacity-60 cursor-not-allowed"
+              : "bg-primary text-white hover:bg-secondary"
           } px-5 py-3 text-sm font-medium text-white justify-center items-center`}
         >
           {isLoading ? (
             <ImSpinner9 className="animate-spin text-3xl text-secondary" />
           ) : (
-            "Change Password"
+            t("changePassword.changePasswordButton")
           )}
         </button>
       </form>
