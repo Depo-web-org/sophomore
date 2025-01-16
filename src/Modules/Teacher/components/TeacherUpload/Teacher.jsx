@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import TopText from "../Top Text Cards/TopText";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next"; // Import useTranslation
+import { useTranslation } from "react-i18next";  
 
 const cardteacher = [
   {
@@ -85,32 +85,28 @@ const TeacherUpload = () => {
     try {
       setLoading(true);
 
-      // Convert files to base64
-      const cvFile = buttonStates[0]?.file;
-      const graduationCertificateFile = buttonStates[1]?.file;
-      const introVideoFile = buttonStates[2]?.file;
-      const additionalDocumentsFile = buttonStates[3]?.file;
+         // Helper function to convert file to base64 or return empty string
+          const getBase64 = async (file) => (file ? await fileToBase64(file) : "");
 
-      const cvBase64 = cvFile ? await fileToBase64(cvFile) : "";
-      const graduationCertificateBase64 = graduationCertificateFile
-        ? await fileToBase64(graduationCertificateFile)
-        : "";
-      const introVideoBase64 = introVideoFile
-        ? await fileToBase64(introVideoFile)
-        : "";
-      const additionalDocumentsBase64 = additionalDocumentsFile
-        ? await fileToBase64(additionalDocumentsFile)
-        : "";
+          // Convert files to base64
+          const files = [
+            buttonStates[0]?.file, // CV
+            buttonStates[1]?.file, // Graduation Certificate
+            buttonStates[2]?.file, // Intro Video
+            buttonStates[3]?.file, // Additional Documents
+          ];
 
-      // Prepare the data to be sent
-      const payload = {
-        cv: cvBase64,
-        graduation_certificate: graduationCertificateBase64,
-        intro_video: introVideoBase64,
-        additional_documents: additionalDocumentsBase64,
-      };
+          const [cvBase64, graduationCertificateBase64, introVideoBase64, additionalDocumentsBase64] =
+            await Promise.all(files.map(getBase64));
 
-      console.log("Payload to be sent:", payload);
+          // Prepare the data to be sent
+          const payload = {
+            cv: cvBase64,
+            graduation_certificate: graduationCertificateBase64,
+            intro_video: introVideoBase64,
+            additional_documents: additionalDocumentsBase64,
+          };
+         console.log("Payload to be sent:", payload);
 
       // Send data to backend
       // const access_token = localStorage.getItem("access_token");
@@ -231,3 +227,35 @@ const TeacherUpload = () => {
 };
 
 export default TeacherUpload;
+
+
+
+
+
+      // Convert files to base64
+      // const cvFile = buttonStates[0]?.file;
+      // const graduationCertificateFile = buttonStates[1]?.file;
+      // const introVideoFile = buttonStates[2]?.file;
+      // const additionalDocumentsFile = buttonStates[3]?.file;
+
+      // const cvBase64 = cvFile ? await fileToBase64(cvFile) : "";
+
+      // const graduationCertificateBase64 = graduationCertificateFile
+      //   ? await fileToBase64(graduationCertificateFile)
+      //   : "";
+
+      // const introVideoBase64 = introVideoFile
+      //   ? await fileToBase64(introVideoFile)
+      //   : "";
+        
+      // const additionalDocumentsBase64 = additionalDocumentsFile
+      //   ? await fileToBase64(additionalDocumentsFile)
+      //   : "";
+
+      // // Prepare the data to be sent
+      // const payload = {
+      //   cv: cvBase64,
+      //   graduation_certificate: graduationCertificateBase64,
+      //   intro_video: introVideoBase64,
+      //   additional_documents: additionalDocumentsBase64,
+      // };
