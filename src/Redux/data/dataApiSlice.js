@@ -8,7 +8,15 @@ export const dataApiSlice = apiSlice.injectEndpoints({
         url: "getConsumerProfile.php", 
         method: "GET", 
       }),
-      providesTags: ["Profile"], // Caches the data with this tag
+      providesTags: ["Profile"], 
+    }),
+    getProfileTeacher: builder.query({
+      query: (provider = {}) => ({
+        url: "getConsumerProfile.php", 
+        method: "post", 
+        body: provider,
+      }),
+      providesTags: ["Profile"], 
     }),
     getSchools:builder.query({
       query:()=> ({
@@ -29,4 +37,4 @@ export const dataApiSlice = apiSlice.injectEndpoints({
 });
 
 // Export hooks to use in your components
-export const { useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery } = dataApiSlice;
+export const { useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery} = dataApiSlice;

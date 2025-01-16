@@ -6,24 +6,25 @@ import PhoneInput from "react-phone-number-input/input";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { ImSpinner9 } from "react-icons/im";
-import { useGetProfileQuery } from "../../../../../Redux/data/dataApiSlice";
+import { useGetProfileQuery, useGetProfileTeacherQuery } from "../../../../../Redux/data/dataApiSlice";
 import { useUpdateProfileMutation } from "../../../../../Redux/Auth/authApiSlice";
 import { LoadingComponents } from "../../../../../App";
 
 export default function Profile() {
   const { t,i18n } = useTranslation();
 
+ const role = useSelector((state) => state.role.role);
+  const provider= role==='teacher'?true:false;
+  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileTeacherQuery({provider:role});
 
-  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+  const getProfile=async ()=> 
   console.log('data profile:',data?.data)
 const student= data?.data;
 
 
   const [profileImage, setProfileImage] = useState( null);
 
-  const getProfileData= async()=>{
-
-  }
+  
 
   const {
     register,
@@ -41,21 +42,22 @@ const student= data?.data;
       formDataToSend.append("last_name", formData.last_name);
       formDataToSend.append("phone_number", formData.phone_number);
     
-      // If a profile image is selected, append it to FormData
+      // إضافة provider: true إلى FormData
+      formDataToSend.append("provider", true);
+    
+      // إذا تم اختيار صورة ملف شخصي، قم بإلحاقها إلى FormData
       if (profileImage) {
         formDataToSend.append("photo", profileImage);
       }
     
-      console.log("Form Data with image:", formDataToSend);
     
       try {
         const response = await updateProfile(formDataToSend).unwrap();
-        if (response.code === 0) refetch() ;
+        if (response.code === 0) refetch();
       } catch (error) {
         console.log(error);
       }
     };
-    
 
   
  if(isFetching){

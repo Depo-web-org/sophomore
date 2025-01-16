@@ -22,8 +22,8 @@ export default function Login({ toggleForm }) {
   const [forgetPassword, setForgetPassword] = useState(false);
   const userRole = useRole("RO_V1_2024");
   const role = useSelector((state) => state.role.role);
-  const [userEmail, setUserEmail] = useState(null);
   const provider= role==='teacher'?true:false;
+  const [userEmail, setUserEmail] = useState(null);
 
 
   const VerifyAccount = (email) => {
