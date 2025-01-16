@@ -299,5 +299,136 @@
       ],
       "button": "Get Started"
     }
+  },
+
+
+  "form": {
+    "title": "Join Our Team",
+    "subTitle": "Fill the form to join our team",
+    "fields": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "First Name",
+        "error": {
+          "required": "First Name is required",
+          "invalid": "First Name must contain only letters"
+        }
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Last Name",
+        "error": {
+          "required": "Last Name is required",
+          "invalid": "Last Name must contain only letters"
+        }
+      },
+      "phoneNumber": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "error": {
+          "invalid": "Invalid phone number"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "error": {
+          "required": "Email is required",
+          "invalid": "Enter a valid email address e.g: user.name@domain.com"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter password",
+        "error": {
+          "required": "Password is required",
+          "invalid": "Password must contain at least one uppercase letter, one number, and one special character"
+        }
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm password",
+        "error": {
+          "required": "Confirm Password is required",
+          "mismatch": "Passwords must match"
+        }
+      }
+    },
+    "submitButton": {
+      "text": "Sign Up",
+      "loading": "Loading..."
+    },
+    "alreadyHaveAccount": {
+      "text": "Already have an account?",
+      "login": "Login"
+    }
+  },
+
+
+
+ "otpPage": {
+    "title": {
+      "head": "Check your mail",
+      "subTitle": "We have sent an OTP to your mail {email}"
+    },
+    "form": {
+      "validateButton": "Validate",
+      "resendOTP": {
+        "timer": "{time}",
+        "didNotReceive": "Didn’t get your OTP?",
+        "resend": "Resend OTP"
+      },
+      "wrongEmail": {
+        "text": "Wrong Email?",
+        "registerAgain": "Register again"
+      },
+      "error": {
+        "invalidOTP": "Invalid OTP. Please try again."
+      }
+    },
+    "resendOTPModal": {
+      "title": "Resend OTP",
+      "subTitle": "Are you sure?",
+      "yesResend": "Yes, Resend",
+      "discard": "Discard"
+    }
+  },
+
+
+  "OtpPage": {
+    "title": {
+      "head": "Check Your Mail for OTP",
+      "subTitle": {
+        "verified": "Please go to the login page.",
+        "emailSent": "We have sent an OTP to your mail {email}.",
+        "emailNotFound": "We couldn’t retrieve your email. Please check again."
+      }
+    },
+    "form": {
+      "validateButton": "Validate",
+      "resendOTP": {
+        "timer": "{time}",
+        "didNotReceive": "Didn’t get your OTP?",
+        "resend": "Resend OTP"
+      },
+      "error": {
+        "invalidOTP": "Invalid OTP. Please try again."
+      }
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

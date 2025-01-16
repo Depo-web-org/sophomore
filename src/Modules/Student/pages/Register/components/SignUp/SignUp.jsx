@@ -8,8 +8,11 @@ import { useGetOTpMutation,  useSignupMutation,} from "../../../../../../Redux/A
 import { HeadTitle } from "../Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import UserRole from "../components/UserRole/UserRole";
+import { useTranslation } from "react-i18next";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
+  const { t } = useTranslation();
+
   const [requestEndPoints, setRequestEndPoints] = useState("student");
 
   const role = useSelector((state) => state.role.role);
@@ -122,45 +125,42 @@ const [errorSubmit, setErrorSubmit] = useState(null)
   };
 
   return (
-    <div className="min-h-[calc(100vh-112px)]  flex flex-col gap-8 lg:gap-12 justify-between w-full  pb-4 ">
-      <div className="flex flex-col items-start gap-6 w-full 2xl:w-4/5 ml-auto ">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4">
+      <div className="flex flex-col items-start gap-6 w-full 2xl:w-4/5 ml-auto">
         <HeadTitle
           title={{
-            head: "Join Our Team",
-            subTitle: "Fill the form to join our team",
+            head: t("form.title"),  
+            subTitle: t("form.subTitle"), 
           }}
         />
         <div className="w-full">
-          {/* form starting */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mb-0 w-full space-y-4 flex flex-col gap-2 lg:gap-5 "
+            className="mb-0 w-full space-y-4 flex flex-col gap-2 lg:gap-5"
           >
-            <UserRole role={role} dispatch={dispatch} />
-            {/*First Name Field */}
-            <div className='flex gap-2 flex-wrap  '> 
+            {/* First Name Field */}
+            <div className="flex gap-2 flex-wrap">
               <label
                 htmlFor="first_name"
-                className="w-[calc(50%-8px)] bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between "
+                className="w-[calc(50%-8px)] bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
               >
                 <input
                   type="text"
                   id="first_name"
                   {...register("first_name", {
-                    required: "First Name is required",
+                    required: t("form.fields.firstName.error.required"),  
                     pattern: {
                       value: /^[a-zA-Z]+$/,
-                      message: "First Name must contain only letters",
-                    }
+                      message: t("form.fields.firstName.error.invalid"),  
+                    },
                   })}
                   className="outline-none text-base w-full"
-                  placeholder="First Name"
+                  placeholder={t("form.fields.firstName.placeholder")} 
                 />
               </label>
-             
-  {/*Last Name Field */}
 
-               <label
+              {/* Last Name Field */}
+              <label
                 htmlFor="last_name"
                 className="w-[calc(50%-8px)] bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
               >
@@ -168,75 +168,38 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                   type="text"
                   id="last_name"
                   {...register("last_name", {
-                    required: "Last Name is required",
+                    required: t("form.fields.lastName.error.required"),  
                     pattern: {
                       value: /^[a-zA-Z]+$/,
-                      message: "Last Name must contain only letters",
-                    }
-                  })}
-                  className="outline-none text-base w-full"
-                  placeholder=" Last Name"
-                />
-              </label>
-           
-
-
-
-
-
-              {errors.first_name || errors.last_name ? <>
-  <div className='flex justify-evenly w-full'>
-    {errors.first_name && (
-      <p className="text-red-500 text-sm text-center font-medium">
-        {errors.first_name.message} 
-      </p>
-    )}
-    {errors.last_name && (
-      <p className="text-red-500 text-sm text-center font-medium">
-        {errors.last_name.message} 
-      </p>
-    )}
-  </div>
-</> : null}
-            </div>
-           
-
-            
-
-  {/*Last Name Field */}
-  {/* <div>
-              <label
-                htmlFor="last_name"
-                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between"
-              >
-                <input
-                  type="text"
-                  id="last_name"
-                  {...register("last_name", {
-                    required: "Name is required",
-                    pattern: {
-                      value: /^[a-zA-Z]{3,}\s[a-zA-Z]{3,}$/,
-                      message:
-                        "Enter a valid full name with two words, each at least 3 letters",
+                      message: t("form.fields.lastName.error.invalid"), 
                     },
                   })}
                   className="outline-none text-base w-full"
-                  placeholder="Enter your Last Name"
+                  placeholder={t("form.fields.lastName.placeholder")}  
                 />
               </label>
-              {errors.last_name && (
-                <p className="text-red-500 text-sm text-center font-medium mt-4">
-                  {errors.last_name.message}
-                </p>
-              )}
-            </div> */}
 
-
+              {/* Display Errors */}
+              {errors.first_name || errors.last_name ? (
+                <div className="flex justify-evenly w-full">
+                  {errors.first_name && (
+                    <p className="text-red-500 text-sm text-center font-medium">
+                      {errors.first_name.message}
+                    </p>
+                  )}
+                  {errors.last_name && (
+                    <p className="text-red-500 text-sm text-center font-medium">
+                      {errors.last_name.message}
+                    </p>
+                  )}
+                </div>
+              ) : null}
+            </div>
 
             {/* Phone Number Field */}
             <div>
               <label htmlFor="phone_number" className="sr-only">
-                Phone Number
+                {t("form.fields.phoneNumber.label")}  
               </label>
               <Controller
                 name="phone_number"
@@ -244,15 +207,15 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                 rules={{
                   validate: (value) =>
                     (value && isValidPhoneNumber(value)) ||
-                    "Invalid phone number",
+                    t("form.fields.phoneNumber.error.invalid"), 
                 }}
                 render={({ field }) => (
                   <PhoneInput
                     {...field}
                     id="phone_number"
-                    placeholder="Enter your phone number"
+                    placeholder={t("form.fields.phoneNumber.placeholder")}  
                     defaultCountry="EG"
-                    className="w-full text-base bg-white px-2 py-3 lg:p-4  rounded-lg border-gray-200  shadow-sm outline-none focus-visible:outline-none"
+                    className="w-full text-base bg-white px-2 py-3 lg:p-4 rounded-lg border-gray-200 shadow-sm outline-none focus-visible:outline-none"
                   />
                 )}
               />
@@ -262,23 +225,24 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                 </p>
               )}
             </div>
+
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="sr-only">
-                Email
+                {t("form.fields.email.label")}  
               </label>
               <input
                 id="email"
                 autoComplete="userMail"
                 {...register("email", {
-                  required: "Email is required",
+                  required: t("form.fields.email.error.required"),  
                   pattern: {
                     value: /^[a-zA-Z]{2,}[^@]*@[^@]+\.[^@ .]{2,}$/,
-                    message: `Enter a valid email address e.g:user.name@domain.com`,
+                    message: t("form.fields.email.error.invalid"), 
                   },
                 })}
-                className="w-full text-base rounded-lg border-gray-200 px-2 py-3 lg:p-4  shadow-sm outline-none"
-                placeholder="Enter your email"
+                className="w-full text-base rounded-lg border-gray-200 px-2 py-3 lg:p-4 shadow-sm outline-none"
+                placeholder={t("form.fields.email.placeholder")}  
               />
               {errors.email && (
                 <p className="text-red-500 text-sm text-center font-medium mt-4">
@@ -286,27 +250,27 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                 </p>
               )}
             </div>
+
             {/* Password Field */}
             <div>
               <label
                 htmlFor="password"
-                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-base shadow-sm flex items-center justify-between "
+                className="w-full bg-white rounded-lg border-gray-200 px-2 py-3 lg:p-4 text-base shadow-sm flex items-center justify-between"
               >
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
                   autoComplete="new-password"
                   {...register("password", {
-                    required: "Password is required",
+                    required: t("form.fields.password.error.required"),  
                     pattern: {
                       value:
                         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
-                      message:
-                        "Password must contain at least one uppercase letter, one number, and one special character",
+                      message: t("form.fields.password.error.invalid"),  
                     },
                   })}
                   className="outline-none text-base w-4/5"
-                  placeholder="Enter password"
+                  placeholder={t("form.fields.password.placeholder")}  
                 />
                 <button
                   type="button"
@@ -322,6 +286,7 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                 </p>
               )}
             </div>
+
             {/* Confirm Password Field */}
             <div>
               <label
@@ -332,12 +297,13 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                   type={showPassword ? "text" : "password"}
                   id="password2"
                   {...register("password2", {
-                    required: "Confirm Password is required",
+                    required: t("form.fields.confirmPassword.error.required"),  
                     validate: (value, data) =>
-                      value === data.password || "Passwords must match",
+                      value === data.password ||
+                      t("form.fields.confirmPassword.error.mismatch"),  
                   })}
                   className="outline-none text-base w-4/5"
-                  placeholder="Confirm password"
+                  placeholder={t("form.fields.confirmPassword.placeholder")}  
                 />
                 <button
                   type="button"
@@ -353,56 +319,56 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                 </p>
               )}
             </div>
+
             {/* Submit Button */}
             <button
               type="submit"
               disabled={
                 isLoading ||
-                errors.first_name || 
+                errors.first_name ||
                 errors.last_name ||
                 errors.password2 ||
                 errors.password ||
                 errors.email ||
                 errors.phone_number
-              } // Disable if loading
-
+              }
               className={`inline-flex w-full rounded-lg ${
                 isLoading
-                  ? "bg-white text-white "
-                  : ` ${
-                errors.first_name || 
-                errors.last_name ||
+                  ? "bg-white text-white"
+                  : `${
+                      errors.first_name ||
+                      errors.last_name ||
                       errors.password2 ||
                       errors.password ||
                       errors.email ||
                       errors.phone_number
-                        ? "bg-primary bg-opacity-5 cursor-not-allowed text-white text-opacity-60  "
+                        ? "bg-primary bg-opacity-5 cursor-not-allowed text-white text-opacity-60"
                         : "bg-primary text-white hover:bg-secondary duration-150 transition-all"
-                    } `
+                    }`
               } px-5 py-3 text-sm lg:text-base font-semibold text-white justify-center items-center`}
             >
               {isLoading ? (
                 <ImSpinner9 className="animate-spin text-3xl text-secondary" />
               ) : (
-                " Sign Up"
+                t("form.submitButton.text")  
               )}
             </button>
           </form>
         </div>
+
+        {/* Already Have Account Section */}
         <div className="mx-auto pb-10 lg:pb-0 w-full text-center lg:w-4/5 lg:ml-auto">
           <p
-            className={`  text-sm  ${
-              alreadyAv
-                ? "text-secondary font-bold  underline"
-                : "text-gray-500"
+            className={`text-sm ${
+              alreadyAv ? "text-secondary font-bold underline" : "text-gray-500"
             }`}
           >
-            Already have an account {alreadyAv ? "" : " ? "}
+            {t("form.alreadyHaveAccount.text")}  
             <button
               onClick={toggleForm}
               className="underline mx-1 text-primary"
             >
-              Login
+              {t("form.alreadyHaveAccount.login")}  
             </button>
           </p>
         </div>

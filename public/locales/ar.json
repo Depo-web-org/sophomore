@@ -308,5 +308,140 @@
       ],
       "button": "ابدأ الآن"
     }
+  },
+
+
+
+  "form": {
+    "title": "انضم إلى فريقنا",
+    "subTitle": "املأ النموذج للانضمام إلى فريقنا",
+    "fields": {
+      "firstName": {
+        "label": "الاسم الأول",
+        "placeholder": "الاسم الأول",
+        "error": {
+          "required": "الاسم الأول مطلوب",
+          "invalid": "يجب أن يحتوي الاسم الأول على أحرف فقط"
+        }
+      },
+      "lastName": {
+        "label": "الاسم الأخير",
+        "placeholder": "الاسم الأخير",
+        "error": {
+          "required": "الاسم الأخير مطلوب",
+          "invalid": "يجب أن يحتوي الاسم الأخير على أحرف فقط"
+        }
+      },
+      "phoneNumber": {
+        "label": "رقم الهاتف",
+        "placeholder": "أدخل رقم هاتفك",
+        "error": {
+          "invalid": "رقم الهاتف غير صحيح"
+        }
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني",
+        "error": {
+          "required": "البريد الإلكتروني مطلوب",
+          "invalid": "أدخل عنوان بريد إلكتروني صحيح، مثال: user.name@domain.com"
+        }
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور",
+        "error": {
+          "required": "كلمة المرور مطلوبة",
+          "invalid": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، ورقم، ورمز خاص"
+        }
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "أكد كلمة المرور",
+        "error": {
+          "required": "تأكيد كلمة المرور مطلوب",
+          "mismatch": "كلمات المرور غير متطابقة"
+        }
+      }
+    },
+    "submitButton": {
+      "text": "التسجيل",
+      "loading": "جاري التحميل..."
+    },
+    "alreadyHaveAccount": {
+      "text": "هل لديك حساب بالفعل؟",
+      "login": "تسجيل الدخول"
+    }
+  },
+
+
+
+"otpPage": {
+    "title": {
+      "head": "تحقق من بريدك",
+      "subTitle": "لقد أرسلنا رمز OTP إلى بريدك {email}"
+    },
+    "form": {
+      "validateButton": "تحقق",
+      "resendOTP": {
+        "timer": "{time}",
+        "didNotReceive": "لم تستلم رمز OTP؟",
+        "resend": "إعادة إرسال رمز OTP"
+      },
+      "wrongEmail": {
+        "text": "بريد إلكتروني خاطئ؟",
+        "registerAgain": "التسجيل مرة أخرى"
+      },
+      "error": {
+        "invalidOTP": "رمز OTP غير صحيح. يرجى المحاولة مرة أخرى."
+      }
+    },
+    "resendOTPModal": {
+      "title": "إعادة إرسال رمز OTP",
+      "subTitle": "هل أنت متأكد؟",
+      "yesResend": "نعم، أعد الإرسال",
+      "discard": "إلغاء"
+    }
+  },
+
+
+
+  "OtpPage": {
+    "title": {
+      "head": "تحقق من بريدك للحصول على رمز OTP",
+      "subTitle": {
+        "verified": "يرجى الانتقال إلى صفحة تسجيل الدخول.",
+        "emailSent": "لقد أرسلنا رمز OTP إلى بريدك {email}.",
+        "emailNotFound": "لم نتمكن من العثور على بريدك الإلكتروني. يرجى التحقق مرة أخرى."
+      }
+    },
+    "form": {
+      "validateButton": "تحقق",
+      "resendOTP": {
+        "timer": "{time}",
+        "didNotReceive": "لم تستلم رمز OTP؟",
+        "resend": "إعادة إرسال رمز OTP"
+      },
+      "error": {
+        "invalidOTP": "رمز OTP غير صحيح. يرجى المحاولة مرة أخرى."
+      }
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
