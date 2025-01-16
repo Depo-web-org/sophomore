@@ -11,7 +11,7 @@ import { HeadTitle } from "../Login/Login";
 import { useSelector } from "react-redux";
 import { formatTime } from "../../../../../../Helpers/Timer";
 import { useTranslation } from "react-i18next";
-import { useTranslation } from "react-i18next";
+ 
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const { t, i18n } = useTranslation()
@@ -212,10 +212,8 @@ export function ResendOtpModal(props) {
     <div
       onClick={() => props.setResendOTPModal(false)}
       className="fixed inset-0 bg-slate-600 bg-opacity-75 flex items-center justify-center z-50"
-      className="fixed inset-0 bg-slate-600 bg-opacity-75 flex items-center justify-center z-50"
     >
       <div
-        className="bg-slate-900 rounded-lg p-6 w-full mx-4 lg:w-3/5 lg:mx-auto border-r-2 border-b-2 border-primary"
         className="bg-slate-900 rounded-lg p-6 w-full mx-4 lg:w-3/5 lg:mx-auto border-r-2 border-b-2 border-primary"
         onClick={(e) => e.stopPropagation()}
       >
@@ -251,6 +249,7 @@ export function ResendOtpModal(props) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
