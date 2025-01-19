@@ -51,7 +51,7 @@ const student= data?.data;
     
       try {
         const response = await updateProfile(formDataToSend).unwrap();
-        if (response.code === 0) refetch() ;
+        if (response.code === 0)  refetch().then(()=> setProfileImage(null));
       } catch (error) {
         console.log(error);
       }
@@ -195,7 +195,7 @@ const student= data?.data;
         className="flex items-center gap-2 text-primary cursor-pointer font-medium"
       >
         <BsFillCameraFill className="text-lg" />
-        Upload Photo
+        {t("profile.uploadPhoto")}
       </label>
       <input
         type="file"
@@ -204,6 +204,7 @@ const student= data?.data;
         className="hidden"
         onChange={(e) => setProfileImage(e.target.files[0])}
       />
+
     </>
   ) : (
     <div className="flex items-center gap-2">
@@ -212,6 +213,9 @@ const student= data?.data;
         alt="Profile Preview"
         className="w-16 h-16 object-cover"
       />
+<p className="text-green-600 font-semibold text-sm">
+        {profileImage.name}
+      </p>
     </div>
   )}
 </div>
