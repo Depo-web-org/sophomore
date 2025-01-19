@@ -81,11 +81,11 @@ console.log(mail)
   }, [timeLeft]);
 
   const reSendOtp = async () => {
-    const dataSend = { email: mail };
+    const userData = { email: mail };
     if (provider) {
-      dataSend.provider = provider;
+      userData.provider = provider;
     }
-    await resend_otp(dataSend)
+    await resend_otp({ userData})
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));

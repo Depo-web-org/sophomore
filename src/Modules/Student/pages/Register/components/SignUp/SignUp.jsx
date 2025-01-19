@@ -4,7 +4,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ImSpinner9 } from "react-icons/im";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { useGetOTpMutation,  useSignupMutation,} from "../../../../../../Redux/Auth/authApiSlice";
+import { useGetOTpMutation,  useSignupMutation, useResend_otpMutation} from "../../../../../../Redux/Auth/authApiSlice";
 import { HeadTitle } from "../Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import UserRole from "../components/UserRole/UserRole";
@@ -23,7 +23,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
 
   // Redux Toolkit's useSignupMutation hook
   const [ getOTp] = useGetOTpMutation();
-  
+  const [resend_otp]= useResend_otpMutation()
   const [signup, { isLoading, isError, error }] = useSignupMutation();
   const {  register, handleSubmit,  control, formState: { errors }, } = useForm();
   const [showPassword, setShowPassword] = useState(false);
@@ -74,7 +74,8 @@ const [errorSubmit, setErrorSubmit] = useState(null)
         if(response.code === 0){
           handleSendOtp();
         }else if(response.code ===1){
-          ResendOTP(data, handleSendOtp, setAlreadyAv);
+          setAlreadyAv(true);
+          // ResendOTP(data, handleSendOtp, setAlreadyAv);
         }else{
           console.error("Signup Error:", response.message );
           
@@ -105,12 +106,25 @@ const [errorSubmit, setErrorSubmit] = useState(null)
 
 
 
-  //645838
   // Redux Toolkit's useResend_otpMutation hook
   const ResendOTP = async (data, handleSendOtp, setAlreadyAv) => {
     const provider = role === "teacher" ? true : false;
+   
+
+    const userData = {email: data.email}
+
+    if (provider) {
+      userData.provider = provider;
+    }
     try {
-      await  getOTp({ email: data.email }).unwrap();
+      const response = await  resend_otp({ userData}).unwrap();
+
+      // if(response.code===1){
+          
+      // }
+      if(response.message==='Error! Account has been already verified'){
+        handleSendOtp();
+      }
       handleSendOtp(); // Call the success callback
     } catch (err) {
       if (
