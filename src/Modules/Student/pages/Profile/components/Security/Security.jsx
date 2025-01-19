@@ -12,6 +12,7 @@ import useChangePassword from "../../../../../../Hooks/UseChangePassword";
 import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../../../../../../Redux/data/dataApiSlice";
 import { LoadingComponents } from "../../../../../../App";
+import ProfileSkeleton from "../Skeleton/ProfileSkeleton";
 
 export default function Security() {
   const { t,i18n} = useTranslation();
@@ -52,7 +53,7 @@ export default function Security() {
     setShowPassword((prevState) => !prevState);
   };
    if(isFetching){
-    return <LoadingComponents/> ;
+    return <ProfileSkeleton/> ;
    }
   return (
     <div  className=" pb-10 lg:pb-0">

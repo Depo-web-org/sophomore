@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../../../../../../Redux/data/dataApiSlice";
 import { LoadingComponents } from "../../../../../../App";
 import { ImSpinner9 } from "react-icons/im";
+import ProfileSkeleton from "../Skeleton/ProfileSkeleton";
 
 export default function MyProfile() {
   const { t,i18n } = useTranslation();
@@ -59,7 +60,7 @@ const student= data?.data;
 
   
  if(isFetching){
-  return <LoadingComponents/> ;
+  return <ProfileSkeleton/> ;
  }
 
   return (
