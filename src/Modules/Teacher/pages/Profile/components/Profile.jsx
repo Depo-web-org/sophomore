@@ -90,7 +90,8 @@ const student= data?.data;
         className={`px-4 lg:px-8 lg:w-[70%] ${i18n.language ===  "ar" ?  "ms-auto" :"mx-auto"}`}
       >
         {/* Name Fields */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-5">
+     
+     <div dir={i18n.language ===  "ar" ?  "rtl" :"ltr"}  className="flex flex-col sm:flex-row gap-4 mb-5">
           <div className="w-full">
             <label
               htmlFor="first_name"
