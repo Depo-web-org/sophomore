@@ -15,6 +15,7 @@ import useRole, { secretKey } from "../../../../../../Hooks/UseRole";
 import { setRole } from "../../../../../../Redux/RoleSlice/RoleSlice";
 import { getRole } from "../../../../../../Helpers/enCodeRole";
 import { setStudent } from "../../../../../../Redux/StudentSlices/StudentSlice";
+import { useTranslation } from "react-i18next";
 
 export default function Login({ toggleForm }) {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function Login({ toggleForm }) {
   const role = useSelector((state) => state.role.role);
   const provider= role==='teacher'?true:false;
   const [userEmail, setUserEmail] = useState(null);
-
+const {i18n} =useTranslation()
 
   const VerifyAccount = (email) => {
     const enCodedMail = encodeEmail(email);
@@ -109,13 +110,11 @@ export default function Login({ toggleForm }) {
           navigate("/register");
         }
       }
-     else if(response.code===10){
-
+    else if(response.code===10){
       navigate(`/register/verify-account/${encodeEmail(data.loginMail)}`);
     }
       else if(response.code===20){
         setErrorMessage(response?.message)
-
       }
       else{
         setErrorMessage(response?.message)
@@ -125,8 +124,10 @@ export default function Login({ toggleForm }) {
       error?.data?.message
         ? setErrorMessage(error?.data?.message)
         : setErrorMessage(
-            "Oops! We couldn't process your request due to a server issue. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com."
-          );
+          i18n?.languages[0] == "ar"
+            ? "خطأ في تسجيل الدخول"
+            : "Oops! We couldn't process your request may you don't have internet connection. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com."
+        );
 
     }
   };
