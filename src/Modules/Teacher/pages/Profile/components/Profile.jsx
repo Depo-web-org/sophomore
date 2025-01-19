@@ -25,7 +25,6 @@ const student= data?.data;
 
   const [profileImage, setProfileImage] = useState( null);
 
-  
 
   const {
     register,
@@ -54,13 +53,12 @@ const student= data?.data;
     
       try {
         const response = await updateProfile(formDataToSend).unwrap();
-        if (response.code === 0) refetch();
+        if (response.code === 0) refetch().then(()=> setProfileImage(null));
       } catch (error) {
         console.log(error);
       }
     };
 
-  
  if(isFetching){
   return <ProfileSkeleton/> ;
  }
@@ -92,7 +90,8 @@ const student= data?.data;
         className={`px-4 lg:px-8 lg:w-[70%] ${i18n.language ===  "ar" ?  "ms-auto" :"mx-auto"}`}
       >
         {/* Name Fields */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-5">
+     
+     <div dir={i18n.language ===  "ar" ?  "rtl" :"ltr"}  className="flex flex-col sm:flex-row gap-4 mb-5">
           <div className="w-full">
             <label
               htmlFor="first_name"
@@ -188,23 +187,39 @@ const student= data?.data;
 
         {/* Profile Image Upload */}
         <div className="mb-5 flex flex-col sm:flex-row justify-between items-center">
-          <div className="flex items-center gap-4">
-            <label
-              htmlFor="upload"
-              className="flex items-center gap-2 text-primary cursor-pointer font-medium"
-            >
-              <BsFillCameraFill className="text-lg" />
-              {t("profile.uploadPhoto")}
-            </label>
-            <input
-              type="file"
-              id="upload"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => setProfileImage(e.target.files[0])}
 
-            />
-          </div>
+        <div className="flex items-center gap-4">
+  {!profileImage ? (
+    <>
+      <label
+        htmlFor="upload"
+        className="flex items-center gap-2 text-primary cursor-pointer font-medium"
+      >
+        <BsFillCameraFill className="text-lg" />
+        {t("profile.uploadPhoto")}
+      </label>
+      <input
+        type="file"
+        id="upload"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => setProfileImage(e.target.files[0])}
+      />
+    </>
+  ) : (
+    <div className="flex items-center gap-2 ">
+      <img
+        src={URL.createObjectURL(profileImage)}
+        alt="Profile Preview"
+        className="w-16 h-16 object-cover rounded-full"
+      />
+      <p className="text-green-600 font-semibold text-sm">
+        {profileImage.name}
+      </p>
+    </div>
+  )}
+</div>
+         
           <div className="flex gap-4 mt-4 sm:mt-0">
             <button
               type="button"

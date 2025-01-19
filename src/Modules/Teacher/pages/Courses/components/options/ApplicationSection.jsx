@@ -979,10 +979,10 @@ const ApplicationSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Fetch data from the API
+
   const { data: schoolsData = {}, isLoading, isError } = useGetAllSchoolInformationQuery();
 
-  // State لتتبع نوع المدرسة والصف المختار
+
   const [selectedSchoolType, setSelectedSchoolType] = useState(null);
   const [selectedGrade, setSelectedGrade] = useState(null);
 
