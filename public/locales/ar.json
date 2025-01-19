@@ -425,7 +425,7 @@
 "otpPage": {
     "title": {
       "head": "تحقق من بريدك",
-      "subTitle": "لقد أرسلنا رمز OTP إلى بريدك {email}"
+      "subTitle": "لقد أرسلنا رمز OTP إلى بريدك "
     },
     "form": {
       "validateButton": "تحقق",
@@ -439,7 +439,7 @@
         "registerAgain": "التسجيل مرة أخرى"
       },
       "error": {
-        "invalidOTP": "رمز OTP غير صحيح. يرجى المحاولة مرة أخرى."
+        "invalidOTP": "   يرجى المحاولة مرة أخرى رمز OTP غير صحيح ."
       }
     },
     "resendOTPModal": {

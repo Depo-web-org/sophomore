@@ -117,11 +117,10 @@ const TeacherUpload = () => {
       setError(true);
     } finally {
       setLoading(false);
+      refetch()
     }
   };
 
-
-  console.log(typeof(documentProcess))
   return (
     
     <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
