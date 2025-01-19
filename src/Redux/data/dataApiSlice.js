@@ -30,7 +30,7 @@ export const dataApiSlice = apiSlice.injectEndpoints({
         url:"getGrades.php?subjects=true",
         method: "GET", 
       }),
-      providesTags:['Schools']
+      providesTags:['Grades']
     }),
     // Other data fetching endpoints can go here...
   }),
