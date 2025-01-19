@@ -222,23 +222,7 @@ const student= data?.data;
 </div>
 
           {/* submit  */}
-          <div className="flex items-center gap-4">
-            <label
-              htmlFor="upload"
-              className="flex items-center gap-2 text-primary cursor-pointer font-medium"
-            >
-              <BsFillCameraFill className="text-lg" />
-              {t("profile.uploadPhoto")}
-            </label>
-            <input
-              type="file"
-              id="upload"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => setProfileImage(e.target.files[0])}
-
-            />
-          </div>
+ 
           <div className="flex gap-4 mt-4 sm:mt-0">
             <button
               type="button"
