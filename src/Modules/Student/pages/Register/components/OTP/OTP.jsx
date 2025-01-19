@@ -34,7 +34,6 @@ console.log(mail)
   });
   const [resend_otp, { isLoading }] = useResend_otpMutation();
   const [verifyEmail, { isLoading: loadingSending }] = useVerify_emailMutation();
-
   const onSubmit = async (data) => {
     const otp = data.otp.join("");
     const dataSend = { email: mail, otp };
@@ -42,8 +41,7 @@ console.log(mail)
       dataSend.provider = provider;
     }
     try {
-      const response = await verifyEmail({ dataSend }).unwrap();
-      console.log("Verify Email Response:", response);
+      const response = await verifyEmail({dataSend}).unwrap(); 
       if (response.code === 0) {
         handleValidateOtp(); // Call the provided callback on success
       } else if (response.code === 1) {
@@ -54,16 +52,14 @@ console.log(mail)
       // Handle error
     }
   };
-
-  const handleInput = (e, index, fields) => {
+  const handleInput = (e, index) => {
     const value = e.target.value;
-    if (value.length === 1 && index < fields.length - 1) {
+    if (value.length === 1 && index < 5) {
       setFocus(`otp[${index + 1}]`);
     } else if (!value && index > 0) {
       setFocus(`otp[${index - 1}]`);
     }
   };
-
   const handlePaste = (e, setValue) => {
     e.preventDefault();
     const text = e.clipboardData.getData("text");
@@ -73,7 +69,6 @@ console.log(mail)
       setFocus("otp[5]"); // Move focus to the last input
     }
   };
-
   useEffect(() => {
     if (timeLeft > 0) {
       const interval = setInterval(() => {
@@ -86,22 +81,21 @@ console.log(mail)
   }, [timeLeft]);
 
   const reSendOtp = async () => {
-    const dataSend = { email: mail };
+    const userData = { email: mail };
     if (provider) {
-      dataSend.provider = provider;
+      userData.provider = provider;
     }
-    await resend_otp({ dataSend })
+    await resend_otp({ userData})
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
     setResendOTPModal(false);
     setIsResendDisabled(true);
-    setTimeLeft(1);
+    setTimeLeft(60); 
   };
-
   return (
     <>
-    <div className="w-full my-auto flex justify-center bg-red-500">
+    <div className="w-full my-auto flex justify-center ">
       <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
           title={{
@@ -111,7 +105,7 @@ console.log(mail)
             }), 
           }}
         />
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+        <form  dir="ltr" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
           <div  className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4 ">
             {[0, 1, 2, 3, 4, 5].map((index) => (
               <Controller
