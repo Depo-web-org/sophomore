@@ -5,8 +5,21 @@ import TopText from "../Top Text Cards/TopText";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useUpdateDocumentMutation } from "../../../../Redux/Auth/authApiSlice";
+import { useGetProfileTeacherQuery } from "../../../../Redux/data/dataApiSlice";
+import { useSelector } from "react-redux";
+import { BsHourglassSplit } from "react-icons/bs";
 
 const TeacherUpload = () => {
+  const role = useSelector((state) => state.role.role);
+  const {
+    data,
+    error: dataerror,
+    isFetching,
+    refetch,
+    isLoading: dataLoading,
+  } = useGetProfileTeacherQuery({ provider: role });
+  const documentProcess = data?.data?.status;
+
   const { t } = useTranslation();
   const [buttonStates, setButtonStates] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,7 +45,6 @@ const TeacherUpload = () => {
           icon: item.icon,
           mandatory: item.mandatory === "1",
         }));
-        console.log(mappedData);
 
         setCardteacher(mappedData);
       } catch (error) {
@@ -103,7 +115,7 @@ const TeacherUpload = () => {
       }
 
       // Navigate after all files are uploaded
-      navigate("/teacherPanel");
+      // navigate("/teacherPanel");
     } catch (error) {
       console.error("Error uploading files:", error);
       setError(true);
@@ -112,43 +124,7 @@ const TeacherUpload = () => {
     }
   };
 
-  // function For Send All 4 Files once but didn't work
-  // const onSubmit = async (data) => {
-  //   try {
-  //     setLoading(true);
-
-  //     // إنشاء FormData واحد
-  //     const formData = new FormData();
-
-  //     // إضافة جميع البيانات إلى FormData
-  //     cardteacher.forEach((item, index) => {
-  //       const file = buttonStates[index]?.file;
-  //       if (file) {
-  //         formData.append(`document_category_${index}`, item.id); // إضافة document_category
-  //         formData.append(`hint_${index}`, item.hint || ""); // إضافة hint
-  //         formData.append(`hint_ar_${index}`, item.hint_ar || ""); // إضافة hint_ar
-  //         formData.append(`document_${index}`, file); // إضافة الملف
-  //       }
-  //     });
-
-  //     // Log FormData contents
-  //     for (let [key, value] of formData.entries()) {
-  //       console.log(key, value);
-  //     }
-
-  //     // إرسال FormData في طلب واحد
-  //     const response = await updateDocument(formData).unwrap();
-  //     console.log("Upload successful:", response);
-
-  //     // التنقل بعد الانتهاء من التحميل
-  //     navigate("/teacherPanel");
-  //   } catch (error) {
-  //     console.error("Error uploading files:", error);
-  //     setError(true);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  console.log(typeof documentProcess);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
       <div className="pt-28 lg:pt-32">
@@ -185,11 +161,19 @@ const TeacherUpload = () => {
                     buttonStates[index]?.status === "Uploaded"
                       ? "bg-green-500"
                       : "bg-primary"
-                  } hover:bg-blue-800 cursor-pointer rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
+                  } hover:bg-blue-800  rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
                 >
-                  {buttonStates[index]?.status === "Uploaded"
+                  {/* condition ro check if document uploaded before or not  */}
+                  {documentProcess === "2" ? (
+                    <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block" />
+                  ) : buttonStates[index]?.status === "Uploaded" ? (
+                    t("teacherUpload.uploaded")
+                  ) : (
+                    t("teacherUpload.upload")
+                  )}
+                  {/* {buttonStates[index]?.status === "Uploaded"
                     ? t("teacherUpload.uploaded")
-                    : t("teacherUpload.upload")}
+                    : t("teacherUpload.upload") } */}
                   <input
                     type="file"
                     className="hidden"
@@ -218,7 +202,7 @@ const TeacherUpload = () => {
           </p>
         )}
 
-        {buttonStates[2]?.status === "Uploaded" ? (
+        {documentProcess !== "2" && (
           <button
             type="submit"
             disabled={loading}
@@ -237,8 +221,6 @@ const TeacherUpload = () => {
               t("teacherUpload.getStarted")
             )}
           </button>
-        ) : (
-          ""
         )}
       </div>
     </form>
@@ -246,3 +228,41 @@ const TeacherUpload = () => {
 };
 
 export default TeacherUpload;
+
+// function For Send All 4 Files once but didn't work
+// const onSubmit = async (data) => {
+//   try {
+//     setLoading(true);
+
+//     // إنشاء FormData واحد
+//     const formData = new FormData();
+
+//     // إضافة جميع البيانات إلى FormData
+//     cardteacher.forEach((item, index) => {
+//       const file = buttonStates[index]?.file;
+//       if (file) {
+//         formData.append(`document_category_${index}`, item.id); // إضافة document_category
+//         formData.append(`hint_${index}`, item.hint || ""); // إضافة hint
+//         formData.append(`hint_ar_${index}`, item.hint_ar || ""); // إضافة hint_ar
+//         formData.append(`document_${index}`, file); // إضافة الملف
+//       }
+//     });
+
+//     // Log FormData contents
+//     for (let [key, value] of formData.entries()) {
+//       console.log(key, value);
+//     }
+
+//     // إرسال FormData في طلب واحد
+//     const response = await updateDocument(formData).unwrap();
+//     console.log("Upload successful:", response);
+
+//     // التنقل بعد الانتهاء من التحميل
+//     navigate("/teacherPanel");
+//   } catch (error) {
+//     console.error("Error uploading files:", error);
+//     setError(true);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
