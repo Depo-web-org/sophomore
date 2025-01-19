@@ -305,10 +305,6 @@
 
 
 
-
-
-
-
 import { Link, useNavigate, useParams } from "react-router-dom";
 import GoBack from "../../../../components/GoBack";
 import { useEffect, useState } from "react";
@@ -330,7 +326,7 @@ function Button({ classButton, events, title, type }) {
 }
 
 const Unit = () => {
-  const naviagte = useNavigate()
+  const naviagte = useNavigate();
   const { t } = useTranslation();
   const { unit } = useParams();
   const [uploadedVideo, setUploadedVideo] = useState(null);
@@ -339,13 +335,19 @@ const Unit = () => {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const CourseInformation = useSelector((state) => state.AddTeacherCourse);
-console.log(CourseInformation)
-useEffect(()=>{
-  if(CourseInformation.image ===null
-    ||  CourseInformation.orderNotes ===null 
-  ||CourseInformation.schoolType===null
-    ||CourseInformation.selectedGrade === null) naviagte('/teacherPanel/courses/addnewcourse');
-},[])
+
+  console.log(CourseInformation);
+
+  useEffect(() => {
+    if (
+      !CourseInformation.courseNotes ||
+      !CourseInformation.schoolType ||
+      !CourseInformation.selectedGrade
+    ) {
+      naviagte("/teacherPanel/courses/addnewcourse");
+    }
+  }, [CourseInformation, naviagte]);
+
   // React Hook Form
   const {
     register,
@@ -369,6 +371,7 @@ useEffect(()=>{
   };
 
   const handleFormSubmit = (data) => {
+    console.log(data)
     if (!data.video || !data.pdf) {
       setMessage(t("unit.bothFilesRequired"));
       return;
@@ -380,11 +383,13 @@ useEffect(()=>{
       UploadedVideo: uploadedVideo,
       UploadedMaterial: uploadedPDF,
     };
-    console.log(newUnit);
 
-    // إرسال بيانات الوحدة الجديدة إلى الـ slice
+    // const updatedCourseInformation = {
+    //   ...CourseInformation,
+    //   units: [...(CourseInformation.units || []), newUnit],
+    // };
+
     dispatch(setUnit(newUnit));
-    console.log(CourseInformation);
 
     setMessage(t("unit.unitSaved"));
     setUploadedVideo(null);

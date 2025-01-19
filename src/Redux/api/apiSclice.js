@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
     const Token = localStorage.getItem('Token')
     console.log(endpoint)
     // Add Authorization header for all requests except login , logout and Change Password 
-    if (Token && endpoint !== "/auth/login/student" && endpoint !== "getSchools" && endpoint !== "getGrades" ) {
+    if (Token && endpoint !== "/auth/login/student" && endpoint !== "getSchools" && endpoint !== "getGrades" && endpoint !== "getAllSchoolInformation") {
       headers.set("Authorization", `${Token}`);
     }
     return headers;
