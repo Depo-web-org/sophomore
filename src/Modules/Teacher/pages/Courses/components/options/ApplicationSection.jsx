@@ -360,89 +360,631 @@
 
 
 
+// import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { IoImage } from "react-icons/io5";
+// import { RiCloseFill } from "react-icons/ri";
+// import { useDispatch } from "react-redux";
+// import { addCourse } from "../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
+// import { useNavigate } from "react-router-dom";
+// import { useTranslation } from "react-i18next";
+// import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/dataApiSlice";
+
+// const ApplicationSection = () => {
+//   const { t, i18n } = useTranslation();
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   // محاكاة البيانات
+//   const schoolsData = [
+//     {
+//       id: "2",
+//       name: "Governmental",
+//       name_ar: "حكومى",
+//       image: "Governomental.webp",
+//       path: "/education/assets/meta/",
+//       grades: [
+//         {
+//           id: "17",
+//           grade_no: "Grade-1",
+//           name: "Grade-1",
+//           name_ar: "اﻷول الابتدائى",
+//           image: "Elementary.webp",
+//           path: "/education/assets/meta/",
+//           school_type_id: "2",
+//         },
+//         {
+//           id: "18",
+//           grade_no: "Grade-2",
+//           name: "Grade-2",
+//           name_ar: "السادس الابتدائى",
+//           image: "Elementary.webp",
+//           path: "/education/assets/meta/",
+//           school_type_id: "2",
+//         },
+//         {
+//           id: "19",
+//           grade_no: "Grade-2",
+//           name: "Grade-2",
+//           name_ar: "اﻵول اﻵعدادي",
+//           image: "Elementary.webp",
+//           path: "/education/assets/meta/",
+//           school_type_id: "2",
+//         },
+//       ],
+//     },
+//     {
+//       id: "8",
+//       name: "IG",
+//       name_ar: "اى جى",
+//       image: "IG.webp",
+//       path: "/education/assets/meta/",
+//       grades: [
+//         {
+//           id: "11",
+//           grade_no: "Grade-1",
+//           name: "Grade-1",
+//           name_ar: "الصف السابع",
+//           image: "Elementary.webp",
+//           path: "/education/assets/meta/",
+//           school_type_id: "8",
+//         },
+//         {
+//           id: "12",
+//           grade_no: "Grade-2",
+//           name: "Grade-2",
+//           name_ar: "الصف الثانى الثانوي",
+//           image: "Elementary.webp",
+//           path: "/education/assets/meta/",
+//           school_type_id: "8",
+//         },
+//       ],
+//     },
+//   ];
+//   const {data}=useGetAllSchoolInformationQuery()
+//   console.log(data)
+  
+//   // State لتتبع نوع المدرسة المختارة
+//   const [selectedSchoolType, setSelectedSchoolType] = useState(null);
+
+//   // React Hook Form
+//   const {
+//     register,
+//     handleSubmit,
+//     reset,
+//     setValue,
+//     formState: { errors },
+//   } = useForm();
+//   const [uploadImage, setUploadImage] = useState(null);
+
+//   // Handle image upload
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setUploadImage(file);
+//       setValue("image", file);
+//     }
+//   };
+
+//   const handleFormSubmit = (data) => {
+//     const formData = {
+//       title: data.title,
+//       orderNotes: data.orderNotes,
+//       // image: uploadImage,
+//      schoolType: selectedSchoolType ? selectedSchoolType.id : null, 
+//       selectedGrade: data.grade,
+//     };
+// console.log(formData)
+//     dispatch(addCourse(formData));
+//     reset();
+//     setUploadImage(null);
+//     setTimeout(() => {
+//       navigate("/teacherPanel/courses/Upload Course");
+//     }, 500);
+//   };
+
+//   return (
+//     <>
+//       <div className="lg:ms-5 h-auto ">
+//         <form onSubmit={handleSubmit(handleFormSubmit)}>
+//           <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
+//             <p className="block text-2xl lg:text-3xl font-semibold">
+//               {t("application.addNewCourse")}
+//             </p>
+
+//             {/* Uplaod Image underComment Until add again   */}
+//             {/* <span className="text-sm font-medium text-gray-400 my-2">
+//               {t("application.uploadThumbnail")}
+//             </span> */}
+
+//             {/* Image Upload Section */}
+//             {/* <div
+//               className={`relative border-2 border-dashed rounded-lg p-6 ${
+//                 errors.image ? "border-red-500" : "border-gray-300"
+//               }`}
+//             >
+//               <div className="flex justify-center w-full flex-col items-center pb-10 relative">
+//                 <img
+//                   src={
+//                     uploadImage
+//                       ? "/images/correct.svg"
+//                       : "/images/Add New Courses.svg"
+//                   }
+//                   alt=""
+//                   className="w-auto absolute cursor-pointer mb-2"
+//                 />
+
+//                 <input
+//                   id="Upload-Image"
+//                   name="image"
+//                   type="file"
+//                   onChange={handleImageChange}
+//                   accept="image/*"
+//                   className="cursor-pointer opacity-0 z-20 py-7 mt-24"
+//                   required
+//                 />
+//                 {!uploadImage && (
+//                   <>
+//                     <span className="mt-2">
+//                       {t("application.dropImage")}{" "}
+//                       <span className="text-blue-600">
+//                         {t("application.browse")}
+//                       </span>
+//                     </span>
+//                     <span className="text-[#00000078] text-sm">
+//                       {t("application.supportedFormats")}
+//                     </span>
+//                   </>
+//                 )}
+//                 {uploadImage && (
+//                   <>
+//                     <span className="text-emerald-600">
+//                       {t("application.uploadSuccess")}{" "}
+//                       <IoImage className="inline mx-1" />
+//                     </span>
+//                     <span className="block text-gray-500 font-semibold">
+//                       {uploadImage.name}
+//                     </span>
+//                     <div
+//                       className="bg-red-600 text-white cursor-pointer rounded-md px-1 mt-2 font-semibold"
+//                       onClick={() => {
+//                         setUploadImage(null);
+//                         document.getElementById("Upload-Image").value = "";
+//                         setValue("image", null);
+//                       }}
+//                     >
+//                       <span className="mx-1">{t("application.delete")}</span>
+//                       <RiCloseFill className="text-2xl inline" />
+//                     </div>
+//                   </>
+//                 )}
+//               </div>
+//               {errors.image && (
+//                 <p className="text-red-500 text-sm">{errors.image.message}</p>
+//               )}
+//             </div> */}
+//           </div>
+
+//           <div
+//             id="options"
+//             className="grid grid-cols-1 lg:grid-cols-2 gap-5 h-auto tracking-wide my-4"
+//           >
+//             {/* Form Section */}
+//             <div className="">
+//               <div>
+//                 <label
+//                   htmlFor="UserEmail"
+//                   className="block text-sm font-medium text-gray-400"
+//                 >
+//                   {t("application.title")}
+//                 </label>
+//                 <input
+//                   type="text"
+//                   id="title"
+//                   {...register("title", { required: t("application.titleRequired") })}
+//                   className={`border-2 py-2.5 mt-1 w-full text-gray-600 font-semibold placeholder:font-normal rounded-md shadow-sm sm:text-sm p-2 focus-within:outline-gray-200 bg-[#EFEFEF] ${
+//                     errors.title ? "border-red-500" : "border-[#EFEFEF]"
+//                   }`}
+//                   placeholder={t("application.titlePlaceholder")}
+//                 />
+//                 {errors.title && (
+//                   <p className="text-red-500 text-sm">{errors.title.message}</p>
+//                 )}
+//               </div>
+
+//               <div className="my-4">
+//                 <label
+//                   htmlFor="OrderNotes"
+//                   className="block text-sm font-medium text-gray-400"
+//                 >
+//                   {t("application.orderNotes")}
+//                 </label>
+//                 <textarea
+//                   id="OrderNotes"
+//                   {...register("orderNotes", {
+//                     required: t("application.orderNotesRequired"),
+//                   })}
+//                   className={`border-2 mt-2 w-full rounded-lg h-[7.5rem] shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
+//                     errors.orderNotes ? "border-red-500" : "border-[#EFEFEF]"
+//                   }`}
+//                   rows="4"
+//                   placeholder={t("application.orderNotesPlaceholder")}
+//                 ></textarea>
+//                 {errors.orderNotes && (
+//                   <p className="text-red-500 text-sm">
+//                     {errors.orderNotes.message}
+//                   </p>
+//                 )}
+//               </div>
+//             </div>
+
+//             {/* School and Grade Selection */}
+//             <div className="h-full">
+//               {/* School Type Dropdown */}
+//               <div>
+//                 <label
+//                   htmlFor="schoolType"
+//                   className="text-gray-400 font-semibold text-sm lg:text-md"
+//                 >
+//                   {t("application.selectSchoolType")}
+//                 </label>
+//                 <select
+//                   id="schoolType"
+//                   className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+//                   onChange={(e) =>
+//                     setSelectedSchoolType(
+//                       schoolsData.find((school) => school.id === e.target.value)
+//                     )
+//                   }
+//                 >
+//                   <option value="">{t("application.selectSchoolType")}</option>
+//                   {schoolsData.map((school) => (
+//                     <option key={school.id} value={school.id}>
+//                       {i18n.language === "ar" ? school.name_ar : school.name}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
+
+//               {/* Grades Dropdown (يظهر فقط عند اختيار نوع المدرسة) */}
+//               {selectedSchoolType && (
+//                 <div>
+//                   <label
+//                     htmlFor="grade"
+//                     className="text-gray-400 font-semibold text-sm lg:text-md"
+//                   >
+//                     {t("application.selectGrade")}
+//                   </label>
+//                   <select
+//                     id="grade"
+//                     className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+//                     {...register("grade", {
+//                       required: t("application.fieldRequired"),
+//                     })}
+//                   >
+//                     <option value="">{t("application.selectGrade")}</option>
+//                     {selectedSchoolType.grades.map((grade) => (
+//                       <option key={grade.id} value={grade.id}>
+//                         {i18n.language === "ar" ? grade.name_ar : grade.name}
+//                       </option>
+//                     ))}
+//                   </select>
+//                   {errors.grade && (
+//                     <p className="text-red-500 text-sm">
+//                       {errors.grade.message}
+//                     </p>
+//                   )}
+//                 </div>
+//               )}
+//                      {/* Subjects Dropdown  */}
+//                 {selectedSchoolType && (
+//                 <div>
+//                   <label
+//                     htmlFor="grade"
+//                     className="text-gray-400 font-semibold text-sm lg:text-md"
+//                   >
+//                     {t("application.selectGrade")}
+//                   </label>
+//                   <select
+//                     id="grade"
+//                     className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+//                     {...register("grade", {
+//                       required: t("application.fieldRequired"),
+//                     })}
+//                   >
+//                     <option value="">{t("application.selectGrade")}</option>
+//                     {selectedSchoolType.grades.map((grade) => (
+//                       <option key={grade.id} value={grade.id}>
+//                         {i18n.language === "ar" ? grade.name_ar : grade.name}
+//                       </option>
+//                     ))}
+//                   </select>
+//                   {errors.grade && (
+//                     <p className="text-red-500 text-sm">
+//                       {errors.grade.message}
+//                     </p>
+//                   )}
+//                 </div>
+//               )}
+//             </div>
+
+//             {/* Submit Button */}
+//             <button
+//               type="submit"
+//               className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+//             >
+//               {t("application.continue")}
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default ApplicationSection;
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { useDispatch } from "react-redux";
+// import { addCourse } from "../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
+// import { useNavigate } from "react-router-dom";
+// import { useTranslation } from "react-i18next";
+// import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/dataApiSlice";
+
+// const ApplicationSection = () => {
+//   const { t, i18n } = useTranslation();
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   // Fetch data from the API
+//   const { data: schoolsData = {}, isLoading, isError } = useGetAllSchoolInformationQuery();
+
+//   // State لتتبع نوع المدرسة والصف المختار
+//   const [selectedSchoolType, setSelectedSchoolType] = useState(null);
+//   const [selectedGrade, setSelectedGrade] = useState(null);
+
+//   // React Hook Form
+//   const {
+//     register,
+//     handleSubmit,
+//     reset,
+//     setValue,
+//     formState: { errors },
+//   } = useForm();
+//   const [uploadImage, setUploadImage] = useState(null);
+
+//   // Handle image upload
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setUploadImage(file);
+//       setValue("image", file);
+//     }
+//   };
+
+//   const handleFormSubmit = (data) => {
+//     console.log(data)
+//     const formData = {
+//       title: data.title,
+//       orderNotes: data.orderNotes,
+//       schoolType: selectedSchoolType ? selectedSchoolType.id : null,
+//       selectedGrade: selectedGrade ? selectedGrade.id : null,
+//       selectedSubject: data.subject, 
+//     };
+//     console.log(formData);
+
+//     dispatch(addCourse(formData));
+//     reset();
+//     setUploadImage(null);
+//     setTimeout(() => {
+//       navigate("/teacherPanel/courses/Upload Course");
+//     }, 500);
+//   };
+
+//   // Loading state
+//   if (isLoading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   // Error state
+//   if (isError) {
+//     return <div>Error fetching data</div>;
+//   }
+
+//   return (
+//     <>
+//       <div className="lg:ms-5 h-auto ">
+//         <form onSubmit={handleSubmit(handleFormSubmit)}>
+//           <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
+//             <p className="block text-2xl lg:text-3xl font-semibold">
+//               {t("application.addNewCourse")}
+//             </p>
+//           </div>
+
+//           <div
+//             id="options"
+//             className="grid grid-cols-1 lg:grid-cols-2 gap-5 h-auto tracking-wide my-4"
+//           >
+//             {/* Form Section */}
+//             <div className="">
+//               <div>
+//                 <label
+//                   htmlFor="UserEmail"
+//                   className="block text-sm font-medium text-gray-400"
+//                 >
+//                   {t("application.title")}
+//                 </label>
+//                 <input
+//                   type="text"
+//                   id="title"
+//                   {...register("title", { required: t("application.titleRequired") })}
+//                   className={`border-2 py-2.5 mt-1 w-full text-gray-600 font-semibold placeholder:font-normal rounded-md shadow-sm sm:text-sm p-2 focus-within:outline-gray-200 bg-[#EFEFEF] ${
+//                     errors.title ? "border-red-500" : "border-[#EFEFEF]"
+//                   }`}
+//                   placeholder={t("application.titlePlaceholder")}
+//                 />
+//                 {errors.title && (
+//                   <p className="text-red-500 text-sm">{errors.title.message}</p>
+//                 )}
+//               </div>
+
+//               <div className="my-4">
+//                 <label
+//                   htmlFor="OrderNotes"
+//                   className="block text-sm font-medium text-gray-400"
+//                 >
+//                   {t("application.orderNotes")}
+//                 </label>
+//                 <textarea
+//                   id="OrderNotes"
+//                   {...register("orderNotes", {
+//                     required: t("application.orderNotesRequired"),
+//                   })}
+//                   className={`border-2 mt-2 w-full rounded-lg h-[7.5rem] shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
+//                     errors.orderNotes ? "border-red-500" : "border-[#EFEFEF]"
+//                   }`}
+//                   rows="4"
+//                   placeholder={t("application.orderNotesPlaceholder")}
+//                 ></textarea>
+//                 {errors.orderNotes && (
+//                   <p className="text-red-500 text-sm">
+//                     {errors.orderNotes.message}
+//                   </p>
+//                 )}
+//               </div>
+//             </div>
+
+//             {/* School and Grade Selection */}
+//             <div className="h-full">
+//               {/* School Type Dropdown */}
+//               <div>
+//                 <label
+//                   htmlFor="schoolType"
+//                   className="text-gray-400 font-semibold text-sm lg:text-md"
+//                 >
+//                   {t("application.selectSchoolType")}
+//                 </label>
+//                 <select
+//                   id="schoolType"
+//                   className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+//                   onChange={(e) => {
+//                     const selectedSchool = schoolsData.data.find(
+//                       (school) => school.id === e.target.value
+//                     );
+//                     setSelectedSchoolType(selectedSchool);
+//                     setSelectedGrade(null); // Reset selected grade
+//                   }}
+//                 >
+//                   <option value="">{t("application.selectSchoolType")}</option>
+//                   {schoolsData?.data?.map((school) => (
+//                     <option key={school.id} value={school.id}>
+//                       {i18n.language === "ar" ? school.name_ar : school.name}
+//                     </option>
+//                   ))}
+//                 </select>
+//               </div>
+
+//               {/* Grades Dropdown */}
+//               {selectedSchoolType && (
+//                 <div>
+//                   <label
+//                     htmlFor="grade"
+//                     className="text-gray-400 font-semibold text-sm lg:text-md"
+//                   >
+//                     {t("application.selectGrade")}
+//                   </label>
+//                   <select
+//                     id="grade"
+//                     className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+//                     onChange={(e) => {
+//                       const selectedGrade = selectedSchoolType.grades.find(
+//                         (grade) => grade.id === e.target.value
+//                       );
+//                       setSelectedGrade(selectedGrade);
+//                     }}
+//                   >
+//                     <option value="">{t("application.selectGrade")}</option>
+//                     {selectedSchoolType.grades?.map((grade) => (
+//                       <option key={grade.id} value={grade.id}>
+//                         {i18n.language === "ar" ? grade.name_ar : grade.name}
+//                       </option>
+//                     ))}
+//                   </select>
+//                 </div>
+//               )}
+
+//               {/* Subjects Dropdown */}
+//               {selectedGrade && (
+//                 <div>
+//                   <label
+//                     htmlFor="subject"
+//                     className="text-gray-400 font-semibold text-sm lg:text-md"
+//                   >
+//                     {t("application.selectSubject")}
+//                   </label>
+//                   <select
+//                     id="subject"
+//                     className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+//                     {...register("subject", {
+//                       required: t("application.fieldRequired"),
+//                     })}
+//                   >
+//                     <option value="">{t("application.selectSubject")}</option>
+//                     {selectedGrade.subjects?.map((subject) => (
+//                       <option key={subject.id} value={subject.id}>
+//                         {i18n.language === "ar" ? subject.name_ar : subject.name}
+//                       </option>
+//                     ))}
+//                   </select>
+//                   {errors.subject && (
+//                     <p className="text-red-500 text-sm">{errors.subject.message}</p>
+//                   )}
+//                 </div>
+//               )}
+//             </div>
+
+//             {/* Submit Button */}
+//             <button
+//               type="submit"
+//               className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+//             >
+//               {t("application.continue")}
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default ApplicationSection;
+
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoImage } from "react-icons/io5";
-import { RiCloseFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { addCourse } from "../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/dataApiSlice";
 
 const ApplicationSection = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // محاكاة البيانات
-  const schoolsData = [
-    {
-      id: "2",
-      name: "Governmental",
-      name_ar: "حكومى",
-      image: "Governomental.webp",
-      path: "/education/assets/meta/",
-      grades: [
-        {
-          id: "17",
-          grade_no: "Grade-1",
-          name: "Grade-1",
-          name_ar: "اﻷول الابتدائى",
-          image: "Elementary.webp",
-          path: "/education/assets/meta/",
-          school_type_id: "2",
-        },
-        {
-          id: "18",
-          grade_no: "Grade-2",
-          name: "Grade-2",
-          name_ar: "السادس الابتدائى",
-          image: "Elementary.webp",
-          path: "/education/assets/meta/",
-          school_type_id: "2",
-        },
-        {
-          id: "19",
-          grade_no: "Grade-2",
-          name: "Grade-2",
-          name_ar: "اﻵول اﻵعدادي",
-          image: "Elementary.webp",
-          path: "/education/assets/meta/",
-          school_type_id: "2",
-        },
-      ],
-    },
-    {
-      id: "8",
-      name: "IG",
-      name_ar: "اى جى",
-      image: "IG.webp",
-      path: "/education/assets/meta/",
-      grades: [
-        {
-          id: "11",
-          grade_no: "Grade-1",
-          name: "Grade-1",
-          name_ar: "الصف السابع",
-          image: "Elementary.webp",
-          path: "/education/assets/meta/",
-          school_type_id: "8",
-        },
-        {
-          id: "12",
-          grade_no: "Grade-2",
-          name: "Grade-2",
-          name_ar: "الصف الثانى الثانوي",
-          image: "Elementary.webp",
-          path: "/education/assets/meta/",
-          school_type_id: "8",
-        },
-      ],
-    },
-  ];
+  // Fetch data from the API
+  const { data: schoolsData = {}, isLoading, isError } = useGetAllSchoolInformationQuery();
 
-  // State لتتبع نوع المدرسة المختارة
+  // State لتتبع نوع المدرسة والصف المختار
   const [selectedSchoolType, setSelectedSchoolType] = useState(null);
+  const [selectedGrade, setSelectedGrade] = useState(null);
 
   // React Hook Form
   const {
@@ -464,14 +1006,16 @@ const ApplicationSection = () => {
   };
 
   const handleFormSubmit = (data) => {
+    console.log(data);
     const formData = {
       title: data.title,
-      orderNotes: data.orderNotes,
-      // image: uploadImage,
-     schoolType: selectedSchoolType ? selectedSchoolType.id : null, 
-      selectedGrade: data.grade,
+      orderNotes: data.orderNotes, 
+      schoolType: selectedSchoolType ? selectedSchoolType.id : null,
+      selectedGrade: selectedGrade ? selectedGrade.id : null,
+      selectedSubject: data.subject,
     };
-console.log(formData)
+    console.log(formData);
+
     dispatch(addCourse(formData));
     reset();
     setUploadImage(null);
@@ -480,86 +1024,24 @@ console.log(formData)
     }, 500);
   };
 
+  // Loading state
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // Error state
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
+
   return (
     <>
-      <div className="lg:ms-5 h-auto">
+      <div className="lg:ms-5 h-auto ">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
             <p className="block text-2xl lg:text-3xl font-semibold">
               {t("application.addNewCourse")}
             </p>
-
-            {/* Uplaod Image underComment Until add again   */}
-            {/* <span className="text-sm font-medium text-gray-400 my-2">
-              {t("application.uploadThumbnail")}
-            </span> */}
-
-            {/* Image Upload Section */}
-            {/* <div
-              className={`relative border-2 border-dashed rounded-lg p-6 ${
-                errors.image ? "border-red-500" : "border-gray-300"
-              }`}
-            >
-              <div className="flex justify-center w-full flex-col items-center pb-10 relative">
-                <img
-                  src={
-                    uploadImage
-                      ? "/images/correct.svg"
-                      : "/images/Add New Courses.svg"
-                  }
-                  alt=""
-                  className="w-auto absolute cursor-pointer mb-2"
-                />
-
-                <input
-                  id="Upload-Image"
-                  name="image"
-                  type="file"
-                  onChange={handleImageChange}
-                  accept="image/*"
-                  className="cursor-pointer opacity-0 z-20 py-7 mt-24"
-                  required
-                />
-                {!uploadImage && (
-                  <>
-                    <span className="mt-2">
-                      {t("application.dropImage")}{" "}
-                      <span className="text-blue-600">
-                        {t("application.browse")}
-                      </span>
-                    </span>
-                    <span className="text-[#00000078] text-sm">
-                      {t("application.supportedFormats")}
-                    </span>
-                  </>
-                )}
-                {uploadImage && (
-                  <>
-                    <span className="text-emerald-600">
-                      {t("application.uploadSuccess")}{" "}
-                      <IoImage className="inline mx-1" />
-                    </span>
-                    <span className="block text-gray-500 font-semibold">
-                      {uploadImage.name}
-                    </span>
-                    <div
-                      className="bg-red-600 text-white cursor-pointer rounded-md px-1 mt-2 font-semibold"
-                      onClick={() => {
-                        setUploadImage(null);
-                        document.getElementById("Upload-Image").value = "";
-                        setValue("image", null);
-                      }}
-                    >
-                      <span className="mx-1">{t("application.delete")}</span>
-                      <RiCloseFill className="text-2xl inline" />
-                    </div>
-                  </>
-                )}
-              </div>
-              {errors.image && (
-                <p className="text-red-500 text-sm">{errors.image.message}</p>
-              )}
-            </div> */}
           </div>
 
           <div
@@ -575,7 +1057,6 @@ console.log(formData)
                 >
                   {t("application.title")}
                 </label>
-
                 <input
                   type="text"
                   id="title"
@@ -629,14 +1110,16 @@ console.log(formData)
                 <select
                   id="schoolType"
                   className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
-                  onChange={(e) =>
-                    setSelectedSchoolType(
-                      schoolsData.find((school) => school.id === e.target.value)
-                    )
-                  }
+                  onChange={(e) => {
+                    const selectedSchool = schoolsData.data.find(
+                      (school) => school.id === e.target.value
+                    );
+                    setSelectedSchoolType(selectedSchool);
+                    setSelectedGrade(null); // Reset selected grade
+                  }}
                 >
                   <option value="">{t("application.selectSchoolType")}</option>
-                  {schoolsData.map((school) => (
+                  {schoolsData?.data?.map((school) => (
                     <option key={school.id} value={school.id}>
                       {i18n.language === "ar" ? school.name_ar : school.name}
                     </option>
@@ -644,7 +1127,7 @@ console.log(formData)
                 </select>
               </div>
 
-              {/* Grades Dropdown (يظهر فقط عند اختيار نوع المدرسة) */}
+              {/* Grades Dropdown */}
               {selectedSchoolType && (
                 <div>
                   <label
@@ -656,21 +1139,48 @@ console.log(formData)
                   <select
                     id="grade"
                     className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
-                    {...register("grade", {
-                      required: t("application.fieldRequired"),
-                    })}
+                    onChange={(e) => {
+                      const selectedGrade = selectedSchoolType.grades.find(
+                        (grade) => grade.id === e.target.value
+                      );
+                      setSelectedGrade(selectedGrade);
+                    }}
                   >
                     <option value="">{t("application.selectGrade")}</option>
-                    {selectedSchoolType.grades.map((grade) => (
+                    {selectedSchoolType.grades?.map((grade) => (
                       <option key={grade.id} value={grade.id}>
                         {i18n.language === "ar" ? grade.name_ar : grade.name}
                       </option>
                     ))}
                   </select>
-                  {errors.grade && (
-                    <p className="text-red-500 text-sm">
-                      {errors.grade.message}
-                    </p>
+                </div>
+              )}
+
+              {/* Subjects Dropdown */}
+              {selectedGrade && (
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="text-gray-400 font-semibold text-sm lg:text-md"
+                  >
+                    {t("application.selectSubject")}
+                  </label>
+                  <select
+                    id="subject"
+                    className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+                    {...register("subject", {
+                      required: t("application.fieldRequired"),
+                    })}
+                  >
+                    <option value="">{t("application.selectSubject")}</option>
+                    {selectedGrade.subjects?.map((subject) => (
+                      <option key={subject.id} value={subject.id}>
+                        {i18n.language === "ar" ? subject.name_ar : subject.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.subject && (
+                    <p className="text-red-500 text-sm">{errors.subject.message}</p>
                   )}
                 </div>
               )}
@@ -691,12 +1201,6 @@ console.log(formData)
 };
 
 export default ApplicationSection;
-
-
-
-
-
-
 
 
 

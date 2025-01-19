@@ -9,6 +9,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { useGetProfileQuery, useGetProfileTeacherQuery } from "../../../../../Redux/data/dataApiSlice";
 import { useUpdateProfileMutation } from "../../../../../Redux/Auth/authApiSlice";
 import { LoadingComponents } from "../../../../../App";
+import ProfileSkeleton from "../../../../Student/pages/Profile/components/Skeleton/ProfileSkeleton";
 
 export default function Profile() {
   const { t,i18n } = useTranslation();
@@ -61,7 +62,7 @@ const student= data?.data;
 
   
  if(isFetching){
-  return <p>Loading.....</p> ;
+  return <ProfileSkeleton/> ;
  }
 
   return (
