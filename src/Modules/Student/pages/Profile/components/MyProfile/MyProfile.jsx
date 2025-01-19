@@ -183,25 +183,39 @@ const student= data?.data;
 </div>
 }
 
-        {/* Profile Image Upload */}
         <div className="mb-5 flex flex-col sm:flex-row justify-between items-center">
-          <div className="flex items-center gap-4">
-            <label
-              htmlFor="upload"
-              className="flex items-center gap-2 text-primary cursor-pointer font-medium"
-            >
-              <BsFillCameraFill className="text-lg" />
-              {t("profile.uploadPhoto")}
-            </label>
-            <input
-              type="file"
-              id="upload"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => setProfileImage(e.target.files[0])}
+                  {/* Profile Image Upload */}
 
-            />
-          </div>
+                  <div className="flex items-center gap-4">
+  {!profileImage ? (
+    <>
+      <label
+        htmlFor="upload"
+        className="flex items-center gap-2 text-primary cursor-pointer font-medium"
+      >
+        <BsFillCameraFill className="text-lg" />
+        Upload Photo
+      </label>
+      <input
+        type="file"
+        id="upload"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => setProfileImage(e.target.files[0])}
+      />
+    </>
+  ) : (
+    <div className="flex items-center gap-2">
+      <img
+        src={URL.createObjectURL(profileImage)}
+        alt="Profile Preview"
+        className="w-16 h-16 object-cover"
+      />
+    </div>
+  )}
+</div>
+
+          {/* submit  */}
           <div className="flex gap-4 mt-4 sm:mt-0">
             <button
               type="button"
