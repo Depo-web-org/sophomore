@@ -146,7 +146,7 @@ const TeacherUpload = () => {
               } h-52 text-center flex flex-col items-center justify-center p-4 rounded-lg`}
             >
               <img
-                className="w-16 h-16 object-cover"
+                className="w-16 h-16 object-cover rounded-md"
                 src={`https://dev.depowebeg.com/${item.path}/${item.icon}`}
                 alt={item.name}
               />
