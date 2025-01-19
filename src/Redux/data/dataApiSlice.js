@@ -32,9 +32,17 @@ export const dataApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags:['Schools']
     }),
+    getAllSchoolInformation:builder.query({
+      query:()=> ({
+        url:"getSchools.php?grades=true&recursive=true&recursive=true",
+        method: "GET", 
+      }),
+      providesTags:['Grades']
+    }),
+    // https://dev.depowebeg.com/education/api/getSchools.php?grades=true&recursive=true&recursive=true
     // Other data fetching endpoints can go here...
   }),
 });
 
 // Export hooks to use in your components
-export const { useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery} = dataApiSlice;
+export const { useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery , useGetAllSchoolInformationQuery} = dataApiSlice;

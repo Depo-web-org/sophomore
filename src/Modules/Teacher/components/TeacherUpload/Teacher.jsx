@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import TopText from "../Top Text Cards/TopText";
 import { useForm } from "react-hook-form";
@@ -127,104 +127,116 @@ const TeacherUpload = () => {
 
  
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
-      <div className="pt-28 lg:pt-32">
-        <TopText
-          name={t("teacherUpload.welcome", {
-            name: `${getUserInformation.data.first_name}`,
-          })}
-          title={t("teacherUpload.uploadPapers")}
-        />
+    
+<form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
+  <div className="pt-28 lg:pt-32">
+    <TopText
+      name={t("teacherUpload.welcome", { name: `${getUserInformation.data.first_name}` })}
+      title={t("teacherUpload.uploadPapers")}
+    />
 
-        <div className="relative inset-x-0 grid grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 mx-2 sm:mx-10">
-          {cardteacher.map((item, index) => (
-            <div
-              key={item.id}
-              className={`border ${
-                buttonStates[index]?.status === "Uploaded"
-                  ? "border-green-400"
-                  : "border-white"
-              } h-52 text-center flex flex-col items-center justify-center p-4 rounded-lg`}
-            >
-              <img
-                className="w-16 h-16 object-cover rounded-md"
-                src={`https://dev.depowebeg.com/${item.path}/${item.icon}`}
-                alt={item.name}
-              />
-              <div>
-                <p className="sm:w-44 min-h-[70px] text-sm sm:text-base lg:text-lg text-white font-bold py-2">
-                  {t(
-                    `teacherUpload.${item.name.toLowerCase().replace(/ /g, "")}`
-                  )}
-                </p>
-                <label
-                  className={`${
-                    buttonStates[index]?.status === "Uploaded"
-                      ? "bg-green-500"
-                      : "bg-primary"
-                  } hover:bg-blue-800  rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
-                >
-                  {/* condition ro check if document uploaded before or not  */}
-                  {documentProcess === "2" ? (
-                    <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block" />
-                  ) : buttonStates[index]?.status === "Uploaded" ? (
-                    t("teacherUpload.uploaded")
-                  ) : (
-                    t("teacherUpload.upload")
-                  )}
-                  {/* {buttonStates[index]?.status === "Uploaded"
-                    ? t("teacherUpload.uploaded")
-                    : t("teacherUpload.upload") } */}
-                  <input
-                    type="file"
-                    className="hidden"
-                    onChange={(e) => handleFileChange(e, index)}
-                    accept={
-                      item.name === "Intro Video"
-                        ? "video/mp4"
-                        : "application/pdf"
-                    }
-                  />
-                </label>
-              </div>
-            </div>
-          ))}
+    <div className="relative inset-x-0 grid grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 mx-2 sm:mx-10">
+      {cardteacher.map((item, index) => (
+        <div
+          key={item.id}
+          className={`border ${
+            buttonStates[index]?.status === "Uploaded"
+              ? "border-green-400"
+              : "border-white"
+          } h-52 text-center flex flex-col items-center justify-center p-4 rounded-lg`}
+        >
+          <img
+            className="w-16 h-16 object-cover"
+            src={`https://dev.depowebeg.com/${item.path}/${item.icon}`}
+            alt={item.name}
+          />
+          <div>
+            <p className="sm:w-44 min-h-[70px] text-sm sm:text-base lg:text-lg text-white font-bold py-2">
+              {t(`teacherUpload.${item.name.toLowerCase().replace(/ /g, "")}`)}
+            </p>
+            <label
+  className={`${
+    documentProcess === "0"
+      ? "bg-green-500"
+      : documentProcess === "2"
+      ? "bg-orange-500"
+      : "bg-primary"
+  } rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
+>
+  {/* Conditional rendering for documentProcess */}
+  {documentProcess === "1" && "upload to verify"}
+  {documentProcess === "2" && (
+    <>
+      pending verification{" "}
+      <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block" />
+    </>
+  )}
+  {documentProcess === "0" && "verified"}
+  {documentProcess !== "1" &&
+    documentProcess !== "2" &&
+    documentProcess !== "0" &&
+    (buttonStates[index]?.status === "Uploaded"
+      ? t("teacherUpload.uploaded")
+      : t("teacherUpload.upload"))}
+
+  <input
+    type="file"
+    className="hidden"
+    onChange={(e) => handleFileChange(e, index)}
+    accept={
+      item.name === "Intro Video"
+        ? "video/mp4"
+        : "application/pdf"
+    }
+  />
+</label>
+
+          </div>
         </div>
-      </div>
+      ))}
+    </div>
+  </div>
 
-      <div className="relative inset-x-0 text-center py-14">
-        {error ? (
-          <p className="text-red-500 mt-2">
-            {t("teacherUpload.errorUploading")}
-          </p>
-        ) : (
-          <p className="text-lg sm:text-2xl lg:text-3xl text-white font-bold">
-            {t("teacherUpload.waitForApproval")}
-          </p>
-        )}
+  <div className="relative inset-x-0 text-center py-14">
+    {error ? (
+      <p className="text-red-500 mt-2">{t("teacherUpload.errorUploading")}</p>
+    ) : (
+      <p className="text-lg sm:text-2xl lg:text-3xl text-white font-bold">
+        {t("teacherUpload.waitForApproval")}
+      </p>
+    )}
 
-        {documentProcess !== "2" && (
-          <button
-            type="submit"
-            disabled={loading}
-            className="rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+    {documentProcess !== "0" && (
+      <button
+        type="submit"
+        disabled={loading}
+        className="rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+      >
+        {loading ? (
+          <div
+            className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
           >
-            {loading ? (
-              <div
-                className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status"
-              >
-                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                  {t("teacherUpload.loading")}
-                </span>
-              </div>
-            ) : (
-              t("teacherUpload.getStarted")
-            )}
-          </button>
+            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+              {t("teacherUpload.loading")}
+            </span>
+          </div>
+        ) : (
+          "Upload Documents"
         )}
-      </div>
-    </form>
+      </button>
+    )}
+    {documentProcess == "0" && (
+            <Link
+            to={'/teacherpanel'}
+            className="rounded mt-5 inline-block bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+          >
+Lets start
+          </Link>
+    ) }
+  </div>
+</form>
+
   );
 };
 
