@@ -1,7 +1,7 @@
 import { get } from "react-hook-form";
 import { apiSlice } from "../api/apiSclice"; // Import the base apiSlice
 
-export const dataApiSlice = apiSlice.injectEndpoints({
+export const getDataApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query({
       query: () => ({
@@ -45,4 +45,4 @@ export const dataApiSlice = apiSlice.injectEndpoints({
 });
 
 // Export hooks to use in your components
-export const { useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery , useGetAllSchoolInformationQuery} = dataApiSlice;
+export const { useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery , useGetAllSchoolInformationQuery} = getDataApiSlice;
