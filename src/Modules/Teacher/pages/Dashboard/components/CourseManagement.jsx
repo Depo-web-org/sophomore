@@ -3,7 +3,6 @@ import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next"; // Import useTranslation
 import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
-
 export default function CourseManagement({ data }) {
   const { t } = useTranslation(); // Initialize useTranslation
   // const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
@@ -50,47 +49,45 @@ export default function CourseManagement({ data }) {
                   {course.enrollment || 0}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                  {course.status ===1  ?  "Active" :"Not Active"}
+                  {course.status === 1 ? "Active" : "Not Active"}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2  ">
+                  <div className="relative text-primary text-2xl cursor-pointer group ">
+                    <TbEdit />
 
-                  
-                    <div className="relative text-primary text-2xl cursor-pointer group ">
-                      <TbEdit />
-
-                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
-                        <div className="flex flex-col space-y-2 bg-white p-2 rounded-md shadow-lg border border-gray-200">
-                          <Link
-                            to={"courses/chooseunit"}
-                            className="block w-full px-4 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors duration-300"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log("Delete button clicked");
-                            }}
-                            className="block w-full px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300"
-                          >
-                            Delete
-                          </button>
-                          <Link
-                            to={`/teacherPanel/courses/${course.id}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log("Delete button clicked");
-                            }}
-                            className="block w-full px-4 py-2 text-sm text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors duration-300"
-                          >
-                            Add Lesson
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-
-
-
+                    <ul className="hidden absolute left-[-16px]   z-50 bg-white border border-gray-300 w-[130px] rounded-lg group-hover:block">
+                      <li className="flex items-center justify-between px-2 py-1 text-start   text-sm transition-all duration-150   hover:text-base cursor-pointer">
+                        <Link
+                          to={"courses/chooseunit"}
+                          className="block w-full px-4 py-2 text-center text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                        >
+                          Edit
+                        </Link>
+                      </li>
+                      <li className="flex items-center justify-between px-2 py-1 text-start  text-sm transition-all duration-150   hover:text-base cursor-pointer">
+                        <button
+                          onClick={(e) => {
+                            console.log("Delete button clicked");
+                          }}
+                          className="block w-full px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300"
+                        >
+                          Delete
+                        </button>
+                      </li>
+                      <li className="flex items-center justify-between px-2 py-1 text-start border-b text-sm transition-all duration-150   hover:text-base cursor-pointer">
+                        <Link
+                          to={`/teacherPanel/courses/${course.id}`}
+                          onClick={(e) => {
+                            console.log("Delete button clicked");
+                          }}
+                          className="block w-full px-4 py-2 text-sm text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors duration-300"
+                        >
+                          Add Lesson
+                        </Link>
+                      </li>
+                    </ul>
+               
+                  </div>
                 </td>
               </tr>
             ))}
