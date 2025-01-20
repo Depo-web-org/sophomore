@@ -50,7 +50,7 @@ export default function CourseManagement({ data }) {
                   {course.enrollment || 0}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                  {course.status || "Active"}
+                  {course.status ===1  ?  "Active" :"Not Active"}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2  ">
 
