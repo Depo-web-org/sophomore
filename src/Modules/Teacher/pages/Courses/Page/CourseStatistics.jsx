@@ -127,20 +127,7 @@ const RecentlyUploaded = () => {
   const { t, i18n } = useTranslation(); // Initialize useTranslation
   // Array of objects representing course details
   
-  const courses = [
-    {
-      name: "Introduction to math",
-      dob: "Jan 12 , 2024",
-      enrollment: "500",
-      status: "Active",
-    },
-    {
-      name: "Introduction to math",
-      dob: "Jan 12 , 2024",
-      enrollment: "500",
-      status: "Active",
-    },
-  ];
+
 
   return (
     <div className="w-full lg:w -3/5 bg-white rounded-3xl py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
@@ -169,8 +156,8 @@ const RecentlyUploaded = () => {
                   {course.title}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                {timeAgo(course.dateof)}
-                </td>
+              {timeAgo(course.dateof)[i18n.language]} 
+            </td>
               </tr>
             ))}
           </tbody>

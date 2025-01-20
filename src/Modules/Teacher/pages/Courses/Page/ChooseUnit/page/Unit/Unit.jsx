@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUnit } from "../../../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
 import { useTranslation } from "react-i18next";
 import { useAddTeacherCourseContentMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
+import { ImSpinner9 } from "react-icons/im";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -88,26 +89,34 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
       }
   
       // Make the API call
-      const response = await addTeacherCourseContent(formData).unwrap();
-      console.log("Response from backend:", response);
+      const response = await addTeacherCourseContent(formData).unwrap().then((res)=>{
+        console.log("Response from backend:", res);
+        setUploadedVideo(null);
+        setUploadedPDF(null);
+        reset();
+      }).then(()=> naviagte('/teacherPanel'))
+     
   
       // // Clear form and show success message
       // setMessage(t("unit.unitSaved"));
-      setUploadedVideo(null);
-      setUploadedPDF(null);
-      reset();
+     
     } catch (error) {
       console.error("Error submitting form:", error);
       setMessage(t("unit.errorSubmitting")); // Handle error message
     }
   };
+  if(loading) {
+    return(
+      <div className="min-h-screen flex justify-center items-center">
+                    <ImSpinner9 className="animate-spin text-6xl text-secondary" />
+                 
+      </div>
+    )
   
-
+  }
+  
   return (
     <div>
-      {/* الرأس */}
-
-      {/* الجسم */}
       <div className="flex w-full items-start flex-col ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
