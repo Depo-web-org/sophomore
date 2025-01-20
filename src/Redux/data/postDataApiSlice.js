@@ -3,7 +3,7 @@ import { apiSlice } from "../api/apiSclice";
 export const postDataApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
   
-    AddTeacherDocument: builder.mutation({
+    addTeacherDocument: builder.mutation({
       query: (formData) => {
         console.log("updateDocument api slice:", formData); 
         return {
@@ -13,9 +13,31 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    addTeacherCourse: builder.mutation({
+        query: (formData) => {
+          console.log("add course api slice:", formData); 
+          return {
+            url: "addProviderCourse.php", 
+            method: "POST",
+            body: formData, 
+          };
+        },
+      }),
+      addTeacherCourseContent: builder.mutation({
+        query: (formData) => {
+          console.log("add course content api slice:", formData); 
+          return {
+            url: "addProviderCourseContent.php", 
+            method: "POST",
+            body: formData, 
+          };
+        },
+      }),
   }),
 });
 
 export const {
-  useAddTeacherDocumentMutation
+  useAddTeacherDocumentMutation,
+  useAddTeacherCourseMutation,
+  useAddTeacherCourseContentMutation
 } = postDataApiSlice;
