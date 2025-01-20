@@ -1,43 +1,47 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FaSackDollar } from "react-icons/fa6";
 import { HiUserGroup } from "react-icons/hi";
 import { ImBooks } from "react-icons/im";
 
+// Statistic data template (will be dynamically updated based on props)
 export const statisticsData = [
   {
     image: <ImBooks />,
     title: "Total Courses",
     title_ar: "أجمالي الكورسات",
-    stats: 12,
+    stats: 0, // Will be updated dynamically
   },
   {
     image: <HiUserGroup />,
-    title: "Active Users",
-    title_ar: " الطﻻب الناشطين",
-    stats: 34,
+    title: "Active Students",
+    title_ar: "الطلاب الناشطين",
+    stats: 0, // Will be updated dynamically
   },
-  // {
-  //   image: <FaSackDollar />,
-  //   title: "Total Profit",
-  //   title_ar: "Total Courses",
-  //   stats: 56,
-  // },
 ];
 
-export default function Statistics() {
-  const { i18n, t } = useTranslation(); 
+export default function Statistics({ numberOfCourses, numberOfStudents }) {
+  const { i18n, t } = useTranslation();
+
+  // Update the statisticsData array with the props
+  const updatedStatisticsData = statisticsData.map((item) => {
+    if (item.title === "Total Courses") {
+      return { ...item, stats: numberOfCourses || 0 };
+    } else if (item.title === "Active Students") {
+      return { ...item, stats: numberOfStudents || 0 };
+    }
+    return item;
+  });
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-4 w-full ">
-      {statisticsData.map((item, index) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-4 w-full">
+      {updatedStatisticsData.map((item, index) => (
         <StatisticCard
           style={
-            "flex justify-center items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
+            "flex justify-center items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md"
           }
           key={index}
           image={item.image}
-          title={`${  i18n.language==="en"? item.title:item.title_ar }`}
-          
+          title={`${i18n.language === "en" ? item.title : item.title_ar}`}
           stats={item.stats}
         />
       ))}
@@ -48,17 +52,14 @@ export default function Statistics() {
 export function StatisticCard({ image, title, stats, style }) {
   return (
     <div className={`${style}`}>
-      <span  className=" text-5xl lg:text-6xl mb-4 text-primary  inline " >
-      {image}
+      <span className="text-5xl lg:text-6xl mb-4 text-primary inline">
+        {image}
       </span>
-      {/* <img src={image} alt={title} className="w-12 lg:w-14 h-12 lg:h-14 mb-4" /> */}
-      <div className="flex flex-col items-start justify-start ">
-        <p className="text-base lg:text-lg font-medium text-gray-500 group-hover:text-secondary duration-300 transition-all ">
+      <div className="flex flex-col items-start justify-start">
+        <p className="text-base lg:text-lg font-medium text-gray-500 group-hover:text-secondary duration-300 transition-all">
           {title}
         </p>
-        <p className="text-base lg:text-2xl font-bold text-gray-900  ">
-          {stats}
-        </p>
+        <p className="text-base lg:text-2xl font-bold text-gray-900">{stats}</p>
       </div>
     </div>
   );

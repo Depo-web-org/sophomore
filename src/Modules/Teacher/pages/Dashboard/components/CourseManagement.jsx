@@ -2,31 +2,13 @@ import React from "react";
 import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next"; // Import useTranslation
+import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
 
-const courses = [
-  {
-    name: "Introduction to math",
-    dob: "Jan 12 , 2024",
-    enrollment: "500",
-    status: "Active",
-  },
-  {
-    name: "Introduction to math",
-    dob: "Jan 12 , 2024",
-    enrollment: "500",
-    status: "Active",
-  },
-  {
-    name: "Introduction to math",
-    dob: "Jan 12 , 2024",
-    enrollment: "500",
-    status: "Active",
-  },
-];
 
-export default function CourseManagement() {
+export default function CourseManagement({data}) {
   const { t } = useTranslation(); // Initialize useTranslation
-
+  // const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
+ 
   return (
     <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
@@ -56,19 +38,19 @@ export default function CourseManagement() {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            {courses.map((course, index) => (
+            {data?.data.map((course, index) => (
               <tr key={index}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  {course.name}
+                  {course.title}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {course.dob}
+                  {course.dateof.split(' ')[0].split('')}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {course.enrollment}
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                  {course.enrollment|| 0}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                  {course.status}
+                  {course.status || "Active"}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   <Link
