@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useGetProfileTeacherQuery } from "../../../../Redux/data/getDataApiSlice";
 import { useSelector } from "react-redux";
 import { BsHourglassSplit } from "react-icons/bs";
-import { useUpdateDocumentMutation } from "../../../../Redux/data/postDataApiSlice";
+import { useAddTeacherDocumentMutation } from "../../../../Redux/data/postDataApiSlice";
 
 const TeacherUpload = () => {
   const role = useSelector((state) => state.role.role);
@@ -28,7 +28,7 @@ const TeacherUpload = () => {
   const navigate = useNavigate();
   const getUserInformation = JSON.parse(localStorage.getItem("USER"));
   const [updateDocument, { isLoading, isError, error: UpdateEroor }] =
-    useUpdateDocumentMutation();
+  useAddTeacherDocumentMutation();
   // Fetch data from backend on component mount
   useEffect(() => {
     const fetchData = async () => {
