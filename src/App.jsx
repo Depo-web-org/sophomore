@@ -345,6 +345,7 @@ import NotFound from "./Modules/Student/pages/404/NotFound";
 import { useSelector } from "react-redux";
 import EditUnit from "./Modules/Teacher/pages/Courses/Page/EditUnit/Index";
 import EditSpecificUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditSpecificUnit/EditSpecificUnit";
+import EditCourse from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditCourse/EditCourse";
 
 
 export const baseUrl="https://dev.depowebeg.com"
@@ -502,7 +503,8 @@ function AppRoutes() {
 
 
                   {/* Edit Unit */}
-                  <Route path="EditLessons" element={<EditUnit />}>
+    <Route path="EditCourse" element={<EditCourse />}/>
+    <Route path="EditLessons" element={<EditUnit />}>
   <Route path="lesson/:lessonID" element={<ItemsUnit />} />
   <Route path="lessons/:lesson" element={<EditSpecificUnit />} />
   <Route path="unit/:unit/test" element={<Test />} />
