@@ -42,7 +42,10 @@ export const getDataApiSlice = apiSlice.injectEndpoints({
     getTeacherCourses:builder.query({
       query:()=> ({
         url:"getProviderCourses.php",
-        method: "GET", 
+        method: "POST", 
+        body: { 
+          "contents":true
+        }
       }),
       providesTags:['teacherCourses']
     }),
