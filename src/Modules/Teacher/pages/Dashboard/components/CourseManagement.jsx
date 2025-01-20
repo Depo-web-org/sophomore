@@ -10,7 +10,7 @@ export default function CourseManagement({data}) {
   // const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
  
   return (
-    <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4 group hover:shadow-lg">
+    <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4  hover:shadow-lg">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
         {t("courseManagement.title")} {/* Translated title */}
       </p>
@@ -52,12 +52,15 @@ export default function CourseManagement({data}) {
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
                   {course.status || "Active"}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                <td className="whitespace-nowrap px-4 py-2  ">
                   <Link
                     to={"courses/chooseunit"}
-                    className="text-primary text-2xl cursor-pointer"
+                    className="text-primary text-2xl cursor-pointer hover:text-secondary group relative"
                   >
                     <TbEdit />
+                    <div className="absolute h-0 w-0 group-hover:h-full group-hover:w-full group-hover:bg-primary rounded-md start-0 duration-500 transition-all top-0">
+
+        </div>
                   </Link>
                 </td>
               </tr>
