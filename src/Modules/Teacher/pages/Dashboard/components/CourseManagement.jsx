@@ -50,7 +50,7 @@ export default function CourseManagement({ data }) {
                   {course.enrollment || 0}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                  {course.status || "Active"}
+                  {course.status ===1  ?  "Active" :"Not Active"}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2  ">
                   <div className="h-5">
@@ -67,7 +67,7 @@ export default function CourseManagement({ data }) {
                           </Link>
                           <button
                           onClick={( eo) => {  console.log(eo.target);
-                           }}
+                          }}
                             className="block w-full px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300"
                           >
                             Delete
