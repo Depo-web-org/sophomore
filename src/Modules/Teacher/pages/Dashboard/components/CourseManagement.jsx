@@ -9,7 +9,7 @@ export default function CourseManagement({ data }) {
   // const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
 
   return (
-    <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4  hover:shadow-lg">
+    <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4  hover:shadow-lg  ">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
         {t("courseManagement.title")} {/* Translated title */}
       </p>
@@ -37,7 +37,7 @@ export default function CourseManagement({ data }) {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 ">
             {data?.data.map((course, index) => (
               <tr key={index}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -53,8 +53,9 @@ export default function CourseManagement({ data }) {
                   {course.status ===1  ?  "Active" :"Not Active"}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2  ">
-                  <div className="h-5">
-                    <div className="fixed text-primary text-2xl cursor-pointer hover:text-secondary group  ">
+
+                  
+                    <div className="relative text-primary text-2xl cursor-pointer group ">
                       <TbEdit />
 
                       <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
@@ -66,8 +67,10 @@ export default function CourseManagement({ data }) {
                             Edit
                           </Link>
                           <button
-                          onClick={( eo) => {  console.log(eo.target);
-                          }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log("Delete button clicked");
+                            }}
                             className="block w-full px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300"
                           >
                             Delete
@@ -75,7 +78,9 @@ export default function CourseManagement({ data }) {
                         </div>
                       </div>
                     </div>
-                  </div>
+
+
+
                 </td>
               </tr>
             ))}
