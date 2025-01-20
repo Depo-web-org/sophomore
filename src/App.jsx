@@ -502,11 +502,12 @@ function AppRoutes() {
 
 
                   {/* Edit Unit */}
-            <Route path="EditLessons" element={<EditUnit />}>
-              <Route index element={<ItemsUnit />} />
-              <Route path=":unit" element={<EditSpecificUnit />} />
-              <Route path=":unit/test" element={<Test />} />
-            </Route>
+                  <Route path="EditLessons" element={<EditUnit />}>
+  <Route path="lesson/:lessonID" element={<ItemsUnit />} />
+  <Route path="lessons/:lesson" element={<EditSpecificUnit />} />
+  <Route path="unit/:unit/test" element={<Test />} />
+</Route>
+
 
 
 
