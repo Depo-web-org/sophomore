@@ -491,6 +491,11 @@
     "status": "Status",
     "actions": "Actions"
   },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "addLesson": "Add Lesson"
+  },
   "allCourses": {
     "title": "All Course",
     "courseName": "Course Name",

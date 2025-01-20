@@ -2,13 +2,12 @@ import React from "react";
 import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next"; // Import useTranslation
-import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
+
 export default function CourseManagement({ data }) {
   const { t } = useTranslation(); // Initialize useTranslation
-  // const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
 
   return (
-    <div className="w-full lg:w -[80%] bg-white rounded-[20px] py-4  hover:shadow-lg  ">
+    <div className="w-full lg:w-[80%] bg-white rounded-[20px] py-4 hover:shadow-lg">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
         {t("courseManagement.title")} {/* Translated title */}
       </p>
@@ -24,8 +23,7 @@ export default function CourseManagement({ data }) {
                 {t("courseManagement.dob")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                {t("courseManagement.enrollment")}{" "}
-                {/* Translated column header */}
+                {t("courseManagement.enrollment")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
                 {t("courseManagement.status")} {/* Translated column header */}
@@ -36,14 +34,14 @@ export default function CourseManagement({ data }) {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200 ">
+          <tbody className="divide-y divide-gray-200">
             {data?.data.map((course, index) => (
               <tr key={index}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                   {course.title}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {course.dateof.split(" ")[0].split("")}
+                  {course.dateof.split(" ")[0]}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                   {course.enrollment || 0}
@@ -51,42 +49,41 @@ export default function CourseManagement({ data }) {
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
                   {course.status === 1 ? "Active" : "Not Active"}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2  ">
-                  <div className="relative text-primary text-2xl cursor-pointer group ">
+                <td className="whitespace-nowrap px-4 py-2">
+                  <div className="relative text-primary text-2xl cursor-pointer group">
                     <TbEdit />
 
-                    <ul className="hidden absolute left-[-16px]   z-50 bg-white border border-gray-300 w-[130px] rounded-lg group-hover:block">
-                      <li className="flex items-center justify-between px-2 py-1 text-start   text-sm transition-all duration-150   hover:text-base cursor-pointer">
+                    <ul className="hidden absolute -end-0 z-50 bg-white border border-gray-300 w-[130px] rounded-lg group-hover:block">
+                      <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                         <Link
                           to={"courses/chooseunit"}
-                          className="block w-full px-4 py-2 text-center text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors duration-300"
+                          className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
                         >
-                          Edit
+                          {t("actions.edit")} {/* Translated action */}
                         </Link>
                       </li>
-                      <li className="flex items-center justify-between px-2 py-1 text-start  text-sm transition-all duration-150   hover:text-base cursor-pointer">
+                      <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                         <button
                           onClick={(e) => {
                             console.log("Delete button clicked");
                           }}
-                          className="block w-full px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300"
+                          className="block w-full px-4 py-2 text-sm text-white bg-secondary  rounded-md hover:bg-opacity-80 transition-colors duration-300"
                         >
-                          Delete
+                          {t("actions.delete")} {/* Translated action */}
                         </button>
                       </li>
-                      <li className="flex items-center justify-between px-2 py-1 text-start border-b text-sm transition-all duration-150   hover:text-base cursor-pointer">
+                      <li className="flex items-center justify-between px-2 py-1 text-start border-b text-sm transition-all duration-150 hover:text-base cursor-pointer">
                         <Link
                           to={`/teacherPanel/courses/${course.id}`}
                           onClick={(e) => {
                             console.log("Delete button clicked");
                           }}
-                          className="block w-full px-4 py-2 text-sm text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors duration-300"
+                          className="block w-full px-4 py-2 text-sm text-white bg-green-700 rounded-md hover:bg-opacity-80 transition-colors duration-300"
                         >
-                          Add Lesson
+                          {t("actions.addLesson")} {/* Translated action */}
                         </Link>
                       </li>
                     </ul>
-               
                   </div>
                 </td>
               </tr>

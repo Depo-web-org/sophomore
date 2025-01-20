@@ -506,6 +506,11 @@
   "status": "الحالة",
   "actions": "الإجراءات"
 },
+"actions": {
+  "edit": "تعديل",
+  "delete": "حذف",
+  "addLesson": "إضافة درس"
+},
 "allCourses": {
   "title": "جميع الكورسات",
   "courseName": "اسم الكورس",
