@@ -10,7 +10,7 @@ import { ImSpinner9 } from "react-icons/im";
 import useFetch from "../../../../../../Hooks/UseFetch";
 import useChangePassword from "../../../../../../Hooks/UseChangePassword";
 import { useTranslation } from "react-i18next";
-import { useGetProfileQuery } from "../../../../../../Redux/data/dataApiSlice";
+import { useGetProfileQuery } from "../../../../../../Redux/data/getDataApiSlice";
 import { LoadingComponents } from "../../../../../../App";
 import ProfileSkeleton from "../Skeleton/ProfileSkeleton";
 

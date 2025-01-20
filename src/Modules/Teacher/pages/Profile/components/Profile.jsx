@@ -6,7 +6,7 @@ import PhoneInput from "react-phone-number-input/input";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { ImSpinner9 } from "react-icons/im";
-import { useGetProfileQuery, useGetProfileTeacherQuery } from "../../../../../Redux/data/dataApiSlice";
+import { useGetProfileQuery, useGetProfileTeacherQuery } from "../../../../../Redux/data/getDataApiSlice";
 import { useUpdateProfileMutation } from "../../../../../Redux/Auth/authApiSlice";
 import { LoadingComponents } from "../../../../../App";
 import ProfileSkeleton from "../../../../Student/pages/Profile/components/Skeleton/ProfileSkeleton";

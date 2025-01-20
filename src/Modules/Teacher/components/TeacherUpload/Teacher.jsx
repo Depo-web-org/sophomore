@@ -4,10 +4,10 @@ import axios from "axios";
 import TopText from "../Top Text Cards/TopText";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useUpdateDocumentMutation } from "../../../../Redux/Auth/authApiSlice";
-import { useGetProfileTeacherQuery } from "../../../../Redux/data/dataApiSlice";
+import { useGetProfileTeacherQuery } from "../../../../Redux/data/getDataApiSlice";
 import { useSelector } from "react-redux";
 import { BsHourglassSplit } from "react-icons/bs";
+import { useUpdateDocumentMutation } from "../../../../Redux/data/postDataApiSlice";
 
 const TeacherUpload = () => {
   const role = useSelector((state) => state.role.role);

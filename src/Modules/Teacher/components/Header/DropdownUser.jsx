@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useGetProfileTeacherQuery } from "../../../../Redux/data/dataApiSlice";
+import { useGetProfileTeacherQuery } from "../../../../Redux/data/getDataApiSlice";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);

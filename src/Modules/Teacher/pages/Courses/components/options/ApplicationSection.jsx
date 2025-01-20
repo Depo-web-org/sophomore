@@ -972,7 +972,7 @@ import { useDispatch } from "react-redux";
 import { addCourse } from "../../../../../../Redux/TeacherAddCourse/TeacherAddCourse";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/dataApiSlice";
+import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/getDataApiSlice";
 
 const ApplicationSection = () => {
   const { t, i18n } = useTranslation();

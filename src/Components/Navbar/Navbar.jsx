@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInformation } from "../../Redux/ UserInformation/ UserInformationSlice";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
-import { useGetProfileQuery } from "../../Redux/data/dataApiSlice";
+import { useGetProfileQuery } from "../../Redux/data/getDataApiSlice";
 import { baseUrl } from "../../App";
  
 const Navbar = () => {

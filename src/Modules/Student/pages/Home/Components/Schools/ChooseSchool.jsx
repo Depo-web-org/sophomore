@@ -3,7 +3,7 @@ import { SkeletonCard } from "../../../../../../Components/Common/SkeletonCard/S
 import useFetch from "../../../../../../Hooks/UseFetch";
 import { useTranslation } from "react-i18next";
 import { baseUrl } from "../../../../../../App";
-import { useGetSchoolsQuery } from "../../../../../../Redux/data/dataApiSlice";
+import { useGetSchoolsQuery } from "../../../../../../Redux/data/getDataApiSlice";
 
 export default function ChooseSchool() {
   const {data}=useGetSchoolsQuery()

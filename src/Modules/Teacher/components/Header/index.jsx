@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import DropdownUser from "./DropdownUser";
 import Logo from "/images/logos/logo.svg";
-import { useGetProfileQuery } from "../../../../Redux/data/dataApiSlice";
+import { useGetProfileQuery } from "../../../../Redux/data/getDataApiSlice";
 import i18n from "../../../../i18n";
 import { useTranslation } from "react-i18next";
 

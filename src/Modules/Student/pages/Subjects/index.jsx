@@ -5,7 +5,7 @@ import CardInfo from "../../../../Components/Common/CardInfo/CardInfo";
 import { SkeletonCard } from "../../../../Components/Common/SkeletonCard/SkeletonCard";
 import { useTranslation } from "react-i18next";
 import { baseUrl } from "../../../../App";
-import { useGetGradesQuery } from "../../../../Redux/data/dataApiSlice";
+import { useGetGradesQuery } from "../../../../Redux/data/getDataApiSlice";
 
 const subjectImageMap = {
   algebra: '/education/assets/meta/subjects/algebra.webp',
