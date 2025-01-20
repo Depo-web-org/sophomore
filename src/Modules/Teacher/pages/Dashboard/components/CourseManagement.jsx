@@ -75,6 +75,16 @@ export default function CourseManagement({ data }) {
                           >
                             Delete
                           </button>
+                          <Link
+                            to={`/teacherPanel/courses/${course.id}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log("Delete button clicked");
+                            }}
+                            className="block w-full px-4 py-2 text-sm text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors duration-300"
+                          >
+                            Add Lesson
+                          </Link>
                         </div>
                       </div>
                     </div>
