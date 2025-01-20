@@ -12,11 +12,11 @@ import { useGetTeacherCoursesQuery } from '../../../../../../../Redux/data/getDa
 const ItemsUnit = () => {
   const [modelOpen, setModelOpen] = useState()
   const location = useLocation();
-  const {lessonID}= useParams()
+  const {courseID}= useParams()
 
   const {data,isLoading, isFetching, isError}= useGetTeacherCoursesQuery();
 
-  const selectedCourse= data?.data.filter((course)=> course.id===lessonID)[0];
+  const selectedCourse= data?.data.filter((course)=> course.id===courseID)[0];
   console.log(selectedCourse)
   // Log All CourseInfo which added by teacher
   
@@ -37,7 +37,9 @@ const ItemsUnit = () => {
                 key={i+index} 
                 className=" bg-mainGray   text-white h-32  rounded-lg  font-semibold"
               >
-                <Link   to={`/teacherPanel/courses/EditLessons/lessons/${i.title}`}
+                <Link 
+                  state={{ selectedCourse }}
+                  to={`/teacherPanel/courses/EditLessons/lesson/${i.id}`}
  className='h-full w-full flex items-center justify-center'>
                 {i.title}
                 </Link>

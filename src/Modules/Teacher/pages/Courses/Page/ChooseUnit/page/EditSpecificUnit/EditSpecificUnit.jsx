@@ -1,9 +1,12 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import GoBack from "../../../../components/GoBack";
 import { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { RiCloseFill } from "react-icons/ri";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useEditTeacherCourseContentMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
+import { ImSpinner9 } from "react-icons/im";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -14,33 +17,29 @@ function Button({ classButton, events, title, type }) {
     </div>
   );
 }
-const fakeUnitData = {
-  title: "Introduction to Unit One",
-  description: "This unit covers the basics of Mathematics .",
-  video: {
-    name: "UnitVideo.mp4",
-    size: 3250534,
-    type: "video/mp4",
-    link:'https://depowebeg.com/assets/videos/DELIVENDOR.mp4'
-    },
-  pdf:{
-    name: "UnitMartial.pdf",
-    size: 44902,
-    type: "application/pdf",
-    link:'https://www.tutorialspoint.com/javascript/javascript_tutorial.pdf'
-    }
-};
+
 const EditSpecificUnit = () => {
-  const { unit } = useParams();
-  const [uploadedVideo, setUploadedVideo] = useState(fakeUnitData.video);
-  const [uploadedPDF, setUploadedPDF] = useState(fakeUnitData.pdf);
-  const [uploading, setUploading] = useState(false);
+    const { t } = useTranslation();
+  
+  const { lessonId } = useParams();
+  console.log(lessonId)
+  const {state}= useLocation();
+  const selectedLesson=  state.selectedCourse.contents.filter((lesson)=>lesson.id===lessonId)[0];
+
+const navigate= useNavigate();
+  const [uploadedVideo, setUploadedVideo] = useState(selectedLesson.video);
+  const [uploadedPDF, setUploadedPDF] = useState(selectedLesson.pdf);
   const [message, setMessage] = useState("");
+
+  console.log(selectedLesson)
+  const [editTeacherCourseContent ,{isLoading:loading, isError:error}]= useEditTeacherCourseContentMutation()
+  console.log(state)
   // React Hook Form
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -57,48 +56,63 @@ const EditSpecificUnit = () => {
     setValue("pdf", pdf); // Manually set the PDF file in the form state
   };
 
-  // Handle form submission
+
+
   const handleFormSubmit = async (data) => {
     if (!data.video || !data.pdf) {
-      setMessage("Both video and PDF files are required!");
+      setMessage(t("unit.bothFilesRequired"));
       return;
     }
-    const formData = new FormData();
-    formData.append("video", data.video);
-    formData.append("pdf", data.pdf);
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-
-    setUploading(true);
-    setMessage("Uploading...");
-
-    // Example: Send formData to the backend
-    // try {
-    //   const response = await fetch("/api/upload", {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error("Failed to upload files");
-    //   }
-
-    //   const result = await response.json();
-    //   setMessage("Upload successful!");
-    // } catch (error) {
-    //   setMessage(`Error: ${error.message}`);
-    // } finally {
-    //   setUploading(false);
-    // }
+  
+    try {
+      // Create a FormData object
+      const formData = new FormData();
+      formData.append("id", lessonId); // Ensure UploadCourse is defined and has the right value
+      formData.append("title", data.title);
+      formData.append("description", data.description);
+      formData.append("video", uploadedVideo); // Add video file
+      formData.append("pdf", uploadedPDF); // Add PDF file
+  
+      console.log("FormData entries:");
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+  
+      // Make the API call
+      const response = await editTeacherCourseContent(formData).unwrap().then((res)=>{
+        console.log("Response from backend:", res);
+        setUploadedVideo(null);
+        setUploadedPDF(null);
+        reset();
+      }).then(()=> navigate('/teacherPanel'))
+     
+  
+      // // Clear form and show success message
+      // setMessage(t("unit.unitSaved"));
+     
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setMessage(t("unit.errorSubmitting")); // Handle error message
+    }
   };
-
   useEffect(() => {
     // Pre-fill form with fake data
-    setValue("title", fakeUnitData.title);
-    setValue("description", fakeUnitData.description);
-    setValue("video", fakeUnitData.video);
-    setValue("pdf", fakeUnitData.pdf);
+    setValue("title", selectedLesson.title);
+    setValue("description", selectedLesson.description);
+    setValue("video", selectedLesson.video);
   }, [setValue]);
+
+  if(loading) {
+    return(
+      <div className="min-h-screen flex justify-center items-center">
+                    <ImSpinner9 className="animate-spin text-6xl text-secondary" />
+                 
+      </div>
+    )
+  
+  }
+
+
   return (
     <div>
       {/* Head */}
@@ -107,11 +121,13 @@ const EditSpecificUnit = () => {
       <div className="flex w-full items-start flex-col">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
-            <GoBack title={`${"Edit " + unit}`} />
+            {/* <GoBack title={`${"Edit " + unit}`} /> */}
             <div className="flex gap-x-2">
               <div className="flex items-center">
                 <button className="bg-primary hover:bg-secondary text-nowrap py-2 px-2 text-white rounded-md transition-all duration-300">
-                  <Link to={`/teacherpanel/courses/chooseunit/${unit}/test`}>
+                  <Link 
+                  // to={`/teacherpanel/courses/chooseunit/${unit}/test`}
+                  >
                     Add Unit Test
                   </Link>
                 </button>
