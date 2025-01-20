@@ -508,6 +508,7 @@
 },
 "actions": {
   "edit": "تعديل",
+  "editLessons": "تعديل الدروس",
   "delete": "حذف",
   "addLesson": "إضافة درس"
 },

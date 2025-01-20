@@ -63,6 +63,14 @@ export default function CourseManagement({ data }) {
                         </Link>
                       </li>
                       <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
+                        <Link
+                          to={`/teacherPanel/courses/EditLessons/lesson/${course.id}`}
+                          className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
+                        >
+                          {t("actions.editLessons")} {/* Translated action */}
+                        </Link>
+                      </li>
+                      <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                         <button
                           onClick={(e) => {
                             console.log("Delete button clicked");

@@ -493,6 +493,7 @@
   },
   "actions": {
     "edit": "Edit",
+    "editLessons": "Edit Lessons",
     "delete": "Delete",
     "addLesson": "Add Lesson"
   },
