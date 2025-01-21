@@ -12,9 +12,12 @@ import {timeAgo} from "../../../../../Helpers/timeAgo"
 
 export default function CourseStatistics() {
   const { i18n, t } = useTranslation(); // Initialize useTranslation
+    const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
+  
   return (
     <>
-      <div className="grid grid-cols-1 gap-8 gap-y-4 w-full bgred">
+      <div className="grid grid-cols-1 gap-8 gap-y-4 w-full  ">
+
         {statisticsData.map((item, index) => (
           <StatisticCard
             style={
@@ -26,9 +29,10 @@ export default function CourseStatistics() {
             stats={item.stats}
           />
         ))}
+        
       </div>
       <AllCourses />
-      <RecentlyUploaded />
+      <RecentlyUploaded data={data} />
     </>
   );
 }
@@ -52,7 +56,7 @@ const AllCourses = () => {
 
 
   return (
-    <div className="w-full  bg-white rounded-3xl py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
+    <div className="w-full  bg-white rounded-3xl  py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
       <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between pb-4 px-4">
         <p className="text-base md:text-lg lg:text-3xl font-semibold text-start py-4 text-black">
           {t("allCourses.title")} {/* Translated title */}
@@ -103,7 +107,7 @@ const AllCourses = () => {
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   <Link
-                    to={`/teacherPanel/courses/EditLessons/lesson/${course.id}`}
+                    to={`EditLessons/course/${course.id}`}
                     className="text-primary text-2xl cursor-pointer"
                   >
                     <TbEdit />
@@ -118,8 +122,7 @@ const AllCourses = () => {
   );
 };
 
-const RecentlyUploaded = () => {
-  const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
+const RecentlyUploaded = ({data}) => {
   console.log(data?.data)
   const recentCourses= data?.data.slice(0,3)
   console.log(recentCourses)

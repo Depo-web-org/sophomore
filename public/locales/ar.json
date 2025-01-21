@@ -500,6 +500,7 @@
 },
 "courseManagement": {
   "title": "إدارة الكورسات",
+  "empty": "لا توجد كورسات متاحة",
   "name": "الاسم",
   "dob": "تاريخ الإنشاء",
   "enrollment": "عدد المسجلين",
@@ -511,6 +512,12 @@
   "editLessons": "تعديل الدروس",
   "delete": "حذف",
   "addLesson": "إضافة درس"
+},
+"deleteModal": {
+  "title": "حذف الدورة",
+  "description": "هل أنت متأكد أنك تريد حذف هذه الدورة؟ لا يمكن التراجع عن هذا الإجراء.",
+  "confirmButton": "تأكيد",
+  "cancelButton": "إلغاء"
 },
 "allCourses": {
   "title": "جميع الكورسات",

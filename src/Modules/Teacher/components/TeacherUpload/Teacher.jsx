@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import TopText from "../Top Text Cards/TopText";
 import { useForm } from "react-hook-form";
@@ -16,18 +16,17 @@ const TeacherUpload = () => {
     error: dataerror,
     isFetching,
     refetch,
-    isLoading: dataLoading,
+    isLoading
   } = useGetProfileTeacherQuery({ provider: role });
-  const documentProcess = data?.data?.status;
+  const documentStatus = data?.data?.documents || [];
+  const AllDataStatus = data?.data?.status;
+
 
   const { t } = useTranslation();
   const [buttonStates, setButtonStates] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [cardteacher, setCardteacher] = useState([]);
-  const navigate = useNavigate();
   const getUserInformation = JSON.parse(localStorage.getItem("USER"));
-  const [updateDocument, { isLoading, isError, error: UpdateEroor }] =
+  const [updateDocument, {  isError, error: UpdateEroor }] =
   useAddTeacherDocumentMutation();
   // Fetch data from backend on component mount
   useEffect(() => {
@@ -37,16 +36,10 @@ const TeacherUpload = () => {
           "https://dev.depowebeg.com/education/api/getProviderDocumentCategories.php"
         );
         const backendData = response.data.data;
+        console.log(backendData)
 
-        const mappedData = backendData.map((item) => ({
-          id: item.id,
-          name: item.name,
-          path: item.path,
-          icon: item.icon,
-          mandatory: item.mandatory === "1",
-        }));
 
-        setCardteacher(mappedData);
+        setCardteacher(backendData);
       } catch (error) {
         console.error("Error fetching data from backend:", error);
       }
@@ -90,7 +83,6 @@ const TeacherUpload = () => {
 
   const onSubmit = async (data) => {
     try {
-      setLoading(true);
 
       // Loop through each cardteacher item and send the corresponding file
       for (let index = 0; index < cardteacher.length; index++) {
@@ -99,9 +91,9 @@ const TeacherUpload = () => {
 
         if (file) {
           const formData = new FormData();
-          formData.append("document_category", item.id); // Use the item's ID as document_category
-          formData.append("hint", item.hint || ""); // Use hint if available, otherwise empty
-          formData.append("hint_ar", item.hint_ar || ""); // Use hint_ar if available, otherwise empty
+          formData.append("document_category", item.id); 
+          formData.append("hint", item.hint || ""); 
+          formData.append("hint_ar", item.hint_ar || ""); 
           formData.append("document", file);
 
           // Log FormData contents
@@ -113,14 +105,9 @@ const TeacherUpload = () => {
           console.log(`Upload successful for ${item.name}:`, response);
         }
       }
-
-      // Navigate after all files are uploaded
-      // navigate("/teacherPanel");
     } catch (error) {
       console.error("Error uploading files:", error);
-      setError(true);
     } finally {
-      setLoading(false);
       refetch()
     }
   };
@@ -136,7 +123,7 @@ const TeacherUpload = () => {
     />
 
     <div className="relative inset-x-0 grid grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 mx-2 sm:mx-10">
-      {cardteacher.map((item, index) => (
+      {cardteacher?.map((item, index) => (
         <div
           key={item.id}
           className={`border ${
@@ -156,25 +143,25 @@ const TeacherUpload = () => {
             </p>
             <label
   className={`${
-    documentProcess === "0"
+    documentStatus[index]?.verified === "0"
       ? "bg-green-500"
-      : documentProcess === "2"
+      : documentStatus[index]?.verified === "2"
       ? "bg-orange-500"
       : "bg-primary"
   } rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
 >
-  {/* Conditional rendering for documentProcess */}
-  {documentProcess === "1" && "upload to verify"}
-  {documentProcess === "2" && (
+  {/* Conditional rendering for documentProcess[index].verified */}
+  {documentStatus[index]?.verified === "1" && "upload to verify"}
+  {documentStatus[index]?.verified === "2" && (
     <>
       pending verification{" "}
       <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block" />
     </>
   )}
-  {documentProcess === "0" && "verified"}
-  {documentProcess !== "1" &&
-    documentProcess !== "2" &&
-    documentProcess !== "0" &&
+  {documentStatus[index]?.verified === "0" && "verified"}
+  {documentStatus[index]?.verified !== "1" &&
+    documentStatus[index]?.verified !== "2" &&
+    documentStatus[index]?.verified !== "0" &&
     (buttonStates[index]?.status === "Uploaded"
       ? t("teacherUpload.uploaded")
       : t("teacherUpload.upload"))}
@@ -198,7 +185,7 @@ const TeacherUpload = () => {
   </div>
 
   <div className="relative inset-x-0 text-center py-14">
-    {error ? (
+    {dataerror ? (
       <p className="text-red-500 mt-2">{t("teacherUpload.errorUploading")}</p>
     ) : (
       <p className="text-lg sm:text-2xl lg:text-3xl text-white font-bold">
@@ -206,13 +193,13 @@ const TeacherUpload = () => {
       </p>
     )}
 
-    {documentProcess !== "0" && (
+    {AllDataStatus !== "0" && (
       <button
         type="submit"
-        disabled={loading}
+        disabled={isLoading}
         className="rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
       >
-        {loading ? (
+        {isLoading ? (
           <div
             className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
             role="status"
@@ -226,7 +213,7 @@ const TeacherUpload = () => {
         )}
       </button>
     )}
-    {documentProcess == "0" && (
+    {AllDataStatus == "0" && (
             <Link
             to={'/teacherpanel'}
             className="rounded mt-5 inline-block bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
@@ -242,40 +229,3 @@ Lets start
 
 export default TeacherUpload;
 
-// function For Send All 4 Files once but didn't work
-// const onSubmit = async (data) => {
-//   try {
-//     setLoading(true);
-
-//     // إنشاء FormData واحد
-//     const formData = new FormData();
-
-//     // إضافة جميع البيانات إلى FormData
-//     cardteacher.forEach((item, index) => {
-//       const file = buttonStates[index]?.file;
-//       if (file) {
-//         formData.append(`document_category_${index}`, item.id); // إضافة document_category
-//         formData.append(`hint_${index}`, item.hint || ""); // إضافة hint
-//         formData.append(`hint_ar_${index}`, item.hint_ar || ""); // إضافة hint_ar
-//         formData.append(`document_${index}`, file); // إضافة الملف
-//       }
-//     });
-
-//     // Log FormData contents
-//     for (let [key, value] of formData.entries()) {
-//       console.log(key, value);
-//     }
-
-//     // إرسال FormData في طلب واحد
-//     const response = await updateDocument(formData).unwrap();
-//     console.log("Upload successful:", response);
-
-//     // التنقل بعد الانتهاء من التحميل
-//     navigate("/teacherPanel");
-//   } catch (error) {
-//     console.error("Error uploading files:", error);
-//     setError(true);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
