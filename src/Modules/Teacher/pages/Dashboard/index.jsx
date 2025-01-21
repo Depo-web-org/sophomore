@@ -8,7 +8,10 @@ import { useGetTeacherCoursesQuery } from "../../../../Redux/data/getDataApiSlic
 import CourseManagementSkeleton from "../../components/Skeletons/CourseManagementSkeleton";
 
 export default function Dashboard() {
-  const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
+  const {data,isLoading, isFetching,isError,refetch} = useGetTeacherCoursesQuery()
+  useEffect(()=>{
+    refetch()
+  },[])
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col p-4 lg:px-8 justify-start items-start  gap-8">
       <Statistics numberOfCourses={data?.data?.length}  />
