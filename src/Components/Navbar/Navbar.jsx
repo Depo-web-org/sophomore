@@ -41,7 +41,7 @@ const Navbar = () => {
       items.push(
         { text: t("header.menu.my_learning"), link: "/mylearning" },
         { icon: <IoCartOutline />, link: "/cart" },
-        // { icon: <IoHeartOutline />, link: "/wishlist" }
+        { icon: <IoHeartOutline />, link: "/wishlist" }
       );
     } else if (Token && role !== "student") {
       items.push({ text: t("header.menu.dashboard"), link: "/teacherupload" });
