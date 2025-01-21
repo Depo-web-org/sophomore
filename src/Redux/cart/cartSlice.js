@@ -21,7 +21,7 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id, name, image, price, quantity } = action.payload; // {id:p1, name:Cerum, image:"url", price:20}
+      const { id, coursName, image, techerName, grade } = action.payload; // {id:p1, name:Cerum, image:"url", price:20}
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
@@ -30,7 +30,7 @@ const cartSlice = createSlice({
         return;
       } else {
         // Add new item to cart
-        state.items.push({ id, name, image, price, quantity });
+        state.items.push({id, coursName, image, techerName, grade  });
         // toast.success("Item added to cart successfully");
       }
       saveCartToLocalStorage(state.items);
