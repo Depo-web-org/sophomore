@@ -7,16 +7,16 @@ import { Link } from "react-router-dom";
 import { TbEdit } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
-import {timeAgo} from "../../../../../Helpers/timeAgo"
-
+import { timeAgo } from "../../../../../Helpers/timeAgo";
+import Statistics from "../../Dashboard/components/StatisticCard";
 
 export default function CourseStatistics() {
   const { i18n, t } = useTranslation(); // Initialize useTranslation
-    const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
-  
+  const { data, isLoading, isFetching, isError } = useGetTeacherCoursesQuery();
+
   return (
     <>
-      <div className="grid grid-cols-1 gap-8 gap-y-4 w-full  ">
+      {/* <div className="grid grid-cols-1 gap-8 gap-y-4 w-full  ">
 
         {statisticsData.map((item, index) => (
           <StatisticCard
@@ -30,7 +30,9 @@ export default function CourseStatistics() {
           />
         ))}
         
-      </div>
+      </div> */}
+      <Statistics numberOfCourses={data?.data?.length} />
+
       <AllCourses />
       <RecentlyUploaded data={data} />
     </>
@@ -52,11 +54,13 @@ export function UploadCourse({ title, path, width }) {
 const AllCourses = () => {
   const { t, i18n } = useTranslation(); // Initialize useTranslation
 
-  const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
-
+  const { data, isLoading, isFetching, isError } = useGetTeacherCoursesQuery();
 
   return (
-    <div className="w-full  bg-white rounded-3xl  py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
+    <div
+      className="w-full  bg-white rounded-3xl  py-4"
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
+    >
       <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between pb-4 px-4">
         <p className="text-base md:text-lg lg:text-3xl font-semibold text-start py-4 text-black">
           {t("allCourses.title")} {/* Translated title */}
@@ -97,10 +101,10 @@ const AllCourses = () => {
                   {course.title}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {course.dateof.split(' ')[0].split('')}
+                  {course.dateof.split(" ")[0].split("")}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                  {course.enrollment|| 0}
+                  {course.enrollment || 0}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
                   {course.status || "Active"}
@@ -122,18 +126,19 @@ const AllCourses = () => {
   );
 };
 
-const RecentlyUploaded = ({data}) => {
-  console.log(data?.data)
-  const recentCourses= data?.data.slice(0,3)
-  console.log(recentCourses)
+const RecentlyUploaded = ({ data }) => {
+  console.log(data?.data);
+  const recentCourses = data?.data.slice(0, 3);
+  console.log(recentCourses);
 
   const { t, i18n } = useTranslation(); // Initialize useTranslation
   // Array of objects representing course details
-  
-
 
   return (
-    <div className="w-full lg:w -3/5 bg-white rounded-3xl py-4" dir={i18n.language === "ar" ? "rtl" : "ltr"}>
+    <div
+      className="w-full lg:w -3/5 bg-white rounded-3xl py-4"
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
+    >
       <div className="flex justify-between mx-5">
         <p className="text-lg lg:text-[28px] font-semibold text-start py-4 text-black">
           {t("recentlyUploaded.title")} {/* Translated title */}
@@ -144,7 +149,8 @@ const RecentlyUploaded = ({data}) => {
           <thead className="ltr:text-left rtl:text-right">
             <tr>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                {t("recentlyUploaded.courseName")} {/* Translated column header */}
+                {t("recentlyUploaded.courseName")}{" "}
+                {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
                 {t("allCourses.uploadDate")} {/* Translated column header */}
@@ -159,8 +165,8 @@ const RecentlyUploaded = ({data}) => {
                   {course.title}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-green-700">
-              {timeAgo(course.dateof)[i18n.language]} 
-            </td>
+                  {timeAgo(course.dateof)[i18n.language]}
+                </td>
               </tr>
             ))}
           </tbody>

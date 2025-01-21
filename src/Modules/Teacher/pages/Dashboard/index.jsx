@@ -9,6 +9,8 @@ import CourseManagementSkeleton from "../../components/Skeletons/CourseManagemen
 
 export default function Dashboard() {
   const {data,isLoading, isFetching,isError,refetch} = useGetTeacherCoursesQuery()
+ 
+  
   useEffect(()=>{
     refetch()
   },[])
