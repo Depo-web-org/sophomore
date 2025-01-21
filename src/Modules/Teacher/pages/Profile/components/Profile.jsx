@@ -15,13 +15,13 @@ export default function Profile() {
   const { t,i18n } = useTranslation();
 
  const role = useSelector((state) => state.role.role);
-  const provider= role==='teacher'?true:false;
+  const provider= role ==='teacher'? true:false;
   const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileTeacherQuery({provider:role});
 
   const getProfile=async ()=> 
   console.log('data profile:',data?.data)
 const student= data?.data;
-
+console.log(provider)
 
   const [profileImage, setProfileImage] = useState( null);
 
@@ -52,6 +52,7 @@ const student= data?.data;
     
     
       try {
+      
         const response = await updateProfile(formDataToSend).unwrap();
         if (response.code === 0) refetch().then(()=> setProfileImage(null));
       } catch (error) {

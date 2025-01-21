@@ -17,10 +17,12 @@ const EditCourse = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const { EditCourseID } = useParams();
+const [statusOfCourse, setStatusOfCourse] = useState(false)
 
   const { data: schoolsData = {}, isLoading, isError } = useGetTeacherCoursesQuery();
   const [editTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useEditTeacherCourseMutation();
   const { data: ALLschoolsData } = useGetAllSchoolInformationQuery();
+const [isCourseFinished, setIsCourseFinished] = useState(false); 
 
   console.log("ALLschoolsData:", ALLschoolsData?.data);
 
@@ -66,10 +68,8 @@ const EditCourse = () => {
         school: selectedSchoolType,
         grade: selectedGrade,
         subject: selectedSubject,
+        status: isCourseFinished ? 1 : 0, // 1 = finished, 0 = not finished
       };
-
-      console.log("Form Data:", formData);
-
       const response = await editTeacherCourse(formData).unwrap();
       console.log(response);
       if (response.code == 0) {
@@ -96,7 +96,7 @@ const EditCourse = () => {
   }
 
   return (
-    <div className="lg:ms-5 h-auto ">
+    <div className="lg:ms-5 h-auto  ">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
         <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.updateCourse") }/>
@@ -254,6 +254,46 @@ const EditCourse = () => {
               )}
             </div>
           </div>
+
+{/* 
+          <div className=" flex justify-start items-center">
+              <p className="flex  justify-center gap-2">
+                <span className="font-medium "> {t("courseManagement.statusOfAddCourse")}
+                </span>
+                <input type="checkbox" onChange={() => setStatusOfCourse(!statusOfCourse)} />
+              </p>
+            </div> */}
+
+
+<div className="flex justify-start items-start gap-4 flex-col">
+  <label className="flex items-center gap-2">
+    <input
+      type="radio"
+      name="courseStatus"
+      value="notFinished"
+      checked={!isCourseFinished}
+      onChange={() => setIsCourseFinished(false)}
+    />
+    <span className="font-medium">{t("courseManagement.statusOfAddCourse")}</span>
+  </label>
+  <label className="flex items-center gap-2">
+    <input
+      type="radio"
+      name="courseStatus"
+      value="finished"
+      checked={isCourseFinished}
+      onChange={() => setIsCourseFinished(true)}
+    />
+    <span className="font-medium">{t("courseManagement.statusOfCourseFinished")}</span>
+  </label>
+</div>
+
+
+
+
+
+
+
 
           <div className="flex flex-col gap-y-2">
             {errorMessage && (

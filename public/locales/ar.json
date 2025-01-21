@@ -505,7 +505,9 @@
   "dob": "تاريخ الإنشاء",
   "enrollment": "عدد المسجلين",
   "status": "الحالة",
-  "actions": "الإجراءات"
+  "actions": "الإجراءات",
+  "statusOfAddCourse":"لم ينتهي بعد ",
+  "statusOfCourseFinished":" أنتهي "
 },
 "actions": {
   "edit": "تعديل",

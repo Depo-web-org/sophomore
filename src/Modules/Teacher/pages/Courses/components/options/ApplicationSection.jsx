@@ -7,12 +7,13 @@ import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/ge
 import { useAddTeacherCourseMutation } from "../../../../../../Redux/data/postDataApiSlice";
 
 const ApplicationSection = () => {
+  
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage]= useState(null);
-
-
+const [statusOfCourse, setStatusOfCourse] = useState(false)
+const [isCourseFinished, setIsCourseFinished] = useState(false); 
   const { data: schoolsData = {}, isLoading, isError } = useGetAllSchoolInformationQuery();
   const [addTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useAddTeacherCourseMutation();
 
@@ -39,34 +40,32 @@ const ApplicationSection = () => {
     }
   };
 
-// submit function 
-const handleFormSubmit = async (data) => {
-  try {
-    const formData = {
-      title: data.title,
-      notes: data.orderNotes,
-      school: selectedSchoolType ? selectedSchoolType.id : null,
-      grade: selectedGrade ? selectedGrade.id : null,
-      subject: data.subject,
-    };
-    console.log(formData);
-
-    const response = await addTeacherCourse(formData).unwrap();
-    console.log(response);
-    if(response.code==0){
-      reset()
-      navigate(`/teacherPanel/courses/${response.data}`);
+  const handleFormSubmit = async (data) => {
+    try {
+      const formData = {
+        title: data.title,
+        notes: data.orderNotes,
+        school: selectedSchoolType ? selectedSchoolType.id : null,
+        grade: selectedGrade ? selectedGrade.id : null,
+        subject: data.subject,
+        status: isCourseFinished ? 1 : 0, // 1 = finished, 0 = not finished
+      };
+  
+      const response = await addTeacherCourse(formData).unwrap();
+      console.log(response);
+  
+      if (response.code === 0) {
+        reset();
+        navigate(`/teacherPanel/courses/${response.data}`);
+      } else {
+        setErrorMessage(response.data);
+      }
+  
+      setUploadImage(null);
+    } catch (error) {
+      console.error("Error adding course:", error);
     }
-    if(response.code!==0){
-      setErrorMessage(response.data)
-    }
-
-    setUploadImage(null);
-  } catch (error) {
-    console.error("Error adding course:", error);
-  }
-};
-
+  };
 
 
   // Loading state
@@ -230,8 +229,36 @@ const handleFormSubmit = async (data) => {
                 </div>
               )}
             </div>
+
+
+
+            <div className="flex justify-start items-start gap-4 flex-col">
+  <label className="flex items-center gap-2">
+    <input
+      type="radio"
+      name="courseStatus"
+      value="notFinished"
+      checked={!isCourseFinished}
+      onChange={() => setIsCourseFinished(false)}
+    />
+    <span className="font-medium">{t("courseManagement.statusOfAddCourse")}</span>
+  </label>
+  <label className="flex items-center gap-2">
+    <input
+      type="radio"
+      name="courseStatus"
+      value="finished"
+      checked={isCourseFinished}
+      onChange={() => setIsCourseFinished(true)}
+    />
+    <span className="font-medium">{t("courseManagement.statusOfCourseFinished")}</span>
+  </label>
+</div>
+
+
+
+
             <div className=" flex flex-col gap-y-2">
-            
             {errorMessage&& (
                     <p className="text-red-500 text-sm  w-full block">{errorMessage}</p>
                   )}

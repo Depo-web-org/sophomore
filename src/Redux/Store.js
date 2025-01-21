@@ -5,6 +5,7 @@ import { roleUser } from "./RoleSlice/RoleSlice";
 import { AddCourse } from "./TeacherAddCourse/TeacherAddCourse";
 import studentReducer from "./StudentSlices/StudentSlice"; 
 import AddNewCourse from "../Modules/Teacher/pages/Courses/Page/AddNewCourse";
+import courseInformationReducer from './CourseInformationSlice/CourseInformationSlice';
 import wishlistReducer from "./wishlist/wishlistSlice"
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     role: roleUser,
     AddTeacherCourse:AddCourse,
     student: studentReducer,
+    courseInformation: courseInformationReducer,
     wishlist: wishlistReducer,
   },
   middleware: (getDefaultMiddleware) =>
