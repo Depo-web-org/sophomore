@@ -1,25 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useAddTeacherCourseMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
-import { useGetAllSchoolInformationQuery } from "../../../../../../../../Redux/data/getDataApiSlice";
+import {
+  useGetAllSchoolInformationQuery,
+  useGetTeacherCoursesQuery,
+} from "../../../../../../../../Redux/data/getDataApiSlice";
+import { useEditTeacherCourseMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 
 const EditCourse = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage]= useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const { EditCourseID } = useParams();
 
+  const { data: schoolsData = {}, isLoading, isError } = useGetTeacherCoursesQuery();
+  const [editTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useEditTeacherCourseMutation();
+  const { data: ALLschoolsData } = useGetAllSchoolInformationQuery();
 
-  const { data: schoolsData = {}, isLoading, isError } = useGetAllSchoolInformationQuery();
-  const [addTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useAddTeacherCourseMutation();
+  const selectedCourse = schoolsData?.data.filter((id) => id.id === EditCourseID)[0];
 
+  // إدارة الحالة للقوائم المنسدلة
+  const [selectedSchoolType, setSelectedSchoolType] = useState(selectedCourse?.school || "");
+  const [selectedGrade, setSelectedGrade] = useState(selectedCourse?.grade || "");
+  const [selectedSubject, setSelectedSubject] = useState(selectedCourse?.subject || "");
 
-  const [selectedSchoolType, setSelectedSchoolType] = useState(null);
-  const [selectedGrade, setSelectedGrade] = useState(null);
-
+  
   // React Hook Form
   const {
     register,
@@ -28,55 +36,55 @@ const EditCourse = () => {
     setValue,
     formState: { errors },
   } = useForm();
-  const [uploadImage, setUploadImage] = useState(null);
 
-  // Handle image upload
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setUploadImage(file);
-      setValue("image", file);
+ 
+  useEffect(() => {
+    if (selectedCourse) {
+      setValue("title", selectedCourse.title);
+      setValue("orderNotes", selectedCourse.notes);
+      setSelectedSchoolType(selectedCourse.school);
+      setSelectedGrade(selectedCourse.grade);
+      setSelectedSubject(selectedCourse.subject);
+    }
+  }, [selectedCourse, setValue]);
+
+  // submit function
+  const handleFormSubmit = async (data) => {
+    try {
+      const formData = {
+        id: EditCourseID,
+        title: data.title,
+        notes: data.orderNotes,
+        school: selectedSchoolType,  
+        grade: selectedGrade,  
+        subject: selectedSubject,   
+      };
+
+      console.log("ALL DATA : ", formData);
+
+      const response = await editTeacherCourse(formData).unwrap();
+      console.log(response);
+      if (response.code == 0) {
+        reset();
+
+        navigate(`/teacherPanel/courses/${response.data}`);
+      }
+      if (response.code !== 0) {
+        setErrorMessage(response.data);
+      }
+    } catch (error) {
+      console.error("Error adding course:", error);
     }
   };
 
-// submit function 
-const handleFormSubmit = async (data) => {
-  try {
-    const formData = {
-      title: data.title,
-      notes: data.orderNotes,
-      school: selectedSchoolType ? selectedSchoolType.id : null,
-      grade: selectedGrade ? selectedGrade.id : null,
-      subject: data.subject,
-    };
-    console.log(formData);
-
-    const response = await addTeacherCourse(formData).unwrap();
-    console.log(response);
-    if(response.code==0){
-      reset()
-      navigate(`/teacherPanel/courses/${response.data}`);
-    }
-    if(response.code!==0){
-      setErrorMessage(response.data)
-    }
-
-    setUploadImage(null);
-  } catch (error) {
-    console.error("Error adding course:", error);
-  }
-};
-
-
-
-  // Loading state
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
-  // Error state
-  if (isError) {
+  if (isError  ) {
     return <div>Error fetching data</div>;
+  }
+  if (!schoolsData) {
+    return <div>No course found with the provided ID.</div>;
   }
 
   return (
@@ -105,7 +113,10 @@ const handleFormSubmit = async (data) => {
                 <input
                   type="text"
                   id="title"
-                  {...register("title", { required: t("application.titleRequired") })}
+                  defaultValue={selectedCourse.title}
+                  {...register("title", {
+                    required: t("application.titleRequired"),
+                  })}
                   className={`border-2 py-2.5 mt-1 w-full text-gray-600 font-semibold placeholder:font-normal rounded-md shadow-sm sm:text-sm p-2 focus-within:outline-gray-200 bg-[#EFEFEF] ${
                     errors.title ? "border-red-500" : "border-[#EFEFEF]"
                   }`}
@@ -125,6 +136,7 @@ const handleFormSubmit = async (data) => {
                 </label>
                 <textarea
                   id="OrderNotes"
+                  defaultValue={selectedCourse.notes}
                   {...register("orderNotes", {
                     required: t("application.orderNotesRequired"),
                   })}
@@ -155,94 +167,75 @@ const handleFormSubmit = async (data) => {
                 <select
                   id="schoolType"
                   className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
-                  onChange={(e) => {
-                    const selectedSchool = schoolsData.data.find(
-                      (school) => school.id === e.target.value
-                    );
-                    setSelectedSchoolType(selectedSchool);
-                    setSelectedGrade(null); // Reset selected grade
-                  }}
+                  value={selectedSchoolType}
+                  onChange={(e) => setSelectedSchoolType(e.target.value)}
                 >
                   <option value="">{t("application.selectSchoolType")}</option>
-                  {schoolsData?.data?.map((school) => (
-                    <option key={school.id} value={school.id}>
-                      {i18n.language === "ar" ? school.name_ar : school.name}
-                    </option>
-                  ))}
+                  <option value={selectedCourse.school}> {selectedCourse.school}</option>
                 </select>
               </div>
 
               {/* Grades Dropdown */}
-              {selectedSchoolType && (
-                <div>
-                  <label
-                    htmlFor="grade"
-                    className="text-gray-400 font-semibold text-sm lg:text-md"
-                  >
-                    {t("application.selectGrade")}
-                  </label>
-                  <select
-                    id="grade"
-                    className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
-                    onChange={(e) => {
-                      const selectedGrade = selectedSchoolType.grades.find(
-                        (grade) => grade.id === e.target.value
-                      );
-                      setSelectedGrade(selectedGrade);
-                    }}
-                  >
-                    <option value="">{t("application.selectGrade")}</option>
-                    {selectedSchoolType.grades?.map((grade) => (
-                      <option key={grade.id} value={grade.id}>
-                        {i18n.language === "ar" ? grade.name_ar : grade.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
+              <div>
+                <label
+                  htmlFor="grade"
+                  className="text-gray-400 font-semibold text-sm lg:text-md"
+                >
+                  {t("application.selectGrade")}
+                </label>
+                <select
+                  id="grade"
+                  className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+                  value={selectedGrade}
+                  onChange={(e) => setSelectedGrade(e.target.value)}
+                >
+                  <option value="">{t("application.selectGrade")}</option>
+                  <option value={selectedCourse.grade}>{selectedCourse.grade}</option>
+                </select>
+              </div>
 
               {/* Subjects Dropdown */}
-              {selectedGrade && (
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="text-gray-400 font-semibold text-sm lg:text-md"
-                  >
-                    {t("application.selectSubject")}
-                  </label>
-                  <select
-                    id="subject"
-                    className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
-                    {...register("subject", {
-                      required: t("application.fieldRequired"),
-                    })}
-                  >
-                    <option value="">{t("application.selectSubject")}</option>
-                    {selectedGrade.subjects?.map((subject) => (
-                      <option key={subject.id} value={subject.id}>
-                        {i18n.language === "ar" ? subject.name_ar : subject.name}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.subject && (
-                    <p className="text-red-500 text-sm">{errors.subject.message}</p>
-                  )}
-                </div>
-              )}
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="text-gray-400 font-semibold text-sm lg:text-md"
+                >
+                  {t("application.selectSubject")}
+                </label>
+                <select
+                  id="subject"
+                  className="my-2 py-2 w-full rounded-lg text-sm lg:text-md font-medium text-gray-400 border focus:outline-none"
+                  value={selectedSubject}
+                  onChange={(e) => setSelectedSubject(e.target.value)}
+                  {...register("subject", {
+                    required: t("application.fieldRequired"),
+                  })}
+                >
+                  <option value="">{t("application.selectSubject")}</option>
+                  <option value={selectedCourse.subject}>{selectedCourse.subject}</option>
+                </select>
+                {errors.subject && (
+                  <p className="text-red-500 text-sm">
+                    {errors.subject.message}
+                  </p>
+                )}
+              </div>
             </div>
-            <div className=" flex flex-col gap-y-2">
-            
-            {errorMessage&& (
-                    <p className="text-red-500 text-sm  w-full block">{errorMessage}</p>
-                  )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
-            >
-              {t("application.continue")}
-            </button>
+            <div className=" flex flex-col gap-y-2">
+              {errorMessage && (
+                <p className="text-red-500 text-sm  w-full block">
+                  {errorMessage}
+                </p>
+              )}
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+              >
+                {t("application.continue")}
+              </button>
             </div>
           </div>
         </form>
@@ -251,14 +244,6 @@ const handleFormSubmit = async (data) => {
   );
 };
 
+
+
 export default EditCourse;
-
-
-
-
-
-
-
-
-
-

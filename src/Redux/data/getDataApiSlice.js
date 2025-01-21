@@ -46,6 +46,7 @@ export const getDataApiSlice = apiSlice.injectEndpoints({
         body: { 
           "contents":true
         }
+        
       }),
       providesTags:['teacherCourses']
     }),

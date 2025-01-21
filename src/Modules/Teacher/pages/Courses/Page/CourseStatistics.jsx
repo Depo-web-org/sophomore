@@ -107,7 +107,7 @@ const AllCourses = () => {
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   <Link
-                    to={`/teacherPanel/courses/EditLessons/lesson/${course.id}`}
+                    to={`EditLessons/course/${course.id}`}
                     className="text-primary text-2xl cursor-pointer"
                   >
                     <TbEdit />

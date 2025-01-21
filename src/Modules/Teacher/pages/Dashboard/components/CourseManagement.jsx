@@ -56,7 +56,7 @@ export default function CourseManagement({ data }) {
                     <ul className="hidden absolute -end-0 z-50 bg-white border border-gray-300 w-[130px] rounded-lg group-hover:block">
                       <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                         <Link
-                          to={"courses/chooseunit"}
+                          to={`courses/EditCourse/${course.id}`}
                           className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
                         >
                           {t("actions.edit")} {/* Translated action */}
@@ -81,7 +81,7 @@ export default function CourseManagement({ data }) {
                         </button>
                       </li>
                       <li className="flex items-center justify-between px-2 py-1 text-start border-b text-sm transition-all duration-150 hover:text-base cursor-pointer">
-                        <Link
+                        <button
                           to={`/teacherPanel/courses/${course.id}`}
                           onClick={(e) => {
                             console.log("Delete button clicked");
@@ -89,7 +89,7 @@ export default function CourseManagement({ data }) {
                           className="block w-full px-4 py-2 text-sm text-white bg-green-700 rounded-md hover:bg-opacity-80 transition-colors duration-300"
                         >
                           {t("actions.addLesson")} {/* Translated action */}
-                        </Link>
+                        </button>
                       </li>
                     </ul>
                   </div>
