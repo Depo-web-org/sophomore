@@ -5,7 +5,7 @@ import { roleUser } from "./RoleSlice/RoleSlice";
 import { AddCourse } from "./TeacherAddCourse/TeacherAddCourse";
 import studentReducer from "./StudentSlices/StudentSlice"; 
 import AddNewCourse from "../Modules/Teacher/pages/Courses/Page/AddNewCourse";
-
+import courseInformationReducer from './CourseInformationSlice/CourseInformationSlice';
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -13,6 +13,7 @@ export const store = configureStore({
     role: roleUser,
     AddTeacherCourse:AddCourse,
     student: studentReducer,
+    courseInformation: courseInformationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
