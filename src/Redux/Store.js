@@ -5,6 +5,7 @@ import { roleUser } from "./RoleSlice/RoleSlice";
 import { AddCourse } from "./TeacherAddCourse/TeacherAddCourse";
 import studentReducer from "./StudentSlices/StudentSlice"; 
 import AddNewCourse from "../Modules/Teacher/pages/Courses/Page/AddNewCourse";
+import wishlistReducer from "./wishlist/wishlistSlice"
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     role: roleUser,
     AddTeacherCourse:AddCourse,
     student: studentReducer,
+    wishlist: wishlistReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
