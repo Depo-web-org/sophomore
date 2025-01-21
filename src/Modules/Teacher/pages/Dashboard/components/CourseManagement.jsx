@@ -42,7 +42,7 @@ export default function CourseManagement({ data }) {
             {t("courseManagement.empty")}
           </p>
         ) : (
-          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm ">
             <thead className="ltr:text-left rtl:text-right">
               <tr>
                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
@@ -75,8 +75,8 @@ export default function CourseManagement({ data }) {
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                     {course.enrollment || 0}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                    {course.status === 1 ? "Active" : "Not Active"}
+                  <td className={`whitespace-nowrap px-4 py-2 ${course.status === "1" ? "text-emerald-700":"text-red-700" } `}>
+                    {course.status === "1" ?   t("courseManagement.statusOfCourseFinished"):t("courseManagement.statusOfAddCourse")  }
                   </td>
                   <td className="whitespace-nowrap px-4 py-2">
                     <div className="relative text-primary text-2xl cursor-pointer group">
@@ -85,7 +85,7 @@ export default function CourseManagement({ data }) {
 
                       {/* Action Menu */}
                       {openMenuId === course.id && (
-                        <ul className="absolute -end-0 z-[100] bg-white border border-gray-300 w-[130px] rounded-lg">
+                        <ul className="absolute -end-0 z-[100] bg-white border border-gray-300 w-[130px] rounded-lg ">
                           <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                             <Link
                               to={`courses/EditCourse/${course.id}`}

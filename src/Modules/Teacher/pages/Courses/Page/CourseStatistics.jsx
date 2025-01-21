@@ -8,17 +8,26 @@ import { TbEdit } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
 import {timeAgo} from "../../../../../Helpers/timeAgo"
+import SkeletonStaticCard from "../../../../../Components/Common/SkeletonCard/SkeletonStaticCard";
+import CourseManagementSkeleton from "../../../components/Skeletons/CourseManagementSkeleton";
 
 
 export default function CourseStatistics() {
   const { i18n, t } = useTranslation(); // Initialize useTranslation
     const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
-  
+  const updatedStatisticsData = statisticsData.map((item) => {
+     if (item.title === "Total Courses") {
+       return { ...item, stats: data?.data?.length || 0 };
+     } else if (item.title === "Active Students") {
+       return { ...item, stats: 0 };
+     }
+     return item;
+   });
   return (
     <>
       <div className="grid grid-cols-1 gap-8 gap-y-4 w-full  ">
-
-        {statisticsData.map((item, index) => (
+      {
+        isLoading ? <SkeletonStaticCard/> :  updatedStatisticsData.map((item, index) => (
           <StatisticCard
             style={
               "flex justify-start items-center gap-8 bg-white p-3 md:p-8 group hover:shadow-lg rounded-md "
@@ -28,10 +37,14 @@ export default function CourseStatistics() {
             title={`${i18n.language === "en" ? item.title : item.title_ar}`}
             stats={item.stats}
           />
-        ))}
+        ))
         
+      }
+       
       </div>
-      <AllCourses />
+      
+      {  isFetching ? <CourseManagementSkeleton/>  :<AllCourses />}
+      
       <RecentlyUploaded data={data} />
     </>
   );
@@ -102,9 +115,9 @@ const AllCourses = () => {
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                   {course.enrollment|| 0}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                  {course.status || "Active"}
-                </td>
+                <td className={`whitespace-nowrap px-4 py-2 ${course.status === "1" ? "text-emerald-700":"text-red-700" } `}>
+                    {course.status === "1" ?   t("courseManagement.statusOfAddCourse")  :  t("courseManagement.statusOfCourseFinished")}
+                  </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   <Link
                     to={`EditLessons/course/${course.id}`}

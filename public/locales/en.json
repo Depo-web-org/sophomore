@@ -490,7 +490,9 @@
     "dob": "Date of Birth",
     "enrollment": "Enrollment",
     "status": "Status",
-    "actions": "Actions"
+    "actions": "Actions",
+  "statusOfAddCourse":"Not finished yet",
+  "statusOfCourseFinished":" finished "
   },
   "actions": {
     "edit": "Edit",
