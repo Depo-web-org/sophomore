@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useUpdateTeacherCourseContentMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 import {
   useGetAllSchoolInformationQuery,
   useGetTeacherCoursesQuery,
 } from "../../../../../../../../Redux/data/getDataApiSlice";
+import { useEditTeacherCourseMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 
 const EditCourse = () => {
   const { t, i18n } = useTranslation();
@@ -17,7 +17,7 @@ const EditCourse = () => {
   const { EditCourseID } = useParams();
 
   const { data: schoolsData = {}, isLoading, isError } = useGetTeacherCoursesQuery();
-  const [UpdateTeacherCourseContent, { isLoading: courseLoading, isError: courseError }] = useUpdateTeacherCourseContentMutation();
+  const [editTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useEditTeacherCourseMutation();
   const { data: ALLschoolsData } = useGetAllSchoolInformationQuery();
 
   const selectedCourse = schoolsData?.data.filter((id) => id.id === EditCourseID)[0];
@@ -62,7 +62,7 @@ const EditCourse = () => {
 
       console.log("ALL DATA : ", formData);
 
-      const response = await UpdateTeacherCourseContent(formData).unwrap();
+      const response = await editTeacherCourse(formData).unwrap();
       console.log(response);
       if (response.code == 0) {
         reset();
