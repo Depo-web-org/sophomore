@@ -33,6 +33,7 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
           };
         },
       }),
+      
   }),
 });
 
