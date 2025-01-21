@@ -4,12 +4,14 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import SubmitUnitsModel from './components/SubmitUnitsModel';
 import { useSelector } from 'react-redux';
 import { useGetTeacherCoursesQuery } from '../../../../../../../Redux/data/getDataApiSlice';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 
 const ItemsUnit = () => {
+    const { t, i18n } = useTranslation();
   const [modelOpen, setModelOpen] = useState()
   const location = useLocation();
   const {courseID}= useParams()
@@ -23,12 +25,12 @@ const ItemsUnit = () => {
   
   return (
     <>
-      <div className=" w-full">
+      <div className=" w-full bgred ">
 
         
         {/* Head Title */}
         {/* location.pathname.split('/')[3]=== 'editUnit' ? "Edit Units" :"Choose Unit" */}
-        <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :"Choose Lessons"}/>
+        <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.chooseLessons")}/>
 
         <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2  my-8 w-full ">
           {selectedCourse?.contents?.map((i, index) => {

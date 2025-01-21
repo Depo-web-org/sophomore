@@ -88,7 +88,7 @@ export default function CourseManagement({ data }) {
                         <ul className="absolute -end-0 z-[100] bg-white border border-gray-300 w-[130px] rounded-lg">
                           <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                             <Link
-                              to={` courses/EditCourse/${course.id}`}
+                              to={`courses/EditCourse/${course.id}`}
                               className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
                             >
                               {t("actions.edit")}

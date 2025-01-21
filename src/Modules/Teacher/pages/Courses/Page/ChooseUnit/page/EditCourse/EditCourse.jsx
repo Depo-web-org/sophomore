@@ -9,6 +9,7 @@ import {
 } from "../../../../../../../../Redux/data/getDataApiSlice";
 import { useEditTeacherCourseMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 import { LoadingComponents } from "../../../../../../../../App";
+import GoBack from "../../../../components/GoBack";
 
 const EditCourse = () => {
   const { t, i18n } = useTranslation();
@@ -73,7 +74,7 @@ const EditCourse = () => {
       console.log(response);
       if (response.code == 0) {
         reset();
-        navigate(`/teacherPanel/courses/${response.data}`);
+        navigate(`/teacherPanel`);
       } else {
         setErrorMessage(response.data);
       }
@@ -95,12 +96,13 @@ const EditCourse = () => {
   }
 
   return (
-    <div className="lg:ms-5 h-auto">
+    <div className="lg:ms-5 h-auto ">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
-          <p className="block text-2xl lg:text-3xl font-semibold">
-            {t("application.addNewCourse")}
-          </p>
+        <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.updateCourse") }/>
+          {/* <p className="block text-2xl lg:text-3xl font-semibold">
+            {t("actions.updateCourse")}
+          </p> */}
         </div>
 
         <div

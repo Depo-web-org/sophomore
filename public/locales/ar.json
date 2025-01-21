@@ -511,7 +511,9 @@
   "edit": "تعديل",
   "editLessons": "تعديل الدروس",
   "delete": "حذف",
-  "addLesson": "إضافة درس"
+  "addLesson": "إضافة درس",
+  "updateCourse": " تعديل الكورس",
+  "chooseLessons": " اختر الدرس"
 },
 "deleteModal": {
   "title": "حذف الدورة",

@@ -496,7 +496,9 @@
     "edit": "Edit",
     "editLessons": "Edit Lessons",
     "delete": "Delete",
-    "addLesson": "Add Lesson"
+    "addLesson": "Add Lesson",
+    "updateCourse": "Update Course",
+    "chooseLessons": "Choose Lessons"
   },
   "deleteModal": {
     "title": "Delete Course",
