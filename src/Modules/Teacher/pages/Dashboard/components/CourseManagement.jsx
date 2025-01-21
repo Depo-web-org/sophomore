@@ -7,8 +7,9 @@ import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiS
 import { ImSpinner9 } from "react-icons/im";
 
 export default function CourseManagement({ data }) {
-  const [deleteModal, setDeleteModal] = useState(false); // State to control modal visibility
-  const [selectedCourseId, setSelectedCourseId] = useState(null); // State to store the selected course ID for deletion
+  const [deleteModal, setDeleteModal] = useState(false); 
+  const [selectedCourseId, setSelectedCourseId] = useState(null); 
+  const [openMenuId, setOpenMenuId] = useState(null); 
   const { t } = useTranslation();
   const [deleteTeacherCourse, { isLoading, isError }] = useDeleteTeacherCourseMutation();
   const { refetch } = useGetTeacherCoursesQuery();
@@ -21,7 +22,12 @@ export default function CourseManagement({ data }) {
     if (response.code === 0) {
       refetch();
     }
-    setDeleteModal(false); // Close the modal after deletion
+    setDeleteModal(false); 
+  };
+
+  
+  const toggleMenu = (id) => {
+    setOpenMenuId(openMenuId === id ? null : id); 
   };
 
   return (
@@ -30,117 +36,128 @@ export default function CourseManagement({ data }) {
         {t("courseManagement.title")}
       </p>
 
-      <div className="overflow-x-auto px-4">
-      {
-      data?.data.length === 0 ?   <p className="whitespace-nowrap px-4 py-2  text-gray-900 text-center font-bold text-xl  wf">
-      {t("courseManagement.empty")}
-            </p>  :
-             <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-             <thead className="ltr:text-left rtl:text-right">
-               <tr>
-                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                   {t("courseManagement.name")}
-                 </th>
-                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                   {t("courseManagement.dob")}
-                 </th>
-                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                   {t("courseManagement.enrollment")}
-                 </th>
-                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                   {t("courseManagement.status")}
-                 </th>
-                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
-                   {t("courseManagement.actions")}
-                 </th>
-               </tr>
-             </thead>
-      
-            
-             <tbody className="divide-y divide-gray-200">
-               {data?.data.map((course, index) => (
-                 <tr key={index}>
-                   <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                     {course.title}
-                   </td>
-                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                     {course.dateof.split(" ")[0]}
-                   </td>
-                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                     {course.enrollment || 0}
-                   </td>
-                   <td className="whitespace-nowrap px-4 py-2 text-green-700">
-                     {course.status === 1 ? "Active" : "Not Active"}
-                   </td>
-                   <td className="whitespace-nowrap px-4 py-2">
-                     <div className="relative text-primary text-2xl cursor-pointer group">
-                       <TbEdit />
-   
-                       <ul className="hidden absolute -end-0 z-50 bg-white border border-gray-300 w-[130px] rounded-lg group-hover:block">
-                         <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
-                           <Link
-                             to={`courses/EditCourse/${course.id}`}
-                             className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
-                           >
-                             {t("actions.edit")}
-                           </Link>
-                         </li>
-                         <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
-                           <Link
-                             to={`/teacherPanel/courses/EditLessons/lesson/${course.id}`}
-                             className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
-                           >
-                             {t("actions.editLessons")}
-                           </Link>
-                         </li>
-                         <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
-                           <button
-                             onClick={() => {
-                               setSelectedCourseId(course.id); // Set the selected course ID
-                               setDeleteModal(true); // Open the modal
-                             }}
-                             className="block w-full px-4 py-2 text-sm text-white bg-secondary rounded-md hover:bg-opacity-80 transition-colors duration-300"
-                           >
-                             {t("actions.delete")}
-                           </button>
-                         </li>
-                         <li className="flex items-center justify-between px-2 py-1 text-start border-b text-sm transition-all duration-150 hover:text-base cursor-pointer">
-                           <button
-                             onClick={() => {
-                               console.log("Add Lesson button clicked");
-                             }}
-                             className="block w-full px-4 py-2 text-sm text-white bg-green-700 rounded-md hover:bg-opacity-80 transition-colors duration-300"
-                           >
-                             {t("actions.addLesson")}
-                           </button>
-                         </li>
-                       </ul>
-                     </div>
-                   </td>
-                 </tr>
-               ))}
-             </tbody>
-           </table>
-    }
-       
+      <div className="px-4 ">
+        {data?.data.length === 0 ? (
+          <p className="whitespace-nowrap px-4 py-2 text-gray-900 text-center font-bold text-xl wf">
+            {t("courseManagement.empty")}
+          </p>
+        ) : (
+          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead className="ltr:text-left rtl:text-right">
+              <tr>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  {t("courseManagement.name")}
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  {t("courseManagement.dob")}
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  {t("courseManagement.enrollment")}
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  {t("courseManagement.status")}
+                </th>
+                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                  {t("courseManagement.actions")}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody className="divide-y divide-gray-200">
+              {data?.data.map((course, index) => (
+                <tr key={index}>
+                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {course.title}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {course.dateof.split(" ")[0]}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                    {course.enrollment || 0}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-green-700">
+                    {course.status === 1 ? "Active" : "Not Active"}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2">
+                    <div className="relative text-primary text-2xl cursor-pointer group">
+                      {/* Action Icon */}
+                      <TbEdit onClick={() => toggleMenu(course.id)} />
+
+                      {/* Action Menu */}
+                      {openMenuId === course.id && (
+                        <ul className="absolute -end-0 z-[100] bg-white border border-gray-300 w-[130px] rounded-lg">
+                          <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
+                            <Link
+                              to={` courses/EditCourse/${course.id}`}
+                              className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
+                            >
+                              {t("actions.edit")}
+                            </Link>
+                          </li>
+                          <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
+                            <Link
+                              to={`courses/EditLessons/course/${course.id}`}
+                              className="block w-full px-4 py-2 text-center text-sm text-white bg-primary rounded-md hover:bg-opacity-90 transition-colors duration-300"
+                            >
+                              {t("actions.editLessons")}
+                            </Link>
+                          </li>
+                          <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
+                            <button
+                              onClick={() => {
+                                setSelectedCourseId(course.id); // Set the selected course ID
+                                setDeleteModal(true); // Open the modal
+                                setOpenMenuId(null); // Close the menu
+                              }}
+                              className="block w-full px-4 py-2 text-sm text-white bg-secondary rounded-md hover:bg-opacity-80 transition-colors duration-300"
+                            >
+                              {t("actions.delete")}
+                            </button>
+                          </li>
+                          <li className="flex items-center justify-between px-2 py-1 text-start border-b text-sm transition-all duration-150 hover:text-base cursor-pointer">
+                            {/* teacherPanel/courses/50*/}
+                            <Link
+                              to={`/teacherPanel/courses/${course.id}`}
+                              className="block w-full px-4 py-2 text-sm text-white bg-green-700 rounded-md hover:bg-opacity-80 transition-colors duration-300"
+                            >
+                              {t("actions.addLesson")}
+                            </Link>
+
+                            {/* <button
+                              onClick={() => {
+                                console.log("Add Lesson button clicked");
+                                setOpenMenuId(null); // Close the menu
+                              }}
+                              className="block w-full px-4 py-2 text-sm text-white bg-green-700 rounded-md hover:bg-opacity-80 transition-colors duration-300"
+                            >
+                              {t("actions.addLesson")}
+                            </button> */}
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {/* Render the modal conditionally */}
       {deleteModal && (
         <DeleteCourseModal
-        isLoading={isLoading}
+          isLoading={isLoading}
           setDeleteModal={setDeleteModal}
           deleteCourse={() => deleteCourse(selectedCourseId)}
-          t={t} 
+          t={t}
         />
       )}
     </div>
   );
 }
 
-
-const DeleteCourseModal = ({ setDeleteModal, deleteCourse ,t,isLoading}) => {
-
+const DeleteCourseModal = ({ setDeleteModal, deleteCourse, t, isLoading }) => {
   return (
     <div
       onClick={() => setDeleteModal(false)} // Close modal when clicking outside
@@ -168,11 +185,11 @@ const DeleteCourseModal = ({ setDeleteModal, deleteCourse ,t,isLoading}) => {
               type="button"
               className="my-7 w-full inline-flex justify-center items-center rounded-3xl bg-primary text-center px-2 py-2 text-md font-semibold text-white transition-all duration-300"
             >
-                          {isLoading ? (
-                            <ImSpinner9 className="animate-spin text-3xl text-secondary" />
-                          ) : (
-                            t("deleteModal.confirmButton")
-                          )}
+              {isLoading ? (
+                <ImSpinner9 className="animate-spin text-3xl text-secondary" />
+              ) : (
+                t("deleteModal.confirmButton")
+              )}
             </button>
 
             <button
