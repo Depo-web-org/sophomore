@@ -4,6 +4,7 @@ import ModalOops from "./ModalOops";
 import { ModalUnits } from "./ModalUnits";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../../../../Redux/cart/cartSlice";
 
 export default function EnrollCard() {
   const { teacher, subject, course } = useSelector((state) => state.courseInformation); 
@@ -13,21 +14,36 @@ const dispatch=useDispatch()
   const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
   const [isModalUnitsOpen, setIsModalUnitsOpen] = useState(false);
 
+      const cartItems = useSelector((state) => state.cart.items);
+      console.log(cartItems)
+
   const handleButtonClick = () => {
     // setIsModalUnitsOpen(false);
     // setIsModalPackagesOpen(false);
     // setIsModalOopsOpen(true);
-    const CourseInfo={
-      teacherName: `${teacher.first_name} ${teacher.last_name}`,
-      subjectName: subject.name,
-      courseName: course.title,
-      courseId: course.id,
-      courseImage:subject.image,
-      gradeName:subject.grade_data.grade_no,
-      price:50
-    }
-  console.log(CourseInfo)
+
   };
+  const CourseInfo={
+    teacherName: `${teacher?.first_name} ${teacher?.last_name}`,
+    subjectName: subject?.name,
+    courseName: course?.title,
+    id: course?.id,
+    courseImage:teacher?.photo,
+    imagePath:teacher?.path,
+    gradeName:subject?.grade_data?.grade_no,
+    price:50
+  }
+  const handleAddToCart = () => {
+
+
+    dispatch(
+      addToCart(CourseInfo)
+    );
+
+  };
+  const isSelected = cartItems?.some(
+    (item) => item.id === CourseInfo.id );
+    console.log(isSelected)
 
   const handleUnitsPackages = () => {
     setIsModalPackagesOpen(false);
@@ -75,10 +91,12 @@ const dispatch=useDispatch()
                   {t('enroll_now')}
             </button> */}
             <button
-              className="bg-white cursor-pointer text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
-              onClick={handleButtonClick}
+            disabled={isSelected}
+              className="bg-white cursor-pointer disabled:cursor-not-allowed text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
+              onClick={handleAddToCart}
             >
-             {t('add_to_cart')}
+              {isSelected?'already in cart': t('add_to_cart')}
+          
             </button>
           </div>
         </div>
