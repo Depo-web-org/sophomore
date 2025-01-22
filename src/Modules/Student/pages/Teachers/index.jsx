@@ -123,9 +123,7 @@ export function TeacherCard({
 
   return (
     <div className="col-span-3 lg:col-span-4 items-center justify-center rounded-md transition hover:shadow-[4px_4px_0px_0px_#F15C54]">
-       <Link
-            to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.id}`}
-          >
+      
       <div className="group relative block overflow-hidden rounded-md">
         <button
           onClick={handleToggleWishlist}
@@ -146,13 +144,19 @@ export function TeacherCard({
           <h3 className="mt-4 text-center text-sm lg:text-lg font-medium text-gray-900 uppercase">
             {teacher.first_name} {teacher.last_name}
           </h3>
+          <Link
+            to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.id}`}
+          >
             <button className="block w-full mt-4 rounded bg-primary hover:bg-secondary text-white p-2 lg:p-4 text-sm font-medium transition hover:scale-105">
               
               {i18n.language === "ar" ? "عرض" : "View"}
             </button>
+
+
+          </Link>
+
         </div>
       </div>
-          </Link>
     </div>
   );
 }
