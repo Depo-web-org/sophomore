@@ -16,7 +16,13 @@ export const fetchUserInformation = createAsyncThunk(
     }
     try {
       const response = await fetch(
-        "https://os1907.github.io/Schools/Profile/Profile.json"
+        "https://dev.depowebeg.com/education/api/getConsumerProfile.php",{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error("Failed to fetch user information");

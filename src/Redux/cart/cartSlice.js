@@ -1,5 +1,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 // fucntion to load the cart from LS
 const loadCartFromLocalStorage = () => {
@@ -8,8 +9,7 @@ const loadCartFromLocalStorage = () => {
   return savedCart ? JSON.parse(savedCart) : [];
 };
 
-// fucntion to save the cart in LS
-// after every change in the cart you must use this fn to update the LS
+
 const saveCartToLocalStorage = (cartItems) => {
   localStorage.setItem("cart", JSON.stringify(cartItems));
 };
@@ -21,17 +21,17 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id, coursName, image, techerName, grade } = action.payload; // {id:p1, name:Cerum, image:"url", price:20}
+      const { id,subjectName, courseName, courseImage, imagePath, teacherName, gradeName,price } = action.payload; // {id:p1, name:Cerum, courseImage:"url", price:20}
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
-        // toast.warning("Item already in cart!");
+        toast.warning("course already in cart!");
         // if the item in the cart do not add it again just return
         return;
       } else {
         // Add new item to cart
-        state.items.push({id, coursName, image, techerName, grade  });
-        // toast.success("Item added to cart successfully");
+        state.items.push({id,subjectName, courseName, courseImage,imagePath, teacherName, gradeName,price  });
+        toast.success("course added to cart successfully");
       }
       saveCartToLocalStorage(state.items);
     },
@@ -53,12 +53,12 @@ const cartSlice = createSlice({
       const id = action.payload;
       state.items = state.items.filter((item) => item.id !== id);
       saveCartToLocalStorage(state.items);
-    //   toast.success("Item removed from cart successfully");
+      toast.success("course removed from cart successfully");
     },
     clearCart: (state) => {
       state.items = [];
       saveCartToLocalStorage(state.items);
-    //   toast.success("Cart cleared successfully");
+      toast.success("Cart cleared successfully");
     },
   },
 });
@@ -68,8 +68,9 @@ export const { addToCart, adjustQuantity, removeFromCart, clearCart } =
 export default cartSlice.reducer;
 
 // Selector to calculate total
-export const selectTotal = (state) =>
+export const selectTotal = (state) =>{
+  console.log(state.cart.items);
   state.cart.items.reduce(
     (total, item) => total + item.price * item.quantity,
     0
-  );
+  )};

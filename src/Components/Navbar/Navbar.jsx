@@ -10,16 +10,33 @@ import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../../Redux/data/getDataApiSlice";
 import { baseUrl } from "../../App";
+import { selectTotal } from "../../Redux/cart/cartSlice";
  
 const Navbar = () => {
   const { t } = useTranslation(); 
+  const [btnIsBumbed, setBtnIsBumbed] = useState(false);
 
   const dispatch = useDispatch();
   // Get User Information 
+    const cartItemsNum = useSelector((state) => state.cart.items.length);
+    console.log(cartItemsNum)
 
+    useEffect(() => {
+      if (cartItemsNum=== 0) {
+        return;
+      }
+      setBtnIsBumbed(true);
+  
+      const timer = setTimeout(() => {
+        setBtnIsBumbed(false);
+      }, 300);
+  
+      return () => {
+        clearTimeout(timer);
+      };
+    }, [cartItemsNum]);
 
   const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
-    console.log('data profile:',data?.data)
   const student= data?.data;
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,8 +57,9 @@ const Navbar = () => {
       // Add protected items only if authenticated as a student
       items.push(
         { text: t("header.menu.my_learning"), link: "/mylearning" },
+        { icon: <IoHeartOutline />, link: "/wishlist" },
         { icon: <IoCartOutline />, link: "/cart" },
-        { icon: <IoHeartOutline />, link: "/wishlist" }
+       
       );
     } else if (Token && role !== "student") {
       items.push({ text: t("header.menu.dashboard"), link: "/teacherupload" });
@@ -73,10 +91,15 @@ const Navbar = () => {
  };
 
 
+ const handleCartClick = () => {
+  if (!user) {
+    navigate("/auth/login"); // Redirect to login if not authenticated
+  } else {
+    navigate("/cart"); // Go to cart if authenticated
+  }
+};
 
 
-
-console.log(student?.photo )
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
       <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
@@ -109,22 +132,39 @@ console.log(student?.photo )
 
         <div className="hidden md:flex items-center ms-5">
           <div className="w-auto text-white flex items-center gap-[-5px]">
-            <ul className="flex gap-x-4 lg:gap-x-7 font-semibold ">
-              {navItems.map((item, index) => (
-                <li key={index + item.text + item.link}>
-                  <NavLink
-                    to={item.link}
-                    style={{
-                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)",
-                    }}
-                    className="text-white text-sm lg:text-base flex items-center justify-center"
-                  >
-                    <span className="text-base md:text-2xl">{item.icon}</span>
-                    {item.text}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+          <ul className="flex gap-x-4 lg:gap-x-7 font-semibold">
+  {navItems.map((item, index) => (
+    <li key={index + item.text + item.link}>
+      <NavLink
+        to={item.link}
+        style={{
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.75)",
+        }}
+        className="text-white text-sm lg:text-base flex items-center justify-center"
+      >
+        {item.link === "/cart" ? (
+          <button
+            onClick={handleCartClick}
+            className={`flex items-center gap-1 ${btnIsBumbed && "bump"}`}
+          >
+            <div className="relative">
+              <IoCartOutline className="text-2xl sm:text-3xl" />
+              {cartItemsNum !== 0 && (
+                <span className={`font-semibold absolute w-4 h-4 bg-white text-secondary rounded-full text-center text-[10px] sm:text-[11px] leading-[16px] sm:leading-[17px] top-4 right-[-3px]`}>
+                  {cartItemsNum}
+                </span>
+              )}
+            </div>
+          </button>
+        ) : (
+          <span className="text-base md:text-2xl">{item.icon}</span>
+        )}
+        {item.text}
+      </NavLink>
+    </li>
+  ))}
+</ul>
+
             {Token && role === "student" && (
               <Link
                 to={"/profile"}
@@ -137,6 +177,7 @@ console.log(student?.photo )
                 />
               </Link>
             )}
+
 
             {!Token && (
               <button

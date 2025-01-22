@@ -139,6 +139,34 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
                   </p>
                 )}
               </div>
+
+
+              {/* price  */}
+              {/* <div className="my-4">
+                <label
+                  htmlFor="OrderNotes"
+                  className="block text-sm font-medium text-gray-400"
+                >
+                  price
+                </label>
+                <input
+                  type="number"
+                  id="OrderNotes"
+                  {...register("orderNotes", {
+                    required: t("application.orderNotesRequired"),
+                  })}
+                  className={`border-2 mt-2 w-full rounded-lg shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
+                    errors.orderNotes ? "border-red-500" : "border-[#EFEFEF]"
+                  }`}
+                  rows="4"
+                  placeholder={t("application.orderNotesPlaceholder")}
+                ></input>
+                {errors.orderNotes && (
+                  <p className="text-red-500 text-sm">
+                    {errors.orderNotes.message}
+                  </p>
+                )}
+              </div> */}
             </div>
 
             {/* School and Grade Selection */}
