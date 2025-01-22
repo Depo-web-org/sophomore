@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import useFetch from '../../../../Hooks/UseFetch';
 import EmptyCart from './components/EmptyCart'
-import FailedCart from './components/FailedCart'
+import FullCart from './components/fullCart'
 
 const Cart = () => {
   const { data, error, loading } = useFetch(
@@ -9,7 +9,7 @@ const Cart = () => {
   ); 
   return (
     <>
-        { data?.numberOfItems ===0 ? <EmptyCart/> :   <FailedCart info={data}/> }
+        { data?.numberOfItems ===0 ? <EmptyCart/> :   <FullCart info={data}/> }
         {/* <EmptyCart/> */}
         </>
   )

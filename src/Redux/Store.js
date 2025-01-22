@@ -7,6 +7,7 @@ import studentReducer from "./StudentSlices/StudentSlice";
 import AddNewCourse from "../Modules/Teacher/pages/Courses/Page/AddNewCourse";
 import courseInformationReducer from './CourseInformationSlice/CourseInformationSlice';
 import wishlistReducer from "./wishlist/wishlistSlice"
+import cartReducer from"./cart/cartSlice"
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     student: studentReducer,
     courseInformation: courseInformationReducer,
     wishlist: wishlistReducer,
+    cart:cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

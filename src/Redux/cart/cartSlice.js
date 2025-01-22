@@ -8,8 +8,7 @@ const loadCartFromLocalStorage = () => {
   return savedCart ? JSON.parse(savedCart) : [];
 };
 
-// fucntion to save the cart in LS
-// after every change in the cart you must use this fn to update the LS
+
 const saveCartToLocalStorage = (cartItems) => {
   localStorage.setItem("cart", JSON.stringify(cartItems));
 };
@@ -21,7 +20,7 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id, coursName, image, techerName, grade } = action.payload; // {id:p1, name:Cerum, image:"url", price:20}
+      const { id,subjectName, courseName, courseImage, imagePath, teacherName, gradeName,price } = action.payload; // {id:p1, name:Cerum, courseImage:"url", price:20}
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
@@ -30,7 +29,7 @@ const cartSlice = createSlice({
         return;
       } else {
         // Add new item to cart
-        state.items.push({id, coursName, image, techerName, grade  });
+        state.items.push({id,subjectName, courseName, courseImage,imagePath, teacherName, gradeName,price  });
         // toast.success("Item added to cart successfully");
       }
       saveCartToLocalStorage(state.items);
