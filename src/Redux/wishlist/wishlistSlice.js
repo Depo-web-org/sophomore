@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 // Function to load the Wishlist from LocalStorage
 const loadWishlistFromLocalStorage = () => {
@@ -27,6 +28,7 @@ const WishlistSlice = createSlice({
         // Add new item to Wishlist
         state.items.push({ id, subjectID, first_name, grade,gradeAr, subject,subjectAr, path, photo, isSelected });
         saveWishlistToLocalStorage(state.items);
+        toast.success('Teacher added to wishlist!'); 
       }
     },
     removeFromWishlist: (state, action) => {
@@ -35,6 +37,7 @@ const WishlistSlice = createSlice({
         (item) => !(item.id === id && item.subjectID === subjectID)
       );
       saveWishlistToLocalStorage(state.items);
+      toast.error('Teacher removed from wishlist!');
     },
     clearWishlist: (state) => {
       state.items = [];

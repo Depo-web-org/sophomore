@@ -91,8 +91,7 @@ const dispatch=useDispatch()
                   {t('enroll_now')}
             </button>
             <button
-            disabled={isSelected}
-              className="bg-white cursor-pointer disabled:cursor-not-allowed text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
+              className="bg-white cursor-pointer text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
               onClick={handleAddToCart}
             >
               {isSelected?'already in cart': t('add_to_cart')}
