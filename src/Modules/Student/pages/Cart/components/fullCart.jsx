@@ -12,7 +12,7 @@ import {baseUrl} from "../../../../../App"
 
 
 
-const FullCart = ({ info }) => {
+const FullCart = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -23,7 +23,6 @@ const FullCart = ({ info }) => {
     const handleRemoveItem = (id) => {
       dispatch(removeFromCart(id));
     };
-console.log(info)
 console.log(cartItems)
 
 
@@ -75,6 +74,7 @@ console.log(cartItems)
                         {course.price} EGP
                       </span>
                       <button
+
   onClick={() => handleRemoveItem(course.id)}                        className="text-secondary text-2xl md:text-3xl mb-3 cursor-pointer"
                       >
                         <RiDeleteBin6Line />
@@ -90,7 +90,7 @@ console.log(cartItems)
               style="col-span-12 lg:col-span-6 xl:col-span-5 bg-dark rounded-xl shadow-[4px_4px_0px_0px_#536CB3] container w-full md:w-custom-md xl:w-full"
               cartItems={cartItems}
               cartInfo={cartItems}
-              pricesInfo={info}
+              // pricesInfo={info}
               onPay={() => console.log("Pay clicked!")}
               onApply={() => console.log("Apply clicked!")}
             />
