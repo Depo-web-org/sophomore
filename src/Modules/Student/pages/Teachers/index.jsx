@@ -37,11 +37,12 @@ const Teachers = () => {
       );
     }
   };
+  console.log(teachersData)
   return (
     <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
       {/* <Breadcrumbs /> */}
 {
-  teachersData?.length ? <>
+  teachersData ? <>
   <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
         {i18n.language === "ar" ? "أي مدرس تريد ؟" : "  Which Teacher do you want?"}
       </h2>
