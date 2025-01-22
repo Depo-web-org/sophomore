@@ -22,13 +22,24 @@ const [statusOfCourse, setStatusOfCourse] = useState(false)
   const { data: schoolsData = {}, isLoading, isError } = useGetTeacherCoursesQuery();
   const [editTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useEditTeacherCourseMutation();
   const { data: ALLschoolsData } = useGetAllSchoolInformationQuery();
-const [isCourseFinished, setIsCourseFinished] = useState(false); 
-
-  console.log("ALLschoolsData:", ALLschoolsData?.data);
-
+  
   const selectedCourse = schoolsData?.data?.find(
     (course) => course.id === EditCourseID
   );
+  const [isCourseFinished, setIsCourseFinished] = useState(false); 
+
+  useEffect(() => {
+    if (selectedCourse) {
+      if (selectedCourse.status == 1) {
+        setIsCourseFinished(true);
+      } else {
+        setIsCourseFinished(false); 
+      }
+      setStatusOfCourse(true);
+    } else {
+      setStatusOfCourse(false); 
+    }
+  }, [selectedCourse]); // 
   const [selectedSchoolType, setSelectedSchoolType] = useState(
     selectedCourse?.school || ""
   );
@@ -95,7 +106,7 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
     return <div>No course found with the provided ID.</div>;
   }
 
-  return (
+  return ( 
     <div className="lg:ms-5 h-auto  ">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
