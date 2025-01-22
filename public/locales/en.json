@@ -492,7 +492,7 @@
     "status": "Status",
     "actions": "Actions",
   "statusOfAddCourse":"Not finished yet",
-  "statusOfCourseFinished":" finished "
+  "statusOfCourseFinished":" Finished "
   },
   "actions": {
     "edit": "Edit",
