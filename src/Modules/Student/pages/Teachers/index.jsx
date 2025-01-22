@@ -38,7 +38,7 @@ const Teachers = () => {
   };
 
   return (
-    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto">
+    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
       <Breadcrumbs />
       <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
         Which Teacher do you want?
@@ -128,7 +128,7 @@ export function TeacherCard({
             {teacher.first_name}
           </h3>
           <Link
-            to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.name}`}
+            to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.id}`}
           >
             <button className="block w-full mt-4 rounded bg-primary hover:bg-secondary text-white p-2 lg:p-4 text-sm font-medium transition hover:scale-105">
               View

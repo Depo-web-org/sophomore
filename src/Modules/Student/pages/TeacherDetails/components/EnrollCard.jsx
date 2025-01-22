@@ -3,17 +3,30 @@ import ModalPackages from "./ModalPackages";
 import ModalOops from "./ModalOops";
 import { ModalUnits } from "./ModalUnits";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function EnrollCard({course}) {
+export default function EnrollCard() {
+  const { teacher, subject, course } = useSelector((state) => state.courseInformation); 
+const dispatch=useDispatch()
   const { t } = useTranslation();
   const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
   const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
   const [isModalUnitsOpen, setIsModalUnitsOpen] = useState(false);
 
   const handleButtonClick = () => {
-    setIsModalUnitsOpen(false);
-    setIsModalPackagesOpen(false);
-    setIsModalOopsOpen(true);
+    // setIsModalUnitsOpen(false);
+    // setIsModalPackagesOpen(false);
+    // setIsModalOopsOpen(true);
+    const CourseInfo={
+      teacherName: `${teacher.first_name} ${teacher.last_name}`,
+      subjectName: subject.name,
+      courseName: course.title,
+      courseId: course.id,
+      courseImage:subject.image,
+      gradeName:subject.grade_data.grade_no,
+      price:50
+    }
+  console.log(CourseInfo)
   };
 
   const handleUnitsPackages = () => {
@@ -23,6 +36,7 @@ export default function EnrollCard({course}) {
   const handleModalPackages = () => {
     setIsModalPackagesOpen(true);
   };
+  // console.log(teacher, subject, course )
   return (
     <>
       <div className=" w-full md:min-w-[376px]  bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
@@ -70,7 +84,7 @@ export default function EnrollCard({course}) {
         </div>
       </div>
 
-      {isModalOopsOpen && <ModalOops setIsModalOopsOpen={setIsModalOopsOpen} />}
+      {isModalOopsOpen && !localStorage.getItem('Token') && <ModalOops setIsModalOopsOpen={setIsModalOopsOpen} />}
       {isModalPackagesOpen && (
         <ModalPackages
           setIsModalPackagesOpen={setIsModalPackagesOpen}
