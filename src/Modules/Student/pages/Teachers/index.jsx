@@ -12,6 +12,9 @@ const Teachers = () => {
   const { data, isLoading ,isFetching } = useGetSubjectTeachersQuery(subjectName);
   const teachersData = data?.data?.providers;
   const subjectData = data?.data?.subject;
+  const schoolData = data?.data?.subject?.school_data;
+  console.log(schoolData)
+
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.items);
@@ -35,6 +38,7 @@ const Teachers = () => {
           subjectID: subjectData?.id,
           path: teacher?.path,
           photo: teacher?.photo,
+          schoolName:schoolData?.name,
           isSelected: true,
         })
       );
@@ -152,7 +156,7 @@ export function TeacherCard({
             {teacher.first_name} {teacher.last_name}
           </h3>
           <Link
-            to={`/school/${schoolName}/grade/${gradeName}/subject/${subjectName}/teacher/${teacher.id}`}
+            to={`/school/${schoolName||teacher.schoolName}/grade/${gradeName||teacher.grade}/subject/${subjectName||teacher.subjectID}/teacher/${teacher.id}`}
           >
             <button className="block w-full mt-4 rounded bg-primary hover:bg-secondary text-white p-2 lg:p-4 text-sm font-medium transition hover:scale-105">
               

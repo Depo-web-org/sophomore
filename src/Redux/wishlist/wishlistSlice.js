@@ -19,14 +19,14 @@ const WishlistSlice = createSlice({
   },
   reducers: {
     addToWishlist: (state, action) => {
-      const { id, subjectID, first_name, grade,gradeAr, subject,subjectAr, path, photo, isSelected } = action.payload;
+      const { id, subjectID,schoolName, first_name, grade,gradeAr, subject,subjectAr, path, photo, isSelected } = action.payload;
       const existingItem = state.items.find(
         (item) => item.id === id && item.subjectID === subjectID
       );
 
       if (!existingItem) {
         // Add new item to Wishlist
-        state.items.push({ id, subjectID, first_name, grade,gradeAr, subject,subjectAr, path, photo, isSelected });
+        state.items.push({ id, subjectID,schoolName, first_name, grade,gradeAr, subject,subjectAr, path, photo, isSelected });
         saveWishlistToLocalStorage(state.items);
         toast.success('Teacher added to wishlist!'); 
       }

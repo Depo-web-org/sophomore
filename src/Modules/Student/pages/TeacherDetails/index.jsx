@@ -20,6 +20,7 @@ export default function TeacherDetails() {
   const teacher = data?.data?.providers[0];
   const subject = data?.data?.subject;
   const course = data?.data?.course;
+  console.log(teacher)
 
   // Dispatch the Redux action inside useEffect
   useEffect(() => {
