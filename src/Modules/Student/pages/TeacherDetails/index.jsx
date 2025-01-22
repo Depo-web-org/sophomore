@@ -8,6 +8,7 @@ import { setTeacherData } from '../../../../Redux/CourseInformationSlice/CourseI
 import { useParams } from 'react-router-dom';
 import { useGetSubjectTeachersQuery } from "../../../../Redux/data/getDataApiSlice.js";
 import { SkeletonCard } from "../../../../Components/Common/SkeletonCard/SkeletonCard.jsx";
+import SkeletonCourseInfo from "../../../../Components/Common/SkeletonCard/SkeletonCourseInfo.jsx";
 
 export default function TeacherDetails() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function TeacherDetails() {
     }
   }, [data, dispatch, teacher, subject, course]);
   if (isFetching) {
-    return <SkeletonCard/>
+    return <SkeletonCourseInfo/>
   }
   return (
     <div className="min-h-screen w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3 ">
