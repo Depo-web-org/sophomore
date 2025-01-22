@@ -68,12 +68,12 @@ const dispatch=useDispatch()
             </p>
           </div>
           <div className="flex items-center justify-between gap-5 min-w-full">
-            {/* <button
+            <button
               className="buttonHover cursor-pointer text-white rounded-md p-2 w-[120px] md:w-[160px] "
               onClick={handleModalPackages}
             >
                   {t('enroll_now')}
-            </button> */}
+            </button>
             <button
               className="bg-white cursor-pointer text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
               onClick={handleButtonClick}

@@ -145,7 +145,6 @@ export function TeacherCard({
           <h3 className="mt-4 text-center text-sm lg:text-lg font-medium text-gray-900 uppercase">
             {teacher.first_name} {teacher.last_name}
           </h3>
-         
             <button className="block w-full mt-4 rounded bg-primary hover:bg-secondary text-white p-2 lg:p-4 text-sm font-medium transition hover:scale-105">
               
               {i18n.language === "ar" ? "عرض" : "View"}
