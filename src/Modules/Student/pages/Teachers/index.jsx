@@ -15,6 +15,7 @@ const Teachers = () => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.items);
+  console.log(subjectData)
 
   const handleToggleWishlist = (teacher) => {
     const isSelected = wishlist?.some(
@@ -26,9 +27,11 @@ const Teachers = () => {
       dispatch(
         addToWishlist({
           id: teacher.id,
-          first_name: teacher.first_name,
+          first_name: teacher?.first_name,
           grade: subjectData?.grade_data?.grade_no,
+          gradeAr: subjectData?.grade_data?.name_ar,
           subject: subjectData?.name,
+          subjectAr:subjectData?.name_ar,
           subjectID: subjectData?.id,
           path: teacher?.path,
           photo: teacher?.photo,
@@ -60,8 +63,8 @@ const Teachers = () => {
               teacher={teacher}
               name={teacher.first_name}
               subject={subjectData.name}
-              subjectAr={subjectData.name_ar}
-              grade={subjectData.grade_data.grade_no}
+              subjectAr={subjectData?.name_ar}
+              grade={subjectData?.grade_data?.grade_no}
               gradeAr={subjectData.grade_data.name_ar}              
               handleToggleWishlist={() => handleToggleWishlist(teacher)}
               wishlist={wishlist}
@@ -120,6 +123,8 @@ export function TeacherCard({
   const { i18n } = useTranslation();
 
   const { schoolName, gradeName, subjectName } = useParams();
+  console.log(teacher)
+  console.log(wishlist)
 
   return (
     <div className="col-span-3 lg:col-span-4 items-center justify-center rounded-md transition hover:shadow-[4px_4px_0px_0px_#F15C54]">
@@ -138,8 +143,8 @@ export function TeacherCard({
         />
         <div className="relative border border-gray-100 bg-white p-2 lg:p-6">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-700"> {i18n.language === "ar" ? subjectAr : subject}</p>
-            <p className="text-sm text-gray-700">{i18n.language === "ar" ? gradeAr :grade}</p>
+            <p className="text-sm text-gray-700"> {i18n.language === "ar" ? subjectAr|| teacher.subjectAr:teacher.subject||subject} </p>
+            <p className="text-sm text-gray-700"> {i18n.language === "ar" ? gradeAr|| teacher.gradeAr:teacher.grade||grade} </p>
           </div>
           <h3 className="mt-4 text-center text-sm lg:text-lg font-medium text-gray-900 uppercase">
             {teacher.first_name} {teacher.last_name}
