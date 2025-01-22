@@ -148,9 +148,9 @@ const Navbar = () => {
             className={`flex items-center gap-1 ${btnIsBumbed && "bump"}`}
           >
             <div className="relative">
-              <IoCartOutline className="text-2xl sm:text-3xl" />
+              <IoCartOutline className="text-base md:text-2xl" />
               {cartItemsNum !== 0 && (
-                <span className={`font-semibold absolute w-4 h-4 bg-white text-secondary rounded-full text-center text-[10px] sm:text-[11px] leading-[16px] sm:leading-[17px] top-4 right-[-3px]`}>
+                <span className={`font-semibold absolute size-[14px] bg-white text-secondary rounded-full text-center flex items-center justify-center text-xs bottom-4 -right-1`}>
                   {cartItemsNum}
                 </span>
               )}

@@ -13,7 +13,8 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
-        <ToastContainer />
-      </BrowserRouter>
+        <ToastContainer 
+  style={{ top: '100px', right: '20px' }} 
+/>      </BrowserRouter>
     </Provider>
 );
