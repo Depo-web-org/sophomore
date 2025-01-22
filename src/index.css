@@ -13,7 +13,9 @@ body {
   --sb-thumb-color: #536cb3;
   --sb-size: 1px;
 }
-
+.iframe-style {
+  border: none;
+}
 body::-webkit-scrollbar {
   width: var(--sb-size);
 }

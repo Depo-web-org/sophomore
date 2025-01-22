@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const Teachers = () => {
   const { schoolName, gradeName, subjectName } = useParams();
-  const { data, isLoading } = useGetSubjectTeachersQuery(subjectName);
+  const { data, isLoading ,isFetching } = useGetSubjectTeachersQuery(subjectName);
   const teachersData = data?.data?.providers;
   const subjectData = data?.data?.subject;
   const { i18n } = useTranslation();
@@ -37,12 +37,13 @@ const Teachers = () => {
       );
     }
   };
-  console.log(teachersData)
   return (
     <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
-      {/* <Breadcrumbs /> */}
+ 
 {
-  teachersData ? <>
+  isFetching?  <div className="grid grid-cols-3 gap-4 ">
+  <SkeletonCard/>
+  </div>   :  teachersData ? <>
   <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
         {i18n.language === "ar" ? "أي مدرس تريد ؟" : "  Which Teacher do you want?"}
       </h2>
@@ -70,12 +71,13 @@ const Teachers = () => {
           ))
         )}
       </div>
-  </> :<div className="relative   bg-primary p-2 lg:p-6 text-center rounded-md h-32 flex justify-center items-center">
+  </> :<div className="relative   bg-primary p-2 lg:p-6 text-center rounded-md min-h-32 flex justify-center items-center">
         <h3 className="mt-4 text-sm lg:text-lg  text-white font-semibold">
           {i18n.language === "ar"
             ? "لم يتم إضافة معلمين لهذا الكورس بعد ."
             : "No teachers have been added to this course yet ."}
-        </h3>
+        </h3> 
+        
       </div>
 }
       

@@ -105,7 +105,7 @@ const student= data?.data;
               {...register("first_name", {
                 required: "First Name is required",
                 pattern: {
-                  value: /^[a-zA-Z]+$/,
+                  value: /^[\u0600-\u06FF\s]+$/,
                   message: "First Name must contain only letters",
                 },
               })}
@@ -133,7 +133,7 @@ const student= data?.data;
               {...register("last_name", {
                 required: "Last Name is required",
                 pattern: {
-                  value: /^[a-zA-Z]+$/,
+                  value: /^[\u0600-\u06FF\s]+$/,
                   message: "Last Name must contain only letters",
                 },
               })}
