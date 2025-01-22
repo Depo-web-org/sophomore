@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Video() {
   return (
-    <div className="flex justify-between items-start flex-wrap gap-4 lg:gap-8 w-full ">
+    <div className="flex flex-col lg:flex-row justify-between items-start  gap-4 lg:gap-8 w-full ">
       <div className="flex flex-col items-start justify-start gap-2 w-full lg:w-1/2 ">
         <iframe
           src="https://www.youtube.com/embed/OQjkFQAIOck?si=wEdNFopy_U2h5_tD"
