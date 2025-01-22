@@ -563,7 +563,7 @@
     "title": "Title",
     "titlePlaceholder": "Title",
     "titleRequired": "Title is required",
-    "orderNotes": "Order Notes",
+    "orderNotes": "Course Description",
     "orderNotesPlaceholder": "Enter any additional order notes...",
     "orderNotesRequired": "Order notes are required",
     "selectSchoolType": "Select School Type",

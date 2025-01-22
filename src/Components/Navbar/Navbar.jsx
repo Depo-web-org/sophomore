@@ -19,7 +19,6 @@ const Navbar = () => {
 
 
   const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
-    console.log('data profile:',data?.data)
   const student= data?.data;
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,7 +75,6 @@ const Navbar = () => {
 
 
 
-console.log(student?.photo )
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
       <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
