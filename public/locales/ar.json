@@ -586,7 +586,11 @@
     "selectGrade": "اختر الصف",
     "selectSubject": "اختر المادة",
     "fieldRequired": "هذا الحقل مطلوب",
-    "continue": "متابعة"
+    "continue": "متابعة",
+    "priceRequiredLesson":"سعر الدرس مطلوب",
+    "priceRequiredFull": "سعر الكورس كامل",
+    "priceLesson":"سعر الدرس ",
+    "priceFull": "سعر الكورس "
   },
   "unit": {
     "title": "العنوان",

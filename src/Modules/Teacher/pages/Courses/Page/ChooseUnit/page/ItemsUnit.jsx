@@ -21,7 +21,7 @@ const ItemsUnit = () => {
 
   const selectedCourse= data?.data.filter((course)=> course.id===courseID)[0];
 
-  // Log All CourseInfo which added by teacher
+ 
   
   
   return (
