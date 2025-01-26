@@ -346,7 +346,7 @@ import { useSelector } from "react-redux";
 import EditUnit from "./Modules/Teacher/pages/Courses/Page/EditUnit/Index";
 import EditSpecificUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditSpecificUnit/EditSpecificUnit";
 import EditCourse from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditCourse/EditCourse";
-
+import OfflinePage from "./Components/Common/Offline/Offline";
 
 export const baseUrl="https://dev.depowebeg.com"
 
@@ -532,6 +532,7 @@ function AppRoutes() {
           />
         </Route>
         <Route path="*" element={<NotFound />} />
+        <Route path="/offline" element={<OfflinePage />} />
       </Routes>
     </>
   );
@@ -547,19 +548,28 @@ export function LoadingComponents() {
   );
 }
 
+
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
-    const handleResourceLoad = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setLoading(false);
-    };
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
 
-    handleResourceLoad();
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
   }, []);
 
-  return <>{loading ? <LoadingComponents /> : <AppRoutes />}</>;
+  if (!isOnline) {
+    return <OfflinePage />;
+  }
+
+  return <AppRoutes />;
 }
 
 export default App;

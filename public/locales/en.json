@@ -244,7 +244,7 @@
   "course_description": "This course covers the essential concepts of mathematics for Grade 1 students, focusing on basic arithmetic, problem-solving, and logical reasoning through engaging activities and interactive lessons.",
   "duration": "Till the end of semester",
   "session_type": "Recorded Sessions",
-  "enroll_now": "Enroll now",
+  "enroll_now": "Buy Full Course",
   "add_to_cart": "Add to cart",
 
   "Reviews": "One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.",
@@ -529,6 +529,11 @@
     "updateDetails": "Update your photos and personal Details",
     "save": "Save"
  },
+ "offline": {
+  "title": "You are Offline",
+  "message": "It seems like you're not connected to the internet. Please check your connection and try again.",
+  "retryButton": "Retry"
+},
  "changePassword": {
   "success": "Password changed successfully!",
   "successMessage": "Your password has been updated successfully.",
