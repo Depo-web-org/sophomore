@@ -1,109 +1,43 @@
 import { useTranslation } from "react-i18next";
 import LearningCard from "./LearningCard";
-
-const courses = [
-  {
-    name: "Math",
-    grade: "Grade 1",
-    image: "/images/MyLearning/subject1.webp",
-    isFinished: false,
-  },
-  {
-    name: "Science",
-    grade: "Grade 2",
-    image: "/images/MyLearning/subject2.webp",
-    isFinished: true,
-  },
-  {
-    name: "History",
-    grade: "Grade 3",
-    image: "/images/MyLearning/subject3.webp",
-    isFinished: false,
-  },
-  {
-    name: "English",
-    grade: "Grade 4",
-    image: "/images/MyLearning/subject1.webp",
-    isFinished: true,
-  },
-  {
-    name: "Geography",
-    grade: "Grade 5",
-    image: "/images/MyLearning/subject1.webp",
-    isFinished: false,
-  },
-  {
-    name: "Physics",
-    grade: "Grade 6",
-    image: "/images/MyLearning/subject2.webp",
-
-    isFinished: true,
-  },
-  {
-    name: "Chemistry",
-    grade: "Grade 7",
-    image: "/images/MyLearning/subject1.webp",
-    isFinished: false,
-  },
-  {
-    name: "Biology",
-    grade: "Grade 8",
-    image: "/images/MyLearning/subject4.webp",
-    isFinished: true,
-  },
-  {
-    name: "Computer Science",
-    grade: "Grade 9",
-    image: "/images/MyLearning/subject2.webp",
-    isFinished: false,
-  },
-  {
-    name: "Art",
-    grade: "Grade 10",
-    image: "/images/MyLearning/subject3.webp",
-    isFinished: true,
-  },
-];
-
+import { useSelector } from "react-redux";
 
 export default function Courses() {
   const { t } = useTranslation(); // Initialize the translation hook
+  const { data, status, error } = useSelector((state) => state.studentCourses);
+  console.log(data?.data[0].items);
+  const coursesData = data?.data[0]?.items; // Accessing courses data
 
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="w-full flex flex-col gap-4 ">
         <p className="text-2xl font-semibold text-white py-8">
-        {t("courses.not_finished_yet")}
+          {t("courses.not_finished_yet")}
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6  ">
-          {courses
-            .filter((cur) => cur.isFinished === true)
-            .map((course) => (
-              <LearningCard
-                key={course.name}
-                course={course}
-                image={course.image}
-                path={`/mylearning/course/${course.name}`}
-              />
-            ))}
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+          {coursesData?.map((course) => (
+            <LearningCard
+              key={course.id} // Using course.id as key
+              course={course}
+              image={course.course_data_object?.image || "/images/MyLearning/subject1.webp"} // Make sure you adjust this according to the available image data in your coursesData
+              path={`/mylearning/course/${course?.course_data_object.title}`}
+            />
+          ))}
         </div>
       </div>
       <div className="w-full flex flex-col gap-4 py-2 border-t border-gray-500">
         <p className="text-2xl font-semibold text-white py-8">
-          
-        {t("courses.finished_courses")}
+          {t("courses.finished_courses")}
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
-          {courses
-            .filter((cur) => cur.isFinished === false)
-            .map((course) => (
-              <LearningCard
-                key={course.name}
-                course={course}
-                image={course.image}
-                path={`/mylearning/course/${course.name}`}
-              />
-            ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {coursesData?.map((course) => (
+            <LearningCard
+              key={course.id} // Using course.id as key
+              course={course}
+              image={course.course_data?.image || "/images/MyLearning/subject1.webp"} // Make sure you adjust this according to the available image data in your coursesData
+              path={`/mylearning/course/${course.title}`}
+            />
+          ))}
         </div>
       </div>
     </div>
