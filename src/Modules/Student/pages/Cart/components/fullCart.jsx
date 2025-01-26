@@ -23,7 +23,6 @@ const FullCart = () => {
     const handleRemoveItem = (id) => {
       dispatch(removeFromCart(id));
     };
-console.log(cartItems)
 
 
   return (
@@ -66,6 +65,8 @@ console.log(cartItems)
                         <span className="text-gray-300 text-sm sm:text-base">
                           {course.gradeName}
                         </span>
+                        <p className="text-gray-300 text-sm"> <span className="text-secondary text-base">lessons:</span> {course?.enrolledLessons}</p>
+
                       </div>
                     </div>
                     {/* Price and Delete */}
