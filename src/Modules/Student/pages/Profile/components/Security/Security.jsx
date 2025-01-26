@@ -104,14 +104,14 @@ export default function Security() {
           {/* Image */}
 
           <div
-            className={`flex flex-col lg:flex-row justify-center items-center absolute -bottom-[70%] md:-bottom-[60%] mb-5 ${
+            className={`flex flex-col lg:flex-row justify-center items-center absolute -bottom-[70%] md:-bottom-[60%] mb-5  ${
               i18n.language === "en"
-                ? "left-1/2 -translate-x-1/2 xl:translate-x-0  xl:left-[5%]"
+                ? "left-1/2 -translate-x-1/2 lg:translate-x-0  lg:left-[5%]"
                 : "right-1/2 translate-x-1/2 md:right-10   md:translate-x-0"
             }  `}
           >
             <img
-              className="border-2 border-white w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover"
+              className="border-2 border-white size-24 h-24 sm:size-32 rounded-full object-cover"
               src={
                 student?.photo
                   ? `https://dev.depowebeg.com${student?.path}${student?.photo}`
@@ -142,7 +142,7 @@ export default function Security() {
       <form
         // ${i18n.language ===  "ar" ?  "ms-auto" :"m-auto"}
         onSubmit={handleSubmit(onSubmit)}
-        className={`w-full px-4 lg:px-8 lg:w-[70%] min-h-96 ${
+        className={`w-full px-4 lg:px-8  min-h-96 ${
           i18n.language === "ar" ? "me-auto" : ""
         } `}
       >

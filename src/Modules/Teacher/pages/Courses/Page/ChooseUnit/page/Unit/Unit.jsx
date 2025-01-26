@@ -9,6 +9,7 @@ import { setUnit } from "../../../../../../../../Redux/TeacherAddCourse/TeacherA
 import { useTranslation } from "react-i18next";
 import { useAddTeacherCourseContentMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 import { ImSpinner9 } from "react-icons/im";
+import { Modal } from "../EditSpecificUnit/EditSpecificUnit";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -22,29 +23,16 @@ function Button({ classButton, events, title, type }) {
 
 const Unit = () => {
   const naviagte = useNavigate();
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const  {UploadCourse}  = useParams();
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [uploadedPDF, setUploadedPDF] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState(null); // Store form data for submission after confirmation
 
 const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeacherCourseContentMutation();
-  // const dispatch = useDispatch();
-  // const CourseInformation = useSelector((state) => state.AddTeacherCourse);
-
-  // console.log(CourseInformation);
-
-  // useEffect(() => {
-  //   if (
-  //     !CourseInformation.courseNotes ||
-  //     !CourseInformation.schoolType ||
-  //     !CourseInformation.selectedGrade
-  //   ) {
-  //     naviagte("/teacherPanel/courses/addnewcourse");
-  //   }
-  // }, [CourseInformation, naviagte]);
-
   // React Hook Form
   const {
     register,
@@ -68,8 +56,61 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
     setValue("pdf", pdf);
   };
 
+  // const handleFormSubmit = async (data) => {
+  //   if (!data.video || !data.pdf) {
+  //     setMessage(t("unit.bothFilesRequired"));
+  //     return;
+  //   }
+  
+  //   try {
+  //     // Create a FormData object
+  //     const formData = new FormData();
+  //     formData.append("course", UploadCourse); // Ensure UploadCourse is defined and has the right value
+  //     formData.append("title", data.title);
+  //     formData.append("description", data.description);
+  //     formData.append("price", data.LessonPrice);
+  //     formData.append("video", uploadedVideo); // Add video file
+  //     formData.append("pdf", uploadedPDF); // Add PDF file
+  
+  //     console.log("FormData entries:");
+  //     for (let [key, value] of formData.entries()) {
+  //       console.log(`${key}:`, value);
+  //     }
+  
+     
+  //   await addTeacherCourseContent(formData).unwrap().then((res)=>{
+  //       console.log("Response from backend:", res);
+  //       setUploadedVideo(null);
+  //       setUploadedPDF(null);
+  //       reset();
+  //     }).then(()=> naviagte('/teacherPanel'))
+     
+  
+  //     // // Clear form and show success message
+  //     // setMessage(t("unit.unitSaved"));
+     
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //     setMessage(t("unit.errorSubmitting")); // Handle error message
+  //   }
+  // };
+
+
   const handleFormSubmit = async (data) => {
-    if (!data.video || !data.pdf) {
+    if (parseFloat(data.LessonPrice) === 0) {
+      // Open modal for confirmation
+      setIsModalOpen(true);
+      setFormData(data); // Store form data for later submission
+      return;
+    }
+
+    // If price is not 0, submit the form directly
+    submitForm(data);
+  };
+
+
+  const submitForm = async (data) => {
+      if (!data.video || !data.pdf) {
       setMessage(t("unit.bothFilesRequired"));
       return;
     }
@@ -89,8 +130,8 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
         console.log(`${key}:`, value);
       }
   
-      // Make the API call
-      const response = await addTeacherCourseContent(formData).unwrap().then((res)=>{
+     
+    await addTeacherCourseContent(formData).unwrap().then((res)=>{
         console.log("Response from backend:", res);
         setUploadedVideo(null);
         setUploadedPDF(null);
@@ -106,6 +147,18 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
       setMessage(t("unit.errorSubmitting")); // Handle error message
     }
   };
+
+  const handleConfirm = () => {
+    setIsModalOpen(false); // Close the modal
+    if (formData) {
+      submitForm(formData); // Submit the form with the stored data
+    }
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false); // Close the modal
+    setFormData(null); // Clear the stored form data
+  };
+  
   if(loading) {
     return(
       <div className="min-h-screen flex justify-center items-center">
@@ -118,7 +171,15 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
   
   return (
     <div>
-      <div className="flex w-full items-start flex-col  ">
+         <Modal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+        message={t("freeLessonMessage")}
+        i18n={i18n}
+
+      />
+      <div className="flex w-full items-start flex-col   ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
             <GoBack />
@@ -166,11 +227,13 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
 {/* price */}
           <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
               <label htmlFor="LessonPrice" className="block text-sm font-medium text-gray-400">
-                Lesson price
+              {t("labels.lessonPrice")}
+
               </label>
               <input
                 type="number"
                 id="LessonPrice"
+                min={0}
                 {...register("LessonPrice", {
                   required: t("application.priceRequiredLesson"),
                 })}
@@ -208,7 +271,6 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
             )}
           </div>
 
-          {/* تحميل الفيديو */}
           <div className="flex flex-col lg:flex-row justify-between gap-x-8 gap-y-4">
             <div className="w-full">
               <label htmlFor="Upload-Video" className="text-[#00000078] py-4">
@@ -239,7 +301,7 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
                 </div>
               </div>
 
-              {/* عرض الفيديو المحمل */}
+            
               {uploadedVideo && (
                 <div className="w-full h-32 mt-4 flex items-start flex-col">
                   <div className="bg-[#4B5563] relative w-28 h-24 text-white flex items-center justify-center rounded-2xl">

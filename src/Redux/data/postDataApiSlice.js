@@ -62,7 +62,17 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
             body: formData, 
           };
         }
-      })
+      }),
+      deleteTeacherCourseContent: builder.mutation({
+        query:(formData) => {
+          console.log("delete course api slice:", formData); 
+          return {
+            url: "deleteProviderCourseContent.php", 
+            method: "POST",
+            body: formData, 
+          };
+        }
+      }),
   }),
 });
 
@@ -72,5 +82,6 @@ export const {
   useAddTeacherCourseContentMutation,
   useEditTeacherCourseMutation,
   useEditTeacherCourseContentMutation,
-  useDeleteTeacherCourseMutation
+  useDeleteTeacherCourseMutation,
+  useDeleteTeacherCourseContentMutation
 } = postDataApiSlice;

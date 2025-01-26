@@ -45,7 +45,7 @@ const Teachers = () => {
     }
   };
   return (
-    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto  ">
  
 {
   isFetching?  <div className="grid grid-cols-3 gap-4  ">
@@ -62,7 +62,7 @@ const Teachers = () => {
             <SkeletonCard />
           </div>
         ) : (
-          teachersData?.map((teacher) => (
+          [...teachersData].reverse().map((teacher) => (
             <TeacherCard
               key={teacher.id}
               teacher={teacher}

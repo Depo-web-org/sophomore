@@ -234,6 +234,30 @@
     "email": "info@punta.com"
   },
 
+  "freeLessonAlert": {
+    "message":"  لقد قمت بأختيار بأن هذا الدرس سيكون <strong>مجانًا تمامًا</strong>! هذه فرصة فريدة للطلاب لتجربة جودة وعمق تدريسك قبل الالتزام بالدورة الكاملة. دعونا نجعل هذا الدرس جذابًا ومؤثرًا لتحفيزهم على الانضمام لبقية الرحلة. نشكرك على تفانيك!"
+  },
+  "deleteConfirmation": {
+    "message": "هل أنت متأكد أنك تريد حذف هذا الدرس؟"
+  }
+  ,
+  "freeLessonMessage": "هذه الدرس سوف يصبح مجاني. هل أنت متأكد؟!" ,
+  "labels": {
+    "title": "العنوان",
+    "description": "الوصف",
+    "lessonPrice": "سعر الدرس",
+    "uploadVideo": "تحميل الفيديو",
+    "uploadMaterial": "تحميل المادة",
+    "browse": "تصفح",
+    "supportsMp4": "يدعم MP4",
+    "supportsPdf": "يدعم PDF",
+    "submit": "إرسال",
+    "addUnitTest": "إضافة اختبار الوحدة"
+  },
+  "errors": {
+    "required": "هذا الحقل مطلوب."
+  }
+  ,
   "teacherInfos": {
     "name": "عمر جاد",
     "jobTitle": "مدرس رياضيات",

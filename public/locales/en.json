@@ -227,6 +227,29 @@
     "email": "info@punta.com"
   },
 
+  "freeLessonAlert": {
+    "message": "You have chosen to make this lesson <strong>completely free</strong>! This is a unique opportunity for students to experience the quality and depth of your teaching before committing to the full course. Let's make this lesson engaging and impactful to encourage them to join the rest of the journey. Thank you for your dedication!"
+},
+"deleteConfirmation": {
+    "message": "Are you sure you want to delete this lesson?"
+  },
+  "freeLessonMessage": "This Lesson will be free. Are you sure ?!",
+  "labels": {
+    "title": "Title",
+    "description": "Description",
+    "lessonPrice": "Lesson price",
+    "uploadVideo": "Upload Video",
+    "uploadMaterial": "Upload Material",
+    "browse": "Browse",
+    "supportsMp4": "Supports MP4",
+    "supportsPdf": "Supports PDF",
+    "submit": "Submit",
+    "addUnitTest": "Add Unit Test"
+  },
+  "errors": {
+    "required": "This field is required."
+  }
+,
   "teacherInfos": {
     "name": "Omar Gad",
     "jobTitle": "Math Teacher",

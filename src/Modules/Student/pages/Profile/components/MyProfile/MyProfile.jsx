@@ -16,6 +16,11 @@ export default function MyProfile() {
 
 
   const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+
+
+
+
+  
   console.log('data profile:',data?.data)
 const student= data?.data;
 

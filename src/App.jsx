@@ -325,7 +325,7 @@ import Courses from "./Modules/Teacher/pages/Courses/Index";
 import CourseStatistics from "./Modules/Teacher/pages/Courses/Page/CourseStatistics";
 import AddNewCourse from "./Modules/Teacher/pages/Courses/Page/AddNewCourse";
 import ChooseUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/Index";
-import ItemsUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/ItemsUnit";
+import ItemsUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditItemsUnit";
 import Unit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/Unit/Unit";
 import Test from "./Modules/Teacher/pages/Courses/Page/Test";
 import Students from "./Modules/Teacher/pages/Students/index";

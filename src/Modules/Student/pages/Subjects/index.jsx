@@ -44,7 +44,7 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-4">
         { 
   Subjects && Subjects.length > 0 ? (
-    Subjects.map((subject, index) => {
+    [...Subjects].reverse().map((subject, index) => {
 
       // Get the image path based on the subject name (convert to lowercase for consistency)
       const imagePath = subjectImageMap[subject.name.toLowerCase()] || '/education/assets/meta/subjects/default.webp';
@@ -61,7 +61,7 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
                 className="h-32 w-full sm:h-full object-cover group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
               />
               <h4
-                className="absolute bottom-[5%] left-[5%] text-nowrap text-sm sm:text-xl xl:text-2xl font-bold text-white group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:left-1/2 group-hover:-translate-x-1/2 duration-300 transition-all"
+                className="absolute uppercase bottom-[5%] left-[5%] text-nowrap text-sm sm:text-xl xl:text-2xl font-bold text-white group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:left-1/2 group-hover:-translate-x-1/2 duration-300 transition-all"
               >
                 {i18n.language === "ar" ? subject.name_ar : subject.name.toLowerCase()}
               </h4>
