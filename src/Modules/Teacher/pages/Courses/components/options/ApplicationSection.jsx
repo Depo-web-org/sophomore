@@ -53,6 +53,7 @@ const ApplicationSection = () => {
         grade: selectedGrade ? selectedGrade.id : null,
         subject: data.subject,
         status: isCourseFinished ? 1 : 0, // 1 = finished, 0 = not finished,
+        price: data.CoursesPrice,
       };
 
       const response = await addTeacherCourse(formData).unwrap();
@@ -146,7 +147,7 @@ const ApplicationSection = () => {
               </div>
 
   {/* Lesson price*/}
-  <div className="my-4">
+  {/* <div className="my-4">
                 <label
                   htmlFor="LessonPrice"
                   className="block text-sm font-medium text-gray-400"
@@ -170,18 +171,7 @@ const ApplicationSection = () => {
                     {errors.orderNotes.message}
                   </p>
                 )}
-              </div>
-
-
-
-
-
-
-
-
-
-
-
+              </div> */}
 
 
               {/* price    Full Courses pr*/}
@@ -210,6 +200,10 @@ const ApplicationSection = () => {
                   </p>
                 )}
               </div>
+
+
+
+
             </div>
 
             {/* School and Grade Selection */}

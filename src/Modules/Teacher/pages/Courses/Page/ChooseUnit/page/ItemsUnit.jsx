@@ -26,7 +26,7 @@ const ItemsUnit = () => {
   
   return (
     <>
-      <div className=" w-full  ">
+      <div className=" w-full   ">
         <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.chooseLessons")}/>
 
         <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2  my-8 w-full ">
