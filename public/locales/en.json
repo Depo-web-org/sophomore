@@ -529,6 +529,11 @@
     "updateDetails": "Update your photos and personal Details",
     "save": "Save"
  },
+ "offline": {
+  "title": "You are Offline",
+  "message": "It seems like you're not connected to the internet. Please check your connection and try again.",
+  "retryButton": "Retry"
+},
  "changePassword": {
   "success": "Password changed successfully!",
   "successMessage": "Your password has been updated successfully.",

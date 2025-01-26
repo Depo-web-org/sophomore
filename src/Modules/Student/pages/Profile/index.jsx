@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 
 function SideBarProfile(props) {
   const { t} = useTranslation();
-// "renomim166@nalwan.com"
   return (
     <div
       className={`${props.Active}  flex flex-col bg-[#111827] border-r border-gray-500  z-10 gap-2 justify-start overflow-hidden absolute items-start h-full px-2`}

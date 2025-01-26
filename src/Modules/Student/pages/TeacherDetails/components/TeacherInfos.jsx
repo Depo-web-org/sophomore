@@ -42,11 +42,12 @@ export default function TeacherInfos({teacher,subject}) {
 
           </div>
         </div>
-        <div className=" ">
+
+        <div className="  ">
           <Tabs />
         </div>
 
-        <div className=" py-4">
+        <div className=" py-4 ">
           <Outlet />
         </div>
       </div>

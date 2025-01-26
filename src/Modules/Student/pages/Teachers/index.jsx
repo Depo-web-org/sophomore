@@ -48,10 +48,10 @@ const Teachers = () => {
     <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
  
 {
-  isFetching?  <div className="grid grid-cols-3 gap-4 ">
+  isFetching?  <div className="grid grid-cols-3 gap-4  ">
   <SkeletonCard/>
   </div>   :  teachersData ? <>
-  <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
+  <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20 ">
         {i18n.language === "ar" ? "أي مدرس تريد ؟" : "  Which Teacher do you want?"}
       </h2>
       <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
@@ -148,9 +148,9 @@ export function TeacherCard({
           className="h-40 md:h-48 lg:h-64 w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <div className="relative border border-gray-100 bg-white p-2 lg:p-6">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-700"> {i18n.language === "ar" ? subjectAr|| teacher.subjectAr:teacher.subject||subject} </p>
-            <p className="text-sm text-gray-700"> {i18n.language === "ar" ? gradeAr|| teacher.gradeAr:teacher.grade||grade} </p>
+          <div className="flex items-center justify-between uppercase flex-wrap">
+            <p className="text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? subjectAr|| teacher.subjectAr:teacher.subject||subject} </p>
+            <p className="text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? gradeAr|| teacher.gradeAr:teacher.grade||grade} </p>
           </div>
           <h3 className="mt-4 text-center text-sm lg:text-lg font-medium text-gray-900 uppercase">
             {teacher.first_name} {teacher.last_name}
