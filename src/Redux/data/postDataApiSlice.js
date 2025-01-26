@@ -64,12 +64,12 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
         }
       }),
       checkoutCart: builder.mutation({
-        query:(formData) => {
-          console.log("checkoutCart api slice:", formData); 
+        query:(dataToSend) => {
+          console.log("checkoutCart api slice:", dataToSend); 
           return {
-            url: "deleteProviderCourse.php", 
+            url: "doCheckout.php", 
             method: "POST",
-            body: formData, 
+            body: dataToSend, 
           };
         }
       })
@@ -82,5 +82,6 @@ export const {
   useAddTeacherCourseContentMutation,
   useEditTeacherCourseMutation,
   useEditTeacherCourseContentMutation,
-  useDeleteTeacherCourseMutation
+  useDeleteTeacherCourseMutation,
+  useCheckoutCartMutation
 } = postDataApiSlice;
