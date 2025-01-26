@@ -23,11 +23,12 @@ const [statusOfCourse, setStatusOfCourse] = useState(false)
   const [editTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useEditTeacherCourseMutation();
   const { data: ALLschoolsData } = useGetAllSchoolInformationQuery();
   
+  // console.log(schoolsData)
   const selectedCourse = schoolsData?.data?.find(
     (course) => course.id === EditCourseID
   );
   const [isCourseFinished, setIsCourseFinished] = useState(false); 
-
+console.log(selectedCourse)
   useEffect(() => {
     if (selectedCourse) {
       if (selectedCourse.status == 1) {
@@ -79,7 +80,8 @@ const [statusOfCourse, setStatusOfCourse] = useState(false)
         school: selectedSchoolType,
         grade: selectedGrade,
         subject: selectedSubject,
-        status: isCourseFinished ? 1 : 0, // 1 = finished, 0 = not finished
+        status: isCourseFinished ? 1 : 0,// 1 = finished, 0 = not finished
+        price: data.CoursesPrice
       };
       const response = await editTeacherCourse(formData).unwrap();
       console.log(response);
@@ -107,7 +109,7 @@ const [statusOfCourse, setStatusOfCourse] = useState(false)
   }
 
   return ( 
-    <div className="lg:ms-5 h-auto  ">
+    <div className="lg:ms-5 h-auto   ">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
         <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.updateCourse") }/>
@@ -266,6 +268,33 @@ const [statusOfCourse, setStatusOfCourse] = useState(false)
             </div>
           </div>
 
+          <div className="my-4">
+                <label
+                  htmlFor="CoursesPrice"
+                  className="block text-sm font-medium text-gray-400"
+                >
+                  Full Courses price
+                </label>
+                <input
+                  type="number"
+                  id="CoursesPrice"
+                defaultValue={selectedCourse.price}
+
+                  {...register("CoursesPrice", {
+                    required: t("application.priceRequiredFull"),
+                  })}
+                  className={`border-2 mt-2 w-full rounded-lg shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
+                    errors.CoursesPrice ? "border-red-500" : "border-[#EFEFEF]"
+                  }`}
+                  rows="4"
+                  placeholder={t("application.priceFull") }
+                ></input> 
+                {errors.CoursesPrice && (
+                  <p className="text-red-500 text-sm">
+                    {errors.CoursesPrice.message}
+                  </p>
+                )}
+              </div>
 {/* 
           <div className=" flex justify-start items-center">
               <p className="flex  justify-center gap-2">

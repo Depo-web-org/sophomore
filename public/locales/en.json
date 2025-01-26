@@ -570,7 +570,11 @@
     "selectGrade": "Select Grade",
     "selectSubject": "Select Subject",
     "fieldRequired": "This field is required",
-    "continue": "Continue"
+    "continue": "Continue",
+    "priceRequiredLesson":"Lesson Price is required",
+    "priceRequiredFull":" Full Courses Price is required",
+        "priceLesson":"Lesson Price  ",
+      "priceFull": "Full Courses"
   },
   "unit": {
     "title": "Title",

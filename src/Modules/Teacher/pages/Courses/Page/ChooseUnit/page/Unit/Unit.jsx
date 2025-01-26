@@ -80,6 +80,7 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
       formData.append("course", UploadCourse); // Ensure UploadCourse is defined and has the right value
       formData.append("title", data.title);
       formData.append("description", data.description);
+      formData.append("price", data.LessonPrice);
       formData.append("video", uploadedVideo); // Add video file
       formData.append("pdf", uploadedPDF); // Add PDF file
   
@@ -117,7 +118,7 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
   
   return (
     <div>
-      <div className="flex w-full items-start flex-col ">
+      <div className="flex w-full items-start flex-col  ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
             <GoBack />
@@ -142,8 +143,9 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
             </div>
           </div>
 
-          {/* حقل العنوان */}
-          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
+      <div className="flex items-center gap-x-4 flex-col lg:flex-row">
+            {/* حقل العنوان */}
+            <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
             <label
               htmlFor="title"
               className="text-base font-normal text-[#00000078]"
@@ -160,6 +162,31 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
               <p className="text-red-500 text-sm">{errors.title.message}</p>
             )}
           </div>
+
+{/* price */}
+          <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
+              <label htmlFor="LessonPrice" className="block text-sm font-medium text-gray-400">
+                Lesson price
+              </label>
+              <input
+                type="number"
+                id="LessonPrice"
+                {...register("LessonPrice", {
+                  required: t("application.priceRequiredLesson"),
+                })}
+                className="bg-[#E8E8E8] min-h-[51px] rounded-lg outline-none ring-0 py-1 px-2 font-medium text-[#000000e7]"
+                placeholder={t("application.priceLesson")}
+              />
+              {errors.orderNotes && <p className="text-red-500 text-sm">{errors.orderNotes.message}</p>}
+            </div>
+
+
+      </div>
+
+
+
+
+
 
           {/* حقل الوصف */}
           <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">

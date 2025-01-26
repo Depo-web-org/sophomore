@@ -7,16 +7,19 @@ import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/ge
 import { useAddTeacherCourseMutation } from "../../../../../../Redux/data/postDataApiSlice";
 
 const ApplicationSection = () => {
-  
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage]= useState(null);
-const [statusOfCourse, setStatusOfCourse] = useState(false)
-const [isCourseFinished, setIsCourseFinished] = useState(false); 
-  const { data: schoolsData = {}, isLoading, isError } = useGetAllSchoolInformationQuery();
-  const [addTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useAddTeacherCourseMutation();
-
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [statusOfCourse, setStatusOfCourse] = useState(false);
+  const [isCourseFinished, setIsCourseFinished] = useState(false);
+  const {
+    data: schoolsData = {},
+    isLoading,
+    isError,
+  } = useGetAllSchoolInformationQuery();
+  const [addTeacherCourse, { isLoading: courseLoading, isError: courseError }] =
+    useAddTeacherCourseMutation();
 
   const [selectedSchoolType, setSelectedSchoolType] = useState(null);
   const [selectedGrade, setSelectedGrade] = useState(null);
@@ -41,6 +44,7 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
   };
 
   const handleFormSubmit = async (data) => {
+    console.log(data)
     try {
       const formData = {
         title: data.title,
@@ -48,25 +52,25 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
         school: selectedSchoolType ? selectedSchoolType.id : null,
         grade: selectedGrade ? selectedGrade.id : null,
         subject: data.subject,
-        status: isCourseFinished ? 1 : 0, // 1 = finished, 0 = not finished
+        status: isCourseFinished ? 1 : 0, // 1 = finished, 0 = not finished,
+        price: data.CoursesPrice,
       };
-  
+
       const response = await addTeacherCourse(formData).unwrap();
       console.log(response);
-  
+
       if (response.code === 0) {
         reset();
         navigate(`/teacherPanel/courses/${response.data}`);
       } else {
         setErrorMessage(response.data);
       }
-  
+
       setUploadImage(null);
     } catch (error) {
       console.error("Error adding course:", error);
     }
   };
-
 
   // Loading state
   if (isLoading) {
@@ -104,7 +108,9 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
                 <input
                   type="text"
                   id="title"
-                  {...register("title", { required: t("application.titleRequired") })}
+                  {...register("title", {
+                    required: t("application.titleRequired"),
+                  })}
                   className={`border-2 py-2.5 mt-1 w-full text-gray-600 font-semibold placeholder:font-normal rounded-md shadow-sm sm:text-sm p-2 focus-within:outline-gray-200 bg-[#EFEFEF] ${
                     errors.title ? "border-red-500" : "border-[#EFEFEF]"
                   }`}
@@ -140,33 +146,64 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
                 )}
               </div>
 
-
-              {/* price  */}
-              {/* <div className="my-4">
+  {/* Lesson price*/}
+  {/* <div className="my-4">
                 <label
-                  htmlFor="OrderNotes"
+                  htmlFor="LessonPrice"
                   className="block text-sm font-medium text-gray-400"
                 >
-                  price
+                  Lesson price
                 </label>
                 <input
                   type="number"
-                  id="OrderNotes"
-                  {...register("orderNotes", {
-                    required: t("application.orderNotesRequired"),
+                  id="LessonPrice"
+                  {...register("LessonPrice", {
+                    required: t("application.priceRequiredLesson"),
                   })}
                   className={`border-2 mt-2 w-full rounded-lg shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
                     errors.orderNotes ? "border-red-500" : "border-[#EFEFEF]"
                   }`}
                   rows="4"
-                  placeholder={t("application.orderNotesPlaceholder")}
-                ></input>
+                  placeholder={t("application.priceLesson") }
+                ></input> 
                 {errors.orderNotes && (
                   <p className="text-red-500 text-sm">
                     {errors.orderNotes.message}
                   </p>
                 )}
               </div> */}
+
+
+              {/* price    Full Courses pr*/}
+              <div className="my-4">
+                <label
+                  htmlFor="CoursesPrice"
+                  className="block text-sm font-medium text-gray-400"
+                >
+                  Full Courses price
+                </label>
+                <input
+                  type="number"
+                  id="CoursesPrice"
+                  {...register("CoursesPrice", {
+                    required: t("application.priceRequiredFull"),
+                  })}
+                  className={`border-2 mt-2 w-full rounded-lg shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
+                    errors.CoursesPrice ? "border-red-500" : "border-[#EFEFEF]"
+                  }`}
+                  rows="4"
+                  placeholder={t("application.priceFull") }
+                ></input> 
+                {errors.CoursesPrice && (
+                  <p className="text-red-500 text-sm">
+                    {errors.CoursesPrice.message}
+                  </p>
+                )}
+              </div>
+
+
+
+
             </div>
 
             {/* School and Grade Selection */}
@@ -247,57 +284,62 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
                     <option value="">{t("application.selectSubject")}</option>
                     {selectedGrade.subjects?.map((subject) => (
                       <option key={subject.id} value={subject.id}>
-                        {i18n.language === "ar" ? subject.name_ar : subject.name}
+                        {i18n.language === "ar"
+                          ? subject.name_ar
+                          : subject.name}
                       </option>
                     ))}
                   </select>
                   {errors.subject && (
-                    <p className="text-red-500 text-sm">{errors.subject.message}</p>
+                    <p className="text-red-500 text-sm">
+                      {errors.subject.message}
+                    </p>
                   )}
                 </div>
               )}
             </div>
 
-
-
             <div className="flex justify-start items-start gap-4 flex-col">
-  <label className="flex items-center gap-2">
-    <input
-      type="radio"
-      name="courseStatus"
-      value="notFinished"
-      checked={!isCourseFinished}
-      onChange={() => setIsCourseFinished(false)}
-    />
-    <span className="font-medium">{t("courseManagement.statusOfAddCourse")}</span>
-  </label>
-  <label className="flex items-center gap-2">
-    <input
-      type="radio"
-      name="courseStatus"
-      value="finished"
-      checked={isCourseFinished}
-      onChange={() => setIsCourseFinished(true)}
-    />
-    <span className="font-medium">{t("courseManagement.statusOfCourseFinished")}</span>
-  </label>
-</div>
-
-
-
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="courseStatus"
+                  value="notFinished"
+                  checked={!isCourseFinished}
+                  onChange={() => setIsCourseFinished(false)}
+                />
+                <span className="font-medium">
+                  {t("courseManagement.statusOfAddCourse")}
+                </span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="courseStatus"
+                  value="finished"
+                  checked={isCourseFinished}
+                  onChange={() => setIsCourseFinished(true)}
+                />
+                <span className="font-medium">
+                  {t("courseManagement.statusOfCourseFinished")}
+                </span>
+              </label>
+            </div>
 
             <div className=" flex flex-col gap-y-2">
-            {errorMessage&& (
-                    <p className="text-red-500 text-sm  w-full block">{errorMessage}</p>
-                  )}
+              {errorMessage && (
+                <p className="text-red-500 text-sm  w-full block">
+                  {errorMessage}
+                </p>
+              )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
-            >
-              {t("application.continue")}
-            </button>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+              >
+                {t("application.continue")}
+              </button>
             </div>
           </div>
         </form>
@@ -307,13 +349,3 @@ const [isCourseFinished, setIsCourseFinished] = useState(false);
 };
 
 export default ApplicationSection;
-
-
-
-
-
-
-
-
-
-
