@@ -4,7 +4,12 @@ export const OrderDetalis = ({ cartItems }) => {
     ?.map((item) => item.price)
     .reduce((acc, curr) => acc + curr, 0);
 
-  console.log(totalPrices);  console.log(totalPrices)
+  console.log(totalPrices);
+  
+  const products = cartItems.map((item) => ({
+    productId: item.id,
+  }));
+  console.log(products)
   return(
     <div>
       <p className="text-white font-semibold text-3xl">Order Summary</p>

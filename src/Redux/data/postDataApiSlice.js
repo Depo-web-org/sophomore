@@ -62,6 +62,16 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
             body: formData, 
           };
         }
+      }),
+      checkoutCart: builder.mutation({
+        query:(formData) => {
+          console.log("checkoutCart api slice:", formData); 
+          return {
+            url: "deleteProviderCourse.php", 
+            method: "POST",
+            body: formData, 
+          };
+        }
       })
   }),
 });
