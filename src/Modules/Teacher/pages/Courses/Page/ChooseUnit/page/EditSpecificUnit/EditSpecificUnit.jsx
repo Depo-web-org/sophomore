@@ -1006,6 +1006,7 @@ import { useTranslation } from "react-i18next";
 import { useEditTeacherCourseContentMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 import { ImSpinner9 } from "react-icons/im";
 import { IoMdAlert } from "react-icons/io";
+import Alert from "../../../../../../../Student/pages/Profile/components/Alerts/Alert";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -1047,7 +1048,8 @@ console.log(i18n.languages)
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(null); // Store form data for submission after confirmation
-
+  const [showAlert, setShowAlert] = useState(false); 
+  const [showAlertError, setShowAlertError] = useState(false); 
   const [editTeacherCourseContent, { isLoading, isError }] =
     useEditTeacherCourseContentMutation();
 
@@ -1098,14 +1100,32 @@ console.log(i18n.languages)
       }
       formData.append("price", data.LessonPrice);
 
-      await editTeacherCourseContent(formData).unwrap();
-      setUploadedVideo(null);
-      setUploadedPDF(null);
-      reset();
-      navigate("/teacherPanel");
+    const res=  await editTeacherCourseContent(formData).unwrap();
+      console.log("Response from backend:", res);
+  
+      if (res.code === 1) {
+        // Show the error alert
+        setShowAlertError(true);
+        setMessage(t("unit.errorSubmitting")); 
+        setUploadedPDF(null);
+  
+        setTimeout(() => {
+          setShowAlertError(false);
+        }, 2000);
+      } else {
+        setUploadedVideo(null);
+        setUploadedPDF(null);
+        reset();
+        setShowAlert(true);
+  
+        setTimeout(() => {
+          navigate('/teacherPanel');
+        }, 2000);
+      }
+  
     } catch (error) {
       console.error("Error submitting form:", error);
-      setMessage(t("unit.errorSubmitting"));
+      setMessage(t("unit.errorSubmitting")); // Handle error message
     }
   };
 
@@ -1146,8 +1166,24 @@ console.log(i18n.languages)
         message={t("freeLessonMessage")}
         i18n={i18n}
       />
+{showAlert && (
+        <Alert
+        Name={` ${i18n.languages[0]==='ar' ? "تم أضافه التعديل بنجاح":"Lesson updated Successfully"}`}
+          color={"text-green-600"}
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
+      )}
 
-      <div className="flex w-full items-start flex-col">
+      {showAlertError && (
+        <Alert
+          Name={` ${i18n.languages[0]==='ar' ? "لم يتم التعديل الدرس ":"Lesson failed to updated"}`}
+          color={"text-red-600"}
+          showAlert={showAlertError}
+          setShowAlert={setShowAlertError}
+        />
+      )}
+      <div className="flex w-full items-start flex-col ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
             <GoBack />
@@ -1170,7 +1206,7 @@ console.log(i18n.languages)
           {/* Modal for Free First Lesson */}
           {selectedLesson.price=== "0.00" && <FreeLessonAlert />}
 
-          <div className="flex items-center gap-x-4">
+          <div className="flex items-center gap-x-4 flex-wrap lg:flex-nowrap">
             <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
               <label
                 htmlFor="title"

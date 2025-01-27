@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 import { useAddTeacherCourseContentMutation } from "../../../../../../../../Redux/data/postDataApiSlice";
 import { ImSpinner9 } from "react-icons/im";
 import { Modal } from "../EditSpecificUnit/EditSpecificUnit";
+import Alert from "../../../../../../../Student/pages/Profile/components/Alerts/Alert";
+import { newFunction } from "../../../../../../../../Helpers/Alert";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -22,7 +24,7 @@ function Button({ classButton, events, title, type }) {
 }
 
 const Unit = () => {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
   const { t,i18n } = useTranslation();
   const  {UploadCourse}  = useParams();
   const [uploadedVideo, setUploadedVideo] = useState(null);
@@ -55,9 +57,26 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
     setUploadedPDF(pdf);
     setValue("pdf", pdf);
   };
+ const [showAlert, setShowAlert] = useState(false); 
+  const [showAlertError, setShowAlertError] = useState(false); 
+  // const handleAlert = newFunction(setShowAlert, setShowAlertError);
 
-  // const handleFormSubmit = async (data) => {
-  //   if (!data.video || !data.pdf) {
+
+  const handleFormSubmit = async (data) => {
+    if (parseFloat(data.LessonPrice) === 0) {
+      // Open modal for confirmation
+      setIsModalOpen(true);
+      setFormData(data); // Store form data for later submission
+      return;
+    }
+
+    // If price is not 0, submit the form directly
+    submitForm(data);
+  };
+
+
+  // const submitForm = async (data) => {
+  //     if (!data.video || !data.pdf) {
   //     setMessage(t("unit.bothFilesRequired"));
   //     return;
   //   }
@@ -80,10 +99,18 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
      
   //   await addTeacherCourseContent(formData).unwrap().then((res)=>{
   //       console.log("Response from backend:", res);
+  //       if(res.code===1) null
   //       setUploadedVideo(null);
   //       setUploadedPDF(null);
   //       reset();
-  //     }).then(()=> naviagte('/teacherPanel'))
+  //     })
+  //     .then(()=>{
+  //       setShowAlert(true);
+  //     }) .then(()=> {
+  //       setTimeout(() => {
+  //         naviagte('/teacherPanel')
+  //       }, 2000);
+  //     })
      
   
   //     // // Clear form and show success message
@@ -96,21 +123,65 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
   // };
 
 
-  const handleFormSubmit = async (data) => {
-    if (parseFloat(data.LessonPrice) === 0) {
-      // Open modal for confirmation
-      setIsModalOpen(true);
-      setFormData(data); // Store form data for later submission
-      return;
-    }
 
-    // If price is not 0, submit the form directly
-    submitForm(data);
-  };
+
+
+
+
+  // const submitForm = async (data) => {
+  //   if (!data.video || !data.pdf) {
+  //     setMessage(t("unit.bothFilesRequired"));
+  //     return;
+  //   }
+  
+  //   try {
+  //     // Create a FormData object
+  //     const formData = new FormData();
+  //     formData.append("course", UploadCourse); // Ensure UploadCourse is defined and has the right value
+  //     formData.append("title", data.title);
+  //     formData.append("description", data.description);
+  //     formData.append("price", data.LessonPrice);
+  //     formData.append("video", uploadedVideo); // Add video file
+  //     formData.append("pdf", uploadedPDF); // Add PDF file
+  
+  //     console.log("FormData entries:");
+  //     for (let [key, value] of formData.entries()) {
+  //       console.log(`${key}:`, value);
+  //     }
+  
+  //     // Handle the response
+  //     const res = await addTeacherCourseContent(formData).unwrap();
+  
+  //     console.log("Response from backend:", res);
+  
+  //     if (res.code === 1) {
+  //       setUploadedVideo(null);
+  //       setUploadedPDF(null);
+  //     } else {
+  //       setUploadedVideo(null);
+  //       setUploadedPDF(null);
+  //       reset();
+  //       setShowAlert(true);
+  //     }
+  
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
+  
+
+
+
+
+
+
+
+
+
 
 
   const submitForm = async (data) => {
-      if (!data.video || !data.pdf) {
+    if (!data.video || !data.pdf) {
       setMessage(t("unit.bothFilesRequired"));
       return;
     }
@@ -130,24 +201,41 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
         console.log(`${key}:`, value);
       }
   
-     
-    await addTeacherCourseContent(formData).unwrap().then((res)=>{
-        console.log("Response from backend:", res);
+      // Handle the response
+      const res = await addTeacherCourseContent(formData).unwrap();
+  
+      console.log("Response from backend:", res);
+  
+      if (res.code === 1) {
+        // Show the error alert
+        setShowAlertError(true);
+        setMessage(t("unit.errorSubmitting")); // Request failed, show error message
+        setUploadedVideo(null);
+        setUploadedPDF(null);
+  
+        // Hide the error alert after 2000ms
+        setTimeout(() => {
+          setShowAlertError(false);
+        }, 2000);
+      } else {
         setUploadedVideo(null);
         setUploadedPDF(null);
         reset();
-      }).then(()=> naviagte('/teacherPanel'))
-     
+        setShowAlert(true);
   
-      // // Clear form and show success message
-      // setMessage(t("unit.unitSaved"));
-     
+        setTimeout(() => {
+          // navigate('/teacherPanel');
+        setShowAlert(false);
+
+        }, 2000);
+      }
+  
     } catch (error) {
       console.error("Error submitting form:", error);
       setMessage(t("unit.errorSubmitting")); // Handle error message
     }
   };
-
+  
   const handleConfirm = () => {
     setIsModalOpen(false); // Close the modal
     if (formData) {
@@ -179,6 +267,23 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
         i18n={i18n}
 
       />
+     {showAlert && (
+        <Alert
+        Name={` ${i18n.languages[0]==='ar' ? "تم أضافه الدرس بنجاح":"Lesson added Successfully"}`}
+          color={"text-green-600"}
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
+      )}
+
+      {showAlertError && (
+        <Alert
+          Name={` ${i18n.languages[0]==='ar' ? "لم يتم أضافه الدرس ":"Lesson failed to added"}`}
+          color={"text-red-600"}
+          showAlert={showAlertError}
+          setShowAlert={setShowAlertError}
+        />
+      )}
       <div className="flex w-full items-start flex-col   ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">

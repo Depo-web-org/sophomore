@@ -31,18 +31,18 @@ export default function CourseManagement({ data }) {
   };
 
   return (
-    <div className="w-full bg-white rounded-[20px] py-4 hover:shadow-lg">
+    <div className="w-full bg-white rounded-[20px] py-4 hover:shadow-lg bgy">
       <p className="text-xl md:text-3xl font-semibold text-center py-4 text-black">
         {t("courseManagement.title")}
       </p>
 
-      <div className="px-4 ">
+      <div className="px-4 overflow-x-auto  ">
         {data?.data.length === 0 ? (
           <p className="whitespace-nowrap px-4 py-2 text-gray-900 text-center font-bold text-xl wf">
             {t("courseManagement.empty")}
           </p>
         ) : (
-          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm ">
+          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm overflow-auto ">
             <thead className="ltr:text-left rtl:text-right">
               <tr>
                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
@@ -63,7 +63,7 @@ export default function CourseManagement({ data }) {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 ">
               {data?.data.map((course, index) => (
                 <tr key={index}>
                   <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -85,7 +85,7 @@ export default function CourseManagement({ data }) {
 
                       {/* Action Menu */}
                       {openMenuId === course.id && (
-                        <ul className="absolute -end-0 z-[100] bg-white border border-gray-300 w-[130px] rounded-lg ">
+                        <ul className="relative -end-0 z-50 bg-white border border-gray-300 w-[130px] rounded-lg ">
                           <li className="flex items-center justify-between px-2 py-1 text-start text-sm transition-all duration-150 hover:text-base cursor-pointer">
                             <Link
                               to={`courses/EditCourse/${course.id}`}

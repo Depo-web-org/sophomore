@@ -9,6 +9,7 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { useDeleteTeacherCourseContentMutation } from '../../../../../../../Redux/data/postDataApiSlice';
 import { ImSpinner9 } from 'react-icons/im';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 const ItemsUnit = () => {
   const { t, i18n } = useTranslation();
@@ -28,26 +29,40 @@ const [messageDelete, setMessageDelete] = useState()
     setDeleteModalOpen(true); // Open the delete confirmation modal
   };
 
-  // Handle actual deletion
   const handleDelete = async () => {
     if (selectedContentId) {
       const formData = {
         id: selectedContentId,
       };
-      await deleteTeacherContent(formData).unwrap().then(()=>{
-        if(!deleteCourseLoading){
+      try {
+        const res = await deleteTeacherContent(formData).unwrap();
+        if (!deleteCourseLoading) {
           setDeleteModalOpen(false); // Close the modal
-          setSelectedContentId(null); // Reset the
+          setSelectedContentId(null); // Reset the selected content ID
         }
-      }).then((res)=>{
-console.log(res)
-      })
-      refetch(); 
+  
+        if (
+          res.message ===
+          "Deleting course process failed: Course has been bought. Delete prohibited"
+        ) {
+          setMessageDelete({
+            ar: "لا يمكن حذف هذا الدرس لأنه قد تم شراؤه بالفعل من قبل أحد الطلاب. يرجى ملاحظة أن حذف الدروس التي تم شراؤها غير مسموح به للحفاظ على حقوق الطلاب الذين قاموا بالشراء.",
+            en: "This lesson cannot be deleted because it has already been purchased by a student. Please note that deleting purchased lessons is not allowed to ensure the rights of students who made the purchase."
+          });
+        
+          setTimeout(() => {
+            setMessageDelete(null);
+          }, 4000);
+        } else {
+          // Optional refetch logic if needed
+          refetch();
+        }
+      } catch (error) {
+        console.error("Error deleting content:", error);
+      }
     }
-   
-
   };
-
+  
   // Handle cancel deletion
   const handleCancelDelete = () => {
     setDeleteModalOpen(false); // Close the modal
@@ -65,7 +80,7 @@ console.log(res)
           }
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 my-8 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 my-8 w-full relative">
           {selectedCourse?.contents?.length === 0 ? (
             <>
               <div className="bg-mainGray bg-opacity-80 text-white h-32 rounded-lg font-semibold flex justify-center items-center text-center">
@@ -116,6 +131,15 @@ console.log(res)
               );
             })
           )}
+
+{
+  messageDelete&&  <AlertMessage message={i18n.languages[0] === 'ar' ? messageDelete?.ar : messageDelete?.en} setDeleteModalOpen={setDeleteModalOpen}/>
+
+}
+         
+   {/* <AlertMessage message={ "لا يمكن حذف هذا الدرس لأنه قد تم شراؤه بالفعل من قبل أحد الطلاب. يرجى ملاحظة أن حذف الدروس التي تم شراؤها غير مسموح به للحفاظ على حقوق الطلاب الذين قاموا بالشراء."} setDeleteModalOpen={setDeleteModalOpen}/> */}
+
+
         </div>
 
         {/* Delete Confirmation Modal */}
@@ -149,28 +173,51 @@ export const DeleteConfirmationModal = ({ isOpen, onConfirm, onCancel, message,i
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg p-6 w-96 shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">
+      <div className="bg-white rounded-lg p-6 w-96 shadow-lg mx-4 lg:mx-0">
+        <h2 className=" lg:text-xl font-semibold mb-4">
            
-
           {i18n.languages[0] === 'ar' ? 'تأكيد الحذف' : 'Confirm Deletion'}
         </h2>
-        <p className="mb-6">{message}</p>
-        <div className="flex justify-end gap-4">
-          <button
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
-            onClick={onCancel}
-          >
-            {i18n.languages[0] === 'ar' ? 'إلغاء' : 'Cancel'}
-
-          </button>
-          <button
+        <p className="text-sm lg:text-base mb-6">{message}</p>
+        <div className="flex justify-end gap-4 text-sm lg:text-base">
+        <button
             className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary hover:bg-opacity-90"
             onClick={onConfirm}
             disabled={deleteCourseLoading}
           >
             {       deleteCourseLoading?<ImSpinner9 className="animate-spin text-3xl text-white " />: i18n.languages[0] === 'ar' ? 'حذف' : 'Delete'}
           </button>
+          <button
+            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+            onClick={onCancel}
+          >
+            {i18n.languages[0] === 'ar' ? 'إلغاء' : 'Cancel'}
+
+          </button>
+         
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const AlertMessage = ({ message, setDeleteModalOpen }) => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-full mx-4 lg:mx-0 lg:w-1/2 relative slide-in-top">
+        <button
+          className="absolute top-2 start-2 text-gray-500 hover:text-gray-800 text-3xl"
+          onClick={() => setDeleteModalOpen(null)} // Fix: Pass a function reference
+        >
+          &times;
+        </button>
+        <div className="flex items-center gap-4">
+          <div className="text-red-500 text-3xl">
+            <FaExclamationTriangle />
+          </div>
+          <div className="text-xs md:text-sm lg:text-lg font-semibold text-gray-800">
+            {message}
+          </div>
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../../../../../../Redux/data/getDataApiSlice";
 import { LoadingComponents } from "../../../../../../App";
 import ProfileSkeleton from "../Skeleton/ProfileSkeleton";
+import { newFunction } from "../../../../../../Helpers/Alert";
 
 export default function Security() {
   const { t, i18n } = useTranslation();
@@ -27,8 +28,9 @@ export default function Security() {
   console.log("data profile:", data?.data);
   const student = data?.data;
 
-  const [showAlert, setShowAlert] = useState(false); // حالة عرض رسالة النجاح
-  const [showAlertError, setShowAlertError] = useState(false); // حالة عرض رسالة الخطأ
+  const [showAlert, setShowAlert] = useState(false); 
+  const [showAlertError, setShowAlertError] = useState(false); 
+  const handleAlert = newFunction(setShowAlert, setShowAlertError);
 
   const role = useSelector((state) => state.role.role);
 
@@ -40,19 +42,6 @@ export default function Security() {
     formState: { errors },
   } = useForm();
   // alert
-  const handleAlert = (type, duration = 3000) => {
-    if (type === 'success') {
-      setShowAlert(true);  
-      setTimeout(() => {
-        setShowAlert(false);  
-      }, duration);
-    } else if (type === 'error') {
-      setShowAlertError(true); 
-      setTimeout(() => {
-        setShowAlertError(false);  
-      }, duration);
-    }
-  };
 
   // Hook For Change Password
   const { submitChangePassword, isLoading, isError } = useChangePassword({ role,handleAlert,reset,});
@@ -289,3 +278,19 @@ export default function Security() {
     </div>
   );
 }
+// export function newFunction(setShowAlert, setShowAlertError) {
+//   return (type, duration = 3000) => {
+//     if (type === 'success') {
+//       setShowAlert(true);
+//       setTimeout(() => {
+//         setShowAlert(false);
+//       }, duration);
+//     } else if (type === 'error') {
+//       setShowAlertError(true);
+//       setTimeout(() => {
+//         setShowAlertError(false);
+//       }, duration);
+//     }
+//   };
+// }
+
