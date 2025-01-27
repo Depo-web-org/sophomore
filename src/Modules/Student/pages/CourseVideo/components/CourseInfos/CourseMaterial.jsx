@@ -1,5 +1,6 @@
 import React from "react";
 import { Link,  useLocation,  useParams } from "react-router-dom";
+import { baseUrl } from "../../../../../../App";
 
 export default function CourseMaterial() {
   const {courseID}=useParams()
@@ -31,12 +32,13 @@ function UnitTest({params}) {
 }
 
 function Material() {
-  const{state}=useLocation()
-  console.log(state)
-  const {lessonID, courseID}= useParams();
+  const { state } = useLocation();
+  console.log(state);
+  const { lessonID } = useParams();
 
-  const selectedVideo= state.filter((selected)=> selected.id=== lessonID)[0]
-  console.log(selectedVideo)
+  // Assuming `state` is an array
+  const selectedVideo = state.filter((selected) => selected.id === lessonID)[0];
+  console.log(selectedVideo);
 
   return (
     <>
@@ -44,23 +46,21 @@ function Material() {
         <p className="text-lg md:text-xl font-bold text-white">
           Course Material
         </p>
-     
-          <div
- 
-            className="flex justify-between items-center w-full gap-2 border p-2 lg:p-4 rounded-lg"
-          >
-            <p className="text-sm md:text-lg font-semibold text-white">
-              {selectedVideo.title}
-            </p>
-            <a
-              href={selectedVideo.pdf}
-              download={selectedVideo.pdf}
-            className="text-white text-sm md:text-lg font-semibold  px-2  lg:px-4 py-2 buttonHover  rounded-md">
-              Download
-            </a>
-          </div>
 
+        <div className="flex justify-between items-center w-full gap-2 border p-2 lg:p-4 rounded-lg">
+          <p className="text-sm md:text-lg font-semibold text-white">
+            {selectedVideo.title}
+          </p>
+          <a
+            href={`${baseUrl}${selectedVideo.path}${selectedVideo.pdf}`} 
+            download={selectedVideo.pdf} 
+            className="text-white text-sm md:text-lg font-semibold px-2 lg:px-4 py-2 buttonHover rounded-md"
+          >
+            Download
+          </a>
+        </div>
       </div>
     </>
   );
 }
+
