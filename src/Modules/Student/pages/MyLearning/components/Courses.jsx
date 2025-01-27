@@ -3,10 +3,13 @@ import LearningCard from "./LearningCard";
 import { useSelector } from "react-redux";
 import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
 import CoursesSkeleton from "./Skeleton";
+import { useParams } from "react-router-dom";
 
 export default function Courses() {
   const { t } = useTranslation(); // Initialize the translation hook
   // const { data, status, error } = useSelector((state) => state.studentCourses);
+  const params=window.location.pathname
+  console.log(params)
   const {data, isLoading, isError}= useGetStudentCoursesQuery()
   console.log(data?.data);
   const ordersData = data?.data // Accessing courses data
@@ -19,9 +22,12 @@ export default function Courses() {
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="w-full flex flex-col gap-4 ">
-        <p className="text-2xl font-semibold text-white py-8">
+        {
+          params !=='/' &&<p className="text-2xl font-semibold text-white py-8">
           My courses
         </p>
+        }
+        
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
           {ordersData?.map((order) =>
   order.items.map((item) => {

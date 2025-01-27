@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { FaPlayCircle } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Courses from "../../../MyLearning/components/Courses";
 
 export default function HomeMin() {
   const { t } = useTranslation();
@@ -51,10 +52,23 @@ export default function HomeMin() {
           </p>
         </div>
 
-        <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
+        <Courses />
+
+
+      </section>
+    </>
+  );
+}
+
+
+
+
+
+
+
+{/* <div className="grid grid-cols-6 lg:grid-cols-12 gap-6 items-center justify-center">
           {HomeItem.map((item) => (
             <div className="col-span-3 lg:col-span-4 " key={item.id}>
-              {/* img */}
               <Link to={"/mylearning/course/Science"}>
                 <div className="group block overflow-hidden relative rounded-3xl hover:cursor-pointer">
                   <img
@@ -68,7 +82,6 @@ export default function HomeMin() {
                   </span>
                 </div>
               </Link>
-              {/* Text */}
               <div className="font-semibold text-white   mt-1 lg:mt-4 ">
                 <p className="text-sm sm:text-base lg:text-lg">{item.Name}</p>
 
@@ -76,12 +89,4 @@ export default function HomeMin() {
               </div>
             </div>
           ))}
-        </div>
-
-
-
-
-      </section>
-    </>
-  );
-}
+        </div> */}
