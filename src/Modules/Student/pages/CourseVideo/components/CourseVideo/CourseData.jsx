@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import CourseInfos from "../CourseInfos/CourseInfos";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { baseUrl } from "../../../../../../App";
 
 export default function CourseData() {
   const{state}=useLocation()
   console.log(state)
   const {lessonID, courseID}= useParams();
   console.log(lessonID, courseID)
+
 
   const selectedVideo= state.filter((selected)=> selected.id=== lessonID)[0]
   console.log(selectedVideo)
@@ -17,7 +19,7 @@ export default function CourseData() {
     <div className=" w-full ">
       <div className="flex flex-col items-start justify-start gap-2 w-full lg:w-3/4 ">
         <iframe
-          src="https://www.youtube.com/embed/OQjkFQAIOck?si=wEdNFopy_U2h5_tD"
+          src={`${baseUrl}${selectedVideo.path}${selectedVideo.video}`}
           // title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
