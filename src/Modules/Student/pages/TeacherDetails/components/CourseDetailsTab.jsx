@@ -8,8 +8,11 @@ import { TbPhotoVideo } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../../../../../Redux/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const CourseDetailsTab = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { course, teacher,subject } = useSelector((state) => state.courseInformation); 
   const contents = [...(course?.contents || [])].reverse(); 
@@ -44,8 +47,21 @@ const CourseDetailsTab = () => {
 console.log(lessonInfo)
     // Dispatch the addToCart action
     dispatch(addToCart(lessonInfo));
-    toast.success("Lesson added to cart successfully!");
+    // toast.success("Lesson added to cart successfully!");
   };
+
+  const handleBuyFullCourse = (lesson) => {
+    handleAddLessonToCart(lesson)
+    navigate("/cart"); // Navigate to cart page
+  };
+
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems)
+  // check if all course in cart 
+  const isFullCourseSelected = cartItems?.some(
+    (item) => item.id === course?.id );
+    console.log(isFullCourseSelected)
+
 
   return (
     <div className="w-full flex flex-col gap-4 text-white">
@@ -59,11 +75,13 @@ console.log(lessonInfo)
       ) : (
         contents.map((item, i) => {
           const isOpen = openItems.includes(item.id);
+          const isLessonSelected = cartItems?.some(cartItem => cartItem.id === item.id);
+
           return (
             <div
               key={item.id}
               className={`border-gray-200 bg-[#FFFFFF26] rounded-xl border-s-4 ${
-                i === 0 ? "border-s-emerald-600" : "border-s-secondary"
+                item.price === "0.00" ? "border-s-emerald-600" : "border-s-secondary"
               }`}
             >
               <button
@@ -71,11 +89,11 @@ console.log(lessonInfo)
                 onClick={() => toggleItem(item.id)}
               >
                 <p className="font-medium">
-                  {i === 0
+                  { item.price === "0.00"
                     ? ` ${
                         i18n.languages[0] === "ar"
-                          ? "التجربة المجانية "
-                          : " Free Trial"
+                          ? ` مجاني : ${item.title}`
+                          : ` Free :  ${item.title}`
                       } `
                     : item.title}
                 </p>
@@ -117,15 +135,19 @@ console.log(lessonInfo)
                   </div>
 
                   <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap ">
-                    <button
-                    onClick={()=> console.log(item)}
-                    className="buttonHover cursor-pointer text-white rounded-md p-2 w-full font-semibold">
-                      {t("enroll_now")}
+                  <button
+  disabled={isFullCourseSelected ||isLessonSelected}
+  className={`rounded-md p-2 w-full text-white ${
+    isFullCourseSelected || isLessonSelected ? "bg-gray-400 cursor-not-allowed" : "buttonHover cursor-pointer"
+  }`}
+  onClick={()=> handleBuyFullCourse(item)}
+>
+                  Enroll Now
                     </button>
                     <button 
       onClick={()=> handleAddLessonToCart(item)}
                     className="font-semibold bg-white cursor-pointer text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all">
-                      {t("add_to_cart")}
+                     {isFullCourseSelected || isLessonSelected?'already in cart': t('add_to_cart')}
                     </button>
                   </div>
                 </div>
