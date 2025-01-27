@@ -266,25 +266,8 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
         onCancel={handleCancel}
         message={t("freeLessonMessage")}
         i18n={i18n}
-
       />
-     {showAlert && (
-        <Alert
-        Name={` ${i18n.languages[0]==='ar' ? "تم أضافه الدرس بنجاح":"Lesson added Successfully"}`}
-          color={"text-green-600"}
-          showAlert={showAlert}
-          setShowAlert={setShowAlert}
-        />
-      )}
 
-      {showAlertError && (
-        <Alert
-          Name={` ${i18n.languages[0]==='ar' ? "لم يتم أضافه الدرس ":"Lesson failed to added"}`}
-          color={"text-red-600"}
-          showAlert={showAlertError}
-          setShowAlert={setShowAlertError}
-        />
-      )}
       <div className="flex w-full items-start flex-col   ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
