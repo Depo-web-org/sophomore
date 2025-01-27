@@ -145,8 +145,11 @@ console.log(lessonInfo)
                   Enroll Now
                     </button>
                     <button 
+                     disabled={isFullCourseSelected ||isLessonSelected}
       onClick={()=> handleAddLessonToCart(item)}
-                    className="font-semibold bg-white cursor-pointer text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all">
+                    className={`font-semibold bg-white text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all  ${
+    isFullCourseSelected || isLessonSelected ? "cursor-not-allowed" : " cursor-pointer"
+  }`}>
                      {isFullCourseSelected || isLessonSelected?'already in cart': t('add_to_cart')}
                     </button>
                   </div>

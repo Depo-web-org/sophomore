@@ -5,14 +5,6 @@ import { useEffect } from "react";
 import { fetchstudentCourses } from "../../../../Redux/data/studentCourses";
 
 export default function MyLearning() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchstudentCourses());
-  }, [dispatch]);
-
-  // Select data, status, and error from Redux store
-  const { data, status, error } = useSelector((state) => state.studentCourses);
-  console.log(data?.data);
 
   return (
     <>
