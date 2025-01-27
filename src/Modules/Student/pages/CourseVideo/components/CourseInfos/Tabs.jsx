@@ -1,17 +1,20 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next"; // Import useTranslation hook
 
 export default function Tabs() {
-  const { courseName } = useParams();
+  const {lessonID, courseID}= useParams();
   const { t } = useTranslation(); // Initialize translation hook
+  const{state}=useLocation()
+
   
   return (
     <div>
-      <div className="w-full ">
-        <div className="border-b border-gray-200 ">
+      <div className="w-full border-b border-gray-200 ">
+
           <nav className="mb-1 flex gap-6 justify-center lg:justify-start" aria-label="Tabs">
             <NavLink
-              to={`/mylearning/course/${courseName}`}
+            state={state}
+              to={`/mylearning/course/${courseID}/lesson/${lessonID}`}
               end
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm lg:text-base font-medium text-white hover:text-secondary"
             >
@@ -19,6 +22,8 @@ export default function Tabs() {
             </NavLink>
 
             <NavLink
+                        state={state}
+
               to="comments"
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm lg:text-base font-medium text-white hover:text-secondary"
             >
@@ -26,6 +31,8 @@ export default function Tabs() {
             </NavLink>
 
             <NavLink
+                        state={state}
+
               to="material"
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm lg:text-base font-medium text-white hover:text-secondary"
             >
@@ -34,6 +41,5 @@ export default function Tabs() {
           </nav>
         </div>
       </div>
-    </div>
   );
 }

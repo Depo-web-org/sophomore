@@ -5,17 +5,19 @@ import { ModalUnits } from "./ModalUnits";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../Redux/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function EnrollCard() {
   const { teacher, subject, course } = useSelector((state) => state.courseInformation); 
 const dispatch=useDispatch()
+const navigate = useNavigate();
   const { t } = useTranslation();
   const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
   const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
   const [isModalUnitsOpen, setIsModalUnitsOpen] = useState(false);
 
       const cartItems = useSelector((state) => state.cart.items);
-      console.log(cartItems)
+      console.log(course)
 
   const handleButtonClick = () => {
     // setIsModalUnitsOpen(false);
@@ -23,24 +25,38 @@ const dispatch=useDispatch()
     // setIsModalOopsOpen(true);
 
   };
-  const CourseInfo={
+  // Define CourseInfo object
+  const CourseInfo = {
     teacherName: `${teacher?.first_name} ${teacher?.last_name}`,
     subjectName: subject?.name,
     courseName: course?.title,
     id: course?.id,
-    courseImage:teacher?.photo,
-    imagePath:teacher?.path,
-    gradeName:subject?.grade_data?.grade_no,
-    price:50
-  }
-  const handleAddToCart = () => {
-
-
-    dispatch(
-      addToCart(CourseInfo)
-    );
-
+    courseImage: teacher?.photo,
+    imagePath: teacher?.path,
+    gradeName: subject?.grade_data?.grade_no,
+    price: course?.price, // Price of the course or lesson
+    enrolledLessons: "full course",
+    type: "course", // Default to "course"
   };
+
+  // Handle adding to cart
+  const handleAddToCart = (type = "course", lessonId = null) => {
+    const itemToAdd = {
+      ...CourseInfo,
+      type,
+      lessonsId: type === "lesson" ? [lessonId] : [], // Set lessonsId for lessons
+    };
+
+    dispatch(addToCart(itemToAdd));
+  };
+
+  // Handle buying full course
+  const handleBuyFullCourse = () => {
+    handleAddToCart("course")
+    navigate("/cart"); // Navigate to cart page
+  };
+
+
   const isSelected = cartItems?.some(
     (item) => item.id === CourseInfo.id );
     console.log(isSelected)
@@ -84,15 +100,18 @@ const dispatch=useDispatch()
             </p>
           </div>
           <div className="flex items-center justify-between gap-5 min-w-full">
-            <button
-              className="buttonHover cursor-pointer text-white rounded-md p-2 w-[120px] md:w-[160px] "
-              onClick={handleModalPackages}
-            >
+          <button
+  disabled={isSelected}
+  className={`rounded-md p-2 w-[120px] md:w-[160px] text-white ${
+    isSelected ? "bg-gray-400 cursor-not-allowed" : "buttonHover cursor-pointer"
+  }`}
+  onClick={handleBuyFullCourse}
+>
                   {t('enroll_now')}
             </button>
             <button
               className="bg-white cursor-pointer text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
-              onClick={handleAddToCart}
+              onClick={() => handleAddToCart("course")} 
             >
               {isSelected?'already in cart': t('add_to_cart')}
           

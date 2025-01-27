@@ -1,14 +1,11 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-// fucntion to load the cart from LS
+// Function to load the cart from Local Storage
 const loadCartFromLocalStorage = () => {
   const savedCart = localStorage.getItem("cart");
-  // return cart or  just empty array
   return savedCart ? JSON.parse(savedCart) : [];
 };
-
 
 const saveCartToLocalStorage = (cartItems) => {
   localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -17,21 +14,41 @@ const saveCartToLocalStorage = (cartItems) => {
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: loadCartFromLocalStorage(), // if(cart in LS){make it the intial} else {empty array}
+    items: loadCartFromLocalStorage(),
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id,subjectName, courseName, courseImage, imagePath, teacherName, gradeName,price } = action.payload; // {id:p1, name:Cerum, courseImage:"url", price:20}
+      const {
+        id,
+        subjectName,
+        courseName,
+        courseImage,
+        imagePath,
+        teacherName,
+        gradeName,
+        price,
+        type,
+        enrolledLessons,
+      } = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
-        toast.warning("course already in cart!");
-        // if the item in the cart do not add it again just return
+        toast.warning(`${type === "lesson" ? "Lesson" : "Course"} already in cart!`);
         return;
       } else {
-        // Add new item to cart
-        state.items.push({id,subjectName, courseName, courseImage,imagePath, teacherName, gradeName,price  });
-        toast.success("course added to cart successfully");
+        state.items.push({
+          id,
+          subjectName,
+          courseName,
+          courseImage,
+          imagePath,
+          teacherName,
+          gradeName,
+          price,
+          type,
+          enrolledLessons,
+        });
+        toast.success(`${type === "lesson" ? "Lesson" : "Course"} added to cart successfully`);
       }
       saveCartToLocalStorage(state.items);
     },
@@ -42,7 +59,6 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity += quantity;
 
-        // quantity cant be 0
         if (item.quantity <= 0) {
           item.quantity = 1;
         }
@@ -51,26 +67,25 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const id = action.payload;
-      state.items = state.items.filter((item) => item.id !== id);
-      saveCartToLocalStorage(state.items);
-      toast.success("course removed from cart successfully");
+      const itemToRemove = state.items.find((item) => item.id === id);
+      if (itemToRemove) {
+        state.items = state.items.filter((item) => item.id !== id);
+        toast.success(`${itemToRemove.type === "lesson" ? "Lesson" : "Course"} removed from cart successfully`);
+        saveCartToLocalStorage(state.items);
+      }
     },
     clearCart: (state) => {
       state.items = [];
-      saveCartToLocalStorage(state.items);
       toast.success("Cart cleared successfully");
+      saveCartToLocalStorage(state.items);
     },
   },
 });
 
-export const { addToCart, adjustQuantity, removeFromCart, clearCart } =
-  cartSlice.actions;
+export const { addToCart, adjustQuantity, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 // Selector to calculate total
-export const selectTotal = (state) =>{
-  console.log(state.cart.items);
-  state.cart.items.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  )};
+export const selectTotal = (state) => {
+  return state.cart.items.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
+};

@@ -73,6 +73,16 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
           };
         }
       }),
+      checkoutCart: builder.mutation({
+        query:(dataToSend) => {
+          console.log("checkoutCart api slice:", dataToSend); 
+          return {
+            url: "doCheckout.php", 
+            method: "POST",
+            body: dataToSend, 
+          };
+        }
+      })
   }),
 });
 
@@ -83,5 +93,6 @@ export const {
   useEditTeacherCourseMutation,
   useEditTeacherCourseContentMutation,
   useDeleteTeacherCourseMutation,
-  useDeleteTeacherCourseContentMutation
+  useDeleteTeacherCourseContentMutation,
+  useCheckoutCartMutation
 } = postDataApiSlice;
