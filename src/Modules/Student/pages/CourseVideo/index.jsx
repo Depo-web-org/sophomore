@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CourseInfos from "./components/CourseInfos/CourseInfos";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function EnrolledCourse() {
   const{state}=useLocation()
   console.log(state)
+  const navigate = useNavigate();
+  const {lessonID, courseID}= useParams();
+  console.log(lessonID, courseID)
+
+  // useEffect(() => {
+  //   // Navigate to the first lesson automatically when entering the course page
+  //   navigate(`/mylearning/course/${courseID}/lesson/${lessonID}`);
+  // }, [courseID, navigate]);
+
   return (
     <div className="min-h-screen w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3">
       <div className="flex flex-1 gap-8 flex-col lg:flex-row ">
@@ -24,6 +33,8 @@ const LessonsPaginator = () => {
   const { state: lessonsNum } = useLocation(); 
   console.log(lessonsNum); 
   const { t } = useTranslation();
+  const ReversedLesson = lessonsNum.reverse();
+  console.log(ReversedLesson)
 
   return (
     <div className="bg-slate-900 rounded-lg p-6 w-full hover:shadow-[6px_6px_0px_0px_#F15C54] duration-150 transition-all shadow-[4px_4px_0px_0px_#F15C54]">
@@ -32,18 +43,18 @@ const LessonsPaginator = () => {
       </div>
 
       <div className="space-y-4">
-        {lessonsNum?.map((lesson, index) => (
+        {lessonsNum?.map((lesson, index) => {
+          return(
           <NavLink
             key={lesson.id}
             to={`lesson/${lesson.id}`}
-            
             state={lessonsNum }
             className="flex items-center space-x-3 bg-slate-900 rounded-lg px-4 py-2 text-white hover:bg-slate-700 transition"
           >
             <span className=" text-base">Lesson {index + 1}:</span>
             <span className=" text-sm">{lesson.title}</span>
-          </NavLink>
-        ))}
+          </NavLink>)
+        })}
       </div>
     </div>
   );
