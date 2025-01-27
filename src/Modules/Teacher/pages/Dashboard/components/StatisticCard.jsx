@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { GiMoneyStack } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi";
 import { ImBooks } from "react-icons/im";
 
@@ -14,6 +15,12 @@ export const statisticsData = [
   {
     image: <HiUserGroup />,
     title: "Active Students",
+    title_ar: "الطلاب الناشطين",
+    stats: 0, // Will be updated dynamically
+  },
+  {
+    image: <GiMoneyStack />,
+    title: "Total Profit ",
     title_ar: "الطلاب الناشطين",
     stats: 0, // Will be updated dynamically
   },

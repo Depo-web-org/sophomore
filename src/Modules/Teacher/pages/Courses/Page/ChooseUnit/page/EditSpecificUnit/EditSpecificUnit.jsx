@@ -47,8 +47,8 @@ console.log(i18n.languages)
     (lesson) => lesson.id === lessonId
   )[0];
 
-  const [uploadedVideo, setUploadedVideo] = useState(selectedLesson.video);
-  const [uploadedPDF, setUploadedPDF] = useState(selectedLesson.pdf);
+  const [uploadedVideo, setUploadedVideo] = useState();
+  const [uploadedPDF, setUploadedPDF] = useState();
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState(null); // Store form data for submission after confirmation
@@ -95,11 +95,13 @@ console.log(i18n.languages)
       formData.append("id", lessonId);
       formData.append("title", data.title);
       formData.append("description", data.description);
-      if (!data.video || !data.pdf) {
-        formData.delete("video", uploadedVideo);
-        formData.delete("pdf", uploadedPDF);
-      } else {
+        
+      if (!data.video )formData.delete("video", uploadedVideo);
+      else{
         formData.append("video", uploadedVideo);
+      }
+      if ( !data.pdf)formData.delete("pdf", uploadedPDF);
+      else {
         formData.append("pdf", uploadedPDF);
       }
       formData.append("price", data.LessonPrice);
@@ -145,7 +147,6 @@ toast.success(`${i18n.languages[0]==='ar' ? "تم أضافه التعديل بن
   useEffect(() => {
     setValue("title", selectedLesson.title);
     setValue("description", selectedLesson.description);
-    setValue("video", selectedLesson.video);
     setValue("LessonPrice", selectedLesson.price);
   }, [setValue, selectedLesson]);
 
