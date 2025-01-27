@@ -3,13 +3,18 @@ import { useCheckoutCartMutation } from '../../../../../../Redux/data/postDataAp
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../../../../../../Redux/cart/cartSlice';
 import { toast } from 'react-toastify';
+import { ImSpinner9 } from 'react-icons/im';
+import { useGetStudentCoursesQuery } from '../../../../../../Redux/data/getDataApiSlice';
 
 export const OrderDetalis = ({ cartItems }) => {
+    const {refetch}= useGetStudentCoursesQuery()
+  
   const dispatch=useDispatch()
 
   console.log(cartItems)
   
-  const [checkoutCart, isLoading, isError]=   useCheckoutCartMutation();
+  const [checkoutCart, {isLoading, isError}]=   useCheckoutCartMutation();
+  console.log(isLoading)
   const totalPrices = cartItems
     ?.map((item) => +item.price)
     .reduce((acc, curr) => acc + curr, 0);
@@ -47,6 +52,7 @@ export const OrderDetalis = ({ cartItems }) => {
       if (response.code === 0) {
         toast.success("Your order has been placed successfully! Thank you for shopping with us.");
         dispatch(clearCart())
+        refetch();
       }
     } catch (error) {
       console.error("Error during checkout:", error);
@@ -86,8 +92,8 @@ export const OrderDetalis = ({ cartItems }) => {
       </div>
       <button
       onClick={handleCheckout}
-       className="buttonHover text-white rounded-md p-2 xl:p-3 text-center font-semibold mt-3">
-        Checkout
+       className="buttonHover flex items-center justify-center text-white rounded-md p-2 xl:p-3 text-center font-semibold mt-3">
+       {isLoading?<ImSpinner9 className="animate-spin text-3xl text-secondary" />:"Checkout"}
       </button>
     </div>
     </div>
