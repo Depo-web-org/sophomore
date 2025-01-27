@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function LearningCard({ course, path, image,contents }) {
+  console.log(contents.length)
   console.log(contents)
-  console.log(course)
+  
+const lessonName =contents.length>1?"full course": contents[0].title
+
+
   return (
     <div>
       <div className="flex flex-col w-[auto]  min-h-[328px] group">
@@ -30,8 +35,8 @@ export default function LearningCard({ course, path, image,contents }) {
           </div>
           <div className="flex items-center justify-between w-full pt-2">
             <p className="text-xl font-medium text-white">{course.title}</p>
-            <p className="text-base font-normal my-4 text-[#FFFFFF57]">
-              {course.price} LE
+            <p className="text-sm font-normal my-4 text-[#FFFFFF57]">
+             ({lessonName})
             </p>
           </div>
         </Link>
