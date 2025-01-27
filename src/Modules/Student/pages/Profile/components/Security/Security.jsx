@@ -99,6 +99,8 @@ export default function Security() {
                 : "right-1/2 translate-x-1/2 md:right-10   md:translate-x-0"
             }  `}
           >
+            <div className="relative">
+
             <img
               className="border-2 border-white size-24 h-24 sm:size-32 rounded-full object-cover"
               src={
@@ -108,6 +110,9 @@ export default function Security() {
               }
               alt="profile"
             />
+                <div  className="bg-green-400 size-3 lg:size-4 absolute end-1/4 bottom-0 z-[5] rounded-full "/>
+
+            </div>
             <div className=" lg:flex-1 ">
               {/* section Name */}
               <div className="relative sm:px-4 pt-4 w-full   ">

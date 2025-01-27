@@ -24,7 +24,7 @@ function SideBarProfile(props) {
         }`}
       />
 
-      <div className="flex flex-col gap-2 justify-between h-full w-48">
+      <div className="flex flex-col gap-2 justify-between h-full  w-48">
         <div className="flex flex-col gap-2 justify-start   ">
 
 
@@ -47,7 +47,7 @@ function SideBarProfile(props) {
           <NavLink
             to="security"
             className={({ isActive }) =>
-              `tab group p-3 w-full flex items-center gap-3 rounded-lg transition-all duration-500 ${
+              `tab group  p-3 w-full flex items-center gap-3  rounded-lg transition-all duration-500 ${
                 isActive
                   ? "text-black bg-white"
                   : "text-white hover:bg-white hover:text-black"
@@ -91,7 +91,7 @@ export default function Profile() {
   const {  i18n} = useTranslation();
 
   const [Active, setActive] = useState("close");
-  const [OpseModel, setOpseModel] = useState(false);
+  const [OpsModel, setOpsModel] = useState(false);
   
   useEffect(() => {
     const handleResize = () => {
@@ -105,15 +105,15 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="mt-24   container md:w-custom-md  xl:w-custom-xl mx-auto relative flex  lg:gap-6  min-h-screen">
+    <div className="mt-24        lg:w-custom-xl   mx-auto relative flex  lg:gap-6  min-h-screen">
       <SideBarProfile
         Active={Active}
         setActive={setActive}
-        setOpseModel={setOpseModel}
+        setOpseModel={setOpsModel}
       ></SideBarProfile>
-      {OpseModel && <LogoutModal setOpseModel={setOpseModel} />}
+      {OpsModel && <LogoutModal setOpseModel={setOpsModel} />}
 
-      <div className={`w-4/5 ml-auto lg:pl-8 xl:pl-0  ${i18n.language ===  "ar" ?  "ms-auto" :"me-auto"}`}>
+      <div className={`w-5/6  lg:w-4/5  ms-auto  lg:pl-8 xl:pl-0   `}>
         <Outlet />
       </div>
     </div>

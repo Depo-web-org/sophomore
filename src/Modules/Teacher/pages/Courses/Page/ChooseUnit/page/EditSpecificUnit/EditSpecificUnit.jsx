@@ -10,6 +10,7 @@ import { useEditTeacherCourseContentMutation } from "../../../../../../../../Red
 import { ImSpinner9 } from "react-icons/im";
 import { IoMdAlert } from "react-icons/io";
 import Alert from "../../../../../../../Student/pages/Profile/components/Alerts/Alert";
+import { toast } from "react-toastify";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -119,11 +120,8 @@ console.log(i18n.languages)
         setUploadedVideo(null);
         setUploadedPDF(null);
         reset();
-        setShowAlert(true);
-  
-        setTimeout(() => {
-          navigate('/teacherPanel');
-        }, 2000);
+toast.success(`${i18n.languages[0]==='ar' ? "تم أضافه التعديل بنجاح":"Lesson updated Successfully"}`);  
+        navigate('/teacherPanel');
       }
   
     } catch (error) {
@@ -169,23 +167,7 @@ console.log(i18n.languages)
         message={t("freeLessonMessage")}
         i18n={i18n}
       />
-{showAlert && (
-        <Alert
-        Name={` ${i18n.languages[0]==='ar' ? "تم أضافه التعديل بنجاح":"Lesson updated Successfully"}`}
-          color={"text-green-600"}
-          showAlert={showAlert}
-          setShowAlert={setShowAlert}
-        />
-      )}
 
-      {showAlertError && (
-        <Alert
-          Name={` ${i18n.languages[0]==='ar' ? "لم يتم التعديل الدرس ":"Lesson failed to updated"}`}
-          color={"text-red-600"}
-          showAlert={showAlertError}
-          setShowAlert={setShowAlertError}
-        />
-      )}
       <div className="flex w-full items-start flex-col ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">

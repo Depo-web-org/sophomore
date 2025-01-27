@@ -23,15 +23,6 @@ const SkeletonTeacherCards = () => {
 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     </>
   )
 }

@@ -45,7 +45,7 @@ const Teachers = () => {
     }
   };
   return (
-    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto  ">
+    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto   ">
  
 {
   isFetching?  <div className="grid grid-cols-3 gap-4  ">
@@ -56,7 +56,7 @@ const Teachers = () => {
       </h2>
       <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
         {isLoading ? (
-          <div className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="col-span-6 w-full grid grid-cols-3 gap-4">
             <SkeletonCard />
             <SkeletonCard />
             <SkeletonCard />
@@ -129,13 +129,12 @@ export function TeacherCard({
   const { i18n } = useTranslation();
 
   const { schoolName, gradeName, subjectName } = useParams();
-  console.log(teacher)
-  console.log(wishlist)
+  
 
   return (
-    <div className="col-span-3 lg:col-span-4 items-center justify-center rounded-md transition hover:shadow-[4px_4px_0px_0px_#F15C54]">
+    <div className="col-span-3   lg:col-span-4 items-center justify-center rounded-md transition hover:shadow-[4px_4px_0px_0px_#F15C54]">
       
-      <div className="group relative block overflow-hidden rounded-md">
+      <div className="group relative block overflow-hidden rounded-md ">
         <button
           onClick={handleToggleWishlist}
           className="absolute end-2 lg:end-4 top-2 lg:top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 hover:text-red-900/75"
@@ -149,10 +148,10 @@ export function TeacherCard({
         />
         <div className="relative border border-gray-100 bg-white p-2 lg:p-6">
           <div className="flex items-center justify-between uppercase flex-wrap">
-            <p className="text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? subjectAr|| teacher.subjectAr:teacher.subject||subject} </p>
-            <p className="text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? gradeAr|| teacher.gradeAr:teacher.grade||grade} </p>
+            <p className="text-xs md:text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? subjectAr|| teacher.subjectAr:teacher.subject||subject} </p>
+            <p className="text-xs md:text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? gradeAr|| teacher.gradeAr:teacher.grade||grade} </p>
           </div>
-          <h3 className="mt-4 text-center text-sm lg:text-lg font-medium text-gray-900 uppercase">
+          <h3 className="mt-4 text-center text-xs md:text-sm lg:text-lg font-medium text-gray-900 uppercase">
             {teacher.first_name} {teacher.last_name}
           </h3>
           <Link

@@ -12,6 +12,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { Modal } from "../EditSpecificUnit/EditSpecificUnit";
 import Alert from "../../../../../../../Student/pages/Profile/components/Alerts/Alert";
 import { newFunction } from "../../../../../../../../Helpers/Alert";
+import { toast } from "react-toastify";
 
 function Button({ classButton, events, title, type }) {
   return (
@@ -222,12 +223,12 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
         setUploadedPDF(null);
         reset();
         setShowAlert(true);
-  
-        setTimeout(() => {
-          // navigate('/teacherPanel');
-        setShowAlert(false);
+  toast.success(` ${i18n.languages[0]==='ar' ? "تم أضافه الدرس بنجاح":"Lesson added Successfully"}`);  
+        // setTimeout(() => {
+        //   // navigate('/teacherPanel');
+        // setShowAlert(false);
 
-        }, 2000);
+        // }, 2000);
       }
   
     } catch (error) {
