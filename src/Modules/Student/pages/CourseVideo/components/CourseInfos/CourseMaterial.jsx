@@ -1,12 +1,12 @@
 import React from "react";
-import { Link,  useParams } from "react-router-dom";
+import { Link,  useLocation,  useParams } from "react-router-dom";
 
 export default function CourseMaterial() {
-  const {courseName}=useParams()
+  const {courseID}=useParams()
 
   return (
     <div className="flex flex-col items-start justify-start gap-4 lg:gap-8">
-      <UnitTest params={courseName} />
+      <UnitTest params={courseID} />
       <Material />
     </div>
   );
@@ -31,24 +31,12 @@ function UnitTest({params}) {
 }
 
 function Material() {
-  const courseMaterials = [
-    {
-      name: "Introduction to Mathematics.pdf",
-      url: "/path/to/Introduction-to-Mathematics.pdf",
-    },
-    {
-      name: "Physics Fundamentals.pdf",
-      url: "/path/to/Physics-Fundamentals.pdf",
-    },
-    {
-      name: "Chemistry Basics.pdf",
-      url: "/path/to/Chemistry-Basics.pdf",
-    },
-    {
-      name: "Programming 101.pdf",
-      url: "/path/to/Programming-101.pdf",
-    },
-  ];
+  const{state}=useLocation()
+  console.log(state)
+  const {lessonID, courseID}= useParams();
+
+  const selectedVideo= state.filter((selected)=> selected.id=== lessonID)[0]
+  console.log(selectedVideo)
 
   return (
     <>
@@ -56,22 +44,22 @@ function Material() {
         <p className="text-lg md:text-xl font-bold text-white">
           Course Material
         </p>
-        {courseMaterials.map((material, index) => (
+     
           <div
-            key={index}
+ 
             className="flex justify-between items-center w-full gap-2 border p-2 lg:p-4 rounded-lg"
           >
             <p className="text-sm md:text-lg font-semibold text-white">
-              {material.name}
+              {selectedVideo.title}
             </p>
             <a
-              href={material.url}
-              download={material.name}
+              href={selectedVideo.pdf}
+              download={selectedVideo.pdf}
             className="text-white text-sm md:text-lg font-semibold  px-2  lg:px-4 py-2 buttonHover  rounded-md">
               Download
             </a>
           </div>
-        ))}
+
       </div>
     </>
   );
