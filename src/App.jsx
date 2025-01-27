@@ -300,7 +300,7 @@ import Home from "./Modules/Student/pages/Home/index";
 import About from "./Modules/Student/pages/About/index";
 import Contact from "./Modules/Student/pages/Contact/index";
 import Cart from "./Modules/Student/pages/Cart/index";
-import CourseVideo from "./Modules/Student/pages/CourseVideo/index";
+import EnrolledCourse from "./Modules/Student/pages/CourseVideo/index";
 import CourseDetails from "./Modules/Student/pages/CourseVideo/components/CourseInfos/CourseDetails";
 import CourseComments from "./Modules/Student/pages/CourseVideo/components/CourseInfos/CourseComments";
 import CourseMaterial from "./Modules/Student/pages/CourseVideo/components/CourseInfos/CourseMaterial";
@@ -347,6 +347,7 @@ import EditUnit from "./Modules/Teacher/pages/Courses/Page/EditUnit/Index";
 import EditSpecificUnit from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditSpecificUnit/EditSpecificUnit";
 import EditCourse from "./Modules/Teacher/pages/Courses/Page/ChooseUnit/page/EditCourse/EditCourse";
 import OfflinePage from "./Components/Common/Offline/Offline";
+import CourseData from "./Modules/Student/pages/CourseVideo/components/CourseVideo/CourseData";
 
 export const baseUrl="https://dev.depowebeg.com"
 
@@ -384,13 +385,23 @@ function AppRoutes() {
           />
           {/* course video nested route */}
           <Route
-            path="/mylearning/course/:courseName"
-            element={<CourseVideo />}
+            path="/mylearning/course/:courseID"
+            element={<EnrolledCourse />}
+            
           >
+              <Route index element={<CourseData />} />
+
+          <Route 
+    path="lesson/:lessonID" 
+    element={<CourseData />} >
             <Route element={<CourseDetails />} index />
             <Route path="comments" element={<CourseComments />} />
             <Route path="material" element={<CourseMaterial />} />
+            </Route>
           </Route>
+
+
+
           <Route
             path="/wishlist"
             element={
