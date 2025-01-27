@@ -1,45 +1,39 @@
 import { useTranslation } from "react-i18next";
 import LearningCard from "./LearningCard";
 import { useSelector } from "react-redux";
+import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
 
 export default function Courses() {
   const { t } = useTranslation(); // Initialize the translation hook
-  const { data, status, error } = useSelector((state) => state.studentCourses);
-  console.log(data?.data[0].items);
-  const coursesData = data?.data[0]?.items; // Accessing courses data
+  // const { data, status, error } = useSelector((state) => state.studentCourses);
+  const {data, isLoading, isError}= useGetStudentCoursesQuery()
+  console.log(data?.data);
+  const ordersData = data?.data // Accessing courses data
 
   return (
     <div className="w-full flex flex-col gap-8">
       <div className="w-full flex flex-col gap-4 ">
         <p className="text-2xl font-semibold text-white py-8">
-          {t("courses.not_finished_yet")}
+          My courses
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-          {coursesData?.map((course) => (
-            <LearningCard
-              key={course.id} // Using course.id as key
-              course={course}
-              image={course.course_data_object?.image || "/images/MyLearning/subject1.webp"} // Make sure you adjust this according to the available image data in your coursesData
-              path={`/mylearning/course/${course?.course_data_object.title}`}
-            />
-          ))}
+          {ordersData?.map((order) =>
+  order?.items?.map((item) => (
+    <LearningCard
+      key={item.id} // Using course.id as key
+      course={item?.course_data_object}
+      contents={item?.contents}
+      image={item?.course_data_object?.image || "/images/MyLearning/subject1.webp"}
+      path={`/mylearning/course/${item?.course_data_object.id}`}
+    />
+  ))
+)
+}
         </div>
       </div>
-      <div className="w-full flex flex-col gap-4 py-2 border-t border-gray-500">
-        <p className="text-2xl font-semibold text-white py-8">
-          {t("courses.finished_courses")}
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {coursesData?.map((course) => (
-            <LearningCard
-              key={course.id} // Using course.id as key
-              course={course}
-              image={course.course_data?.image || "/images/MyLearning/subject1.webp"} // Make sure you adjust this according to the available image data in your coursesData
-              path={`/mylearning/course/${course.title}`}
-            />
-          ))}
-        </div>
-      </div>
+
     </div>
   );
 }
+
+
