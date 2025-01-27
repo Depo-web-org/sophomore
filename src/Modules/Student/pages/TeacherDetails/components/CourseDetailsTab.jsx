@@ -145,7 +145,7 @@ console.log(lessonInfo)
                   Enroll Now
                     </button>
                     <button 
-                     disabled={isFullCourseSelected ||isLessonSelected}
+                    //  disabled={isFullCourseSelected ||isLessonSelected}
       onClick={()=> handleAddLessonToCart(item)}
                     className={`font-semibold bg-white text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all  ${
     isFullCourseSelected || isLessonSelected ? "cursor-not-allowed" : " cursor-pointer"
