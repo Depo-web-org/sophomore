@@ -386,11 +386,9 @@ function AppRoutes() {
           {/* course video nested route */}
           <Route
             path="/mylearning/course/:courseID"
-            element={<EnrolledCourse />}
             
-          >
-              <Route index element={<CourseData />} />
-
+            element={<EnrolledCourse />}
+             >
           <Route 
     path="lesson/:lessonID" 
     element={<CourseData />} >
