@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import LearningCard from "./LearningCard";
 import { useSelector } from "react-redux";
 import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
+import CoursesSkeleton from "./Skeleton";
 
 export default function Courses() {
   const { t } = useTranslation(); // Initialize the translation hook
@@ -9,6 +10,11 @@ export default function Courses() {
   const {data, isLoading, isError}= useGetStudentCoursesQuery()
   console.log(data?.data);
   const ordersData = data?.data // Accessing courses data
+  if (isLoading){
+    return(
+      <CoursesSkeleton/>
+    )
+  }
 
   return (
     <div className="w-full flex flex-col gap-8">
@@ -18,15 +24,18 @@ export default function Courses() {
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
           {ordersData?.map((order) =>
-  order?.items?.map((item) => (
+  order.items.map((item) => {
+    const contents= item?.contents.length>0?item?.contents:[item?.content_data_object];
+    return(
+    
     <LearningCard
       key={item.id} // Using course.id as key
       course={item?.course_data_object}
-      contents={item?.contents}
+      contents={contents}
       image={item?.course_data_object?.image || "/images/MyLearning/subject1.webp"}
-      path={`/mylearning/course/${item?.course_data_object.id}`}
+      path={`/mylearning/course/${item?.course_data_object.id}/lesson/${contents[0]?.id}`}
     />
-  ))
+  )})
 )
 }
         </div>
