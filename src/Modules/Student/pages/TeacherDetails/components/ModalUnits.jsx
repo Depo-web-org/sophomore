@@ -18,7 +18,7 @@ export function ModalUnits({ setIsModalUnitsOpen, handleButtonClick }) {
   return (
     <div
       onClick={() => setIsModalUnitsOpen(false)}
-      className="fixed inset-0 bg-slate-600 bg-opacity-50 flex items-center justify-center"
+      className="fixed inset-0 bg-slate-600 bg-opacity-50 flex items-center justify-center "
     >
       <div
         className="bg-slate-900 rounded-lg  p-6 w-[90%] max-w-md shadow-[4px_4px_0px_0px_#F15C54]"

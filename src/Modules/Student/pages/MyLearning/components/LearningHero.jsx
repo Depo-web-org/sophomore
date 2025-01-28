@@ -4,45 +4,15 @@ import { useTranslation } from "react-i18next";
 
 
 const TimeCard =() => {
-  // const targetDate = new Date('2025-11-29T00:00:00');
-
-  // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  // function calculateTimeLeft() {
-  //   const now = new Date();
-  //   const difference = targetDate - now;
-
-  //   if (difference > 0) {
-  //     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  //     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  //     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-  //     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-  //     return { days, hours, minutes, seconds };
-  //   }
-
-  //   return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-  // }
-
-  // // Update the countdown every second
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTimeLeft(calculateTimeLeft());
-  //   }, 1000);
-
-  //   // Cleanup the interval on component unmount
-  //   return () => clearInterval(timer);
-  // }, []);
-
-  const { t } = useTranslation(); // Initialize the translation hook
+  const { t } = useTranslation(); 
 
   return (
-    <div className="col-span-12 lg:col-span-5 flex justify-center lg:justify-end">
-      <div className="bg-dark lg:w-52 lg:h-96 text-center p-8 rounded-3xl flex flex-col justify-between">
+    <div className="col-span-12 lg:col-span-5 flex justify-center lg:justify-end ">
+      <div className="bg-dark lg:w-52  text-center p-4 lg:p-8 rounded-3xl flex flex-col justify-between">
         <div>
           <p className="font-bold text-base lg:text-xl"> {t("courses.availability")}</p>
-          <div className="bg-zinc-300 rounded-3xl overflow-hidden mt-5 m-5 lg:m-9">
-            <div className="bg-red-500 p-1">
+          <div className="bg-zinc-300 rounded-3xl overflow-hidden mt-5 m-2 lg:m-9  ">
+            <div className="bg-red-500 p-1 w-full px-4">
               <p className="font-bold text-base lg:text-xl">Nov</p>
             </div>
             <p className="text-zinc-800 text-2xl lg:text-3xl font-extrabold py-2">29</p>

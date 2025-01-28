@@ -10,13 +10,13 @@ const lessonName =contents.length>1?"full course": contents[0].title
 
   return (
     <div>
-      <div className="flex flex-col w-[auto]  min-h-[328px] group">
+      <div className="flex flex-col w-[auto]   group">
         <Link state={contents} to={path}>
-          <div className="relative w-full min-h-[285px] group   rounded-lg">
+          <div className="relative w-full group   rounded-lg">
             <img
               src={image}
               alt="learning card"
-              className="w-full min-h-[285px] object-cover   rounded-lg duration-200 transition-all"
+              className="w-full  object-cover   rounded-lg duration-200 transition-all"
             />
             <div className="absolute -bottom-5 left-[50%] translate-x-[-50%] group-hover:bottom-1/2 duration-300  group-hover:scale-105 transition-all z-10">
               <img
@@ -26,16 +26,15 @@ const lessonName =contents.length>1?"full course": contents[0].title
                     : "/images/MyLearning/Group1.svg"
                 }
                 alt="play"
-                className="w-12 lg:w-14  "
+                className="w-8 lg:w-14  "
               />
             </div>
-            <div className="bg-black bg-opacity-75 inset-0 h-0 absolute group-hover:h-full group-hover:w-full duration-500 transition-all ">
-
-            </div>
+            <div className="bg-black bg-opacity-75 inset-0 h-0 absolute group-hover:h-full group-hover:w-full duration-500 transition-all "/>
+            
           </div>
-          <div className="flex items-center justify-between w-full pt-2">
-            <p className="text-xl font-medium text-white">{course.title}</p>
-            <p className="text-sm font-normal my-4 text-[#FFFFFF57]">
+          <div className="flex items-center justify-between w-full pt-2 flex-wrap">
+            <p className="text-base lg:text-xl font-medium text-white">{course.title}</p>
+            <p className="text-xs lg:text-sm font-normal my-4 text-[#FFFFFF57]">
              ({lessonName})
             </p>
           </div>

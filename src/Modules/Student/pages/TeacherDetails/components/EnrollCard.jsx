@@ -68,11 +68,10 @@ const navigate = useNavigate();
   const handleModalPackages = () => {
     setIsModalPackagesOpen(true);
   };
-  // console.log(teacher, subject, course )
   return (
     <>
       <div className=" w-full md:min-w-[376px]  bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
-        <p className="text-base lg:text-lg font-semibold lg:leading-[27px] text-primary">
+        <p className="text-base lg:text-lg font-semibold lg:leading-[27px] text-primary uppercase">
         {/* {t('course_title')} */}
         {course?.title}
         </p>
@@ -95,14 +94,14 @@ const navigate = useNavigate();
               src="/images/TeacherDetails/Frame (1).svg"
               alt="Sessions icon"
             />
-            <p className="text-sm lg:text-base font-normal leading-[18.75px] text-white">
+            <p className="text-sm lg:text-base  font-normal leading-[18.75px] text-white">
             {t('session_type')}
             </p>
           </div>
-          <div className="flex items-center justify-between gap-5 min-w-full">
+          <div className="flex items-center justify-center gap-3 lg:gap-5 min-w-full flex-wrap">
           <button
   disabled={isSelected}
-  className={`rounded-md p-2 w-[120px] md:w-[160px] text-white ${
+  className={`rounded-md text-sm  lg:text-base p-2   text-white ${
     isSelected ? "bg-gray-400 cursor-not-allowed" : "buttonHover cursor-pointer"
   }`}
   onClick={handleBuyFullCourse}
@@ -110,10 +109,10 @@ const navigate = useNavigate();
                   {t('enroll_now')}
             </button>
             <button
-              className="bg-white cursor-pointer text-primary rounded-md p-2 w-[120px] md:w-[160px] hover:bg-primary hover:text-white duration-200 transition-all"
+              className="bg-white cursor-pointer text-primary rounded-md text-sm  lg:text-base p-2  hover:bg-primary hover:text-white duration-200 transition-all"
               onClick={() => handleAddToCart("course")} 
             >
-              {isSelected?'already in cart': t('add_to_cart')}
+              {isSelected?'already in cart': t('add_to_cart')} 
           
             </button>
           </div>
