@@ -274,14 +274,14 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
             <GoBack />
             <div className="flex gap-x-2">
               <div className="flex items-center">
-                <button className="bg-primary hover:bg-secondary text-nowrap py-2 px-2 text-white rounded-md transition-all duration-300">
+                {/* <button className="bg-primary hover:bg-secondary text-nowrap py-2 px-2 text-white rounded-md transition-all duration-300">
                   <Link 
                   // to={`/teacherpanel/courses/chooseunit/${unit}/test`}
                   to={''}
                   >
                     {t("unit.addUnitTest")}
                   </Link>
-                </button>
+                </button> */}
               </div>
 
               <button

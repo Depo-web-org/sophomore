@@ -30,7 +30,7 @@ export default function StudentStatistics() {
     <Carusoul totalsNum={totalsNum}/>
       <div className="w-full flex flex-col md:flex-row items-center justify-center md:justify-around ">
         <EnrollmentProgress  totalsNum={totalsNum} />
-        <TotalChart  />
+        {/* <TotalChart  /> */}
       </div>
       <StudentDetails />
     </>
