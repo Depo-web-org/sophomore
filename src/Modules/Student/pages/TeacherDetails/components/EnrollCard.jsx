@@ -25,7 +25,7 @@ const navigate = useNavigate();
         const isEnrolled = useMemo(() => {
           if (!isLoading && !isError && data) {
             const coursesEnrolled = data.data?.flatMap((course) => course?.items.map((item) => item.course));
-            return coursesEnrolled?.includes(course.id);
+            return coursesEnrolled?.includes(course?.id);
           }
           return false; // Default to false if data is unavailable
         }, [data, isLoading, isError, course?.id]);
