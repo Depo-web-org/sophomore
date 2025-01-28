@@ -34,7 +34,7 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
 
   return (
     <>
-      <section className="min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto py-24 lg:py-32  ">
+      <section className="min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto py-24 lg:py-32   ">
         <div>
           {/* <Breadcrumbs /> */}
           <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
@@ -50,7 +50,7 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
       const imagePath = subjectImageMap[subject.name.toLowerCase()] || '/education/assets/meta/subjects/default.webp';
 
       return (
-        <div key={subject.id} className="col-span-3 lg:col-span-4 rounded-2xl">
+        <div key={subject.id} className="col-span-3 lg:col-span-4 rounded-2xl ">
           <div className="relative overflow-hidden mt-2 lg:mt-4 rounded-3xl group">
             <Link to={`/school/${schoolName}/grade/${gradeName}/subject/${subject.id}`}>
             {/* <Link to={`/school/${subject.name}/subject/${subject.id}`}> */}
