@@ -5,57 +5,52 @@ import "swiper/css/pagination";
 import "./style/style.css";
 import { Pagination } from "swiper/modules";
 import { IoMdTrendingUp, IoMdTrendingDown } from "react-icons/io";
-const Carusoul = () => {
+const Carusoul = ({totalsNum}) => {
   const [details, setDetails] = useState([]);
-
+console.log(totalsNum)
   // Simulating an API call
-  useEffect(() => {
-    // Simulating fetching data from API
-    const fetchData = async () => {
+
       const response = {
         data: [
           {
             title: "Enroll Students",
-            value: "7.268",
+            value:totalsNum,
             percentageChange: "+11.01%",
             icon: "IoMdTrendingUp",
           },
-          {
-            title: "Quiz completion rates",
-            value: "85%",
-            percentageChange: "-2.5%",
-            icon: "IoMdTrendingDown",
-          },
-          {
-            title: "Average quiz scores",
-            value: "88%",
-            percentageChange: "+5.5%",
-            icon: "IoMdTrendingUp",
-          },
-          {
-            title: "Quiz Completion",
-            value: "92%",
-            percentageChange: "+1.2%",
-            icon: "IoMdTrendingUp",
-          },
-          {
-            title: "Enroll Students",
-            value: "7.268",
-            percentageChange: "+11.01%",
-            icon: "IoMdTrendingUp",
-          },
-          {
-            title: "Quiz completion rates",
-            value: "75%",
-            percentageChange: "-3.3%",
-            icon: "IoMdTrendingDown",
-          },
+          // {
+          //   title: "Quiz completion rates",
+          //   value: "85%",
+          //   percentageChange: "-2.5%",
+          //   icon: "IoMdTrendingDown",
+          // },
+          // {
+          //   title: "Average quiz scores",
+          //   value: "88%",
+          //   percentageChange: "+5.5%",
+          //   icon: "IoMdTrendingUp",
+          // },
+          // {
+          //   title: "Quiz Completion",
+          //   value: "92%",
+          //   percentageChange: "+1.2%",
+          //   icon: "IoMdTrendingUp",
+          // },
+          // {
+          //   title: "Enroll Students",
+          //   value: "7.268",
+          //   percentageChange: "+11.01%",
+          //   icon: "IoMdTrendingUp",
+          // },
+          // {
+          //   title: "Quiz completion rates",
+          //   value: "75%",
+          //   percentageChange: "-3.3%",
+          //   icon: "IoMdTrendingDown",
+          // },
         ],
       };
-      setDetails(response.data);
-    };
-    fetchData();
-  }, []);
+ 
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -87,7 +82,7 @@ const Carusoul = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {details.map((detail, index) => (
+          {response.data.map((detail, index) => (
             <SwiperSlide key={index}>
               <div
                 className={`h-28 gap-y-2 px-4 flex justify-center flex-col items-start ${
