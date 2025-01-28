@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const EnrollmentProgress = () => {
-  const targetProgress = 50;
+const EnrollmentProgress = ({totalsNum}) => {
+  const targetProgress = totalsNum;
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const ProgressCircle = ({ progress }) => {
       </svg>
 
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-4xl font-normal text-white">{progress}%</span>
+        <span className="text-4xl font-normal text-white">{progress}</span>
       </div>
     </div>
   );
