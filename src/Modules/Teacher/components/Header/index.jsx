@@ -11,15 +11,7 @@ const Header = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const pathname = location.pathname.split("/").filter((x) => x);
-  const {
-    data,
-    error: dataerror,
-    isFetching,
-    refetch,
-    isLoading: dataLoading,
-  } = useGetProfileQuery();
-  console.log('data profile:', data?.data);
-  const student = data?.data;
+ 
   const toggleLanguage = () => {
     const newLanguage = i18n.language === "en" ? "ar" : "en";
     // change in Html
