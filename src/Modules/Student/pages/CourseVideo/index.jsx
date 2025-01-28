@@ -16,9 +16,9 @@ export default function EnrolledCourse() {
   // }, [courseID, navigate]);
 
   return (
-    <div className="min-h-screen w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3">
+    <div className="min-h-screen  w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3">
       <div className="flex flex-1 gap-8 flex-col lg:flex-row ">
-        <div className="w-2/3">
+        <div className="w-full lg:w-2/3">
        <Outlet/>
        </div>
        <div className="lg:w-1/3 w-full">
@@ -34,10 +34,9 @@ const LessonsPaginator = () => {
   console.log(lessonsNum); 
   const { t } = useTranslation();
   const ReversedLesson = lessonsNum.reverse();
-  console.log(ReversedLesson)
 
   return (
-    <div className="bg-slate-900 rounded-lg p-6 w-full hover:shadow-[6px_6px_0px_0px_#F15C54] duration-150 transition-all shadow-[4px_4px_0px_0px_#F15C54]">
+    <div className="bg--900  rounded-lg p-6 w-full hover:shadow-[6px_6px_0px_0px_#F15C54] duration-150 transition-all shadow-[4px_4px_0px_0px_#F15C54]">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-bold text-white">{t("choose_lesson")}</h1>
       </div>

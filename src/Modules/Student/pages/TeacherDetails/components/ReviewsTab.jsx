@@ -5,7 +5,7 @@ export default function ReviewsTab() {
     const { t } = useTranslation();
   
   return (
-    <section className="w-full flex flex-col items-start justify-start xl:pr-12  ">
+    <section className="w-full flex flex-col items-start justify-start xl:pr-12   ">
       <div className="grid grid-cols-1 gap-8  ">
         <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto border-b border-gray-500">
           <div className="col-span-12 lg:col-span-10  ">

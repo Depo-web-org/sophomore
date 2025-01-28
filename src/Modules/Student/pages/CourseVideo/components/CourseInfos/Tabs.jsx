@@ -27,7 +27,7 @@ export default function Tabs() {
               to="comments"
               className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm lg:text-base font-medium text-white hover:text-secondary"
             >
-              {t("tabs.comments")} {/* Translated */}
+              {t("tabs.comments")} 
             </NavLink>
 
             <NavLink

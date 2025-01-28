@@ -64,10 +64,10 @@ console.log(lessonInfo)
 
 
   return (
-    <div className="w-full flex flex-col gap-4 text-white">
+    <div className="w-full flex flex-col gap-4 text-white ">
       {contents.length === 0 ? (
-        <div className="text-center py-6">
-          <p className=" font-medium text-gray-300 text-2xl ">
+        <div className="text-center  py-2 lg:py-6">
+          <p className=" font-medium text-gray-300 text-base  lg:text-2xl ">
             {/* {t("no_lessons_added")}  */}
             { i18n.languages[0] === "ar" ? " لم يتم إضافة دروس بعد !" : " No lessons added ! "}
           </p>
