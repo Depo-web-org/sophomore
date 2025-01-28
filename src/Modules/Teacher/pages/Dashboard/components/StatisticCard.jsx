@@ -20,22 +20,23 @@ export const statisticsData = [
   },
   {
     image: <GiMoneyStack />,
-    title: "Total Profit ",
-    title_ar: "الطلاب الناشطين",
+    title: "Total Profit",
+    title_ar: "الربح الإجمالي",
     stats: 0, // Will be updated dynamically
   },
 ];
 
-export default function Statistics({ numberOfCourses, numberOfStudents }) {
+export default function Statistics({ numberOfCourses, numberOfStudents,numberOfTotalProfit }) {
   const { i18n, t } = useTranslation();
 
-  // Update the statisticsData array with the props
   const updatedStatisticsData = statisticsData.map((item) => {
-    if (item.title === "Total Courses") {
+    if (item.title === "Total Profit") { 
+      return { ...item, stats: numberOfTotalProfit   };
+    }else if (item.title === "Total Courses") {
       return { ...item, stats: numberOfCourses || 0 };
     } else if (item.title === "Active Students") {
       return { ...item, stats: numberOfStudents || 0 };
-    }
+    } 
     return item;
   });
 

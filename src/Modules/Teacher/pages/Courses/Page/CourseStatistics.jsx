@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   StatisticCard,
   statisticsData,
@@ -6,23 +6,38 @@ import {
 import { Link } from "react-router-dom";
 import { TbEdit } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
-import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { useGetTeacherCoursesQuery, useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
 import {timeAgo} from "../../../../../Helpers/timeAgo"
 import SkeletonStaticCard from "../../../../../Components/Common/SkeletonCard/SkeletonStaticCard";
 import CourseManagementSkeleton from "../../../components/Skeletons/CourseManagementSkeleton";
+import { getUniqueData } from "../../Dashboard";
 
 
 export default function CourseStatistics() {
-  const { i18n, t } = useTranslation(); // Initialize useTranslation
+  const { i18n, t } = useTranslation(); 
     const {data,isLoading, isFetching,isError} = useGetTeacherCoursesQuery()
+    const { data: subscribersData, isFetching: isFetchingSubscribers } = useGetTeacherSubscripersQuery();
+      const finalFilterData = useMemo(() => getUniqueData(subscribersData?.data, "consumer"), [subscribersData]);
+    
+     const numberOfTotalProfit = useMemo(
+        () =>
+          subscribersData?.data
+            ?.map((item) => Number(item.total))
+            .reduce((sum, value) => sum + value, 0) || 0,
+        [subscribersData]
+      );
   const updatedStatisticsData = statisticsData.map((item) => {
      if (item.title === "Total Courses") {
        return { ...item, stats: data?.data?.length || 0 };
      } else if (item.title === "Active Students") {
-       return { ...item, stats: 0 };
+       return { ...item, stats: finalFilterData.length  };
      }
+     else if (item.title === "Total Profit") {
+      return { ...item, stats:numberOfTotalProfit };
+    }
      return item;
    });
+   
   return (
     <>
       <div className="grid grid-cols-1 gap-8 gap-y-4 w-full  ">
@@ -140,10 +155,8 @@ const AllCourses = () => {
 const RecentlyUploaded = ({ data }) => {
   console.log(data?.data);
   const recentCourses = data?.data.slice(0, 3);
-  console.log(recentCourses);
 
-  const { t, i18n } = useTranslation(); // Initialize useTranslation
-  // Array of objects representing course details
+  const { t, i18n } = useTranslation(); 
 
   return (
     <div

@@ -3,16 +3,50 @@ import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDeleteTeacherCourseMutation } from "../../../../../Redux/data/postDataApiSlice";
-import { useGetTeacherCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { useGetTeacherCoursesQuery, useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
 import { ImSpinner9 } from "react-icons/im";
+import { getUniqueData } from "..";
 
-export default function CourseManagement({ data }) {
+
+export const countStudentsPerCourse = (data) => {
+  const courseCounts = {};
+
+  data?.forEach(order => {
+    const studentId = order.student_id;
+
+    order?.items?.forEach(item => {
+      const courseId = item.course_data_object.id;
+      const courseTitle = item.course_data_object.title;
+
+      if (!courseCounts[courseId]) {
+        courseCounts[courseId] = {
+          title: courseTitle,
+          count: 0,
+          courseID: courseId,
+          uniqueStudents: new Set() 
+        };
+      }
+
+      
+      if (!courseCounts[courseId].uniqueStudents.has(studentId)) {
+        courseCounts[courseId].uniqueStudents.add(studentId); 
+        courseCounts[courseId].count++; 
+      }
+    });
+  });
+
+  return Object.values(courseCounts).map(({ uniqueStudents, ...rest }) => rest);
+};
+
+
+export default function CourseManagement({ data,subscribersData }) {
   const [deleteModal, setDeleteModal] = useState(false); 
   const [selectedCourseId, setSelectedCourseId] = useState(null); 
   const [openMenuId, setOpenMenuId] = useState(null); 
   const { t } = useTranslation();
   const [deleteTeacherCourse, { isLoading, isError }] = useDeleteTeacherCourseMutation();
   const { refetch } = useGetTeacherCoursesQuery();
+const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
 
   const deleteCourse = async (id) => {
     const formData = {
@@ -26,9 +60,8 @@ export default function CourseManagement({ data }) {
   };
 
   
-  const toggleMenu = (id) => {
-    setOpenMenuId(openMenuId === id ? null : id); 
-  };
+  const toggleMenu = id =>  setOpenMenuId(openMenuId === id ? null : id); 
+
 
   return (
     <div className="w-full bg-white rounded-[20px] py-4 hover:shadow-lg bgy">
@@ -64,7 +97,10 @@ export default function CourseManagement({ data }) {
             </thead>
 
             <tbody className="divide-y divide-gray-200 ">
-              {data?.data.map((course, index) => (
+              {data?.data.map((course, index) =>{ 
+            
+                const numberOfStudents =studentPerCourse?.filter((item)=> item.courseID === course.id)
+                return (
                 <tr key={index}>
                   <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                     {course.title}
@@ -73,7 +109,8 @@ export default function CourseManagement({ data }) {
                     {course.dateof.split(" ")[0]}
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                    {course.enrollment || 0}
+                    {/* {course.enrollment || 0} */}
+                    {numberOfStudents[0]?.count}
                   </td>
                   <td className={`whitespace-nowrap px-4 py-2 ${course.status === "1" ? "text-emerald-700":"text-red-700" } `}>
                     {course.status === "1" ?   t("courseManagement.statusOfCourseFinished"):t("courseManagement.statusOfAddCourse")  }
@@ -138,7 +175,7 @@ export default function CourseManagement({ data }) {
                     </div>
                   </td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </table>
         )}
