@@ -4,11 +4,14 @@ import CourseManagement from "./components/CourseManagement";
 import Activity from "./components/Activity";
 import QuickAction from "./components/QuickAction";
 import ApexChart from "./components/Chart";
-import { useGetTeacherCoursesQuery } from "../../../../Redux/data/getDataApiSlice";
+import { useGetTeacherCoursesQuery, useGetTeacherSubscripersQuery } from "../../../../Redux/data/getDataApiSlice";
 import CourseManagementSkeleton from "../../components/Skeletons/CourseManagementSkeleton";
 
 export default function Dashboard() {
   const {data,isLoading, isFetching,isError,refetch} = useGetTeacherCoursesQuery()
+  const {data:subscripers,isLoading:subLoading, isFetching:subFetching,isError:subError,refetch:subRefetch} = useGetTeacherSubscripersQuery()
+  console.log(subscripers)
+  
  
   
   useEffect(()=>{
