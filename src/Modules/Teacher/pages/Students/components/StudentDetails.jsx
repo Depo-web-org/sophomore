@@ -1,67 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-
-const students = [
-  {
-    name: "Rami Zayd",
-    id: "#34152",
-    enrollmentDate: "Jun 24, 2024",
-    progress: 45,
-    courseName: "Math",
-    progressColor: "bg-yellow-400",
-    email: "rami.zayd@example.com",
-    phone: "+1234567890",
-    grade: "Grade 2",
-  },
-  {
-    name: "Samir Khalid",
-    id: "#21450",
-    enrollmentDate: "Mar 10, 2024",
-    progress: 60,
-    courseName: "Math",
-    progressColor: "bg-red-400",
-    email: "samir.khalid@example.com",
-    phone: "+1234567891",
-    grade: "Grade 1",
-  },
-  {
-    name: "Jana Fadila",
-    id: "#40152",
-    enrollmentDate: "Nov 10, 2024",
-    progress: 70,
-    courseName: "Math",
-    progressColor: "bg-pink-400",
-    email: "jana.fadila@example.com",
-    phone: "+1234567892",
-    grade: "Grade 2",
-  },
-  {
-    name: "Layla Noor",
-    id: "#81153",
-    enrollmentDate: "Dec 20, 2024",
-    progress: 20,
-    courseName: "Math",
-    progressColor: "bg-green-400",
-    email: "layla.noor@example.com",
-    phone: "+1234567893",
-    grade: "Grade 1",
-  },
-  {
-    name: "Ali Karim",
-    id: "#24152",
-    enrollmentDate: "Jul 25, 2024",
-    progress: 90,
-    courseName: "Math",
-    progressColor: "bg-purple-400",
-    email: "ali.karim@example.com",
-    phone: "+1234567894",
-    grade: "Grade 2",
-  },
-];
+import { useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { timeAgo } from "../../../../../Helpers/timeAgo";
+import { useTranslation } from "react-i18next";
 
 export default function StudentDetails() {
+  const { data: subscripers, isLoading: subLoading, isFetching: subFetching, isError: subError, refetch: subRefetch } = useGetTeacherSubscripersQuery();
+  const students = subscripers?.data;
+
+  const { i18n, t } = useTranslation(); 
   const navigate = useNavigate();
+
+  const [searchQuery, setSearchQuery] = useState(""); 
+
+  const filteredStudents = students?.filter((student) => {
+    const fullName = `${student?.consumer_data_object?.first_name} ${student?.consumer_data_object?.last_name}`.toLowerCase();
+    return fullName.includes(searchQuery.toLowerCase());
+  });
   return (
     <div className="bg-white rounded-2xl w-full p-6">
       <div className="flex flex-col md:flex-row gap-2 justify-between items-center w-full">
@@ -69,13 +25,17 @@ export default function StudentDetails() {
         <div className="flex items-center flex-col md:flex-row justify-center md:justify-evenly w-full md:w-1/2 ">
           <div className="relative w-4/5 md:w-1/2">
             <input
-              className="border-[1px] w-full bg-gray-100  rounded-lg outline-none ring-0 py-1 px-2 pl-10" // Add padding to the left for the icon
+              className="border-[1px] w-full bg-gray-100 rounded-lg outline-none ring-0 py-1 px-2 pl-10"
               type="search"
               placeholder="Search"
+              value={searchQuery} 
+              onChange={(e) => setSearchQuery(e.target.value)} 
             />
-            <IoIosSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />{" "}
+            <IoIosSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
           </div>
-          <button className="text-lg text-primary underline hover:underline-offset-0 hover:bg-slate-50 rounded-lg p-2 ">
+          <button
+          onClick={()=>setSearchQuery("")}
+           className="text-lg text-primary underline hover:underline-offset-0 hover:bg-slate-50 rounded-lg p-2 ">
             View all
           </button>
         </div>
@@ -87,45 +47,39 @@ export default function StudentDetails() {
               <th className="py-4 px-6">Student Name</th>
               <th className="py-4 px-6">Student ID</th>
               <th className="py-4 px-6">Enrollment Date</th>
-              <th className="py-4 px-6">Progress</th>
+              <th className="py-4 px-6">Phone</th>
               <th className="py-4 px-6">Course Name</th>
             </tr>
           </thead>
           <tbody>
-            {students.map((student, index) => (
-              <tr
-                onClick={() =>
-                  navigate("/teacherPanel/students/studentprofile", {
-                    state: { student },
-                  })
-                }
-                key={student.id}
-                className={`${
-                  index % 2 === 0 ? "bg-[#E6F1FD]" : "bg-[#C3CCE5]"
-                }  border-b-4 border-white`}
-              >
-                <td className="py-4 px-6 flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-600"></div>
-                  {student.name}
-                </td>
-                <td className="py-4 px-6">{student.id}</td>
-                <td className="py-4 px-6">{student.enrollmentDate}</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex-1 h-2 bg-white rounded-full ">
-                      <div
-                        className={`h-full ${student.progressColor} rounded-full`}
-                        style={{ width: `${student.progress}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-sm text-gray-600">
-                      {student.progress}%
-                    </span>
-                  </div>
-                </td>
-                <td className="py-4 px-6">{student.courseName}</td>
-              </tr>
-            ))}
+            {filteredStudents?.map((student, index) => {
+              const lessons = student?.items[0].contents.length > 0 ? "full course" : student?.items[0]?.content_data_object?.title;
+              return (
+                <tr
+                  onClick={() =>
+                    navigate("/teacherPanel/students/studentprofile", {
+                      state: { student },
+                    })
+                  }
+                  key={student.id}
+                  className={`${
+                    index % 2 === 0 ? "bg-[#E6F1FD]" : "bg-[#C3CCE5]"
+                  }  border-b-4 border-white`}
+                >
+                  <td className="py-4 px-6 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                    {student?.consumer_data_object?.first_name} {student?.consumer_data_object?.last_name}
+                  </td>
+                  <td className="py-4 px-6"># {student?.consumer_data_object?.id}</td>
+                  <td className="py-4 px-6">{timeAgo(student?.dateof)[i18n.language]}</td>
+                  <td className="py-4 px-6">{student?.consumer_data_object?.phone_number === "undefined" ? "Not added yet" : student?.consumer_data_object?.phone_number}</td>
+                  <td className="py-4 px-6">
+                    {student?.items[0].course_data_object?.title}
+                    <span className="text-sm text-green-600 px-1">({lessons})</span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
