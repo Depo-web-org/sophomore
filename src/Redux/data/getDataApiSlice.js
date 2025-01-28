@@ -70,10 +70,17 @@ export const getDataApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ['StudentCourses']
     }),
+    getTeacherSubscripers: builder.query({
+      query: () => ({
+        url: `getProviderSubscribers.php`,
+        method: "GET",   
+      }),
+      providesTags: ['TeacherSubscripers']
+    }),
     // https://dev.depowebeg.com/education/api/getSchools.php?grades=true&recursive=true&recursive=true
     // Other data fetching endpoints can go here...
   }),
 });
 
 // Export hooks to use in your components
-export const { useGetTeacherCoursesQuery,useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery , useGetAllSchoolInformationQuery , useGetSubjectTeachersQuery,useGetTeacherDocumentQuery,useGetStudentCoursesQuery} = getDataApiSlice;
+export const { useGetTeacherCoursesQuery,useGetGradesQuery, useGetSchoolsQuery, useGetProfileQuery ,useGetProfileTeacherQuery , useGetAllSchoolInformationQuery , useGetSubjectTeachersQuery,useGetTeacherDocumentQuery,useGetStudentCoursesQuery,useGetTeacherSubscripersQuery} = getDataApiSlice;
