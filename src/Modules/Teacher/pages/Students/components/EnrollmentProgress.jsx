@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const EnrollmentProgress = ({totalsNum}) => {
   const targetProgress = totalsNum;
   const [progress, setProgress] = useState(0);
+const {i18n}=useTranslation()
 
   useEffect(() => {
     let animationFrame;
@@ -26,7 +28,8 @@ const EnrollmentProgress = ({totalsNum}) => {
   return (
     <div className="flex flex-col items-center p-8">
       <h1 className="text-base font-normal text-[#666666] mb-4">
-        New Enrollments
+        
+        {`${i18n.language==="ar" ? " اﻵشتراكات الجديدة":"New Enrollments"}`}
       </h1>
 
       <ProgressCircle progress={progress} />

@@ -24,16 +24,17 @@ export default function StudentDetails() {
       <StudentDetailsSkeleton/>
     )
   }
+
   return (
     <div className="bg-white rounded-2xl w-full p-6">
       <div className="flex flex-col md:flex-row gap-2 justify-between items-center w-full">
-        <p className="text-xl font-semibold text-primary">Student details</p>
+        <p className="text-xl font-semibold text-primary">{  `${i18n.language==="ar"? "تفاصيل الطﻻب" :"Student details"}`}</p>
         <div className="flex items-center flex-col md:flex-row justify-center md:justify-evenly w-full md:w-1/2 ">
           <div className="relative w-4/5 md:w-1/2">
             <input
               className="border-[1px] w-full bg-gray-100 rounded-lg outline-none ring-0 py-1 px-2 pl-10"
               type="search"
-              placeholder="Search"
+              placeholder={  `${i18n.language==="ar"? "بحث" :"search"}`}
               value={searchQuery} 
               onChange={(e) => setSearchQuery(e.target.value)} 
             />
@@ -42,19 +43,20 @@ export default function StudentDetails() {
           <button
           onClick={()=>setSearchQuery("")}
            className="text-lg text-primary underline hover:underline-offset-0 hover:bg-slate-50 rounded-lg p-2 ">
-            View all
+         
+            {  `${i18n.language==="ar"? "اظهار الكل" :"   View all"}`}
           </button>
         </div>
       </div>
-      <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
+      <div  className="bg-white rounded-xl shadow-sm overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="text-left text-sm text-gray-500">
-              <th className="py-4 px-6">Student Name</th>
-              <th className="py-4 px-6">Student ID</th>
-              <th className="py-4 px-6">Enrollment Date</th>
-              <th className="py-4 px-6">Phone</th>
-              <th className="py-4 px-6">Course Name</th>
+            <tr className="text-start text-sm text-gray-500 text-nowrap">
+              <th className="py-4 px-6"> {  `${i18n.language==="ar"? "اسم الطالب " :"Student Name"}`}</th>
+              <th className="py-4 px-6"> {  `${i18n.language==="ar"? "كود الطالب" :"Student ID"}`}</th>
+              <th className="py-4 px-6"> {  `${i18n.language==="ar"? "تاريخ اﻵشتراك " :"Enrollment Date"}`}</th>
+              <th className="py-4 px-6">{  `${i18n.language==="ar"? "الهاتف" :"Phone"}`}</th>
+              <th className="py-4 px-6">{  `${i18n.language==="ar"? "أسم الكورس" :"Course Name "}`}</th>
             </tr>
           </thead>
           <tbody>
@@ -70,15 +72,15 @@ export default function StudentDetails() {
                   key={student.id}
                   className={`${
                     index % 2 === 0 ? "bg-[#E6F1FD]" : "bg-[#C3CCE5]"
-                  }  border-b-4 border-white`}
+                  }  border-b-4 border-white text-nowrap `}
                 >
-                  <td className="py-4 px-6 flex items-center gap-2">
+                  <td className="py-4 px-6 flex items-center gap-2 justify-center">
                     <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                     {student?.consumer_data_object?.first_name} {student?.consumer_data_object?.last_name}
                   </td>
                   <td className="py-4 px-6"># {student?.consumer_data_object?.id}</td>
                   <td className="py-4 px-6">{timeAgo(student?.dateof)[i18n.language]}</td>
-                  <td className="py-4 px-6">{student?.consumer_data_object?.phone_number === "undefined" ? "Not added yet" : student?.consumer_data_object?.phone_number}</td>
+                  <td className="py-4 px-6">{student?.consumer_data_object?.phone_number === "undefined" ? `${i18n.language==="ar"? "لم يضف بعد" :"Not added yet"}`  : student?.consumer_data_object?.phone_number}</td>
                   <td className="py-4 px-6 flex flex-wrap justify-center">
                      
                {student?.items[0].course_data_object?.title}

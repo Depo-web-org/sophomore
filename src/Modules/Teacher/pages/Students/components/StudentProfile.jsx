@@ -9,15 +9,14 @@ import { baseUrl } from "../../../../../App";
 import { useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
 import { BsCalendar2Check } from "react-icons/bs";
 import StudentProfileSkeleton from "./StudentProfileSkeleton";
+import { useTranslation } from "react-i18next";
 
 export default function StudentProfile() {
   const location = useLocation();
+  const {i18n}=useTranslation()
   const { student } = location.state || {};
 
     const {data:subscripers,isLoading:subLoading, isFetching:subFetching,isError:subError,refetch:subRefetch} = useGetTeacherSubscripersQuery()
-    console.log(subscripers?.data)
-
-
   if (!student) {
     return <div>No student data available</div>;
   }
@@ -25,26 +24,26 @@ export default function StudentProfile() {
     return(<StudentProfileSkeleton/>)
   }
 const selectedStudent =subscripers?.data?.filter((selected)=>student.consumer===selected?.consumer)
-console.log(selectedStudent)
+console.log(i18n.language)
   return (
-    <div className="w-full min-h-40">
+    <div className="w-full min-h-40 ">
       <div className="relative bg-gradient-to-l from-[#F15C54] from-10%  to-[#536CB3] to-90% w-full h-48  rounded-tl-lg rounded-tr-lg">
         {/* img */}
         <div className="absolute top-32 md:top-[102px] left-2 md:left-24 flex items-center justify-start gap-4">
           <img
-            className="border-4 border-white  w-24 h-24 md:w-36 md:h-36 s rounded-full object-cover"
+            className="border-4 border-white  w-24 h-24 md:w-36 md:h-36  rounded-full object-cover"
             src={`${baseUrl}${student.consumer_data_object.path}${student.consumer_data_object.photo}`}
             alt="profile"
           />
-          <p className="text-lg md:text-2xl font-semibold text-white">
+          <p className="text-lg md:text-2xl font-semibold text-white text-nowrap">
             {student.consumer_data_object.first_name} {student.consumer_data_object.last_name}
           </p>
           <p className="bg-green-600 px-2 py-1 text-white font-normal text-xs md:text-sm rounded-full">
-            active
+            {i18n.language==="ar"? "نشط": "active"}
           </p>
         </div>
       </div>
-      <div className="bg-white min-h-32 flex flex-col md:flex-row items-center justify-start  pl-[8%] pt-16 md:pt-5 gap-8 ">
+      <div className="bg-white min-h-32 flex flex-col md:flex-row items-center justify-start  ps-[8%] pt-20 md:pt-10 gap-8 ">
         <div className="flex items-center justify-center gap-1 text-[#4B5563]">
           <span className="mb-1 text-primary text-xl ">
             <IoMdMail />
@@ -55,7 +54,7 @@ console.log(selectedStudent)
           <span className="mb-1 text-primary text-xl ">
             <MdLocalPhone />
           </span>
-          <p>{student?.consumer_data_object?.phone_number==="undefined"?"Not added yet":student?.consumer_data_object?.phone_number}</p>
+          <p>{student?.consumer_data_object?.phone_number==="undefined"? `${i18n.language==="ar"? "لم يضف بعد" :"Not added yet"}`:student?.consumer_data_object?.phone_number}</p>
         </div>
         {/* <div className="flex items-center justify-center gap-1 text-[#4B5563]">
           <span className="mb-1 text-primary text-xl ">
