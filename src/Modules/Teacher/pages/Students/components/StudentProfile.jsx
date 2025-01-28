@@ -8,6 +8,7 @@ import { RiGraduationCapFill } from "react-icons/ri";
 import { baseUrl } from "../../../../../App";
 import { useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
 import { BsCalendar2Check } from "react-icons/bs";
+import StudentProfileSkeleton from "./StudentProfileSkeleton";
 
 export default function StudentProfile() {
   const location = useLocation();
@@ -19,6 +20,9 @@ export default function StudentProfile() {
 
   if (!student) {
     return <div>No student data available</div>;
+  }
+  if(subFetching){
+    return(<StudentProfileSkeleton/>)
   }
 const selectedStudent =subscripers?.data?.filter((selected)=>student.consumer===selected?.consumer)
 console.log(selectedStudent)
