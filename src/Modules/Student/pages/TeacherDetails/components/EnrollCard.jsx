@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ModalPackages from "./ModalPackages";
 import ModalOops from "./ModalOops";
 import { ModalUnits } from "./ModalUnits";
@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../Redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
 
 export default function EnrollCard() {
   const { teacher, subject, course } = useSelector((state) => state.courseInformation); 
@@ -18,7 +19,19 @@ const navigate = useNavigate();
 
       const cartItems = useSelector((state) => state.cart.items);
       console.log(course)
+        const {data, isLoading, isError}= useGetStudentCoursesQuery()
+        // console.log(data?.data);
 
+        const isEnrolled = useMemo(() => {
+          if (!isLoading && !isError && data) {
+            const coursesEnrolled = data.data?.flatMap((course) => course?.items.map((item) => item.course));
+            return coursesEnrolled?.includes(course.id);
+          }
+          return false; // Default to false if data is unavailable
+        }, [data, isLoading, isError, course?.id]);
+        console.log(isEnrolled)
+
+        
   const handleButtonClick = () => {
     // setIsModalUnitsOpen(false);
     // setIsModalPackagesOpen(false);
@@ -98,7 +111,7 @@ const navigate = useNavigate();
             {t('session_type')}
             </p>
           </div>
-          <div className="flex items-center justify-center gap-3 lg:gap-5 min-w-full flex-wrap">
+{      !isEnrolled&&    <div className="flex items-center justify-center gap-3 lg:gap-5 min-w-full flex-wrap">
           <button
   disabled={isSelected}
   className={`rounded-md text-sm  lg:text-base p-2   text-white ${
@@ -115,7 +128,7 @@ const navigate = useNavigate();
               {isSelected?'already in cart': t('add_to_cart')} 
           
             </button>
-          </div>
+          </div>}
         </div>
       </div>
 
