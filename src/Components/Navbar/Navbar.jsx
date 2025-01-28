@@ -50,12 +50,13 @@ const Navbar = () => {
       { text: t("header.menu.home"), link: "/" },
       { text: t("header.menu.about_us"), link: "/about" },
       { text: t("header.menu.contact_us"), link: "/contact" },
+      { icon: <IoHeartOutline />, link: "/wishlist" },
     ];
     if (Token && role === "student") {
       // Add protected items only if authenticated as a student
       items.push(
         { text: t("header.menu.my_learning"), link: "/mylearning" },
-        { icon: <IoHeartOutline />, link: "/wishlist" },
+        
         { icon: <IoCartOutline />, link: "/cart" },
        
       );

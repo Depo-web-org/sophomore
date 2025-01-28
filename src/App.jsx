@@ -403,9 +403,9 @@ function AppRoutes() {
           <Route
             path="/wishlist"
             element={
-              <StudentProtectedRoute>
+              // <StudentProtectedRoute>
                 <WishList />
-              </StudentProtectedRoute>
+              // </StudentProtectedRoute>
             }
           />
           <Route path="/Wishlistempty" element={<Wishlistempty />} />
