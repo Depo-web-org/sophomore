@@ -2,9 +2,6 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function LearningCard({ course, path, image,contents }) {
-  console.log(contents.length)
-  console.log(contents)
-  
 const lessonName =contents.length>1?"full course": contents[0].title
 
 
@@ -32,8 +29,8 @@ const lessonName =contents.length>1?"full course": contents[0].title
             <div className="bg-black bg-opacity-75 inset-0 h-0 absolute group-hover:h-full group-hover:w-full duration-500 transition-all "/>
             
           </div>
-          <div className="flex items-center justify-between w-full pt-2 flex-wrap">
-            <p className="text-base lg:text-xl font-medium text-white">{course.title}</p>
+          <div className="flex items-center justify-between w-full pt-5 lg:pt-2 flex-wrap">
+            <p className="text-sm lg:text-xl font-medium text-white">{course.title}</p>
             <p className="text-xs lg:text-sm font-normal my-4 text-[#FFFFFF57]">
              ({lessonName})
             </p>
