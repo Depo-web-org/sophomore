@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
 import { timeAgo } from "../../../../../Helpers/timeAgo";
 import { useTranslation } from "react-i18next";
+import StudentDetailsSkeleton from "./StudentDetailsSkeleton";
 
 export default function StudentDetails() {
   const { data: subscripers, isLoading: subLoading, isFetching: subFetching, isError: subError, refetch: subRefetch } = useGetTeacherSubscripersQuery();
@@ -18,6 +19,11 @@ export default function StudentDetails() {
     const fullName = `${student?.consumer_data_object?.first_name} ${student?.consumer_data_object?.last_name}`.toLowerCase();
     return fullName.includes(searchQuery.toLowerCase());
   });
+  if(subFetching){
+    return(
+      <StudentDetailsSkeleton/>
+    )
+  }
   return (
     <div className="bg-white rounded-2xl w-full p-6">
       <div className="flex flex-col md:flex-row gap-2 justify-between items-center w-full">
@@ -73,8 +79,9 @@ export default function StudentDetails() {
                   <td className="py-4 px-6"># {student?.consumer_data_object?.id}</td>
                   <td className="py-4 px-6">{timeAgo(student?.dateof)[i18n.language]}</td>
                   <td className="py-4 px-6">{student?.consumer_data_object?.phone_number === "undefined" ? "Not added yet" : student?.consumer_data_object?.phone_number}</td>
-                  <td className="py-4 px-6">
-                    {student?.items[0].course_data_object?.title}
+                  <td className="py-4 px-6 flex flex-wrap justify-center">
+                     
+               {student?.items[0].course_data_object?.title}
                     <span className="text-sm text-green-600 px-1">({lessons})</span>
                   </td>
                 </tr>
