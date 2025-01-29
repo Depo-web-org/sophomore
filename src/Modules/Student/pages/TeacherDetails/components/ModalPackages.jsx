@@ -45,7 +45,7 @@ function UnitPackage({ handleUnitsPackages }) {
   const { t } = useTranslation();
 
   return (
-    <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12">
+    <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12 b">
       <div className="text-center">
         <h2 className="text-lg font-medium text-white">
           {t("modal.unit_by_unit.title")} <span className="sr-only">Plan</span>

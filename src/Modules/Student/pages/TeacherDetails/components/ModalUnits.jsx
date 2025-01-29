@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { useSelector } from "react-redux";
 
 export function ModalUnits({ setIsModalUnitsOpen, handleButtonClick }) {
   const [selectedUnits, setSelectedUnits] = useState([]);
   const unitPrice = 300;
-
+ 
   const handleUnitToggle = (unit) => {
     setSelectedUnits((prev) =>
       prev.includes(unit) ? prev.filter((u) => u !== unit) : [...prev, unit]

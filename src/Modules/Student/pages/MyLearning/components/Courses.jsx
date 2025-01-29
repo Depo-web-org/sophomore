@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 
 
-const parseJSONSafely = (jsonString) => {
+export const parseJSONSafely = (jsonString) => {
   try {
     if (typeof jsonString !== "string") return jsonString; 
     // eslint-disable-next-line no-control-regex

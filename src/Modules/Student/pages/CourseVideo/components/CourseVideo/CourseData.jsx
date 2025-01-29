@@ -12,7 +12,7 @@ export default function CourseData() {
 
   return (
     <div className=" w-full ">
-      <div className="flex flex-col items-start justify-start gap-2 w-full  ">
+      <div className="flex flex-col items-start justify-start gap-2 w-full   ">
         <iframe
           src={`${baseUrl}${selectedVideo?.path}${selectedVideo?.video}`}
           // title="YouTube video player"
