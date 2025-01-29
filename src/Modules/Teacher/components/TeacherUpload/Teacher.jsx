@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TopText from "../Top Text Cards/TopText";
@@ -28,6 +27,7 @@ const TeacherUpload = () => {
   const { t } = useTranslation();
   const [buttonStates, setButtonStates] = useState([]);
   const [cardteacher, setCardteacher] = useState([]);
+  const [loading, setLoading] = useState(false); // State to track loading status
   const getUserInformation = JSON.parse(localStorage.getItem("USER"));
   const [updateDocument, { isError, error: UpdateEroor }] =
     useAddTeacherDocumentMutation();
@@ -39,6 +39,7 @@ const TeacherUpload = () => {
   // Fetch data from backend on component mount
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true); // Set loading to true when data fetching starts
       try {
         const response = await axios.get(
           "https://dev.depowebeg.com/education/api/getProviderDocumentCategories.php"
@@ -50,6 +51,8 @@ const TeacherUpload = () => {
         setCardteacher(backendData);
       } catch (error) {
         console.error("Error fetching data from backend:", error);
+      } finally {
+        setLoading(false); // Set loading to false after the fetch is complete
       }
     };
 
@@ -122,7 +125,9 @@ const TeacherUpload = () => {
         />
 
         <div className="relative inset-x-0 grid grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 mx-2 sm:mx-10">
-          {cardteacher.length > 0 ? (
+          {loading ? (
+            <p>Loading...</p> // Display loading message or spinner
+          ) : cardteacher.length > 0 ? (
             cardteacher.map((item, index) => (
               <div
                 key={item.id}
@@ -215,7 +220,7 @@ const TeacherUpload = () => {
                 </span>
               </div>
             ) : (
-              "Upload Documents"
+              "Loading..."
             )}
           </button>
         )}
