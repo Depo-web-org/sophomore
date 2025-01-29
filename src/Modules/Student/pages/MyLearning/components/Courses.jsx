@@ -29,21 +29,23 @@ export default function Courses() {
         }
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  lg:gap-6">
           {params !=='/' ? ordersData?.map((order) =>
-  order.items.map((item) => {
+  order?.items?.map((item) => {
+    console.log(item)
     const contents= item?.contents.length>0?item?.contents:[item?.content_data_object];
     return(
     
     <LearningCard
       key={item.id} // Using course.id as key
-      course={item?.course_data_object}
+      course={item?.course_data_object||item?.course_data_object}
       contents={contents}
       image={item?.course_data_object?.image || "/images/MyLearning/subject1.webp"}
-      path={`/mylearning/course/${item?.course_data_object.id}/lesson/${contents[0]?.id}`}
+      path={`/mylearning/course/${item?.course_data_object?.id}/lesson/${contents[0]?.id}`}
     />
   )}) 
 ):  ordersData?.slice(0,3).map((order) =>
   order.items.map((item) => {
     const contents= item?.contents.length>0?item?.contents:[item?.content_data_object];
+    console.log(item)
     return(
     
     <LearningCard
@@ -51,7 +53,7 @@ export default function Courses() {
       course={item?.course_data_object}
       contents={contents}
       image={item?.course_data_object?.image || "/images/MyLearning/subject1.webp"}
-      path={`/mylearning/course/${item?.course_data_object.id}/lesson/${contents[0]?.id}`}
+      path={`/mylearning/course/${item?.course_data_object?.id}/lesson/${contents[0]?.id}`}
     />
   )}) 
 )

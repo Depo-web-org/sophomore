@@ -48,9 +48,9 @@ const LessonsPaginator = () => {
             key={lesson.id}
             to={`lesson/${lesson.id}`}
             state={lessonsNum }
-            className="flex items-start  bg-slate-900 rounded-lg px-2 lg:px-4 py-2 text-white hover:bg-slate-700  flex-wrap "
+            className="flex items-center gap-2 bg-slate-900 rounded-lg px-2 lg:px-4 py-2 text-white hover:bg-slate-700  flex-wrap "
           >
-            <p className=" text-base ">Lesson {index + 1} </p>
+            <p className=" text-base ">Lesson {index + 1}: </p>
             <p className=" text-sm ">{lesson.title}</p>
           </NavLink>)
         })}

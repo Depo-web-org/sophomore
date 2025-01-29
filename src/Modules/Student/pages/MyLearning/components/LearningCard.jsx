@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function LearningCard({ course, path, image,contents }) {
-const lessonName =contents.length>1?"full course": contents[0].title
+const lessonName =contents.length>1?"full course": contents[0]?.title
+const courseName =contents.length>0?contents[0]?.course_data?.title: course?.title
 
+console.log(course)
 
   return (
     <div>
@@ -18,7 +20,7 @@ const lessonName =contents.length>1?"full course": contents[0].title
             <div className="absolute -bottom-5 left-[50%] translate-x-[-50%] group-hover:bottom-1/2 duration-300  group-hover:scale-105 transition-all z-10">
               <img
                 src={
-                  course.isFinished
+                  course?.isFinished
                     ? "/images/MyLearning/Group.svg"
                     : "/images/MyLearning/Group1.svg"
                 }
@@ -30,7 +32,7 @@ const lessonName =contents.length>1?"full course": contents[0].title
             
           </div>
           <div className="flex items-center justify-between w-full pt-5 lg:pt-2 flex-wrap">
-            <p className="text-sm lg:text-xl font-medium text-white">{course.title}</p>
+            <p className="text-sm lg:text-xl font-medium text-white">{course?.title || courseName}</p>
             <p className="text-xs lg:text-sm font-normal my-4 text-[#FFFFFF57]">
              ({lessonName})
             </p>
