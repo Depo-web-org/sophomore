@@ -13,12 +13,10 @@ const Teachers = () => {
   const teachersData = data?.data?.providers;
   const subjectData = data?.data?.subject;
   const schoolData = data?.data?.subject?.school_data;
-  console.log(schoolData)
 
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.items);
-  console.log(subjectData)
 
   const handleToggleWishlist = (teacher) => {
     const isSelected = wishlist?.some(
@@ -45,7 +43,7 @@ const Teachers = () => {
     }
   };
   return (
-    <section className="min-h-screen py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto    ">
+    <section className="min-h-screen  py-24 lg:py-32 container w-full md:w-custom-md xl:w-custom-xl mx-auto    ">
  
 {
   isFetching?  <div className="grid grid-cols-3 gap-4  ">

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import SkeletonLoader from './SkeletonLoader';
+import { useTranslation } from 'react-i18next';
 
 const AnswerComponents = props => {
+  
   return (
     <div
       onClick={(e) => props.addAnswer(e)}
@@ -33,6 +35,7 @@ const Questions = ({ data, studentAnswer, setIsExamFinished }) => {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [randomAnswers, setRandomAnswers] = useState([]);
+  const {i18n}=useTranslation()
 
   const Question = data?.results[activeQuestionIndex];
 
@@ -118,8 +121,8 @@ const Questions = ({ data, studentAnswer, setIsExamFinished }) => {
                 } text-white rounded-lg py-3 px-8`}
               >
                 {activeQuestionIndex + 1 === data?.results?.length
-                  ? "Finish"
-                  : "Continue"}
+                  ? `${i18n.language === "ar" ? "أنهي ": "Finish"} ` 
+                  : `${i18n.language === "ar" ? "أستمر ": "Continue"} `  }
               </button>
             </div>
           </>

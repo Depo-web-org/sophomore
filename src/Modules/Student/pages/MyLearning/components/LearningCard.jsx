@@ -5,8 +5,6 @@ export default function LearningCard({ course, path, image,contents }) {
 const lessonName =contents.length>1?"full course": contents[0]?.title
 const courseName =contents.length>0?contents[0]?.course_data?.title: course?.title
 
-console.log(course)
-
   return (
     <div>
       <div className="flex flex-col w-[auto]   group">
@@ -25,13 +23,13 @@ console.log(course)
                     : "/images/MyLearning/Group1.svg"
                 }
                 alt="play"
-                className="w-8 lg:w-14  "
+                className="w-8 lg:w-  "
               />
             </div>
             <div className="bg-black bg-opacity-75 inset-0 h-0 absolute group-hover:h-full group-hover:w-full duration-500 transition-all "/>
             
           </div>
-          <div className="flex items-center justify-between w-full pt-5 lg:pt-2 flex-wrap">
+          <div className="flex items-center justify-between w-full pt-5 lg:pt-6 flex-wrap">
             <p className="text-sm lg:text-xl font-medium text-white">{course?.title || courseName}</p>
             <p className="text-xs lg:text-sm font-normal my-4 text-[#FFFFFF57]">
              ({lessonName})

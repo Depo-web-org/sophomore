@@ -1,9 +1,12 @@
 import React from "react";
 import { Link,  useLocation,  useParams } from "react-router-dom";
 import { baseUrl } from "../../../../../../App";
+import { useTranslation } from "react-i18next";
 
 export default function CourseMaterial() {
   const {courseID}=useParams()
+const {i18n}=useTranslation()
+
 
   return (
     <div className="flex flex-col items-start justify-start gap-4 lg:gap-8">
@@ -33,12 +36,10 @@ function UnitTest({params}) {
 
 function Material() {
   const { state } = useLocation();
-  console.log(state);
   const { lessonID } = useParams();
 
   // Assuming `state` is an array
   const selectedVideo = state.filter((selected) => selected.id === lessonID)[0];
-  console.log(selectedVideo);
 
   return (
     <>

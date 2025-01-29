@@ -4,11 +4,13 @@ import Questions from './Components/Questions/Questions'
 import Results from './Components/Questions/Results/Results'
 import Timer from './Components/Timer/Timer'
 import useFetch from '../../../../Hooks/UseFetch';
+import { useTranslation } from 'react-i18next'
 
 
 const Quiz = () => {
+  const {i18n}=useTranslation()
   // get data 
-    const {data ,success}=useFetch('https://opentdb.com/api.php?amount=5&category=21&type=multiple')
+    const {data ,success}=useFetch('https://opentdb.com/api.php?amount=5&category=19&type=multiple')
     //get all answers
     const [Answers, setAnswers] = useState([])
     // Store all true answers
@@ -38,7 +40,9 @@ useEffect(()=>{
 
   <div className='text-white flex justify-between'>
       <p className='font-semibold text-3xl border-b'>
-          Math Test 
+            {
+            i18n.language === "ar" ? "الآختبار" :  "Test"
+           }
       </p>
       
       {/* timer start when get all question  */}

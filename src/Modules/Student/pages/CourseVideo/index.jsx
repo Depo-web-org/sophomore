@@ -5,10 +5,8 @@ import { useTranslation } from "react-i18next";
 
 export default function EnrolledCourse() {
   const{state}=useLocation()
-  console.log(state)
   const navigate = useNavigate();
   const {lessonID, courseID}= useParams();
-  console.log(lessonID, courseID)
 
   // useEffect(() => {
   //   // Navigate to the first lesson automatically when entering the course page
@@ -18,7 +16,7 @@ export default function EnrolledCourse() {
   return (
     <div className="min-h-screen  w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3 ">
       <div className="flex flex-1  flex-col lg:flex-row ">
-        <div className="w-full lg:w-2/3   ">
+        <div className="w-full flex justify-center lg:w-2/3   ">
        <Outlet/>
        </div>
        <div className="lg:w-1/3 w-full ">
@@ -31,7 +29,6 @@ export default function EnrolledCourse() {
 
 const LessonsPaginator = () => {
   const { state: lessonsNum } = useLocation(); 
-  console.log(lessonsNum); 
   const { t } = useTranslation();
   const ReversedLesson = lessonsNum.reverse();
 

@@ -29,7 +29,7 @@ export default function LogInContent({
   const dispatch = useDispatch();
 
   return (
-    <div className="flex flex-col items-start gap-8 lg:gap-10 w-full 2xl:w-4/5 mr-auto slide-in-right">
+    <div className="flex flex-col items-start  gap-8 lg:gap-10 w-full 2xl:w-4/5 me-auto slide-in-right">
       <div className="lg:mt-20 w-full">
         <HeadTitle
           title={{
@@ -55,19 +55,26 @@ export default function LogInContent({
                   errorsForm.loginMail && "border-2 border-red-600"
                 } px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between`}
               >
-                <input
-                  id="loginMail"
-                  className="outline-none flex-1 text-base"
-                  autoComplete="userMail"
-                  placeholder={t("login.enterEmail")}
-                  {...register("loginMail", {
-                    required: t("login.emailRequired"),
-                    pattern: {
-                      value: /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: t("login.validEmail"),
-                    },
-                  })}
-                />
+               <input
+  id="loginMail"
+  className="outline-none flex-1 text-base"
+  autoComplete="userMail"
+  placeholder={t("login.enterEmail")}
+  {...register("loginMail", {
+    required: t("login.emailRequired"),
+    pattern: {
+      value: /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: t("login.validEmail"),
+    },
+  })}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      // setForgetPassword(false);
+    }
+  }}
+/>
+
                 <MdAlternateEmail className="ml-2 text-gray-500 focus:outline-none" />
               </label>
               {errorsForm.loginMail && (

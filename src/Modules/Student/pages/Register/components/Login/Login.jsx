@@ -156,7 +156,7 @@ const {i18n} =useTranslation()
 
 
   return (
-    <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full    overflow-hidden ">
+    <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full     overflow-hidden ">
       {forgetPassword ? (
         <ForgetPassword
           ResponseError={errorMessage}

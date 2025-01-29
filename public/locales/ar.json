@@ -443,9 +443,18 @@
       "login": "تسجيل الدخول"
     }
   },
-
-
-
+"otp": {
+    "amazing": "رائع",
+    "everythingSet": "كل شيء جاهز",
+    "thankYou": "شكرًا لك",
+    "successfulRegistration": "لقد تم تسجيلك بنجاح",
+    "pendingVerification": "في انتظار مستندات التحقق الخاصة بك",
+    "goToLogin": "الذهاب إلى تسجيل الدخول"
+  },
+  "wishlist": {
+    "added": "تمت إضافة المعلم إلى المفضلة!",
+    "removed": "تمت إزالة المعلم من المفضلة!"
+  },
 "otpPage": {
     "title": {
       "head": "تحقق من بريدك",

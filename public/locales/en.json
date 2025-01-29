@@ -427,9 +427,19 @@
       "login": "Login"
     }
   },
-
-
-
+"otp": {
+  "amazing": "Amazing",
+  "everythingSet": "Everything is set",
+  "thankYou": "Thank You",
+  "successfulRegistration": "You have registered Successfully",
+  "pendingVerification": "Pending your verification paper",
+  "goToLogin": "Go to Login"
+},
+"wishlist": {
+  "added": "Teacher added to wishlist!",
+  "removed": "Teacher removed from wishlist!"
+}
+,
  "otpPage": {
     "title": {
       "head": "Check your mail",

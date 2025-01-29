@@ -11,15 +11,12 @@ export const OrderDetalis = ({ cartItems }) => {
   
   const dispatch=useDispatch()
 
-  console.log(cartItems)
   
   const [checkoutCart, {isLoading, isError}]=   useCheckoutCartMutation();
-  console.log(isLoading)
   const totalPrices = cartItems
     ?.map((item) => +item.price)
     .reduce((acc, curr) => acc + curr, 0);
 
-  console.log(totalPrices);
 
  
   const items = cartItems.map((item) => {
@@ -47,7 +44,6 @@ export const OrderDetalis = ({ cartItems }) => {
       };
   
       const response = await checkoutCart(dataToSend).unwrap();
-      console.log(dataToSend);
   
       if (response.code === 0) {
         toast.success("Your order has been placed successfully! Thank you for shopping with us.");
@@ -60,9 +56,6 @@ export const OrderDetalis = ({ cartItems }) => {
   };
   
   
-
-  
-  console.log(items)
   return(
     <div>
       <p className="text-white font-semibold text-3xl">Order Summary</p>

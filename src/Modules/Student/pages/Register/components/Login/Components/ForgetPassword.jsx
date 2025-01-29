@@ -15,7 +15,7 @@ export default function ForgetPassword({
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col items-start gap-8 justify-center lg:gap-24 slide-in-right min-h-screen w-full 2xl:w-4/5 mr-auto">
+    <div className="flex flex-col items-start gap-8 justify-center lg:gap-24 slide-in-right min-h-screen w-full 2xl:w-4/5 me-auto">
       <div className="w-full -mt-20">
         <HeadTitle
           title={{

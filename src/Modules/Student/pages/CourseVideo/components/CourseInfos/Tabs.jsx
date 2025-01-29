@@ -8,7 +8,7 @@ export default function Tabs() {
 
   
   return (
-    <div>
+    <div className='w-full   '>
       <div className="w-full border-b border-gray-200 ">
 
           <nav className="mb-1 flex gap-6 justify-center lg:justify-start" aria-label="Tabs">
