@@ -14,13 +14,12 @@ export default function EnrollCard() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
   const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
   const [isModalUnitsOpen, setIsModalUnitsOpen] = useState(false);
 
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(course);
   const { data, isLoading, isError } = useGetStudentCoursesQuery();
   // console.log(data?.data);
 
@@ -134,7 +133,7 @@ export default function EnrollCard() {
                 className="bg-white cursor-pointer text-primary rounded-md text-sm  lg:text-base p-2  hover:bg-primary hover:text-white duration-200 transition-all"
                 onClick={() => handleAddToCart("course")}
               >
-                {isSelected ? "already in cart" : t("add_to_cart")}
+                {isSelected ? `${ i18n.language ==='ar'? "موجود مسبقا ":'already in cart'}` : t("add_to_cart")}
               </button>
             </div>
           )}
