@@ -15,7 +15,7 @@ export default function EnrolledCourse() {
 
   return (
     <div className="min-h-screen  w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3 ">
-      <div className="flex flex-1  flex-col lg:flex-row ">
+      <div className="flex flex-1  flex-col lg:flex-row gap-x-4 ">
         <div className="w-full flex justify-center lg:w-2/3   ">
        <Outlet/>
        </div>
@@ -29,7 +29,7 @@ export default function EnrolledCourse() {
 
 const LessonsPaginator = () => {
   const { state: lessonsNum } = useLocation(); 
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const ReversedLesson = lessonsNum.reverse();
 
   return (
@@ -47,7 +47,7 @@ const LessonsPaginator = () => {
             state={lessonsNum }
             className="flex items-center gap-2 bg-slate-900 rounded-lg px-2 lg:px-4 py-2 text-white hover:bg-slate-700  flex-wrap "
           >
-            <p className=" text-base ">Lesson {index + 1}: </p>
+            <p className=" text-base ">{i18n.language === 'ar' ? " الدرس ال" : " Lesson"} {index + 1} : </p>
             <p className=" text-sm ">{lesson.title}</p>
           </NavLink>)
         })}

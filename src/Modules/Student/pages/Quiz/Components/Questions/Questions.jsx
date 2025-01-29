@@ -80,7 +80,7 @@ const Questions = ({ data, studentAnswer, setIsExamFinished }) => {
       <>
         {
           <>
-            <div className="text-white my-10">
+            <div dir='ltr' className="text-white my-10">
               <p className="text-center font-semibold text-xl xl:text-2xl">
                 <span>{activeQuestionIndex + 1} - </span> {Question.question}
               </p>

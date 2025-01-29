@@ -169,7 +169,7 @@ toast.success(`${i18n.languages[0]==='ar' ? "تم أضافه التعديل بن
         i18n={i18n}
       />
 
-      <div className="flex w-full items-start flex-col ">
+      <div className="flex w-full items-start flex-col  ">
         <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full">
           <div className="flex flex-wrap justify-between w-full gap-y-4">
             <GoBack />

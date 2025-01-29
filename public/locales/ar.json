@@ -607,10 +607,10 @@
 } ,
 "quickActions": {
   "title": "إجراءات سريعة",
-  "addNewCourse": "إضافة دورة جديدة"
+  "addNewCourse": "إضافة كورس جديد"
 },
 "application": {
-    "addNewCourse": "إضافة دورة جديدة",
+    "addNewCourse": "إضافة كورس جديدة",
     "uploadThumbnail": "تحميل الصورة المصغرة",
     "dropImage": "قم بإسقاط صورتك هنا أو",
     "browse": "تصفح",

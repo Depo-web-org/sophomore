@@ -8,6 +8,7 @@ import { useAddTeacherCourseMutation } from "../../../../../../Redux/data/postDa
 
 const ApplicationSection = () => {
   const { t, i18n } = useTranslation();
+  // console.log(i18n.language)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -44,7 +45,6 @@ const ApplicationSection = () => {
   };
 
   const handleFormSubmit = async (data) => {
-    console.log(data)
     try {
       const formData = {
         title: data.title,
@@ -126,7 +126,8 @@ const ApplicationSection = () => {
                   htmlFor="OrderNotes"
                   className="block text-sm font-medium text-gray-400"
                 >
-                  {t("application.orderNotes")}
+          { i18n.language === 'ar'? "وصف الكورس" : "  Course Description" }
+
                 </label>
                 <textarea
                   id="OrderNotes"
@@ -146,33 +147,6 @@ const ApplicationSection = () => {
                 )}
               </div>
 
-  {/* Lesson price*/}
-  {/* <div className="my-4">
-                <label
-                  htmlFor="LessonPrice"
-                  className="block text-sm font-medium text-gray-400"
-                >
-                  Lesson price
-                </label>
-                <input
-                  type="number"
-                  id="LessonPrice"
-                  {...register("LessonPrice", {
-                    required: t("application.priceRequiredLesson"),
-                  })}
-                  className={`border-2 mt-2 w-full rounded-lg shadow-sm sm:text-sm p-2 text-gray-600 font-semibold placeholder:font-normal focus-within:outline-gray-200 bg-[#EFEFEF] ${
-                    errors.orderNotes ? "border-red-500" : "border-[#EFEFEF]"
-                  }`}
-                  rows="4"
-                  placeholder={t("application.priceLesson") }
-                ></input> 
-                {errors.orderNotes && (
-                  <p className="text-red-500 text-sm">
-                    {errors.orderNotes.message}
-                  </p>
-                )}
-              </div> */}
-
 
               {/* price    Full Courses pr*/}
               <div className="my-4">
@@ -180,7 +154,10 @@ const ApplicationSection = () => {
                   htmlFor="CoursesPrice"
                   className="block text-sm font-medium text-gray-400"
                 >
-                  Full Courses price
+                {
+                  i18n.language === 'ar'? "سعر الكورس كامل" : " Full Courses price"
+                }
+                 
                 </label>
                 <input
                   type="number"

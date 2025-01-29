@@ -302,9 +302,11 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
             >
               {t("unit.title")}
             </label>
+
             <input
               id="title"
               type="text"
+              placeholder= {t("unit.title")}
               {...register("title", { required: t("unit.requiredTitle") })}
               className="bg-[#E8E8E8] min-h-[51px] rounded-lg outline-none ring-0 py-1 px-2"
             />
@@ -317,7 +319,6 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
           <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
               <label htmlFor="LessonPrice" className="block text-sm font-medium text-gray-400">
               {t("labels.lessonPrice")}
-
               </label>
               <input
                 type="number"
@@ -340,7 +341,6 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
 
 
 
-          {/* حقل الوصف */}
           <div className="flex flex-col w-full md:w-1/2 my-4 gap-y-4">
             <label
               htmlFor="description"
@@ -353,6 +353,7 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
               {...register("description", {
                 required: t("unit.requiredDescription"),
               })}
+              placeholder={t("unit.description")}
               className="bg-[#E8E8E8] h-36 rounded-lg outline-none ring-0 py-1 px-2"
             />
             {errors.description && (
