@@ -12,8 +12,9 @@ import { BsHourglassSplit } from "react-icons/bs";
 import { useAddTeacherDocumentMutation } from "../../../../Redux/data/postDataApiSlice";
 import axios from "axios"; // Import axios for API calls
 import Alert from "../../../Student/pages/Profile/components/Alerts/Alert";
+import { toast } from "react-toastify";
 
-const TeacherUpload = (  ) => {
+const TeacherUpload = ({showAlert,setShowAlert} ) => {
   const role = useSelector((state) => state.role.role);
   const {
     data,
@@ -39,7 +40,8 @@ console.log("AllDataStatus :", AllDataStatus);
   });
 
 
-  // const [showw, setshoww] = useState();
+  
+
   
   // Fetch data from backend on component mount
   useEffect(() => { 
@@ -55,7 +57,6 @@ console.log("AllDataStatus :", AllDataStatus);
 
         // Update the cardteacher state with fetched data
         setCardteacher(backendData);
-        //  setshoww(true)
       } catch (error) {
         console.error("Error fetching data from backend:", error);
       } finally {
@@ -112,7 +113,10 @@ console.log("AllDataStatus :", AllDataStatus);
 
           const response = await updateDocument(formData).unwrap();
           console.log(`Upload successful for ${item.name}:`, response);
+      toast.success(t("teacherUpload.tost"));
+
         }
+        
       }
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -129,15 +133,7 @@ console.log("AllDataStatus :", AllDataStatus);
   return (
 < >
   
-  {/* {showw && 
-  <Alert  
-            Name={t("changePassword.success")}
-            title={t("changePassword.successMessage")}
-            color={"text-green-600"}
-            showAlert={showAlert}
-            setShowAlert={setShowAlert}
-        />
-    }   */}
+
 
       <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
         <div className="pt-28 lg:pt-32">
