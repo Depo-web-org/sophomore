@@ -142,15 +142,18 @@ console.log(lessonInfo)
   }`}
   onClick={()=> handleBuyFullCourse(item)}
 >
-                  Enroll Now
+{
+  i18n.language ==='ar'? "سجل الآن":"Enroll Now"
+}
+                  
                     </button>
                     <button 
-                    //  disabled={isFullCourseSelected ||isLessonSelected}
+                     disabled={isFullCourseSelected ||isLessonSelected}
       onClick={()=> handleAddLessonToCart(item)}
                     className={`font-semibold bg-white text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all  ${
     isFullCourseSelected || isLessonSelected ? "cursor-not-allowed" : " cursor-pointer"
   }`}>
-                     {isFullCourseSelected || isLessonSelected?'already in cart': t('add_to_cart')}
+                     {isFullCourseSelected || isLessonSelected? `${ i18n.language ==='ar'? "موجود مسبقا ":'already in cart'}`: t('add_to_cart')}
                     </button>
                   </div>
                 </div>

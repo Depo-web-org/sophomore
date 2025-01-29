@@ -438,6 +438,14 @@
 "wishlist": {
   "added": "Teacher added to wishlist!",
   "removed": "Teacher removed from wishlist!"
+},
+"order": {
+  "summaryTitle": "Order Summary",
+  "subtotal": "Subtotal",
+  "discount": "Discount",
+  "total": "Total",
+  "checkoutButton": "Checkout",
+  "successMessage": "Your order has been placed successfully! Thank you for shopping with us."
 }
 ,
  "otpPage": {

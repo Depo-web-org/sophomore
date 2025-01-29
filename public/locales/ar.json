@@ -605,6 +605,14 @@
 "activity": {
   "recentActivity": "أﻵنشطه الأخيرة"
 } ,
+"order": {
+  "summaryTitle": "ملخص الطلب",
+  "subtotal": "المجموع الفرعي",
+  "discount": "الخصم",
+  "total": "الإجمالي",
+  "checkoutButton": "الدفع",
+  "successMessage": "تم تقديم طلبك بنجاح! شكراً لتسوقك معنا."
+},
 "quickActions": {
   "title": "إجراءات سريعة",
   "addNewCourse": "إضافة كورس جديد"
