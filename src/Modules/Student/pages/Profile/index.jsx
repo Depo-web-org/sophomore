@@ -96,7 +96,7 @@ export default function Profile() {
   useEffect(() => {
     const handleResize = () => {
       const isLargeScreen = window.matchMedia("(min-width: 640px)").matches;
-      setActive(isLargeScreen ?  "close" :"open" );
+      setActive(isLargeScreen ?  "open" :"close" );
     };
 
     handleResize();
