@@ -507,7 +507,8 @@
     "errorUploading": "Error Uploading Files",
     "waitForApproval": "Kindly wait until you get approved",
     "getStarted": "Get Started",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "tost":"Your request has been submitted successfully! Please wait for your request to be approved."
   }, 
   "sidebar": {
     "dashboard": "Dashboard",
