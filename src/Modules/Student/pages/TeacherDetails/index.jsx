@@ -14,7 +14,7 @@ export default function TeacherDetails() {
   const dispatch = useDispatch();
   const { subjectName , teacherName} = useParams()
   const pathEndPoint=`${subjectName}&only=${teacherName}`
-  const { data, isLoading,isFetching } = useGetSubjectTeachersQuery(pathEndPoint);
+  const { data, isLoading,isFetching ,refetch} = useGetSubjectTeachersQuery(pathEndPoint);
 
   const teacher = data?.data?.providers[0];
   const subject = data?.data?.subject;
@@ -25,12 +25,13 @@ export default function TeacherDetails() {
     if (data) {
       dispatch(setTeacherData({ teacher, subject, course }));
     }
+    refetch()
   }, [data, dispatch, teacher, subject, course]);
   if (isFetching) {
     return <SkeletonCourseInfo/>
   }
   return (
-    <div className="min-h-screen w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3    ">
+    <div className="min-h-screen w-full pt-24 container md:w-custom-md xl:w-custom-xl mx-auto 3     ">
       {/* <Breadcrumbs /> */}
       <div className="flex items-start gap-4 flex-col lg:flex-row justify-between pt-4 lg:pt-8 ">
         <TeacherInfos teacher={teacher} subject={subject} />
