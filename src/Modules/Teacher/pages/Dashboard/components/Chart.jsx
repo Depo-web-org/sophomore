@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { useTranslation } from "react-i18next";
 
 const ApexChart = () => {
+  const {i18n} = useTranslation()
   const [state, setState] = useState({
     series: [
       {
-        name: "Views",
+        name: `${i18n.language === 'ar'? "المشاهدات" : "Views"}`,
         data: [120, 200, 150, 80, 70, 110, 130, 170, 220, 240, 180, 200], // Example data for monthly views
       },
     ],
@@ -25,11 +27,11 @@ const ApexChart = () => {
       },
       colors: ["#F15C54"],
       title: {
-        text: "Course Statistics",
+        text: `${i18n.language === 'ar'? "احصائيات الكورسات" : "Course Statistics"}`,
         align: "left",
       },
       subtitle: {
-        text: "Monthly Views",
+        text: `${i18n.language === 'ar'? "عدد المشاهدات " : "Monthly Views"}`,
         align: "left",
       },
       labels: [
@@ -49,12 +51,12 @@ const ApexChart = () => {
       xaxis: {
         type: "category",
         title: {
-          text: "Months",
+          text: `${i18n.language === 'ar'? "الشهور" : "Months"}`,
         },
       },
       yaxis: {
         title: {
-          text: "Views",
+          text: `${i18n.language === 'ar'? "المشاهدات" : "Views"}`,
         },
       },
       legend: {

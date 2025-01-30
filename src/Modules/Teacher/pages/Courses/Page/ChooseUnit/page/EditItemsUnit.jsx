@@ -10,6 +10,7 @@ import { MdDelete } from 'react-icons/md';
 import { useDeleteTeacherCourseContentMutation } from '../../../../../../../Redux/data/postDataApiSlice';
 import { ImSpinner9 } from 'react-icons/im';
 import { FaExclamationTriangle } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const ItemsUnit = () => {
   const { t, i18n } = useTranslation();
@@ -41,21 +42,16 @@ const [messageDelete, setMessageDelete] = useState()
           setSelectedContentId(null); // Reset the selected content ID
         }
   
+        
         if (
           res.message ===
-          "Deleting course process failed: Course has been bought. Delete prohibited"
+          "Deleting course process failed: Content has been bought. Delete prohibited"
         ) {
-          setMessageDelete({
-            ar: "لا يمكن حذف هذا الدرس لأنه قد تم شراؤه بالفعل من قبل أحد الطلاب. يرجى ملاحظة أن حذف الدروس التي تم شراؤها غير مسموح به للحفاظ على حقوق الطلاب الذين قاموا بالشراء.",
-            en: "This lesson cannot be deleted because it has already been purchased by a student. Please note that deleting purchased lessons is not allowed to ensure the rights of students who made the purchase."
-          });
-        
-          setTimeout(() => {
-            setMessageDelete(null);
-          }, 4000);
+          toast.error(`${i18n.languages[0] === 'ar' ? "لا يمكن حذف هذا الدرس لأنه قد تم شراؤه بالفعل من قبل أحد الطلاب." : "This lesson cannot be deleted because it has already been purchased by a student."}`);
         } else {
           // Optional refetch logic if needed
           refetch();
+          toast.success(`${i18n.languages[0] === 'ar' ? "تم حذف الدرس بنجاح." : "Lesson deleted successfully."}`);
         }
       } catch (error) {
         console.error("Error deleting content:", error);
@@ -71,7 +67,7 @@ const [messageDelete, setMessageDelete] = useState()
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full ">
         <GoBack
           title={
             location.pathname.split('/')[3] === 'editUnit'

@@ -49,7 +49,7 @@ const TotalChart = () => {
 
   return (
     <div>
-      <div className="chart-wrap">
+      <div className="chart-wrap  ">
         <div id="chart">
           <ReactApexChart
             options={options}

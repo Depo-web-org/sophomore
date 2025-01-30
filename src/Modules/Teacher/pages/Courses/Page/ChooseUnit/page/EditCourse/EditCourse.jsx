@@ -109,7 +109,7 @@ console.log(selectedCourse)
   }
 
   return ( 
-    <div className="lg:ms-5 h-auto   ">
+    <div className="lg:ms-5 h-auto    ">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
         <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.updateCourse") }/>

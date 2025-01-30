@@ -125,7 +125,7 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
+      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
         <div className="flex flex-col items-start b justify-center lg:gap-8 w-full slide-in-left lg:min-h-screen">
           <div className="w-full">
             <HeadTitle
@@ -139,12 +139,12 @@ const ResetPassword = () => {
               }}
             />
           </div>
-          <div className="w-full mt-6">
+          <div className="w-full mt-6 ">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"
             >
-              <div dir="ltr" className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 mr-auto">
+              <div dir="ltr" className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 ms-auto">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
@@ -171,10 +171,10 @@ const ResetPassword = () => {
                   />
                 ))}
               </div>
-              <div className="lg:mt-8 mt-4 mb-0 lg:mb-4 flex flex-col gap-y-2 lg:gap-y-4">
+              <div className="lg:mt-8 mt-4 mb-0 lg:mb-4 flex flex-col gap-y-2 lg:gap-y-4 ">
                 <label
                   htmlFor="password"
-                  className="w-full lg:w-4/5 mr-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
+                  className="w-full lg:w-4/5 me-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-6 mb-4"
                 >
                   <input
                     type={showPassword ? "text" : "password"}
@@ -207,7 +207,7 @@ const ResetPassword = () => {
                 </div>
                 <label
                   htmlFor="password2"
-                  className="w-full lg:w-4/5 mr-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
+                  className="w-full lg:w-4/5 me-auto bg-white rounded-lg border-gray-200 p-4 text-sm shadow-sm flex items-center justify-between mt-2"
                 >
                   <input
                     type={showPassword ? "text" : "password"}
@@ -245,7 +245,7 @@ const ResetPassword = () => {
                 disabled={isLoading}
                 className={`inline-flex rounded-lg ${
                   isLoading ? "bg-white" : "bg-primary"
-                } w-full lg:w-4/5 mr-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+                } w-full lg:w-4/5 me-auto py-3 text-sm font-medium text-white justify-center items-center mt-8`}
               >
                 {isLoading ? (
                   <ImSpinner9 className="animate-spin text-3xl text-secondary" />
@@ -255,7 +255,7 @@ const ResetPassword = () => {
               </button>
 
               {isError && (
-                <div className="w-full lg:w-4/5 mr-auto">
+                <div className="w-full lg:w-4/5 me-auto">
                   <p className="text-red-500 text-sm text-center font-medium">
                     {error?.data?.message}
                   </p>
@@ -263,7 +263,7 @@ const ResetPassword = () => {
               )}
 
               {StatusOfChangesPassword && (
-                <div className="w-full lg:w-4/5 mr-auto">
+                <div className="w-full lg:w-4/5 me-auto">
                   <p className="text-emerald-600 text-center font-semibold">
                     {StatusOfChangesPassword}
                   </p>
@@ -271,7 +271,7 @@ const ResetPassword = () => {
               )}
             </form>
 
-            <div className="flex w-full flex-col justify-center items-center gap-2 py-4 lg:w-4/5 mr-auto">
+            <div className="flex w-full flex-col justify-center items-center gap-2 py-4 lg:w-4/5 me-auto">
               {isResendDisabled && (
                 <p
                   className={`${
@@ -304,7 +304,7 @@ const ResetPassword = () => {
         </div>
 
         <img
-          src="/register/login.webp"
+         src="/images/logos/logo.svg"
           alt="register img"
           className="hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] slide-in-right object-cover rounded-xl z-10"
         />

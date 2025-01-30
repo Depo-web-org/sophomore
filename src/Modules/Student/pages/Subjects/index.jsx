@@ -84,19 +84,3 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
 
 export default Subjects;
 
-
-
-
-// old Data
-  // data ? translatedData?.map((subj, index) => {
-          //     // Use English name for the URL
-
-          //     return (
-          //       <div key={subj.id} className="col-span-3 lg:col-span-4">
-          //         <CardInfo
-          //           item={subj}
-          //           path={`/school/${schoolName}/grade/${gradeName}/subject/${englishSubj?.name}`}
-          //         />
-          //       </div>
-          //     );
-          //   })

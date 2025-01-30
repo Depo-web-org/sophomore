@@ -36,13 +36,13 @@ export default function Register() {
     setIsOTP(false);
   };
   return (
-    <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-10 overflow-hidden">
+    <div className="container w-full  md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-10 overflow-hidden">
       {isLogin && <Login toggleForm={toggleForm} />}
 
       <img
         src="/images/register/login.webp"
         alt="register img"
-        className={`hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] ${
+        className={`hidden lg:block min-h-screen py-4   lg:max-w-[420px] xl:max-w-[580px] ${
           !isSignUp || isLogin ? "slide-in-left" : "slide-in-right"
         } object-cover rounded-xl z-10`}
       />

@@ -13,7 +13,6 @@ import SkeletonCourseInfo from "../../../../Components/Common/SkeletonCard/Skele
 export default function TeacherDetails() {
   const dispatch = useDispatch();
   const { subjectName , teacherName} = useParams()
-  console.log({ subjectName , teacherName})
   const pathEndPoint=`${subjectName}&only=${teacherName}`
   const { data, isLoading,isFetching } = useGetSubjectTeachersQuery(pathEndPoint);
 

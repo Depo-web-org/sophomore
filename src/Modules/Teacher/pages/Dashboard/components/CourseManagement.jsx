@@ -15,8 +15,8 @@ export const countStudentsPerCourse = (data) => {
     const studentId = order.student_id;
 
     order?.items?.forEach(item => {
-      const courseId = item.course_data_object.id;
-      const courseTitle = item.course_data_object.title;
+      const courseId = item?.course_data_object?.id;
+      const courseTitle = item?.course_data_object?.title;
 
       if (!courseCounts[courseId]) {
         courseCounts[courseId] = {

@@ -9,7 +9,6 @@ const StudentProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
   const [triggerRefreshToken] = useRefreshTokenMutation();
   const Token= localStorage.getItem('Token');
-  console.log(Token)
 
   useEffect(() => {
     const refreshAccessToken = async () => {

@@ -427,9 +427,27 @@
       "login": "Login"
     }
   },
-
-
-
+"otp": {
+  "amazing": "Amazing",
+  "everythingSet": "Everything is set",
+  "thankYou": "Thank You",
+  "successfulRegistration": "You have registered Successfully",
+  "pendingVerification": "Pending your verification paper",
+  "goToLogin": "Go to Login"
+},
+"wishlist": {
+  "added": "Teacher added to wishlist!",
+  "removed": "Teacher removed from wishlist!"
+},
+"order": {
+  "summaryTitle": "Order Summary",
+  "subtotal": "Subtotal",
+  "discount": "Discount",
+  "total": "Total",
+  "checkoutButton": "Checkout",
+  "successMessage": "Your order has been placed successfully! Thank you for shopping with us."
+}
+,
  "otpPage": {
     "title": {
       "head": "Check your mail",
@@ -497,7 +515,8 @@
     "errorUploading": "Error Uploading Files",
     "waitForApproval": "Kindly wait until you get approved",
     "getStarted": "Get Started",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "tost":"Your request has been submitted successfully! Please wait for your request to be approved."
   }, 
   "sidebar": {
     "dashboard": "Dashboard",

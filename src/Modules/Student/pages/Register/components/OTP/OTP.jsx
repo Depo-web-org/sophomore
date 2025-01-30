@@ -23,7 +23,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
   const provider = role === "teacher" ? true : false;
 console.log(mail)
   // Time format
-  const [timeLeft, setTimeLeft] = useState(1);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
   // React Hook Form

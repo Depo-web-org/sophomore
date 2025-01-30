@@ -182,7 +182,7 @@ const Navbar = () => {
             {!Token && (
               <button
                 onClick={() => navigate("/register")}
-                className="bg-primary py-2 px-8 rounded-full font-semibold hover:bg-secondary transition-all duration-200 ml-8 text-white"
+                className="bg-primary py-2 px-8 rounded-full font-semibold hover:bg-secondary transition-all duration-200 ms-8 text-white"
               >
               {t("header.menu.login")}
               </button>

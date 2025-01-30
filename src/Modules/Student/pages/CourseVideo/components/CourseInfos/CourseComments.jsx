@@ -2,24 +2,24 @@ export default function CourseComments() {
   const comments = [
     {
       id: 1,
-      name: "Omar Gad",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      date: "July 12, 2022",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      name: "Ahmed Gad",
+      text: "Amazing course very helpful !",
+      date: "Jan 30, 2025",
+      avatar: "https://media.istockphoto.com/id/1336063208/photo/single-portrait-of-smiling-confident-male-student-teenager-looking-at-camera-in-library.jpg?s=612x612&w=0&k=20&c=w9SCRRCFa-Li82fmZotJzHdGGWXBVN7FgfBCD5NK7ic=",
     },
     {
       id: 2,
-      name: "Sarah Connor",
+      name: "Samir Galal",
       text: "This course was really helpful, thank you!",
-      date: "August 15, 2022",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+      date: "Jan 28, 2025",
+      avatar: "https://img.freepik.com/free-photo/teen-boy-writing-notebook_23-2147668970.jpg",
     },
     {
       id: 3,
-      name: "John Doe",
+      name: "Ibrahim Sabry",
       text: "I found the examples very clear and concise.",
-      date: "September 8, 2022",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      date: "Jan 23, 2025",
+      avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ47HILWuUgVTqOxL-lJ0Jdvo9tpUNIP5X5Q&s",
     },
   ];
 
@@ -41,7 +41,7 @@ export default function CourseComments() {
 function Comment({ name, text, date, avatar }) {
   return (
     <div className="flex items-start gap-4 mb-4">
-      <img className="w-12 h-12 rounded-full" src={avatar} alt={name} />
+      <img className="w-12 h-12 rounded-full object-cover" src={avatar} alt={name} />
       <div>
         <h3 className="text-base lg:text-lg font-semibold text-white">{name}</h3>
         <p className="text-sm lg:text-base text-gray-400">{text}</p>

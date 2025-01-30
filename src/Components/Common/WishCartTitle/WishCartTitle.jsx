@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 const WishCartTitle = ({name, items}) => {
   const { t,i18n } = useTranslation(); 
   const currentLanguage = i18n.language;
-  console.log(currentLanguage)
 
   return (
     <>
