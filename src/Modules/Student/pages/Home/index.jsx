@@ -9,7 +9,7 @@ const Home = () => {
   const {  user } = useSelector((state) => state.auth);
   const {role}=useSelector((state)=>state.role)|| user.role;
   const Token= localStorage.getItem('Token');
-
+console.log(Token)
   return (
     <>
       <Hero />
