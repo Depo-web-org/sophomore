@@ -14,7 +14,7 @@ import axios from "axios"; // Import axios for API calls
 import Alert from "../../../Student/pages/Profile/components/Alerts/Alert";
 import { toast } from "react-toastify";
 
-const TeacherUpload = ({showAlert,setShowAlert} ) => {
+const TeacherUpload = ({ showAlert, setShowAlert }) => {
   const role = useSelector((state) => state.role.role);
   const {
     data,
@@ -25,9 +25,9 @@ const TeacherUpload = ({showAlert,setShowAlert} ) => {
   } = useGetProfileTeacherQuery({ provider: role });
   const documentStatus = data?.data?.documents || [];
   const AllDataStatus = data?.data?.status;
-console.log("AllDataStatus :", AllDataStatus);
+  console.log("AllDataStatus :", AllDataStatus);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [buttonStates, setButtonStates] = useState([]);
   const [cardteacher, setCardteacher] = useState([]);
   const [loading, setLoading] = useState(false); // State to track loading status
@@ -35,19 +35,16 @@ console.log("AllDataStatus :", AllDataStatus);
   const [updateDocument, { isError, error: UpdateEroor }] =
     useAddTeacherDocumentMutation();
 
+  console.log(getUserInformation.data.status);
   const { data: AllData, error } = useGetTeacherDocumentQuery({
     provider: role,
   });
 
-
-  
-
-  
   // Fetch data from backend on component mount
-  useEffect(() => { 
+  useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);  
-         // Set loading to true when data fetching starts
+      setLoading(true);
+      // Set loading to true when data fetching starts
       try {
         const response = await axios.get(
           "https://dev.depowebeg.com/education/api/getProviderDocumentCategories.php"
@@ -73,7 +70,12 @@ console.log("AllDataStatus :", AllDataStatus);
     formState: { errors },
   } = useForm();
 
+  const [uploadedFilesCount, setUploadedFilesCount] = useState(0);
   const handleFileChange = (e, index) => {
+    if (uploadedFilesCount >= 4) {
+      alert("لا يمكنك رفع أكثر من 4 ملفات");
+      return;
+    }
     const file = e.target.files[0];
     if (file && cardteacher[index]) {
       const allowedTypes = {
@@ -96,9 +98,14 @@ console.log("AllDataStatus :", AllDataStatus);
         [index]: { status: "Uploaded", urlfile: file.name, file },
       }));
     }
+    setUploadedFilesCount((prev) => prev + 1);
   };
 
   const onSubmit = async (data) => {
+    if (uploadedFilesCount === 0) {
+      alert("الرجاء رفع الملفات قبل الإرسال.");
+      return;
+    }
     try {
       for (let index = 0; index < cardteacher.length; index++) {
         const item = cardteacher[index];
@@ -113,28 +120,22 @@ console.log("AllDataStatus :", AllDataStatus);
 
           const response = await updateDocument(formData).unwrap();
           console.log(`Upload successful for ${item.name}:`, response);
-      toast.success(t("teacherUpload.tost"));
-
         }
-        
+        console.log("FILSE .. ");
       }
+      toast.success(t("teacherUpload.tost"));
     } catch (error) {
       console.error("Error uploading files:", error);
+      // toast.(t("teacherUpload.tost"));
     } finally {
       refetch();
     }
   };
 
-
- 
-
-
+  console.log("//", getUserInformation?.data?.status);
 
   return (
-< >
-  
-
-
+    <>
       <form onSubmit={handleSubmit(onSubmit)} className="relative w-full">
         <div className="pt-28 lg:pt-32">
           <TopText
@@ -143,8 +144,8 @@ console.log("AllDataStatus :", AllDataStatus);
             })}
             title={t("teacherUpload.uploadPapers")}
           />
-  
-          <div className="relative inset-x-0 grid grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 mx-2 sm:mx-10">
+
+          <div className="relative inset-x-0 mx-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 lg:mx-2 sm:mx-10">
             {loading ? (
               <p>Loading...</p> // Display loading message or spinner
             ) : cardteacher.length > 0 ? (
@@ -165,7 +166,9 @@ console.log("AllDataStatus :", AllDataStatus);
                   <div>
                     <p className="sm:w-44 min-h-[70px] text-sm sm:text-base lg:text-lg text-white font-bold py-2">
                       {t(
-                        `teacherUpload.${item.name.toLowerCase().replace(/ /g, "")}`
+                        `teacherUpload.${item.name
+                          .toLowerCase()
+                          .replace(/ /g, "")}`
                       )}
                     </p>
                     <label
@@ -175,14 +178,14 @@ console.log("AllDataStatus :", AllDataStatus);
                           : documentStatus[index]?.verified === "2"
                           ? "bg-orange-500"
                           : "bg-primary"
-                      } rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300`}
+                      } rounded px-4 py-2 text-md font-semibold text-white transition-all duration-300 text-nowrap `}
                     >
                       {documentStatus[index]?.verified === "1" &&
                         "upload to verify"}
                       {documentStatus[index]?.verified === "2" && (
                         <>
                           pending verification{" "}
-                          <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block" />
+                          <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block " />
                         </>
                       )}
                       {documentStatus[index]?.verified === "0" && "verified"}
@@ -192,7 +195,7 @@ console.log("AllDataStatus :", AllDataStatus);
                         (buttonStates[index]?.status === "Uploaded"
                           ? t("teacherUpload.uploaded")
                           : t("teacherUpload.upload"))}
-  
+
                       <input
                         type="file"
                         className="hidden"
@@ -212,7 +215,7 @@ console.log("AllDataStatus :", AllDataStatus);
             )}
           </div>
         </div>
-  
+
         <div className="relative inset-x-0 text-center py-14">
           {dataerror ? (
             <p className="text-red-500 mt-2">
@@ -223,8 +226,8 @@ console.log("AllDataStatus :", AllDataStatus);
               {t("teacherUpload.waitForApproval")}
             </p>
           )}
-  
-          {AllDataStatus !== "0" && (
+
+          {AllDataStatus === "1" && (
             <button
               type="submit"
               disabled={loading}
@@ -239,23 +242,30 @@ console.log("AllDataStatus :", AllDataStatus);
                     {t("teacherUpload.loading")}
                   </span>
                 </div>
+              ) : i18n.language === "ar" ? (
+                "تحميل المستندات"
               ) : (
-                 "Upload Documents"
-   
+                "Upload Documents"
               )}
             </button>
           )}
+
           {AllDataStatus === "0" && (
             <Link
               to={"/teacherpanel"}
               className="rounded mt-5 inline-block bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
             >
-              Lets start
+              {i18n.language === "ar" ? "ابدا" : "Lets start"}
             </Link>
           )}
         </div>
       </form>
-</ >
+      {AllDataStatus === "2" && (
+        <button className="rounded block mx-auto m-5 bg-yellow-500 px-4 py-2 text-md font-semibold text-white hover:bg-yellow-600 transition-all duration-300">
+          {i18n.language === "ar" ? " قيد المراجعه" : "Under review"}
+        </button>
+      )}
+    </>
   );
 };
 
