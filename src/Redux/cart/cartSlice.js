@@ -11,7 +11,7 @@ const saveCartToLocalStorage = (cartItems) => {
   localStorage.setItem("cart", JSON.stringify(cartItems));
 };
 const Token =localStorage.getItem("Token");
-
+// console.log(Token)
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -37,7 +37,7 @@ const cartSlice = createSlice({
         toast.warning(`${type === "lesson" ? "Lesson" : "Course"} already in cart!`);
         return;
       }
-      if (!Token) {
+      if (!localStorage.getItem("Token")) {
         toast.warning(`You have to login Fisrt!`);
         return;
       } 

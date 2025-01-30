@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GoBack from '../../../components/GoBack';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import SubmitUnitsModel from './components/SubmitUnitsModel';
@@ -20,7 +20,7 @@ const ItemsUnit = () => {
   const location = useLocation();
   const { courseID } = useParams();
   const [deleteTeacherContent, { refetch ,isLoading:deleteCourseLoading}] = useDeleteTeacherCourseContentMutation();
-  const { data, isLoading, isFetching, isError } = useGetTeacherCoursesQuery();
+  const { data, isLoading, isFetching, isError,refetch:getData } = useGetTeacherCoursesQuery();
 const [messageDelete, setMessageDelete] = useState()
   const selectedCourse = data?.data.filter((course) => course.id === courseID)[0];
 
@@ -64,10 +64,12 @@ const [messageDelete, setMessageDelete] = useState()
     setDeleteModalOpen(false); // Close the modal
     setSelectedContentId(null); // Reset the selected content ID
   };
-
+useEffect(()=>{
+  getData()
+},[])
   return (
     <>
-      <div className="w-full ">
+      <div className="w-full  ">
         <GoBack
           title={
             location.pathname.split('/')[3] === 'editUnit'

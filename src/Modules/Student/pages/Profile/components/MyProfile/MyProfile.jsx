@@ -20,9 +20,9 @@ export default function MyProfile() {
 
 
 
+const UserInformation= JSON.parse(localStorage.getItem('USER'))
   
-  console.log('data profile:',data?.data)
-const student= data?.data;
+const student= UserInformation?.data;
 
 
   const [profileImage, setProfileImage] = useState( null);

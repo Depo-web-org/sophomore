@@ -25,8 +25,9 @@ export default function Security() {
     refetch,
     isLoading: dataLoading,
   } = useGetProfileQuery();
-  console.log("data profile:", data?.data);
-  const student = data?.data;
+const student= UserInformation?.data;
+
+const UserInformation= JSON.parse(localStorage.getItem('USER'))
 
   const [showAlert, setShowAlert] = useState(false); 
   const [showAlertError, setShowAlertError] = useState(false); 

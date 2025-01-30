@@ -5,14 +5,16 @@ import ChooseSchool from "./Components/Schools/ChooseSchool";
 import ChooseCard from "./Components/choose/ChooseCard";
 import { Grade } from "../Grades";
 import { useGetStudentCoursesQuery } from "../../../../Redux/data/getDataApiSlice";
+import { useEffect } from "react";
 
 const Home = () => {
   const {  user } = useSelector((state) => state.auth);
   const {role}=useSelector((state)=>state.role)|| user.role;
   const Token= localStorage.getItem('Token');
-    const {data, isLoading, isError}= useGetStudentCoursesQuery()
-    // console.log(data?.data?.length)
-  
+    const {data, isLoading, isError,refetch}= useGetStudentCoursesQuery()
+useEffect(()=>{
+  refetch();
+},[])  
 
   return (
     <>

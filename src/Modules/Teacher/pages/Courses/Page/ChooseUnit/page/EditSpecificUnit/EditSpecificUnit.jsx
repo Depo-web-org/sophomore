@@ -175,11 +175,11 @@ toast.success(`${i18n.languages[0]==='ar' ? "تم أضافه التعديل بن
             <GoBack />
 
             <div className="flex gap-x-2">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <button className="bg-primary hover:bg-secondary text-nowrap py-2 px-2 text-white rounded-md transition-all duration-300">
                   <Link>{t("labels.addUnitTest")}</Link>
                 </button>
-              </div>
+              </div> */}
 
               <Button
                 classButton="bg-primary py-2 px-2 text-white rounded-md hover:bg-secondary transition-all duration-300"

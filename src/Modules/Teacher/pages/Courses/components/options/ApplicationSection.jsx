@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useGetAllSchoolInformationQuery } from "../../../../../../Redux/data/getDataApiSlice";
 import { useAddTeacherCourseMutation } from "../../../../../../Redux/data/postDataApiSlice";
+import { toast } from "react-toastify";
+import { ImSpinner9 } from "react-icons/im";
 
 const ApplicationSection = () => {
   const { t, i18n } = useTranslation();
@@ -57,18 +59,19 @@ const ApplicationSection = () => {
       };
 
       const response = await addTeacherCourse(formData).unwrap();
-      console.log(response);
 
       if (response.code === 0) {
         reset();
         navigate(`/teacherPanel/courses/${response.data}`);
       } else {
-        setErrorMessage(response.data);
+        if(response.data==="Duplicate data entry ( 'teacher course')" ){
+          toast.error(`${i18n.language==='ar' ? "تم أضافه الكورس من قبل":"Course already exists"}`)
+        }
       }
 
       setUploadImage(null);
     } catch (error) {
-      console.error("Error adding course:", error);
+      // console.error("Error adding course:", error);
     }
   };
 
@@ -84,7 +87,7 @@ const ApplicationSection = () => {
 
   return (
     <>
-      <div className="lg:ms-5 h-auto ">
+      <div className="lg:ms-5 h-auto  ">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
             <p className="block text-2xl lg:text-3xl font-semibold">
@@ -313,9 +316,14 @@ const ApplicationSection = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full lg:w-1/2 lg:mt-5 rounded bg-primary px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+                disabled={courseLoading}
+                className={`w-full lg:w-1/2 lg:mt-5 rounded flex items-center justify-center ${courseLoading ? "bg-white":"bg-primary"} px-2 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300`}
               >
-                {t("application.continue")}
+                 {courseLoading ? (
+                              <ImSpinner9 className="animate-spin text-3xl text-secondary text-center" />
+                            ) : (
+                              t("application.continue")
+                            )}
               </button>
             </div>
           </div>

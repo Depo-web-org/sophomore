@@ -76,111 +76,6 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
   };
 
 
-  // const submitForm = async (data) => {
-  //     if (!data.video || !data.pdf) {
-  //     setMessage(t("unit.bothFilesRequired"));
-  //     return;
-  //   }
-  
-  //   try {
-  //     // Create a FormData object
-  //     const formData = new FormData();
-  //     formData.append("course", UploadCourse); // Ensure UploadCourse is defined and has the right value
-  //     formData.append("title", data.title);
-  //     formData.append("description", data.description);
-  //     formData.append("price", data.LessonPrice);
-  //     formData.append("video", uploadedVideo); // Add video file
-  //     formData.append("pdf", uploadedPDF); // Add PDF file
-  
-  //     console.log("FormData entries:");
-  //     for (let [key, value] of formData.entries()) {
-  //       console.log(`${key}:`, value);
-  //     }
-  
-     
-  //   await addTeacherCourseContent(formData).unwrap().then((res)=>{
-  //       console.log("Response from backend:", res);
-  //       if(res.code===1) null
-  //       setUploadedVideo(null);
-  //       setUploadedPDF(null);
-  //       reset();
-  //     })
-  //     .then(()=>{
-  //       setShowAlert(true);
-  //     }) .then(()=> {
-  //       setTimeout(() => {
-  //         naviagte('/teacherPanel')
-  //       }, 2000);
-  //     })
-     
-  
-  //     // // Clear form and show success message
-  //     // setMessage(t("unit.unitSaved"));
-     
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     setMessage(t("unit.errorSubmitting")); // Handle error message
-  //   }
-  // };
-
-
-
-
-
-
-
-  // const submitForm = async (data) => {
-  //   if (!data.video || !data.pdf) {
-  //     setMessage(t("unit.bothFilesRequired"));
-  //     return;
-  //   }
-  
-  //   try {
-  //     // Create a FormData object
-  //     const formData = new FormData();
-  //     formData.append("course", UploadCourse); // Ensure UploadCourse is defined and has the right value
-  //     formData.append("title", data.title);
-  //     formData.append("description", data.description);
-  //     formData.append("price", data.LessonPrice);
-  //     formData.append("video", uploadedVideo); // Add video file
-  //     formData.append("pdf", uploadedPDF); // Add PDF file
-  
-  //     console.log("FormData entries:");
-  //     for (let [key, value] of formData.entries()) {
-  //       console.log(`${key}:`, value);
-  //     }
-  
-  //     // Handle the response
-  //     const res = await addTeacherCourseContent(formData).unwrap();
-  
-  //     console.log("Response from backend:", res);
-  
-  //     if (res.code === 1) {
-  //       setUploadedVideo(null);
-  //       setUploadedPDF(null);
-  //     } else {
-  //       setUploadedVideo(null);
-  //       setUploadedPDF(null);
-  //       reset();
-  //       setShowAlert(true);
-  //     }
-  
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //   }
-  // };
-  
-
-
-
-
-
-
-
-
-
-
-
   const submitForm = async (data) => {
     if (!data.video || !data.pdf) {
       setMessage(t("unit.bothFilesRequired"));
@@ -210,7 +105,9 @@ const [addTeacherCourseContent ,{isLoading:loading, isError:error}]= useAddTeach
       if (res.code === 1) {
         // Show the error alert
         setShowAlertError(true);
-        setMessage(t("unit.errorSubmitting")); // Request failed, show error message
+      
+  toast.error(` ${i18n.languages[0]==='ar' ? "تم أضافه الدرس بنجاح":"Lesson added Successfully"}`);  
+  // setMessage( ` ${i18n.languages[0]==='ar' ? "حدث خطأ يرجي مراجعة الملفات المرفوعه او التححق من اﻵـصال بالانترنت":"The error occurred. Please check the uploaded files or verify the internet connection. "}` ); // Request failed, show error message
         setUploadedVideo(null);
         setUploadedPDF(null);
   
