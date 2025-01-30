@@ -13,6 +13,8 @@ import { useAddTeacherDocumentMutation } from "../../../../Redux/data/postDataAp
 import axios from "axios"; // Import axios for API calls
 import Alert from "../../../Student/pages/Profile/components/Alerts/Alert";
 import { toast } from "react-toastify";
+import { LoadingComponents } from "../../../../App";
+import { ImSpinner9 } from "react-icons/im";
 
 const TeacherUpload = ({ showAlert, setShowAlert }) => {
   const role = useSelector((state) => state.role.role);
@@ -89,7 +91,11 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
       const allowedType = allowedTypes[itemName];
 
       if (file.type !== allowedType) {
-        alert(`Invalid file type for ${itemName}. Expected: ${allowedType}`);
+        toast.error(
+          i18n.language === "en"
+            ? `Invalid file type for ${itemName}. Expected: ${allowedType}`
+            : `نوع الملف غير صالح لـ ${itemName}. المتوقع: ${allowedType}`
+        );
         return;
       }
 
@@ -102,11 +108,16 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
   };
 
   const onSubmit = async (data) => {
-    if (uploadedFilesCount === 0) {
-      alert("الرجاء رفع الملفات قبل الإرسال.");
+    if (uploadedFilesCount !== 4) {
+      toast.error(
+        i18n.language === "en"
+          ? "Please upload files before sending ?"
+          : " الرجاء رفع الملفات قبل الإرسال"
+      );
       return;
     }
     try {
+      setLoading(true)
       for (let index = 0; index < cardteacher.length; index++) {
         const item = cardteacher[index];
         const file = buttonStates[index]?.file;
@@ -128,6 +139,8 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
       console.error("Error uploading files:", error);
       // toast.(t("teacherUpload.tost"));
     } finally {
+      
+      setLoading(false)
       refetch();
     }
   };
@@ -147,7 +160,12 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
 
           <div className="relative inset-x-0 mx-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-4 lg:mx-2 sm:mx-10">
             {loading ? (
-              <p>Loading...</p> // Display loading message or spinner
+              // Display loading message or spinner
+              <div className="fixed mt-5 left-1/2 right-1/2  ">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-solid border-current border-e-transparent text-white">
+                  <span className="sr-only">{t("teacherUpload.loading")}</span>
+                </div>
+              </div>
             ) : cardteacher.length > 0 ? (
               cardteacher.map((item, index) => (
                 <div
@@ -184,11 +202,15 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
                         "upload to verify"}
                       {documentStatus[index]?.verified === "2" && (
                         <>
-                       {i18n.language === "ar" ? "في انتظار التحقق": "pending verification"}   
+                          {i18n.language === "ar"
+                            ? "في انتظار التحقق"
+                            : "pending verification"}
                           <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block " />
                         </>
                       )}
-                      {documentStatus[index]?.verified === "0" && "verified"}
+                      {documentStatus[index]?.verified === "0" &&
+                        (i18n.language === "ar" ? "مقبول" : "verified")}
+
                       {documentStatus[index]?.verified !== "1" &&
                         documentStatus[index]?.verified !== "2" &&
                         documentStatus[index]?.verified !== "0" &&
@@ -212,7 +234,11 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
                 </div>
               ))
             ) : (
-              <p>Loading...</p>
+              <div className="fixed mt-5 left-1/2 right-1/2  ">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-solid border-current border-e-transparent text-white">
+                  <span className="sr-only">{t("teacherUpload.loading")}</span>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -231,7 +257,7 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
           {AllDataStatus === "1" && (
             <button
               type="submit"
-              disabled={loading}
+              disabled={AllDataStatus === "2"}
               className="rounded mt-4 bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
             >
               {loading ? (
