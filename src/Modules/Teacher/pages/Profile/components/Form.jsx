@@ -188,7 +188,7 @@ const Form = () => {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="ml-2 text-gray-500 focus:outline-none"
+              className="ml-2 text-gray-500 focus:outline-none "
             >
               {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
