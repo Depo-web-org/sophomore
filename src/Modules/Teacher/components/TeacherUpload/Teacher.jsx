@@ -184,7 +184,7 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
                         "upload to verify"}
                       {documentStatus[index]?.verified === "2" && (
                         <>
-                          pending verification{" "}
+                       {i18n.language === "ar" ? "في انتظار التحقق": "pending verification"}   
                           <BsHourglassSplit className="text-white text-xl animate-spin duration-700 transition-all inline-block " />
                         </>
                       )}
@@ -199,6 +199,7 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
                       <input
                         type="file"
                         className="hidden"
+                        disabled={documentStatus[index]?.verified === "2"}
                         onChange={(e) => handleFileChange(e, index)}
                         accept={
                           item.name === "Intro Video"
@@ -253,7 +254,7 @@ const TeacherUpload = ({ showAlert, setShowAlert }) => {
           {AllDataStatus === "0" && (
             <Link
               to={"/teacherpanel"}
-              className="rounded mt-5 inline-block bg-primary px-4 py-2 text-md font-semibold text-white hover:bg-blue-800 transition-all duration-300"
+              className="rounded mt-5 inline-block bg-green-500 px-4 py-2 text-md font-semibold text-white hover:bg-green-600 transition-all duration-300"
             >
               {i18n.language === "ar" ? "ابدا" : "Lets start"}
             </Link>
