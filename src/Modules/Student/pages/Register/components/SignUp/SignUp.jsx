@@ -139,7 +139,7 @@ const [errorSubmit, setErrorSubmit] = useState(null)
   };
 
   return (
-    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4">
+    <div className="min-h-[calc(100vh-112px)] flex flex-col gap-8 lg:gap-12 justify-between w-full pb-4 ">
       <div className="flex flex-col items-start gap-6 w-full 2xl:w-4/5 ms-auto">
         <HeadTitle
           title={{
@@ -166,7 +166,7 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                   {...register("first_name", {
                     required: t("form.fields.firstName.error.required"),  
                     pattern: {
-                      value: /^[a-zA-Z]+$/,
+                      value: /^[a-zA-Z\s]+$/,
                       message: t("form.fields.firstName.error.invalid"),  
                     },
                   })}
@@ -186,7 +186,7 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                   {...register("last_name", {
                     required: t("form.fields.lastName.error.required"),  
                     pattern: {
-                      value: /^[a-zA-Z]+$/,
+                      value: /^[a-zA-Z\s]+$/,
                       message: t("form.fields.lastName.error.invalid"), 
                     },
                   })}

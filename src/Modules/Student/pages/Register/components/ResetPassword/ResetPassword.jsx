@@ -125,8 +125,8 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden">
-        <div className="flex flex-col items-start b justify-center lg:gap-8 w-full slide-in-left lg:min-h-screen">
+      <div className="container  w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-start gap-4 overflow-hidden items-center ">
+        <div className="flex flex-col items-start b justify-center lg:gap-8 w-full slide-in-left lg:min-h-screen ">
           <div className="w-full">
             <HeadTitle
               title={{
@@ -144,7 +144,7 @@ const ResetPassword = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"
             >
-              <div dir="ltr" className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 ms-auto">
+              <div dir="ltr" className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 me-auto">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
@@ -306,7 +306,7 @@ const ResetPassword = () => {
         <img
          src="/images/logos/logo.svg"
           alt="register img"
-          className="hidden lg:block min-h-[calc(100vh-112px)] lg:max-w-[420px] xl:max-w-[580px] slide-in-right object-cover rounded-xl z-10"
+          className="hidden lg:block w-96 slide-in-right object-cover rounded-xl z-10"
         />
       </div>
       {resendOTPModal && (

@@ -21,12 +21,12 @@ const EmptyCart = () => {
             </p>
 
             {/* Translated Start Shopping Button */}
-            <button
+           <Link to="/" className="bg-primary w-4/5 lg:w-1/2 text-sm lg:text-base rounded-[5px] text-white px-8 py-4 font-bold transition-colors ease-out duration-300 hover:bg-primary-hover">   <button
               type="submit"
-              className="bg-primary w-4/5 lg:w-1/2 text-sm lg:text-base rounded-[5px] text-white px-8 py-4 font-bold transition-colors ease-out duration-300 hover:bg-primary-hover"
+              
             >
-              <Link to="/">{t("cart.startShopping")}</Link>
-            </button>
+            {t("cart.startShopping")}
+            </button></Link>
           </div>
           <div className="xl:w-2/5">
             <img src="/images/empty.svg" alt="" className="w-full" />

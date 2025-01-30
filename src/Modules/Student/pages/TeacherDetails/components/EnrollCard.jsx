@@ -33,7 +33,6 @@ export default function EnrollCard() {
     }
     return false; // Default to false if data is unavailable or invalid
   }, [data, isLoading, isError, course?.id]);
-
   const handleButtonClick = () => {
     // setIsModalUnitsOpen(false);
     // setIsModalPackagesOpen(false);

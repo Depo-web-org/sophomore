@@ -15,7 +15,7 @@ export default function MyProfile() {
   const { t,i18n } = useTranslation();
 
 
-  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading , } = useGetProfileQuery();
 
 
 
@@ -236,10 +236,15 @@ const student= data?.data;
           <div className="flex gap-4 mt-4 sm:mt-0">
             <button
               type="button"
+              disabled={isLoading}
+
               className="text-red-500 font-medium"
-              onClick={() => setProfileImage(null)}
+              onClick={() => {
+                setProfileImage(null)
+              }}
             >
-              {t("profile.delete")}
+              
+              {       isLoading?<ImSpinner9 className="animate-spin text-3xl text-secondary " />: `${t("profile.delete")}`}
             </button>
             <button
               type="submit"

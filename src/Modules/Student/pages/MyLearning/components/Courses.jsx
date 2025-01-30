@@ -19,11 +19,91 @@ export const parseJSONSafely = (jsonString) => {
   }
 };
 
+// export default function Courses() {
+//   const { t, i18n } = useTranslation();
+//   const params = window.location.pathname;
+//   const { data, isLoading, isError } = useGetStudentCoursesQuery();
+//   const ordersData = data?.data;
+
+//   if (isLoading) {
+//     return <CoursesSkeleton />;
+//   }
+
+//   return (
+//     <div className="w-full flex flex-col gap-8">
+//       <div className="w-full flex flex-col gap-4">
+//         {params !== "/" && (
+//           <p className="text-2xl font-semibold text-white py-4 lg:py-8">
+//             {i18n.language === "ar" ? " دروسي " : " My courses"}
+//           </p>
+//         )}
+//         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+//           {params !== "/"
+//             ? ordersData?.map((order) =>
+//                 order?.items?.map((item) => {
+//                   const contentDataObject = parseJSONSafely(item?.content_data);
+//                   const contents =
+//                     item?.contents.length > 0
+//                       ? item?.contents
+//                       : [contentDataObject];
+
+//                   return (
+//                     <LearningCard
+//                       key={item.id}
+//                       course={item?.course_data_object}
+//                       contents={contents}
+//                       image={
+//                         item?.course_data_object?.image ||
+//                         "/images/MyLearning/subject1.webp"
+//                       }
+//                       path={`/mylearning/course/${item?.course_data_object?.id}/lesson/${contents[0]?.id}`}
+//                     />
+//                   );
+//                 })
+//               )
+//             : ordersData
+//                 ?.slice(0, 2)
+//                 ?.map((order) =>
+//                   order.items.map((item) => {
+//                     const contentDataObject = parseJSONSafely(
+//                       item?.content_data
+//                     );
+//                     const contents =
+//                       item?.contents.length > 0
+//                         ? item?.contents
+//                         : [contentDataObject];
+
+//                     if (contents[0] === null) {
+//                       return null;
+//                     }
+
+//                     return (
+//                       <LearningCard
+//                         key={item.id}
+//                         course={item?.course_data_object}
+//                         contents={contents}
+//                         image={
+//                           item?.course_data_object?.image ||
+//                           "/images/MyLearning/subject1.webp"
+//                         }
+//                         path={`/mylearning/course/${item?.course_data_object?.id}/lesson/${contents[0]?.id}`}
+//                       />
+//                     );
+//                   })
+//                 )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 export default function Courses() {
   const { t, i18n } = useTranslation();
   const params = window.location.pathname;
   const { data, isLoading, isError } = useGetStudentCoursesQuery();
   const ordersData = data?.data;
+
+  // تحقق إذا كانت ordersData مصفوفة قبل استخدام map عليها
+  const isOrdersDataArray = Array.isArray(ordersData);
 
   if (isLoading) {
     return <CoursesSkeleton />;
@@ -39,7 +119,8 @@ export default function Courses() {
         )}
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
           {params !== "/"
-            ? ordersData?.map((order) =>
+            ? isOrdersDataArray &&
+              ordersData?.map((order) =>
                 order?.items?.map((item) => {
                   const contentDataObject = parseJSONSafely(item?.content_data);
                   const contents =
@@ -61,7 +142,8 @@ export default function Courses() {
                   );
                 })
               )
-            : ordersData
+            : isOrdersDataArray &&
+              ordersData
                 ?.slice(0, 2)
                 ?.map((order) =>
                   order.items.map((item) => {
