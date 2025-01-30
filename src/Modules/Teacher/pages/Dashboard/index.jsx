@@ -20,9 +20,8 @@ export function getUniqueData(data, uniqueKey) {
 
 export default function Dashboard() {
  
-  const { data: coursesData, isFetching: isFetchingCourses } = useGetTeacherCoursesQuery();
+  const { data: coursesData, isFetching: isFetchingCourses ,refetch} = useGetTeacherCoursesQuery();
   const { data: subscribersData, isFetching: isFetchingSubscribers } = useGetTeacherSubscripersQuery();
-
 
   const finalFilterData = useMemo(() => getUniqueData(subscribersData?.data, "consumer"), [subscribersData]);
   const numberOfTotalProfit = useMemo(
@@ -32,6 +31,9 @@ export default function Dashboard() {
         .reduce((sum, value) => sum + value, 0) || 0,
     [subscribersData]
   );
+  useEffect(()=>{
+    refetch()
+  },[])
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex flex-col p-4 lg:px-8 justify-start items-start gap-8">

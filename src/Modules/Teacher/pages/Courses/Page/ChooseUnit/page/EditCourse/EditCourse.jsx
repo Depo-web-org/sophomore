@@ -20,15 +20,15 @@ const EditCourse = () => {
 const [statusOfCourse, setStatusOfCourse] = useState(false)
 
   const { data: schoolsData = {}, isLoading, isError } = useGetTeacherCoursesQuery();
-  const [editTeacherCourse, { isLoading: courseLoading, isError: courseError }] = useEditTeacherCourseMutation();
+  const [editTeacherCourse, { isLoading: courseLoading, isError: courseError ,refetch}] = useEditTeacherCourseMutation();
   const { data: ALLschoolsData } = useGetAllSchoolInformationQuery();
   
-  // console.log(schoolsData)
+
   const selectedCourse = schoolsData?.data?.find(
     (course) => course.id === EditCourseID
   );
   const [isCourseFinished, setIsCourseFinished] = useState(false); 
-console.log(selectedCourse)
+
   useEffect(() => {
     if (selectedCourse) {
       if (selectedCourse.status == 1) {
@@ -109,7 +109,7 @@ console.log(selectedCourse)
   }
 
   return ( 
-    <div className="lg:ms-5 h-auto    ">
+    <div className="lg:ms-5 h-auto     ">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="w-full lg:w-1/2 sm:mx-auto lg:mx-0">
         <GoBack  title={location.pathname.split('/')[3]=== 'editUnit' ? "Edit Lessons" :t("actions.updateCourse") }/>
