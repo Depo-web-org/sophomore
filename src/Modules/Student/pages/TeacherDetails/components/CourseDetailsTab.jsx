@@ -22,8 +22,20 @@ const CourseDetailsTab = () => {
   const { i18n } = useTranslation();
   
 const { data, isLoading, isError } = useGetStudentCoursesQuery();
-const LessonsStudent = Array.isArray(data?.data)  ? data?.data?.map(i => i.items)?.map(i => i[0])?.map(i => i.content) : [];
-const LessonsStudentFullContent = Array.isArray(data?.data)  ? data?.data?.map(i => i.items)[0][0]?.contents?.map(i => i.id) : [];
+const LessonsStudent = Array.isArray(data?.data)
+  ? data?.data
+      .map(i => i.items)
+      .filter(items => Array.isArray(items) && items.length > 0)
+      .map(i => i[0])
+      .filter(item => item !== undefined)
+      .map(i => i.content)
+  : [];
+
+const LessonsStudentFullContent = Array.isArray(data?.data) &&
+  Array.isArray(data?.data[0]?.items) &&
+  Array.isArray(data?.data[0]?.items[0]?.contents)
+  ? data?.data[0]?.items[0]?.contents.map(i => i.id)
+  : [];
 
 
   const isEnrolled = useMemo(() => {

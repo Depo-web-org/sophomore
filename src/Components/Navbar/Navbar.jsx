@@ -104,6 +104,9 @@ const student= data?.data ||UserInformation?.data;
   }
 };
 
+useEffect(() => {
+  refetch()
+}, [])
 
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
