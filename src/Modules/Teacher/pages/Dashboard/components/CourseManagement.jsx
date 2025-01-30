@@ -6,6 +6,7 @@ import { useDeleteTeacherCourseMutation } from "../../../../../Redux/data/postDa
 import { useGetTeacherCoursesQuery, useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
 import { ImSpinner9 } from "react-icons/im";
 import { getUniqueData } from "..";
+import { toast } from "react-toastify";
 
 
 export const countStudentsPerCourse = (data) => {
@@ -43,7 +44,7 @@ export default function CourseManagement({ data,subscribersData }) {
   const [deleteModal, setDeleteModal] = useState(false); 
   const [selectedCourseId, setSelectedCourseId] = useState(null); 
   const [openMenuId, setOpenMenuId] = useState(null); 
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const [deleteTeacherCourse, { isLoading, isError }] = useDeleteTeacherCourseMutation();
   const { refetch } = useGetTeacherCoursesQuery();
 const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
@@ -53,9 +54,18 @@ const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
       id,
     };
     const response = await deleteTeacherCourse(formData).unwrap();
-    if (response.code === 0) {
-      refetch();
-    }
+
+            if (
+              response.message ===
+              "Deleting course process failed"
+            ) {
+              toast.error(`${i18n.languages[0] === 'ar' ? "لا يمكن حذف هذا الكورس لأنه قد تم شراؤه بالفعل من قبل أحد الطلاب." : "This course cannot be deleted because it has already been purchased by a student."}`);
+            } else {
+              // Optional refetch logic if needed
+              refetch();
+              toast.success(`${i18n.languages[0] === 'ar' ? "تم حذف الدرس بنجاح." : "Lesson deleted successfully."}`);
+            }
+   
     setDeleteModal(false); 
   };
 

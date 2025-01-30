@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../../Redux/data/getDataApiSlice";
 import { baseUrl } from "../../App";
  
+ 
 const Navbar = () => {
   const { t } = useTranslation(); 
   const [btnIsBumbed, setBtnIsBumbed] = useState(false);
@@ -19,6 +20,8 @@ const Navbar = () => {
   // Get User Information 
     const cartItemsNum = useSelector((state) => state.cart.items.length);
 
+
+// sapan27862@ahaks.com
     useEffect(() => {
       if (cartItemsNum=== 0) {
         return;
@@ -34,8 +37,11 @@ const Navbar = () => {
       };
     }, [cartItemsNum]);
 
-  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
-  const student= data?.data;
+  // const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+
+  const UserInformation= JSON.parse(localStorage.getItem('USER'))
+const student= UserInformation?.data;
+// console.log(student)
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();

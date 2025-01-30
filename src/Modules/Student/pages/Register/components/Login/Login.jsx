@@ -40,7 +40,7 @@ const {i18n} =useTranslation()
     formState: { errors },
   } = useForm();
 
-  const [login, { isLoading, isError, error }] = useLoginMutation();
+  const [login, { isLoading, isError, error ,}] = useLoginMutation();
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
 
@@ -53,18 +53,18 @@ const {i18n} =useTranslation()
           userData.provider = provider;
         }
       const response = await login({ userData, role }).unwrap();
-      console.log(response)
       setUserEmail(data.loginMail);
     
 
 
       if (response.code===0) {
-        console.log(response.data)
 
         // Encrypt the refresh token and store it
+        console.log("before",response.data.token)
 
-        localStorage.setItem("Token", response.data.token);
-
+        localStorage.setItem("Token", response.data.token)
+        
+        console.log("after",response.data.token)
                 //Store In Redux
 
               

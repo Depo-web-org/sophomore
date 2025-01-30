@@ -15,7 +15,6 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
     }),
     addTeacherCourse: builder.mutation({
         query: (formData) => {
-          console.log("add course api slice:", formData); 
           return {
             url: "addProviderCourse.php", 
             method: "POST",
@@ -25,7 +24,6 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
       }),
       addTeacherCourseContent: builder.mutation({
         query: (formData) => {
-          console.log("add course content api slice:", formData); 
           return {
             url: "addProviderCourseContent.php", 
             method: "POST",

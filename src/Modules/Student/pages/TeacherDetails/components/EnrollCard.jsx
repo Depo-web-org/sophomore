@@ -70,7 +70,7 @@ export default function EnrollCard() {
   };
 
   const isSelected = cartItems?.some((item) => item.id === CourseInfo.id);
-  console.log(isSelected);
+  // console.log(isSelected);
 
   const handleUnitsPackages = () => {
     setIsModalPackagesOpen(false);
