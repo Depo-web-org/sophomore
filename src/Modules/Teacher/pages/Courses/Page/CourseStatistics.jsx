@@ -153,7 +153,6 @@ const AllCourses = () => {
 };
 
 const RecentlyUploaded = ({ data }) => {
-  console.log(data?.data);
   const recentCourses = data?.data.slice(0, 3);
 
   const { t, i18n } = useTranslation(); 

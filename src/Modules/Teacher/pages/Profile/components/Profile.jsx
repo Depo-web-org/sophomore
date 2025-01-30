@@ -21,7 +21,6 @@ export default function Profile() {
   const getProfile=async ()=> 
   console.log('data profile:',data?.data)
 const student= data?.data;
-console.log(provider)
 
   const [profileImage, setProfileImage] = useState( null);
 
