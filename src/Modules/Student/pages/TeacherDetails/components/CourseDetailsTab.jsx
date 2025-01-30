@@ -147,7 +147,7 @@ console.log(lessonInfo)
 
 
             {
-              ! LessonsStudent?.includes(item.id) &&   <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap ">
+              ! LessonsStudent?.includes(item.id)  &&   <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap  ">
               <button
 disabled={isFullCourseSelected ||isLessonSelected}
 className={`rounded-md p-2 w-full text-white ${

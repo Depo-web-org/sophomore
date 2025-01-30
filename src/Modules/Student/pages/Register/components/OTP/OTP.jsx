@@ -95,7 +95,7 @@ console.log(mail)
   };
   return (
     <>
-    <div className="w-full my-auto flex justify-center ">
+    <div className="w-full my-auto flex justify-center  ">
       <div className="flex flex-col items-start justify-start gap-2 mx-4">
         <HeadTitle
           title={{

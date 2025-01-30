@@ -451,7 +451,7 @@
  "otpPage": {
     "title": {
       "head": "Check your mail",
-      "subTitle": "We have sent an OTP to your mail {email}"
+      "subTitle": "We have sent an OTP to your mail "
     },
     "form": {
       "validateButton": "Validate",

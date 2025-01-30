@@ -116,7 +116,7 @@ console.log(email.split('@')[0].slice(0, 3))
 
   return (
     <>
-     <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-center gap-4 overflow-hidden">
+     <div className="container w-full pt-16 md:w-custom-md xl:w-custom-xl mx-auto min-h-screen flex justify-between items-center gap-4 overflow-hidden ">
         <div className="flex flex-col items-start justify-center gap-4 lg:gap-8 w-full slide-in-left lg:min-h-screen">
           <div className="w-full">
             <HeadTitle
