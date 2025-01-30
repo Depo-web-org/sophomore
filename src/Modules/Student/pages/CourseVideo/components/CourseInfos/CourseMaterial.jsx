@@ -18,7 +18,7 @@ const {i18n}=useTranslation()
 
 function UnitTest({params,i18n}) {
   return (
-    <div className="flex flex-col md:items-start justify-center w-full gap-2">
+    <div className="flex flex-col md:items-start justify-center w-full gap-2 ">
       <p className="text-lg md:text-xl font-bold text-white">  {
             i18n.language === 'ar' ? "أختبار الدرس" : " Unit Test"
           }
@@ -51,7 +51,7 @@ function Material({i18n}) {
 
   return (
     <>
-      <div className="flex flex-col items-start justify-center w-full gap-2">
+      <div className="flex flex-col items-start justify-center w-full gap-2 ">
         <p className="text-lg md:text-xl font-bold text-white">
          
           {

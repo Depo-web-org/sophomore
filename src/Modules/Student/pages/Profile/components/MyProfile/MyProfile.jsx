@@ -15,15 +15,10 @@ export default function MyProfile() {
   const { t,i18n } = useTranslation();
 
 
-  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading , } = useGetProfileQuery();
-
-
-
-
-const UserInformation= JSON.parse(localStorage.getItem('USER'))
-  
-const student= UserInformation?.data;
-
+  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+  // if(data) localStorage.setItem('USER');
+    const UserInformation= JSON.parse(localStorage.getItem('USER'))
+  const student= data?.data ||UserInformation?.data
 
   const [profileImage, setProfileImage] = useState( null);
 

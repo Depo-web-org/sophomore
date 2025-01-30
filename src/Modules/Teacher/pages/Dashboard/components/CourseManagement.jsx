@@ -120,7 +120,7 @@ const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                     {/* {course.enrollment || 0} */}
-                    {numberOfStudents[0]?.count}
+                    {numberOfStudents[0]?.count  || 0}
                   </td>
                   <td className={`whitespace-nowrap px-4 py-2 ${course.status === "1" ? "text-emerald-700":"text-red-700" } `}>
                     {course.status === "1" ?   t("courseManagement.statusOfCourseFinished"):t("courseManagement.statusOfAddCourse")  }

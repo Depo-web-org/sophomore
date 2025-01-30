@@ -11,6 +11,7 @@ import {timeAgo} from "../../../../../Helpers/timeAgo"
 import SkeletonStaticCard from "../../../../../Components/Common/SkeletonCard/SkeletonStaticCard";
 import CourseManagementSkeleton from "../../../components/Skeletons/CourseManagementSkeleton";
 import { getUniqueData } from "../../Dashboard";
+import { countStudentsPerCourse } from "../../Dashboard/components/CourseManagement";
 
 
 export default function CourseStatistics() {
@@ -58,7 +59,7 @@ export default function CourseStatistics() {
        
       </div>
       
-      {  isFetching ? <CourseManagementSkeleton/>  :<AllCourses />}
+      {  isFetching ? <CourseManagementSkeleton/>  :<AllCourses  subscribersData={subscribersData}/>}
       
       <RecentlyUploaded data={data} />
     </>
@@ -77,14 +78,16 @@ export function UploadCourse({ title, path, width }) {
   );
 }
 
-const AllCourses = () => {
+const AllCourses = ({subscribersData}) => {
   const { t, i18n } = useTranslation(); // Initialize useTranslation
-
   const { data, isLoading, isFetching, isError } = useGetTeacherCoursesQuery();
+  // const finalFilterData = useMemo(() => getUniqueData(data?.data, "consumer"), [data]);
+const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
+
 
   return (
     <div
-      className="w-full  bg-white rounded-3xl  py-4"
+      className="w-full  bg-white rounded-3xl  py-4 "
       dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
       <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between pb-4 px-4">
@@ -121,7 +124,11 @@ const AllCourses = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            {data?.data.map((course, index) => (
+            {data?.data.map((course, index) => {
+              const numberOfStudents =studentPerCourse?.filter((item)=> item.courseID === course.id)
+
+           return (
+              
               <tr key={index}>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                   {course.title}
@@ -130,7 +137,8 @@ const AllCourses = () => {
                   {course.dateof.split(" ")[0].split("")}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                  {course.enrollment || 0}
+                  {numberOfStudents[0]?.count  || 0}
+
                 </td>
                 <td className={`whitespace-nowrap px-4 py-2 ${course.status === "1" ? "text-emerald-700":"text-red-700" } `}>
                     {course.status === "1" ?   t("courseManagement.statusOfAddCourse")  :  t("courseManagement.statusOfCourseFinished")}
@@ -144,7 +152,8 @@ const AllCourses = () => {
                   </Link>
                 </td>
               </tr>
-            ))}
+            )})
+            }
           </tbody>
         </table>
       </div>

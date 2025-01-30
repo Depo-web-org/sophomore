@@ -37,11 +37,11 @@ const Navbar = () => {
       };
     }, [cartItemsNum]);
 
-  // const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
-
+  const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+// if(data) localStorage.setItem('USER');
   const UserInformation= JSON.parse(localStorage.getItem('USER'))
-const student= UserInformation?.data;
-// console.log(student)
+const student= data?.data ||UserInformation?.data;
+
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();

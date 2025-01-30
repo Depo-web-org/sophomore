@@ -23,6 +23,9 @@ const CourseDetailsTab = () => {
   
 const { data, isLoading, isError } = useGetStudentCoursesQuery();
 const LessonsStudent = Array.isArray(data?.data)  ? data?.data?.map(i => i.items)?.map(i => i[0])?.map(i => i.content) : [];
+const LessonsStudentFullContent = Array.isArray(data?.data)  ? data?.data?.map(i => i.items)[0][0]?.contents?.map(i => i.id) : [];
+
+
   const isEnrolled = useMemo(() => {
     if (!isLoading && !isError && Array.isArray(data?.data)) {
       const coursesEnrolled = data?.data.flatMap((course) =>
@@ -56,7 +59,6 @@ const LessonsStudent = Array.isArray(data?.data)  ? data?.data?.map(i => i.items
       price: lesson.price, // Set the price for the lesson (adjust as needed)
       type: "lesson", // Indicate this is a lesson
     };
-console.log(lessonInfo)
     // Dispatch the addToCart action
     dispatch(addToCart(lessonInfo));
     // toast.success("Lesson added to cart successfully!");
@@ -71,8 +73,6 @@ console.log(lessonInfo)
   // check if all course in cart 
   const isFullCourseSelected = cartItems?.some(
     (item) => item.id === course?.id );
-    console.log(isFullCourseSelected)
-
 
   return (
     <div className="w-full flex flex-col gap-4 text-white  ">
@@ -147,7 +147,7 @@ console.log(lessonInfo)
 
 
             {
-              ! LessonsStudent?.includes(item.id)  &&   <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap  ">
+              ! LessonsStudent?.includes(item.id) && !LessonsStudentFullContent?.includes(item.id)  &&   <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap  ">
               <button
 disabled={isFullCourseSelected ||isLessonSelected}
 className={`rounded-md p-2 w-full text-white ${
