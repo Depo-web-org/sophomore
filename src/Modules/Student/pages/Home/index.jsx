@@ -21,7 +21,7 @@ useEffect(()=>{
       <Hero />
 
       {Token && role === "student" && data?.data?.length > 0 && <HomeMin />}
-      <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
+      <div className=" w-full px-4 md:px-[80px] lg:px-[85px] xl:px-[200px]  mx-auto">
         <ChooseSchool />
         {/* <Grade/> */}
       {!Token &&   <ChooseCard />}

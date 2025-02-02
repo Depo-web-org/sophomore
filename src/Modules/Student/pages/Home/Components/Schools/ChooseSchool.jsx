@@ -51,13 +51,24 @@ export default function ChooseSchool() {
                 {/* <CardInfo item={item} path={`/school/${item.name}`} /> */}
                 <div className="relative overflow-hidden mt-2 lg:mt-4 rounded-3xl group ">
             <Link to={`/school/${item.name}/grade/${grade.id}`} >
-              <img
+              {/* <img
               // src= {` /education/assets/meta/ ${item.image }`}.
                 // src={'/images/Grade/HighSchool.webp'}
                 src = { `${ baseUrl +grade.path+grade.image }`}
+                width={128}
+                height={128}
               alt={i18n.language === "ar" ? item.name_ar:item.name   }
               className="h-32 w-full sm:h-full object-cover group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
-              />
+              /> */}
+              <img 
+  src={ `${ baseUrl + grade.path + grade.image }` }
+  width={300}  
+  height={200} 
+    loading="lazy"
+  alt={i18n.language === "ar" ? grade.name_ar : grade.name }
+  className="h-32 w-full sm:h-full object-cover group-hover:scale-110 group-hover:opacity-30 transition duration-500 ease-in-out"
+/>
+
               
             <h4
               className="absolute bottom-[5%] left-[5%] text-nowrap text-sm sm:text-xl 

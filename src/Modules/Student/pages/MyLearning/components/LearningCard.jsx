@@ -13,6 +13,9 @@ const courseName =contents.length>0?contents[0]?.course_data?.title: course?.tit
             <img
               src={image}
               alt="learning card"
+              width={300}  
+              height={200} 
+                loading="lazy"
               className="w-full  object-cover   rounded-lg duration-200 transition-all"
             />
             <div className="absolute -bottom-5 left-[50%] translate-x-[-50%] group-hover:bottom-1/2 duration-300  group-hover:scale-105 transition-all z-10">
