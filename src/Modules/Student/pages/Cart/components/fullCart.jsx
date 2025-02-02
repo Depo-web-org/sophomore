@@ -75,7 +75,7 @@ const FullCart = () => {
                       </span>
                       <button
 
-  onClick={() => handleRemoveItem(course.id)}                        className="text-secondary text-2xl md:text-3xl mb-3 cursor-pointer"
+  onClick={() => handleRemoveItem(course.id)}    className="text-secondary text-2xl md:text-3xl mb-3 cursor-pointer"
                       >
                         <RiDeleteBin6Line />
                       </button>
