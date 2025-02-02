@@ -6,7 +6,7 @@ export default defineConfig({
   // logLevel: 'silent',  
   plugins: [react()],
   esbuild: {
-    drop: ['console', 'debugger'],
+    drop: ['console'],
   },
 });
 
