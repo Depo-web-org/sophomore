@@ -165,9 +165,13 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                   id="first_name"
                   {...register("first_name", {
                     required: t("form.fields.firstName.error.required"),  
+                    // pattern: {
+                    //   value: /^[a-zA-Z\s]+$/,
+                    //   message: t("form.fields.firstName.error.invalid"),  
+                    // },
                     pattern: {
-                      value: /^[a-zA-Z\s]+$/,
-                      message: t("form.fields.firstName.error.invalid"),  
+                      value: /^[\u0600-\u06FFa-zA-Z\s]+$/,
+                      message: "First Name must contain only letters",
                     },
                   })}
                   className="outline-none text-base w-full"
@@ -185,9 +189,13 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                   id="last_name"
                   {...register("last_name", {
                     required: t("form.fields.lastName.error.required"),  
+                    // pattern: {
+                    //   value: /^[a-zA-Z\s]+$/,
+                    //   message: t("form.fields.lastName.error.invalid"), 
+                    // },
                     pattern: {
-                      value: /^[a-zA-Z\s]+$/,
-                      message: t("form.fields.lastName.error.invalid"), 
+                      value: /^[\u0600-\u06FFa-zA-Z\s]+$/,
+                      message: "First Name must contain only letters",
                     },
                   })}
                   className="outline-none text-base w-full"
