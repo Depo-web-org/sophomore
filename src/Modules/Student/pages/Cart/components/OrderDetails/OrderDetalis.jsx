@@ -106,8 +106,7 @@ import { useGetStudentCoursesQuery } from '../../../../../../Redux/data/getDataA
 import { useTranslation } from 'react-i18next';
 
 export const OrderDetalis = ({ cartItems }) => {
-  const { t, i18n } = useTranslation(); // استخدام الترجمة هنا
-  
+  const { t, i18n } = useTranslation();
   const { refetch } = useGetStudentCoursesQuery();
   const dispatch = useDispatch();
   const [checkoutCart, { isLoading, isError }] = useCheckoutCartMutation();
@@ -146,6 +145,9 @@ export const OrderDetalis = ({ cartItems }) => {
         toast.success(t('order.successMessage')); // ترجمة رسالة النجاح
         dispatch(clearCart());
         refetch();
+      }else if( response.data ==='Courses for different teachers are not allowed in the same order' && response.code === 1){
+        toast.error(`${i18n.language==='ar'? ' العمليتن مختلفين ﻻ يمكنك شراء في نفس العمليه ':'Courses for different teachers are not allowed in the same order'}`);
+
       }
     } catch (error) {
       console.error('Error during checkout:', error);

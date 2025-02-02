@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Wishlistempty({lang}) {
   return (
     <>
@@ -14,14 +16,17 @@ export default function Wishlistempty({lang}) {
          
           {lang==="ar"? "القائمة فارغة"  :" Your wishlist is empty"}
         </span>
+        <Link to='/'>
         <button
           type="button"
-          className="block m-auto rounded bg-primary my-5 px-8 pb-2 pt-2.5 text-white font-bold hover:bg-blue-500 transition duration-150 ease-in-out"
+          className="block m-auto rounded bg-primary hover:bg-opacity-70 my-5 px-8 pb-2 pt-2.5 text-white font-bold hover:bg-blue-500 transition duration-150 ease-in-out"
         >
           {lang==="ar"? "ابدء التعلم "  :" Start Learning"}
 
           
         </button>
+        </Link>
+
       </section>
     </>
   );

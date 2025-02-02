@@ -26,7 +26,7 @@ export default function StudentDetails() {
   }
 
   return (
-    <div className="bg-white rounded-2xl w-full p-6">
+    <div className="bg-white rounded-2xl w-full p-6 ">
       <div className="flex flex-col md:flex-row gap-2 justify-between items-center w-full">
         <p className="text-xl font-semibold text-primary">{  `${i18n.language==="ar"? "تفاصيل الطﻻب" :"Student details"}`}</p>
         <div className="flex items-center flex-col md:flex-row justify-center md:justify-evenly w-full md:w-1/2 ">

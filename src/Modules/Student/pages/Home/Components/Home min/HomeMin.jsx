@@ -29,7 +29,7 @@ export default function HomeMin() {
 
   return (
     <>
-      <section className="text-white  pt-8 container w-full md:w-custom-md xl:w-custom-xl mx-auto ">
+      <section className="text-white  pt-8 container  ">
 
         
         <div className="lg:py-5">

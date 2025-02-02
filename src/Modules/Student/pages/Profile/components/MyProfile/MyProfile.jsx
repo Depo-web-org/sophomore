@@ -47,7 +47,6 @@ export default function MyProfile() {
         formDataToSend.append("photo", profileImage);
       }
     
-      console.log("Form Data with image:", formDataToSend);
     
       try {
         const response = await updateProfile(formDataToSend).unwrap();
@@ -154,10 +153,7 @@ export default function MyProfile() {
         </div>
 
         {/* Phone Number */}
-{
-  !student?.phone_number
-  &&         
-  <div className="mb-5">
+        <div className="mb-5">
   <label
     htmlFor="phone_number"
     className="block text-gray-700 font-medium"
@@ -174,20 +170,21 @@ export default function MyProfile() {
       <PhoneInput
         {...field}
         id="phone_number"
+        value={student?.phone_number}
         placeholder={t("profile.phoneNumber")}
         defaultCountry="EG"
         className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
       />
     )}
   />
-
   {errors.phone_number && (
     <p className="text-red-500 text-sm mt-1">
       {errors.phone_number.message}
     </p>
   )}
 </div>
-}
+
+
 
         {/* Profile Image Upload */}
         <div className="mb-5 flex flex-col sm:flex-row justify-between items-center">
