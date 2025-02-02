@@ -5,7 +5,6 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
   
     addTeacherDocument: builder.mutation({
       query: (formData) => {
-        console.log("updateDocument api slice:", formData); 
         return {
           url: "addProviderDocument.php", 
           method: "POST",
@@ -42,7 +41,6 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
       }),
       editTeacherCourseContent: builder.mutation({
         query: (formData) => {
-          console.log("add course content api slice:", formData); 
           return {
             url: "updateProviderCourseContent.php", 
             method: "POST",
@@ -62,7 +60,6 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
       }),
       deleteTeacherCourseContent: builder.mutation({
         query:(formData) => {
-          console.log("delete course api slice:", formData); 
           return {
             url: "deleteProviderCourseContent.php", 
             method: "POST",
@@ -72,7 +69,6 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
       }),
       checkoutCart: builder.mutation({
         query:(dataToSend) => {
-          console.log("checkoutCart api slice:", dataToSend); 
           return {
             url: "doCheckout.php", 
             method: "POST",
