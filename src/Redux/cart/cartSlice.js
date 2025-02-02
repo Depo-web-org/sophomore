@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import i18n from "../../i18n";
+ 
+ 
 
 // Function to load the cart from Local Storage
 const loadCartFromLocalStorage = () => {
+  
   const savedCart = localStorage.getItem("cart");
   return savedCart ? JSON.parse(savedCart) : [];
 };
@@ -10,6 +15,7 @@ const loadCartFromLocalStorage = () => {
 const saveCartToLocalStorage = (cartItems) => {
   localStorage.setItem("cart", JSON.stringify(cartItems));
 };
+
 const Token =localStorage.getItem("Token");
 // console.log(Token)
 const cartSlice = createSlice({
@@ -34,7 +40,9 @@ const cartSlice = createSlice({
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
-        toast.warning(`${type === "lesson" ? "Lesson" : "Course"} already in cart!`);
+        toast.warning(
+          `${type === "lesson" ? (i18n.language === "ar" ? "الدرس" : "Lesson") : (i18n.language === "ar" ? "الدورة" : "Course")} ${i18n.language === "ar" ? "موجود بالفعل في السلة!" : "already in cart!"}`
+        );
         return;
       }
       if (!localStorage.getItem("Token")) {
@@ -54,7 +62,9 @@ const cartSlice = createSlice({
           type,
           enrolledLessons,
         });
-        toast.success(`${type === "lesson" ? "Lesson" : "Course"} added to cart successfully`);
+        toast.success(
+          `${type === "lesson" ? (i18n.language === "ar" ? "الدرس" : "Lesson") : (i18n.language === "ar" ? "الدورة" : "Course")} ${i18n.language === "ar" ? "تمت إضافته إلى السلة بنجاح" : "added to cart successfully"}`
+        );
       }
       saveCartToLocalStorage(state.items);
     },
@@ -76,13 +86,18 @@ const cartSlice = createSlice({
       const itemToRemove = state.items.find((item) => item.id === id);
       if (itemToRemove) {
         state.items = state.items.filter((item) => item.id !== id);
-        toast.success(`${itemToRemove.type === "lesson" ? "Lesson" : "Course"} removed from cart successfully`);
+        toast.success(
+          `${itemToRemove.type === "lesson" ? (i18n.language === "ar" ? "الدرس" : "Lesson") : (i18n.language === "ar" ? "الدورة" : "Course")} ${i18n.language === "ar" ? "تمت إزالته من السلة بنجاح" : "removed from cart successfully"}`
+        );
         saveCartToLocalStorage(state.items);
       }
     },
     clearCart: (state) => {
       state.items = [];
-      toast.success("Cart cleared successfully");
+      toast.success(
+        i18n.language === "ar" ? "تم مسح السلة بنجاح" : "Cart cleared successfully"
+      );
+      
       saveCartToLocalStorage(state.items);
     },
   },

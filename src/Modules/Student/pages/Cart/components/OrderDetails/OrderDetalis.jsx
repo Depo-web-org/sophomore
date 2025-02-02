@@ -142,7 +142,7 @@ export const OrderDetalis = ({ cartItems }) => {
       const response = await checkoutCart(dataToSend).unwrap();
 
       if (response.code === 0) {
-        toast.success(t('order.successMessage')); // ترجمة رسالة النجاح
+        toast.success(t('order.successMessage'));  
         dispatch(clearCart());
         refetch();
       }else if( response.data ==='Courses for different teachers are not allowed in the same order' && response.code === 1){
