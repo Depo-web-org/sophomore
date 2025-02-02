@@ -1,7 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Roboto';
+  src: url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"') format('woff2');
+  font-display: swap;
+}
+
 * {
+  
+
   font-family: "Poppins", sans-serif;
 }
 body {
@@ -13,6 +21,8 @@ body {
   --sb-thumb-color: #536cb3;
   --sb-size: 1px;
 }
+
+
 .iframe-style {
   border: none;
 }

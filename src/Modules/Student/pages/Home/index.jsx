@@ -21,13 +21,13 @@ useEffect(()=>{
       <Hero />
 
       {Token && role === "student" && data?.data?.length > 0 && <HomeMin />}
-      <div className="container w-full md:w-custom-md xl:w-custom-xl mx-auto">
+      <section className="  container">
         <ChooseSchool />
         {/* <Grade/> */}
       {!Token &&   <ChooseCard />}
 
        
-      </div>
+      </section>
     </>
   );
 };

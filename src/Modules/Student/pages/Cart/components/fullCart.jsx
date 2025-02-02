@@ -87,7 +87,7 @@ const FullCart = () => {
             {/* Order Summary */}
             {/* Uncomment if needed */}
             <OrderSummary
-              style="col-span-12 lg:col-span-6 xl:col-span-5 bg-dark rounded-xl shadow-[4px_4px_0px_0px_#536CB3] container w-full md:w-custom-md xl:w-full"
+              style="col-span-12 lg:col-span-6  xl:col-span-5 bg-dark rounded-xl shadow-[4px_4px_0px_0px_#536CB3] container w-full md:w-custom-md xl:w-full"
               cartItems={cartItems}
               cartInfo={cartItems}
               // pricesInfo={info}

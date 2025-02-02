@@ -150,7 +150,38 @@ const student= data?.data;
         </div>
 
         {/* Phone Number */}
-{
+        <div className="mb-5">
+  <label
+    htmlFor="phone_number"
+    className="block text-gray-700 font-medium"
+  >
+    {t("profile.phoneNumber")}
+  </label>
+  <Controller
+    name="phone_number"
+    control={control}
+    rules={{
+      validate: (value) => (value ? true : "Phone number is required"),
+    }}
+    render={({ field }) => (
+      <PhoneInput
+        {...field}
+        id="phone_number"
+        value={student?.phone_number}
+        placeholder={t("profile.phoneNumber")}
+        defaultCountry="EG"
+        className="w-full px-4 py-2 mt-2 border rounded-lg shadow-sm focus:ring focus:ring-primary focus:outline-none"
+      />
+    )}
+  />
+
+  {errors.phone_number && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.phone_number.message}
+    </p>
+  )}
+</div>
+{/* {
   !student?.phone_number
   &&         
   <div className="mb-5">
@@ -183,7 +214,7 @@ const student= data?.data;
     </p>
   )}
 </div>
-}
+} */}
 
         {/* Profile Image Upload */}
         <div className="mb-5 flex flex-col sm:flex-row justify-between items-center">

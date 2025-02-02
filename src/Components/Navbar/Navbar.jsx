@@ -110,7 +110,7 @@ useEffect(() => {
 
   return (
     <nav className="z-[9999] fixed top-4 w-full px-4 md:px-0">
-      <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container w-full md:w-custom-md xl:w-custom-xl transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
+      <div className="bg-white/20 shadow-black/10 backdrop-blur-[5px] border border-white/20 container transition-all duration-300 h-16 mx-auto shadow-sm rounded-full flex items-center justify-between">
        <div className=" flex justify-center items-center  ">
        <Link to={"/"}>
           <div className="flex justify-start items-center pt-1 lg:ms-5 w-full ">

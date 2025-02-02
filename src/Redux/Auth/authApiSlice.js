@@ -103,7 +103,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     updateProfile: builder.mutation({
       query: (formData) => {
-        console.log("updateProfile api slice:", formData); 
         return {
           url: "updateConsumerProfile.php", 
           method: "POST",

@@ -165,6 +165,7 @@ const ApplicationSection = () => {
                 <input
                   type="number"
                   id="CoursesPrice"
+                  min={0}
                   {...register("CoursesPrice", {
                     required: t("application.priceRequiredFull"),
                   })}

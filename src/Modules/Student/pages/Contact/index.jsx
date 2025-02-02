@@ -9,7 +9,7 @@ const Contact = () => {
 
   return (
     <>
-      <section>
+      <section className="min-h-screen">
         {/* Part One */}
         <div className="contact-Background text-white relative lg:max-h-[650px] 2xl:max-h-[676px]">
           <div className="pt-28 lg:py-32 relative z-10 flex flex-col lg:flex-row w-full md:w-custom-md xl:w-custom-xl mx-auto gap-5">
