@@ -56,7 +56,8 @@ import OfflinePage from "./Components/Common/Offline/Offline";
 import CourseData from "./Modules/Student/pages/CourseVideo/components/CourseVideo/CourseData";
 
 export const baseUrl="https://dev.depowebeg.com"
-
+// Admin >
+// https://dev.depowebeg.com/education/admin/doVerifyProviderDocument.php
 function AppRoutes() {
   return (
     <>
