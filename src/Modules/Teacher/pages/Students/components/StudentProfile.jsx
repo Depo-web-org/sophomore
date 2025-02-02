@@ -92,10 +92,10 @@ function CoursesCard({course}) {
         <div className=" w-full p-2 bg-white min-h-10 rounded-b-lg">
           <div className="flex items-center justify-between">
             <p className="text-xl font-medium text-black">
-              {course.title}
+              {course?.title}
             </p>
             <p className="text-base font-normal  text-[#4B5563]">
-              {course.price} LE
+              {course?.price} LE
             </p>
           </div>
           <div className="flex items-center justify-between pt-8">
@@ -104,7 +104,7 @@ function CoursesCard({course}) {
               American
             </p> */}
             <p className="text-sm font-normal flex gap-2 items-center justify-center text-[#4B5563]">
-            <BsCalendar2Check /> {course.dateof.split(" ")[0]} </p>
+            <BsCalendar2Check /> {course?.dateof.split(" ")[0]} </p>
           </div>
         </div>
       </div>

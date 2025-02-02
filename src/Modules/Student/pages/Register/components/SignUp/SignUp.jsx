@@ -221,9 +221,10 @@ const [errorSubmit, setErrorSubmit] = useState(null)
                 name="phone_number"
                 control={control}
                 rules={{
-                  validate: (value) =>
-                    (value && isValidPhoneNumber(value)) ||
-                    t("form.fields.phoneNumber.error.invalid"), 
+                  validate: (value) => {
+                    const egyptianPhoneRegex = /^\+20\d{10}$/;
+                    return egyptianPhoneRegex.test(value) || t("form.fields.phoneNumber.error.invalid");
+                  },
                 }}
                 render={({ field }) => (
                   <PhoneInput

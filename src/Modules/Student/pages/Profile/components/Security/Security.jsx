@@ -18,16 +18,10 @@ import { newFunction } from "../../../../../../Helpers/Alert";
 export default function Security() {
   const { t, i18n } = useTranslation();
 
-  const {
-    data,
-    error: dataerror,
-    isFetching,
-    refetch,
-    isLoading: dataLoading,
-  } = useGetProfileQuery();
-const student= UserInformation?.data;
-
-const UserInformation= JSON.parse(localStorage.getItem('USER'))
+ const { data, error:dataerror, isFetching, refetch, isLoading:dataLoading } = useGetProfileQuery();
+  // if(data) localStorage.setItem('USER');
+    const UserInformation= JSON.parse(localStorage.getItem('USER'))
+  const student= data?.data ||UserInformation?.data
 
   const [showAlert, setShowAlert] = useState(false); 
   const [showAlertError, setShowAlertError] = useState(false); 

@@ -15,7 +15,7 @@ export default function Sectinons() {
       <div className="relative overflow-hidden">
         <img
           className="w-full min-h-96 object-cover"
-          src="/images/About Us/header1.svg"
+          src="/images/About Us/header1.jpg"
           alt="img header1"
         />
         <div

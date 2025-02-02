@@ -7,7 +7,6 @@ import { useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getData
 
 export default function StudentStatistics() {
       const {data:subscripers,isLoading:subLoading, isFetching:subFetching,isError:subError,refetch:subRefetch} = useGetTeacherSubscripersQuery()
-      console.log(subscripers?.data)
       const idCounts = subscripers?.data?.reduce((counts, obj) => {
         counts[obj?.consumer] = (counts[obj.consumer] || 0) + 1;
         return counts;
@@ -21,7 +20,6 @@ export default function StudentStatistics() {
       }
       totals(idCounts)
       const totalsNum = totals(idCounts);
-      console.log(totalsNum)
 
  
       

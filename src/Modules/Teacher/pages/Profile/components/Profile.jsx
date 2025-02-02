@@ -21,7 +21,6 @@ export default function Profile() {
   const getProfile=async ()=> 
   console.log('data profile:',data?.data)
 const student= data?.data;
-console.log(provider)
 
   const [profileImage, setProfileImage] = useState( null);
 
@@ -224,10 +223,11 @@ console.log(provider)
           <div className="flex gap-4 mt-4 sm:mt-0">
             <button
               type="button"
+              disabled={ isLoading }
               className="text-red-500 font-medium"
               onClick={() => setProfileImage(null)}
             >
-              {t("profile.delete")}
+              {       isLoading?<ImSpinner9 className="animate-spin text-3xl text-secondary " />: `${t("profile.delete")}`}
             </button>
             <button
               type="submit"
