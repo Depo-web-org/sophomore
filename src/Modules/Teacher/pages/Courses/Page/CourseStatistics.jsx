@@ -111,7 +111,7 @@ const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
                 {t("allCourses.uploadDate")} {/* Translated column header */}
               </th>
-              <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+              <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-[#6B7280]">
                 {t("allCourses.enrollment")} {/* Translated column header */}
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">

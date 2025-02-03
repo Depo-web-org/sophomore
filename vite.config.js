@@ -5,8 +5,8 @@ export default defineConfig({
   // base: '/sophomore',
   // logLevel: 'silent',  
   plugins: [react()],
-  esbuild: {
-    drop: ['console'],
-  },
+  // esbuild: {
+  //   drop: ['console'],
+  // },
 });
 

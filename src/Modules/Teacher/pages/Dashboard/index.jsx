@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import Statistics from "./components/StatisticCard";
-import CourseManagement from "./components/CourseManagement";
+import CourseManagement, { countStudentsPerCourse } from "./components/CourseManagement";
 import Activity from "./components/Activity";
 import QuickAction from "./components/QuickAction";
 import ApexChart from "./components/Chart";
@@ -31,6 +31,10 @@ export default function Dashboard() {
         .reduce((sum, value) => sum + value, 0) || 0,
     [subscribersData]
   );
+
+
+   const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
+  
   useEffect(()=>{
     refetch()
   },[])
@@ -57,7 +61,7 @@ export default function Dashboard() {
           <Activity />
           <QuickAction Text="Upload a new course" />
         </div>
-        <ApexChart />
+        <ApexChart studentPerCourse={studentPerCourse} />
       </div>
     </div>
   );

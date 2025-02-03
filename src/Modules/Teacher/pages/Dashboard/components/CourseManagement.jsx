@@ -9,11 +9,43 @@ import { getUniqueData } from "..";
 import { toast } from "react-toastify";
 
 
+// export const countStudentsPerCourse = (data) => {
+//   const courseCounts = {};
+
+//   data?.forEach(order => {
+//     const studentId = order.student_id;
+
+//     order?.items?.forEach(item => {
+//       const courseId = item?.course_data_object?.id;
+//       const courseTitle = item?.course_data_object?.title;
+
+//       if (!courseCounts[courseId]) {
+//         courseCounts[courseId] = {
+//           title: courseTitle,
+//           count: 0,
+//           courseID: courseId,
+//           uniqueStudents: new Set() 
+//         };
+//       }
+
+      
+//       if (!courseCounts[courseId].uniqueStudents.has(studentId)) {
+//         courseCounts[courseId].uniqueStudents.add(studentId); 
+//         courseCounts[courseId].count++; 
+//       }
+//     });
+//   });
+
+//   return Object.values(courseCounts).map(({ uniqueStudents, ...rest }) => rest);
+// };
+
+
+// to get numberOFstudents in course
 export const countStudentsPerCourse = (data) => {
   const courseCounts = {};
 
   data?.forEach(order => {
-    const studentId = order.student_id;
+    const studentId = order.consumer;
 
     order?.items?.forEach(item => {
       const courseId = item?.course_data_object?.id;
@@ -24,21 +56,19 @@ export const countStudentsPerCourse = (data) => {
           title: courseTitle,
           count: 0,
           courseID: courseId,
-          uniqueStudents: new Set() 
+          uniqueStudents: new Set()
         };
       }
 
-      
       if (!courseCounts[courseId].uniqueStudents.has(studentId)) {
         courseCounts[courseId].uniqueStudents.add(studentId); 
-        courseCounts[courseId].count++; 
+        courseCounts[courseId].count++;
       }
     });
   });
 
   return Object.values(courseCounts).map(({ uniqueStudents, ...rest }) => rest);
 };
-
 
 export default function CourseManagement({ data,subscribersData }) {
   const [deleteModal, setDeleteModal] = useState(false); 
@@ -94,7 +124,7 @@ const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
                   {t("courseManagement.dob")}
                 </th>
-                <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
+                <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-[#6B7280] ">
                   {t("courseManagement.enrollment")}
                 </th>
                 <th className="whitespace-nowrap px-4 py-2 text-start font-medium text-[#6B7280]">
@@ -118,7 +148,7 @@ const studentPerCourse=countStudentsPerCourse(subscribersData?.data)
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                     {course.dateof.split(" ")[0]}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center ">
                     {numberOfStudents[0]?.count  || 0}
                   </td>
                   <td className={`whitespace-nowrap px-4 py-2 ${course.status === "1" ? "text-emerald-700":"text-red-700" } `}>

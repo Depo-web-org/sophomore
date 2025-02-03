@@ -4,6 +4,7 @@ import StudentDetails from "./StudentDetails";
 import EnrollmentProgress from "./EnrollmentProgress";
 import Carusoul from "./Carusoul";
 import { useGetTeacherSubscripersQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { countStudentsPerCourse } from "../../Dashboard/components/CourseManagement";
 
 export default function StudentStatistics() {
       const {data:subscripers,isLoading:subLoading, isFetching:subFetching,isError:subError,refetch:subRefetch} = useGetTeacherSubscripersQuery()
@@ -21,14 +22,14 @@ export default function StudentStatistics() {
       totals(idCounts)
       const totalsNum = totals(idCounts);
 
- 
+ const studentPerCourse=countStudentsPerCourse(subscripers?.data)
       
   return (
     <>
     <Carusoul totalsNum={totalsNum}/>
       <div className="w-full flex flex-col md:flex-row items-center justify-center md:justify-around  ">
         <EnrollmentProgress  totalsNum={totalsNum} />
-        {/* <TotalChart  /> */}
+ <TotalChart studentPerCourse={studentPerCourse}  />
       </div>
       <StudentDetails />
     </>
