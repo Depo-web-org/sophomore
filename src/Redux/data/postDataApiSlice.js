@@ -75,7 +75,25 @@ export const postDataApiSlice = apiSlice.injectEndpoints({
             body: dataToSend, 
           };
         }
-      })
+      }),
+      createWishList: builder.mutation({
+        query:(dataToSend) => {
+          return {
+            url: "addConsumerWishListItem.php", 
+            method: "POST",
+            body: dataToSend, 
+          };
+        }
+      }),
+      deleteWishList: builder.mutation({
+        query:(dataToSend) => {
+          return {
+            url: "deleteConsumerWishListItem.php", 
+            method: "POST",
+            body: dataToSend, 
+          };
+        }
+      }),
   }),
 });
 
@@ -87,5 +105,7 @@ export const {
   useEditTeacherCourseContentMutation,
   useDeleteTeacherCourseMutation,
   useDeleteTeacherCourseContentMutation,
-  useCheckoutCartMutation
+  useCheckoutCartMutation,
+  useCreateWishListMutation,
+  useDeleteWishListMutation,
 } = postDataApiSlice;

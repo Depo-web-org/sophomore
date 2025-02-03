@@ -149,7 +149,7 @@ const ApexChart = ({ studentPerCourse }) => {
     if (studentPerCourse && studentPerCourse.length > 0) {
       const newSeries = studentPerCourse.map((course) => ({
         name: course.title,
-        data: Array.from({ length: 12 }, () => Math.floor(course.count / 2 + Math.random() * course.count / 2)), // توزيع عشوائي على مدار السنة
+        data: Array.from({ length: 12 }, () => Math.floor(course.count / 2 + Math.random() * course.count / 2)), 
       }));
 
       setState((prevState) => ({

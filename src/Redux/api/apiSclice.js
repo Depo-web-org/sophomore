@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setCredentials } from "../Auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-   // baseUrl: "http://192.168.1.26:8000/api/v1",
    baseUrl: "https://dev.depowebeg.com/education/api",
   // credentials: "true",
   prepareHeaders: (headers, { getState, endpoint }) => {

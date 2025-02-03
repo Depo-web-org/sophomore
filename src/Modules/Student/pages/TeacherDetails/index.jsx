@@ -15,7 +15,7 @@ export default function TeacherDetails() {
   const { subjectName , teacherName} = useParams()
   const pathEndPoint=`${subjectName}&only=${teacherName}`
   const { data, isLoading,isFetching ,refetch} = useGetSubjectTeachersQuery(pathEndPoint);
-
+console.log(data)
   const teacher = data?.data?.providers[0];
   const subject = data?.data?.subject;
   const course = data?.data?.course;

@@ -6,12 +6,55 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../Redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { useGetStudentCoursesQuery, useGetWishListsQuery } from "../../../../../Redux/data/getDataApiSlice";
+import { useCreateWishListMutation, useDeleteWishListMutation } from "../../../../../Redux/data/postDataApiSlice";
+import { toast } from "react-toastify";
 
 export default function EnrollCard() {
+  const [createWishList]=useCreateWishListMutation()
+    const {data:wishlistData,refetch}=useGetWishListsQuery();
+    console.log(wishlistData)
+    const [deleteWishList ]=useDeleteWishListMutation()
   const { teacher, subject, course } = useSelector(
     (state) => state.courseInformation
   );
+  const alreadyInWishList = wishlistData?.data?.some(i => i.course === course?.id);
+  const WishListItem = wishlistData?.data?.find(i => i.course === course?.id);
+  const WishListID = WishListItem ? WishListItem.id : null;
+  
+  const handleToggleWishlist = async () => {    
+      try {
+          if (alreadyInWishList) {
+              if (!WishListID) {
+                  toast.error("Wishlist item not found!");
+                  return;
+              }
+              const res = await deleteWishList({ id: WishListID });
+              if (res.data.code === 0) {
+                  toast.success("Deleted wish list item successfully!");
+                  await refetch();
+              } else {
+                  toast.error("Error while removing course from your wishlist!");
+              }
+          } else {
+              const res = await createWishList({ course: course.id });
+              if (res.data.code === 0) {
+                  toast.success("Added course to wishlist successfully!");
+                  await refetch();
+              } else {
+                  toast.error("Error while adding course to your wishlist!");
+              }
+          }
+      } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong. Please try again!");
+      }
+  };
+  
+  console.log(alreadyInWishList)
+// console.log(wishlistData.data.map(i=> i.course).includes(course.id))
+// console.log(wishlistData.data.includes(course.id))
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t ,i18n} = useTranslation();
@@ -70,7 +113,6 @@ export default function EnrollCard() {
   };
 
   const isSelected = cartItems?.some((item) => item.id === CourseInfo.id);
-  // console.log(isSelected);
 
   const handleUnitsPackages = () => {
     setIsModalPackagesOpen(false);
@@ -79,6 +121,30 @@ export default function EnrollCard() {
   const handleModalPackages = () => {
     setIsModalPackagesOpen(true);
   };
+//   const handleToggleWishlist = async () => {    
+//     try {
+//         if (alreadyInWishList) {
+//             const res = await deleteWishList({ id: WishListID });
+//             if (res.data.code === 0) {
+//                 toast.success("Deleted wish list item successfully!");
+//                 refetch()
+//             } else {
+//                 toast.error("Error while removing course from your wishlist!");
+//             }
+//         } else {
+//             const res = await createWishList({ course: course.id });
+//             if (res.data.code === 0) {
+//                 toast.success("Added course to wishlist successfully!");
+//                 refetch()
+//             } else {
+//                 toast.error("Error while adding course to your wishlist!");
+//             }
+//         }
+//     } catch (err) {
+//         console.log(err);
+//         toast.error("Something went wrong. Please try again!");
+//     }
+// };
   return (
     <>
       <div className=" w-full md:min-w-[376px]  bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
@@ -125,8 +191,21 @@ export default function EnrollCard() {
               >
                 {isSelected ? `${ i18n.language ==='ar'? "موجود مسبقا ":'already in cart'}` : t("add_to_cart")}
               </button>
+              <button
+                className="bg-white cursor-pointer text-primary rounded-md text-sm  lg:text-base p-2  hover:bg-primary hover:text-white duration-200 transition-all"
+                onClick={() => handleToggleWishlist()}
+
+              >
+               
+                {/* {isSelected ? `${ i18n.language ==='ar'? "اضف الي السله ":'add to wishlist'}` : t("add_to_cart")} */}
+               
+                {
+alreadyInWishList ?   ` ${ i18n.language ==='ar'? "حذف  من الرغبات ":'add remove wishlist'}`  : ` ${ i18n.language ==='ar'? "اضف الي الرغبات ":'add to wishlist'}` 
+                }
+              </button>
             </div>
           )}
+         
         </div>
       </div>
 
