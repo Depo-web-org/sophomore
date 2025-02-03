@@ -11,18 +11,27 @@ import { useCreateWishListMutation, useDeleteWishListMutation } from "../../../.
 import { toast } from "react-toastify";
 
 export default function EnrollCard() {
+  const navigate = useNavigate();
+
   const [createWishList]=useCreateWishListMutation()
     const {data:wishlistData,refetch}=useGetWishListsQuery();
-    console.log(wishlistData)
     const [deleteWishList ]=useDeleteWishListMutation()
   const { teacher, subject, course } = useSelector(
     (state) => state.courseInformation
   );
-  const alreadyInWishList = wishlistData?.data?.some(i => i.course === course?.id);
-  const WishListItem = wishlistData?.data?.find(i => i.course === course?.id);
-  const WishListID = WishListItem ? WishListItem.id : null;
-  
-  const handleToggleWishlist = async () => {    
+const Token =localStorage.getItem("Token");
+const alreadyInWishList = Array.isArray(wishlistData?.data) 
+? wishlistData.data.some(i => i.course === course?.id) 
+: false;
+
+const WishListItem = Array.isArray(wishlistData?.data) 
+    ? wishlistData.data.find(i => i.course === course?.id) 
+    : null;
+
+const WishListID = WishListItem ? WishListItem.id : null;
+
+  const handleToggleWishlist = async () => {  
+    if(!Token)    toast.warning(`You have to login Fisrt!`);
       try {
           if (alreadyInWishList) {
               if (!WishListID) {
@@ -47,16 +56,14 @@ export default function EnrollCard() {
           }
       } catch (err) {
           console.log(err);
-          toast.error("Something went wrong. Please try again!");
+    if(Token)   toast.error("Something went wrong. Please try again!");
+
       }
   };
   
-  console.log(alreadyInWishList)
-// console.log(wishlistData.data.map(i=> i.course).includes(course.id))
-// console.log(wishlistData.data.includes(course.id))
+
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t ,i18n} = useTranslation();
   const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
   const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
