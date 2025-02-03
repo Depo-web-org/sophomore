@@ -56,12 +56,7 @@ console.log(i18n.language)
           </span>
           <p>{student?.consumer_data_object?.phone_number==="undefined"? `${i18n.language==="ar"? "لم يضف بعد" :"Not added yet"}`:student?.consumer_data_object?.phone_number}</p>
         </div>
-        {/* <div className="flex items-center justify-center gap-1 text-[#4B5563]">
-          <span className="mb-1 text-primary text-xl ">
-            <RiGraduationCapFill />
-          </span>
-          <p>{student.grade}</p>
-        </div> */}
+       
       </div>
       <div className="w-full flex flex-col gap-4 pt-8 ">
         <p className="text-2xl font-semibold text-[#4B5563]">Course </p>
