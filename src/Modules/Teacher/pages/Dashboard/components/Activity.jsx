@@ -33,11 +33,11 @@ export default function Activity() {
                 {i18n.language === "ar" ? activity.courseNameAR : activity.courseNameEn} 
               </p>
             </div>
-          </div>
-        )
-      }
+          </div>         
+        )                    
+      } 
       )}
       
-    </div>
+    </div>  
   );
-}
+}     
