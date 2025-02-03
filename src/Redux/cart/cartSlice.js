@@ -95,7 +95,7 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
       toast.success(
-        i18n.language === "ar" ? "تم مسح السلة بنجاح" : "Cart cleared successfully"
+        i18n.language === "ar" ? "تم مسح الدوره من السله بنجاح" : "Cart cleared successfully"
       );
       
       saveCartToLocalStorage(state.items);
