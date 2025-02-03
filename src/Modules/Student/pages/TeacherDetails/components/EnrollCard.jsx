@@ -6,65 +6,100 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../Redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { useGetStudentCoursesQuery, useGetWishListsQuery } from "../../../../../Redux/data/getDataApiSlice";
-import { useCreateWishListMutation, useDeleteWishListMutation } from "../../../../../Redux/data/postDataApiSlice";
+import {
+  useGetStudentCoursesQuery,
+  useGetWishListsQuery,
+} from "../../../../../Redux/data/getDataApiSlice";
+import {
+  useCreateWishListMutation,
+  useDeleteWishListMutation,
+} from "../../../../../Redux/data/postDataApiSlice";
 import { toast } from "react-toastify";
 
 export default function EnrollCard() {
   const navigate = useNavigate();
 
-  const [createWishList]=useCreateWishListMutation()
-    const {data:wishlistData,refetch}=useGetWishListsQuery();
-    const [deleteWishList ]=useDeleteWishListMutation()
+  const [createWishList] = useCreateWishListMutation();
+  const { data: wishlistData, refetch } = useGetWishListsQuery();
+  const [deleteWishList] = useDeleteWishListMutation();
   const { teacher, subject, course } = useSelector(
     (state) => state.courseInformation
   );
-const Token =localStorage.getItem("Token");
-const alreadyInWishList = Array.isArray(wishlistData?.data) 
-? wishlistData.data.some(i => i.course === course?.id) 
-: false;
 
-const WishListItem = Array.isArray(wishlistData?.data) 
-    ? wishlistData.data.find(i => i.course === course?.id) 
+  const Token = localStorage.getItem("Token");
+  const alreadyInWishList = Array.isArray(wishlistData?.data)
+    ? wishlistData.data.some((i) => i.course === course?.id)
+    : false;
+
+  const WishListItem = Array.isArray(wishlistData?.data)
+    ? wishlistData.data.find((i) => i.course === course?.id)
     : null;
 
-const WishListID = WishListItem ? WishListItem.id : null;
+  const WishListID = WishListItem ? WishListItem.id : null;
 
-  const handleToggleWishlist = async () => {  
-    if(!Token)    toast.warning(`You have to login Fisrt!`);
-      try {
-          if (alreadyInWishList) {
-              if (!WishListID) {
-                  toast.error("Wishlist item not found!");
-                  return;
-              }
-              const res = await deleteWishList({ id: WishListID });
-              if (res.data.code === 0) {
-                  toast.success("Deleted wish list item successfully!");
-                  await refetch();
-              } else {
-                  toast.error("Error while removing course from your wishlist!");
-              }
-          } else {
-              const res = await createWishList({ course: course.id });
-              if (res.data.code === 0) {
-                  toast.success("Added course to wishlist successfully!");
-                  await refetch();
-              } else {
-                  toast.error("Error while adding course to your wishlist!");
-              }
-          }
-      } catch (err) {
-          console.log(err);
-    if(Token)   toast.error("Something went wrong. Please try again!");
+  const handleToggleWishlist = async () => {
+    if (!Token)
+      toast.warning(
+        i18n.language === "ar"
+          ? "يجب عليك تسجيل الدخول أولاً!"
+          : "You have to login first!"
+      );
 
+    try {
+      if (alreadyInWishList) {
+        if (!WishListID) {
+          toast.error(
+            i18n.language === "ar"
+              ? "لم يتم العثور على العنصر في قائمة الرغبات!"
+              : "Wishlist item not found!"
+          );
+          return;
+        }
+        const res = await deleteWishList({ id: WishListID });
+        if (res.data.code === 0) {
+          toast.success(
+            i18n.language === "ar"
+              ? "تم حذف العنصر من قائمة الرغبات بنجاح!"
+              : "Deleted wish list item successfully!"
+          );
+          await refetch();
+        } else {
+          toast.error(
+            i18n.language === "ar"
+              ? "حدث خطأ أثناء إزالة الدورة من قائمة الرغبات!"
+              : "Error while removing course from your wishlist!"
+          );
+        }
+      } else {
+        const res = await createWishList({ course: course.id });
+        if (res.data.code === 0) {
+          toast.success(
+            i18n.language === "ar"
+              ? "تمت إضافة الدورة إلى قائمة الرغبات بنجاح!"
+              : "Added course to wishlist successfully!"
+          );
+          await refetch();
+        } else {
+          toast.error(
+            i18n.language === "ar"
+              ? "حدث خطأ أثناء إضافة الدورة إلى قائمة الرغبات!"
+              : "Error while adding course to your wishlist!"
+          );
+        }
       }
+    } catch (err) {
+      console.log(err);
+      if (Token)
+        toast.error(
+          i18n.language === "ar"
+            ? "حدث خطأ ما. يرجى المحاولة مرة أخرى!"
+            : "Something went wrong. Please try again!"
+        );
+    }
   };
-  
-
 
   const dispatch = useDispatch();
-  const { t ,i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isModalOopsOpen, setIsModalOopsOpen] = useState(false);
   const [isModalPackagesOpen, setIsModalPackagesOpen] = useState(false);
   const [isModalUnitsOpen, setIsModalUnitsOpen] = useState(false);
@@ -128,30 +163,30 @@ const WishListID = WishListItem ? WishListItem.id : null;
   const handleModalPackages = () => {
     setIsModalPackagesOpen(true);
   };
-//   const handleToggleWishlist = async () => {    
-//     try {
-//         if (alreadyInWishList) {
-//             const res = await deleteWishList({ id: WishListID });
-//             if (res.data.code === 0) {
-//                 toast.success("Deleted wish list item successfully!");
-//                 refetch()
-//             } else {
-//                 toast.error("Error while removing course from your wishlist!");
-//             }
-//         } else {
-//             const res = await createWishList({ course: course.id });
-//             if (res.data.code === 0) {
-//                 toast.success("Added course to wishlist successfully!");
-//                 refetch()
-//             } else {
-//                 toast.error("Error while adding course to your wishlist!");
-//             }
-//         }
-//     } catch (err) {
-//         console.log(err);
-//         toast.error("Something went wrong. Please try again!");
-//     }
-// };
+  //   const handleToggleWishlist = async () => {
+  //     try {
+  //         if (alreadyInWishList) {
+  //             const res = await deleteWishList({ id: WishListID });
+  //             if (res.data.code === 0) {
+  //                 toast.success("Deleted wish list item successfully!");
+  //                 refetch()
+  //             } else {
+  //                 toast.error("Error while removing course from your wishlist!");
+  //             }
+  //         } else {
+  //             const res = await createWishList({ course: course.id });
+  //             if (res.data.code === 0) {
+  //                 toast.success("Added course to wishlist successfully!");
+  //                 refetch()
+  //             } else {
+  //                 toast.error("Error while adding course to your wishlist!");
+  //             }
+  //         }
+  //     } catch (err) {
+  //         console.log(err);
+  //         toast.error("Something went wrong. Please try again!");
+  //     }
+  // };
   return (
     <>
       <div className=" w-full md:min-w-[376px]  bg-slate-600 bg-opacity-25 border border-slate-700 rounded-lg flex flex-col justify-start items-start gap-2 p-4 shadow-[4px_4px_0px_0px_#F15C54] mb-6">
@@ -196,23 +231,34 @@ const WishListID = WishListItem ? WishListItem.id : null;
                 className="bg-white cursor-pointer text-primary rounded-md text-sm  lg:text-base p-2  hover:bg-primary hover:text-white duration-200 transition-all"
                 onClick={() => handleAddToCart("course")}
               >
-                {isSelected ? `${ i18n.language ==='ar'? "موجود مسبقا ":'already in cart'}` : t("add_to_cart")}
+                {isSelected
+                  ? `${
+                      i18n.language === "ar"
+                        ? "موجود مسبقا "
+                        : "already in cart"
+                    }`
+                  : t("add_to_cart")}
               </button>
               <button
                 className="bg-white cursor-pointer text-primary rounded-md text-sm  lg:text-base p-2  hover:bg-primary hover:text-white duration-200 transition-all"
                 onClick={() => handleToggleWishlist()}
-
               >
-               
                 {/* {isSelected ? `${ i18n.language ==='ar'? "اضف الي السله ":'add to wishlist'}` : t("add_to_cart")} */}
-               
-                {
-alreadyInWishList ?   ` ${ i18n.language ==='ar'? "حذف  من الرغبات ":'add remove wishlist'}`  : ` ${ i18n.language ==='ar'? "اضف الي الرغبات ":'add to wishlist'}` 
-                }
+
+                {alreadyInWishList
+                  ? ` ${
+                      i18n.language === "ar"
+                        ? "حذف  من الرغبات "
+                        : "remove wishlist"
+                    }`
+                  : ` ${
+                      i18n.language === "ar"
+                        ? "اضف الي الرغبات "
+                        : "add to wishlist"
+                    }`}
               </button>
             </div>
           )}
-         
         </div>
       </div>
 
