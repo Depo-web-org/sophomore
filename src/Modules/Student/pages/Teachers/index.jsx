@@ -62,7 +62,7 @@ const Teachers = () => {
   <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20 ">
         {i18n.language === "ar" ? "أي مدرس تريد ؟" : "  Which Teacher do you want?"}
       </h2>
-      <div className="grid grid-cols-6 w-full lg:grid-cols-12 gap-4 items-center justify-center">
+      <div className="grid grid-cols-12 gap-4 items-center justify-center ">
         {isLoading ? (
           <div className="col-span-6 w-full grid grid-cols-3 gap-4">
             <SkeletonCard />
@@ -142,7 +142,7 @@ export function TeacherCard({
   
 
   return (
-    <div className={style ?style : '"col-span-3    lg:col-span-4 items-center justify-center rounded-md transition hover:shadow-[4px_4px_0px_0px_#F15C54]  "' }>
+    <div className={style ? style : '" col-span-6 md:col-span-4 lg:col-span-3 items-center justify-center rounded-md transition hover:shadow-[4px_4px_0px_0px_#F15C54]  "' } >
       
       <div className="group relative block overflow-hidden rounded-md  ">
         {/* <button
@@ -156,7 +156,7 @@ export function TeacherCard({
           alt={`${teacher.first_name} ${teacher.last_name}`}
           className="w-full object-cover transition duration-500 group-hover:scale-105 h-32 lg:h-72"
         />
-        <div className="relative border border-gray-100 bg-white p-2 lg:p-6">
+        <div className="relative border border-gray-100 bg-white p-2 lg:p-6 ">
           <div className="flex items-center justify-between uppercase flex-wrap">
             <p className="text-xs md:text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? subjectAr|| teacher.subjectAr:teacher.subject||subject} </p>
             <p className="text-xs md:text-sm text-gray-700 font-semibold"> {i18n.language === "ar" ? gradeAr|| teacher.gradeAr:teacher.grade||grade} </p>

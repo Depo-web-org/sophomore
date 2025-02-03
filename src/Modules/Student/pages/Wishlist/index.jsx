@@ -16,18 +16,18 @@ export default function WishList() {
   // };
     const [deleteWishList]=useDeleteWishListMutation()
   const {i18n}=useTranslation()
-
+  console.log(data)
   return (
     <div className="min-h-screen w-full pt-4 lg:pt-24 container md:w-custom-md xl:w-custom-xl mx-auto">
 
-      {data?.data?.length > 0 ? (
+      {data?.data?.length > 0 && data.code != 1  ? (
         <>
               
         <div className="grid grid-cols-6 lg:grid-cols-12 gap-4 w-full pb-5">
         <h2 className="text-white text-xl lg:text-4xl font-semibold pt-20 lg:py-10 text-center block col-span-6 lg:col-span-12 ">
               {i18n.language==="ar"? "قائمة الرغبات الخاصة بك": "Your Wishlist"}
             </h2>
-          {data?.data.map((teacher) =>{
+          {data?.data?.map((teacher) =>{
             console.log(teacher,{
               subjectID:teacher.course_data.subject,
               teacher:teacher.course_data.provider,
