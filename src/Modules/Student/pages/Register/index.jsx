@@ -3,6 +3,8 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import OTP from "./components/OTP/OTP";
 import SucessOtp from "./components/OTP/Sucess";
+import { useDispatch } from "react-redux";
+import { setIsVerified } from "../../../../Redux/StudentSlices/StudentSlice";
 
 export default function Register() {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,12 +12,16 @@ export default function Register() {
   const [isOTP, setIsOTP] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [mail, setMail] = useState();
+
+  const dispatch = useDispatch();
+
   const toggleForm = () => {
     setIsSignUp(!isSignUp);
     setIsLogin(!isLogin);
   };
 
   const handleSendOtp = () => {
+    dispatch(setIsVerified(true)); 
     setIsSignUp(false);
     setIsOTP(true);
   };

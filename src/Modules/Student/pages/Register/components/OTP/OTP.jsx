@@ -8,20 +8,21 @@ import {
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { HeadTitle } from "../Login/Login";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "../../../../../../Helpers/Timer";
 import { useTranslation } from "react-i18next";
- 
+import { setIsVerified } from "../../../../../../Redux/StudentSlices/StudentSlice";
+import { toast } from "react-toastify";
 
 export default function OTP({ handleValidateOtp, mail, registerAgain }) {
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
   const navigate = useNavigate();
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const role = useSelector((state) => state.role.role);
   const [responseError, setResponseError] = useState(null);
   const provider = role === "teacher" ? true : false;
-console.log(mail)
+
   // Time format
   const [timeLeft, setTimeLeft] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
@@ -33,17 +34,36 @@ console.log(mail)
     },
   });
   const [resend_otp, { isLoading }] = useResend_otpMutation();
-  const [verifyEmail, { isLoading: loadingSending }] = useVerify_emailMutation();
+  const [verifyEmail, { isLoading: loadingSending }] =
+    useVerify_emailMutation();
+
+  const maill = localStorage.getItem("mail");
+  if (!maill) {
+    // console.error("خطأ: لا يوجد بريد إلكتروني مخزن في localStorage");
+  } else {
+    // console.log("mail :otp:::", maill);
+  }
+  const dispatch = useDispatch();
+
   const onSubmit = async (data) => {
     const otp = data.otp.join("");
-    const dataSend = { email: mail, otp };
+
+    const dataSend = { email: maill, otp };
+
     if (provider) {
       dataSend.provider = provider;
     }
     try {
-      const response = await verifyEmail({dataSend}).unwrap(); 
+      const response = await verifyEmail({ dataSend }).unwrap();
       if (response.code === 0) {
-        handleValidateOtp(); // Call the provided callback on success
+        // handleValidateOtp(); // Call the provided callback on success
+        toast.success(
+          i18n.language === "ar"
+            ? " ✅ تهانينا! تم التحقق من رمز التأكيد بنجاح"
+            : "Verification successful! You can proceed ✅"
+        );
+        dispatch(setIsVerified(false));
+        navigate("/register");
       } else if (response.code === 1) {
         setResponseError(response.message);
         console.error("Verification Error:", response.message || response);
@@ -52,6 +72,7 @@ console.log(mail)
       // Handle error
     }
   };
+
   const handleInput = (e, index) => {
     const value = e.target.value;
     if (value.length === 1 && index < 5) {
@@ -81,127 +102,142 @@ console.log(mail)
   }, [timeLeft]);
 
   const reSendOtp = async () => {
-    const userData = { email: mail };
+    const userData = { email: maill };
     if (provider) {
       userData.provider = provider;
     }
-    await resend_otp({ userData})
+    await resend_otp({ userData })
       .unwrap()
       .then(() => console.log("Successfully sent"))
       .catch((err) => console.log("Error", err));
     setResendOTPModal(false);
     setIsResendDisabled(true);
-    setTimeLeft(60); 
+    setTimeLeft(60);
   };
+
   return (
     <>
-    <div className="w-full my-auto flex justify-center  ">
-      <div className="flex flex-col items-start justify-start gap-2 mx-4">
-        <HeadTitle
-          title={{
-            head: t("otpPage.title.head"), 
-            subTitle: t("otpPage.title.subTitle", {
-              email: `${mail?.slice(0, 3)}*****@${mail?.split("@")[1]?.slice(0, 2)}***.com`,
-            }), 
-          }}
-        />
-        <form  dir="ltr" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-          <div  className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4 ">
-            {[0, 1, 2, 3, 4, 5].map((index) => (
-              <Controller
-                key={index}
-                name={`otp[${index}]`}
-                control={control}
-                render={({ field: { onChange, value, ref } }) => (
-                  <input
-                    ref={ref}
-                
-                    type="text"
-                    value={value}
-                    maxLength="1"
-                    dir={isRTL ? "rtl" : "ltr"}  
-                    className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md border-b ring-0 outline-none text-center font-bold"
-                    onChange={(e) => {
-                      const inputValue = e.target.value;
-                      if (/^\d*$/.test(inputValue)) {
-                        onChange(inputValue);
-                        handleInput(e, index);  
-                      }
-                    }}
-                    onFocus={(e) => e.target.select()}
-                    onPaste={(e) => handlePaste(e)}  
-                  />
-                )}
-              />
-            ))}
-          </div>
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={loadingSending || isLoading}
-            className={`inline-flex w-full rounded-lg ${
-              loadingSending || isLoading ? "bg-white" : "bg-primary"
-            } px-5 py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+      <div className="w-full my-auto flex justify-center  ">
+        <div className="flex flex-col items-start justify-start gap-2 mx-4">
+          <HeadTitle
+            title={{
+              head: t("otpPage.title.head"),
+              subTitle: t("otpPage.title.subTitle", {
+                email: `${mail?.slice(0, 3)}*****@${mail
+                  ?.split("@")[1]
+                  ?.slice(0, 2)}***.com`,
+              }),
+            }}
+          />
+          <form
+            dir="ltr"
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-2"
           >
-            {loadingSending || isLoading ? (
-              <ImSpinner9 className="animate-spin text-3xl text-secondary" />
-            ) : (
-              t("otpPage.form.validateButton")  
-            )}
-          </button>
-          {responseError && (
-            <p className="text-red-500 text-center">
-              {t("otpPage.form.error.invalidOTP")}  
-            </p>
-          )}
-        </form>
-        <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
-          <p className={`${isResendDisabled ? "text-white" : "text-gray-500"} text-base font-medium`}>
-            {formatTime(timeLeft)}
-          </p>
-          <p
-            className={`text-sm lg:text-base font-medium leading-[18.75px] text-center ${
-              isLoading || isResendDisabled ? "text-textopacity" : "text-white"
-            }`}
-          >
-            {t("otpPage.form.resendOTP.didNotReceive")}  
+            <div className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4 ">
+              {[0, 1, 2, 3, 4, 5].map((index) => (
+                <Controller
+                  key={index}
+                  name={`otp[${index}]`}
+                  control={control}
+                  render={({ field: { onChange, value, ref } }) => (
+                    <input
+                      ref={ref}
+                      type="text"
+                      value={value}
+                      maxLength="1"
+                      dir={isRTL ? "rtl" : "ltr"}
+                      className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md border-b ring-0 outline-none text-center font-bold"
+                      onChange={(e) => {
+                        const inputValue = e.target.value;
+                        if (/^\d*$/.test(inputValue)) {
+                          onChange(inputValue);
+                          handleInput(e, index);
+                        }
+                      }}
+                      onFocus={(e) => e.target.select()}
+                      onPaste={(e) => handlePaste(e)}
+                    />
+                  )}
+                />
+              ))}
+            </div>
+            {/* Submit Button */}
             <button
-              disabled={isLoading || isResendDisabled}
-              onClick={() => setResendOTPModal(true)}
-              className={`text-sm lg:text-base font-medium leading-[18.75px] text-center underline mx-2 ${
-                isResendDisabled ? "text-gray-500" : "text-white"
+              type="submit"
+              disabled={loadingSending || isLoading}
+              className={`inline-flex w-full rounded-lg ${
+                loadingSending || isLoading ? "bg-white" : "bg-primary"
+              } px-5 py-3 text-sm font-medium text-white justify-center items-center mt-8`}
+            >
+              {loadingSending || isLoading ? (
+                <ImSpinner9 className="animate-spin text-3xl text-secondary" />
+              ) : (
+                t("otpPage.form.validateButton")
+              )}
+            </button>
+            {responseError && (
+              <p className="text-red-500 text-center">
+                {t("otpPage.form.error.invalidOTP")}
+              </p>
+            )}
+          </form>
+          <div className="flex flex-col justify-center items-center gap-2 pt-8 w-full">
+            <p
+              className={`${
+                isResendDisabled ? "text-white" : "text-gray-500"
+              } text-base font-medium`}
+            >
+              {formatTime(timeLeft)}
+            </p>
+            <p
+              className={`text-sm lg:text-base font-medium leading-[18.75px] text-center ${
+                isLoading || isResendDisabled
+                  ? "text-textopacity"
+                  : "text-white"
               }`}
             >
-              {t("otpPage.form.resendOTP.resend")}  
-            </button>
-          </p>
-          <p className="text-sm lg:text-base leading-[18.75px] text-center text-white">
-            {t("otpPage.form.wrongEmail.text")}  
-            <button
-              onClick={() => {
-                setResendOTPModal(false);
-                registerAgain();
-              }}
-              className="text-sm leading-[18.75px] text-center underline text-white mx-2"
-            >
-              {t("otpPage.form.wrongEmail.registerAgain")}  
-            </button>
-          </p>
+              {t("otpPage.form.resendOTP.didNotReceive")}
+              <button
+                disabled={isLoading || isResendDisabled}
+                onClick={() => setResendOTPModal(true)}
+                className={`text-sm lg:text-base font-medium leading-[18.75px] text-center underline mx-2 ${
+                  isResendDisabled ? "text-gray-500" : "text-white"
+                }`}
+              >
+                {t("otpPage.form.resendOTP.resend")}
+              </button>
+            </p>
+            <p className="text-sm lg:text-base leading-[18.75px] text-center text-white">
+              {t("otpPage.form.wrongEmail.text")}
+              <button
+                onClick={() => {
+                  // setResendOTPModal(false);
+                  // registerAgain();dfdf
+                  dispatch(setIsVerified(false));
+                  navigate("/");
+
+                }}
+                className="text-sm leading-[18.75px] text-center underline text-white mx-2"
+              >
+                {t("otpPage.form.wrongEmail.registerAgain")}
+              </button>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    {resendOTPModal && (
-      <ResendOtpModal
-        setResendOTPModal={setResendOTPModal}
-        reSendOtp={reSendOtp}
-      />
-    )}
-  </>
-);
-};
+      {resendOTPModal && (
+        <ResendOtpModal
+          setResendOTPModal={setResendOTPModal}
+          reSendOtp={reSendOtp}
+        />
+      )}
+    </>
+  );
+}
 
 export function ResendOtpModal(props) {
-  const { t } = useTranslation();  
+  const { t } = useTranslation();
 
   return (
     <div
@@ -221,30 +257,30 @@ export function ResendOtpModal(props) {
           </button>
         </div>
         <div className="flex items-center justify-center flex-col gap-2">
-        <div className="flex items-center justify-center flex-col gap-2">
-          <p className="mb-4 text-white text-2xl font-bold text-center">
-            {t("otpPage.resendOTPModal.title")} <br />  
-            <span className="text-base font-medium">
-              {t("otpPage.resendOTPModal.subTitle")}  
-            </span>
-          </p>
-          <div className="flex gap-4 flex-wrap justify-center">
-            <button
-              onClick={() => props.reSendOtp()}
-              className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold"
-            >
-              {t("otpPage.resendOTPModal.yesResend")}  
-            </button>
-            <button
-              onClick={() => props.setResendOTPModal(false)}
-              className="bg-slate-900 text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold"
-            >
-              {t("otpPage.resendOTPModal.discard")}  
-            </button>
+          <div className="flex items-center justify-center flex-col gap-2">
+            <p className="mb-4 text-white text-2xl font-bold text-center">
+              {t("otpPage.resendOTPModal.title")} <br />
+              <span className="text-base font-medium">
+                {t("otpPage.resendOTPModal.subTitle")}
+              </span>
+            </p>
+            <div className="flex gap-4 flex-wrap justify-center">
+              <button
+                onClick={() => props.reSendOtp()}
+                className="bg-primary text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold"
+              >
+                {t("otpPage.resendOTPModal.yesResend")}
+              </button>
+              <button
+                onClick={() => props.setResendOTPModal(false)}
+                className="bg-slate-900 text-white px-4 py-2 min-w-[279px] rounded-md hover:bg-secondary duration-500 transition-all font-semibold"
+              >
+                {t("otpPage.resendOTPModal.discard")}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

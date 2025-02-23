@@ -8,6 +8,7 @@ let initialState = {
   email: null,
   path:null,
   photo:null,
+  isVerified: localStorage.getItem("isVerified") === "true",
 };
 
 const studentSlice = createSlice({
@@ -35,8 +36,12 @@ const studentSlice = createSlice({
       state.phone = action.payload.phone;
       state.email = action.payload.email;
     },
+    setIsVerified: (state, action) => {
+      state.isVerified = action.payload;
+      localStorage.setItem("isVerified", action.payload);  
+    },
   },
 });
 
-export const { setStudent, clearStudent, updateStudent } = studentSlice.actions;
+export const { setStudent, clearStudent, updateStudent,setIsVerified } = studentSlice.actions;
 export default studentSlice.reducer;

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { ImSpinner9 } from 'react-icons/im';
 import { HeadTitle } from '../Login/Login';
-import { useForget_passwordMutation, useResend_otpMutation, useReset_passwordMutation, useVerify_emailMutation } from '../../../../../../Redux/Auth/authApiSlice';
-import { useSelector } from 'react-redux';
+import {  useResend_otpMutation, useVerify_emailMutation } from '../../../../../../Redux/Auth/authApiSlice';
+import {   useSelector } from 'react-redux';
 import { decodeEmail } from '../../../../../../Helpers/deCode';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {   useNavigate, useParams } from 'react-router-dom';
 import { ResendOtpModal } from '../OTP/OTP';
 import { formatTime } from '../../../../../../Helpers/Timer';
 import { useTranslation } from 'react-i18next';
+ 
 
 const VerifyAccount = () => {
   const { t, i18n } = useTranslation();  
@@ -20,7 +20,9 @@ const VerifyAccount = () => {
   const role = useSelector((state) => state.role.role);
   const provider= role==='teacher'?true:false;
 
-
+  
+ 
+  
   const [resendOTPModal, setResendOTPModal] = useState(false);
   const [timeLeft, setTimeLeft] = useState(null);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
@@ -46,8 +48,16 @@ const [errorOtp, setErrorOtp] = useState(null)
     try {
       const response = await verifyEmail({ dataSend }).unwrap();
       if(response.code===0){
+
+
         setStatusOfAccount("Your account has already been verified")
-        setTimeout(()=> navigate('/register'), 3000)
+        // setTimeout(()=> navigate('/register'), 3000)
+    // تحديث حالة التحقق
+    console.log("Your account has already been verified");
+    
+      navigate("/register"); 
+
+
       }else if (response.code===1){
         console.error('Verification Error:', response.message  );
         setErrorOtp(response.message )
@@ -108,7 +118,7 @@ const [errorOtp, setErrorOtp] = useState(null)
   useEffect(() => {
     reSendOtp();
   }, []);
-console.log(email.split('@')[0].slice(0, 3))
+   console.log(email.split('@')[0].slice(0, 3))
   const subTitle = statusOfAccount ? t("OtpPage.title.subTitle.verified") 
     : email
     ? t("OtpPage.title.subTitle.emailSent", { email: `${email.split('@')[0].slice(0, 3)}****@${email.split('@')[1]?.slice(0, 2)}***.com`,}) 

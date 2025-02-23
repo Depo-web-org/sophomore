@@ -23,9 +23,9 @@ export default function Login({ toggleForm }) {
   const [forgetPassword, setForgetPassword] = useState(false);
   const userRole = useRole("RO_V1_2024");
   const role = useSelector((state) => state.role.role);
-  const provider= role==='teacher'?true:false;
+  const provider = role === "teacher" ? true : false;
   const [userEmail, setUserEmail] = useState(null);
-const {i18n} =useTranslation()
+  const { i18n } = useTranslation();
 
   const VerifyAccount = (email) => {
     const enCodedMail = encodeEmail(email);
@@ -40,47 +40,40 @@ const {i18n} =useTranslation()
     formState: { errors },
   } = useForm();
 
-  const [login, { isLoading, isError, error ,}] = useLoginMutation();
+  const [login, { isLoading, isError, error }] = useLoginMutation();
   const [forgetpassword, { isLoading: isForgetPasswordLoading }] =
     useForget_passwordMutation();
 
   const handleLogin = async (data) => {
-
     try {
-        const userData = { email: data.loginMail, password: data.password };
+      const userData = { email: data.loginMail, password: data.password };
 
-        if (provider) {
-          userData.provider = provider;
-        }
+      if (provider) {
+        userData.provider = provider;
+      }
       const response = await login({ userData, role }).unwrap();
       setUserEmail(data.loginMail);
-    
 
-
-      if (response.code===0) {
-
+      if (response.code === 0) {
         // Encrypt the refresh token and store it
-        console.log("before",response.data.token)
+        console.log("before", response.data.token);
 
-        localStorage.setItem("Token", response.data.token)
-        
-        console.log("after",response.data.token)
-                //Store In Redux
+        localStorage.setItem("Token", response.data.token);
 
-              
-                  const studentData = {
-                    uid: response.data.token, 
-                    email: response.data.email,
-                    first_name: response.data.first_name,
-                    last_name: response.data.last_name,
-                    phone: response.data.phone_number,
-                    path: response.data.path,
-                    photo: response.data.photo,
-                  };
-          
-                  dispatch(setStudent(studentData));
-              
-          
+        console.log("after", response.data.token);
+        //Store In Redux
+
+        const studentData = {
+          uid: response.data.token,
+          email: response.data.email,
+          first_name: response.data.first_name,
+          last_name: response.data.last_name,
+          phone: response.data.phone_number,
+          path: response.data.path,
+          photo: response.data.photo,
+        };
+
+        dispatch(setStudent(studentData));
 
         // Encrypt the Role and store it
         const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString();
@@ -109,26 +102,25 @@ const {i18n} =useTranslation()
         } else {
           navigate("/register");
         }
-      }
-    else if(response.code===10){
-      navigate(`/register/verify-account/${encodeEmail(data.loginMail)}`);
-    }
-      else if(response.code===20){
-        setErrorMessage(response?.message)
-      }
-      else{
-        setErrorMessage(response?.message)
+      } else if (response.code === 10) {
+      
+        const enCodedMail = encodeEmail(data.loginMail);
+        navigate(`/register/otp/${enCodedMail}`);
+        
+      } else if (response.code === 20) {
+        setErrorMessage(response?.message);
+      } else {
+        setErrorMessage(response?.message);
       }
     } catch (error) {
       // console.error("Login Error:", error?.data?.message);
       error?.data?.message
         ? setErrorMessage(error?.data?.message)
         : setErrorMessage(
-          i18n?.languages[0] == "ar"
-            ? "خطأ في تسجيل الدخول"
-            : "Oops! We couldn't process your request may you don't have internet connection. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com."
-        );
-
+            i18n?.languages[0] == "ar"
+              ? "خطأ في تسجيل الدخول"
+              : "Oops! We couldn't process your request may you don't have internet connection. Please refresh the page or try again later. For assistance, reach out to sophomore@info.com."
+          );
     }
   };
 
@@ -140,11 +132,14 @@ const {i18n} =useTranslation()
       if (provider) {
         userData.provider = provider;
       }
-      const response = await forgetpassword({
-        userData,
-      }).unwrap();
+
+      const response = await forgetpassword({ userData }).unwrap();
+
       const enCodedMail = encodeEmail(data.loginMail);
+
       navigate(`/register/reset-password/${enCodedMail}`);
+
+      console.log(`/reset-password/${enCodedMail}`);
     } catch (error) {
       setErrorMessage(error?.data?.message);
       setUserEmail(data.loginMail);
@@ -153,7 +148,6 @@ const {i18n} =useTranslation()
   };
 
   // If the user is not logged in, redirect them to the login page
-
 
   return (
     <div className=" flex flex-col justify-between gap-8 pb-4 lg:pb-0 lg:gap-24 w-full     overflow-hidden ">

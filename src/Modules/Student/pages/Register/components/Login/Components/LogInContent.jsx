@@ -47,7 +47,7 @@ export default function LogInContent({
         >
           <UserRole role={role} dispatch={dispatch} />
 
-          <div className="mt-4 pt-4">
+          <div className="mt-4 pt-4 ">
             <div className="relative">
               <label
                 htmlFor="loginMail"
@@ -55,25 +55,26 @@ export default function LogInContent({
                   errorsForm.loginMail && "border-2 border-red-600"
                 } px-2 py-3 lg:p-4 text-sm shadow-sm flex items-center justify-between`}
               >
-               <input
-  id="loginMail"
-  className="outline-none flex-1 text-base"
-  autoComplete="userMail"
-  placeholder={t("login.enterEmail")}
-  {...register("loginMail", {
-    required: t("login.emailRequired"),
-    pattern: {
-      value: /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      message: t("login.validEmail"),
-    },
-  })}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      // setForgetPassword(false);
-    }
-  }}
-/>
+                <input
+                  id="loginMail"
+                  className="outline-none flex-1 text-base"
+                  autoComplete="userMail"
+                  placeholder={t("login.enterEmail")}
+                  {...register("loginMail", {
+                    required: t("login.emailRequired"),
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                      message: t("login.validEmail"),
+                    },
+                  })}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      // setForgetPassword(false);
+                    }
+                  }}
+                />
 
                 <MdAlternateEmail className="ml-2 text-gray-500 focus:outline-none" />
               </label>
@@ -85,7 +86,7 @@ export default function LogInContent({
             </div>
           </div>
 
-          <div className="my-4">
+          <div className="my-4 ">
             <div className="relative">
               <label
                 htmlFor="password"
@@ -142,7 +143,9 @@ export default function LogInContent({
 
           <button
             type="submit"
-            disabled={loadingSending || errorsForm.loginMail || errorsForm.password}
+            disabled={
+              loadingSending || errorsForm.loginMail || errorsForm.password
+            }
             className={`inline-flex w-full rounded-lg ${
               loadingSending
                 ? "bg-white text-white"
@@ -173,7 +176,7 @@ export default function LogInContent({
       {ResponseError === t("login.accountNotVerified") && (
         <div className="w-full flex justify-center">
           <button
-            onClick={() => VerifyAccount()}
+            // onClick={() => VerifyAccount()}
             className="text-base font-semibold text-white text-center underline"
           >
             {t("login.verifyAccountNow")}

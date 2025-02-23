@@ -13,6 +13,7 @@ import {
 import { ResendOtpModal } from "../OTP/OTP";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next"; // Import useTranslation
+import { toast } from "react-toastify";
 
 const ResetPassword = () => {
   const { t } = useTranslation(); // Initialize useTranslation
@@ -21,6 +22,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [resendOTPModal, setResendOTPModal] = useState(false);
+  const [invalidPassowrd, setinvalidPassowrd] = useState(false);
   const [StatusOfChangesPassword, setStatusOfChangesPassword] = useState();
   const role = useSelector((state) => state.role.role);
   const provider = role === "teacher" ? true : false;
@@ -33,6 +35,7 @@ const ResetPassword = () => {
     control,
     setFocus,
     register,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -49,6 +52,7 @@ const ResetPassword = () => {
 
   const onSubmit = async (data) => {
     const otp = data.otp_code.join("");
+
     const dataSend = {
       otp,
       password: data.password,
@@ -58,13 +62,18 @@ const ResetPassword = () => {
       dataSend.provider = provider;
     }
 
-    await resetPassword({ dataSend, role })
-      .unwrap()
-      .then(() => setStatusOfChangesPassword(t("resetPasswordConfirmation")))
-      .then(() => setTimeout(() => navigate("/register"), 3000))
-      .catch((err) => {
-        console.error("Error occurred:", err);
-      });
+    try {
+      const response = await resetPassword({ dataSend, role }).unwrap();
+
+      if (response.code === 0) {
+        setStatusOfChangesPassword(t("resetPasswordConfirmation"));
+
+        console.log("data:", dataSend);
+        navigate("/register");
+      } else if (response.code === 1) toast.error("Something is wrong !");
+    } catch (err) {
+      console.error("Error occurred:", err);
+    }
   };
 
   const handleInput = (e, index) => {
@@ -85,15 +94,14 @@ const ResetPassword = () => {
     }
   };
 
+  // Timer
   const [timeLeft, setTimeLeft] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
-
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return t("timeLeft", { minutes, seconds });
   };
-
   useEffect(() => {
     if (timeLeft > 0) {
       const interval = setInterval(() => {
@@ -104,7 +112,7 @@ const ResetPassword = () => {
       setIsResendDisabled(false);
     }
   }, [timeLeft]);
-
+  // resend otp
   const reSendOtp = async () => {
     setResendOTPModal(false);
     setIsResendDisabled(true);
@@ -144,10 +152,14 @@ const ResetPassword = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-2"
             >
-              <div dir="ltr" className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 me-auto">
+              <div
+                dir="ltr"
+                className="flex justify-center items-start gap-2 lg:gap-4 text-white text-center text-2xl w-full lg:w-4/5 me-auto"
+              >
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <Controller
                     key={index}
+                    id="otp_code"
                     name={`otp_code[${index}]`}
                     control={control}
                     render={({ field: { onChange, value, ref } }) => (
@@ -156,7 +168,9 @@ const ResetPassword = () => {
                         type="text"
                         value={value}
                         maxLength="1"
-                        className="w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md border-b ring-0 outline-none text-center font-bold"
+                        className={`w-full lg:w-4/5 mx-auto h-10 lg:h-16 bg-white text-primary rounded-md border-b ring-0 outline-none text-center font-bold ${
+                          errors.otp_code ? "border-red-500" : "border-gray-300"
+                        }`}
                         onChange={(e) => {
                           const inputValue = e.target.value;
                           if (/^\d*$/.test(inputValue)) {
@@ -171,6 +185,7 @@ const ResetPassword = () => {
                   />
                 ))}
               </div>
+
               <div className="lg:mt-8 mt-4 mb-0 lg:mb-4 flex flex-col gap-y-2 lg:gap-y-4 ">
                 <label
                   htmlFor="password"
@@ -219,10 +234,14 @@ const ResetPassword = () => {
                           /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
                         message: t("passwordValidation"),
                       },
+                      validate: (value) =>
+                        value === getValues("password") ||
+                        t("password Mis match"),
                     })}
                     className="outline-none flex-1"
                     placeholder={t("confirmPassword")}
                   />
+
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
@@ -239,6 +258,12 @@ const ResetPassword = () => {
                   )}
                 </div>
               </div>
+              {/* {invalidPassowrd && (
+                <p className="text-red-600  font-semibold">
+                  The passwords do not match. Please enter the same password in
+                  both fields
+                </p>
+              )} */}
 
               <button
                 type="submit"
@@ -304,7 +329,7 @@ const ResetPassword = () => {
         </div>
 
         <img
-         src="/images/logos/logo.svg"
+          src="/images/logos/logo.svg"
           alt="register img"
           className="hidden lg:block w-96 slide-in-right object-cover rounded-xl z-10"
         />

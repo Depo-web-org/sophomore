@@ -9,6 +9,7 @@ import { HeadTitle } from "../Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import UserRole from "../components/UserRole/UserRole";
 import { useTranslation } from "react-i18next";
+import { setIsVerified } from "../../../../../../Redux/StudentSlices/StudentSlice";
 
 export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const { t } = useTranslation();
@@ -30,25 +31,7 @@ export default function SignUp({ toggleForm, handleSendOtp, setMail }) {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-const [errorSubmit, setErrorSubmit] = useState(null)
-  // const onSubmit = async (data) => {
-  //   setMail(data);
-  //   // try {
-  //   //   // Call the signup mutation here instead of axios
-  //   //   await signup({ userData: data, role }).unwrap();
-  //   //   handleSendOtp();
-  //   // } catch (err) {
-  //   //   console.error("Signup Error:", err.data?.message);
-  //   //   err?.data?.message === "student with this email already exists." ||
-  //   //   err?.data?.message === "Teacher with this email already exists."
-  //   //     ? // ? handleSendOtp()
-  //   //       ResendOTP(data, handleSendOtp, setAlreadyAv)
-  //   //     : console.log(err?.response);
-  //   // }
-  // };
-
-
-
+ 
 
   const onSubmit = async (data) => {
     
@@ -68,7 +51,20 @@ const [errorSubmit, setErrorSubmit] = useState(null)
       payload.provider = provider;
     }
     console.log("Data to Send:", payload);
+
+    
+    if (data?.email) {
+      localStorage.setItem("mail", data.email);
+    } else {
+      console.error("خطأ: البريد الإلكتروني غير متوفر في data.email");
+    }
+    
+
+
+
     setMail( data.email)
+ 
+     
     try {
      const response= await signup({ userData: payload }).unwrap()
         if(response.code === 0){
