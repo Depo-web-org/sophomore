@@ -23,7 +23,7 @@ const MinProfile = () => {
         
         </label>
       </div> */}
-      <hr className="ms-auto lg:w-[70%] " />
+      <hr className="ms-auto lg:w-[70%]  " />
 
       {/* last section */}
 

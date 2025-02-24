@@ -1,8 +1,27 @@
-// import { useState } from "react";
+// import { useEffect, useState } from "react";
 // import ReactApexChart from "react-apexcharts";
 
 // const TotalChart = ({studentPerCourse}) => {
 //   const [series, setSeries] = useState([139, 124, 90]);
+//     // const [series, setSeries] = useState([]);
+//   const [labels, setLabels] = useState([]);
+ 
+ 
+//   useEffect(() => {
+//     if (studentPerCourse && studentPerCourse.length > 0) {
+//       const counts = studentPerCourse.map(course => course.count);
+//       const titles = studentPerCourse.map(course => course.title);
+//       setSeries(counts);
+//       setLabels(titles);
+
+
+// console.log(">>> ",counts , titles);
+
+// console.log("xvxvfxd");
+
+
+//     }
+//   }, [studentPerCourse]);
 // console.log(studentPerCourse)
 //   const options = {
 //     chart: {
@@ -81,6 +100,8 @@ const {i18n}=useTranslation()
       const titles = studentPerCourse.map(course => course.title);
       setSeries(counts);
       setLabels(titles);
+
+
     }
   }, [studentPerCourse]);
 
@@ -130,7 +151,7 @@ const {i18n}=useTranslation()
 
   return (
     <div>
-      <div className="chart-wrap">
+      <div className=" z-50 chart-wrap">
         <div id="chart">
           <ReactApexChart
             options={options}
