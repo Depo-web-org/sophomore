@@ -95,7 +95,7 @@ const Form = () => {
         }`}
       >
         {/* Password Inputs */}
-        <div className="relative pb-2 pt-5">
+        <div className="relative pb-2 pt-5 " >
           <span className="text-sm font-medium text-gray-500 mb-4 block">
             {t("changePassword.currentPassword")}
           </span>
