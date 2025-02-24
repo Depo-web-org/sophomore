@@ -47,7 +47,6 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
 
   const onSubmit = async (data) => {
     const otp = data.otp.join("");
-
     const dataSend = { email: maill, otp };
 
     if (provider) {
@@ -132,7 +131,7 @@ export default function OTP({ handleValidateOtp, mail, registerAgain }) {
           <form
             dir="ltr"
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2"
+            className="flex flex-col gap-2 lg:px-40"
           >
             <div className="flex justify-center items-center gap-2 lg:gap-4 text-white text-center text-2xl mx-4 ">
               {[0, 1, 2, 3, 4, 5].map((index) => (

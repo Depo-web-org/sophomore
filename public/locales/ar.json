@@ -69,8 +69,14 @@
     "recaptchaError": "يرجى إكمال اختبار reCAPTCHA",
     "submitButton": "إرسال الرسالة",
     "successMessage": "تم إرسال النموذج بنجاح!",
-    "errorMessage": "حدث خطأ ما، يرجى المحاولة مرة أخرى"
+    "errorMessage": "حدث خطأ ما، يرجى المحاولة مرة أخرى",
+    "textarea-numberOfWords": "أستخدمت 500 كلمه ",
+    "textarea-numberUsed": "/ 500 كلمة "
+
   },
+
+
+
   "learningSection": {
     "title": "لنواصل التعلم",
     "myLearning": "تعلّمي",
@@ -80,6 +86,7 @@
       "name": "اسم الدورة",
       "description": "وصف الدورة"
     }
+
   },
   "contact": {
     "partOne": {
@@ -657,5 +664,10 @@
     "requiredDescription": "الوصف مطلوب",
     "bothFilesRequired": "يجب تحميل كل من الفيديو وملف الـ PDF!",
     "unitSaved": "تم حفظ الوحدة بنجاح!"
-  }
+  },
+   "toast":"تم إرسال الطلب بنجاح لقد تم إرسال طلبك بنجاح. سوف نتواصل معك قريبا."
 }
+
+
+
+   

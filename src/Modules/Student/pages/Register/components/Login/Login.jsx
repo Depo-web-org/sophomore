@@ -183,11 +183,11 @@ export default function Login({ toggleForm }) {
 
 export const HeadTitle = ({ title }) => {
   return (
-    <div className="flex flex-col justify-start items-center lg:items-start gap-2  w-full">
+    <div className="flex flex-col justify-center items-center  gap-2  w-full">
       <img
         src="/images/logos/logo.svg"
-        alt=""
-        className="size-52 lg:size-auto lg:hidden"
+        alt="logo"
+        className="mt-5 w-80 md:full "
       />
       <p className="text-white text-3xl lg:text-5xl font-extrabold pt-4 text-center lg:text-start">
         {title.head}

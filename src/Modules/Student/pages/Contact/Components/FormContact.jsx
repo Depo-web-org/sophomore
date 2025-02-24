@@ -1,80 +1,83 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "react-phone-number-input/style.css";
-import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import PhoneInput from "react-phone-number-input";
 import LoadingAnimation from "./loadingAnimation";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useTranslation } from "react-i18next";
-
-const FormContact = () => {
-  const { t } = useTranslation();
-  const location_URL = window.location.href.split('/contact')[0];
+import { toast } from "react-toastify";
+import ar from "../../../../../../public/locales/countrysAr.json";
+import en from "../../../../../../public/locales/countrysEn.json";
+const FormContact = ({ Style, form, btnbuttom }) => {
   const {
-    register,
     handleSubmit,
-    formState: { errors },
+    register,
     reset,
+    setValue,
+    control,
+    clearErrors,
+    setError,
+    formState: { errors },
   } = useForm();
-  const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState();
-  const [phoneValue, setPhoneValue] = useState("");
+
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  const [isSubmitted, setisSubmitted] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const [messageValue, setMessageValue] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const recaptcha = useRef();
-  const messageLength =
-    messageValue?.trim().split(/\s+/).filter(Boolean).length || 0;
+  const [messageLength, setMessageLength] = useState(0);
+  const [phoneValue] = useState("");
+  const recaptcha = useRef(null);
+  const { t, i18n } = useTranslation();
 
-  const sendDataToBackend = async (data, recaptchaValue) => {
-    if (phoneValue?.length >= 10 && recaptchaValue) {
-      setIsLoading(true);
-      const formData = { ...data, phone: phoneValue };
-      await axios
-        .post(`${location_URL}/api/api/form`, formData, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(() => setResponse(t("formContact.successMessage")))
-        .then(() => {
-          reset();
-          recaptcha.current.reset();
-          setPhoneValue("");
-          setMessageValue("");
-          setIsSubmitted(false);
-        })
-        .catch(() => setResponse(t("formContact.errorMessage")))
-        .finally(() => {
-          setIsLoading(false);
-          setTimeout(() => {
-            setResponse(null);
-          }, 5000);
-        });
-    } else {
-      setResponse(t("formContact.errorMessage"));
-    }
-  };
+  useEffect(() => {
+    setValue("phone", phoneValue);
+  }, [phoneValue, setValue]);
 
-  const disableCopyPasteCut = (e) => {
-    e.preventDefault();
-  };
+  // lang country
+  let countryOptions;
+  if (i18n.language === "en") {
+    countryOptions = en;
+  } else {
+    countryOptions = ar;
+  }
 
-  const handleFormSubmit = async (e) => {
-    setIsSubmitted(true);
+  const onSubmit = async (data, e) => {
+    setisSubmitted(true);
     e.preventDefault();
     const recaptchaValue = recaptcha?.current?.getValue();
     if (!recaptchaValue) {
       return;
     }
-    await handleSubmit((data) => sendDataToBackend(data, recaptchaValue))(e);
+    setisLoading(true);
+
+    try {
+      await axios.post(`https://dev.depowebeg.com/request.php`, data);
+
+      toast.success(t("toast"));
+
+      reset();
+      setMessageValue(" ");
+    } catch {
+      console.log("Something went wrong, please try again");
+    } finally {
+      setisLoading(false);
+    }
   };
 
   return (
     <section className="pt-4 text-white" dir="rtl">
-      <form onSubmit={handleFormSubmit} action="submit" className="p-2 lg:p-10 xl:p-20 flex flex-col gap-y-5">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        action="submit"
+        className="p-2 lg:p-10 xl:p-20 flex flex-col gap-y-5"
+      >
         {/* First Name and Last Name Fields */}
         <div className="flex flex-col lg:flex-row justify-between lg:gap-4">
-          <label htmlFor="first-name" className="w-full lg:w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col">
+          <label
+            htmlFor="first-name"
+            className="w-full lg:w-1/2 cursor-pointer text-slate-100 flex flex-col"
+          >
             {t("formContact.firstName")}
             <input
               {...register("firstName", {
@@ -94,7 +97,10 @@ const FormContact = () => {
             )}
           </label>
 
-          <label htmlFor="last-name" className="w-full lg:w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col">
+          <label
+            htmlFor="last-name"
+            className="w-full lg:w-1/2 cursor-pointer text-slate-100 flex flex-col"
+          >
             {t("formContact.lastName")}
             <input
               {...register("lastName", {
@@ -117,7 +123,10 @@ const FormContact = () => {
 
         {/* Email and Phone Fields */}
         <div className="flex flex-col lg:flex-row items-center lg:gap-4">
-          <label htmlFor="user-mail" className="h-10 w-full mb-12 lg:mb-0 lg:w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col">
+          <label
+            htmlFor="user-mail"
+            className="h-10 w-full mb-12 lg:mb-0 lg:w-1/2 cursor-pointer text-slate-100 flex flex-col"
+          >
             {t("formContact.email")}
             <input
               {...register("email", {
@@ -130,69 +139,104 @@ const FormContact = () => {
               id="user-mail"
               type="email"
               placeholder={t("formContact.emailPlaceholder")}
-              className="bg-white rounded-[5px] active:outline-primary outline-primary placeholder:text-gray-400 p-[10px] text-gray-400"
+              className="bg-white rounded-[5px] active:outline-primary outline-primary   placeholder:text-gray-400 p-[10px] text-gray-400"
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
             )}
           </label>
-
-          <label htmlFor="user-phone" className="h-10 w-full lg:w-1/2 cursor-pointer text-slate-100 font-medium flex flex-col">
+          {/* phone  */}
+          <label
+            htmlFor="user-phone"
+            className="h-10 w-full lg:w-1/2 cursor-pointer text-slate-100 flex flex-col  placeholder:text-center"
+          >
             {t("formContact.phone")}
-            <PhoneInput
-              international
-              id="user-phone"
-              placeholder={t("formContact.phonePlaceholder")}
-              value={phoneValue}
-              onChange={setPhoneValue}
-              defaultCountry="EG"
-              className="bg-white w-full rounded-[5px] active:outline-primary outline-primary placeholder:text-gray-400 p-[10px] text-gray-400"
+            <Controller
+              name="phone"
+              control={control}
+              rules={{ required: t("formContact.phoneError") }}
+              render={({ field }) => (
+                <PhoneInput
+                  {...field}
+                  id="user-phone"
+                  placeholder={t("formContact.phonePlaceholder")}
+                  defaultCountry="EG"
+                  labels={countryOptions}
+                  className="bg-white border rounded w-full p-2"
+                  onChange={(value) => field.onChange(value)}
+                />
+              )}
             />
-            {isSubmitted && !isValidPhoneNumber(`${phoneValue?.toString()}`) && (
-              <p className="text-red-500">{t("formContact.phoneError")}</p>
+            {errors.phone && (
+              <p className="text-red-500">{errors.phone.message}</p>
             )}
           </label>
         </div>
 
-        {/* Message Field */}
-        <div>
-          <label htmlFor="user-message" className="w-full cursor-pointer mt-5 text-slate-100 font-medium flex flex-col">
-            {t("formContact.message")}
-            <textarea
-              {...register("message", {
-                required: t("formContact.messageError.required"),
-                validate: {
-                  noLeadingSpaces: (value) =>
-                    !/^\s/.test(value) || t("formContact.messageError.noLeadingSpaces"),
-                },
-              })}
-              id="user-message"
-              className={`h-60 ${
-                messageLength >= 500
-                  ? "active:outline-red-500 outline-red-500"
-                  : "active:outline-primary outline-primary"
-              } resize-none scrollbar-hide placeholder:text-gray-400 my-[6px] rounded-[5px] p-[10px] text-gray-400`}
-              placeholder={t("formContact.messagePlaceholder")}
-              value={messageValue}
-              onChange={(e) =>
-                e.target.value.length <= 500 && setMessageValue(e.target.value)
+        {/* text areaa */}
+        <label
+          htmlFor="user-message"
+          className="w-full cursor-pointer mt-16 text-white flex flex-col"
+        >
+          {t("formContact.message")}
+          <textarea
+            {...register("message", {
+              required: `${t("formContact.messageError.required")}`,
+              validate: {
+                noLeadingSpaces: (value) =>
+                  !/^\s/.test(value) ||
+                  `${t("formContact.messageError.required")}`,
+              },
+            })}
+            id="user-message"
+            className={`${Style}  ${
+              messageLength >= 500
+                ? "active:outline-red-500 outline-red-500"
+                : "active:outline-primary outline-primary "
+            } resize-none scrollbar-hide placeholder:text-gray-400 my-[6px] Shadowinpuut rounded-[5px] p-[10px] text-gray-800`}
+            placeholder={t("formContact.messagePlaceholder")}
+            value={messageValue}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              if (value.length > 500) {
+                setError("message", {
+                  type: "maxLength",
+                  // message: t("Contact.Left Side.textarea-numberOfWords"),
+                });
+              } else {
+                clearErrors("message");
+                setMessageValue(value);
+                setMessageLength(value.length);
               }
-              onCopy={disableCopyPasteCut}
-              onPaste={disableCopyPasteCut}
-              onCut={disableCopyPasteCut}
-            ></textarea>
-            {errors.message && (
-              <p className="text-red-500">{errors.message.message}</p>
-            )}
-          </label>
-        </div>
+            }}
+          ></textarea>
+
+          {errors.message && (
+            <p className="text-red-500">{errors.message.message}</p>
+          )}
+
+          <span className="text-right  ">
+            {messageLength >= 500
+              ? ` ${t("formContact.textarea-numberOfWords")}`
+              : `${messageLength}  ${t("formContact.textarea-numberUsed")}`}
+          </span>
+        </label>
 
         {/* ReCAPTCHA */}
-        <div className="recaptcha-dir">
-          <ReCAPTCHA ref={recaptcha} sitekey="6Lcl6YEqAAAAANdKLVZywDSMl7iLTh24k9QaXGnu" />
+        <div className="recaptcha-dir pt-4">
+          <ReCAPTCHA
+            key={i18n.language}
+            ref={recaptcha}
+            sitekey="6Lcl6YEqAAAAANdKLVZywDSMl7iLTh24k9QaXGnu"
+            hl={i18n.language === "ar" ? "ar" : "en"}
+            onChange={(value) => setRecaptchaValue(value)}
+          />
         </div>
-        {isSubmitted && !recaptcha?.current?.getValue() && (
-          <span className="text-red-500 block">{t("formContact.recaptchaError")}</span>
+        {isSubmitted && !recaptchaValue && (
+          <span className="text-red-500 block">
+            {t("formContact.recaptchaError")}
+          </span>
         )}
 
         {/* Submit Button */}
@@ -204,10 +248,6 @@ const FormContact = () => {
           {isLoading ? <LoadingAnimation /> : t("formContact.submitButton")}
         </button>
       </form>
-
-      {response != null && (
-        <p className="mt-2 text-white font-bold">{response}</p>
-      )}
     </section>
   );
 };
