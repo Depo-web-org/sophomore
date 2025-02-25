@@ -34,14 +34,14 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
 
   return (
     <>
-      <section className="min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto py-24 lg:py-32   ">
+      <section className=" min-h-screen container w-full md:w-custom-md xl:w-custom-xl mx-auto py-24 lg:py-32   ">
         <div>
           {/* <Breadcrumbs /> */}
           <h2 className="text-white text-lg lg:text-4xl font-semibold pb-4 md:pb-10 xl:pb-20">
             {t("subjectsPage.title")} {/* Translated title */}
           </h2>
         </div>
-        <div className="grid grid-cols-6 lg:grid-cols-12 gap-4">
+        <div className="grid grid-cols-6 lg:grid-cols-12 gap-4 ">
         { 
   Subjects && Subjects.length > 0 ? (
     [...Subjects].reverse().map((subject, index) => {
@@ -71,7 +71,7 @@ const Subjects = data?.data.filter(i=>i.id === gradeName)[0]?.subjects
       );
     })
   ) : (
-    <div className="col-span-12 w-full grid grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-12   gap-4">
       <SkeletonCard />
     </div>
   )
