@@ -4,14 +4,15 @@ import { useSelector } from "react-redux";
 import { useGetStudentCoursesQuery } from "../../../../../Redux/data/getDataApiSlice";
 import CoursesSkeleton from "./Skeleton";
 import { useParams } from "react-router-dom";
-
-
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const parseJSONSafely = (jsonString) => {
   try {
-    if (typeof jsonString !== "string") return jsonString; 
+    if (typeof jsonString !== "string") return jsonString;
     // eslint-disable-next-line no-control-regex
-    const cleanedString = jsonString.replace(/[\u0000-\u001F\u007F]/g, ""); 
+    const cleanedString = jsonString.replace(/[\u0000-\u001F\u007F]/g, "");
     return JSON.parse(cleanedString);
   } catch (error) {
     console.error("خطأ في تحليل JSON:", error);
@@ -98,6 +99,7 @@ export const parseJSONSafely = (jsonString) => {
 // }
 export default function Courses() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const params = window.location.pathname;
   const { data, isLoading, isError } = useGetStudentCoursesQuery();
   const ordersData = data?.data;
@@ -108,44 +110,48 @@ export default function Courses() {
   if (isLoading) {
     return <CoursesSkeleton />;
   }
-
   return (
-    <div className="w-full flex flex-col gap-8">
-      <div className="w-full flex flex-col gap-4">
-        {params !== "/" && (
-          <p className="text-2xl font-semibold text-white py-4 lg:py-8">
-            {i18n.language === "ar" ? " دروسي " : " My courses"}
-          </p>
-        )}
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-          {params !== "/"
-            ? isOrdersDataArray &&
-              ordersData?.map((order) =>
-                order?.items?.map((item) => {
-                  const contentDataObject = parseJSONSafely(item?.content_data);
-                  const contents =
-                    item?.contents.length > 0
-                      ? item?.contents
-                      : [contentDataObject];
+    <>
+      <div className="w-full flex flex-col gap-8">
+        <div className="w-full flex flex-col gap-4">
+          {params !== "/" && (
+            <p className="text-2xl font-semibold text-white py-4 lg:py-8">
+              {i18n.language === "ar" ? " دروسي " : " My courses"}
+            </p>
+          )}
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+            {params !== "/"
+              ? isOrdersDataArray &&
+                ordersData?.map((order) =>
+                  order?.items?.map((item) => {
+                    const contentDataObject = parseJSONSafely(
+                      item?.content_data
+                    );
+                    const contents =
+                      item?.contents.length > 0
+                        ? item?.contents
+                        : [contentDataObject];
 
-                  return (
-                    <LearningCard
-                      key={item.id}
-                      course={item?.course_data_object}
-                      contents={contents}
-                      image={
-                        item?.course_data_object?.image ||
-                        "/images/MyLearning/subject1.webp"
-                      }
-                      path={`/mylearning/course/${item?.course_data_object?.id}/lesson/${contents[0]?.id}`}
-                    />
-                  );
-                })
-              )
-            : isOrdersDataArray &&
-              ordersData
-                ?.slice(0, 2)
-                ?.map((order) =>
+                    return (
+                      <LearningCard
+                        key={item.id}
+                        course={item?.course_data_object}
+                        contents={contents}
+                        image={
+                          item?.course_data_object?.image ||
+                          "/images/MyLearning/subject1.webp"
+                        }
+                        path={
+                          contents.length > 0 && contents[0]?.id
+                            ? `/mylearning/course/${item?.course_data_object?.id}/lesson/${contents[0]?.id}`
+                            : ""
+                        }
+                      />
+                    );
+                  })
+                )
+              : isOrdersDataArray &&
+                ordersData?.slice(0, 2)?.map((order) =>
                   order.items.map((item) => {
                     const contentDataObject = parseJSONSafely(
                       item?.content_data
@@ -173,8 +179,9 @@ export default function Courses() {
                     );
                   })
                 )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

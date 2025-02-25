@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+ 
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function LearningCard({ course, path, image,contents }) {
 const lessonName =contents.length>1?"full course": contents[0]?.title
 const courseName =contents.length>0?contents[0]?.course_data?.title: course?.title
+  const { t ,i18n } = useTranslation(); 
 
   return (
     <div>
       <div className="flex flex-col w-[auto]   group">
-        <Link state={contents} to={path}>
+        <Link state={contents} to={path}  >
           <div className="relative w-full group   rounded-lg">
             <img
               src={image}
@@ -35,9 +37,15 @@ const courseName =contents.length>0?contents[0]?.course_data?.title: course?.tit
           </div>
           <div className="flex items-center justify-between w-full pt-5 lg:pt-6 flex-wrap">
             <p className="text-sm lg:text-xl font-medium text-white">{course?.title || courseName}</p>
+
+
             <p className="text-xs lg:text-sm font-normal my-4 text-[#FFFFFF57]">
-             ({lessonName})
+             ({          lessonName ? lessonName : <span className="text-red-500"> {t(i18n.language === "en" ? "Not added Lessons yet !" :"لم يتم إضافة الدروس بعد !")}   </span>                      })
             </p>
+
+
+
+
           </div>
         </Link>
       </div>
