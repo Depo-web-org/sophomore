@@ -6,7 +6,7 @@ const WishCartTitle = ({name, items}) => {
 
   return (
     <>
-    <div className="flex justify-between border-b border-white items-center pb-4 w-full  "> 
+    <div className="my-5 flex justify-between border-b border-white items-center pb-4 w-full  "> 
             <h2 className="text-white  text-3xl lg:text-4xl font-semibold  ">
            {name} 
           </h2>

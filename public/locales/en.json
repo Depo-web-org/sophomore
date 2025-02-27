@@ -112,6 +112,8 @@
     "emptyMessage": "Your Cart Is Empty",
     "startShopping": "Start Shopping"
   },
+
+
   "footer": {
     "brand": "Sophomore",
     "request_info": "Request More Information",
@@ -121,8 +123,15 @@
       "home": "Home",
       "about_us": "About Us",
       "contact_us": "Contact Us"
-    }
+    },
+
+
+    "rights-title": " 2025 Depo Web - All rights reserved"
+
+
   },
+
+
   "my_learning": {
     "title": "Continue your learning Journey",
     "description": "Access all the courses you’ve purchased and continue learning at your own pace."

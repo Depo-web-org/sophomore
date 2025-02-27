@@ -15,28 +15,38 @@ const CourseDetailsTab = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { course, teacher,subject } = useSelector((state) => state.courseInformation); 
-  const contents = [...(course?.contents || [])].reverse(); 
+  const { course, teacher, subject } = useSelector(
+    (state) => state.courseInformation
+  );
+  const contents = [...(course?.contents || [])].reverse();
   const { t } = useTranslation();
   const [openItems, setOpenItems] = useState([]);
   const { i18n } = useTranslation();
+
+  const { data, isLoading, isError } = useGetStudentCoursesQuery();
+
+
+
   
-const { data, isLoading, isError } = useGetStudentCoursesQuery();
-const LessonsStudent = Array.isArray(data?.data)
-  ? data?.data
-      .map(i => i.items)
-      .filter(items => Array.isArray(items) && items.length > 0)
-      .map(i => i[0])
-      .filter(item => item !== undefined)
-      .map(i => i.content)
-  : [];
+  const LessonsStudent = Array.isArray(data?.data)
+    ? data?.data
+        .map((i) => i.items)
+        .filter((items) => Array.isArray(items) && items.length > 0)
+        .map((i) => i[0])
+        .filter((item) => item !== undefined)
+        .map((i) => i.content)
+    : [];
 
-const LessonsStudentFullContent = Array.isArray(data?.data) &&
-  Array.isArray(data?.data[0]?.items) &&
-  Array.isArray(data?.data[0]?.items[0]?.contents)
-  ? data?.data[0]?.items[0]?.contents.map(i => i.id)
-  : [];
 
+
+
+
+  const LessonsStudentFullContent =
+    Array.isArray(data?.data) &&
+    Array.isArray(data?.data[0]?.items) &&
+    Array.isArray(data?.data[0]?.items[0]?.contents)
+      ? data?.data[0]?.items[0]?.contents.map((i) => i.id)
+      : [];
 
   const isEnrolled = useMemo(() => {
     if (!isLoading && !isError && Array.isArray(data?.data)) {
@@ -47,7 +57,7 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
       );
       return coursesEnrolled?.includes(course?.id);
     }
-    return false; 
+    return false;
   }, [data, isLoading, isError, course?.id]);
 
   const toggleItem = (id) => {
@@ -57,7 +67,7 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
         : [...prevOpenItems, id]
     );
   };
-  
+
   const handleAddLessonToCart = (lesson) => {
     const lessonInfo = {
       teacherName: `${teacher?.first_name} ${teacher?.last_name}`,
@@ -67,7 +77,7 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
       courseImage: teacher?.photo,
       imagePath: teacher?.path,
       gradeName: subject?.grade_data?.grade_no,
-      enrolledLessons:lesson.title,
+      enrolledLessons: lesson.title,
       price: lesson.price, // Set the price for the lesson (adjust as needed)
       type: "lesson", // Indicate this is a lesson
     };
@@ -77,14 +87,15 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
   };
 
   const handleBuyFullCourse = (lesson) => {
-    handleAddLessonToCart(lesson)
+    handleAddLessonToCart(lesson);
     navigate("/cart"); // Navigate to cart page
   };
 
   const cartItems = useSelector((state) => state.cart.items);
-  // check if all course in cart 
+  // check if all course in cart
   const isFullCourseSelected = cartItems?.some(
-    (item) => item.id === course?.id );
+    (item) => item.id === course?.id
+  );
 
   return (
     <div className="w-full flex flex-col gap-4 text-white  ">
@@ -92,19 +103,25 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
         <div className="text-center  py-2 lg:py-6">
           <p className=" font-medium text-gray-300 text-base  lg:text-2xl ">
             {/* {t("no_lessons_added")}  */}
-            { i18n.languages[0] === "ar" ? " لم يتم إضافة دروس بعد !" : " No lessons added ! "}
+            {i18n.languages[0] === "ar"
+              ? " لم يتم إضافة دروس بعد !"
+              : " No lessons added ! "}
           </p>
         </div>
       ) : (
         contents.map((item, i) => {
           const isOpen = openItems.includes(item.id);
-          const isLessonSelected = cartItems?.some(cartItem => cartItem.id === item.id);
+          const isLessonSelected = cartItems?.some(
+            (cartItem) => cartItem.id === item.id
+          );
 
           return (
             <div
               key={item.id}
               className={`border-gray-200 bg-[#FFFFFF26] rounded-xl border-s-4 ${
-                item.price === "0.00" ? "border-s-emerald-600" : "border-s-secondary"
+                item.price === "0.00"
+                  ? "border-s-emerald-600"
+                  : "border-s-secondary"
               }`}
             >
               <button
@@ -112,7 +129,7 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
                 onClick={() => toggleItem(item.id)}
               >
                 <p className="font-medium">
-                  { item.price === "0.00"
+                  {item.price === "0.00"
                     ? ` ${
                         i18n.languages[0] === "ar"
                           ? ` مجاني : ${item.title}`
@@ -157,32 +174,39 @@ const LessonsStudentFullContent = Array.isArray(data?.data) &&
                     </div>
                   </div>
 
-
-            {
-              ! LessonsStudent?.includes(item.id) && !LessonsStudentFullContent?.includes(item.id)  &&   <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap  ">
-              <button
-disabled={isFullCourseSelected ||isLessonSelected}
-className={`rounded-md p-2 w-full text-white ${
-isFullCourseSelected || isLessonSelected ? "bg-gray-400 cursor-not-allowed" : "buttonHover cursor-pointer"
-}`}
-onClick={()=> handleBuyFullCourse(item)}
->
-{
-i18n.language ==='ar'? "سجل الآن":"Enroll Now"
-}
-              
-                </button>
-                <button 
-                 disabled={isFullCourseSelected ||isLessonSelected}
-  onClick={()=> handleAddLessonToCart(item)}
-                className={`font-semibold bg-white text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all  ${
-isFullCourseSelected || isLessonSelected ? "cursor-not-allowed" : " cursor-pointer"
-}`}>
-                 {isFullCourseSelected || isLessonSelected? `${ i18n.language ==='ar'? "موجود مسبقا ":'already in cart'}`: t('add_to_cart')}
-                </button>
-              </div>
-            }     
-
+                  {!LessonsStudent?.includes(item.id) &&
+                    !LessonsStudentFullContent?.includes(item.id) && (
+                      <div className="flex items-center justify-between gap-4 min-w-full my-2 flex-wrap  ">
+                        <button
+                          disabled={isFullCourseSelected || isLessonSelected}
+                          className={`rounded-md p-2 w-full text-white ${
+                            isFullCourseSelected || isLessonSelected
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "buttonHover cursor-pointer"
+                          }`}
+                          onClick={() => handleBuyFullCourse(item)}
+                        >
+                          {i18n.language === "ar" ? "سجل الآن" : "Enroll Now"}
+                        </button>
+                        <button
+                          disabled={isFullCourseSelected || isLessonSelected}
+                          onClick={() => handleAddLessonToCart(item)}
+                          className={`font-semibold bg-white text-primary rounded-md p-2 w-full hover:bg-primary hover:text-white duration-200 transition-all  ${
+                            isFullCourseSelected || isLessonSelected
+                              ? "cursor-not-allowed"
+                              : " cursor-pointer"
+                          }`}
+                        >
+                          {isFullCourseSelected || isLessonSelected
+                            ? `${
+                                i18n.language === "ar"
+                                  ? "موجود مسبقا "
+                                  : "already in cart"
+                              }`
+                            : t("add_to_cart")}
+                        </button>
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
@@ -212,18 +236,17 @@ export default CourseDetailsTab;
 // const CourseDetailsTab = () => {
 //   const navigate = useNavigate();
 //   const dispatch = useDispatch();
-//   const { course, teacher, subject } = useSelector((state) => state.courseInformation); 
-//   const contents = [...(course?.contents || [])].reverse(); 
+//   const { course, teacher, subject } = useSelector((state) => state.courseInformation);
+//   const contents = [...(course?.contents || [])].reverse();
 //   const { t } = useTranslation();
 //   const [openItems, setOpenItems] = useState([]);
 //   const { i18n } = useTranslation();
-  
+
 //   const { data, isLoading, isError } = useGetStudentCoursesQuery();
 //   const LessonsStudent=data?.data?.map(i=>i.items)?.map(i=>i[0]).map(i=>i.
 //     content
 //     )
 
-  
 //   const isEnrolled = useMemo(() => {
 //     if (!isLoading && !isError && Array.isArray(data?.data)) {
 //       const coursesEnrolled = data?.data.flatMap((course) =>
@@ -233,23 +256,22 @@ export default CourseDetailsTab;
 //       );
 //       return coursesEnrolled?.includes(course?.id);
 //     }
-//     return false; 
+//     return false;
 //   }, [data, isLoading, isError, course?.id]);
 //   const isLessonPurchased = useMemo(() => {
 //     if (!isLoading && !isError && Array.isArray(data?.data)) {
 //       const purchasedLessons = data?.data.flatMap((course) =>
 //         Array.isArray(course?.items)
-//           ? course.items.flatMap((item) => item.content_data_object?.id) 
+//           ? course.items.flatMap((item) => item.content_data_object?.id)
 //           : []
 //       );
-//       return purchasedLessons?.includes("27"); 
+//       return purchasedLessons?.includes("27");
 //     }
 //     return false;
 //   }, [data, isLoading, isError]);
-  
+
 //   console.log(isLessonPurchased);
-  
-  
+
 //   const toggleItem = (id) => {
 //     setOpenItems((prevOpenItems) =>
 //       prevOpenItems.includes(id)
@@ -257,7 +279,7 @@ export default CourseDetailsTab;
 //         : [...prevOpenItems, id]
 //     );
 //   };
-  
+
 //   const handleAddLessonToCart = (lesson) => {
 //     const lessonInfo = {
 //       teacherName: `${teacher?.first_name} ${teacher?.last_name}`,
@@ -281,7 +303,7 @@ export default CourseDetailsTab;
 //   };
 
 //   const cartItems = useSelector((state) => state.cart.items);
-  
+
 //   // Check if the course is already selected in the cart
 //   const isFullCourseSelected = cartItems?.some(
 //     (item) => item.id === course?.id
@@ -311,8 +333,7 @@ export default CourseDetailsTab;
 //                 item.price === "0.00" ? "border-s-emerald-600" : "border-s-secondary"
 //               }`}
 //             >
-        
-            
+
 //               <button
 //                 className="flex justify-between items-center w-full py-4 px-6 text-left"
 //                 onClick={() => toggleItem(item.id)}
@@ -392,7 +413,6 @@ export default CourseDetailsTab;
 //                     </button>
 //                   </div>
 // }
-               
 
 //                 </div>
 //               </div>
@@ -406,7 +426,6 @@ export default CourseDetailsTab;
 
 // export default CourseDetailsTab;
 
-
 // const CourseDetailsTab = () => {
 //   const navigate = useNavigate();
 //   const dispatch = useDispatch();
@@ -417,7 +436,6 @@ export default CourseDetailsTab;
 
 //   const { data, isLoading, isError } = useGetStudentCoursesQuery();
 
- 
 //   const LessonsStudent = Array.isArray(data?.data)
 //     ? data?.data?.map(i => i.items)?.map(i => i[0])?.map(i => i.content)
 //     : [];
