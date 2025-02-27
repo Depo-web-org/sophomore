@@ -155,7 +155,7 @@ export const OrderDetalis = ({ cartItems }) => {
   };
 
   return (
-    <div>
+    <div >
       <p className="text-white font-semibold text-3xl">{t('order.summaryTitle')}</p>
       <div className="py-2">
         {cartItems?.map((course) => (

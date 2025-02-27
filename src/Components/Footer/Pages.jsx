@@ -27,6 +27,10 @@ export default function Pages() {
           </Link>
         </li>
       </ul>
+
+
+
+      
     </>
   );
 }

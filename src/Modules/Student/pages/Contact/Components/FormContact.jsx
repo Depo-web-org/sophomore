@@ -162,7 +162,7 @@ const FormContact = ({ Style, form, btnbuttom }) => {
                   placeholder={t("formContact.phonePlaceholder")}
                   defaultCountry="EG"
                   labels={countryOptions}
-                  className="bg-white border rounded w-full p-2"
+                  className="bg-white text-black border rounded w-full p-2"
                   onChange={(value) => field.onChange(value)}
                 />
               )}
